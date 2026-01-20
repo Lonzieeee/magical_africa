@@ -1,0 +1,29 @@
+import HeroSection from '../components/HeroSection';
+import Services from '../components/Services';
+import AboutSection from '../components/AboutSection';
+import Marketplace from '../components/Marketplace';
+import TribesSection from '../components/TribesSection';
+import SocialImpact from '../components/SocialImpact';
+import Partners from '../components/Partners';
+import FAQ from '../components/FAQ';
+import Contact from '../components/Contact';
+import Footer from '../components/Footer';
+
+const Home = () => {
+  return (
+    <>
+      <HeroSection />
+      <Services />
+      <AboutSection />
+      <Marketplace />
+      <TribesSection />
+      <SocialImpact />
+      <Partners />
+      <FAQ />
+      <Contact />
+      <Footer />
+    </>
+  );
+};
+
+export default Home;

@@ -1,0 +1,195 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+  line-height: 1.5rem;
+  
+}
+
+ .languages-section {
+ 
+     padding-top: 4rem;
+     padding-bottom: 4rem;
+      /*
+      background: linear-gradient(to right, #f9f5ef, #fff);
+      */
+      
+    }
+
+    .languages-section h2 {
+      font-size: 1.5rem;
+      font-weight: 400;
+      /*
+      color: #1f6f43;
+      */
+      color: black;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    .languages-section .p {
+      width: 50%;
+      margin: 0 auto;
+      font-size: 0.875rem;
+      color: #767676;
+      text-align: center;
+    }
+
+    /*
+    .languages {
+      
+      display: flex;
+      
+     flex-wrap: wrap;
+     
+      gap: 15px;
+     justify-self: center;
+     width: 302px;
+     padding-top: 80px;
+     overflow-x: hidden;
+     
+    }
+     */
+
+      .carousel-container {
+      overflow: hidden;
+      max-width: 300px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .languages {
+      display: flex;
+      gap: 15px;
+      animation: scroll 15s linear infinite;
+      padding-top: 80px;
+    }
+
+    .languages.paused {
+      animation-play-state: paused;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+  
+
+     .languages span {
+      padding: 12px 22px;
+      position: relative;
+      background-color: #1f6f43;
+      /*
+      background-color: rgb(181, 161, 145) ;
+      */
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.875rem;
+      cursor: pointer;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      /*
+      white-space: nowrap;
+      flex-shrink: 0;
+      */
+    }
+  
+    .languages span:hover {
+      /*
+      transform: translateY(-5px);
+      */
+      background-color: #145a34;
+    }
+      
+
+
+
+
+/*Tooltip text */
+.languages span::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 140%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 180px;
+  height: 50px;
+  background-color: #F2EFEB;
+  color:#767676;
+  padding: 6px 10px;
+  font-size: 0.75rem;
+  opacity: 0;
+  line-height: 1.2;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+
+.languages span::before {
+  content: "";
+  position: absolute;
+  bottom: 115%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: #F2EFEB transparent transparent transparent;
+ 
+  opacity: 0;
+  transition: opacity 0.3s ease;
+ z-index: 10;
+ 
+}
+
+
+.languages span:hover::after,
+.languages span:hover::before {
+  opacity: 1;
+}
+
+
+ 
+
+@media screen and (max-width:768px) {
+
+  .carousel-container{
+    margin: 0;
+  }
+
+  .languages-section{
+   padding-left: 3rem;
+   padding-right: 3rem;
+
+  }
+  .languages-section .p{
+    width: 100%;
+    text-align: start;
+  }
+
+  .languages-section h2{
+    text-align: start;
+    line-height: 1.7rem;
+  }
+
+  .languages{
+    justify-content: start;
+  }
+}
+
+@media screen and (max-width:480px) {
+    .languages-section{
+   padding-left: 1rem;
+   padding-right: 1rem;
+
+  }
+}
+
+
+
+
