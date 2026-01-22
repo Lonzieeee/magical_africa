@@ -96,29 +96,7 @@ const About = () => {
         ></div>
         
         <div className="problem-text">
-          {/* 
-          <h1>The Problem We're Solving</h1>
-          <p className="problem-text-p">
-            Africa's rich cultural heritage is at risk. Languages are dying, traditions are fading, and the authentic African story is being lost or misrepresented.
-          </p>
-          
-          <div className="problems">
-            {problems.map((problem, index) => (
-              <div className="problem1" key={index}>
-                <span>
-                  <i className={`fa-solid ${problem.icon}`}></i>
-                </span>
-                <div className="text2">
-                  <h1>{problem.title}</h1>
-                  <p>{problem.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-           
-
-          */}
+         
 
           <h1>Our <span>Background</span></h1>
            
@@ -158,66 +136,7 @@ const About = () => {
         </div>
       </section>
 
-      {/* Solutions Section - css is impact.css*/}
-       {/* 
-      <section className="our-solution">
-        <h1>What We do</h1>
-        <p>
-          Magical Africa is a comprehensive platform that preserves, celebrates, and shares African culture with the world.
-        </p>
-
-        <div className="solution-box">
-          <div className="chev-prev2" onClick={prevSolution}>
-            <i className="fa-solid fa-chevron-left"></i>
-          </div>
-
-          <div className="solutions-carousel">
-
-           
-            <div 
-              className="solutions-wrapper"
-              style={{ transform: `translateX(-${solutionSlide * 50}%)` }}
-            >
-              {solutions.map((slide, slideIndex) => (
-                <div className="solutions-slide" key={slideIndex}>
-                  {slide.map((solution, index) => (
-                    <div 
-                      className="solution1" 
-                      key={index}
-                      style={{ backgroundImage: `url(${solution.image})` }}
-                    >
-                      <div className="solution-content">
-                        <h2>{solution.title}</h2>
-                        <p>{solution.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ))}
-            </div>
-            
-
-           <div>
-
-
-            </div>
-
-            <div>
-
-
-              </div>  
-           
-
-          </div>
-
-          <div className="chev-next2" onClick={nextSolution}>
-            <i className="fa-solid fa-chevron-right"></i>
-          </div>
-        </div>
-      </section>
-
-      */}
-
+     
 
 
       <section className="our-solution">

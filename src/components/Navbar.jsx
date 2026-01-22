@@ -65,13 +65,13 @@ const Navbar = () => {
             <span>Menu</span>
           </button>
  
-       {/*
+       
           <button className="search">
             <i className="fa-solid fa-magnifying-glass"></i>
-            <span>Search</span>
+            <span>Lang</span>
           </button>
 
-           */}
+         
         </div>
 
         
