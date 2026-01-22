@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "menu": "Enkitáábùà",
+    "language": "Enkutuk",
+    "signIn": "Nídó",
+    "logOut": "Péé",
+    "currentlyIn": "Ítíí",
+    "yourAccounts": "Akaunti línó",
+    "addAccount": "Tíkí akaunti e Magical Africa",
+    "personal": "Endáà"
+  },
+  "hero": {
+   
+    "learnLanguage": "Ayau Enkutuk",
+    "exploreCulture": "Eidim Enkítùàátà",
+    "visitAntiques": "Alo Inkítùàátìn"
+  },
+   "services": {
+    "heading": "Eidim Engídongoí e Enkítùàátà Enatií",
+    "learnMore": "Ayau Kumok",
+    "viewAll": "Eitodolu Pooki",
+    "learnLanguage": {
+      "title": "Ayau Enkutuk",
+      "description": "Eidim enaishorua e inkutuk e Afrika amu eitodolu inkítùàátà naapukunot."
+    },
+    "exploreIdentity": {
+      "title": "Eidim enaitoi ó inkítùàátìn",
+      "description": "Eitodolu injore ó inkínejiát naátúrù inkítùàátà e Afrika amu naátúrù iltunganak kumok."
+    },
+    "streamFolklore": {
+      "title": "Eitodolu inkonyek, enkirira, ó inkonyek",
+      "description": "Eitodolu emurua e enaitoi e Afrika ó inkítùàátìn naápuò kití iltunganak."
+    }
+  },
+
+  "about": {
+  "title": "Tenebo Magical Africa",
+  "description": "Magical Africa eidimie enaishorua, enkítùàátà, ó inkonyek e Afrika. Kéítoòdòl inkítùàátìn naapukunot e enkóp, inkóp naápuò, ó oltau enídò, kéídim ake engídongoí e Afrika.",
+  "learnMore": "Ayau Kumok"
+},
+
+
+"marketplace": {
+  "title": "Enkáng' Enatií",
+  "price": "Eshilingi",
+  "viewAll": "Eitodolu Pooki",
+  "categories": {
+    "jewelery": "Inkoitoi",
+    "garments": "Inkajijik",
+    "toolsArtefacts": "Inkíshómìé ó Inkítùàátìn",
+    "musicalInstruments": "Inkíshúmátà"
+  },
+  "items": {
+    "maasaiBracelets": {
+      "title": "Inkoitoi le Maasai",
+      "description": "Inkoitoi le Maasai naápuò inkoitoi naatii enkítùàátà ó enánkárè."
+    },
+    "beadedJewelery": {
+      "title": "Inkoitoi e inkoitoi",
+      "description": "Inkoitoi e iltungani naátúrù enánkárè."
+    },
+    "maasaiNecklaces": {
+      "title": "Inkoitoi e ngurore Maasai",
+      "description": "Inkoitoi e ngurore Maasai naatii inkujit naápuò."
+    },
+    "ankaraGown": {
+      "title": "Enkajijik e Ankara",
+      "description": "Naátúrù enkajijik e Ankara, naátií iltunganak le Nigeria."
+    },
+    "maasaiLeso": {
+      "title": "Olkila le Maasai",
+      "description": "Naátií ilpayiani ó intoyie le Maasai e Kenya ó Tanzania."
+    },
+    "kitenge": {
+      "title": "Kitenge",
+      "description": "Naátúrù enkajijik naápuò inkujit mara ilpayiani ó intoyie."
+    },
+    "carpentryTools": {
+      "title": "Inkíshómìé e iltungani",
+      "description": "Inkíshómìé e iltungani mara enánkárè."
+    },
+    "farmingTools": {
+      "title": "Inkíshómìé e enkárè",
+      "description": "Inkíshómìé e enkárè naatii toki."
+    },
+    "traditionalSpears": {
+      "title": "Imurran",
+      "description": "Imurran naátúrù enkishon ilmurran."
+    },
+    "drums": {
+      "title": "Engoma",
+      "description": "Engoma e Afrika mara enkítùàátìn ó engolon."
+    },
+    "stringInstruments": {
+      "title": "Inkíshúmátà e inkoitoi",
+      "description": "Inkíshúmátà e inkoitoi naátúrù enkishon."
+    },
+    "windInstruments": {
+      "title": "Inkíshúmátà e enkéène",
+      "description": "Inkulupai ó inkonyek naátúrù inkíshómìé e enkáng'."
+    }
+  }
+}
+}

@@ -1,3 +1,5 @@
+
+{/* 
 import { useNavigate } from 'react-router-dom';
 import '../styles/about.css';
 
@@ -14,6 +16,30 @@ const AboutSection = () => {
 
       <button className="learn-more2" onClick={() => navigate('/about')}>
         Learn More
+      </button>
+    </section>
+  );
+};
+
+export default AboutSection;
+*/}
+
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import '../styles/about.css';
+
+const AboutSection = () => {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  return (
+    <section className="about-section">
+      <h1>{t('about.title')}</h1>
+
+      <p>{t('about.description')}</p>
+
+      <button className="learn-more2" onClick={() => navigate('/about')}>
+        {t('about.learnMore')}
       </button>
     </section>
   );

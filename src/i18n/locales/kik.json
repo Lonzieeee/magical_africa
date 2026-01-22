@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "menu": "Menyu",
+    "language": "Rũthiomi",
+    "signIn": "Ĩngĩra",
+    "logOut": "Uma",
+    "currentlyIn": "Ũrĩ",
+    "yourAccounts": "Akaunti ciaku",
+    "addAccount": "Ongera akaunti ya Magical Africa",
+    "personal": "Ya mwene"
+  },
+  "hero": {
+    
+    "learnLanguage": "Ĩthoma Rũthiomi",
+    "exploreCulture": "Menya Mĩtũũrĩre",
+    "visitAntiques": "Cererwa Indo cia Tene"
+  },
+   "services": {
+    "heading": "Menya Ũrogi Ũrĩa Ũrĩ Thutha wa Mĩtũũrĩre Yĩtũ",
+    "learnMore": "Menya Gũkĩra",
+    "viewAll": "Ona Ciothe",
+    "learnLanguage": {
+      "title": "Ĩthoma Rũthiomi",
+      "description": "Kũũra ũthaka wa rũthiomi rwa Gĩabirika na ũkoranĩrie na mĩtũũrĩre mĩingĩ ĩrĩa ĩrĩ kontinent yothe."
+    },
+    "exploreIdentity": {
+      "title": "Menya ũmenyekani na mĩtũũrĩre",
+      "description": "Kũũra mathĩĩna na mĩthiĩre ĩrĩa yaumĩire mĩtũũrĩre ya Abirika na yakoranĩirie andũ amo na matukũ."
+    },
+    "streamFolklore": {
+      "title": "Ona ngano, nyĩmbo, na ũkũndania",
+      "description": "Kũũra mĩĩ ya ũmenyekani wa Gĩabirika na mĩtũũrĩre ĩrĩa yĩtaũrĩrwo kuuma rũciaro rũmwe nginya rũngĩ."
+    }
+  },
+
+  "about": {
+  "title": "Ũhoro wa Magical Africa",
+  "description": "Magical Africa nĩyonanĩria ũthaka, mĩtũũrĩre, na ngano cia Abirika. Tũkonanĩria mĩtũũrĩre ya kontinent ĩno, matũũra ma kũhũũrana, na ngwatanĩro ya muoyo, tũkĩana kĩrĩa gĩtũmaga Abirika ĩkorwo na ũrogi wa ma.",
+  "learnMore": "Menya Gũkĩra"
+},
+
+
+"marketplace": {
+  "title": "Ndũka Yĩtũ",
+  "price": "Mbeca",
+  "viewAll": "Ona Ciothe",
+  "categories": {
+    "jewelery": "Indo cia kũĩtĩkĩra",
+    "garments": "Ngũo",
+    "toolsArtefacts": "Iria na Indo cia Tene",
+    "musicalInstruments": "Indo cia Mũtũĩre"
+  },
+  "items": {
+    "maasaiBracelets": {
+      "title": "Mbangili cia Gĩmaasai",
+      "description": "Mbangili cia shanga cia Gĩmaasai cionania mĩtũũrĩre na ũhunaji."
+    },
+    "beadedJewelery": {
+      "title": "Indo cia shanga",
+      "description": "Indo cia mahiga ciombĩtwo na moko na ũthaka wa kawaĩda."
+    },
+    "maasaiNecklaces": {
+      "title": "Mikũfũ ya Gĩmaasai",
+      "description": "Mikũfũ ya shanga ya Gĩmaasai yĩna rangi ĩrĩa cioneka wega."
+    },
+    "ankaraGown": {
+      "title": "Ngũo ya Ankara",
+      "description": "Yombĩtwo na ngũo ya Ankara, yĩhumbagwo mĩtũũrĩre mĩingĩ ya Gĩnigeria."
+    },
+    "maasaiLeso": {
+      "title": "Leso ya Gĩmaasai",
+      "description": "Yĩhumbagwo nĩ arũme na atumia a Gĩmaasai Kenya na Tanzania."
+    },
+    "kitenge": {
+      "title": "Kitenge",
+      "description": "Kĩombĩtwo na ngũo ya pamba yĩna mĩĩko ya rangi kwa arũme na atumia."
+    },
+    "carpentryTools": {
+      "title": "Iria cia Ũhunaji Mĩtĩ",
+      "description": "Iria cia ũhunaji mĩtĩ cia ahunaji kwa wĩra mwega."
+    },
+    "farmingTools": {
+      "title": "Iria cia Ũrĩmi",
+      "description": "Iria cia ũrĩmi cia tene cĩkĩhuthĩrwo ũmũthĩ."
+    },
+    "traditionalSpears": {
+      "title": "Mĩtĩ ya Tene",
+      "description": "Mĩtĩ ĩrĩa yombĩtwo na moko yahuthĩrwo nĩ njamba."
+    },
+    "drums": {
+      "title": "Ngoma",
+      "description": "Ngoma cia Gĩabirika cia tene kwa mĩario na matũũro."
+    },
+    "stringInstruments": {
+      "title": "Indo cia Nyuĩ",
+      "description": "Indo cia nyuĩ ciombĩtwo na moko cĩna mĩrĩro ĩrĩa ĩ ĩmwe."
+    },
+    "windInstruments": {
+      "title": "Indo cia Rũhuho",
+      "description": "Mĩturirĩro na ihembe cia tene ciombĩtwo na indo cia kawaĩda."
+    }
+  }
+}
+}

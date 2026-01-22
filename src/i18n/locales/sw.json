@@ -1,0 +1,103 @@
+{
+  "nav": {
+    "menu": "Menyu",
+    "language": "Lugha",
+    "signIn": "Ingia",
+    "logOut": "Toka",
+    "currentlyIn": "Sasa uko",
+    "yourAccounts": "Akaunti zako",
+    "addAccount": "Ongeza akaunti ya Magical Africa",
+    "personal": "Binafsi"
+  },
+  "hero": {
+   
+    "learnLanguage": "Jifunze Lugha",
+    "exploreCulture": "Chunguza Utamaduni",
+    "visitAntiques": "Tembelea Mambo ya Kale"
+  },
+  "services": {
+    "heading": "Chunguza Uchawi Nyuma ya Utamaduni Wetu",
+    "learnMore": "Jifunze Zaidi",
+    "viewAll": "Tazama Zote",
+    "learnLanguage": {
+      "title": "Jifunze Lugha",
+      "description": "Gundua uzuri wa lugha za Kiafrika na uunganishe na tamaduni mbalimbali barani kote."
+    },
+    "exploreIdentity": {
+      "title": "Chunguza utambulisho na mila",
+      "description": "Gundua safari na mienendo iliyounda tamaduni mbalimbali za Afrika na kuunganisha watu wake kwa muda."
+    },
+    "streamFolklore": {
+      "title": "Tazama hadithi, muziki, na usimulizi",
+      "description": "Gundua mizizi ya utambulisho wa Kiafrika na mila za milele zinazopitishwa kizazi hadi kizazi."
+    }
+  },
+  "about": {
+  "title": "Kuhusu Magical Africa",
+  "description": "Magical Africa inasherehekea uzuri, utamaduni, na hadithi za Afrika. Tunaonyesha mila tajiri za bara, mandhari mbalimbali, na roho hai, tukishiriki kinachofanya Afrika kuwa ya kichawi kweli.",
+  "learnMore": "Jifunze Zaidi"
+},
+
+
+"marketplace": {
+  "title": "Soko Letu",
+  "price": "Bei",
+  "viewAll": "Tazama Zote",
+  "categories": {
+    "jewelery": "Vito",
+    "garments": "Mavazi",
+    "toolsArtefacts": "Zana na Sanaa",
+    "musicalInstruments": "Ala za Muziki"
+  },
+  "items": {
+    "maasaiBracelets": {
+      "title": "Bangili za Kimaasai",
+      "description": "Bangili za shanga za Kimaasai zinazoonyesha mila na usanii."
+    },
+    "beadedJewelery": {
+      "title": "Vito vya shanga",
+      "description": "Vito vya mawe vilivyotengenezwa kwa mkono na umaridadi wa asili."
+    },
+    "maasaiNecklaces": {
+      "title": "Mikufu ya Kimaasai",
+      "description": "Mikufu ya shanga ya Kimaasai yenye rangi za kupendeza."
+    },
+    "ankaraGown": {
+      "title": "Gauni la Ankara",
+      "description": "Limetengenezwa kwa kitambaa cha Ankara, linavaliwa katika tamaduni nyingi za Kinigeria."
+    },
+    "maasaiLeso": {
+      "title": "Leso ya Kimaasai",
+      "description": "Inavaliwa na wanaume na wanawake wa Kimaasai nchini Kenya na Tanzania."
+    },
+    "kitenge": {
+      "title": "Kitenge",
+      "description": "Kimetengenezwa kwa kitambaa cha pamba chenye michoro ya rangi kwa wanaume na wanawake."
+    },
+    "carpentryTools": {
+      "title": "Zana za Useremala",
+      "description": "Zana za useremala za mafundi kwa ufundi kamili."
+    },
+    "farmingTools": {
+      "title": "Zana za Kilimo",
+      "description": "Vifaa vya kilimo vya jadi bado vinatumika leo."
+    },
+    "traditionalSpears": {
+      "title": "Mikuki ya Jadi",
+      "description": "Mikuki iliyotengenezwa kwa mkono iliyotumiwa na mashujaa katika historia."
+    },
+    "drums": {
+      "title": "Ngoma",
+      "description": "Ngoma za jadi za Kiafrika kwa sherehe na maadhimisho."
+    },
+    "stringInstruments": {
+      "title": "Ala za Nyuzi",
+      "description": "Ala za nyuzi zilizotengenezwa kwa mkono zenye sauti za kipekee."
+    },
+    "windInstruments": {
+      "title": "Ala za Upepo",
+      "description": "Filimbi na pembe za jadi zilizotengenezwa kwa vifaa vya asili."
+    }
+  }
+}
+}

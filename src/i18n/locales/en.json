@@ -1,0 +1,93 @@
+{
+  "nav": {
+    "menu": "Menu",
+    "language": "Language",
+    "signIn": "Sign In",
+    "logOut": "Log out",
+    "currentlyIn": "Currently in",
+    "yourAccounts": "Your accounts",
+    "addAccount": "Add Magical Africa account",
+    "personal": "Personal"
+  },
+  "hero": {
+    
+    "learnLanguage": "Learn Language",
+    "exploreCulture": "Explore Culture",
+    "visitAntiques": "Visit Antiques"
+  },
+   "exploreIdentity": {
+      "title": "Explore identity and tradition",
+      "description": "Uncover the journeys and movements that formed Africa's diverse cultures and united its people through time."
+    },
+    "streamFolklore": {
+      "title": "Stream folklore, music, and storytelling",
+      "description": "Uncover the roots of African identity and the timeless traditions passed through generations."
+    },
+    "about": {
+  "title": "About Magical Africa",
+  "description": "Magical Africa celebrates the beauty, culture, and stories of Africa. We showcase the continent's rich traditions, diverse landscapes, and vibrant spirit, sharing what makes Africa truly magical.",
+  "learnMore": "Learn More"
+},
+
+"marketplace": {
+  "title": "Our Marketplace",
+  "price": "Price",
+  "viewAll": "View All",
+  "categories": {
+    "jewelery": "Jewelery",
+    "garments": "Garments",
+    "toolsArtefacts": "Tools & Artefacts",
+    "musicalInstruments": "Musical Instruments"
+  },
+  "items": {
+    "maasaiBracelets": {
+      "title": "Maasai bracelets",
+      "description": "Maasai beaded bracelets showcasing tradition and artistry."
+    },
+    "beadedJewelery": {
+      "title": "Beaded jewelery",
+      "description": "Handcrafted stone jewelry with natural elegance."
+    },
+    "maasaiNecklaces": {
+      "title": "Maasai necklaces",
+      "description": "Traditional Maasai beaded necklaces with vibrant colors."
+    },
+    "ankaraGown": {
+      "title": "Ankara Gown",
+      "description": "Made from Ankara Fabric, worn across many Nigerian cultures."
+    },
+    "maasaiLeso": {
+      "title": "Maasai Leso",
+      "description": "Worn by Maasai men and women across Kenya and Tanzania."
+    },
+    "kitenge": {
+      "title": "Kitenge",
+      "description": "Made from brightly patterned cotton fabric for both men and women."
+    },
+    "carpentryTools": {
+      "title": "Carpentry Tools",
+      "description": "Artisan carpentry tools for perfect craftsmanship."
+    },
+    "farmingTools": {
+      "title": "Farming Tools",
+      "description": "Traditional farming implements still in use today."
+    },
+    "traditionalSpears": {
+      "title": "Traditional Spears",
+      "description": "Handcrafted spears used by warriors throughout history."
+    },
+    "drums": {
+      "title": "Drums",
+      "description": "Traditional African drums for ceremonies and celebrations."
+    },
+    "stringInstruments": {
+      "title": "String Instruments",
+      "description": "Handmade string instruments with unique sounds."
+    },
+    "windInstruments": {
+      "title": "Wind Instruments",
+      "description": "Traditional flutes and horns made from natural materials."
+    }
+  }
+}
+}

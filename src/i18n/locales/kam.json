@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "menu": "Menyu",
+    "language": "Lũthĩmo",
+    "signIn": "Ĩngĩa",
+    "logOut": "Uma",
+    "currentlyIn": "Ũ ĩ",
+    "yourAccounts": "Akaunti syaku",
+    "addAccount": "Ongela akaunti ya Magical Africa",
+    "personal": "Ya mũene"
+  },
+  "hero": {
+  
+    "learnLanguage": "Ĩthoma Lũthĩmo",
+    "exploreCulture": "Manya Mĩtũũo",
+    "visitAntiques": "Enda Vĩndu vya Tene"
+  },
+   "services": {
+    "heading": "Manya Ũthaithu Ũlĩ Thutha wa Mĩtũũo Yĩtũ",
+    "learnMore": "Manya Vonthe",
+    "viewAll": "Ona Syothe",
+    "learnLanguage": {
+      "title": "Ĩthoma Lũthĩmo",
+      "description": "Manya ũnasya wa lũthĩmo lwa Kĩafilika na ũkolanĩsye na mĩtũũo mĩingĩ ĩla yĩ kontinent yonthe."
+    },
+    "exploreIdentity": {
+      "title": "Manya ũmanyĩkĩlĩlyo na mĩtũũo",
+      "description": "Manya mathĩĩno na mĩthĩĩngĩko ĩla yaumĩa mĩtũũo ya Afilika na yakolanĩsya andũ amo na matukũ."
+    },
+    "streamFolklore": {
+      "title": "Ona ngewa, nyĩmbo, na ũkũndanĩa",
+      "description": "Manya mĩĩ ya ũmanyĩkĩlĩlyo wa Kĩafilika na mĩtũũo ĩla yĩtawĩawa kuuma kĩvalo kĩmwe nginya kĩngi."
+    }
+  },
+
+  "about": {
+  "title": "Ũhoro wa Magical Africa",
+  "description": "Magical Africa nĩyonanasya ũnasya, mĩtũũo, na ngewa sya Afilika. Tũonanasya mĩtũũo ya kontinent ĩno, matũũa ma kũvathũkana, na ngwatanĩo ya wĩw'ũ, tũkũana kĩla kĩ ũmĩe Afilika nĩ ya ũthaithu wa kweli.",
+  "learnMore": "Manya Vonthe"
+},
+
+
+"marketplace": {
+  "title": "Ndũka Yĩtũ",
+  "price": "Mbesa",
+  "viewAll": "Ona Syothe",
+  "categories": {
+    "jewelery": "Vĩtũ vya kũĩtavya",
+    "garments": "Ngũa",
+    "toolsArtefacts": "Ifaa na Vĩndu vya Tene",
+    "musicalInstruments": "Vyombo vya Mũsiki"
+  },
+  "items": {
+    "maasaiBracelets": {
+      "title": "Mbangili sya Kimaasai",
+      "description": "Mbangili sya shanga sya Kimaasai syonanasya mĩtũũo na usanii."
+    },
+    "beadedJewelery": {
+      "title": "Vĩtũ vya shanga",
+      "description": "Vĩtũ vya mawe vyaũmbĩkĩwe kwa mwoko na ũnasya wa kawaĩda."
+    },
+    "maasaiNecklaces": {
+      "title": "Mikũfũ ya Kimaasai",
+      "description": "Mikũfũ ya shanga ya Kimaasai yĩna langi ĩla syoneka nesa."
+    },
+    "ankaraGown": {
+      "title": "Ngũa ya Ankara",
+      "description": "Yĩtũmbĩkĩtwe na ngũo ya Ankara, yĩvaaĩwa mĩtũũo mĩingĩ ya Kinigeria."
+    },
+    "maasaiLeso": {
+      "title": "Leso ya Kimaasai",
+      "description": "Yĩvaaĩwa nĩ anũme na aka a Kimaasai Kenya na Tanzania."
+    },
+    "kitenge": {
+      "title": "Kitenge",
+      "description": "Kĩũmbĩkĩtwe na ngũo ya pamba yĩna mĩĩko ya langi kwa anũme na aka."
+    },
+    "carpentryTools": {
+      "title": "Ifaa sya Wĩĩa Mĩtĩ",
+      "description": "Ifaa sya wĩĩa mĩtĩ sya afundi kwa wĩĩa mwanya."
+    },
+    "farmingTools": {
+      "title": "Ifaa sya Ũlĩmi",
+      "description": "Ifaa sya ũlĩmi sya tene syĩkũtũmĩkĩwa ũmũthĩ."
+    },
+    "traditionalSpears": {
+      "title": "Mĩtũ ya Tene",
+      "description": "Mĩtũ ĩla yaũmbĩkĩwe kwa mwoko yatũmĩkĩwe nĩ aita."
+    },
+    "drums": {
+      "title": "Ngoma",
+      "description": "Ngoma sya Kĩafilika sya tene kwa mĩĩo na matũũo."
+    },
+    "stringInstruments": {
+      "title": "Vyombo vya Nyui",
+      "description": "Vyombo vya nyui vyaũmbĩkĩwe kwa mwoko vyĩna mĩlĩo ĩla ĩ ĩmwe."
+    },
+    "windInstruments": {
+      "title": "Vyombo vya Mbeva",
+      "description": "Filimbi na pembe sya tene syaũmbĩkĩwe na vĩndu vya kawaĩda."
+    }
+  }
+}
+}

@@ -8,12 +8,14 @@ import Partners from '../components/Partners';
 import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
+import Languages from '../components/Languages';
 
 const Home = () => {
   return (
     <>
       <HeroSection />
       <Services />
+      <Languages />
       <AboutSection />
       <Marketplace />
       <TribesSection />

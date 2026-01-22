@@ -1,0 +1,104 @@
+{
+  "nav": {
+    "menu": "Imenyu",
+    "language": "Ulimi",
+    "signIn": "Ngena",
+    "logOut": "Phuma",
+    "currentlyIn": "Okwamanje uku",
+    "yourAccounts": "Ama-akhawunti akho",
+    "addAccount": "Engeza i-akhawunti ye-Magical Africa",
+    "personal": "Komuntu siqu"
+  },
+  "hero": {
+   
+    "learnLanguage": "Funda Ulimi",
+    "exploreCulture": "Hlola Isiko",
+    "visitAntiques": "Vakashela Izinto Zasendulo"
+  },
+   "services": {
+    "heading": "Hlola Imilingo Ngemuva Kwesiko Lethu",
+    "learnMore": "Funda Kabanzi",
+    "viewAll": "Buka Konke",
+    "learnLanguage": {
+      "title": "Funda Ulimi",
+      "description": "Thola ubuhle bezilimi zase-Afrika uxhumane namasiko ahlukahlukene kulo lonke izwekazi."
+    },
+    "exploreIdentity": {
+      "title": "Hlola ubunikazi nesiko",
+      "description": "Vumbulula uhambo nezinyathelo ezakha amasiko ahlukahlukene ase-Afrika futhi ahlanganisa abantu bayo ngesikhathi."
+    },
+    "streamFolklore": {
+      "title": "Bukela izinganekwane, umculo, nokuxoxa izindaba",
+      "description": "Vumbulula izimpande zobunikazi base-Afrika namasiko angunaphakade adluliswa ezizukulwaneni."
+    }
+  },
+
+  "about": {
+  "title": "Mayelana ne-Magical Africa",
+  "description": "I-Magical Africa igubha ubuhle, isiko, nezindaba ze-Afrika. Sibonisa amasiko acebi ezwekazi, izindawo ezihlukahlukene, nomoya ophilayo, sabelana ngokwenza i-Afrika ibe yimlingo ngempela.",
+  "learnMore": "Funda Kabanzi"
+},
+
+
+"marketplace": {
+  "title": "Imakethe Yethu",
+  "price": "Intengo",
+  "viewAll": "Buka Konke",
+  "categories": {
+    "jewelery": "Ubucwebe",
+    "garments": "Izingubo",
+    "toolsArtefacts": "Amathuluzi Nezinto Zasendulo",
+    "musicalInstruments": "Izinsimbi Zomculo"
+  },
+  "items": {
+    "maasaiBracelets": {
+      "title": "Amasongo amaMaasai",
+      "description": "Amasongo amaMaasai anebuhlalu abonisa isiko nobuciko."
+    },
+    "beadedJewelery": {
+      "title": "Ubucwebe bebuhlalu",
+      "description": "Ubucwebe bamatshe obenziwel esandleni nobuhle bemvelo."
+    },
+    "maasaiNecklaces": {
+      "title": "Amaketanga amaMaasai",
+      "description": "Amaketanga ebuhlalu amaMaasai endabuko anemibala ephilayo."
+    },
+    "ankaraGown": {
+      "title": "Isigqoko se-Ankara",
+      "description": "Yenziwe ngendwangu ye-Ankara, igqokwa emasikweni amaningi aseNigeria."
+    },
+    "maasaiLeso": {
+      "title": "I-Leso yamaMaasai",
+      "description": "Igqokwa ngabesilisa nabesifazane bamaMaasai eKenya naseTanzania."
+    },
+    "kitenge": {
+      "title": "I-Kitenge",
+      "description": "Yenziwe ngendwangu yekotini enezithombe ezicwebezelayo yabesilisa nabesifazane."
+    },
+    "carpentryTools": {
+      "title": "Amathuluzi Okhuni",
+      "description": "Amathuluzi okhuni ezingcweti obuciko obuphelele."
+    },
+    "farmingTools": {
+      "title": "Amathuluzi Okulima",
+      "description": "Izinsiza zokulima zendabuko ezisasetshenziswa namuhla."
+    },
+    "traditionalSpears": {
+      "title": "Imikhonto Yendabuko",
+      "description": "Imikhonto eyenziwe ngesandla esetshenziswa amaqhawe emlandweni."
+    },
+    "drums": {
+      "title": "Izigubhu",
+      "description": "Izigubhu zendabuko zase-Afrika zemicimbi nokugubha."
+    },
+    "stringInstruments": {
+      "title": "Izinsimbi Zentambo",
+      "description": "Izinsimbi zentambo ezenziwe ngesandla ezinomsindo ohlukile."
+    },
+    "windInstruments": {
+      "title": "Izinsimbi Zomoya",
+      "description": "Imitshingo nezimpondo zendabuko ezenziwe ngezinto zemvelo."
+    }
+  }
+}
+}

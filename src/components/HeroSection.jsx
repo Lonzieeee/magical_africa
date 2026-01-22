@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Navbar from './Navbar';
 
 const heroSlides = [
@@ -41,8 +42,8 @@ const heroSlides = [
 
 const HeroSection = ({ children, customContent, backgroundImage }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { t } = useTranslation();
 
-  // Only run the slideshow if no custom backgroundImage is provided
   useEffect(() => {
     if (backgroundImage) return;
 
@@ -53,11 +54,7 @@ const HeroSection = ({ children, customContent, backgroundImage }) => {
     return () => clearInterval(interval);
   }, [backgroundImage]);
 
-  // Determine the current slide data
   const slide = heroSlides[currentSlide];
-  
-  // Determine which background image to use
-  // If a custom backgroundImage prop is passed, use that; otherwise use the current slide's image
   const bgImage = backgroundImage || slide.image;
 
   return (
@@ -80,17 +77,17 @@ const HeroSection = ({ children, customContent, backgroundImage }) => {
             <div className="hero-boxes">
               <div className="hero-box">
                 <i className="fa-solid fa-comments"></i>
-                <p>Learn Language</p>
+                <p>{t('hero.learnLanguage')}</p>
               </div>
 
               <div className="hero-box">
                 <i className="fa-solid fa-mask"></i>
-                <p>Explore Culture</p>
+                <p>{t('hero.exploreCulture')}</p>
               </div>
 
               <div className="hero-box">
                 <i className="fa-solid fa-scroll"></i>
-                <p>Visit Antiques</p>
+                <p>{t('hero.visitAntiques')}</p>
               </div>
             </div>
           </div>

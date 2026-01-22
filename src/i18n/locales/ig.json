@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "menu": "Ndepụta",
+    "language": "Asụsụ",
+    "signIn": "Banye",
+    "logOut": "Pụọ",
+    "currentlyIn": "Ị nọ na",
+    "yourAccounts": "Akaụntụ gị",
+    "addAccount": "Tinye akaụntụ Magical Africa",
+    "personal": "Nke onwe"
+  },
+  "hero": {
+    
+    "learnLanguage": "Mụta Asụsụ",
+    "exploreCulture": "Nyochaa Omenala",
+    "visitAntiques": "Gaa Ihe Ochie"
+  },
+
+   "services": {
+    "heading": "Nyochaa Anwansi Dị N'azụ Omenala Anyị",
+    "learnMore": "Mụtakwuo",
+    "viewAll": "Lee Niile",
+    "learnLanguage": {
+      "title": "Mụta Asụsụ",
+      "description": "Chọpụta ịma mma nke asụsụ ndị Africa ma jikọọ na omenala dị iche iche n'ofe kọntinent ahụ."
+    },
+    "exploreIdentity": {
+      "title": "Nyochaa njirimara na omenala",
+      "description": "Kpughee njem na mmegharị ndị kpụrụ omenala dị iche iche nke Afrika ma jikọta ndị ya site na oge."
+    },
+    "streamFolklore": {
+      "title": "Lelee akụkọ ifo, egwu, na akụkọ",
+      "description": "Kpughee mgbọrọgwụ nke njirimara Afrika na omenala ebighị ebi ndị a na-enyefe site n'ọgbọ rue n'ọgbọ."
+    }
+  },
+
+  "about": {
+  "title": "Maka Magical Africa",
+  "description": "Magical Africa na-eme emume ịma mma, omenala, na akụkọ nke Afrika. Anyị na-egosi omenala bara ụba nke kọntinent ahụ, ala dị iche iche, na mmụọ dị ndụ, na-ekekọrịta ihe na-eme Afrika bụrụ nke anwansi n'ezie.",
+  "learnMore": "Mụtakwuo"
+},
+
+
+"marketplace": {
+  "title": "Ahịa Anyị",
+  "price": "Ọnụahịa",
+  "viewAll": "Lee Niile",
+  "categories": {
+    "jewelery": "Ihe ịchọ mma",
+    "garments": "Akwa",
+    "toolsArtefacts": "Ngwa ọrụ na Ihe ochie",
+    "musicalInstruments": "Ngwa egwu"
+  },
+  "items": {
+    "maasaiBracelets": {
+      "title": "Aka ọla Maasai",
+      "description": "Aka ọla Maasai nwere shanga na-egosipụta omenala na nka."
+    },
+    "beadedJewelery": {
+      "title": "Ihe ịchọ mma shanga",
+      "description": "Ihe ịchọ mma nkume emere n'aka nwere ịma mma nke okike."
+    },
+    "maasaiNecklaces": {
+      "title": "Olu ọla Maasai",
+      "description": "Olu ọla shanga Maasai omenala nwere agba dị ndụ."
+    },
+    "ankaraGown": {
+      "title": "Uwe Ankara",
+      "description": "Emere ya site na akwa Ankara, a na-eyi ya n'omenala Naịjirịa dị iche iche."
+    },
+    "maasaiLeso": {
+      "title": "Leso Maasai",
+      "description": "Ndị nwoke na ndị nwanyị Maasai na-eyi ya na Kenya na Tanzania."
+    },
+    "kitenge": {
+      "title": "Kitenge",
+      "description": "Emere ya site na akwa owu nwere usoro dị egwu maka ndị nwoke na ndị nwanyị."
+    },
+    "carpentryTools": {
+      "title": "Ngwa ọkpụkpụ osisi",
+      "description": "Ngwa ọkpụkpụ osisi nke ndị nka maka ọrụ aka zuru oke."
+    },
+    "farmingTools": {
+      "title": "Ngwa ọrụ ugbo",
+      "description": "Ngwa ọrụ ugbo omenala ka a na-eji taa."
+    },
+    "traditionalSpears": {
+      "title": "Ube omenala",
+      "description": "Ube emere n'aka ndị agha ji na akụkọ ihe mere eme."
+    },
+    "drums": {
+      "title": "Ịgba",
+      "description": "Ịgba omenala Afrika maka emume na nnọkọ."
+    },
+    "stringInstruments": {
+      "title": "Ngwa egwu eriri",
+      "description": "Ngwa egwu eriri emere n'aka nwere ụda pụrụ iche."
+    },
+    "windInstruments": {
+      "title": "Ngwa egwu ikuku",
+      "description": "Opi na mpi omenala emere site na ihe ndị okike."
+    }
+  }
+}
+}
