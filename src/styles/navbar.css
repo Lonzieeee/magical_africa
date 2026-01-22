@@ -12,7 +12,10 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   
 }
 
@@ -380,6 +383,44 @@
   cursor: pointer;
 }
 
+
+.magical-logo {
+  display: flex;
+  align-items: center;
+  
+}
+
+.magical-logo .logo {
+  height: 40px;
+  transition: opacity 0.3s ease;
+}
+
+/* Default state (navbar transparent) */
+.logo-light {
+  display: none;
+}
+
+.logo-dark {
+  display: block;
+}
+
+/* When navbar is scrolled (white background) */
+.navbar.scrolled .logo-dark {
+  display: none;
+}
+
+.navbar.scrolled .logo-light {
+  display: block;
+}
+
+/* When navbar is hovered */
+.navbar:hover .logo-dark {
+  display: none;
+}
+
+.navbar:hover .logo-light {
+  display: block;
+}
 
 
 

@@ -18,7 +18,7 @@ const Contact = () => {
           <div className="contact-links">
             <a href="#">
               <i className="fa-regular fa-envelope"></i>
-              info@magical.africa
+              gloria@magical.africa
             </a>
             <a href="#">
               <i className="fa-solid fa-mobile"></i>
@@ -26,7 +26,7 @@ const Contact = () => {
             </a>
             <a href="#">
               <i className="fa-solid fa-location-dot"></i>
-              Nairobi, Kenya
+              Chandaria Innovation Center
             </a>
           </div>
         </div>

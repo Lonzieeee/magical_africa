@@ -9,20 +9,27 @@
 .mission-vision{
   position: absolute;
   bottom: 10%;
-  padding-left: 3rem;
-  padding-right: 3rem;
+  left: 3rem;
+  
   display: flex;
   flex-direction: column;
-  
+  gap: 20px;
   z-index: 1;
 }
 .mission-vision h1{
-  font-size: 3rem;
+  font-size: 2.5rem;
   color: white;
+  
 }
 .mission-vision p{
   font-size: 1.2rem;
   color: white;
+ 
+  width: 90%;
+}
+
+.about-tagline{
+  font-size: 1rem;
 }
 
 .mission{
@@ -56,16 +63,35 @@ width: 100%;
 display: flex;
 flex-direction: column;
 justify-content: center;
-padding-right: 0.5rem;
+
+gap: 20px;
 }
 
 .problem-text h1{
   font-size: 1.5rem;
 }
 
+.problem-text h1 span{
+  color: rgb(181, 161, 145);
+}
+
 .problem-text-p{
   font-size: 1rem;
   padding-top: 1rem;
+}
+
+.background-text{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.875rem;
+  justify-content: center;
+  
+}
+
+.impact-icon{
+  font-size: 2rem;
+  color: rgb(210, 123, 58);
 }
 
 .problems{
@@ -178,94 +204,123 @@ background-color: transparent;
   
 }
 
-.solution1{
-  background-image: url(images/explore-identity.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 300px;
-}
 
-
-.solutions-carousel{
-  width: 100%;
+  .solutions-carousel {
   overflow: hidden;
+  width: 100%;
 }
 
-.solutions-wrapper{
+.solutions-wrapper {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.solution-pair {
+  min-width: 100%;
+  display: flex;
+  gap: 2rem;
+}
+
+.solution-text {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.solution-text h1{
+  font-size: 1rem;
+  line-height: 1.7rem;
+}
+
+.solution-text p{
+  font-size: 0.875rem;
+}
+.solution-text ul{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: fit-content;
+  list-style-position: inside; 
+align-items: self-start;
+ 
+}
+
+.solution-text ul li{
+  list-style-type: disc; 
+  font-size: 0.8rem;
   display: flex;
   flex-direction: row;
-  transition: transform 0.5s ease-in-out;
-  width: 200%; /* 2 slides */
+  gap: 10px;
+ }
+.solution-image {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  min-height: 500px;
+}
+.solution-text ul li span{
+background-color: rgb(210, 123, 58) !important;
+height: 10px;
+width: 10px;
+border: 50%;
 }
 
-.solutions-slide{
+
+.working-with{
+  display: flex;
+  flex-direction: column;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  align-items: center;
+
+}
+.working-with h1{
+  font-size: 1.5rem;
+  text-align: center;
+  font-weight: 400;
+}
+
+.working-with p{
+  font-size: 1rem;
+  padding-top: 1rem;
+  
+}
+
+.partnering{
   display: flex;
   flex-direction: row;
   gap: 30px;
-  width: 50%; /* Each slide takes half of wrapper */
-  flex-shrink: 0;
+  width: 100%;
+  align-items: center;
+  padding-top: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
-
-.solution1{
-  flex: 1;
-  background-image: url(images/explore-identity.jpg);
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  height: 300px;
-  position: relative;
+.partner-a{
+  width: 100%;
+  height: 150px;
+  border: 0.5px solid rgb(181, 161, 145);
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Optional: Add overlay and content styling */
-.solution1::before{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 50%);
+.img-a img{
+  width: 60%;
 }
 
-.solution-content{
-  position: relative;
-  z-index: 1;
-  padding: 1rem;
-  color: white;
+.img-b img{
+  width: 80%;
 }
 
-.solution-content h2{
-  font-size: 1.1rem;
-  font-weight: 600;
+.img-d img{
+width: 40%;
 }
 
-.solution-content p{
-  font-size: 0.875rem;
-  padding-top: 0.5rem;
-}
 
-/* Different images for variety */
-.solutions-slide:first-child .solution1:nth-child(1){
-  background-image: url(images/explore-identity.jpg);
-}
-.solutions-slide:first-child .solution1:nth-child(2){
-  background-image: url(images/African-storytelling.jpg);
-}
-.solutions-slide:first-child .solution1:nth-child(3){
-  background-image: url(images/drums.jpg);
-}
-.solutions-slide:last-child .solution1:nth-child(1){
-  background-image: url(images/hammer.jpg);
-}
-.solutions-slide:last-child .solution1:nth-child(2){
-  background-image: url(images/Igbo.jpg);
-}
-.solutions-slide:last-child .solution1:nth-child(3){
-  background-image: url(images/maasai-land.jpg);
-}
 
 /* Responsive */
 @media screen and (max-width: 768px) {
@@ -289,6 +344,13 @@ background-color: transparent;
    
     width: 100%;
   }
+  .problem-text{
+    height: fit-content;
+  }
+  .problem-page{
+    padding-bottom: 2rem;
+  }
+ 
 }
 
 
@@ -329,6 +391,9 @@ background-color: transparent;
   .problem-text-p{
     width: 90%;
   }
+  .solution-image{
+    height: 700px;
+  }
 }
 
 
@@ -354,6 +419,15 @@ padding-top: 6rem;
 .our-solution p{
   text-align: center;
 }
+.solution-pair{
+  flex-direction: column;
+}
+.solution-text h1{
+  text-align: start;
+}
+.solution-text p{
+  text-align: start;
+}
 }
 
 
@@ -366,6 +440,25 @@ padding-top: 6rem;
  .mission-vision p{
   font-size: 1rem;
  }
-
-
+ .partnering{
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .partner-a{
+    height: 200px;
+  }
+  .partner-a  img{
+   
+  }
+  .solution-box{
+    margin-top: 2rem;
+  }
+.solution-text{
+  padding-left:0rem ;
+  padding-right: 0rem;
+}
+.solution-text h1{
+  line-height: 1.7rem;
+}
 }

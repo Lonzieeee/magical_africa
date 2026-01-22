@@ -42,17 +42,39 @@ const Navbar = () => {
       />
 
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+       
+
         <div className="item1">
-          <button className="menu" onClick={() => setIsSideMenuOpen(true)}>
+
+           <div className='magical-logo'>
+          <img
+           src="/images/magicaal-logo1-removebg-preview.png"
+           alt="Magical Africa logo dark"
+           className="logo logo-dark"
+      />
+     <img
+         src="/images/magivcal-logo2-removebg-preview.png"
+         alt="Magical Africa logo light"
+         className="logo logo-light"
+      />
+        </div>
+
+
+         <button className="menu" onClick={() => setIsSideMenuOpen(true)}>
             <i className="fa-solid fa-bars"></i>
             <span>Menu</span>
           </button>
-
+ 
+       {/*
           <button className="search">
             <i className="fa-solid fa-magnifying-glass"></i>
             <span>Search</span>
           </button>
+
+           */}
         </div>
+
+        
 
         <div className="item2">
           <h1 id="logo-header" onClick={() => navigate('/')}>Magical Africa</h1>
