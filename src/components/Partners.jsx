@@ -1,3 +1,5 @@
+
+{/* 
 import '../styles/partners.css';
 
 const Partners = () => {
@@ -31,6 +33,41 @@ const Partners = () => {
       </div>
 
      
+    </section>
+  );
+};
+
+export default Partners;
+*/}
+
+
+
+import { useTranslation } from 'react-i18next';
+import '../styles/partners.css';
+
+const Partners = () => {
+  const { t } = useTranslation();
+
+  return (
+    <section className="partners">
+      <div className="partners-boxes">
+        <div className="box1">
+          <img src="/images/aws.webp" alt="Partner 1" />
+        </div>
+        <div className="box2">
+          <img src="/images/kuLogo.webp" alt="Partner 2" />
+        </div>
+      </div>
+      
+      <div className="partners-text">
+        <h1>{t('partners.title')}</h1>
+        <p>{t('partners.description')}</p>
+      </div>
+
+      <div className="partners-text2">
+        <h1>{t('partners.title')}</h1>
+        <p>{t('partners.description')}</p>
+      </div>
     </section>
   );
 };

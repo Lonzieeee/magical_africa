@@ -101,5 +101,694 @@
       "description": "Opi na mpi omenala emere site na ihe ndị okike."
     }
   }
-}
+},
+
+
+"sideMenu": {
+  "close": "Mechie",
+  "search": "Chọọ",
+  "home": "Ụlọ",
+  "tribes": "Ebo",
+  "about": "Maka",
+  "language": "Asụsụ",
+  "marketplace": "Ahịa"
+},
+
+
+"languages": {
+  "title": "Mụta Asụsụ Anyị Ụfọdụ",
+  "description": "Afrika bụ ụlọ ọtụtụ puku asụsụ, nke ọ bụla na-eburu akụkọ ihe mere eme, njirimara, na omenala. Nyochaa ekele na okwu ndị a na-ahụkarị site na obodo Afrika dị iche iche ma jikọọ na kọntinent ahụ site na asụsụ.",
+  "items": {
+    "swahili": {
+      "name": "Swahili",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Habari?', pụtara 'Kedu ka ị mere?'"
+    },
+    "zulu": {
+      "name": "Zulu",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Sawubona', pụtara 'Ahụrụ m gị.'"
+    },
+    "yoruba": {
+      "name": "Yoruba",
+      "tooltip": "'Báwo ni?' bụ ekele Yoruba pụtara 'Kedu ka ị mere?'"
+    },
+    "kikuyu": {
+      "name": "Kikuyu",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Jambo', pụtara 'Nnọọ'"
+    },
+    "hausa": {
+      "name": "Hausa",
+      "tooltip": "'Akkam?' pụtara 'Kedu ka ị mere?' na Hausa."
+    },
+    "shona": {
+      "name": "Shona",
+      "tooltip": "'Mhoro' bụ ekele Shona pụtara 'Nnọọ.'"
+    },
+    "sukuma": {
+      "name": "Sukuma",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Moro', pụtara 'Nnọọ'"
+    },
+    "xhosa": {
+      "name": "Xhosa",
+      "tooltip": "'Molo' bụ ekele Xhosa pụtara 'Nnọọ.'"
+    },
+    "maasai": {
+      "name": "Maasai",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Sanu', pụtara 'Nnọọ'"
+    },
+    "igbo": {
+      "name": "Igbo",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Kedu?', pụtara 'Kedu ka ị mere?'"
+    },
+    "lingala": {
+      "name": "Lingala",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Mbote', pụtara 'Nnọọ'"
+    },
+    "tsonga": {
+      "name": "Tsonga",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Avuxeni', pụtara 'Ụtụtụ ọma'"
+    },
+    "setswana": {
+      "name": "Setswana",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Dumela', pụtara 'Nnọọ'"
+    },
+    "chichewa": {
+      "name": "Chichewa",
+      "tooltip": "Ekele a na-ahụkarị bụ 'Moni', pụtara 'Nnọọ'"
+    }
+  }
+},
+
+
+
+"tribes": {
+  "title": "Nyochaa Ebo Anyị",
+  "subtitle": "Njem site na ebo dị iche iche nke Afrika na omenala ebighị ebi",
+  "viewAll": "Lee Niile",
+  "oromo": {
+    "name": "Oromo",
+    "description": "Ndị Oromo si Ethiopia, na-eburu ihe nketa mpako nke omenala, ịdị n'otu, na njirimara omenala. Ha bụ otu ndị kachasị ukwuu n'obodo ahụ, na-eme ihe dị ka otu ụzọ n'ụzọ atọ nke ndị mmadụ nwere ihe dị ka nde mmadụ 40."
+  },
+  "zulu": {
+    "name": "Zulu",
+    "description": "Site na South Africa, ndị Zulu na-eburu ihe nketa dị ike nke omenala, nguzosi ike n'oge, na njirimara, na-anọchite anya karịa nde mmadụ 11."
+  },
+  "igbo": {
+    "name": "Igbo",
+    "description": "Ndị Igbo si Nigeria, bụ otu n'ime ebo kachasị ukwuu n'obodo ahụ, nwere karịa nde 30, a ma ama maka omenala bara ụba, ịzụ ahịa, na ụkpụrụ obodo siri ike."
+  }
+},
+
+
+"socialImpact": {
+  "title": "Mmetụta Anyị na Ọha",
+  "description": "Anyị kwenyere na inye obodo ndị na-akpali anyị ihe. Site na ikpo okwu anyị, anyị na-akwado ndị nka obodo, na-echekwa ihe nketa omenala, ma na-emepụta ohere akụ na ụba n'ofe Afrika.",
+  "learnMore": "Mụtakwuo",
+  "readMore": "Gụkwuo",
+  "artisans": {
+    "title": "Ịkwado Ndị Nka Obodo",
+    "description": "Anyị na-ejikọ ndị ọrụ nka obodo ozugbo na ahịa ụwa, na-ehụ na ha na-enweta ụgwọ ziri ezi maka ọrụ ha."
+  },
+  "heritage": {
+    "title": "Ịchekwa Ihe Nketa",
+    "description": "Ebe nchekwa dijitalụ anyị na-enyere aka ịchekwa asụsụ ndị nọ n'ihe ize ndụ, omenala, na omenaala maka ọgbọ ndị na-abịa."
+  }
+},
+
+
+"partners": {
+  "title": "Ndị Mmekọ Anyị",
+  "description": "Anyị na-arụkọ ọrụ na nzukọ ndị na-ekekọrịta ọhụụ anyị nke ịchekwa na ime emume omenala Afrika. Ọnụ, anyị na-eme mmetụta karịa."
+},
+
+
+
+"faq": {
+  "title": "Ajụjụ A Na-ajụkarị",
+  "items": {
+    "whatIs": {
+      "question": "Gịnị bụ Magical Africa?",
+      "answer": "Magical Africa bụ ikpo okwu raara nye ichekwa, ime emume, na ikekọrịta ihe nketa omenala bara ụba nke Afrika na ụwa. Anyị na-ejikọ ndị mmadụ na omenala Afrika n'ezie, asụsụ, omenala, na obodo."
+    },
+    "contribute": {
+      "question": "Kedu ka m ga-esi tinye aka na Magical Africa?",
+      "answer": "Ị nwere ike itinye aka site na ikekọrịta akụkọ, foto, ma ọ bụ ihe ọmụma gbasara obodo gị. Debanye aha ma jiri ngwa onyinye anyị tinye ọdịnaya gbasara omenala, asụsụ, na ihe nketa nke ebo gị."
+    },
+    "authentic": {
+      "question": "Ọdịnaya dị na Magical Africa ọ bụ nke eziokwu?",
+      "answer": "Ee! A na-enweta ọdịnaya anyị niile ozugbo site n'aka ndị otu obodo na ndị ọkachamara omenala. Anyị na-arụkọ ọrụ chiri anya na obodo ndị obodo iji hụ na ihe niile anyị na-ekekọrịta ziri ezi ma bụrụ nke eziokwu."
+    },
+    "learnLanguage": {
+      "question": "Kedu ka m ga-esi mụta asụsụ Afrika na ikpo okwu a?",
+      "answer": "Anyị na-enye ihe eji amụ asụsụ gụnyere okwu a na-ahụkarị, mkpọ ụda sitere n'aka ndị na-asụ asụsụ ọmụmụ, na ọnọdụ omenala iji nyere gị aka ghọta ma kwanyere asụsụ ndị Africa ùgwù."
+    },
+    "purchase": {
+      "question": "Enwere m ike ịzụta ngwaahịa Afrika n'ezie?",
+      "answer": "Ee! Ahịa anyị nwere ngwaahịa omenala ndị a kpụrụ n'aka ndị nka Africa. Ọzụzụ ọ bụla na-akwado obodo ndị obodo ma na-enyere aka ịchekwa ọrụ aka omenala."
+    }
+  }
+},
+
+
+"contact": {
+  "description": "Ị nwere ajụjụ gbasara omenala Afrika, ihe nketa, ma ọ bụ mkpokọta anyị? Kpọtụrụ anyị ma chọpụta akụkọ, omenala, na ike ịmepụta ihe ndị na-eme Afrika pụrụ iche. Anyị ga-enwe mmasị ijikọ na gị ma kesaa anwansi nke Afrika.",
+  "button": "Kpọtụrụ Anyị"
+},
+
+
+
+"footer": {
+  "tagline": "Ebe Akụkọ Afrika N'ezie bi",
+  "quickLinks": "Njikọ Ngwa Ngwa",
+  "links": {
+    "home": "Ụlọ",
+    "tribes": "Ebo",
+    "languages": "Asụsụ",
+    "about": "Maka",
+    "marketplace": "Ahịa",
+    "contact": "Kpọtụrụ"
+  },
+  "terms": "Usoro Ojiji",
+  "privacy": "Iwu Nzuzo",
+  "cookiePolicy": "Iwu Kuki",
+  "cookieSettings": "Ntọala Kuki",
+  "copyright": "© 2026 Magical.africa. Ikike niile echekwara"
+},
+
+
+
+
+
+"auth": {
+  "signIn": "Banye",
+  "signUp": "Debanye Aha",
+  "email": "Email",
+  "emailPlaceholder": "email@ọmụmaatụ.com",
+  "enterEmail": "Tinye email gị",
+  "password": "Okwuntụghe",
+  "forgotPassword": "Chefuru Okwuntụghe?",
+  "required": "A chọrọ",
+  "continueWithGoogle": "Gaa n'ihu na Google",
+  "orBecomeMember": "Ma ọ bụ Bụrụ Onye Otu",
+  "joinText": "Sonye na",
+  "joinTextEnd": "ma chọpụta omenala Afrika, ihe nketa, akụkọ, na omenala.",
+  "journeyStarts": "Njem Gị Na-amalite Ebe A",
+  "letsGetStarted": "Ka Anyị Malite",
+  "tribes": "Ebo",
+  "firstName": "Aha Mbụ",
+  "firstNamePlaceholder": "Tinye aha gị mbụ",
+  "lastName": "Aha Nke Abụọ",
+  "lastNamePlaceholder": "Tinye aha gị ikpeazụ",
+  "country": "Obodo",
+  "countryPlaceholder": "Tinye obodo gị",
+  "createAccount": "Mepụta Akaụntụ",
+  "signInSuccess": "Ị banyere nke ọma!",
+  "googleSuccess": "Ị banyere na Google nke ọma!",
+  "accountCreated": "Emepụtara akaụntụ nke ọma!",
+  "cards": {
+    "explore": {
+      "title": "Nyochaa Afrika N'ezie",
+      "description": "Chọpụta omenala bara ụba, omenala, na akụkọ site na kọntinent niile n'otu ebe."
+    },
+    "connect": {
+      "title": "Jikọọ Na Ihe Nketa",
+      "description": "Nwee ahụmahụ Afrika site na ndị ya, ebo, na omenala ebighị ebi, a họpụtara nke ọma."
+    },
+    "travel": {
+      "title": "Njem Gafere Nke A Na-ahụkarị",
+      "description": "Meghee ebe pụrụ iche na ahụmahụ omenala ndị gafere ụzọ ndị njem a na-ahụkarị."
+    }
+  },
+  "errors": {
+    "noAccount": "Ọ dịghị akaụntụ hụrụ na email a",
+    "wrongPassword": "Okwuntụghe ezighi ezi",
+    "invalidCredential": "Email ma ọ bụ okwuntụghe ezighi ezi",
+    "passwordLength": "Okwuntụghe ga-enwerịrị opekata mpe mkpụrụedemede 6",
+    "emailInUse": "Edebanyela email a",
+    "invalidEmail": "Biko tinye adreesị email ziri ezi",
+    "generic": "Njehie: "
+  }
+},
+
+
+
+"tribesPage": {
+  "hero": {
+    "title": "Nyochaa Obodo Afrika",
+    "subtitle": "Chọpụta ọtụtụ omenala dị iche iche, omenala, na ihe nketa nke Afrika n'ofe kọntinent."
+  },
+  "section": {
+    "title": "Obodo Afrika",
+    "subtitle": "Nyochaa omenala dị iche iche, omenala, na akụkọ nke obodo Afrika site na kọntinent niile."
+  },
+  "language": "Asụsụ",
+  "exploreCulture": "Nyochaa Omenala",
+  "contribute": {
+    "title": "Obodo Gị Ọ Nọghị?",
+    "description": "Nyere anyị aka ịchekwa na ikekọrịta omenala gị. Tinye akụkọ ebo gị, omenala, asụsụ, na ihe nketa na Magical.Africa.",
+    "button": "Tinye Akụkọ"
+  },
+  "communities": {
+    "maasai": {
+      "name": "Maasai",
+      "location": "Kenya, Tanzania",
+      "population": "Mmadụ nde 1.5+",
+      "language": "Maa",
+      "desc": "Ndị agha na-akwaga akwaga a maara maka omenala na uwe pụrụ iche."
+    },
+    "ashanti": {
+      "name": "Ashanti",
+      "location": "Ghana",
+      "population": "Mmadụ nde 11+",
+      "language": "Twi",
+      "desc": "A maara ha maka ọrụ aka ọla edo ha na Alaeze Ashanti dị ike."
+    },
+    "hausa": {
+      "name": "Hausa",
+      "location": "Nigeria, Niger",
+      "population": "Mmadụ nde 80+",
+      "language": "Hausa",
+      "desc": "Otu n'ime ebo kachasị ukwuu na Afrika, a maara ha maka azụmaahịa."
+    },
+    "zulu": {
+      "name": "Zulu",
+      "location": "South Africa",
+      "population": "Mmadụ nde 12+",
+      "language": "Zulu",
+      "desc": "A maara ha maka omenala agha, ịkpụ shanga, na Alaeze Zulu a ma ama."
+    },
+    "yoruba": {
+      "name": "Yoruba",
+      "location": "Nigeria, Benin",
+      "population": "Mmadụ nde 45+",
+      "language": "Yoruba",
+      "desc": "Bara ụba na mythology, nka, na obodo ochie dị ka Ife na Oyo."
+    },
+    "kikuyu": {
+      "name": "Kikuyu",
+      "location": "Kenya",
+      "population": "Mmadụ nde 8+",
+      "language": "Kikuyu",
+      "desc": "Ebo kachasị ukwuu na Kenya, a maara ha maka ọrụ ugbo na azụmaahịa."
+    },
+    "igbo": {
+      "name": "Igbo",
+      "location": "Nigeria",
+      "population": "Mmadụ nde 45+",
+      "language": "Igbo",
+      "desc": "A maara ha maka mmụọ azụmaahịa na omenala nka bara ụba n'ọgbọ niile."
+    },
+    "amhara": {
+      "name": "Amhara",
+      "location": "Ethiopia",
+      "population": "Mmadụ nde 32+",
+      "language": "Amharic",
+      "desc": "Otu dị ike n'akụkọ ihe mere eme na Ethiopia nwere ihe nketa Ndị Kraịst ochie."
+    },
+    "berber": {
+      "name": "Berber",
+      "location": "Morocco, Algeria, Libya",
+      "population": "Mmadụ nde 30+",
+      "language": "Tamazight",
+      "desc": "Ndị mbụ nke North Africa nwere omenala na asụsụ ochie."
+    },
+    "swahili": {
+      "name": "Swahili",
+      "location": "Kenya, Tanzania, Zanzibar",
+      "population": "Mmadụ nde 2+",
+      "language": "Kiswahili",
+      "desc": "Ndị mmiri a maara maka azụmaahịa osimiri ha na njikọ omenala kemgbe narị afọ."
+    },
+    "wolof": {
+      "name": "Wolof",
+      "location": "Senegal, Gambia",
+      "population": "Mmadụ nde 6+",
+      "language": "Wolof",
+      "desc": "Ebo dị ike na Senegal a maara maka nnabata na ịdị n'otu ha."
+    },
+    "fulani": {
+      "name": "Fulani",
+      "location": "West Africa (mba 20+)",
+      "population": "Mmadụ nde 40+",
+      "language": "Fulfulde",
+      "desc": "Ndị ọzụzụ anụ na-akwaga akwaga gbasara West Africa nwere omenala pụrụ iche."
+    }
+  }
+},
+
+
+
+"searchSection": {
+  "title": "Chọta Ebo Gị",
+  "searchPlaceholder": "Chọọ ebo",
+  "allRegions": "Mpaghara Niile",
+  "allLanguages": "Asụsụ Niile",
+  "communitiesFound": "obodo achọtara",
+  "showMap": "Gosi Maapụ",
+  "hideMap": "Zoo Maapụ",
+  "addCommunity": "Tinye Obodo Gị",
+  "communitiesLabel": "Obodo",
+  "regions": {
+    "north": "North Africa",
+    "east": "East Africa",
+    "west": "West Africa",
+    "central": "Central Africa",
+    "southern": "Southern Africa"
+  }
+},
+
+
+
+"maasai": {
+  "hero": {
+    "title": "Maasai",
+    "subtitle": "Ndị agha nke East Africa"
+  },
+  "overview": {
+    "title": "Nchịkọta",
+    "titleSpan": "Obodo",
+    "location": "EBE",
+    "population": "ỌNỤ ỌGỤGỤ MMADỤ",
+    "language": "ASỤSỤ",
+    "region": "MPAGHARA",
+    "regionValue": "East Africa"
+  },
+  "tabs": {
+    "overview": "Nchịkọta",
+    "language": "Asụsụ",
+    "culture": "Omenala na Omenaala",
+    "leaders": "Ndị Ndu",
+    "nature": "Okike na Anụ Ọhịa",
+    "antiques": "Ihe Ochie"
+  },
+  "about": {
+    "title": "Maka Obodo",
+    "history": {
+      "title": "Akụkọ Ihe Mere Eme na Nkwaga",
+      "p1": "Ndị Maasai bụ ebo Nilotic bi n'ugwu, etiti na ndịda Kenya na ugwu Tanzania. Ha bụ n'ime ndị obodo a ma ama n'ụwa niile n'ihi obibi ha nso ọtụtụ ogige anụ ọhịa nke Nnukwu Ọdọ Mmiri Afrika na omenaala na uwe ha pụrụ iche.",
+      "p2": "Ndị Maasai na-asụ asụsụ Maa, onye otu ezinụlọ asụsụ Nilotic nwere njikọ na Dinka na Nuer. A ma ha maka omenala ha pụrụ iche, omenaala, na uwe, yana aha ha dị ka ndị agha siri ike na ndị na-azụ ehi. Ndị Maasai edoziela ọtụtụ n'ime ndụ omenala ha n'agbanyeghị nrụgide sitere na mmepe oge a."
+    },
+    "identity": {
+      "title": "Njirimara na Ụdị Ndụ",
+      "description": "Ndị Maasai bụ ndị ọzụzụ anụ na-akwaga akwaga ndị dabere n'omenala na ehi, atụrụ, na ewu maka ndụ ha. Ehi nwere uru pụrụ iche n'omenala Maasai, na-anọchi anya akụ, ọnọdụ, na nri. Ndị Maasai na-atụ akụ nwoke site n'ọnụ ọgụgụ ehi na ụmụ o nwere."
+    }
+  },
+  
+ 
+  
+  "language": {
+    "title": "Asụsụ",
+    "titleSpan": "Maa",
+    "description": "Asụsụ Maa bụ asụsụ omenala nke ndị Maasai nke East Africa. A na-asụ ya karịsịa na Kenya na ugwu Tanzania, ọ bụkwa nke ezinụlọ asụsụ Nilotic. Maa abụghị naanị ụzọ nkwurịta okwu — ọ na-arụ ọrụ dị mkpa n'ịchekwa omenala Maasai, njirimara, na omenaala ọnụ.",
+    "learnButton": "Mụta Asụsụ",
+    "listenButton": "Gee Ụda",
+    "phrasesTitle": "Okwu A Na-ahụkarị na",
+    "proverbsSpan": "Ilu",
+    "phrases": {
+      "sopa": "Nnọọ (nye otu onye)",
+      "serian": "Nnọọ (nye ọtụtụ mmadụ)",
+      "ashoOleng": "Daalụ nke ukwuu",
+      "iko": "Ee",
+      "takwenya": "Ka ọ dị"
+    },
+    "proverbs": {
+      "enkitoria": "Chineke anaghị arahụ ụra",
+      "meidim": "Nsọpụrụ na-amụ nsọpụrụ",
+      "meishoo": "Ọ na-ewe obodo ịzụlite nwa"
+    },
+    "audio": {
+      "title": "Gee Ekele Omenala",
+      "description": "Mụta mkpọpụta Maa n'ezie ozugbo site n'aka ndị na-asụ asụsụ izizi, na-echekwa ụda eziokwu, usoro, na nkọwa omenala nke asụsụ Maasai.",
+      "playButton": "Kpọọ Vidio"
+    }
+  },
+  "culture": {
+    "clothing": {
+      "title": "Uwe na Ịchọ Mma Omenala",
+      "description": "A ma ndị Maasai maka uwe ha pụrụ iche nke uhie a na-akpọ \"shuka.\" Uhie bụ agba kachasị mkpa, na-egosi ịdị ike, ịdị n'otu, na ọbara. Ma ụmụ nwoke ma ụmụ nwanyị na-eyi ihe ịchọ mma shanga pụrụ iche, agba dị iche iche na usoro na-egosi afọ, ọnọdụ alụmdi na nwunye, na ọnọdụ ọha mmadụ.",
+      "button": "Nweta Nkọwa Agba"
+    },
+    "ceremoniesTitle": "Emume na Omenaala Nke Oge",
+    "ceremonies": {
+      "eunoto": {
+        "title": "Eunoto",
+        "desc": "Emume ịbịaru okenye ebe ndị agha na-agbanwe ka ọ bụrụ ndị okenye obere"
+      },
+      "enkipaata": {
+        "title": "Enkipaata",
+        "desc": "Emume tupu obibi maka ụmụ nwoke"
+      },
+      "emuratare": {
+        "title": "Emuratare",
+        "desc": "Emume obibi na-egosi mgbanwe gaa n'ọnọdụ agha"
+      },
+      "enkang": {
+        "title": "Enkang oo-nkiri",
+        "desc": "Emume alụmdi na nwunye nwere ngọzi omenala"
+      },
+      "olngesherr": {
+        "title": "Olngesherr",
+        "desc": "Emume alụmdi na nwunye nwere ngọzi omenala"
+      }
+    },
+    "foodsTitle": "Nri na Usoro Nri",
+    "foods": {
+      "nyamaChoma": {
+        "title": "Nyama Choma",
+        "desc": "Anụ a hụrụ, karịsịa ewu na ehi"
+      },
+      "olpurda": {
+        "title": "Olpurda",
+        "desc": "Ofe e ji anụ, ọkpụkpụ, na ahịhịa mee"
+      },
+      "emuroto": {
+        "title": "Emuroto",
+        "desc": "Nri anụ emume"
+      }
+    }
+  },
+  "leaders": {
+    "title": "Ndị Ndu A Ma Ama Nke Gara Aga na Ugbu A",
+    "laibonLenana": {
+      "name": "Laibon Lenana",
+      "desc": "Onye ndu ime mmụọ Maasai siri ike bụ onye rụrụ ọrụ dị mkpa n'oge ịchịisi Britain."
+    },
+    "olonana": {
+      "name": "Olonana",
+      "desc": "Onyeisi na Laibon bụ onye kparịtara ụkpụrụ iji chebe ala Maasai."
+    },
+    "mbatian": {
+      "name": "Mbatian",
+      "desc": "Laibon a ma ama karịsịa, a ma ya maka amụma ya na ịchịkọta ndị Maasai."
+    },
+    "oleSaibul": {
+      "name": "Ole Saibul",
+      "desc": "Onye ndọrọ ndọrọ ọchịchị Maasai a ma ama na onye na-akwado ikike ndị ọzụzụ anụ na Kenya."
+    },
+    "oleNtimama": {
+      "name": "William Ole Ntimama",
+      "desc": "Onye ndọrọ ndọrọ ọchịchị Kenya bụ onye kwadoro ikike ala Maasai ruo ọtụtụ afọ iri."
+    },
+    "oleLenku": {
+      "name": "Joseph Ole Lenku",
+      "desc": "Gọvanọ ugbu a nke Kajiado County na onye bụbu Akwụkwọ Nchịkwa."
+    }
+  },
+  "nature": {
+    "title": "Njikọ na Okike",
+    "description": "Ndị Maasai ebila n'udo na anụ ọhịa ruo ọtụtụ narị afọ, na-ekekọrịta otu usoro okike ahụ na ọdụm, enyi, na anụ ọhịa ndị ọzọ. Ụdị ndụ ọzụzụ anụ ha na nkwenye omenala enyewo aka ịchekwa nnukwu mpaghara ọzara.",
+    "animalsTitle": "Anụ Nsọ na Nkwenye",
+    "animals": {
+      "cattle": {
+        "name": "Ehi",
+        "desc": "Onyinye nsọ sitere n'aka Enkai (Chineke), dị mkpa maka njirimara na ịdị ndụ Maasai"
+      },
+      "lions": {
+        "name": "Ọdụm",
+        "desc": "A na-asọpụrụ ha dị ka ihe ngosi nke ịdị ike; n'akụkọ ihe mere eme a na-achụ nta ha n'oge emume ịbịaru okenye"
+      },
+      "elephants": {
+        "name": "Enyi",
+        "desc": "A na-asọpụrụ ha maka amamihe na ike; a na-echekwa ha site n'ịchekwa omenala"
+      },
+      "giraffes": {
+        "name": "Ịnyịnya Ibu",
+        "desc": "A na-ele ha anya dị ka ihe dị mma na-ekekọrịta ala ịta nri ha"
+      }
+    }
+  },
+  "antiques": {
+    "title": "Ngwa Omenala na Ihe Ochie",
+    "description": "Ndị Maasai akpụọla ngwa ọrụ pụrụ iche, ngwa agha, na ihe ịchọ mma ruo ọtụtụ narị afọ. Ngwa ndị a na-anọchi anya akụ omenala ha bara ụba ma na-aga n'ihu ịbụ ihe ngosi nke njirimara na omenala.",
+    "button": "Gaa Ahịa",
+    "rungu": {
+      "name": "Rungu (Osisi Ịtụ)",
+      "desc": "Osisi omenala nke ndị agha na-eji echebe na ịchụ nta"
+    },
+    "shuka": {
+      "name": "Shuka (Akwa Uhie)",
+      "desc": "Akwa uhie a ma ama a na-eyi dị ka uwe omenala"
+    },
+    "beadedJewelry": {
+      "name": "Ihe Ịchọ Mma Shanga",
+      "desc": "Ọrụ shanga siri ike na-anọchi anya ọnọdụ, afọ, na njirimara"
+    },
+    "spear": {
+      "name": "Ube (Enkudi)",
+      "desc": "Ihe ngosi nke oke nwoke na ngwa agha bụ isi nke ndị agha Maasai"
+    },
+    "shield": {
+      "name": "Ọta (Olongu)",
+      "desc": "Ọta gbara gburugburu a tere mmanụ na usoro pụrụ iche na-anọchi anya njirimara agbụrụ"
+    },
+    "calabash": {
+      "name": "Ite (Enkukuri)",
+      "desc": "Ọkwa ite a na-eji echekwa ngwakọ mmiri ara ehi na ọbara"
+    }
+  },
+  "preserve": {
+    "title": "Nyere Anyị Aka Ịchekwa Akụ Maasai",
+    "description": "Ị nwere akụkọ, foto, ma ọ bụ ihe ọmụma ịkekọrịta banyere omenala Maasai?",
+    "button": "Tinye na Peeji A"
+  }
+},
+
+
+
+
+
+
+
+
+
+ "about": {
+    "hero": {
+      "title": "Maka Magical Africa",
+      "tagline": "Na-echekwa Asụsụ Afrịka. Na-enye ndị obodo ike. Na-ewu ọdịnihu."
+    },
+    "background": {
+      "sectionTitle": "Akụkọ",
+      "sectionTitleHighlight": "Anyị",
+      "paragraph1": "Magical.africa bụ otu nzukọ Pan-African na-arụ ọrụ n'etiti asụsụ Afrịka, omenala, agụmakwụkwọ, na teknụzụ. Anyị nọ iji kwado iji asụsụ obodo gaa n'ihu, eto eto, na idowe ya n'ofe kọntinent ahụ.",
+      "paragraph2": "Asụsụ Afrịka dị mkpa maka agụmakwụkwọ, ịzụ ndụ, na njikọ ọha na eze, ma ọtụtụ ka na-anọchịghị anya nke ọma na sistemụ gọọmentị na oghere dijitalụ. Magical Africa na-edozi nsogbu a site na usoro lekwasịrị anya n'obodo na mmekọrịta nke na-akpọkọta ndị nwe ihe ọmụma ime obodo, ndị nkụzi, ndị nchọpụta, na ndị mmekọ teknụzụ.",
+      "paragraph3": "Site n'iji teknụzụ dịka ngwá ọrụ enyemaka ọ bụghị nnọchi anyị na-enyere aka ịtinye asụsụ Afrịka na ihe ọmụma omenala n'ime sistemụ ọgbara ọhụrụ n'ụzọ nkwanye ùgwù, gụnyere mmadụ niile, na nke na-adịgide adịgide."
+    },
+    "approach": {
+      "title": "Usoro Anyị",
+      "description": "Anyị na-ejikọ omenala, teknụzụ, na agụmakwụkwọ iji nye ndị obodo ike ma chekwaa ihe nketa Afrịka.",
+      "items": {
+        "communityOwnership": "Ịnwe Obodo",
+        "ethicalStewardship": "Nlekọta Omume Ọma",
+        "sustainableImpact": "Mmetụta Na-adịgide",
+        "localPanAfrican": "Mpaghara & Pan-African"
+      }
+    },
+    "whatWeDo": {
+      "title": "Ihe Anyị Na-eme",
+      "slides": {
+        "datastewardship": {
+          "title": "Nlekọta Data Asụsụ na Omenala Afrịka",
+          "description": "Anyị na-eso obodo dị iche iche ede, lekọta, ma chekwaa asụsụ na omenaala Afrịka n'ụzọ na-asọpụrụ iwu ime obodo, akụkọ ihe mere eme, na ihe kachasị mkpa. Ọrụ anyị gụnyere:",
+          "items": [
+            "Asụsụ a na-ekwu okwu na omenaala ọnụ",
+            "Omenala a na-ahụ anya na omume kwa ụbọchị",
+            "Ide ihe nketa omenala",
+            "Ide asụsụ dị iche iche n'ofe ebe Afrịka"
+          ]
+        },
+        "aiDataCollection": {
+          "title": "Nchịkọta Data AI Lekwasịrị Anya n'Obodo",
+          "description": "Magical Africa na-emepụta ma na-edu usoro nchịkọta data nke omume ọma nke obodo na-eme nke na-akwado mmepe AI gụnyere asụsụ Afrịka. Anyị na-elekwasị anya na:",
+          "items": [
+            "Olu, ederede, na data ụdị dị iche iche",
+            "Ebe ojiji n'ezie (agụmakwụkwọ, omenala, ịzụ ndụ)",
+            "Ịsonye ziri ezi na ịkwụ ụgwọ",
+            "Nlekọta data doro anya"
+          ]
+        },
+        "education": {
+          "title": "Ọrụ Agụmakwụkwọ na Ihe Ọmụma Omenala",
+          "description": "Anyị na-arụ ọrụ n'ụlọ akwụkwọ, ebe mmụta, na ebe omenala n'ofe mpaghara Afrịka dị iche iche iji kwado mmụta asụsụ, nyefee ihe ọmụma, na mgbanwe n'etiti ọgbọ. Anyị na-elekwasị anya na:",
+          "items": [
+            "Gburugburu mmụta asụsụ dị iche iche",
+            "Ihe ọmụma ọnụ na akụkọ",
+            "Mmemme na omenaala omenala",
+            "Itinye aka nke ụmụ okorobịa na ngosipụta"
+          ]
+        }
+      }
+    },
+    "principles": {
+      "title": "Ụkpụrụ Anyị",
+      "items": [
+        "Pan-African site na nhazi - Guzosie ike n'ime obodo, jikọọ kọntinent niile",
+        "Obodo Bụ Ụzọ - Obodo bụ ndị mmekọ, ọ bụghị ebe a na-enweta data",
+        "Omume Ọma site na Mmalite - Nkwenye, ikwu eziokwu, na nzuzo abụghị ihe a ga-akparịta ụka",
+        "Ịsọpụrụ Omenala - Asụsụ na omenala bụ sistemụ dị ndụ",
+        "Mmepe na Mmekọrịta - Anyị na-akwado ihe ọmụma mepere emepe na mmụta ọnụ",
+        "AI Lekwasịrị Anya na Mmadụ - Teknụzụ ga-ejere ndị mmadụ ozi, ọ bụghị iwepụ n'aka ha"
+      ]
+    },
+    "ai": {
+      "title": "Otu Anyị Si Eji AI",
+      "sections": {
+        "preparingData": {
+          "title": "Ịkwadebe Data maka AI Gụnyere Mmadụ Niile",
+          "items": [
+            "Nchọpụta okwu (ASR)",
+            "Ederede-ka-olu (TTS)",
+            "Ngwá ọrụ mmụta dabere na olu",
+            "Ngwa agụmakwụkwọ na omenala ụdị dị iche iche"
+          ]
+        },
+        "research": {
+          "title": "Nchọpụta na Nyocha Ogo Enyere Aka AI",
+          "items": [
+            "Nyere aka na usoro ide na nkọwa",
+            "Chọpụta oghere na nnọchite anya asụsụ",
+            "Kwado nyocha ogo mgbe niile jikọtara na nkwenye mmadụ"
+          ]
+        },
+        "communityTools": {
+          "title": "Ngwá Ọrụ Nke Obodo Na-akwado",
+          "items": [
+            "Akụrụngwa mmụta nke AI kwadoro",
+            "Ngwá ọrụ agụmakwụkwọ dabere na olu na ụdị dị iche iche",
+            "Ikpo okwu ide omenala"
+          ]
+        }
+      }
+    },
+    "partners": {
+      "title": "Ndị Anyị Na-arụkọ Ọrụ",
+      "description": "Anyị na-arụkọ ọrụ n'ofe Afrịka na"
+    },
+    "team": {
+      "title": "Zute Ndị Otu",
+      "description": "Uche nwere mmasị n'azụ Magical Africa",
+      "members": {
+        "gloria": {
+          "name": "Gloria Machoka",
+          "role": "Onye Ntọala Ibe"
+        },
+        "steve": {
+          "name": "Steve Kombo",
+          "role": "Onye Ntọala"
+        },
+        "joel": {
+          "name": "Joel Makori",
+          "role": "Onye Njikwa Mmekọrịta Obodo"
+        }
+      }
+    },
+    "cta": {
+      "title": "Sonyere Anyị Ịchekwa Akụkọ Afrịka N'ezie",
+      "description": "Afrịka achọghị ka ndị ọzọ kọwaa ya. Anyị ga-akọ akụkọ anyị n'onwe anyị n'ùgwù, izi ezi, okike, na mpako.",
+      "buttons": {
+        "contribute": "Tinye Akụkọ Gị",
+        "explore": "Chọpụta Obodo Dị Iche Iche",
+        "contact": "Kpọtụrụ Anyị"
+      }
+    }
+  }
+
 }

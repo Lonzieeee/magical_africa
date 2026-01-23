@@ -100,5 +100,621 @@
       "description": "Inkulupai ó inkonyek naátúrù inkíshómìé e enkáng'."
     }
   }
+},
+
+"sideMenu": {
+  "close": "Ikitok",
+  "search": "Aisho",
+  "home": "Enkáng'",
+  "tribes": "Iloshon",
+  "about": "Tenebo",
+  "language": "Enkutuk",
+  "marketplace": "Enkáng'"
+},
+
+
+
+"languages": {
+  "title": "Ayau Inkutuk Enatií",
+  "description": "Afrika eitii inkutuk kutukui, naápuò enkíshón, enaitoi, ó enkítùàátà. Eidim inkitáábùàin ó inkutuk naápuò kulie iloshon e Afrika amu eitodolu enkóp tené enkutuk.",
+  "items": {
+    "swahili": {
+      "name": "Enkutuk e Swahili",
+      "tooltip": "Enkitáábùà naatii 'Habari?', nápúò 'Kéídim?'"
+    },
+    "zulu": {
+      "name": "Enkutuk e Zulu",
+      "tooltip": "Enkitáábùà naatii 'Sawubona', nápúò 'Káítoóók.'"
+    },
+    "yoruba": {
+      "name": "Enkutuk e Yoruba",
+      "tooltip": "'Báwo ni?' enkitáábùà e Yoruba nápúò 'Kéídim?'"
+    },
+    "kikuyu": {
+      "name": "Enkutuk e Kikuyu",
+      "tooltip": "Enkitáábùà naatii 'Jambo', nápúò 'Supá'"
+    },
+    "hausa": {
+      "name": "Enkutuk e Hausa",
+      "tooltip": "'Akkam?' nápúò 'Kéídim?' tené Hausa."
+    },
+    "shona": {
+      "name": "Enkutuk e Shona",
+      "tooltip": "'Mhoro' enkitáábùà e Shona nápúò 'Supá.'"
+    },
+    "sukuma": {
+      "name": "Enkutuk e Sukuma",
+      "tooltip": "Enkitáábùà naatii 'Moro', nápúò 'Supá'"
+    },
+    "xhosa": {
+      "name": "Enkutuk e Xhosa",
+      "tooltip": "'Molo' enkitáábùà e Xhosa nápúò 'Supá.'"
+    },
+    "maasai": {
+      "name": "Enkutuk e Maasai",
+      "tooltip": "Enkitáábùà naatii 'Sanu', nápúò 'Supá'"
+    },
+    "igbo": {
+      "name": "Enkutuk e Igbo",
+      "tooltip": "Enkitáábùà naatii 'Kedu?', nápúò 'Kéídim?'"
+    },
+    "lingala": {
+      "name": "Enkutuk e Lingala",
+      "tooltip": "Enkitáábùà naatii 'Mbote', nápúò 'Supá'"
+    },
+    "tsonga": {
+      "name": "Enkutuk e Tsonga",
+      "tooltip": "Enkitáábùà naatii 'Avuxeni', nápúò 'Supá enkolóng'"
+    },
+    "setswana": {
+      "name": "Enkutuk e Setswana",
+      "tooltip": "Enkitáábùà naatii 'Dumela', nápúò 'Supá'"
+    },
+    "chichewa": {
+      "name": "Enkutuk e Chichewa",
+      "tooltip": "Enkitáábùà naatii 'Moni', nápúò 'Supá'"
+    }
+  }
+},
+
+
+"tribes": {
+  "title": "Eidim Iloshon Enatií",
+  "subtitle": "Injore tené iloshon naápukunot e Afrika ó inkítùàátìn naápuò",
+  "viewAll": "Eitodolu Pooki",
+  "oromo": {
+    "name": "Oromo",
+    "description": "Iltunganak le Oromo kulie Ethiopia, naákúàk enkíshón naatódòl e enkítùàátà, enkíyámà, ó enaitoi. Kéré ilosho apa kumok tené enkóp, naátúrù apa enkitálá e sídáì e iltunganak naátíí milioni 40."
+  },
+  "zulu": {
+    "name": "Zulu",
+    "description": "Kulie South Africa, iltunganak le Zulu naákúàk enkíshón naatódòl e enkítùàátà, enkitóbòní, ó enaitoi, naátíí iltunganak milioni 11."
+  },
+  "igbo": {
+    "name": "Igbo",
+    "description": "Iltunganak le Igbo kulie Nigeria, kéré ilosho apa kumok tené enkóp, naátíí iltunganak milioni 30, naáyíéú enkítùàátà naápukunot, enkíshómárè, ó inkítùàátìn naásídáì."
+  }
+},
+
+
+
+"socialImpact": {
+  "title": "Enkíshómárè Enatií e Iltunganak",
+  "description": "Kéyíéú kéídim iltunganak naáròrè. Tené enkíkúámát enatií, kéákúàk iltungani le enkáng', kéídim enkítùàátà, amu kéátúrù inkíshómárè e iltunganak tené Afrika.",
+  "learnMore": "Ayau Kumok",
+  "readMore": "Soma Kumok",
+  "artisans": {
+    "title": "Enkákúàkínós Iltungani le Enkáng'",
+    "description": "Kéájòkìnò iltungani le enkáng' ó inkáng' kumok, kéídim kéákúàk eshilingi naásídáì mara ínkérà."
+  },
+  "heritage": {
+    "title": "Enkídímát Enkítùàátà",
+    "description": "Enkitáábùà enatií e digital eidimie enkídímát inkutuk naálámù, inkítùàátìn, ó inkínejiát mara iltunganak naápuò."
+  }
+},
+
+
+"partners": {
+  "title": "Ilkíráshín Enatií",
+  "description": "Kéájòkìnò ó inkíshómárè naáròrè enkíráshát enatií e enkídímát ó enkíyámà e enkítùàátà e Afrika. Kumok, kéátúrù enkíshómárè apa kumok."
+},
+
+
+
+"faq": {
+  "title": "Inkitáábùàin Naáròrè",
+  "items": {
+    "whatIs": {
+      "question": "Kake Magical Africa?",
+      "answer": "Magical Africa eitii enkíkúámát naátódòl enkídímát, enkárrúkót, ó enkídím enkítùàátà e Afrika ó enkóp. Kéájòkìnò iltunganak ó inkítùàátìn e Afrika naatódòl, inkutuk, inkínejiát, ó iloshon."
+    },
+    "contribute": {
+      "question": "Káké átúmù enkákúàkínós Magical Africa?",
+      "answer": "Ínídím ítúmù enkákúàkínós tené enkídím inkonyek, inkájíjík, amu enkanyit tenebo enánkárè. Nídó amu ítúmù inkíshómìé enatií eídim tenebo inkítùàátìn, enkutuk, ó enkíshón e enánkárè."
+    },
+    "authentic": {
+      "question": "Kore inkonyek e Magical Africa naatódòl?",
+      "answer": "Ée! Inkonyek enatií pooki naápuò iltunganak e iloshon ó iltungani naáyíéú inkítùàátìn. Kéárúkòkì ó iloshon e enkáng' enkídím pooki naákúàk naatódòl amu naásídáì."
+    },
+    "learnLanguage": {
+      "question": "Káké áyàù enkutuk e Afrika tené enkíkúámát ení?",
+      "answer": "Kéákúàk inkíshómìé e áyàù enkutuk naátíí inkutuk naápuò, enkírorét kulie iltunganak naáròrè enkutuk, ó enkítùàátà eídim ínídím amu ínkaraki inkutuk e Afrika."
+    },
+    "purchase": {
+      "question": "Kore átúmù áàlèp inkíshómìé e Afrika naatódòl?",
+      "answer": "Ée! Enkáng' enatií eitii inkíshómìé e enkítùàátà naatódòl naátúrù iltungani e Afrika. Enkáàlèpànì pooki eidimie iloshon e enkáng' amu eidimie enkídímát enkíshómárè e tene."
+    }
+  }
+},
+
+
+
+"contact": {
+  "description": "Kore inkitáábùàin tenebo enkítùàátà e Afrika, enkíshón, amu inkíshómìé enatií? Ídól amu eitodolu inkonyek, inkínejiát, ó enánkárè naátúrù Afrika naásídáì. Kéyíéú kéájòkìnò amu kéídím engídongoí e Afrika.",
+  "button": "Ídól"
+},
+
+
+
+"footer": {
+  "tagline": "Enkíkúámát e Enkíshón e Afrika Naatódòl",
+  "quickLinks": "Inkíjàpè Naálámù",
+  "links": {
+    "home": "Enkáng'",
+    "tribes": "Iloshon",
+    "languages": "Inkutuk",
+    "about": "Tenebo",
+    "marketplace": "Enkáng'",
+    "contact": "Ídól"
+  },
+  "terms": "Inkínejiát e Enkitúmúnót",
+  "privacy": "Enkínejiát e Enkíyámà",
+  "cookiePolicy": "Enkínejiát e Kuki",
+  "cookieSettings": "Enkítòròtó e Kuki",
+  "copyright": "© 2026 Magical.africa. Inkínejiát pooki naásídáì"
+},
+
+
+
+
+
+"auth": {
+  "signIn": "Nídó",
+  "signUp": "Ándíkíshà",
+  "email": "Email",
+  "emailPlaceholder": "email@enkíshúí.com",
+  "enterEmail": "Tíkí email línó",
+  "password": "Enkíyámà",
+  "forgotPassword": "Ímerók Enkíyámà?",
+  "required": "Naányór",
+  "continueWithGoogle": "Énídòl ó Google",
+  "orBecomeMember": "Amu Ínídòl Enkítùàátà",
+  "joinText": "Ínídòl",
+  "joinTextEnd": "amu eitodolu enkítùàátà e Afrika, enkíshón, inkonyek, ó inkínejiát.",
+  "journeyStarts": "Injore Línó Eitipikarè Ení",
+  "letsGetStarted": "Káídím",
+  "tribes": "Iloshon",
+  "firstName": "Enkárná Naárèt",
+  "firstNamePlaceholder": "Tíkí enkárná línó naárèt",
+  "lastName": "Enkárná Naáré",
+  "lastNamePlaceholder": "Tíkí enkárná línó naaré",
+  "country": "Enkóp",
+  "countryPlaceholder": "Tíkí enkóp línó",
+  "createAccount": "Átúmù Akaunti",
+  "signInSuccess": "Ínídó naásídáì!",
+  "googleSuccess": "Ínídó ó Google naásídáì!",
+  "accountCreated": "Akaunti naátúrù naásídáì!",
+  "cards": {
+    "explore": {
+      "title": "Eidim Afrika Naatódòl",
+      "description": "Eitodolu inkítùàátìn naápukunot, inkínejiát, ó inkonyek kulie enkóp pooki tené enkíkúámát ímòjì."
+    },
+    "connect": {
+      "title": "Ájòkìnò Ó Enkíshón",
+      "description": "Ínídím Afrika tené iltunganak, iloshon, ó inkínejiát naápuò, naátódòl naásídáì."
+    },
+    "travel": {
+      "title": "Áló Naálámù E Naatódòl",
+      "description": "Eitodolu inkíkúámát naásídáì ó inkítùàátìn naálámù e injore e iltunganak naápuò."
+    }
+  },
+  "errors": {
+    "noAccount": "Meitoki akaunti tené email ení",
+    "wrongPassword": "Enkíyámà naálámù",
+    "invalidCredential": "Email amu enkíyámà naálámù",
+    "passwordLength": "Enkíyámà eitodolu kéré 6 inkutuk",
+    "emailInUse": "Email ení ándíkíshà",
+    "invalidEmail": "Tíkí email naásídáì",
+    "generic": "Enkíláómónì: "
+  }
+},
+
+
+
+
+"tribesPage": {
+  "hero": {
+    "title": "Eidim Iloshon e Afrika",
+    "subtitle": "Eitodolu inkítùàátìn naápukunot, inkínejiát, ó enkíshón e Afrika tené enkóp pooki."
+  },
+  "section": {
+    "title": "Iloshon e Afrika",
+    "subtitle": "Eidim inkítùàátìn naápukunot, inkínejiát, ó inkonyek e iloshon e Afrika kulie enkóp pooki."
+  },
+  "language": "Enkutuk",
+  "exploreCulture": "Eidim Enkítùàátà",
+  "contribute": {
+    "title": "Meitoki Enánkárè Línó?",
+    "description": "Kéákúàk enkídímát ó enkídím enkítùàátà línó. Tíkí enkíshón e enánkárè línó, inkínejiát, enkutuk, ó enkíshón tené Magical.Africa.",
+    "button": "Tíkí Enkíshón"
+  },
+  "communities": {
+    "maasai": { "name": "Maasai", "location": "Kenya, Tanzania", "population": "Iltunganak milioni 1.5+", "language": "Maa", "desc": "Ilmurran naáròrè enkítùàátà ó inkajijik naásídáì." },
+    "ashanti": { "name": "Ashanti", "location": "Ghana", "population": "Iltunganak milioni 11+", "language": "Twi", "desc": "Naáyíéú enánkárè e ola ó Alaeze Ashanti naatódòl." },
+    "hausa": { "name": "Hausa", "location": "Nigeria, Niger", "population": "Iltunganak milioni 80+", "language": "Hausa", "desc": "Ilosho apa kumok tené Afrika, naáyíéú enkáàlèpànì." },
+    "zulu": { "name": "Zulu", "location": "South Africa", "population": "Iltunganak milioni 12+", "language": "Zulu", "desc": "Naáyíéú enkítùàátà e ilmurran, inkoitoi, ó Alaeze Zulu naatódòl." },
+    "yoruba": { "name": "Yoruba", "location": "Nigeria, Benin", "population": "Iltunganak milioni 45+", "language": "Yoruba", "desc": "Naápukunot tené inkonyek, enánkárè, ó inkáng' e tene." },
+    "kikuyu": { "name": "Kikuyu", "location": "Kenya", "population": "Iltunganak milioni 8+", "language": "Kikuyu", "desc": "Ilosho apa kumok tené Kenya, naáyíéú enkárè ó enkáàlèpànì." },
+    "igbo": { "name": "Igbo", "location": "Nigeria", "population": "Iltunganak milioni 45+", "language": "Igbo", "desc": "Naáyíéú enkíshómárè ó inkítùàátìn naápukunot." },
+    "amhara": { "name": "Amhara", "location": "Ethiopia", "population": "Iltunganak milioni 32+", "language": "Amharic", "desc": "Ilosho naatódòl tené Ethiopia naákúàk enkíshón e Kristo e tene." },
+    "berber": { "name": "Berber", "location": "Morocco, Algeria, Libya", "population": "Iltunganak milioni 30+", "language": "Tamazight", "desc": "Iltunganak e enkáng' e North Africa naákúàk inkínejiát ó inkutuk e tene." },
+    "swahili": { "name": "Swahili", "location": "Kenya, Tanzania, Zanzibar", "population": "Iltunganak milioni 2+", "language": "Kiswahili", "desc": "Iltunganak e enkéène naáyíéú enkáàlèpànì e enkéène." },
+    "wolof": { "name": "Wolof", "location": "Senegal, Gambia", "population": "Iltunganak milioni 6+", "language": "Wolof", "desc": "Ilosho apa kumok tené Senegal naáyíéú enkárrúkót ó enkíyámà." },
+    "fulani": { "name": "Fulani", "location": "West Africa (inkóp 20+)", "population": "Iltunganak milioni 40+", "language": "Fulfulde", "desc": "Iltungani e inkíshu naáròrè tené West Africa naákúàk inkínejiát naásídáì." }
+  }
+},
+
+
+
+"searchSection": {
+  "title": "Aisho Elosho Línó",
+  "searchPlaceholder": "Aisho iloshon",
+  "allRegions": "Inkóp Pooki",
+  "allLanguages": "Inkutuk Pooki",
+  "communitiesFound": "iloshon naáròrè",
+  "showMap": "Eitodolu Enkíkúámát",
+  "hideMap": "Epuku Enkíkúámát",
+  "addCommunity": "Tíkí Enánkárè Línó",
+  "communitiesLabel": "Iloshon",
+  "regions": {
+    "north": "Afrika e Lari",
+    "east": "Afrika e Matai",
+    "west": "Afrika e Leperioi",
+    "central": "Afrika e Ltungani",
+    "southern": "Afrika e Kerio"
+  }
 }
+,
+
+
+
+
+
+"maasai": {
+  "hero": {
+    "title": "Maasai",
+    "subtitle": "Ilmurran e Afrika Mashariki"
+  },
+  "overview": {
+    "title": "Enkitáábùà",
+    "titleSpan": "e Iloshon",
+    "location": "ENKÓP",
+    "population": "ILTUNGANAK",
+    "language": "ENKUTUK",
+    "region": "ENKÓP",
+    "regionValue": "Afrika Mashariki"
+  },
+  "tabs": {
+    "overview": "Enkitáábùà",
+    "language": "Enkutuk",
+    "culture": "Enkítùàátà ó Inkínejiát",
+    "leaders": "Ilaiguanak",
+    "nature": "Enkóp ó Inkíshúí",
+    "antiques": "Inkítùàátìn"
+  },
+  "about": {
+    "title": "Tenebo Iloshon",
+    "history": {
+      "title": "Enkíshón ó Enkíyámà",
+      "p1": "Ilmaasai kéré ilosho e Nilotic naátíí enyakatho, kati ó enyingizimu e Kenya ó enyakatho e Tanzania. Kéré iltunganak naámanyíé kumok tené enkóp nááké naáróròrè enkáng' kumok e inkíshúí e Maziwa Makuu e Afrika ó inkítùàátìn ó inkajijik naápukunot.",
+      "p2": "Ilmaasai náásusu enkutuk e Maa, enkutuk e enkúlúpo e inkutuk e Nilotic naájòkìnò Dinka ó Nuer. Naámanyíé nááké enkítùàátà naápukunot, inkínejiát, ó inkajijik, amu enkíráshát naátódòl kéré ilmurran naátódòl ó ilchekutin e inkíshú. Ilmaasai naáìsùjù enkítùàátà naápuò pooki nááké enkíshómárè e enkóp e toki."
+    },
+    "identity": {
+      "title": "Enaitoi ó Enkíshón",
+      "description": "Ilmaasai kéré ilchekutin naákwàmà naádabere tené inkíshú, inkéér, ó imbuziín mara enkíshón. Inkíshú naátíí enkíráshát naásídáì tené enkítùàátà e Ilmaasai, naánòkì akúí, enkíráshát, ó enkímà. Ilmaasai naátútù akúí e oltungani tené enkítálá e inkíshú ó inkéráí naátíí."
+    }
+  },
+  "language": {
+    "title": "Enkutuk",
+    "titleSpan": "e Maa",
+    "description": "Enkutuk e Maa kéré enkutuk e enkítùàátà e Ilmaasai e Afrika Mashariki. Naásusúnyè karísía tené Kenya ó enyakatho e Tanzania, amu kéré e enkúlúpo e inkutuk e Nilotic. Maa meidim naání enkíráshát e enkutuk — naátíí enkíráshát naásídáì tené enkídímát e enkítùàátà e Ilmaasai, enaitoi, ó inkínejiát e enkutuk.",
+    "learnButton": "Ayau Enkutuk",
+    "listenButton": "Eidimie Enkutuk",
+    "phrasesTitle": "Inkutuk Naápuò ó",
+    "proverbsSpan": "Inkutukín",
+    "phrases": {
+      "sopa": "Supá (oltungani ómòk)",
+      "serian": "Supá (iltunganak kumok)",
+      "ashoOleng": "Ashe oleng",
+      "iko": "Ée",
+      "takwenya": "Serian"
+    },
+    "proverbs": {
+      "enkitoria": "Enkai meidim alep",
+      "meidim": "Enkanyit naánòkì enkanyit",
+      "meishoo": "Naátíí enkáng' aitobir enkerai"
+    },
+    "audio": {
+      "title": "Eidimie Inkitáábùàin e Enkítùàátà",
+      "description": "Ayau enkutuk e Maa naásídáì kulie iltunganak naásusu enkutuk e Maa, naáìsùjù inkutuk naásídáì, enkíràmàt, ó enkíráshát e enkítùàátà e enkutuk e Ilmaasai.",
+      "playButton": "Eidimie Video"
+    }
+  },
+  "culture": {
+    "clothing": {
+      "title": "Inkajijik ó Inkoitoi e Enkítùàátà",
+      "description": "Ilmaasai naámanyíé nááké inkajijik naápukunot e olkirua naáròkì \"shuka.\" Olkirua kéré enkujit naásídáì kumok, naánòkì enkitóbòní, enkíyámà, ó osarge. Ilpayiani ó intoyie pooki naátíí inkoitoi e inkóitói naápuò, inkujit naápukunot ó inkínejiát naánòkì ilári, enkíráshát e enkíyámà, ó enkíráshát e iloshon.",
+      "button": "Eidim Inkujit"
+    },
+    "ceremoniesTitle": "Inkínejiát ó Inkítùàátìn",
+    "ceremonies": {
+      "eunoto": {
+        "title": "Eunoto",
+        "desc": "Enkínejíát e enkíyámà apa ilmurran naágúérà kéré ilpayiani"
+      },
+      "enkipaata": {
+        "title": "Enkipaata",
+        "desc": "Enkínejíát e túpúkóí mara ilayiok"
+      },
+      "emuratare": {
+        "title": "Emuratare",
+        "desc": "Enkínejíát e emurata naánòkì enkíyámà e olmurrani"
+      },
+      "enkang": {
+        "title": "Enkang oo-nkiri",
+        "desc": "Inkínejiát e enkíyámà naátíí inkíráshàtín e enkítùàátà"
+      },
+      "olngesherr": {
+        "title": "Olngesherr",
+        "desc": "Inkínejiát e enkíyámà naátíí inkíráshàtín e enkítùàátà"
+      }
+    },
+    "foodsTitle": "Enkímà ó Enkípùàtà",
+    "foods": {
+      "nyamaChoma": {
+        "title": "Enkírì Naáràshà",
+        "desc": "Enkírì naáràshà, karísía e imbuziín ó inkíshú"
+      },
+      "olpurda": {
+        "title": "Olpurda",
+        "desc": "Enkare naátúrù enkírì, inkóshòkè, ó inkújítà"
+      },
+      "emuroto": {
+        "title": "Emuroto",
+        "desc": "Inkírì e inkínejiát"
+      }
+    }
+  },
+  "leaders": {
+    "title": "Ilaiguanak Naámanyíé e Tene ó Toki",
+    "laibonLenana": {
+      "name": "Oloiboni Lenana",
+      "desc": "Oloiboni e Ilmaasai naátódòl naátúrù enkíráshát naásídáì tené enkíshómárè e Waingereza."
+    },
+    "olonana": {
+      "name": "Olonana",
+      "desc": "Olaiguanani ó Oloiboni naákwàmà inkíráshàtín e enkídímát e inkóp e Ilmaasai."
+    },
+    "mbatian": {
+      "name": "Mbatian",
+      "desc": "Oloiboni naámanyíé kumok, naámanyíé nááké inkutukín ó enkíyámà e Ilmaasai."
+    },
+    "oleSaibul": {
+      "name": "Ole Saibul",
+      "desc": "Oltungani e siasa e Ilmaasai naámanyíé ó oltungani naákwàdò inkíráshàtín e ilchekutin tené Kenya."
+    },
+    "oleNtimama": {
+      "name": "William Ole Ntimama",
+      "desc": "Oltungani e siasa e Kenya naákwàdò inkíráshàtín e inkóp e Ilmaasai ilári kumok."
+    },
+    "oleLenku": {
+      "name": "Joseph Ole Lenku",
+      "desc": "Olaiguanani e toki e Kajiado County ó oltungani naátíí Akwụkwọ Nchịkwa."
+    }
+  },
+  "nature": {
+    "title": "Enkíráshát ó Enkóp",
+    "description": "Ilmaasai naátíí tené enkíyámà ó inkíshúí ilári kumok, naáshàrè enkóp ómòk ó inkíshúí, olkiteng, ó inkíshúí naápuò. Enkíshón e ilchekutin ó inkíráshàtín e enkítùàátà naáìsùjù inkóp kumok e enkóp.",
+    "animalsTitle": "Inkíshúí Naásídáì ó Inkíráshàtín",
+    "animals": {
+      "cattle": {
+        "name": "Inkíshú",
+        "desc": "Enkíràmàt naásídáì kulie Enkai, naásídáì mara enaitoi ó enkíshón e Ilmaasai"
+      },
+      "lions": {
+        "name": "Ilowuarak",
+        "desc": "Naákànyítè kéré inkínejiát e enkitóbòní; tené enkíshón naáròkìnyè ilmurran tené inkínejiát e enkíyámà"
+      },
+      "elephants": {
+        "name": "Iltome",
+        "desc": "Naákànyítè nááké enkanyit ó enkitóbòní; naáìsùjùnyè tené enkídímát e enkítùàátà"
+      },
+      "giraffes": {
+        "name": "Ilameyu",
+        "desc": "Naáònyèkìnyè kéré inkíshúí naásídáì naáshàrè inkóp e enkímà"
+      }
+    }
+  },
+  "antiques": {
+    "title": "Inkíshómìé e Enkítùàátà ó Inkítùàátìn",
+    "description": "Iltunganak e Ilmaasai naátúrù inkíshómìé naápukunot, inkíshómìé e enkíròrè, ó inkoitoi ilári kumok. Inkíshómìé íní naánòkì enkítùàátà naápuò amu naáénòkìnyè kéré inkínejiát e enaitoi ó enkítùàátà.",
+    "button": "Alo Enkáng'",
+    "rungu": {
+      "name": "Orúngú",
+      "desc": "Olkúmà e enkítùàátà naátúmíé ilmurran mara enkídímát ó enkíròrè"
+    },
+    "shuka": {
+      "name": "Olkila (Enkajijik Olkirua)",
+      "desc": "Enkajijik olkirua naámanyíé naátíínyè kéré enkajijik e enkítùàátà"
+    },
+    "beadedJewelry": {
+      "name": "Inkoitoi e Inkóitói",
+      "desc": "Ínkérà e inkóitói naánòkì enkíráshát, ilári, ó enaitoi"
+    },
+    "spear": {
+      "name": "Emúrrà (Enkudi)",
+      "desc": "Enkínejíát e ilpayiani ó enkíshómárè naásídáì e ilmurran e Ilmaasai"
+    },
+    "shield": {
+      "name": "Olongu",
+      "desc": "Ilongu naátèrànyè inkínejiát naápukunot naánòkì enaitoi e enkúlúpo"
+    },
+    "calabash": {
+      "name": "Enkukuri",
+      "desc": "Inkukuriín naátúmíé enkídímát e kúlé ó osarge"
+    }
+  },
+  "preserve": {
+    "title": "Kéákúàk Enkídímát Enkítùàátà e Ilmaasai",
+    "description": "Ítíí inkonyek, inkíjàpè, ama enkíráshát e enkéshàrè tenebo enkítùàátà e Ilmaasai?",
+    "button": "Tíkí tené Enkitáábùà Ení"
+  }
+},
+
+
+
+
+
+
+"about": {
+    "hero": {
+      "title": "Tenebo Magical Africa",
+      "tagline": "Eitobirunot Enkutuk oo Afrka. Eipirta inkituaak. Etuo amu."
+    },
+    "background": {
+      "sectionTitle": "Enkitoria",
+      "sectionTitleHighlight": "Enye",
+      "paragraph1": "Magical.africa elo olosho le Pan-African naitumoki te nkop enkutuk oo Afrika, enkanyit, esomasi, nena teknoloji. Kitoye eitobiru, eitu, nena eitoru enkutuk oo inkituaak te nkop tenebo.",
+      "paragraph2": "Enkutuk oo Afrika elo sapuk te esomasi, enkishon, nena oloolo le inkituaak, ake idia naibung te sistemisiek naitayioki nena te nkop oo dijitali. Magical Africa naitumoki naata naata inkituaak, neitoki ilmarei, ilaisinak, iltobitai, nena ilmekeki oo teknoloji.",
+      "paragraph3": "Te eitumoki teknoloji tenebo enaiporu ake meelo ennaiporua kiayiaki enkutuk oo Afrika nena enkanyi te sistemisiek oo sii tenebo sapuk, nikiretita, nena naitoru."
+    },
+    "approach": {
+      "title": "Enkoitoi Enye",
+      "description": "Kinyorr enkanyit, teknoloji, nena esomasi neitobiru inkituaak nena kigil enkanyit oo Afrika.",
+      "items": {
+        "communityOwnership": "Eiyieta Inkituaak",
+        "ethicalStewardship": "Eilikana Naitobiror",
+        "sustainableImpact": "Enaitoru Naitoru",
+        "localPanAfrican": "Enkop nena Pan-African"
+      }
+    },
+    "whatWeDo": {
+      "title": "Naitumoki Enye",
+      "slides": {
+        "datastewardship": {
+          "title": "Eilikana Data oo Enkutuk nena Enkanyit oo Afrika",
+          "description": "Kinyorr inkituaak neitobiru, kigil, nena keitobiru enkutuk nena enkanyit oo Afrika tenebo naitobiror nkarna, enkitoria, nena naibung. Iltunganak enye naigil:",
+          "items": [
+            "Enkutuk naisinya nena enkanyit oo olkuak",
+            "Enkanyit nainyie nena iltunganak oo kila siku",
+            "Eitobirunot enkanyit oo aikina",
+            "Eitobirunot enkutuk idia te nkop oo Afrika"
+          ]
+        },
+        "aiDataCollection": {
+          "title": "Eikunot Data oo AI Naitobiror Inkituaak",
+          "description": "Magical Africa naitumoki nena neitoki enkoitoi eikunot data naitobiror naitumoki inkituaak naayiaki AI nikiretita enkutuk oo Afrika. Kinyie te:",
+          "items": [
+            "Enkuoo, eitobirunot, nena data oo idia",
+            "Enkop oo eitumoki (esomasi, enkanyit, enkishon)",
+            "Eitumoki sapuk nena eikunot nena",
+            "Eilikana data nainyie"
+          ]
+        },
+        "education": {
+          "title": "Iltunganak oo Esomasi nena Enkanyi oo Enkanyit",
+          "description": "Kinyorr te inkang'itie, enkop oo esomasi, nena enkop oo enkanyit te nkop idia oo Afrika neitobiru esomasi enkutuk, eikunot enkanyi, nena eikunot te inkera. Kinyie te:",
+          "items": [
+            "Enkop oo esomasi enkutuk idia",
+            "Enkanyi oo olkuak nena enkitoria",
+            "Iltunganak nena enkanyit oo aikina",
+            "Eitumoki ilayiok nena naisinya"
+          ]
+        }
+      }
+    },
+    "principles": {
+      "title": "Ilturrur Enye",
+      "items": [
+        "Pan-African te enaitumoki - Aigil te enkop, neitoki te tenebo nkop",
+        "Inkituaak Naibung - Inkituaak elo ilmekeki, meelo enkop oo data",
+        "Naitobiror te Enaitumoki - Eitoki, sapuk, nena aigil meiporu eikunot",
+        "Eitobirunot Enkanyit - Enkutuk nena enkanyit elo sistemisiek naishoo",
+        "Nainyie nena Neitoki - Kinyorr enkanyi nainyie nena esomasi pamoja",
+        "AI Naitobiror Iltunga - Teknoloji natii eitobiru iltunga, meelo eiwu"
+      ]
+    },
+    "ai": {
+      "title": "Enaitumoki Enye AI",
+      "sections": {
+        "preparingData": {
+          "title": "Eitumoki Data te AI Nikiretita",
+          "items": [
+            "Eitobiru enkuoo (ASR)",
+            "Eitobirunot-ka-enkuoo (TTS)",
+            "Iltunganak oo esomasi oo enkuoo",
+            "Iltunganak oo esomasi nena enkanyit oo idia"
+          ]
+        },
+        "research": {
+          "title": "Eitumoki nena Eilikana Sapuk Naayiaki AI",
+          "items": [
+            "Ayiaki te enkoitoi eitobirunot nena nkarna",
+            "Eitobiru naata naibung te enkutuk",
+            "Kwado eilikana sapuk neitoki na eitoki iltunga"
+          ]
+        },
+        "communityTools": {
+          "title": "Iltunganak Naayiaki Inkituaak",
+          "items": [
+            "Iltunganak oo esomasi naayiaki AI",
+            "Iltunganak oo esomasi oo enkuoo nena idia",
+            "Enkop oo eitobirunot enkanyit"
+          ]
+        }
+      }
+    },
+    "partners": {
+      "title": "Nainyorr Enye",
+      "description": "Kinyorr te nkop oo Afrika na"
+    },
+    "team": {
+      "title": "Inyie Iltunganak",
+      "description": "Ilkuak naishoo te nyuma oo Magical Africa",
+      "members": {
+        "gloria": {
+          "name": "Gloria Machoka",
+          "role": "Onaitumoki Pamoja"
+        },
+        "steve": {
+          "name": "Steve Kombo",
+          "role": "Onaitumoki"
+        },
+        "joel": {
+          "name": "Joel Makori",
+          "role": "Oleilikanai oo Inkituaak"
+        }
+      }
+    },
+    "cta": {
+      "title": "Inyorr Enye Kigil Enkitoria oo Afrika Naisinya",
+      "description": "Afrika meiporu eitobirunot iltunga idia. Kitobitai enkitoria enye te sapuk, naisinya, naitumoki, nena eitobirunot.",
+      "buttons": {
+        "contribute": "Eitoki Enkitoria Ino",
+        "explore": "Eitobiru Inkituaak",
+        "contact": "Eitoki Enye"
+      }
+    }
+  }
+
 }

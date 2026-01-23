@@ -15,14 +15,25 @@
     "exploreCulture": "Explore Culture",
     "visitAntiques": "Visit Antiques"
   },
-   "exploreIdentity": {
+
+ "services": {
+    "heading": "Explore The Magic Behind Our Culture",
+    "learnMore": "Learn More",
+    "viewAll": "View All",
+    "learnLanguage": {
+      "title": "Learn Language",
+      "description": "Discover the beauty of African languages and connect with diverse cultures across the continent."
+    },
+    "exploreIdentity": {
       "title": "Explore identity and tradition",
       "description": "Uncover the journeys and movements that formed Africa's diverse cultures and united its people through time."
     },
     "streamFolklore": {
       "title": "Stream folklore, music, and storytelling",
       "description": "Uncover the roots of African identity and the timeless traditions passed through generations."
-    },
+    }
+  },
+
     "about": {
   "title": "About Magical Africa",
   "description": "Magical Africa celebrates the beauty, culture, and stories of Africa. We showcase the continent's rich traditions, diverse landscapes, and vibrant spirit, sharing what makes Africa truly magical.",
@@ -89,5 +100,684 @@
       "description": "Traditional flutes and horns made from natural materials."
     }
   }
-}
+},
+
+
+"sideMenu": {
+  "close": "Close",
+  "search": "Search",
+  "home": "Home",
+  "tribes": "Tribes",
+  "about": "About",
+  "language": "Language",
+  "marketplace": "Marketplace"
+},
+
+
+"languages": {
+  "title": "Get to Learn Some of Our Languages",
+  "description": "Africa is home to thousands of languages, each carrying history, identity, and culture. Explore common greetings and words from different African communities and connect with the continent through language.",
+  "items": {
+    "swahili": {
+      "name": "Swahili",
+      "tooltip": "A common greeting is 'Habari?', meaning 'How are you?'"
+    },
+    "zulu": {
+      "name": "Zulu",
+      "tooltip": "A common greeting is 'Sawubona', meaning 'I see you.'"
+    },
+    "yoruba": {
+      "name": "Yoruba",
+      "tooltip": "'Báwo ni?' is a common Yoruba greeting meaning 'How are you?'"
+    },
+    "kikuyu": {
+      "name": "Kikuyu",
+      "tooltip": "A common greeting is 'Jambo', meaning 'Hello'"
+    },
+    "hausa": {
+      "name": "Hausa",
+      "tooltip": "'Akkam?' means 'How are you?' in Hausa."
+    },
+    "shona": {
+      "name": "Shona",
+      "tooltip": "'Mhoro' is a common Shona greeting meaning 'Hello.'"
+    },
+    "sukuma": {
+      "name": "Sukuma",
+      "tooltip": "A common greeting is 'Moro', meaning 'Hello'"
+    },
+    "xhosa": {
+      "name": "Xhosa",
+      "tooltip": "'Molo' is a common Xhosa greeting meaning 'Hello.'"
+    },
+    "maasai": {
+      "name": "Maasai",
+      "tooltip": "A common greeting is 'Sanu', meaning 'Hello'"
+    },
+    "igbo": {
+      "name": "Igbo",
+      "tooltip": "A common greeting is 'Kedu?', meaning 'How are you?'"
+    },
+    "lingala": {
+      "name": "Lingala",
+      "tooltip": "A common greeting is 'Mbote', meaning 'Hello'"
+    },
+    "tsonga": {
+      "name": "Tsonga",
+      "tooltip": "A common greeting is 'Avuxeni', meaning 'Good morning'"
+    },
+    "setswana": {
+      "name": "Setswana",
+      "tooltip": "A common greeting is 'Dumela', meaning 'Hello'"
+    },
+    "chichewa": {
+      "name": "Chichewa",
+      "tooltip": "A common greeting is 'Moni', meaning 'Hello'"
+    }
+  }
+},
+
+
+
+"tribes": {
+  "title": "Explore Our Tribes",
+  "subtitle": "Journey through Africa's diverse tribes and timeless traditions",
+  "viewAll": "View All",
+  "oromo": {
+    "name": "Oromo",
+    "description": "Rooted in Ethiopia, the Oromo people carry a proud legacy of tradition, unity, and cultural identity. They are the country's largest ethnic group, making up about one-third of the population with around 40 million people."
+  },
+  "zulu": {
+    "name": "Zulu",
+    "description": "From South Africa, the Zulu people carry a powerful legacy of tradition, resilience, and identity, representing over 11 million people."
+  },
+  "igbo": {
+    "name": "Igbo",
+    "description": "Rooted in Nigeria, the Igbo people are one of the country's largest ethnic groups, numbering over 30 million, known for their rich traditions, entrepreneurship, and strong communal values."
+  }
+},
+
+
+"socialImpact": {
+  "title": "Our Social Impact",
+  "description": "We believe in giving back to the communities that inspire us. Through our platform, we support local artisans, preserve cultural heritage, and create economic opportunities across Africa.",
+  "learnMore": "Learn More",
+  "readMore": "Read More",
+  "artisans": {
+    "title": "Supporting Local Artisans",
+    "description": "We connect local craftspeople directly with global markets, ensuring fair compensation for their work."
+  },
+  "heritage": {
+    "title": "Preserving Heritage",
+    "description": "Our digital archive helps preserve endangered languages, traditions, and cultural practices for future generations."
+  }
+},
+
+
+"partners": {
+  "title": "Our Partners",
+  "description": "We collaborate with organizations that share our vision of preserving and celebrating African culture. Together, we're making a bigger impact."
+},
+
+
+
+"faq": {
+  "title": "Frequently Asked Questions",
+  "items": {
+    "whatIs": {
+      "question": "What is Magical Africa?",
+      "answer": "Magical Africa is a platform dedicated to preserving, celebrating, and sharing the rich cultural heritage of Africa with the world. We connect people with authentic African cultures, languages, traditions, and communities."
+    },
+    "contribute": {
+      "question": "How can I contribute to Magical Africa?",
+      "answer": "You can contribute by sharing stories, photos, or knowledge about your community. Simply sign up and use our contribution tools to add content about your tribe's traditions, language, and heritage."
+    },
+    "authentic": {
+      "question": "Is the content on Magical Africa authentic?",
+      "answer": "Yes! All our content is sourced directly from community members and cultural experts. We work closely with local communities to ensure accuracy and authenticity in everything we share."
+    },
+    "learnLanguage": {
+      "question": "How do I learn an African language on this platform?",
+      "answer": "We offer language learning resources including common phrases, audio pronunciations from native speakers, and cultural context to help you understand and appreciate African languages."
+    },
+    "purchase": {
+      "question": "Can I purchase authentic African products?",
+      "answer": "Yes! Our marketplace features authentic cultural merchandise handcrafted by African artisans. Every purchase supports local communities and helps preserve traditional craftsmanship."
+    }
+  }
+},
+
+
+"contact": {
+  "description": "Have questions about African culture, heritage, or our collections? Reach out to us and discover the stories, traditions, and creativity that make Africa unique. We'd love to connect with you and share the true magic of Africa.",
+  "button": "Contact Us"
+},
+
+
+"footer": {
+  "tagline": "Where the Real African Story lives",
+  "quickLinks": "Quick Links",
+  "links": {
+    "home": "Home",
+    "tribes": "Tribes",
+    "languages": "Languages",
+    "about": "About",
+    "marketplace": "Marketplace",
+    "contact": "Contact"
+  },
+  "terms": "Terms of Use",
+  "privacy": "Privacy Policy",
+  "cookiePolicy": "Cookie Policy",
+  "cookieSettings": "Cookie Settings",
+  "copyright": "© 2026 Magical.africa. All rights reserved"
+},
+
+
+
+
+
+
+"auth": {
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
+  "email": "Email",
+  "emailPlaceholder": "email@example.com",
+  "enterEmail": "Enter your email",
+  "password": "Password",
+  "forgotPassword": "Forgot Password?",
+  "required": "Required",
+  "continueWithGoogle": "Continue with Google",
+  "orBecomeMember": "Or Become a Member",
+  "joinText": "Join",
+  "joinTextEnd": "and discover Africa's culture, heritage, stories, and traditions.",
+  "journeyStarts": "Your Journey Starts Here",
+  "letsGetStarted": "Let's Get Started",
+  "tribes": "Tribes",
+  "firstName": "First Name",
+  "firstNamePlaceholder": "Enter your first name",
+  "lastName": "Second Name",
+  "lastNamePlaceholder": "Enter your last name",
+  "country": "Country",
+  "countryPlaceholder": "Enter your country",
+  "createAccount": "Create Account",
+  "signInSuccess": "Signed in successfully!",
+  "googleSuccess": "Signed in with Google successfully!",
+  "accountCreated": "Account created successfully!",
+  "cards": {
+    "explore": {
+      "title": "Explore Authentic Africa",
+      "description": "Discover rich cultures, traditions, and stories from across the continent all in one place."
+    },
+    "connect": {
+      "title": "Connect With Heritage",
+      "description": "Experience Africa through its people, tribes, and timeless traditions, curated with care."
+    },
+    "travel": {
+      "title": "Travel Beyond the Ordinary",
+      "description": "Unlock unique destinations and cultural experiences that go beyond the usual tourist path."
+    }
+  },
+  "errors": {
+    "noAccount": "No account found with this email",
+    "wrongPassword": "Incorrect password",
+    "invalidCredential": "Invalid email or password",
+    "passwordLength": "Password must be at least 6 characters",
+    "emailInUse": "This email is already registered",
+    "invalidEmail": "Please enter a valid email address",
+    "generic": "Error: "
+  }
+},
+
+
+
+"tribesPage": {
+  "hero": {
+    "title": "Explore African Communities",
+    "subtitle": "Discover the rich diversity of African cultures, traditions, and heritage across the continent."
+  },
+  "section": {
+    "title": "African Communities",
+    "subtitle": "Explore the diverse cultures, traditions, and stories of African communities from across the continent."
+  },
+  "language": "Language",
+  "exploreCulture": "Explore Culture",
+  "contribute": {
+    "title": "Is Your Community Missing?",
+    "description": "Help us preserve and share your culture. Add your tribe's story, traditions, language, and heritage to Magical.Africa.",
+    "button": "Contribute Story"
+  },
+  "communities": {
+    "maasai": {
+      "name": "Maasai",
+      "location": "Kenya, Tanzania",
+      "population": "1.5M+ people",
+      "language": "Maa",
+      "desc": "Semi-nomadic warriors known for distinctive customs and dress."
+    },
+    "ashanti": {
+      "name": "Ashanti",
+      "location": "Ghana",
+      "population": "11M+ people",
+      "language": "Twi",
+      "desc": "Known for their gold craftsmanship and the powerful Ashanti Empire."
+    },
+    "hausa": {
+      "name": "Hausa",
+      "location": "Nigeria, Niger",
+      "population": "80M+ people",
+      "language": "Hausa",
+      "desc": "One of the largest ethnic groups in Africa, known for trade and commerce."
+    },
+    "zulu": {
+      "name": "Zulu",
+      "location": "South Africa",
+      "population": "12M+ people",
+      "language": "Zulu",
+      "desc": "Known for their warrior culture, beadwork, and the famous Zulu Kingdom."
+    },
+    "yoruba": {
+      "name": "Yoruba",
+      "location": "Nigeria, Benin",
+      "population": "45M+ people",
+      "language": "Yoruba",
+      "desc": "Rich in mythology, art, and ancient city-states like Ife and Oyo."
+    },
+    "kikuyu": {
+      "name": "Kikuyu",
+      "location": "Kenya",
+      "population": "8M+ people",
+      "language": "Kikuyu",
+      "desc": "The largest ethnic group in Kenya, known for agriculture and trade."
+    },
+    "igbo": {
+      "name": "Igbo",
+      "location": "Nigeria",
+      "population": "45M+ people",
+      "language": "Igbo",
+      "desc": "Known for their entrepreneurial spirit and rich artistic traditions across generations."
+    },
+    "amhara": {
+      "name": "Amhara",
+      "location": "Ethiopia",
+      "population": "32M+ people",
+      "language": "Amharic",
+      "desc": "Historically dominant group in Ethiopia with ancient Christian heritage."
+    },
+    "berber": {
+      "name": "Berber",
+      "location": "Morocco, Algeria, Libya",
+      "population": "30M+ people",
+      "language": "Tamazight",
+      "desc": "Indigenous people of North Africa with ancient traditions and languages."
+    },
+    "swahili": {
+      "name": "Swahili",
+      "location": "Kenya, Tanzania, Zanzibar",
+      "population": "2M+ people",
+      "language": "Kiswahili",
+      "desc": "Coastal people known for their maritime trade and cultural fusion for centuries."
+    },
+    "wolof": {
+      "name": "Wolof",
+      "location": "Senegal, Gambia",
+      "population": "6M+ people",
+      "language": "Wolof",
+      "desc": "Dominant ethnic group in Senegal known for their hospitality and unity."
+    },
+    "fulani": {
+      "name": "Fulani",
+      "location": "West Africa (20+ countries)",
+      "population": "40M+ people",
+      "language": "Fulfulde",
+      "desc": "Nomadic pastoralists spread across West Africa with distinct traditions."
+    }
+  }
+},
+
+
+
+
+"searchSection": {
+  "title": "Find Your Tribe",
+  "searchPlaceholder": "Search tribes",
+  "allRegions": "All Regions",
+  "allLanguages": "All Languages",
+  "communitiesFound": "communities found",
+  "showMap": "Show Map",
+  "hideMap": "Hide Map",
+  "addCommunity": "Add Your Community",
+  "communitiesLabel": "Communities",
+  "regions": {
+    "north": "North Africa",
+    "east": "East Africa",
+    "west": "West Africa",
+    "central": "Central Africa",
+    "southern": "Southern Africa"
+  }
+},
+
+
+
+"maasai": {
+  "hero": {
+    "title": "Maasai",
+    "subtitle": "The warriors of East Africa"
+  },
+  "overview": {
+    "title": "Community",
+    "titleSpan": "Overview",
+    "location": "LOCATION",
+    "population": "POPULATION",
+    "language": "LANGUAGE",
+    "region": "REGION",
+    "regionValue": "East Africa"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "language": "Language",
+    "culture": "Culture & Traditions",
+    "leaders": "Leaders",
+    "nature": "Nature & Wildlife",
+    "antiques": "Antiques"
+  },
+  "about": {
+    "title": "About the Community",
+    "history": {
+      "title": "History & Migration",
+      "p1": "The Maasai are a Nilotic ethnic group inhabiting northern, central and southern Kenya and northern Tanzania. They are among the best known local populations internationally due to their residence near many game parks of the African Great Lakes and their distinctive customs and dress.",
+      "p2": "The Maasai speak the Maa language, a member of the Nilotic language family related to Dinka and Nuer. They are known for their unique culture, customs, and dress, as well as their reputation as fierce warriors and cattle herders. The Maasai have maintained much of their traditional lifestyle despite pressure from modern development."
+    },
+    "identity": {
+      "title": "Identity & Lifestyle",
+      "description": "The Maasai are semi-nomadic pastoralists who have traditionally relied on cattle, sheep, and goats for their livelihood. Cattle hold special significance in Maasai culture, representing wealth, status, and sustenance. The Maasai measure a man's wealth by the number of cattle and children he has."
+    }
+  },
+  "language": {
+    "title": "The Maa",
+    "titleSpan": "Language",
+    "description": "The Maa language is the traditional language of the Maasai people of East Africa. It is spoken mainly in Kenya and northern Tanzania, and it belongs to the Nilotic language family. Maa is more than just a means of communication — it plays a central role in preserving Maasai culture, identity, and oral traditions.",
+    "learnButton": "Learn The Language",
+    "listenButton": "Listen Audios",
+    "phrasesTitle": "Common Phrases &",
+    "proverbsSpan": "Proverbs",
+    "phrases": {
+      "sopa": "Hello (to one person)",
+      "serian": "Hello (to many people)",
+      "ashoOleng": "Thank you very much",
+      "iko": "Yes",
+      "takwenya": "Goodbye"
+    },
+    "proverbs": {
+      "enkitoria": "God does not sleep",
+      "meidim": "Respect begets respect",
+      "meishoo": "It takes a village to raise a child"
+    },
+    "audio": {
+      "title": "Listen to Traditional Greetings",
+      "description": "Learn authentic Maa pronunciation directly from native speakers, preserving the true sounds, rhythm, and cultural meaning of the Maasai language.",
+      "playButton": "Play Video"
+    }
+  },
+  "culture": {
+    "clothing": {
+      "title": "Traditional Clothing & Adornment",
+      "description": "The Maasai are renowned for their distinctive red clothing called \"shuka.\" Red is the most important color, symbolizing bravery, unity, and blood. Both men and women wear elaborate beaded jewelry, with different colors and patterns signifying age, marital status, and social position.",
+      "button": "Get Color Meanings"
+    },
+    "ceremoniesTitle": "Ceremonies & Rites of Passage",
+    "ceremonies": {
+      "eunoto": {
+        "title": "Eunoto",
+        "desc": "Coming of age ceremony where warriors transition to junior elders"
+      },
+      "enkipaata": {
+        "title": "Enkipaata",
+        "desc": "Pre-circumcision ceremony for young men"
+      },
+      "emuratare": {
+        "title": "Emuratare",
+        "desc": "Circumcision ceremony marking transition to warrior status"
+      },
+      "enkang": {
+        "title": "Enkang oo-nkiri",
+        "desc": "Marriage ceremonies with traditional blessings"
+      },
+      "olngesherr": {
+        "title": "Olngesherr",
+        "desc": "Marriage ceremonies with traditional blessings"
+      }
+    },
+    "foodsTitle": "Foods & Cuisine",
+    "foods": {
+      "nyamaChoma": {
+        "title": "Nyama Choma",
+        "desc": "Roasted meat, especially goat and beef"
+      },
+      "olpurda": {
+        "title": "Olpurda",
+        "desc": "Soup made from meat, bones, and herbs"
+      },
+      "emuroto": {
+        "title": "Emuroto",
+        "desc": "Ceremonial meat dishes"
+      }
+    }
+  },
+  "leaders": {
+    "title": "Notable Leaders Past & Present",
+    "laibonLenana": {
+      "name": "Laibon Lenana",
+      "desc": "A powerful Maasai spiritual leader who played a key role during British colonization."
+    },
+    "olonana": {
+      "name": "Olonana",
+      "desc": "Chief and Laibon who negotiated treaties to protect Maasai lands."
+    },
+    "mbatian": {
+      "name": "Mbatian",
+      "desc": "The most famous Laibon, known for his prophecies and unifying the Maasai."
+    },
+    "oleSaibul": {
+      "name": "Ole Saibul",
+      "desc": "A prominent Maasai politician and advocate for pastoralist rights in Kenya."
+    },
+    "oleNtimama": {
+      "name": "William Ole Ntimama",
+      "desc": "Kenyan politician who championed Maasai land rights for decades."
+    },
+    "oleLenku": {
+      "name": "Joseph Ole Lenku",
+      "desc": "Current Governor of Kajiado County and former Cabinet Secretary."
+    }
+  },
+  "nature": {
+    "title": "Relationship with Nature",
+    "description": "The Maasai have lived in harmony with wildlife for centuries, sharing the same ecosystem with lions, elephants, and other wildlife. Their pastoral lifestyle and traditional beliefs have helped preserve vast areas of wilderness.",
+    "animalsTitle": "Sacred Animals & Beliefs",
+    "animals": {
+      "cattle": {
+        "name": "Cattle",
+        "desc": "Sacred gift from Enkai (God), central to Maasai identity and survival"
+      },
+      "lions": {
+        "name": "Lions",
+        "desc": "Respected as symbols of bravery; historically hunted by warriors in coming-of-age rituals"
+      },
+      "elephants": {
+        "name": "Elephants",
+        "desc": "Revered for wisdom and strength; protected through traditional conservation"
+      },
+      "giraffes": {
+        "name": "Giraffes",
+        "desc": "Seen as graceful beings sharing their grazing lands"
+      }
+    }
+  },
+  "antiques": {
+    "title": "Traditional Artifacts & Antiques",
+    "description": "The Maasai people have crafted distinctive tools, weapons, and adornments for centuries. These artifacts represent their rich cultural heritage and continue to be symbols of identity and tradition.",
+    "button": "Visit Marketplace",
+    "rungu": {
+      "name": "Rungu (Throwing Club)",
+      "desc": "Traditional wooden club used by warriors for protection and hunting"
+    },
+    "shuka": {
+      "name": "Shuka (Red Cloth)",
+      "desc": "Iconic red checkered cloth worn as traditional dress"
+    },
+    "beadedJewelry": {
+      "name": "Beaded Jewelry",
+      "desc": "Intricate beadwork representing status, age, and identity"
+    },
+    "spear": {
+      "name": "Spear (Enkudi)",
+      "desc": "Symbol of manhood and primary weapon of Maasai warriors"
+    },
+    "shield": {
+      "name": "Shield (Olongu)",
+      "desc": "Oval shields painted with distinctive patterns representing clan identity"
+    },
+    "calabash": {
+      "name": "Calabash (Enkukuri)",
+      "desc": "Gourd containers used for storing milk and blood mixtures"
+    }
+  },
+  "preserve": {
+    "title": "Help Us Preserve Maasai Heritage",
+    "description": "Do you have stories, photos, or knowledge to share about Maasai culture?",
+    "button": "Contribute to This Page"
+  }
+},
+
+
+ "about": {
+    "hero": {
+      "title": "About Magical Africa",
+      "tagline": "Preserving African Languages. Empowering communities. Building the future."
+    },
+    "background": {
+      "sectionTitle": "Our",
+      "sectionTitleHighlight": "Background",
+      "paragraph1": "Magical.africa is a pan-African organization working at the intersection of African languages, culture, education, and technology. We exist to support the continued use, growth, and sustainability of community languages across the continent.",
+      "paragraph2": "African languages are central to education, livelihoods, and social cohesion, yet many remain underrepresented in formal systems and digital spaces. Magical Africa addresses this gap through a community-centered, partnership-driven approach that brings together local knowledge holders, educators, researchers, and technology partners.",
+      "paragraph3": "By using technology as an enabling tool not a replacement we help integrate African languages and cultural knowledge into modern systems in ethical, inclusive, and sustainable ways."
+    },
+    "approach": {
+      "title": "Our Approach",
+      "description": "We combine culture, technology, and education to empower communities and preserve African heritage.",
+      "items": {
+        "communityOwnership": "Community Ownership",
+        "ethicalStewardship": "Ethical Stewardship",
+        "sustainableImpact": "Sustainable Impact",
+        "localPanAfrican": "Local & Pan-African"
+      }
+    },
+    "whatWeDo": {
+      "title": "What We Do",
+      "slides": {
+        "datastewardship": {
+          "title": "African Language & Cultural Data Stewardship",
+          "description": "We partner with communities to document, curate, and steward African languages and cultural practices in ways that respect local norms, histories, and priorities. Our work includes:",
+          "items": [
+            "Spoken language and oral traditions",
+            "Visual culture and everyday practices",
+            "Cultural heritage documentation",
+            "Multilingual documentation across African contexts"
+          ]
+        },
+        "aiDataCollection": {
+          "title": "Community-Centered AI & Data Collection",
+          "description": "Magical Africa designs and leads ethical, community-driven data collection processes that support inclusive AI development for African languages. We focus on:",
+          "items": [
+            "Voice, text, and multimodal data",
+            "Real-world use contexts (education, culture, livelihoods)",
+            "Fair participation and compensation",
+            "Transparent data governance"
+          ]
+        },
+        "education": {
+          "title": "Education & Cultural Knowledge Projects",
+          "description": "We work in schools, learning spaces, and cultural settings across different African regions to support language learning, knowledge transmission, and intergenerational exchange. We focus on:",
+          "items": [
+            "Multilingual learning environments",
+            "Oral knowledge and storytelling",
+            "Cultural events and practices",
+            "Youth engagement and creative expression"
+          ]
+        }
+      }
+    },
+    "principles": {
+      "title": "Our Principles",
+      "items": [
+        "Pan-African by design - Grounded locally, connected continent-wide",
+        "Community First - Communities are collaborators, not data sources",
+        "Ethical by Default - Consent, fairness, and privacy are non-negotiable",
+        "Cultural Respect - Language and culture are living systems",
+        "Open & Collaborative - We support open knowledge and shared learning",
+        "Human-Centered AI - Technology must serve people, not extract from them"
+      ]
+    },
+    "ai": {
+      "title": "How We Use AI",
+      "sections": {
+        "preparingData": {
+          "title": "Preparing Data for Inclusive AI",
+          "items": [
+            "Speech recognition (ASR)",
+            "Text-to-speech (TTS)",
+            "Voice-based learning tools",
+            "Multimodal educational and cultural applications"
+          ]
+        },
+        "research": {
+          "title": "AI-Assisted Research & Quality Review",
+          "items": [
+            "Assist with transcription and annotation workflows",
+            "Identify gaps in language coverage",
+            "Support quality checks always paired with human validation"
+          ]
+        },
+        "communityTools": {
+          "title": "Community-Driven Tools",
+          "items": [
+            "AI-enabled learning resources",
+            "Voice-based and multimodal educational tools",
+            "Cultural documentation platforms"
+          ]
+        }
+      }
+    },
+    "partners": {
+      "title": "Who We Work With",
+      "description": "We collaborate across Africa with"
+    },
+    "team": {
+      "title": "Meet The Team",
+      "description": "The passionate minds behind Magical Africa",
+      "members": {
+        "gloria": {
+          "name": "Gloria Machoka",
+          "role": "Cofounder"
+        },
+        "steve": {
+          "name": "Steve Kombo",
+          "role": "Founder"
+        },
+        "joel": {
+          "name": "Joel Makori",
+          "role": "Community Engagement Manager"
+        }
+      }
+    },
+    "cta": {
+      "title": "Join Us in Preserving The Real African Story",
+      "description": "Africa doesn't need to be explained by outsiders. We will tell our own story with dignity, accuracy, creativity, and pride.",
+      "buttons": {
+        "contribute": "Contribute Your Story",
+        "explore": "Explore Communities",
+        "contact": "Contact Us"
+      }
+    }
+  }
 }

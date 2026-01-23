@@ -100,5 +100,693 @@
       "description": "Imitshingo nezimpondo zendabuko ezenziwe ngezinto zemvelo."
     }
   }
-}
+},
+
+
+"sideMenu": {
+  "close": "Vala",
+  "search": "Sesha",
+  "home": "Ikhaya",
+  "tribes": "Izizwe",
+  "about": "Mayelana",
+  "language": "Ulimi",
+  "marketplace": "Imakethe"
+},
+
+
+
+"languages": {
+  "title": "Funda Ezinye Zezilimi Zethu",
+  "description": "I-Afrika ikhaya lezinkulungwane zezilimi, ngayinye iphethe umlando, ubunikazi, nesiko. Hlola ukubingelela namagama avamile avela emiphakathini ehlukahlukene yase-Afrika uxhumane nezwekazi ngolimi.",
+  "items": {
+    "swahili": {
+      "name": "IsiSwahili",
+      "tooltip": "Ukubingelela okuvamile 'Habari?', okusho 'Unjani?'"
+    },
+    "zulu": {
+      "name": "IsiZulu",
+      "tooltip": "Ukubingelela okuvamile 'Sawubona', okusho 'Ngiyakubona.'"
+    },
+    "yoruba": {
+      "name": "IsiYoruba",
+      "tooltip": "'Báwo ni?' ukubingelela kwesiYoruba okusho 'Unjani?'"
+    },
+    "kikuyu": {
+      "name": "IsiKikuyu",
+      "tooltip": "Ukubingelela okuvamile 'Jambo', okusho 'Sawubona'"
+    },
+    "hausa": {
+      "name": "IsiHausa",
+      "tooltip": "'Akkam?' kusho 'Unjani?' ngesiHausa."
+    },
+    "shona": {
+      "name": "IsiShona",
+      "tooltip": "'Mhoro' ukubingelela kwesiShona okusho 'Sawubona.'"
+    },
+    "sukuma": {
+      "name": "IsiSukuma",
+      "tooltip": "Ukubingelela okuvamile 'Moro', okusho 'Sawubona'"
+    },
+    "xhosa": {
+      "name": "IsiXhosa",
+      "tooltip": "'Molo' ukubingelela kwesiXhosa okusho 'Sawubona.'"
+    },
+    "maasai": {
+      "name": "IsiMaasai",
+      "tooltip": "Ukubingelela okuvamile 'Sanu', okusho 'Sawubona'"
+    },
+    "igbo": {
+      "name": "Isi-Igbo",
+      "tooltip": "Ukubingelela okuvamile 'Kedu?', okusho 'Unjani?'"
+    },
+    "lingala": {
+      "name": "IsiLingala",
+      "tooltip": "Ukubingelela okuvamile 'Mbote', okusho 'Sawubona'"
+    },
+    "tsonga": {
+      "name": "IsiTsonga",
+      "tooltip": "Ukubingelela okuvamile 'Avuxeni', okusho 'Kusile'"
+    },
+    "setswana": {
+      "name": "IsiSetswana",
+      "tooltip": "Ukubingelela okuvamile 'Dumela', okusho 'Sawubona'"
+    },
+    "chichewa": {
+      "name": "IsiChichewa",
+      "tooltip": "Ukubingelela okuvamile 'Moni', okusho 'Sawubona'"
+    }
+  }
+},
+
+
+"tribes": {
+  "title": "Hlola Izizwe Zethu",
+  "subtitle": "Uhambo olungezizwe ezahlukahlukene ze-Afrika namasiko angunaphakade",
+  "viewAll": "Buka Konke",
+  "oromo": {
+    "name": "Oromo",
+    "description": "Abakhe e-Ethiopia, abantu base-Oromo baphethe ifa lokuziqhenya lesiko, ubunye, nobunikazi besiko. Bayisizwe esikhulu kunazo zonke ezweni, benza cishe ingxenye yesithathu yabantu abangu-40 million."
+  },
+  "zulu": {
+    "name": "Zulu",
+    "description": "Abavela eNingizimu Afrika, abantu bamaZulu baphethe ifa elinamandla lesiko, ukubekezela, nobunikazi, bemele abantu abangaphezu kuka-11 million."
+  },
+  "igbo": {
+    "name": "Igbo",
+    "description": "Abakhe eNigeria, abantu bama-Igbo bangesinye sezizwe ezinkulu ezweni, bebala ngaphezu kuka-30 million, baziwa ngamasiko abo acebi, ubusomabhizinisi, nezimilo zomphakathi eziqinile."
+  }
+},
+
+
+
+
+"socialImpact": {
+  "title": "Umthelela Wethu Emphakathini",
+  "description": "Sikholelwa ekubuyiseleni emiphakathini esigqugquzelayo. Ngenkundla yethu, sisekela izingcweti zendawo, silondoloza ifa lamasiko, futhi sidala amathuba ezomnotho e-Afrika yonke.",
+  "learnMore": "Funda Kabanzi",
+  "readMore": "Funda Kabanzi",
+  "artisans": {
+    "title": "Ukusekela Izingcweti Zendawo",
+    "description": "Sixhumanisa izingcweti zendawo ngokuqondile nezimakethe zomhlaba, siqinisekisa ukuthi zithola inkokhelo efanele ngomsebenzi wazo."
+  },
+  "heritage": {
+    "title": "Ukulondoloza Ifa",
+    "description": "Imibhalo yethu yedijithali isiza ukulondoloza izilimi ezisengozini, amasiko, nemikhuba yamasiko yezizukulwane ezizayo."
+  }
+},
+
+
+"partners": {
+  "title": "Abalingani Bethu",
+  "description": "Sibambisana nezinhlangano ezihlanganyela umbono wethu wokulondoloza nokugubha isiko lase-Afrika. Ndawonye, senza umthelela omkhulu."
+},
+
+
+
+
+"faq": {
+  "title": "Imibuzo Evame Ukubuzwa",
+  "items": {
+    "whatIs": {
+      "question": "Iyini i-Magical Africa?",
+      "answer": "I-Magical Africa iyinkundla ezinikele ekulondolozeni, ukugubheni, nokwabelana ngefa elicebi lamasiko e-Afrika nomhlaba. Sixhumanisa abantu namasiko ase-Afrika angempela, izilimi, amasiko, nemiphakathi."
+    },
+    "contribute": {
+      "question": "Ngingahlanganyela kanjani ku-Magical Africa?",
+      "answer": "Ungahlanganyela ngokwabelana ngezindaba, izithombe, noma ulwazi ngomphakathi wakho. Vele ubhalise bese usebenzisa amathuluzi ethu okuhlanganyela ukuze ungeze okuqukethwe ngamasiko, ulimi, nefa lesizwe sakho."
+    },
+    "authentic": {
+      "question": "Ingabe okuqukethwe ku-Magical Africa kungokoqobo?",
+      "answer": "Yebo! Konke okuqukethwe kwethu kutholakala ngokuqondile kumalungu omphakathi nachwepheshe bamasiko. Sisebenza ngokubambisana nemiphakathi yendawo ukuqinisekisa ukunemba nobuqiniso kukho konke esikwabelanayo."
+    },
+    "learnLanguage": {
+      "question": "Ngingayifunda kanjani ulimi lwase-Afrika kule nkundla?",
+      "answer": "Sinikeza izinsiza zokufunda ulimi okuhlanganisa amagama avamile, ukuphimisela ngomsindo okuvela kubantu abakhuluma ulimi lwabo, nomongo wamasiko ukukusiza uqonde futhi ukhonze izilimi zase-Afrika."
+    },
+    "purchase": {
+      "question": "Ngingakwazi ukuthenga imikhiqizo yase-Afrika yangempela?",
+      "answer": "Yebo! Imakethe yethu inemikhiqizo yamasiko yangempela eyenziwe ngesandla izingcweti zase-Afrika. Ukuthenga ngakunye kusekela imiphakathi yendawo futhi kusiza ukulondoloza ubungcweti bendabuko."
+    }
+  }
+},
+
+
+"contact": {
+  "description": "Unemibuzo mayelana namasiko ase-Afrika, ifa, noma imiqoqo yethu? Sithinte uthole izindaba, amasiko, nobuciko obenza i-Afrika ibe ngeyodwa. Singathanda ukuxhumana nawe nokwabelana ngemlingo wangempela we-Afrika.",
+  "button": "Sithinte"
+},
+
+
+
+"footer": {
+  "tagline": "Lapho Indaba Yangempela Yase-Afrika Ihlala Khona",
+  "quickLinks": "Izixhumanisi Ezisheshayo",
+  "links": {
+    "home": "Ikhaya",
+    "tribes": "Izizwe",
+    "languages": "Izilimi",
+    "about": "Mayelana",
+    "marketplace": "Imakethe",
+    "contact": "Xhumana"
+  },
+  "terms": "Imigomo Yokusebenzisa",
+  "privacy": "Inqubomgomo Yobumfihlo",
+  "cookiePolicy": "Inqubomgomo Yamakhukhi",
+  "cookieSettings": "Izilungiselelo Zamakhukhi",
+  "copyright": "© 2026 Magical.africa. Wonke amalungelo agodliwe"
+},
+
+
+
+
+"auth": {
+  "signIn": "Ngena",
+  "signUp": "Bhalisa",
+  "email": "I-imeyili",
+  "emailPlaceholder": "imeyili@isibonelo.com",
+  "enterEmail": "Faka i-imeyili yakho",
+  "password": "Iphasiwedi",
+  "forgotPassword": "Ukhohlwe Iphasiwedi?",
+  "required": "Kuyadingeka",
+  "continueWithGoogle": "Qhubeka nge-Google",
+  "orBecomeMember": "Noma Yiba Ilungu",
+  "joinText": "Joyina",
+  "joinTextEnd": "futhi uthole amasiko e-Afrika, ifa, izindaba, namasiko.",
+  "journeyStarts": "Uhambo Lwakho Luqala Lapha",
+  "letsGetStarted": "Asiqale",
+  "tribes": "Izizwe",
+  "firstName": "Igama Lokuqala",
+  "firstNamePlaceholder": "Faka igama lakho lokuqala",
+  "lastName": "Igama Lesibili",
+  "lastNamePlaceholder": "Faka isibongo sakho",
+  "country": "Izwe",
+  "countryPlaceholder": "Faka izwe lakho",
+  "createAccount": "Dala I-akhawunti",
+  "signInSuccess": "Ungenile ngempumelelo!",
+  "googleSuccess": "Ungenile nge-Google ngempumelelo!",
+  "accountCreated": "I-akhawunti idalwe ngempumelelo!",
+  "cards": {
+    "explore": {
+      "title": "Hlola I-Afrika Yangempela",
+      "description": "Thola amasiko acebi, amasiko, nezindaba ezivela kulo lonke izwekazi endaweni eyodwa."
+    },
+    "connect": {
+      "title": "Xhumana Nefa",
+      "description": "Zizwe i-Afrika ngabantu bayo, izizwe, namasiko angunaphakade, akhethelwe ngokunakekela."
+    },
+    "travel": {
+      "title": "Hamba Ngaphezu Kokujwayelekile",
+      "description": "Vula izindawo ezingavamile nokuhlangenwe nakho kwamasiko okudlula indlela evamile yezivakashi."
+    }
+  },
+  "errors": {
+    "noAccount": "Ayikho i-akhawunti etholakele ngale-imeyili",
+    "wrongPassword": "Iphasiwedi engalungile",
+    "invalidCredential": "I-imeyili noma iphasiwedi engavumeleki",
+    "passwordLength": "Iphasiwedi kufanele ibe nezinhlamvu okungenani ezingu-6",
+    "emailInUse": "Le-imeyili isivele ibhalisiwe",
+    "invalidEmail": "Sicela ufake ikheli le-imeyili elivumelekile",
+    "generic": "Iphutha: "
+  }
+},
+
+
+
+"tribesPage": {
+  "hero": {
+    "title": "Hlola Imiphakathi Yase-Afrika",
+    "subtitle": "Thola ukuhlukahluka okucebile kwamasiko, amasiko, nefa lase-Afrika kulo lonke izwekazi."
+  },
+  "section": {
+    "title": "Imiphakathi Yase-Afrika",
+    "subtitle": "Hlola amasiko ahlukahlukene, amasiko, nezindaba zemiphakathi yase-Afrika evela ezwenikazi lonke."
+  },
+  "language": "Ulimi",
+  "exploreCulture": "Hlola Isiko",
+  "contribute": {
+    "title": "Ingabe Umphakathi Wakho Awukho?",
+    "description": "Sisize ukulondoloza nokwabelana ngesiko lakho. Engeza indaba yesizwe sakho, amasiko, ulimi, nefa ku-Magical.Africa.",
+    "button": "Hlanganyela Indaba"
+  },
+  "communities": {
+    "maasai": {
+      "name": "Maasai",
+      "location": "Kenya, Tanzania",
+      "population": "Abantu abangaphezu kuka-1.5M",
+      "language": "Maa",
+      "desc": "Amaqhawe ahamba ngezindawo ezihlukene adume ngamasiko nokugqoka okuhlukile."
+    },
+    "ashanti": {
+      "name": "Ashanti",
+      "location": "Ghana",
+      "population": "Abantu abangaphezu kuka-11M",
+      "language": "Twi",
+      "desc": "Badume ngobuciko babo begolide neMbuso enamandla yase-Ashanti."
+    },
+    "hausa": {
+      "name": "Hausa",
+      "location": "Nigeria, Niger",
+      "population": "Abantu abangaphezu kuka-80M",
+      "language": "Hausa",
+      "desc": "Elinye lamaqembu amakhulu e-Afrika, elidume ngokuhweba nokuthengisa."
+    },
+    "zulu": {
+      "name": "Zulu",
+      "location": "Afrika Kusini",
+      "population": "Abantu abangaphezu kuka-12M",
+      "language": "Zulu",
+      "desc": "Badume ngesiko lamaqhawe, ukwenza ubuhlalu, noMbuso odumile wamaZulu."
+    },
+    "yoruba": {
+      "name": "Yoruba",
+      "location": "Nigeria, Benin",
+      "population": "Abantu abangaphezu kuka-45M",
+      "language": "Yoruba",
+      "desc": "Bacebe ngemithology, ubuciko, namadolobha akudala njengo-Ife no-Oyo."
+    },
+    "kikuyu": {
+      "name": "Kikuyu",
+      "location": "Kenya",
+      "population": "Abantu abangaphezu kuka-8M",
+      "language": "Kikuyu",
+      "desc": "Iqembu elikhulu kunawo wonke eKenya, elidume ngezolimo nokuhweba."
+    },
+    "igbo": {
+      "name": "Igbo",
+      "location": "Nigeria",
+      "population": "Abantu abangaphezu kuka-45M",
+      "language": "Igbo",
+      "desc": "Badume ngomoya wabo wobusomabhizinisi namasiko acebi obuciko ezizukulwaneni."
+    },
+    "amhara": {
+      "name": "Amhara",
+      "location": "Ethiopia",
+      "population": "Abantu abangaphezu kuka-32M",
+      "language": "Amharic",
+      "desc": "Iqembu elinamandla ngokomlando e-Ethiopia elinefa lamaKristu lasendulo."
+    },
+    "berber": {
+      "name": "Berber",
+      "location": "Morocco, Algeria, Libya",
+      "population": "Abantu abangaphezu kuka-30M",
+      "language": "Tamazight",
+      "desc": "Abantu bendabuko base-North Africa abanesiko nezilimi zasendulo."
+    },
+    "swahili": {
+      "name": "Swahili",
+      "location": "Kenya, Tanzania, Zanzibar",
+      "population": "Abantu abangaphezu kuka-2M",
+      "language": "Kiswahili",
+      "desc": "Abantu basogwini abadume ngokuhweba ngolwandle nokuhlangana kwamasiko amakhulu eminyaka."
+    },
+    "wolof": {
+      "name": "Wolof",
+      "location": "Senegal, Gambia",
+      "population": "Abantu abangaphezu kuka-6M",
+      "language": "Wolof",
+      "desc": "Iqembu elikhulu eSenegal elidume ngokwamukela nobunye balo."
+    },
+    "fulani": {
+      "name": "Fulani",
+      "location": "West Africa (amazwe angaphezu kuka-20)",
+      "population": "Abantu abangaphezu kuka-40M",
+      "language": "Fulfulde",
+      "desc": "Abelusi abahambayo abasabalele eWest Africa abanesiko elihlukile."
+    }
+  }
+},
+
+
+"searchSection": {
+  "title": "Thola Isizwe Sakho",
+  "searchPlaceholder": "Sesha izizwe",
+  "allRegions": "Zonke Izifunda",
+  "allLanguages": "Zonke Izilimi",
+  "communitiesFound": "imiphakathi etholakele",
+  "showMap": "Bonisa Imephu",
+  "hideMap": "Fihla Imephu",
+  "addCommunity": "Engeza Umphakathi Wakho",
+  "communitiesLabel": "Imiphakathi",
+  "regions": {
+    "north": "I-Afrika Esenyakatho",
+    "east": "I-Afrika Esempumalanga",
+    "west": "I-Afrika Esentshonalanga",
+    "central": "I-Afrika Ephakathi",
+    "southern": "I-Afrika Eseningizimu"
+  }
+},
+
+
+
+"maasai": {
+  "hero": {
+    "title": "AmaMaasai",
+    "subtitle": "Amaqhawe ase-East Africa"
+  },
+  "overview": {
+    "title": "Uhlolojikelele",
+    "titleSpan": "Lomphakathi",
+    "location": "INDAWO",
+    "population": "INANI LABANTU",
+    "language": "ULIMI",
+    "region": "ISIFUNDA",
+    "regionValue": "I-East Africa"
+  },
+  "tabs": {
+    "overview": "Uhlolojikelele",
+    "language": "Ulimi",
+    "culture": "Isiko Namasiko",
+    "leaders": "Abaholi",
+    "nature": "Imvelo Nezilwane",
+    "antiques": "Izinto Zasendulo"
+  },
+  "about": {
+    "title": "Mayelana Nomphakathi",
+    "history": {
+      "title": "Umlando Nokufuduka",
+      "p1": "AmaMaasai ayisizwe saseNilotic esihlala enyakatho, maphakathi naseningizimu yeKenya nasenyakatho yeTanzania. Bangaphakathi kwabantu bendawo abaziwa kakhulu emhlabeni ngenxa yokuhlala kwabo eduze neziqiwi eziningi zezilwane zeGreat Lakes yase-Afrika namasiko abo nokugqoka okwehlukile.",
+      "p2": "AmaMaasai akhuluma ulimi lwesiMaa, ilungu lomndeni wezilimi zeNilotic oluhlobene noDinka noNuer. Baziwa ngesiko labo eliyingqayizivele, amasiko, nokugqoka, kanye nodumo lwabo njengamaqhawe anamandla nabafuyi bezinkomo. AmaMaasai agcine indlela yokuphila yawo yendabuko naphezu kwengcindezi evela ekuthuthukisweni kwanamuhla."
+    },
+    "identity": {
+      "title": "Ubuwena Nendlela Yokuphila",
+      "description": "AmaMaasai angabafuyi abahamba-hamba abathembele ezinkomeni, ezimvwini, nasezimbuzini ukuze baphile. Izinkomo zibaluleke kakhulu esikweni lamaaMaasai, zimele ingcebo, isimo, nokudla. AmaMaasai alinganisa ingcebo yendoda ngenani lezinkomo nezingane anazo."
+    }
+  },
+  "language": {
+    "title": "Ulimi",
+    "titleSpan": "LwesiMaa",
+    "description": "Ulimi lwesiMaa luwulimi lwendabuko lwabantu baseMaasai base-East Africa. Lukhulunywa kakhulu eKenya nasenyakatho yeTanzania, futhi lungowomndeni wezilimi zeNilotic. IsiMaa akuyona nje indlela yokuxhumana — linendima ebalulekile ekulondolozeni isiko lamaaMaasai, ubuwena, namasiko omlomo.",
+    "learnButton": "Funda Ulimi",
+    "listenButton": "Lalela Umsindo",
+    "phrasesTitle": "Amagama Avamile",
+    "proverbsSpan": "Nezaga",
+    "phrases": {
+      "sopa": "Sawubona (kumuntu oyedwa)",
+      "serian": "Sawubona (kubantu abaningi)",
+      "ashoOleng": "Ngiyabonga kakhulu",
+      "iko": "Yebo",
+      "takwenya": "Sala kahle"
+    },
+    "proverbs": {
+      "enkitoria": "UNkulunkulu akalali",
+      "meidim": "Inhlonipho izala inhlonipho",
+      "meishoo": "Kudinga isigodi ukukhulisa ingane"
+    },
+    "audio": {
+      "title": "Lalela Ukubingelela Kwendabuko",
+      "description": "Funda ukuphimisa kwesiMaa okuyiqiniso ngokuqondile kubantu abakhuluma ulimi lwebele, ulondoloza imisindo yangempela, isigqi, nencazelo yamasiko yolimi lwesiMaasai.",
+      "playButton": "Dlala Ividiyo"
+    }
+  },
+  "culture": {
+    "clothing": {
+      "title": "Izingubo Zendabuko Nokuhlobisa",
+      "description": "AmaMaasai adume ngezingubo zawo ezibomvu eziyingqayizivele ezibizwa ngokuthi \"shuka.\" Okubomvu kuwumbala obaluleke kakhulu, omele isibindi, ubunye, negazi. Amadoda nabesifazane bagqoka ubucwebe bebuhlalu obuhle, imibala nemidwebo ehlukene ekhombisa iminyaka, isimo somshado, nesikhundla emphakathini.",
+      "button": "Thola Izincazelo Zemibala"
+    },
+    "ceremoniesTitle": "Imicimbi Namasiko Esikhathi",
+    "ceremonies": {
+      "eunoto": {
+        "title": "Eunoto",
+        "desc": "Umcimbi wokukhula lapho amaqhawe eguquka abe abadala abancane"
+      },
+      "enkipaata": {
+        "title": "Enkipaata",
+        "desc": "Umcimbi wangaphambi kokusoka wabafana"
+      },
+      "emuratare": {
+        "title": "Emuratare",
+        "desc": "Umcimbi wokusoka ophawula ukuguquka kube yiqhawe"
+      },
+      "enkang": {
+        "title": "Enkang oo-nkiri",
+        "desc": "Imicimbi yomshado enezibusiso zendabuko"
+      },
+      "olngesherr": {
+        "title": "Olngesherr",
+        "desc": "Imicimbi yomshado enezibusiso zendabuko"
+      }
+    },
+    "foodsTitle": "Ukudla Nokupheka",
+    "foods": {
+      "nyamaChoma": {
+        "title": "Nyama Choma",
+        "desc": "Inyama eyosiwe, ikakhulukazi eyembuzi neyenkomo"
+      },
+      "olpurda": {
+        "title": "Olpurda",
+        "desc": "Isobho elenziwe ngenyama, amathambo, namakhambi"
+      },
+      "emuroto": {
+        "title": "Emuroto",
+        "desc": "Izitsha zenyama zemicimbi"
+      }
+    }
+  },
+  "leaders": {
+    "title": "Abaholi Abadumile Bakudala Nabamanje",
+    "laibonLenana": {
+      "name": "Laibon Lenana",
+      "desc": "Umholi wezomoya waseMaasai onamandla owadlala indima ebalulekile ngesikhathi sokuhlwitha kweBrithani."
+    },
+    "olonana": {
+      "name": "Olonana",
+      "desc": "Inkosi noLaibon owaxoxisana ngezivumelwano zokuvikela amazwe aseMaasai."
+    },
+    "mbatian": {
+      "name": "Mbatian",
+      "desc": "ULaibon odume kakhulu, owaziwa ngeziprofetho zakhe nangokuhlanganisa amaMaasai."
+    },
+    "oleSaibul": {
+      "name": "Ole Saibul",
+      "desc": "Isopolitiki saseMaasai esidumile nomuntu omela amalungelo abafuyi eKenya."
+    },
+    "oleNtimama": {
+      "name": "William Ole Ntimama",
+      "desc": "Isopolitiki saseKenya esalwela amalungelo omhlaba wamaMaasai iminyaka eminingi."
+    },
+    "oleLenku": {
+      "name": "Joseph Ole Lenku",
+      "desc": "UNdunankulu wamanje weKajiado County nowayenguNobhala weKhabhinethi."
+    }
+  },
+  "nature": {
+    "title": "Ubudlelwano Nemvelo",
+    "description": "AmaMaasai ahlala ngokuthula nezilwane zasendle amakhulu eminyaka, ehlanganyela indawo efanayo yemvelo namabhubesi, izindlovu, nezilwane zasendle ezinye. Indlela yabo yokuphila yokufuya nezinkolelo zendabuko kusize ukulondoloza izindawo ezinkulu zasendle.",
+    "animalsTitle": "Izilwane Ezingcwele Nezinkolelo",
+    "animals": {
+      "cattle": {
+        "name": "Izinkomo",
+        "desc": "Isipho esingcwele esivela ku-Enkai (uNkulunkulu), esibalulekile ebuwenini nasekuphileni kwamaMaasai"
+      },
+      "lions": {
+        "name": "Amabhubesi",
+        "desc": "Ahlonishwa njengezimpawu zesibindi; emlandweni azingeli amaqhawe emiciimbini yokukhula"
+      },
+      "elephants": {
+        "name": "Izindlovu",
+        "desc": "Zihlonishwa ngokuhlakanipha namandla; zivikelwa ngokugcinwa kwendabuko"
+      },
+      "giraffes": {
+        "name": "Izindlulamithi",
+        "desc": "Zibonwa njengezidalwa ezinomusa ezihlanganyela amazwe azo okudla"
+      }
+    }
+  },
+  "antiques": {
+    "title": "Izinto Zendabuko Nezasendulo",
+    "description": "Abantu baseMaasai benze amathuluzi ayingqayizivele, izikhali, nokuhlobisa amakhulu eminyaka. Lezi zinto zimele ifa labo elicebile lamasiko futhi ziyaqhubeka ziyizimpawu zobuwena nesiko.",
+    "button": "Vakashela Imakethe",
+    "rungu": {
+      "name": "Rungu (Isagila Sokujikijela)",
+      "desc": "Isagila sokhuni lwendabuko elisetshenziswa amaqhawe ukuvikela nokuzingela"
+    },
+    "shuka": {
+      "name": "Shuka (Indwangu Ebomvu)",
+      "desc": "Indwangu ebomvu eyaziwayo egqokwa njengengubo yendabuko"
+    },
+    "beadedJewelry": {
+      "name": "Ubucwebe Bebuhlalu",
+      "desc": "Umsebenzi webuhlalu onzima omele isimo, iminyaka, nobuwena"
+    },
+    "spear": {
+      "name": "Umkhonto (Enkudi)",
+      "desc": "Uphawu lobudoda nesikhali esiyinhloko samaqhawe aseMaasai"
+    },
+    "shield": {
+      "name": "Isihlangu (Olongu)",
+      "desc": "Izihlangu eziyindilinga ezipendwe ngemidwebo eyingqayizivele emele ubuwena bomndeni"
+    },
+    "calabash": {
+      "name": "Iselwa (Enkukuri)",
+      "desc": "Izitsha zeselwa ezisetshenziselwa ukugcina ingxube yobisi negazi"
+    }
+  },
+  "preserve": {
+    "title": "Sisisize Ukulondoloza Ifa LamaMaasai",
+    "description": "Unezindaba, izithombe, noma ulwazi ozokwabelana ngalo ngesiko lamaMaasai?",
+    "button": "Faka Kuleli Khasi"
+  }
+},
+
+
+
+
+
+
+
+
+
+ "about": {
+    "hero": {
+      "title": "Mayelana ne-Magical Africa",
+      "tagline": "Ukulondoloza Izilimi ZaseAfrika. Ukuhlomisa imiphakathi. Ukwakha ikusasa."
+    },
+    "background": {
+      "sectionTitle": "Umlando",
+      "sectionTitleHighlight": "Wethu",
+      "paragraph1": "Magical.africa iyinhlangano ye-Pan-African esebenza lapho kuhlangana khona izilimi zaseAfrika, amasiko, imfundo, nobuchwepheshe. Sikhona ukusekela ukuqhubeka kokusetshenziswa, ukukhula, nokusimama kwezilimi zemiphakathi kulo lonke izwekazi.",
+      "paragraph2": "Izilimi zaseAfrika zibalulekile emfundweni, ezimpilweni, nasekuxhumaneni komphakathi, kodwa eziningi zisalele emuva ezinhlelweni ezisemthethweni nasezindaweni zedijithali. I-Magical Africa ibhekana naleli gebe ngendlela egxile emphakathini nobambiswano ehlanganisa abanikazi bolwazi bendawo, othisha, abacwaningi, nababambisani bobuchwepheshe.",
+      "paragraph3": "Ngokusebenzisa ubuchwepheshe njengethuluzi elikusizayo hhayi esikhundleni sisiza ukuhlanganisa izilimi zaseAfrika nolwazi lwamasiko ezinhlelweni zanamuhla ngezindlela ezinobulungiswa, ezihlanganisa wonke umuntu, nezisimeme."
+    },
+    "approach": {
+      "title": "Indlela Yethu",
+      "description": "Sihlanganisa amasiko, ubuchwepheshe, nemfundo ukuhlomisa imiphakathi nokulondoloza ifa laseAfrika.",
+      "items": {
+        "communityOwnership": "Ubunikazi Bomphakathi",
+        "ethicalStewardship": "Ukuphatha Ngokuziphatha Kahle",
+        "sustainableImpact": "Umthelela Osimeme",
+        "localPanAfrican": "Wendawo ne-Pan-African"
+      }
+    },
+    "whatWeDo": {
+      "title": "Esikwenzayo",
+      "slides": {
+        "datastewardship": {
+          "title": "Ukuphatha Idatha Yezilimi Namasiko AseAfrika",
+          "description": "Sibambisana nemiphakathi ukubhala, ukuphatha, nokulondoloza izilimi namasiko aseAfrika ngezindlela ezihlonipha izimiso zendawo, umlando, nezinto ezibalulekile. Umsebenzi wethu uhlanganisa:",
+          "items": [
+            "Ulimi olukhulunywayo namasiko omlomo",
+            "Amasiko abonwayo nezenzo zansuku zonke",
+            "Ukubhala ifa lamasiko",
+            "Ukubhala izilimi eziningi ezindaweni ezahlukene zaseAfrika"
+          ]
+        },
+        "aiDataCollection": {
+          "title": "Ukuqoqa Idatha Ye-AI Egxile Emphakathini",
+          "description": "I-Magical Africa yakha futhi ihole izinqubo zokuqoqa idatha ezinobulungiswa eziholwa umphakathi ezisekela ukuthuthukiswa kwe-AI ehlanganisa izilimi zaseAfrika. Sigxila:",
+          "items": [
+            "Izwi, umbhalo, nedatha yezinhlobo ezahlukene",
+            "Izimo zokusetshenziswa kwangempela (imfundo, amasiko, ukuphila)",
+            "Ukubamba iqhaza okufanele nenkokhelo",
+            "Ukuphathwa kwedatha ngokusemthethweni"
+          ]
+        },
+        "education": {
+          "title": "Imisebenzi Yemfundo Nolwazi Lwamasiko",
+          "description": "Sisebenza ezikoleni, ezindaweni zokufunda, nasezindaweni zamasiko ezifundeni ezahlukene zaseAfrika ukusekela ukufunda ulimi, ukudlulisa ulwazi, nokushintshisana phakathi kwezizukulwane. Sigxila:",
+          "items": [
+            "Izindawo zokufunda zezilimi eziningi",
+            "Ulwazi lomlomo nokuxoxa izindaba",
+            "Imicimbi namasiko endabuko",
+            "Ukubamba iqhaza kwentsha nokukhiqiza"
+          ]
+        }
+      }
+    },
+    "principles": {
+      "title": "Izimiso Zethu",
+      "items": [
+        "I-Pan-African ngohlelo - Igxile endaweni, ixhunywe izwekazi lonke",
+        "Umphakathi Kuqala - Imiphakathi ingababambisani, hhayi imithombo yedatha",
+        "Ubulungiswa Ngokuzenzakalelayo - Imvume, ukulunga, nobumfihlo akuxoxiswana ngakho",
+        "Ukuhlonipha Amasiko - Ulimi namasiko kuyizinhlelo eziphilayo",
+        "Okuvulekile Nokubambisana - Sisekela ulwazi oluvulekile nokufunda ndawonye",
+        "I-AI Egxile Kubantu - Ubuchwepheshe kumele busebenzele abantu, hhayi ukubathatha"
+      ]
+    },
+    "ai": {
+      "title": "Indlela Esisebenzisa Ngayo I-AI",
+      "sections": {
+        "preparingData": {
+          "title": "Ukulungiselela Idatha Ye-AI Ehlanganisayo",
+          "items": [
+            "Ukubona inkulumo (ASR)",
+            "Umbhalo-uba-izwi (TTS)",
+            "Amathuluzi okufunda adinga izwi",
+            "Izinhlelo zemfundo namasiko zezinhlobo ezahlukene"
+          ]
+        },
+        "research": {
+          "title": "Ucwaningo Nokuhlola Ikhwalithi Okusizwa Yi-AI",
+          "items": [
+            "Siza ngezinqubo zokubhala nokuchaza",
+            "Thola izikala ekumelweni kwezilimi",
+            "Sekela ukuhlola ikhwalithi njalo kuhambisana nokuqinisekiswa ngabantu"
+          ]
+        },
+        "communityTools": {
+          "title": "Amathuluzi Aqhutshwa Umphakathi",
+          "items": [
+            "Izinsiza zokufunda ezinikwa amandla yi-AI",
+            "Amathuluzi emfundo adinga izwi nezinhlobo ezahlukene",
+            "Izinkundla zokubhala amasiko"
+          ]
+        }
+      }
+    },
+    "partners": {
+      "title": "Esisebenza Nabo",
+      "description": "Sibambisana e-Afrika yonke ne"
+    },
+    "team": {
+      "title": "Hlangana Nethimba",
+      "description": "Izingqondo ezinentshisekelo ngemuva kwe-Magical Africa",
+      "members": {
+        "gloria": {
+          "name": "Gloria Machoka",
+          "role": "Umsunguli Ohlanganyela"
+        },
+        "steve": {
+          "name": "Steve Kombo",
+          "role": "Umsunguli"
+        },
+        "joel": {
+          "name": "Joel Makori",
+          "role": "Umphathi Wokuxhumana Nomphakathi"
+        }
+      }
+    },
+    "cta": {
+      "title": "Sijoyine Ekulondolozeni Indaba YaseAfrika Yeqiniso",
+      "description": "I-Afrika ayidingi ukuchazwa ngabantu bangaphandle. Sizoxoxa indaba yethu ngokwethu ngesithunzi, ngokunemba, ngokukhiqiza, nangokuziqhenya.",
+      "buttons": {
+        "contribute": "Nikela Indaba Yakho",
+        "explore": "Hlola Imiphakathi",
+        "contact": "Xhumana Nathi"
+      }
+    }
+  }
+
+
 }

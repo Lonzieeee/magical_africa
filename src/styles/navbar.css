@@ -500,13 +500,13 @@
 }
 
 .lang-option.selected {
-  color: #4285f4;
+  color: rgb(181, 161, 145);
   font-weight: 500;
 }
 
 .lang-option i {
   font-size: 0.75rem;
-  color: #4285f4;
+  color: rgb(181, 161, 145);
 }
 
 /* Update lang-btn colors when navbar is scrolled or hovered */
@@ -517,7 +517,7 @@
 
 /* Hide lang dropdown on mobile */
 @media screen and (max-width: 768px) {
-  .lang-wrapper {
+  .lang-btn .fa-globe {
     display: none;
   }
 }
@@ -540,7 +540,7 @@
   }
 
   .hero-stuff{
-    padding-left:1rem ;
+   left:1rem ;
     padding-right: 1rem;
   }
 }

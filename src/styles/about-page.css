@@ -400,7 +400,7 @@ width: 40%;
 
 @media screen and (max-width:768px) {
   .mission-vision{
-    padding-left: 1rem;
+    left: 1rem;
     padding-right: 1rem;
   }
   .problem-page{

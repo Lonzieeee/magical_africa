@@ -99,5 +99,689 @@
       "description": "Filimbi na pembe za jadi zilizotengenezwa kwa vifaa vya asili."
     }
   }
-}
+},
+
+
+"sideMenu": {
+  "close": "Funga",
+  "search": "Tafuta",
+  "home": "Nyumbani",
+  "tribes": "Makabila",
+  "about": "Kuhusu",
+  "language": "Lugha",
+  "marketplace": "Soko"
+},
+
+
+"languages": {
+  "title": "Jifunze Lugha Zetu",
+  "description": "Afrika ni nyumbani kwa maelfu ya lugha, kila moja ikibeba historia, utambulisho, na utamaduni. Chunguza salamu na maneno ya kawaida kutoka jamii mbalimbali za Kiafrika na uunganishe na bara kupitia lugha.",
+  "items": {
+    "swahili": {
+      "name": "Kiswahili",
+      "tooltip": "Salamu ya kawaida ni 'Habari?', ikimaanisha 'Hali yako?'"
+    },
+    "zulu": {
+      "name": "Kizulu",
+      "tooltip": "Salamu ya kawaida ni 'Sawubona', ikimaanisha 'Ninakuona.'"
+    },
+    "yoruba": {
+      "name": "Kiyoruba",
+      "tooltip": "'Báwo ni?' ni salamu ya Kiyoruba ikimaanisha 'Habari yako?'"
+    },
+    "kikuyu": {
+      "name": "Kikuyu",
+      "tooltip": "Salamu ya kawaida ni 'Jambo', ikimaanisha 'Hujambo'"
+    },
+    "hausa": {
+      "name": "Kihausa",
+      "tooltip": "'Akkam?' inamaanisha 'Habari yako?' kwa Kihausa."
+    },
+    "shona": {
+      "name": "Kishona",
+      "tooltip": "'Mhoro' ni salamu ya Kishona ikimaanisha 'Hujambo.'"
+    },
+    "sukuma": {
+      "name": "Kisukuma",
+      "tooltip": "Salamu ya kawaida ni 'Moro', ikimaanisha 'Hujambo'"
+    },
+    "xhosa": {
+      "name": "Kixhosa",
+      "tooltip": "'Molo' ni salamu ya Kixhosa ikimaanisha 'Hujambo.'"
+    },
+    "maasai": {
+      "name": "Kimaasai",
+      "tooltip": "Salamu ya kawaida ni 'Sanu', ikimaanisha 'Hujambo'"
+    },
+    "igbo": {
+      "name": "Kiigbo",
+      "tooltip": "Salamu ya kawaida ni 'Kedu?', ikimaanisha 'Habari yako?'"
+    },
+    "lingala": {
+      "name": "Kilingala",
+      "tooltip": "Salamu ya kawaida ni 'Mbote', ikimaanisha 'Hujambo'"
+    },
+    "tsonga": {
+      "name": "Kitsonga",
+      "tooltip": "Salamu ya kawaida ni 'Avuxeni', ikimaanisha 'Habari ya asubuhi'"
+    },
+    "setswana": {
+      "name": "Kisetswana",
+      "tooltip": "Salamu ya kawaida ni 'Dumela', ikimaanisha 'Hujambo'"
+    },
+    "chichewa": {
+      "name": "Kichichewa",
+      "tooltip": "Salamu ya kawaida ni 'Moni', ikimaanisha 'Hujambo'"
+    }
+  }
+},
+
+
+"tribes": {
+  "title": "Chunguza Makabila Yetu",
+  "subtitle": "Safari kupitia makabila mbalimbali ya Afrika na mila za milele",
+  "viewAll": "Tazama Zote",
+  "oromo": {
+    "name": "Oromo",
+    "description": "Wenye asili ya Ethiopia, watu wa Oromo wanabeba urithi wa kiburi wa mila, umoja, na utambulisho wa kitamaduni. Wao ni kabila kubwa zaidi nchini, wakiunda takriban theluthi moja ya idadi ya watu wenye watu milioni 40."
+  },
+  "zulu": {
+    "name": "Zulu",
+    "description": "Kutoka Afrika Kusini, watu wa Zulu wanabeba urithi wenye nguvu wa mila, ustahimilivu, na utambulisho, wakiwakilisha zaidi ya watu milioni 11."
+  },
+  "igbo": {
+    "name": "Igbo",
+    "description": "Wenye asili ya Nigeria, watu wa Igbo ni moja ya makabila makubwa nchini, wakiwa na zaidi ya milioni 30, wanaojulikana kwa mila tajiri, ujasiriamali, na maadili imara ya kijamii."
+  }
+},
+
+
+"socialImpact": {
+  "title": "Athari Yetu ya Kijamii",
+  "description": "Tunaamini katika kurudisha kwa jamii zinazotutia moyo. Kupitia jukwaa letu, tunasaidia mafundi wa ndani, tunahifadhi urithi wa kitamaduni, na kuunda fursa za kiuchumi barani Afrika.",
+  "learnMore": "Jifunze Zaidi",
+  "readMore": "Soma Zaidi",
+  "artisans": {
+    "title": "Kusaidia Mafundi wa Ndani",
+    "description": "Tunaunganisha mafundi wa ndani moja kwa moja na masoko ya kimataifa, tukihakikisha malipo ya haki kwa kazi yao."
+  },
+  "heritage": {
+    "title": "Kuhifadhi Urithi",
+    "description": "Kumbukumbu yetu ya kidijitali inasaidia kuhifadhi lugha zilizo hatarini, mila, na desturi za kitamaduni kwa vizazi vijavyo."
+  }
+},
+
+
+"partners": {
+  "title": "Washirika Wetu",
+  "description": "Tunashirikiana na mashirika yanayoshiriki maono yetu ya kuhifadhi na kusherehekea utamaduni wa Kiafrika. Pamoja, tunafanya athari kubwa zaidi."
+},
+
+
+
+"faq": {
+  "title": "Maswali Yanayoulizwa Mara kwa Mara",
+  "items": {
+    "whatIs": {
+      "question": "Magical Africa ni nini?",
+      "answer": "Magical Africa ni jukwaa lililojitolea kuhifadhi, kusherehekea, na kushiriki urithi tajiri wa kitamaduni wa Afrika na ulimwengu. Tunaunganisha watu na tamaduni halisi za Kiafrika, lugha, mila, na jamii."
+    },
+    "contribute": {
+      "question": "Ninawezaje kuchangia Magical Africa?",
+      "answer": "Unaweza kuchangia kwa kushiriki hadithi, picha, au maarifa kuhusu jamii yako. Jiandikishe tu na utumie zana zetu za kuchangia kuongeza maudhui kuhusu mila, lugha, na urithi wa kabila lako."
+    },
+    "authentic": {
+      "question": "Je, maudhui kwenye Magical Africa ni halisi?",
+      "answer": "Ndiyo! Maudhui yetu yote yanatoka moja kwa moja kutoka kwa wanajamii na wataalamu wa kitamaduni. Tunafanya kazi kwa karibu na jamii za mitaa kuhakikisha usahihi na uhalisi katika kila kitu tunachoshiriki."
+    },
+    "learnLanguage": {
+      "question": "Ninawezaje kujifunza lugha ya Kiafrika kwenye jukwaa hili?",
+      "answer": "Tunatoa rasilimali za kujifunza lugha ikiwa ni pamoja na misemo ya kawaida, matamshi ya sauti kutoka kwa wazungumzaji wa asili, na muktadha wa kitamaduni kukusaidia kuelewa na kuthamini lugha za Kiafrika."
+    },
+    "purchase": {
+      "question": "Je, ninaweza kununua bidhaa halisi za Kiafrika?",
+      "answer": "Ndiyo! Soko letu linajumuisha bidhaa halisi za kitamaduni zilizotengenezwa kwa mkono na mafundi wa Kiafrika. Kila ununuzi unasaidia jamii za mitaa na kusaidia kuhifadhi ufundi wa jadi."
+    }
+  }
+},
+
+
+"contact": {
+  "description": "Una maswali kuhusu utamaduni wa Kiafrika, urithi, au makusanyo yetu? Wasiliana nasi na ugundue hadithi, mila, na ubunifu unaofanya Afrika kuwa ya kipekee. Tungependa kuungana nawe na kushiriki uchawi wa kweli wa Afrika.",
+  "button": "Wasiliana Nasi"
+},
+
+
+"footer": {
+  "tagline": "Mahali ambapo Hadithi Halisi ya Afrika inaishi",
+  "quickLinks": "Viungo vya Haraka",
+  "links": {
+    "home": "Nyumbani",
+    "tribes": "Makabila",
+    "languages": "Lugha",
+    "about": "Kuhusu",
+    "marketplace": "Soko",
+    "contact": "Wasiliana"
+  },
+  "terms": "Masharti ya Matumizi",
+  "privacy": "Sera ya Faragha",
+  "cookiePolicy": "Sera ya Kuki",
+  "cookieSettings": "Mipangilio ya Kuki",
+  "copyright": "© 2026 Magical.africa. Haki zote zimehifadhiwa"
+},
+
+
+
+
+"auth": {
+  "signIn": "Ingia",
+  "signUp": "Jisajili",
+  "email": "Barua pepe",
+  "emailPlaceholder": "barua@mfano.com",
+  "enterEmail": "Ingiza barua pepe yako",
+  "password": "Neno la siri",
+  "forgotPassword": "Umesahau Neno la Siri?",
+  "required": "Inahitajika",
+  "continueWithGoogle": "Endelea na Google",
+  "orBecomeMember": "Au Kuwa Mwanachama",
+  "joinText": "Jiunge na",
+  "joinTextEnd": "na ugundue utamaduni, urithi, hadithi, na mila za Afrika.",
+  "journeyStarts": "Safari Yako Inaanza Hapa",
+  "letsGetStarted": "Tuanze",
+  "tribes": "Makabila",
+  "firstName": "Jina la Kwanza",
+  "firstNamePlaceholder": "Ingiza jina lako la kwanza",
+  "lastName": "Jina la Pili",
+  "lastNamePlaceholder": "Ingiza jina lako la mwisho",
+  "country": "Nchi",
+  "countryPlaceholder": "Ingiza nchi yako",
+  "createAccount": "Fungua Akaunti",
+  "signInSuccess": "Umeingia kwa mafanikio!",
+  "googleSuccess": "Umeingia na Google kwa mafanikio!",
+  "accountCreated": "Akaunti imeundwa kwa mafanikio!",
+  "cards": {
+    "explore": {
+      "title": "Chunguza Afrika Halisi",
+      "description": "Gundua tamaduni tajiri, mila, na hadithi kutoka bara zima mahali pamoja."
+    },
+    "connect": {
+      "title": "Unganisha na Urithi",
+      "description": "Pata uzoefu wa Afrika kupitia watu wake, makabila, na mila za milele, zilizochaguliwa kwa uangalifu."
+    },
+    "travel": {
+      "title": "Safiri Zaidi ya Kawaida",
+      "description": "Fungua maeneo ya kipekee na uzoefu wa kitamaduni unaozidi njia ya kawaida ya watalii."
+    }
+  },
+  "errors": {
+    "noAccount": "Hakuna akaunti iliyopatikana na barua pepe hii",
+    "wrongPassword": "Neno la siri si sahihi",
+    "invalidCredential": "Barua pepe au neno la siri si sahihi",
+    "passwordLength": "Neno la siri lazima liwe na angalau herufi 6",
+    "emailInUse": "Barua pepe hii tayari imesajiliwa",
+    "invalidEmail": "Tafadhali ingiza anwani sahihi ya barua pepe",
+    "generic": "Hitilafu: "
+  }
+},
+
+
+
+
+"tribesPage": {
+  "hero": {
+    "title": "Chunguza Jamii za Kiafrika",
+    "subtitle": "Gundua utofauti tajiri wa tamaduni, mila, na urithi wa Afrika barani kote."
+  },
+  "section": {
+    "title": "Jamii za Kiafrika",
+    "subtitle": "Chunguza tamaduni mbalimbali, mila, na hadithi za jamii za Kiafrika kutoka barani kote."
+  },
+  "language": "Lugha",
+  "exploreCulture": "Chunguza Utamaduni",
+  "contribute": {
+    "title": "Je, Jamii Yako Haipo?",
+    "description": "Tusaidie kuhifadhi na kushiriki utamaduni wako. Ongeza hadithi, mila, lugha, na urithi wa kabila lako kwa Magical.Africa.",
+    "button": "Changia Hadithi"
+  },
+  "communities": {
+    "maasai": {
+      "name": "Maasai",
+      "location": "Kenya, Tanzania",
+      "population": "Watu milioni 1.5+",
+      "language": "Kimaa",
+      "desc": "Wapiganaji wa kuhamahama wanaojulikana kwa desturi na mavazi ya kipekee."
+    },
+    "ashanti": {
+      "name": "Ashanti",
+      "location": "Ghana",
+      "population": "Watu milioni 11+",
+      "language": "Kitwi",
+      "desc": "Wanaojulikana kwa ufundi wao wa dhahabu na Himaya yenye nguvu ya Ashanti."
+    },
+    "hausa": {
+      "name": "Hausa",
+      "location": "Nigeria, Niger",
+      "population": "Watu milioni 80+",
+      "language": "Kihausa",
+      "desc": "Moja ya makabila makubwa Afrika, wanaojulikana kwa biashara na uchuuzi."
+    },
+    "zulu": {
+      "name": "Zulu",
+      "location": "Afrika Kusini",
+      "population": "Watu milioni 12+",
+      "language": "Kizulu",
+      "desc": "Wanaojulikana kwa utamaduni wao wa wapiganaji, ushonaji wa shanga, na Ufalme maarufu wa Zulu."
+    },
+    "yoruba": {
+      "name": "Yoruba",
+      "location": "Nigeria, Benin",
+      "population": "Watu milioni 45+",
+      "language": "Kiyoruba",
+      "desc": "Wenye utajiri wa mythology, sanaa, na miji ya kale kama Ife na Oyo."
+    },
+    "kikuyu": {
+      "name": "Kikuyu",
+      "location": "Kenya",
+      "population": "Watu milioni 8+",
+      "language": "Kikuyu",
+      "desc": "Kabila kubwa zaidi Kenya, wanaojulikana kwa kilimo na biashara."
+    },
+    "igbo": {
+      "name": "Igbo",
+      "location": "Nigeria",
+      "population": "Watu milioni 45+",
+      "language": "Kiigbo",
+      "desc": "Wanaojulikana kwa roho yao ya ujasiriamali na mila tajiri za kisanaa kwa vizazi."
+    },
+    "amhara": {
+      "name": "Amhara",
+      "location": "Ethiopia",
+      "population": "Watu milioni 32+",
+      "language": "Kiamhari",
+      "desc": "Kundi lenye nguvu kihistoria Ethiopia lenye urithi wa Kikristo wa kale."
+    },
+    "berber": {
+      "name": "Berber",
+      "location": "Morocco, Algeria, Libya",
+      "population": "Watu milioni 30+",
+      "language": "Kitamazight",
+      "desc": "Watu wa asili wa Afrika Kaskazini wenye mila na lugha za kale."
+    },
+    "swahili": {
+      "name": "Swahili",
+      "location": "Kenya, Tanzania, Zanzibar",
+      "population": "Watu milioni 2+",
+      "language": "Kiswahili",
+      "desc": "Watu wa pwani wanaojulikana kwa biashara yao ya baharini na mchanganyiko wa kitamaduni kwa karne."
+    },
+    "wolof": {
+      "name": "Wolof",
+      "location": "Senegal, Gambia",
+      "population": "Watu milioni 6+",
+      "language": "Kiwolof",
+      "desc": "Kabila kubwa Senegal linalojulikana kwa ukarimu na umoja wao."
+    },
+    "fulani": {
+      "name": "Fulani",
+      "location": "Afrika Magharibi (nchi 20+)",
+      "population": "Watu milioni 40+",
+      "language": "Fulfulde",
+      "desc": "Wafugaji wa kuhamahama waliosambaa Afrika Magharibi wenye mila za kipekee."
+    }
+  }
+},
+
+
+
+"searchSection": {
+  "title": "Tafuta Kabila Lako",
+  "searchPlaceholder": "Tafuta makabila",
+  "allRegions": "Mikoa Yote",
+  "allLanguages": "Lugha Zote",
+  "communitiesFound": "jamii zimepatikana",
+  "showMap": "Onyesha Ramani",
+  "hideMap": "Ficha Ramani",
+  "addCommunity": "Ongeza Jamii Yako",
+  "communitiesLabel": "Jamii",
+  "regions": {
+    "north": "Afrika Kaskazini",
+    "east": "Afrika Mashariki",
+    "west": "Afrika Magharibi",
+    "central": "Afrika ya Kati",
+    "southern": "Afrika Kusini"
+  }
+},
+
+
+
+"maasai": {
+  "hero": {
+    "title": "Maasai",
+    "subtitle": "Mashujaa wa Afrika Mashariki"
+  },
+  "overview": {
+    "title": "Muhtasari wa",
+    "titleSpan": "Jamii",
+    "location": "ENEO",
+    "population": "IDADI YA WATU",
+    "language": "LUGHA",
+    "region": "MKOA",
+    "regionValue": "Afrika Mashariki"
+  },
+  "tabs": {
+    "overview": "Muhtasari",
+    "language": "Lugha",
+    "culture": "Utamaduni na Mila",
+    "leaders": "Viongozi",
+    "nature": "Mazingira na Wanyamapori",
+    "antiques": "Vitu vya Kale"
+  },
+  "about": {
+    "title": "Kuhusu Jamii",
+    "history": {
+      "title": "Historia na Uhamiaji",
+      "p1": "Wamaasai ni kabila la Kiniloti wanaoishi kaskazini, kati na kusini mwa Kenya na kaskazini mwa Tanzania. Wao ni miongoni mwa watu wa ndani wanaojulikana sana kimataifa kwa sababu ya makazi yao karibu na mbuga nyingi za wanyama za Maziwa Makuu ya Afrika na desturi na mavazi yao ya kipekee.",
+      "p2": "Wamaasai wanazungumza lugha ya Kimaa, mwanachama wa familia ya lugha za Kiniloti inayohusiana na Dinka na Nuer. Wanajulikana kwa utamaduni wao wa kipekee, desturi, na mavazi, pamoja na sifa yao kama mashujaa wakali na wafugaji wa ng'ombe. Wamaasai wamehifadhi sehemu kubwa ya mtindo wao wa maisha wa jadi licha ya shinikizo kutoka kwa maendeleo ya kisasa."
+    },
+    "identity": {
+      "title": "Utambulisho na Mtindo wa Maisha",
+      "description": "Wamaasai ni wafugaji nusu-wahamaji ambao kijadi wametegemea ng'ombe, kondoo, na mbuzi kwa riziki yao. Ng'ombe wana umuhimu maalum katika utamaduni wa Kimaasai, wakiwakilisha utajiri, hadhi, na riziki. Wamaasai wanapima utajiri wa mtu kwa idadi ya ng'ombe na watoto alio nao."
+    }
+  },
+  "language": {
+    "title": "Lugha ya",
+    "titleSpan": "Kimaa",
+    "description": "Lugha ya Kimaa ni lugha ya jadi ya watu wa Kimaasai wa Afrika Mashariki. Inazungumzwa hasa nchini Kenya na kaskazini mwa Tanzania, na ni ya familia ya lugha za Kiniloti. Kimaa ni zaidi ya njia ya mawasiliano — ina jukumu kuu katika kuhifadhi utamaduni, utambulisho, na mila za mdomo za Kimaasai.",
+    "learnButton": "Jifunze Lugha",
+    "listenButton": "Sikiliza Sauti",
+    "phrasesTitle": "Misemo ya Kawaida na",
+    "proverbsSpan": "Methali",
+    "phrases": {
+      "sopa": "Hujambo (kwa mtu mmoja)",
+      "serian": "Hujambo (kwa watu wengi)",
+      "ashoOleng": "Asante sana",
+      "iko": "Ndiyo",
+      "takwenya": "Kwaheri"
+    },
+    "proverbs": {
+      "enkitoria": "Mungu halali",
+      "meidim": "Heshima huzaa heshima",
+      "meishoo": "Mtoto wa mtu ni wako"
+    },
+    "audio": {
+      "title": "Sikiliza Salamu za Jadi",
+      "description": "Jifunze matamshi halisi ya Kimaa moja kwa moja kutoka kwa wazungumzaji wa asili, ukihifadhi sauti za kweli, mdundo, na maana ya kitamaduni ya lugha ya Kimaasai.",
+      "playButton": "Cheza Video"
+    }
+  },
+  "culture": {
+    "clothing": {
+      "title": "Mavazi na Mapambo ya Jadi",
+      "description": "Wamaasai wanajulikana kwa mavazi yao ya kipekee ya rangi nyekundu yanayoitwa \"shuka.\" Nyekundu ni rangi muhimu zaidi, ikiashiria ujasiri, umoja, na damu. Wanaume na wanawake wote huvaa vito vya shanga vilivyopambwa, na rangi na mifumo tofauti ikionyesha umri, hali ya ndoa, na nafasi ya kijamii.",
+      "button": "Pata Maana za Rangi"
+    },
+    "ceremoniesTitle": "Sherehe na Ibada za Kipindi",
+    "ceremonies": {
+      "eunoto": {
+        "title": "Eunoto",
+        "desc": "Sherehe ya kubalehe ambapo mashujaa wanabadilika kuwa wazee wadogo"
+      },
+      "enkipaata": {
+        "title": "Enkipaata",
+        "desc": "Sherehe ya kabla ya tohara kwa vijana wa kiume"
+      },
+      "emuratare": {
+        "title": "Emuratare",
+        "desc": "Sherehe ya tohara inayoashiria mpito kwa hali ya ushujaa"
+      },
+      "enkang": {
+        "title": "Enkang oo-nkiri",
+        "desc": "Sherehe za ndoa zenye baraka za jadi"
+      },
+      "olngesherr": {
+        "title": "Olngesherr",
+        "desc": "Sherehe za ndoa zenye baraka za jadi"
+      }
+    },
+    "foodsTitle": "Vyakula na Upishi",
+    "foods": {
+      "nyamaChoma": {
+        "title": "Nyama Choma",
+        "desc": "Nyama iliyochomwa, hasa mbuzi na ng'ombe"
+      },
+      "olpurda": {
+        "title": "Olpurda",
+        "desc": "Supu iliyotengenezwa kwa nyama, mifupa, na mimea"
+      },
+      "emuroto": {
+        "title": "Emuroto",
+        "desc": "Vyakula vya nyama vya sherehe"
+      }
+    }
+  },
+  "leaders": {
+    "title": "Viongozi Mashuhuri wa Zamani na Sasa",
+    "laibonLenana": {
+      "name": "Laibon Lenana",
+      "desc": "Kiongozi wa kiroho wa Kimaasai mwenye nguvu aliyecheza jukumu muhimu wakati wa ukoloni wa Waingereza."
+    },
+    "olonana": {
+      "name": "Olonana",
+      "desc": "Chifu na Laibon aliyejadili mikataba kulinda ardhi za Kimaasai."
+    },
+    "mbatian": {
+      "name": "Mbatian",
+      "desc": "Laibon mashuhuri zaidi, anayejulikana kwa unabii wake na kuunganisha Wamaasai."
+    },
+    "oleSaibul": {
+      "name": "Ole Saibul",
+      "desc": "Mwanasiasa mashuhuri wa Kimaasai na mtetezi wa haki za wafugaji nchini Kenya."
+    },
+    "oleNtimama": {
+      "name": "William Ole Ntimama",
+      "desc": "Mwanasiasa wa Kenya aliyetetea haki za ardhi za Kimaasai kwa miongo kadhaa."
+    },
+    "oleLenku": {
+      "name": "Joseph Ole Lenku",
+      "desc": "Gavana wa sasa wa Kaunti ya Kajiado na aliyekuwa Waziri wa Baraza la Mawaziri."
+    }
+  },
+  "nature": {
+    "title": "Uhusiano na Mazingira",
+    "description": "Wamaasai wameishi kwa amani na wanyamapori kwa karne nyingi, wakishiriki mfumo huo huo wa ikolojia na simba, tembo, na wanyamapori wengine. Mtindo wao wa maisha wa ufugaji na imani za jadi umesaidia kuhifadhi maeneo makubwa ya nyika.",
+    "animalsTitle": "Wanyama Watakatifu na Imani",
+    "animals": {
+      "cattle": {
+        "name": "Ng'ombe",
+        "desc": "Zawadi takatifu kutoka kwa Enkai (Mungu), muhimu kwa utambulisho na kuishi kwa Wamaasai"
+      },
+      "lions": {
+        "name": "Simba",
+        "desc": "Wanaheshimiwa kama ishara za ujasiri; kihistoria waliwindwa na mashujaa katika ibada za kubalehe"
+      },
+      "elephants": {
+        "name": "Tembo",
+        "desc": "Wanaheshimiwa kwa hekima na nguvu; wanalindwa kupitia uhifadhi wa jadi"
+      },
+      "giraffes": {
+        "name": "Twiga",
+        "desc": "Wanaonekana kama viumbe wavuri wanaoshiriki maeneo yao ya malisho"
+      }
+    }
+  },
+  "antiques": {
+    "title": "Vifaa vya Jadi na Vitu vya Kale",
+    "description": "Watu wa Kimaasai wametengeneza zana, silaha, na mapambo ya kipekee kwa karne nyingi. Vifaa hivi vinawakilisha urithi wao tajiri wa kitamaduni na vinaendelea kuwa ishara za utambulisho na mila.",
+    "button": "Tembelea Soko",
+    "rungu": {
+      "name": "Rungu (Kijiti cha Kutupa)",
+      "desc": "Kijiti cha mbao cha jadi kinachotumiwa na mashujaa kwa ulinzi na uwindaji"
+    },
+    "shuka": {
+      "name": "Shuka (Nguo Nyekundu)",
+      "desc": "Nguo nyekundu ya alama inayovaliwa kama mavazi ya jadi"
+    },
+    "beadedJewelry": {
+      "name": "Vito vya Shanga",
+      "desc": "Kazi ya shanga ngumu inayowakilisha hadhi, umri, na utambulisho"
+    },
+    "spear": {
+      "name": "Mkuki (Enkudi)",
+      "desc": "Ishara ya uanaume na silaha kuu ya mashujaa wa Kimaasai"
+    },
+    "shield": {
+      "name": "Ngao (Olongu)",
+      "desc": "Ngao za mviringo zilizopakwa rangi na mifumo ya kipekee inayowakilisha utambulisho wa ukoo"
+    },
+    "calabash": {
+      "name": "Kibuyu (Enkukuri)",
+      "desc": "Vyombo vya kibuyu vinavyotumika kuhifadhi mchanganyiko wa maziwa na damu"
+    }
+  },
+  "preserve": {
+    "title": "Tusaidie Kuhifadhi Urithi wa Kimaasai",
+    "description": "Je, una hadithi, picha, au maarifa ya kushiriki kuhusu utamaduni wa Kimaasai?",
+    "button": "Changia kwa Ukurasa Huu"
+  }
+},
+
+
+
+
+
+
+
+
+
+"about": {
+    "hero": {
+      "title": "Kuhusu Magical Africa",
+      "tagline": "Kuhifadhi Lugha za Kiafrika. Kuwawezesha jamii. Kujenga mustakabali."
+    },
+    "background": {
+      "sectionTitle": "Historia",
+      "sectionTitleHighlight": "Yetu",
+      "paragraph1": "Magical.africa ni shirika la Ki-Afrika linalofanya kazi katika makutano ya lugha za Kiafrika, utamaduni, elimu, na teknolojia. Tunajitoa kusaidia matumizi endelevu, ukuaji, na uendelevu wa lugha za jamii kote barani.",
+      "paragraph2": "Lugha za Kiafrika ni muhimu kwa elimu, maisha, na mshikamano wa kijamii, lakini nyingi bado haziwakilishwi vya kutosha katika mifumo rasmi na nafasi za kidijitali. Magical Africa inashughulikia pengo hili kupitia mbinu inayozingatia jamii na ushirikiano, inayowaleta pamoja wamiliki wa maarifa ya ndani, waelimishaji, watafiti, na washirika wa teknolojia.",
+      "paragraph3": "Kwa kutumia teknolojia kama zana ya kuwezesha si mbadala tunasaidia kuunganisha lugha za Kiafrika na maarifa ya kitamaduni katika mifumo ya kisasa kwa njia za kimaadili, shirikishi, na endelevu."
+    },
+    "approach": {
+      "title": "Mbinu Yetu",
+      "description": "Tunachanganya utamaduni, teknolojia, na elimu kuwawezesha jamii na kuhifadhi urithi wa Kiafrika.",
+      "items": {
+        "communityOwnership": "Umiliki wa Jamii",
+        "ethicalStewardship": "Usimamizi wa Kimaadili",
+        "sustainableImpact": "Athari Endelevu",
+        "localPanAfrican": "Ya Ndani na ya Ki-Afrika"
+      }
+    },
+    "whatWeDo": {
+      "title": "Tunachofanya",
+      "slides": {
+        "datastewardship": {
+          "title": "Usimamizi wa Data ya Lugha na Utamaduni wa Kiafrika",
+          "description": "Tunashirikiana na jamii kuandika, kusimamia, na kulinda lugha na mila za Kiafrika kwa njia zinazoheshimu kanuni za ndani, historia, na vipaumbele. Kazi yetu inajumuisha:",
+          "items": [
+            "Lugha ya mazungumzo na mila za mdomo",
+            "Utamaduni wa kuona na mazoea ya kila siku",
+            "Uandishi wa urithi wa kitamaduni",
+            "Uandishi wa lugha nyingi katika mazingira ya Kiafrika"
+          ]
+        },
+        "aiDataCollection": {
+          "title": "Ukusanyaji wa Data ya AI Inayozingatia Jamii",
+          "description": "Magical Africa inaunda na kuongoza michakato ya ukusanyaji wa data ya kimaadili inayoendeshwa na jamii ambayo inasaidia maendeleo ya AI shirikishi kwa lugha za Kiafrika. Tunazingatia:",
+          "items": [
+            "Sauti, maandishi, na data ya aina nyingi",
+            "Mazingira ya matumizi halisi (elimu, utamaduni, maisha)",
+            "Ushiriki na fidia ya haki",
+            "Usimamizi wa data wenye uwazi"
+          ]
+        },
+        "education": {
+          "title": "Miradi ya Elimu na Maarifa ya Kitamaduni",
+          "description": "Tunafanya kazi katika shule, nafasi za kujifunza, na mazingira ya kitamaduni kote katika mikoa tofauti ya Afrika kusaidia kujifunza lugha, uhamishaji wa maarifa, na kubadilishana kati ya vizazi. Tunazingatia:",
+          "items": [
+            "Mazingira ya kujifunza ya lugha nyingi",
+            "Maarifa ya mdomo na hadithi",
+            "Matukio na mila za kitamaduni",
+            "Ushiriki wa vijana na ubunifu"
+          ]
+        }
+      }
+    },
+    "principles": {
+      "title": "Kanuni Zetu",
+      "items": [
+        "Ya Ki-Afrika kwa muundo - Imejikita ndani, imeunganishwa bara zima",
+        "Jamii Kwanza - Jamii ni washirikiano, si vyanzo vya data",
+        "Kimaadili kwa Msingi - Ridhaa, usawa, na faragha hazijadiliki",
+        "Heshima ya Kitamaduni - Lugha na utamaduni ni mifumo hai",
+        "Wazi na Shirikishi - Tunaunga mkono maarifa wazi na kujifunza pamoja",
+        "AI Inayozingatia Binadamu - Teknolojia lazima ihudumie watu, si kuwatoa rasilimali"
+      ]
+    },
+    "ai": {
+      "title": "Jinsi Tunavyotumia AI",
+      "sections": {
+        "preparingData": {
+          "title": "Kuandaa Data kwa AI Shirikishi",
+          "items": [
+            "Utambuzi wa hotuba (ASR)",
+            "Maandishi-kwa-sauti (TTS)",
+            "Zana za kujifunza za sauti",
+            "Programu za elimu na utamaduni za aina nyingi"
+          ]
+        },
+        "research": {
+          "title": "Utafiti na Ukaguzi wa Ubora Unaosaidiwa na AI",
+          "items": [
+            "Kusaidia na mtiririko wa kunakili na kuandika maelezo",
+            "Kutambua mapungufu katika uwakilishi wa lugha",
+            "Kusaidia ukaguzi wa ubora daima ukiambatana na uthibitisho wa binadamu"
+          ]
+        },
+        "communityTools": {
+          "title": "Zana Zinazoendeshwa na Jamii",
+          "items": [
+            "Rasilimali za kujifunza zinazowezeshwa na AI",
+            "Zana za elimu za sauti na aina nyingi",
+            "Majukwaa ya uandishi wa kitamaduni"
+          ]
+        }
+      }
+    },
+    "partners": {
+      "title": "Tunafanya Kazi na Nani",
+      "description": "Tunashirikiana kote Afrika na"
+    },
+    "team": {
+      "title": "Kutana na Timu",
+      "description": "Akili zenye shauku nyuma ya Magical Africa",
+      "members": {
+        "gloria": {
+          "name": "Gloria Machoka",
+          "role": "Mwanzilishi Mwenza"
+        },
+        "steve": {
+          "name": "Steve Kombo",
+          "role": "Mwanzilishi"
+        },
+        "joel": {
+          "name": "Joel Makori",
+          "role": "Meneja wa Ushirikiano wa Jamii"
+        }
+      }
+    },
+    "cta": {
+      "title": "Jiunge Nasi Kuhifadhi Hadithi Halisi ya Kiafrika",
+      "description": "Afrika haihitaji kuelezwa na wageni. Tutasimulia hadithi yetu wenyewe kwa heshima, usahihi, ubunifu, na kiburi.",
+      "buttons": {
+        "contribute": "Changia Hadithi Yako",
+        "explore": "Chunguza Jamii",
+        "contact": "Wasiliana Nasi"
+      }
+    }
+  }
+
 }

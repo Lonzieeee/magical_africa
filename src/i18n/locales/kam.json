@@ -100,5 +100,626 @@
       "description": "Filimbi na pembe sya tene syaũmbĩkĩwe na vĩndu vya kawaĩda."
     }
   }
-}
+},
+
+
+"sideMenu": {
+  "close": "Inga",
+  "search": "Kũũnda",
+  "home": "Mũsyĩ",
+  "tribes": "Mĩsyĩ",
+  "about": "Ũhoro",
+  "language": "Lũthĩmo",
+  "marketplace": "Ndũka"
+},
+
+
+"languages": {
+  "title": "Ĩthoma Lũthĩmo Lwĩtũ",
+  "description": "Afilika nĩ mũsyĩ wa lũthĩmo ngili nyingi, ĩla yonthe yĩkũvata ũhoro wa tene, ũmanyĩkĩlĩlyo, na mĩtũũo. Manya maamũkyo na maũndũ a kawaĩda kuuma mĩsyĩ ya Kĩafilika na ũkolanĩsye na kontinent kũtũmĩa lũthĩmo.",
+  "items": {
+    "swahili": {
+      "name": "Kiswahili",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Habari?', yĩtiĩwe 'Ũ mwĩa ata?'"
+    },
+    "zulu": {
+      "name": "Kizulu",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Sawubona', yĩtiĩwe 'Ngũkũona.'"
+    },
+    "yoruba": {
+      "name": "Kiyoruba",
+      "tooltip": "'Báwo ni?' nĩ maamũkyo a Kiyoruba yĩtiĩwe 'Ũ mwĩa ata?'"
+    },
+    "kikuyu": {
+      "name": "Kikuyu",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Jambo', yĩtiĩwe 'Nĩ wega'"
+    },
+    "hausa": {
+      "name": "Kihausa",
+      "tooltip": "'Akkam?' yĩtiĩwe 'Ũ mwĩa ata?' kwa Kihausa."
+    },
+    "shona": {
+      "name": "Kishona",
+      "tooltip": "'Mhoro' nĩ maamũkyo a Kishona yĩtiĩwe 'Nĩ wega.'"
+    },
+    "sukuma": {
+      "name": "Kisukuma",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Moro', yĩtiĩwe 'Nĩ wega'"
+    },
+    "xhosa": {
+      "name": "Kixhosa",
+      "tooltip": "'Molo' nĩ maamũkyo a Kixhosa yĩtiĩwe 'Nĩ wega.'"
+    },
+    "maasai": {
+      "name": "Kimaasai",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Sanu', yĩtiĩwe 'Nĩ wega'"
+    },
+    "igbo": {
+      "name": "Kiigbo",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Kedu?', yĩtiĩwe 'Ũ mwĩa ata?'"
+    },
+    "lingala": {
+      "name": "Kilingala",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Mbote', yĩtiĩwe 'Nĩ wega'"
+    },
+    "tsonga": {
+      "name": "Kitsonga",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Avuxeni', yĩtiĩwe 'Ũmũthĩ mwanya'"
+    },
+    "setswana": {
+      "name": "Kisetswana",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Dumela', yĩtiĩwe 'Nĩ wega'"
+    },
+    "chichewa": {
+      "name": "Kichichewa",
+      "tooltip": "Maamũkyo a kawaĩda nĩ 'Moni', yĩtiĩwe 'Nĩ wega'"
+    }
+  }
+},
+
+
+"tribes": {
+  "title": "Manya Mĩsyĩ Yĩtũ",
+  "subtitle": "Thĩĩna kũtĩĩa mĩsyĩ ya Afilika ĩla ĩkũvathũkana na mĩtũũo ya tene",
+  "viewAll": "Ona Syothe",
+  "oromo": {
+    "name": "Oromo",
+    "description": "Andũ a Oromo kuuma Ethiopia, makũvata ũtaũo wa kũĩyumĩa wa mĩtũũo, ũmwe, na ũmanyĩkĩlĩlyo wa mĩtũũo. Nĩmo mũsyĩ mũnene mũno ũsũ, makũũmba thĩka ĩmwe kũmĩĩna ĩtatũ ya andũ na andũ milioni 40."
+  },
+  "zulu": {
+    "name": "Zulu",
+    "description": "Kuuma South Africa, andũ a Zulu makũvata ũtaũo wa ngũvũ wa mĩtũũo, kũũmĩĩĩlĩla, na ũmanyĩkĩlĩlyo, makũĩmĩĩa andũ milioni 11."
+  },
+  "igbo": {
+    "name": "Igbo",
+    "description": "Andũ a Igbo kuuma Nigeria, nĩmo ĩmwe ya mĩsyĩ mĩnene mũno ũsũ, makwata andũ milioni 30, mamanyĩkĩĩte nĩ mĩtũũo yoo mĩnene, ũcũũĩanĩĩo, na maũndũ ma kĩũngano."
+  }
+},
+
+
+
+"socialImpact": {
+  "title": "Mũtũũo Wĩtũ kwa Andũ",
+  "description": "Twĩtĩkĩla kũvũnĩsya mĩsyĩ ĩla yĩtũsundasya. Kũtũmĩa ndandano yĩtũ, twĩkwatasya afundi a kĩũngano, twĩsũvĩla ũtaũo wa mĩtũũo, na tũũmbĩa maũndũ ma mbesa kwa Afilika yonthe.",
+  "learnMore": "Manya Vonthe",
+  "readMore": "Soma Vonthe",
+  "artisans": {
+    "title": "Kũkwatasya Afundi a Kĩũngano",
+    "description": "Twĩkolanĩsya afundi a kĩũngano na masoko a nthi yonthe, twĩkwĩĩkĩĩĩa makwatĩte mbesa sya ũkĩĩ kwa wĩĩa woo."
+  },
+  "heritage": {
+    "title": "Kũsũvĩla Ũtaũo",
+    "description": "Kĩvathĩko kyĩtũ kya digital kĩkwatasya kũsũvĩla lũthĩmo lũla lũlĩ ũtaũnĩ, mĩtũũo, na maũndũ ma kĩmĩtũũo kwa kĩvalo kĩla kĩũka."
+  }
+},
+
+
+"partners": {
+  "title": "Ashirika Aitũ",
+  "description": "Twĩĩanĩsya na makundi ala makwatanĩĩte na maũndũ maitũ ma kũsũvĩla na kũseuvya mĩtũũo ya Kĩafilika. Amwe, twĩkũũmba mũtũũo mũnene."
+},
+
+
+
+"faq": {
+  "title": "Maũvũĩso Ala Mavũĩawa Mũno",
+  "items": {
+    "whatIs": {
+      "question": "Magical Africa nĩ kĩĩ?",
+      "answer": "Magical Africa nĩ ndandano ĩla yĩĩtĩkĩĩĩte kũsũvĩla, kũnanĩa, na kũana ũtaũo wa mĩtũũo wa Afilika na nthi yonthe. Twĩkolanĩsya andũ na mĩtũũo ya Kĩafilika ya kweli, lũthĩmo, mĩtũũo, na mĩsyĩ."
+    },
+    "contribute": {
+      "question": "Nĩngĩtũma ata kũkwatasya Magical Africa?",
+      "answer": "Ũtũmĩka kũkwatasya kũtũmĩa ngewa, sĩmũ, kana ũmanyi kuhusu mũsyĩ waku. Ĩandĩkĩthya na ũtũmĩe ifaa syĩtũ sya kũkwatasya kũongela maũndũ kuhusu mĩtũũo, lũthĩmo, na ũtaũo wa mũsyĩ waku."
+    },
+    "authentic": {
+      "question": "Maũndũ ala alĩ Magical Africa nĩ a kweli?",
+      "answer": "Ĩĩ! Maũndũ aitũ onthe makũmĩwa kuuma kwa andũ a mĩsyĩ na afundi a mĩtũũo. Twĩĩkĩla ũthyũka na mĩsyĩ ya kĩũngano kũĩkĩĩĩa maũndũ onthe ala twĩanasya nĩ a kweli."
+    },
+    "learnLanguage": {
+      "question": "Nĩngĩĩthoma ata lũthĩmo lwa Kĩafilika kũndandano ĩno?",
+      "answer": "Twĩkũasya vĩtũ vya kũĩthomya lũthĩmo vĩkwatĩte maũndũ a kawaĩda, kũvova kuuma kwa andũ a lũthĩmo, na maũndũ a mĩtũũo kũkũkwatasya ũmanye na ũmĩe lũthĩmo lwa Kĩafilika."
+    },
+    "purchase": {
+      "question": "Nĩngĩtũma kũũa vĩndu vya Kĩafilika vya kweli?",
+      "answer": "Ĩĩ! Ndũka yĩtũ ĩna vĩndu vya mĩtũũo vya kweli vyaũmbĩkĩwe nĩ afundi a Kĩafilika. Kũũa konthe kũkwatasya mĩsyĩ ya kĩũngano na kũkwatasya kũsũvĩla wĩĩa wa tene."
+    }
+  }
+},
+
+
+"contact": {
+  "description": "Ũna maũvũĩso kuhusu mĩtũũo ya Kĩafilika, ũtaũo, kana vĩndu vyĩtũ? Tũkũũĩe na ũmanye ngewa, mĩtũũo, na ũũmbi ũla ũtũmĩte Afilika ĩve ĩmwe. Twĩendete kũkolanĩsya nawe na kũana ũthaithu wa kweli wa Afilika.",
+  "button": "Tũkũũĩe"
+},
+
+
+
+"footer": {
+  "tagline": "Vala Ngewa ya Kweli ya Afilika Yĩkalaa",
+  "quickLinks": "Maunganĩo a Mbĩũ",
+  "links": {
+    "home": "Mũsyĩ",
+    "tribes": "Mĩsyĩ",
+    "languages": "Lũthĩmo",
+    "about": "Ũhoro",
+    "marketplace": "Ndũka",
+    "contact": "Tũkũũĩe"
+  },
+  "terms": "Maũndũ a Kũtũmĩa",
+  "privacy": "Maũndũ a Ũsĩlĩ",
+  "cookiePolicy": "Maũndũ a Kuki",
+  "cookieSettings": "Mĩĩko ya Kuki",
+  "copyright": "© 2026 Magical.africa. Wĩathi wonthe nĩũsũvĩĩtwe"
+},
+
+
+
+
+
+
+
+"auth": {
+  "signIn": "Ĩngĩa",
+  "signUp": "Ĩandĩkĩthya",
+  "email": "Barua pepe",
+  "emailPlaceholder": "barua@mfano.com",
+  "enterEmail": "Ĩkĩa barua pepe yaku",
+  "password": "Neno ya kĩthĩĩmo",
+  "forgotPassword": "Wĩĩwa Neno ya Kĩthĩĩmo?",
+  "required": "Yĩendekaa",
+  "continueWithGoogle": "Thiĩa na Google",
+  "orBecomeMember": "Kana Ũve Mũndũ wa Kĩkũndĩ",
+  "joinText": "Ĩngĩa",
+  "joinTextEnd": "na ũmanye mĩtũũo ya Afilika, ũtaũo, ngewa, na mĩtũũo.",
+  "journeyStarts": "Thĩĩna Waku Wĩambata Vaa",
+  "letsGetStarted": "Tũambate",
+  "tribes": "Mĩsyĩ",
+  "firstName": "Ĩsyĩtwa ya Mbee",
+  "firstNamePlaceholder": "Ĩkĩa ĩsyĩtwa yaku ya mbee",
+  "lastName": "Ĩsyĩtwa ya Keli",
+  "lastNamePlaceholder": "Ĩkĩa ĩsyĩtwa yaku ya mwĩsyo",
+  "country": "Ũsũ",
+  "countryPlaceholder": "Ĩkĩa ũsũ waku",
+  "createAccount": "Ũmba Akaunti",
+  "signInSuccess": "Wĩngĩĩte nesa!",
+  "googleSuccess": "Wĩngĩĩte na Google nesa!",
+  "accountCreated": "Akaunti yũmbĩtwe nesa!",
+  "cards": {
+    "explore": {
+      "title": "Manya Afilika ya Kweli",
+      "description": "Manya mĩtũũo mĩnene, mĩtũũo, na ngewa kuuma kontinent yonthe vala vamwe."
+    },
+    "connect": {
+      "title": "Kolanĩsya na Ũtaũo",
+      "description": "Manya Afilika kũtũmĩa andũ ake, mĩsyĩ, na mĩtũũo ya tene, ĩla yĩtongotetwe nesa."
+    },
+    "travel": {
+      "title": "Thiĩa Kũũ na Vala",
+      "description": "Ũkũĩa matũũa ma kũvathũkana na maũndũ ma mĩtũũo ala makĩĩĩa njĩĩa ya kawaĩda ya andũ."
+    }
+  },
+  "errors": {
+    "noAccount": "Ndĩ akaunti yonekete na barua pepe ĩno",
+    "wrongPassword": "Neno ya kĩthĩĩmo ndĩ ya kweli",
+    "invalidCredential": "Barua pepe kana neno ya kĩthĩĩmo ndĩ ya kweli",
+    "passwordLength": "Neno ya kĩthĩĩmo ĩendekaa kũva na ĩsĩĩa 6",
+    "emailInUse": "Barua pepe ĩno nĩyandĩkĩthye",
+    "invalidEmail": "Ĩkĩa barua pepe ya kweli",
+    "generic": "Kĩw'ũ: "
+  }
+},
+
+
+
+
+
+"tribesPage": {
+  "hero": {
+    "title": "Manya Mĩsyĩ ya Afilika",
+    "subtitle": "Manya kũvathũkana kwa mĩtũũo, mĩtũũo, na ũtaũo wa Afilika kontinent yonthe."
+  },
+  "section": {
+    "title": "Mĩsyĩ ya Afilika",
+    "subtitle": "Manya mĩtũũo ĩla ĩkũvathũkana, mĩtũũo, na ngewa sya mĩsyĩ ya Afilika kuuma kontinent yonthe."
+  },
+  "language": "Lũthĩmo",
+  "exploreCulture": "Manya Mĩtũũo",
+  "contribute": {
+    "title": "Mũsyĩ Waku Ndũ Vaa?",
+    "description": "Tũkwatasye kũsũvĩla na kũana mĩtũũo yaku. Ongela ngewa ya mũsyĩ waku, mĩtũũo, lũthĩmo, na ũtaũo kwa Magical.Africa.",
+    "button": "Kwatasya Ngewa"
+  },
+  "communities": {
+    "maasai": { "name": "Maasai", "location": "Kenya, Tanzania", "population": "Andũ milioni 1.5+", "language": "Kimaa", "desc": "Aita a kũhamahama amanyĩkĩte nĩ mĩtũũo na ngũa sya kũvathũkana." },
+    "ashanti": { "name": "Ashanti", "location": "Ghana", "population": "Andũ milioni 11+", "language": "Kitwi", "desc": "Mamanyĩkĩte nĩ wĩĩa wa thahabu na Ũthamaki wa Ashanti." },
+    "hausa": { "name": "Hausa", "location": "Nigeria, Niger", "population": "Andũ milioni 80+", "language": "Kihausa", "desc": "Ĩmwe ya mĩsyĩ mĩnene Afilika, yamanyĩkĩte nĩ ũcũũĩanĩĩo." },
+    "zulu": { "name": "Zulu", "location": "South Africa", "population": "Andũ milioni 12+", "language": "Kizulu", "desc": "Mamanyĩkĩte nĩ mĩtũũo ya aita, kũũmba shanga, na Ũthamaki wa Zulu." },
+    "yoruba": { "name": "Yoruba", "location": "Nigeria, Benin", "population": "Andũ milioni 45+", "language": "Kiyoruba", "desc": "Mĩna ngewa, wĩĩa, na matũũa a tene ta Ife na Oyo." },
+    "kikuyu": { "name": "Kikuyu", "location": "Kenya", "population": "Andũ milioni 8+", "language": "Kikuyu", "desc": "Mũsyĩ mũnene mũno Kenya, ũmanyĩkĩte nĩ ũlĩmi na ũcũũĩanĩĩo." },
+    "igbo": { "name": "Igbo", "location": "Nigeria", "population": "Andũ milioni 45+", "language": "Kiigbo", "desc": "Mamanyĩkĩte nĩ ngwatanĩo ya ũcũũĩanĩĩo na mĩtũũo ya wĩĩa." },
+    "amhara": { "name": "Amhara", "location": "Ethiopia", "population": "Andũ milioni 32+", "language": "Kiamhari", "desc": "Mũsyĩ ũla wĩĩna ngũvũ Ethiopia ũkwata ũtaũo wa Ũkristayo wa tene." },
+    "berber": { "name": "Berber", "location": "Morocco, Algeria, Libya", "population": "Andũ milioni 30+", "language": "Kitamazight", "desc": "Andũ a kwambĩĩĩa a North Africa mena mĩtũũo na lũthĩmo lwa tene." },
+    "swahili": { "name": "Swahili", "location": "Kenya, Tanzania, Zanzibar", "population": "Andũ milioni 2+", "language": "Kiswahili", "desc": "Andũ a ĩĩa mamanyĩkĩte nĩ ũcũũĩanĩĩo wa ĩĩa." },
+    "wolof": { "name": "Wolof", "location": "Senegal, Gambia", "population": "Andũ milioni 6+", "language": "Kiwolof", "desc": "Mũsyĩ mũnene Senegal ũmanyĩkĩte nĩ kũkĩĩa vĩsĩta na ũmwe." },
+    "fulani": { "name": "Fulani", "location": "West Africa (ĩsũ 20+)", "population": "Andũ milioni 40+", "language": "Fulfulde", "desc": "Alĩsi a kũhamahama a West Africa mena mĩtũũo ya kũvathũkana." }
+  }
+},
+
+
+
+"searchSection": {
+  "title": "Kũũnda Mũsyĩ Waku",
+  "searchPlaceholder": "Kũũnda mĩsyĩ",
+  "allRegions": "Sehemu Syonthe",
+  "allLanguages": "Lũthĩmo Lwonthe",
+  "communitiesFound": "mĩsyĩ yonekete",
+  "showMap": "Onanĩsya Maapũ",
+  "hideMap": "Vĩsa Maapũ",
+  "addCommunity": "Ongela Mũsyĩ Waku",
+  "communitiesLabel": "Mĩsyĩ",
+  "regions": {
+    "north": "Afilika ya Nothi",
+    "east": "Afilika ya Ĩsĩ",
+    "west": "Afilika ya Ũsyũ",
+    "central": "Afilika ya Kĩathĩ",
+    "southern": "Afilika ya Saũthi"
+  }
+},
+
+
+
+
+
+
+
+"maasai": {
+  "hero": {
+    "title": "Maasai",
+    "subtitle": "Aita a Afrika Mashariki"
+  },
+  "overview": {
+    "title": "Ũhoro",
+    "titleSpan": "wa Mũsyĩ",
+    "location": "ŨŨLA",
+    "population": "ANDŨ",
+    "language": "LŨTHĨMO",
+    "region": "ŨŨLA",
+    "regionValue": "Afrika Mashariki"
+  },
+  "tabs": {
+    "overview": "Ũhoro",
+    "language": "Lũthĩmo",
+    "culture": "Mĩtũũo na Mĩĩkĩĩo",
+    "leaders": "Atongoi",
+    "nature": "Kyalo na Nyamũ",
+    "antiques": "Vĩndu vya Tene"
+  },
+  "about": {
+    "title": "Ũhoro wa Mũsyĩ",
+    "history": {
+      "title": "Ũhoro na Kũthama",
+      "p1": "Andũ a Maasai nĩ mũsyĩ wa Kiniloti ũla ũtũũĩte kwa ũthĩũ, katĩkatĩ na kũthĩũ wa Kenya na kwa ũthĩũ wa Tanzania. Nĩmo andũ a ũsũ mamanyĩkĩĩte mũno kũnthi yonthe nĩkwĩthĩwa matũũĩte vakũvĩ na mbũa syingĩ sya nyamũ sya Maziwa Manene a Afrika na mĩtũũo na ngũa syoo sya kwĩyũmĩa.",
+      "p2": "Andũ a Maasai masũmĩaa lũthĩmo lwa Kĩmaa, lũthĩmo lwa mbaĩ ya ũthĩmo wa Kiniloti ũla ũkwatanĩĩte na Dinka na Nuer. Mamanyĩkĩĩte nĩ mĩtũũo yoo ya kwĩyũmĩa, mĩĩkĩĩo, na ngũa, na wĩa woo wa kũmanyĩkana kũũ aita ma ngũvũ na achũngi a ngũkũ. Andũ a Maasai maũvĩĩte mĩtũũo yoo mĩingĩ ya tene nthĩnĩ wa kũkethĩwa nĩ ũseo wa ũmũthĩ."
+    },
+    "identity": {
+      "title": "Ũmanyĩkĩlĩlyo na Mĩtũũĩe",
+      "description": "Andũ a Maasai nĩ achũngi ma nyamũ makwamaa ala matetema ngũkũ, mbũi, na mbũi kwa kũtũũa. Ngũkũ syĩna ũtethyo mũnene mũno kwa mĩtũũo ya Kĩmaasai, syĩonanasya ũkũmũ, ũtonga, na ĩĩo. Andũ a Maasai matũtũũaa ũtonga wa mũndũ mũme nĩ ũingĩ wa ngũkũ na ciana syake."
+    }
+  },
+  "language": {
+    "title": "Lũthĩmo",
+    "titleSpan": "lwa Kĩmaa",
+    "description": "Lũthĩmo lwa Kĩmaa nĩ lũthĩmo lwa tene lwa andũ a Maasai a Afrika Mashariki. Lũsũmĩawa mũno Kenya na kwa ũthĩũ wa Tanzania, na nĩ lwa mbaĩ ya ũthĩmo wa Kiniloti. Kĩmaa tĩ naĩ ndĩa ya kũneenana — lũĩna wĩĩa mũnene wa kũsũvĩla mĩtũũo ya Kĩmaasai, ũmanyĩkĩlĩlyo, na mĩĩkĩĩo ya kanua.",
+    "learnButton": "Ĩthoma Lũthĩmo",
+    "listenButton": "Thĩĩkĩla Mĩlĩo",
+    "phrasesTitle": "Maũndũ ma Kawaĩda na",
+    "proverbsSpan": "Nthĩmo",
+    "phrases": {
+      "sopa": "Nĩ wega (kwa mũndũ ũmwe)",
+      "serian": "Nĩ wega (kwa andũ aingĩ)",
+      "ashoOleng": "Nĩ wega mũno",
+      "iko": "Ĩĩ",
+      "takwenya": "Tũonane"
+    },
+    "proverbs": {
+      "enkitoria": "Ngai ndakomaa",
+      "meidim": "Ĩthĩo yĩsyaa ĩthĩo",
+      "meishoo": "Nĩ mũsyĩ ũkũlasya mwana"
+    },
+    "audio": {
+      "title": "Thĩĩkĩla Maamũkyo ma Tene",
+      "description": "Ĩthoma kũsũma Kĩmaa kwa ũsawa kuuma kwa andũ masũmĩaa lũthĩmo lwa mbee, ũkũsũvĩla mĩlĩo ya kweli, mũĩngĩlo, na ũtethyo wa mĩtũũo wa lũthĩmo lwa Kĩmaasai.",
+      "playButton": "Ũmba Video"
+    }
+  },
+  "culture": {
+    "clothing": {
+      "title": "Ngũa na Vĩtũ vya Kũĩtavya vya Tene",
+      "description": "Andũ a Maasai mamanyĩkĩĩte nĩ ngũa syoo sya kwĩyũmĩa sya langi ya mũũĩanĩ yĩtawa \"shuka.\" Mũũĩanĩ nĩ langi yĩ na ũtethyo mũnene, yĩonanasya ũkĩĩ, ũmwe, na thakame. Anũme na aka monthe mavaaĩte vĩtũ vya shanga vyakũĩsya, langi na mĩĩko ya kũvathũkana yĩonanasya mĩaka, ũmanyĩkĩlĩlyo wa kũtwĩĩka, na ũtonga wa andũ.",
+      "button": "Ona Maana ma Langi"
+    },
+    "ceremoniesTitle": "Mĩĩo na Mĩĩkĩĩo ya Matukũ",
+    "ceremonies": {
+      "eunoto": {
+        "title": "Eunoto",
+        "desc": "Mũĩo wa kũkũla ũla aita maũkaa kũũ atumĩa anini"
+      },
+      "enkipaata": {
+        "title": "Enkipaata",
+        "desc": "Mũĩo wa mbee wa kũtahĩĩwa kwa anyĩĩ"
+      },
+      "emuratare": {
+        "title": "Emuratare",
+        "desc": "Mũĩo wa kũtahĩĩwa ũla ũonanasya kũũka wa ũita"
+      },
+      "enkang": {
+        "title": "Enkang oo-nkiri",
+        "desc": "Mĩĩo ya kũtwĩĩka yĩna kũathĩmwa kwa tene"
+      },
+      "olngesherr": {
+        "title": "Olngesherr",
+        "desc": "Mĩĩo ya kũtwĩĩka yĩna kũathĩmwa kwa tene"
+      }
+    },
+    "foodsTitle": "Ĩĩo na Kũsya",
+    "foods": {
+      "nyamaChoma": {
+        "title": "Nyama Choma",
+        "desc": "Nyama yĩthĩĩtwe, mũno ya mbũi na ngũkũ"
+      },
+      "olpurda": {
+        "title": "Olpurda",
+        "desc": "Supu yĩtũmbĩkĩtwe na nyama, mafupa, na mĩtĩ"
+      },
+      "emuroto": {
+        "title": "Emuroto",
+        "desc": "Ĩĩo sya nyama sya mĩĩo"
+      }
+    }
+  },
+  "leaders": {
+    "title": "Atongoi ma Kũmanyĩkana ma Tene na Ũmũthĩ",
+    "laibonLenana": {
+      "name": "Laibon Lenana",
+      "desc": "Mũtongoi wa ngwatanĩo wa Kĩmaasai wĩna ngũvũ ũla wĩĩtĩe wĩĩa mũnene ĩtina wa ũkoloni wa Waingereza."
+    },
+    "olonana": {
+      "name": "Olonana",
+      "desc": "Mũtongoi na Laibon ũla wakwanĩie mikataba ya kũsũvĩla matũũa ma Kĩmaasai."
+    },
+    "mbatian": {
+      "name": "Mbatian",
+      "desc": "Laibon ũla ũmanyĩkĩĩte mũno, ũmanyĩkĩte nĩ ũnabii wake na kũĩkĩanya andũ a Maasai."
+    },
+    "oleSaibul": {
+      "name": "Ole Saibul",
+      "desc": "Mũndũ wa siasa wa Kĩmaasai ũla ũmanyĩkĩĩte na ũla wakwatĩĩe wĩa wa andũ machũngi Kenya."
+    },
+    "oleNtimama": {
+      "name": "William Ole Ntimama",
+      "desc": "Mũndũ wa siasa wa Kenya ũla wakwatĩĩe wĩa wa matũũa ma Kĩmaasai mĩaka mĩingĩ."
+    },
+    "oleLenku": {
+      "name": "Joseph Ole Lenku",
+      "desc": "Gavana wa ũmũthĩ wa Kajiado County na ũla weĩe Secretary wa Cabinet."
+    }
+  },
+  "nature": {
+    "title": "Ũkwatanĩo na Kyalo",
+    "description": "Andũ a Maasai matũũĩte na ũkĩĩ na nyamũ mĩaka mĩingĩ, makĩshĩlĩanya kyalo kĩmwe na ngatũnyi, nzou, na nyamũ ĩngĩ. Mĩtũũĩe yoo ya achũngi na mĩĩtĩĩkĩĩo ya tene nĩyatetheesye kũsũvĩla matũũa manene ma kyalo.",
+    "animalsTitle": "Nyamũ Ntakatifu na Mĩĩtĩĩkĩĩo",
+    "animals": {
+      "cattle": {
+        "name": "Ngũkũ",
+        "desc": "Kĩũmba kĩtakatifu kuuma kwa Enkai (Ngai), kĩ na ũtethyo kwa ũmanyĩkĩlĩlyo na kũtũũa kwa andũ a Maasai"
+      },
+      "lions": {
+        "name": "Ngatũnyi",
+        "desc": "Syĩthĩĩtwe nĩ sya ũkĩĩ; kwa ũhoro wa tene syachĩĩtwe nĩ aita kwa mĩĩo ya kũkũla"
+      },
+      "elephants": {
+        "name": "Nzou",
+        "desc": "Syĩthĩĩtwe nĩ ũũĩ na ngũvũ; syĩsũvĩĩtwe kũtũmĩa kũsũvĩla kwa tene"
+      },
+      "giraffes": {
+        "name": "Ĩnyau",
+        "desc": "Syĩonekaa kũũ nyamũ nzeo syĩshĩlĩanya matũũa moo ma kũĩsya"
+      }
+    }
+  },
+  "antiques": {
+    "title": "Vĩndu vya Tene na Vĩndu vya Kale",
+    "description": "Andũ a Maasai maũmbĩte vĩfaa vya kwĩyũmĩa, vĩfaa vya ũta, na vĩtũ vya kũĩtavya mĩaka mĩingĩ. Vĩndu ĩvĩ vyonanasya ũtonga woo wa mĩtũũo na vĩkũendeea kũũ vĩndu vya ũmanyĩkĩlĩlyo na mĩtũũo.",
+    "button": "Enda Ndũka",
+    "rungu": {
+      "name": "Rungu (Mũtĩ wa Kũtũpa)",
+      "desc": "Mũtĩ wa tene ũla ũtũmĩawa nĩ aita kwa kũĩũsya na kũchũa"
+    },
+    "shuka": {
+      "name": "Shuka (Ngũo Mũũĩanĩ)",
+      "desc": "Ngũo mũũĩanĩ yĩmanyĩkĩĩte yĩvaaĩwa kũũ ngũo ya tene"
+    },
+    "beadedJewelry": {
+      "name": "Vĩtũ vya Shanga",
+      "desc": "Wĩĩa wa shanga ũla ũonanasya ũtonga, mĩaka, na ũmanyĩkĩlĩlyo"
+    },
+    "spear": {
+      "name": "Mũũ (Enkudi)",
+      "desc": "Kĩndu kya ũanũme na kĩfaa kya mbee kya aita a Kĩmaasai"
+    },
+    "shield": {
+      "name": "Ngao (Olongu)",
+      "desc": "Ngao sya kũsĩngĩlĩla syatakĩĩtwe mĩĩko ya kwĩyũmĩa yĩonanasya ũmanyĩkĩlĩlyo wa mbaĩ"
+    },
+    "calabash": {
+      "name": "Kĩnya (Enkukuri)",
+      "desc": "Vyombo vya kĩnya vĩtũmĩawa kũsũvĩla mũũĩngĩko wa ĩĩa na thakame"
+    }
+  },
+  "preserve": {
+    "title": "Twĩtetheesye Kũsũvĩla Ũtonga wa Kĩmaasai",
+    "description": "Wĩna ngewa, mbaisĩ, kana ũũĩ wa kũneenana ũhoro wa mĩtũũo ya Kĩmaasai?",
+    "button": "Tĩa kwa Peisi Ĩno"
+  }
+},
+
+
+
+
+
+
+
+
+ "about": {
+    "hero": {
+      "title": "Undu wa Magical Africa",
+      "tagline": "Kusuvya Ndimi ya Afrika. Kumiisya mii. Kusenga nthi ya undu."
+    },
+    "background": {
+      "sectionTitle": "Mbee",
+      "sectionTitleHighlight": "Yitu",
+      "paragraph1": "Magical.africa ni kikundi kya Pan-African kyendeea wia wakati wa ndimi ya Afrika, mila, masomo, na teknolojia. Twi kwa kutetheesya kutumika, kukua, na kusimama kwa ndimi ya mii muthini.",
+      "paragraph2": "Ndimi ya Afrika ni ya nzeo muno kwa masomo, maisha, na kwiikania kwa mii, lakini iingi itina kuvandwa wega mithemba ya serikali na mawondu ya dijitali. Magical Africa inanganasya uvyuvu uu kwa njia yilekwasye mii na wia wa maukethanioo wikiethesye aui a umami wa undu, aalimu, atafiti, na amekeki a teknolojia.",
+      "paragraph3": "Kwa kutumia teknolojia ta kivaa kya kutetheesya ti kubadilisha twitetheesya kutwika ndimi ya Afrika na umami wa mila muthemba ya isu kwa njia ya uumbi, kutwika andu onthe, na kusimama."
+    },
+    "approach": {
+      "title": "Njia Yitu",
+      "description": "Twinganasya mila, teknolojia, na masomo kutetheesya mii na kusuvya wumwe wa Afrika.",
+      "items": {
+        "communityOwnership": "Mwene wa Mii",
+        "ethicalStewardship": "Kuleka Kwawundu Mwega",
+        "sustainableImpact": "Utetheesyo Usimamae",
+        "localPanAfrican": "Wa Uku na Pan-African"
+      }
+    },
+    "whatWeDo": {
+      "title": "Undu Twendaa",
+      "slides": {
+        "datastewardship": {
+          "title": "Kuleka Data ya Ndimi na Mila ya Afrika",
+          "description": "Twendaa na mii kuandika, kuleka, na kusuvya ndimi na mila ya Afrika kwa njia yiomba nzia ya uku, mbee, na indu ya nzeo. Wia witu utwika:",
+          "items": [
+            "Ndimi yivuuwa na mila ya kionoo",
+            "Mila yionawa na miendu ya kila mwai",
+            "Kuandika wumwe wa mila",
+            "Kuandika ndimi iingi mawondu onthe a Afrika"
+          ]
+        },
+        "aiDataCollection": {
+          "title": "Kukwata Data ya AI Yilekwasye Mii",
+          "description": "Magical Africa inanganasya na inongosya njia ya kukwata data ya uumbi yiendeeswa mii yitetheesya kusenga AI yitwika ndimi ya Afrika. Twinekela:",
+          "items": [
+            "Nywi, kuandika, na data ya mitaano iingi",
+            "Mawondu a kutumia kwa kweli (masomo, mila, maisha)",
+            "Kutwika wega na kuliva",
+            "Kuleka data kwawundu mwega"
+          ]
+        },
+        "education": {
+          "title": "Mawia a Masomo na Umami wa Mila",
+          "description": "Twendea sukulu, mawondu a kusoma, na mawondu a mila muthini mwingi wa Afrika kutetheesya kusoma ndimi, kuneana umami, na kubadilishana vala wa miaka. Twinekela:",
+          "items": [
+            "Mawondu a kusoma ndimi iingi",
+            "Umami wa kionoo na ndumbu",
+            "Mivuko na mila ya kiasili",
+            "Kutwika andu a musyi na ubunifu"
+          ]
+        }
+      }
+    },
+    "principles": {
+      "title": "Mbingu Yitu",
+      "items": [
+        "Pan-African kwa usenga - Wimike uku, wiananie muthini wonthe",
+        "Mii Kwanza - Mii ni amekeki, ti mawondu a data",
+        "Uumbi wa Kwambya - Ndiho, kwi sawa, na siri sivuuwanwa",
+        "Kuomba Mila - Ndimi na mila ni mithemba yii",
+        "Kwiyulika na Kumekethanio - Twitetheeswya umami ulekuke na kusoma amwi",
+        "AI Yilekwasye Andu - Teknolojia yatila itethesye andu, ti kuwatoa"
+      ]
+    },
+    "ai": {
+      "title": "Uu Twitumia AI",
+      "sections": {
+        "preparingData": {
+          "title": "Kusakya Data kwa AI Yitwika Onthe",
+          "items": [
+            "Kumanya nywi (ASR)",
+            "Kuandika-kwa-nywi (TTS)",
+            "Viaa vya kusoma vya nywi",
+            "Mivuke ya masomo na mila ya mitaano iingi"
+          ]
+        },
+        "research": {
+          "title": "Utafiti na Kulola Ubora Uitheeswa AI",
+          "items": [
+            "Tetheesya na njia ya kuandika na kueleza",
+            "Kwia uvyuvu katika kuvandwa kwa ndimi",
+            "Tetheesya kulola ubora ithaa ukethanie na ukweli wa andu"
+          ]
+        },
+        "communityTools": {
+          "title": "Viaa Viendeeswa Mii",
+          "items": [
+            "Viaa vya kusoma vitetheeswa AI",
+            "Viaa vya masomo vya nywi na mitaano iingi",
+            "Mawondu a kuandika mila"
+          ]
+        }
+      }
+    },
+    "partners": {
+      "title": "Twenda Wia na Ai",
+      "description": "Twendea wia muthini wa Afrika na"
+    },
+    "team": {
+      "title": "Manya Kikundi",
+      "description": "Miiyo ya moyo nyuma ya Magical Africa",
+      "members": {
+        "gloria": {
+          "name": "Gloria Machoka",
+          "role": "Mwanzilisi Mwekeki"
+        },
+        "steve": {
+          "name": "Steve Kombo",
+          "role": "Mwanzilisi"
+        },
+        "joel": {
+          "name": "Joel Makori",
+          "role": "Munangai wa Kuikethania na Mii"
+        }
+      }
+    },
+    "cta": {
+      "title": "Witethesye Kusuvya Ndumbu ya Afrika ya Kweli",
+      "description": "Afrika itivuuwanwa ni andu a nja. Nitwendee ndumbu yitu swiswi na utheu, kwi sawa, ubunifu, na ukeei.",
+      "buttons": {
+        "contribute": "Ikie Ndumbu Yaku",
+        "explore": "Lola Mii",
+        "contact": "Neena na Ithwi"
+      }
+    }
+  }
+
 }

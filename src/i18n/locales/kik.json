@@ -100,5 +100,621 @@
       "description": "Mĩturirĩro na ihembe cia tene ciombĩtwo na indo cia kawaĩda."
     }
   }
-}
+},
+
+
+"sideMenu": {
+  "close": "Hinga",
+  "search": "Caria",
+  "home": "Mũciĩ",
+  "tribes": "Mĩhĩrĩga",
+  "about": "Ũhoro",
+  "language": "Rũthiomi",
+  "marketplace": "Ndũka"
+},
+
+
+
+"languages": {
+  "title": "Ĩthoma Rũthiomi Rwĩtũ",
+  "description": "Abirika nĩ mũciĩ wa rũthiomi ngiri nyingĩ, ĩrĩa yothe yĩkũũa ũhoro wa tene, ũmenyekani, na mĩtũũrĩre. Menya mahoya na maũndũ ma kawaĩda kuuma mĩhĩrĩga ya Gĩabirika na ũkoranĩrie na kontinent kũhuthĩra rũthiomi.",
+  "items": {
+    "swahili": {
+      "name": "Gĩswahili",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Habari?', yĩtiĩtwo 'Wĩ mwega?'"
+    },
+    "zulu": {
+      "name": "Gĩzulu",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Sawubona', yĩtiĩtwo 'Ngũkuona.'"
+    },
+    "yoruba": {
+      "name": "Gĩyoruba",
+      "tooltip": "'Báwo ni?' nĩ mahoya ma Gĩyoruba yĩtiĩtwo 'Wĩ mwega?'"
+    },
+    "kikuyu": {
+      "name": "Gĩkũyũ",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Jambo', yĩtiĩtwo 'Nĩ wega'"
+    },
+    "hausa": {
+      "name": "Gĩhausa",
+      "tooltip": "'Akkam?' yĩtiĩtwo 'Wĩ mwega?' na Gĩhausa."
+    },
+    "shona": {
+      "name": "Gĩshona",
+      "tooltip": "'Mhoro' nĩ mahoya ma Gĩshona yĩtiĩtwo 'Nĩ wega.'"
+    },
+    "sukuma": {
+      "name": "Gĩsukuma",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Moro', yĩtiĩtwo 'Nĩ wega'"
+    },
+    "xhosa": {
+      "name": "Gĩxhosa",
+      "tooltip": "'Molo' nĩ mahoya ma Gĩxhosa yĩtiĩtwo 'Nĩ wega.'"
+    },
+    "maasai": {
+      "name": "Gĩmaasai",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Sanu', yĩtiĩtwo 'Nĩ wega'"
+    },
+    "igbo": {
+      "name": "Gĩigbo",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Kedu?', yĩtiĩtwo 'Wĩ mwega?'"
+    },
+    "lingala": {
+      "name": "Gĩlingala",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Mbote', yĩtiĩtwo 'Nĩ wega'"
+    },
+    "tsonga": {
+      "name": "Gĩtsonga",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Avuxeni', yĩtiĩtwo 'Rũcinĩ rwega'"
+    },
+    "setswana": {
+      "name": "Gĩsetswana",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Dumela', yĩtiĩtwo 'Nĩ wega'"
+    },
+    "chichewa": {
+      "name": "Gĩchichewa",
+      "tooltip": "Mahoya ma kawaĩda nĩ 'Moni', yĩtiĩtwo 'Nĩ wega'"
+    }
+  }
+},
+
+
+"tribes": {
+  "title": "Menya Mĩhĩrĩga Yĩtũ",
+  "subtitle": "Rũgendo rũthiĩre mĩhĩrĩga ya Abirika ĩrĩa ĩhũũranĩte na mĩtũũrĩre ya tene",
+  "viewAll": "Ona Ciothe",
+  "oromo": {
+    "name": "Oromo",
+    "description": "Andũ a Oromo kuuma Ethiopia, makũũa ũtaũo wa kũĩgĩria wa mĩtũũrĩre, ũmwe, na ũmenyekani wa mĩtũũrĩre. Nĩo mũhĩrĩga mũnene mũno, makĩũmba thĩka ĩmwe kũmĩĩna ĩtatũ ya andũ na andũ milioni 40."
+  },
+  "zulu": {
+    "name": "Zulu",
+    "description": "Kuuma South Africa, andũ a Zulu makũũa ũtaũo wa hinya wa mĩtũũrĩre, kũũmĩrĩra, na ũmenyekani, makĩĩmĩĩra andũ milioni 11."
+  },
+  "igbo": {
+    "name": "Igbo",
+    "description": "Andũ a Igbo kuuma Nigeria, nĩo ũmwe wa mĩhĩrĩga mĩnene mũno, makĩrĩ andũ milioni 30, mamenyekete nĩ mĩtũũrĩre yao mĩnene, ũcũũranĩri, na maũndũ ma kĩũnganĩro."
+  }
+},
+
+
+"socialImpact": {
+  "title": "Mũtũũrĩre Witũ kwa Andũ",
+  "description": "Twĩtĩkĩtie kũcokerera mĩhĩrĩga ĩrĩa ĩtũthaithĩtie. Kũhuthĩra ndandano yĩtũ, twĩteithĩtie ahunaji a gĩcigĩ, tũhariirie ũtaũo wa mĩtũũrĩre, na tũũmbĩte mahinda ma mbeca kwa Abirika yothe.",
+  "learnMore": "Menya Gũkĩra",
+  "readMore": "Thoma Gũkĩra",
+  "artisans": {
+    "title": "Gũteithĩa Ahunaji a Gĩcigĩ",
+    "description": "Twĩkoranĩtie ahunaji a gĩcigĩ na macũnjĩ ma thĩ yothe, tũkĩĩhĩgia makĩĩhĩtio mbeca njega nĩ wĩra wao."
+  },
+  "heritage": {
+    "title": "Kũhariria Ũtaũo",
+    "description": "Kĩvathĩko gĩtũ kĩa digital gĩteithĩtie kũhariria rũthiomi rũrĩa rũrĩ hatarĩnĩ, mĩtũũrĩre, na maũndũ ma gĩtũũrĩrĩre kwa rũciaro rũrĩa rũũkĩte."
+  }
+},
+
+
+"partners": {
+  "title": "Ashirika Aitũ",
+  "description": "Twĩkoranĩtie na makundi marĩa mahũũrũkĩra maũndũ maitũ ma kũhariria na kũhũũra mĩtũũrĩre ya Gĩabirika. Hamwe, twĩkũũmba mũtũũrĩre mũnene."
+},
+
+
+
+"faq": {
+  "title": "Maũũria Marĩa Marĩĩa Mũno",
+  "items": {
+    "whatIs": {
+      "question": "Magical Africa nĩ kĩĩ?",
+      "answer": "Magical Africa nĩ ndandano ĩrĩa yĩĩhĩte kũhariria, kũnanĩra, na kũana ũtaũo wa mĩtũũrĩre wa Abirika na thĩ yothe. Tũkoranĩtie andũ na mĩtũũrĩre ya Gĩabirika ya ma, rũthiomi, mĩtũũrĩre, na mĩhĩrĩga."
+    },
+    "contribute": {
+      "question": "Nĩngĩĩka atĩa gũteithĩa Magical Africa?",
+      "answer": "Ũngĩteithĩa na kũana ngano, cithĩ, kana ũũgĩ ũhoro wa mũhĩrĩga waku. Ĩandĩkĩthia na ũhuthĩre iria ciitũ cia gũteithĩa kũongera maũndũ ũhoro wa mĩtũũrĩre, rũthiomi, na ũtaũo wa mũhĩrĩga waku."
+    },
+    "authentic": {
+      "question": "Maũndũ marĩa marĩ Magical Africa nĩ ma ma?",
+      "answer": "Ĩĩ! Maũndũ maitũ mothe makumĩtwo kuuma kwa andũ a mĩhĩrĩga na arutani a mĩtũũrĩre. Tũrũtagĩra hamwe na mĩhĩrĩga ya gĩcigĩ kũĩhĩgia maũndũ mothe marĩa tũanaga nĩ ma ma."
+    },
+    "learnLanguage": {
+      "question": "Nĩngĩĩthoma atĩa rũthiomi rwa Gĩabirika kũndandano ĩno?",
+      "answer": "Tũheaga indo cia kũĩthomera rũthiomi irĩ hamwe na ciugo cia kawaĩda, kwaria kuuma kwa andũ arĩa mararagia rũthiomi rwao, na maũndũ ma gĩtũũrĩrĩre gũkũteithĩa ũmenya na ũkunĩre rũthiomi rwa Gĩabirika."
+    },
+    "purchase": {
+      "question": "No ngũre indo cia Gĩabirika cia ma?",
+      "answer": "Ĩĩ! Ndũka yĩtũ ĩrĩ na indo cia mĩtũũrĩre cia ma ciombĩtwo na moko nĩ ahunaji a Gĩabirika. Kũgũra guothe gũteithĩtie mĩhĩrĩga ya gĩcigĩ na gũteithĩtie kũhariria ũhunaji wa tene."
+    }
+  }
+},
+
+
+
+"contact": {
+  "description": "Ũrĩ na maũũria ũhoro wa mĩtũũrĩre ya Gĩabirika, ũtaũo, kana indo ciitũ? Tũhũũrĩe na ũkũũre ngano, mĩtũũrĩre, na ũũmbi ũrĩa ũtũmaga Abirika ĩkorwo ĩrĩ ĩmwe. Tũngĩenda gũkorana nawe na kũana ũrogi wa ma wa Abirika.",
+  "button": "Tũhũũrĩe"
+},
+
+
+
+"footer": {
+  "tagline": "Kũrĩa Rũgano rwa Ma rwa Abirika Rũtuĩre",
+  "quickLinks": "Mahuthĩro ma Ihenya",
+  "links": {
+    "home": "Mũciĩ",
+    "tribes": "Mĩhĩrĩga",
+    "languages": "Rũthiomi",
+    "about": "Ũhoro",
+    "marketplace": "Ndũka",
+    "contact": "Tũhũũrĩe"
+  },
+  "terms": "Maũndũ ma Kũhuthĩra",
+  "privacy": "Maũndũ ma Ũhoro wa Thĩrĩ",
+  "cookiePolicy": "Maũndũ ma Kuki",
+  "cookieSettings": "Mĩĩko ya Kuki",
+  "copyright": "© 2026 Magical.africa. Wathĩ wothe nĩ wa kũrigĩrĩrwo"
+},
+
+
+
+"auth": {
+  "signIn": "Ĩngĩra",
+  "signUp": "Ĩandĩkĩthia",
+  "email": "Barua pepe",
+  "emailPlaceholder": "barua@mfano.com",
+  "enterEmail": "Ĩkĩra barua pepe yaku",
+  "password": "Neno rĩa gĩcigo",
+  "forgotPassword": "Wĩrĩganĩrwo Neno rĩa Gĩcigo?",
+  "required": "Nĩ ya bata",
+  "continueWithGoogle": "Thiĩ na mbere na Google",
+  "orBecomeMember": "Kana Ũtuĩke Mũndũ wa Gĩkũndi",
+  "joinText": "Ĩngĩra",
+  "joinTextEnd": "na ũkũũre mĩtũũrĩre ya Abirika, ũtaũo, ngano, na mĩtũũrĩre.",
+  "journeyStarts": "Rũgendo Rwaku Rwambĩrĩria Haha",
+  "letsGetStarted": "Tũambĩrĩrie",
+  "tribes": "Mĩhĩrĩga",
+  "firstName": "Rĩĩtwa rĩa Mbere",
+  "firstNamePlaceholder": "Ĩkĩra rĩĩtwa rĩaku rĩa mbere",
+  "lastName": "Rĩĩtwa rĩa Kerĩ",
+  "lastNamePlaceholder": "Ĩkĩra rĩĩtwa rĩaku rĩa mũthia",
+  "country": "Bũrũri",
+  "countryPlaceholder": "Ĩkĩra bũrũri waku",
+  "createAccount": "Ũmba Akaunti",
+  "signInSuccess": "Wĩngĩire wega!",
+  "googleSuccess": "Wĩngĩire na Google wega!",
+  "accountCreated": "Akaunti nĩyũmbĩtwo wega!",
+  "cards": {
+    "explore": {
+      "title": "Menya Abirika ya Ma",
+      "description": "Kũũra mĩtũũrĩre mĩnene, mĩtũũrĩre, na ngano kuuma kontinent yothe handũ hamwe."
+    },
+    "connect": {
+      "title": "Korana na Ũtaũo",
+      "description": "Menya Abirika kũhuthĩra andũ ayo, mĩhĩrĩga, na mĩtũũrĩre ya tene, ĩrĩa yĩhĩtĩtwo wega."
+    },
+    "travel": {
+      "title": "Thiĩ Gũkĩra Gwa Kawaĩda",
+      "description": "Hũgũra matũũra ma kũhũũrana na maũndũ ma mĩtũũrĩre marĩa makĩra njĩra ya kawaĩda ya andũ."
+    }
+  },
+  "errors": {
+    "noAccount": "Gũtirĩ akaunti yonekire na barua pepe ĩno",
+    "wrongPassword": "Neno rĩa gĩcigo ti rĩa ma",
+    "invalidCredential": "Barua pepe kana neno rĩa gĩcigo ti cia ma",
+    "passwordLength": "Neno rĩa gĩcigo nĩ rĩagĩrĩire gũkorwo na ihenya 6",
+    "emailInUse": "Barua pepe ĩno nĩyandĩkĩthĩtio",
+    "invalidEmail": "Ĩkĩra barua pepe ya ma",
+    "generic": "Ĩhĩtia: "
+  }
+},
+
+
+
+"tribesPage": {
+  "hero": {
+    "title": "Menya Mĩhĩrĩga ya Abirika",
+    "subtitle": "Kũũra ũhũũranĩ wa mĩtũũrĩre, mĩtũũrĩre, na ũtaũo wa Abirika kontinent yothe."
+  },
+  "section": {
+    "title": "Mĩhĩrĩga ya Abirika",
+    "subtitle": "Menya mĩtũũrĩre ĩrĩa ĩhũũranĩte, mĩtũũrĩre, na ngano cia mĩhĩrĩga ya Abirika kuuma kontinent yothe."
+  },
+  "language": "Rũthiomi",
+  "exploreCulture": "Menya Mĩtũũrĩre",
+  "contribute": {
+    "title": "Mũhĩrĩga Waku Gũtirĩ Haha?",
+    "description": "Tũteithĩe kũhariria na kũana mĩtũũrĩre yaku. Ongera rũgano rwa mũhĩrĩga waku, mĩtũũrĩre, rũthiomi, na ũtaũo kũrĩ Magical.Africa.",
+    "button": "Teithĩa na Rũgano"
+  },
+  "communities": {
+    "maasai": { "name": "Maasai", "location": "Kenya, Tanzania", "population": "Andũ milioni 1.5+", "language": "Gĩmaa", "desc": "Njamba cia kũhũũra cimenyekete nĩ mĩtũũrĩre na ngũo cia kũhũũrana." },
+    "ashanti": { "name": "Ashanti", "location": "Ghana", "population": "Andũ milioni 11+", "language": "Gĩtwi", "desc": "Mamenyekete nĩ ũhunaji wa thahabu na Ũthamaki wa Ashanti." },
+    "hausa": { "name": "Hausa", "location": "Nigeria, Niger", "population": "Andũ milioni 80+", "language": "Gĩhausa", "desc": "Ĩmwe ya mĩhĩrĩga mĩnene Abirika, yamenyekete nĩ ũcũũrani." },
+    "zulu": { "name": "Zulu", "location": "South Africa", "population": "Andũ milioni 12+", "language": "Gĩzulu", "desc": "Mamenyekete nĩ mĩtũũrĩre ya njamba, gũthondeka ubuhlalu, na Ũthamaki wa Zulu." },
+    "yoruba": { "name": "Yoruba", "location": "Nigeria, Benin", "population": "Andũ milioni 45+", "language": "Gĩyoruba", "desc": "Marĩ na ngano, ũhunaji, na matũũra ma tene ta Ife na Oyo." },
+    "kikuyu": { "name": "Kikuyu", "location": "Kenya", "population": "Andũ milioni 8+", "language": "Gĩkũyũ", "desc": "Mũhĩrĩga mũnene mũno Kenya, ũmenyekete nĩ ũrĩmi na ũcũũrani." },
+    "igbo": { "name": "Igbo", "location": "Nigeria", "population": "Andũ milioni 45+", "language": "Gĩigbo", "desc": "Mamenyekete nĩ mĩoyo ya ũcũũrani na mĩtũũrĩre ya ũhunaji." },
+    "amhara": { "name": "Amhara", "location": "Ethiopia", "population": "Andũ milioni 32+", "language": "Gĩamhari", "desc": "Mũhĩrĩga ũrĩa warĩ na hinya Ethiopia ũrĩ na ũtaũo wa Gĩkristo wa tene." },
+    "berber": { "name": "Berber", "location": "Morocco, Algeria, Libya", "population": "Andũ milioni 30+", "language": "Gĩtamazight", "desc": "Andũ a gũciarĩro a North Africa marĩ na mĩtũũrĩre na rũthiomi rwa tene." },
+    "swahili": { "name": "Swahili", "location": "Kenya, Tanzania, Zanzibar", "population": "Andũ milioni 2+", "language": "Gĩswahili", "desc": "Andũ a iria mamenyekete nĩ ũcũũrani wa iria." },
+    "wolof": { "name": "Wolof", "location": "Senegal, Gambia", "population": "Andũ milioni 6+", "language": "Gĩwolof", "desc": "Mũhĩrĩga mũnene Senegal ũmenyekete nĩ gũkĩrĩra ageni na ũmwe." },
+    "fulani": { "name": "Fulani", "location": "West Africa (mabũrũri 20+)", "population": "Andũ milioni 40+", "language": "Fulfulde", "desc": "Arũgĩri a kũhũũra a West Africa marĩ na mĩtũũrĩre ya kũhũũrana." }
+  }
+},
+
+
+
+
+"searchSection": {
+  "title": "Caria Mũhĩrĩga Waku",
+  "searchPlaceholder": "Caria mĩhĩrĩga",
+  "allRegions": "Sehemu Ciothe",
+  "allLanguages": "Rũthiomi Rwothe",
+  "communitiesFound": "mĩhĩrĩga yonekire",
+  "showMap": "Onanĩria Maapũ",
+  "hideMap": "Hitha Maapũ",
+  "addCommunity": "Ongera Mũhĩrĩga Waku",
+  "communitiesLabel": "Mĩhĩrĩga",
+  "regions": {
+    "north": "Abirika ya North",
+    "east": "Abirika ya East",
+    "west": "Abirika ya West",
+    "central": "Abirika ya Gatagatĩ",
+    "southern": "Abirika ya South"
+  }
+},
+
+
+
+
+
+
+"maasai": {
+  "hero": {
+    "title": "Maasai",
+    "subtitle": "Njamba cia Afrika Mashariki"
+  },
+  "overview": {
+    "title": "Ũhoro",
+    "titleSpan": "wa Mũhĩrĩga",
+    "location": "HANDŨ",
+    "population": "ANDŨ",
+    "language": "RŨTHIOMI",
+    "region": "GĨCIGĨ",
+    "regionValue": "Afrika Mashariki"
+  },
+  "tabs": {
+    "overview": "Ũhoro",
+    "language": "Rũthiomi",
+    "culture": "Mĩtũũrĩre na Mĩĩrio",
+    "leaders": "Atongoria",
+    "nature": "Gĩcigĩ na Nyamũ",
+    "antiques": "Indo cia Tene"
+  },
+  "about": {
+    "title": "Ũhoro wa Mũhĩrĩga",
+    "history": {
+      "title": "Ũhoro na Gũthiĩ",
+      "p1": "Andũ a Maasai nĩ mũhĩrĩga wa Gĩnilotic ũrĩa ũtũũraga rũgongo, gatagatĩ na ithĩ ria Kenya na rũgongo rwa Tanzania. Nĩo andũ a gĩcigĩ amenyekete mũno thĩ yothe nĩ ũndũ wa gũtũũra kwao hakuhĩ na mbũtho nyingĩ cia nyamũ cia Maziwa Manene ma Afrika na mĩtũũrĩre na ngũo ciao cĩa kũũmĩrĩka.",
+      "p2": "Andũ a Maasai marĩthomaga rũthiomi rwa Gĩmaa, rũthiomi rwa nyũmba ya rũthiomi rwa Gĩnilotic rũrĩa rũhũũrũkĩra Dinka na Nuer. Mamenyekete nĩ mĩtũũrĩre yao ya kũũmĩrĩka, mĩĩrio, na ngũo, o na rĩĩtwa rĩao ta njamba na arĩithi a ngũkũ. Andũ a Maasai mahotete gũtũũrĩria mĩtũũrĩre yao mĩingĩ ya tene o na gũkũrwo nĩ ũhinganĩo kuuma ũgaũ wa rĩu."
+    },
+    "identity": {
+      "title": "Ũmenyekani na Mũtũũrĩre",
+      "description": "Andũ a Maasai nĩ arĩithi a nyamũ mathamagĩra marĩa tene maehereire ngũkũ, ngondu, na mbũri nĩ gũtũũra. Ngũkũ cĩna bata mũnene mũno kwa mĩtũũrĩre ya Gĩmaasai, cĩonanĩria ũtonga, ũmenyekani, na irio. Andũ a Maasai mapĩmaga ũtonga wa mũndũ mũrũme nĩ ũingĩ wa ngũkũ na ciana arĩ nacio."
+    }
+  },
+  "language": {
+    "title": "Rũthiomi",
+    "titleSpan": "rwa Gĩmaa",
+    "description": "Rũthiomi rwa Gĩmaa nĩ rũthiomi rwa tene rwa andũ a Maasai a Afrika Mashariki. Rũthomaga mũno Kenya na rũgongo rwa Tanzania, na nĩ rwa nyũmba ya rũthiomi rwa Gĩnilotic. Gĩmaa ti ndĩa ya kũneenana o ĩĩkĩ — rũĩna wĩra mũnene wa kũrĩria mĩtũũrĩre ya Gĩmaasai, ũmenyekani, na mĩĩrio ya kanua.",
+    "learnButton": "Ĩthoma Rũthiomi",
+    "listenButton": "Thĩkĩrĩria Mĩrĩro",
+    "phrasesTitle": "Ciugo cia Kawaĩda na",
+    "proverbsSpan": "Thimo",
+    "phrases": {
+      "sopa": "Nĩ wega (kũ mũndũ ũmwe)",
+      "serian": "Nĩ wega (kũ andũ aingĩ)",
+      "ashoOleng": "Nĩ wega mũno",
+      "iko": "Ĩĩ",
+      "takwenya": "Tũonane"
+    },
+    "proverbs": {
+      "enkitoria": "Ngai ndaromaga",
+      "meidim": "Ũthĩ ũciaraga ũthĩ",
+      "meishoo": "Nĩ mũhĩrĩga ũkũrĩa mwana"
+    },
+    "audio": {
+      "title": "Thĩkĩrĩria Mahoya ma Tene",
+      "description": "Ĩthoma gũthoma Gĩmaa kũhana na ma kuuma kũ andũ mathomaga rũthiomi rwa mbere, ũkĩrĩria mĩrĩro ya ma, mũthĩo, na ũtaũro wa mĩtũũrĩre wa rũthiomi rwa Gĩmaasai.",
+      "playButton": "Riria Video"
+    }
+  },
+  "culture": {
+    "clothing": {
+      "title": "Ngũo na Indo cia Kũĩtĩkĩra cia Tene",
+      "description": "Andũ a Maasai mamenyekete nĩ ngũo ciao cia kũũmĩrĩka cia rangi mũthune cĩĩtagwo \"shuka.\" Mũthune nĩ rangi ya bata mũno, yonanĩria ũcamba, ũmwe, na thakame. Arũme na atumia othe mahumba indo cia shanga cia bata, rangi na mĩthĩo mĩhũũraĩne ĩkĩonanĩria mĩaka, ũmenyekani wa gũciarwo, na ũmenyekani wa andũ.",
+      "button": "Ona Ũtaũro wa Rangi"
+    },
+    "ceremoniesTitle": "Mĩario na Mĩĩrio ya Matukũ",
+    "ceremonies": {
+      "eunoto": {
+        "title": "Eunoto",
+        "desc": "Mũario wa gũkũra ũrĩa njamba ciũkĩrwo atumia anini"
+      },
+      "enkipaata": {
+        "title": "Enkipaata",
+        "desc": "Mũario wa mbere wa gũtahĩrwo nĩ ariũ"
+      },
+      "emuratare": {
+        "title": "Emuratare",
+        "desc": "Mũario wa gũtahĩrwo ũonanĩria gũũka kwa ũnjamba"
+      },
+      "enkang": {
+        "title": "Enkang oo-nkiri",
+        "desc": "Mĩario ya gũciarwo ĩrĩ na kũrathĩmwo kwa tene"
+      },
+      "olngesherr": {
+        "title": "Olngesherr",
+        "desc": "Mĩario ya gũciarwo ĩrĩ na kũrathĩmwo kwa tene"
+      }
+    },
+    "foodsTitle": "Irio na Ũrugĩri",
+    "foods": {
+      "nyamaChoma": {
+        "title": "Nyama Choma",
+        "desc": "Nyama ĩthĩĩtwo, mũno ya mbũri na ngũkũ"
+      },
+      "olpurda": {
+        "title": "Olpurda",
+        "desc": "Thũũbu ĩrĩkĩtwo na nyama, magũrũ, na mĩtĩ"
+      },
+      "emuroto": {
+        "title": "Emuroto",
+        "desc": "Irio cia nyama cia mĩario"
+      }
+    }
+  },
+  "leaders": {
+    "title": "Atongoria Amenyekete a Tene na Rĩu",
+    "laibonLenana": {
+      "name": "Laibon Lenana",
+      "desc": "Mũtongoria wa ngwatanĩro wa Gĩmaasai wĩna hinya ũrĩa warũtĩre wĩra mũnene ĩtina wa ũkoloni wa Waingereza."
+    },
+    "olonana": {
+      "name": "Olonana",
+      "desc": "Mũtongoria na Laibon ũrĩa wakwarĩire mikataba ya kũrĩria matũũra ma Gĩmaasai."
+    },
+    "mbatian": {
+      "name": "Mbatian",
+      "desc": "Laibon ũrĩa ũmenyekete mũno, amenyekete nĩ ũnabii wake na kũĩnganĩa andũ a Maasai."
+    },
+    "oleSaibul": {
+      "name": "Ole Saibul",
+      "desc": "Mũndũ wa siasa wa Gĩmaasai ũrĩa ũmenyekete na ũrĩa wakwatĩĩre wĩra wa andũ arĩithi Kenya."
+    },
+    "oleNtimama": {
+      "name": "William Ole Ntimama",
+      "desc": "Mũndũ wa siasa wa Kenya ũrĩa wakwatĩĩre wĩra wa matũũra ma Gĩmaasai mĩaka mĩingĩ."
+    },
+    "oleLenku": {
+      "name": "Joseph Ole Lenku",
+      "desc": "Gavana wa rĩu wa Kajiado County na ũrĩa warĩ Secretary wa Cabinet."
+    }
+  },
+  "nature": {
+    "title": "Ũhũũrũkĩrĩre na Gĩcigĩ",
+    "description": "Andũ a Maasai matũũrĩte na thayũ na nyamũ cia gĩthaka mĩaka mĩingĩ, makĩhũũrũka gĩcigĩ kĩmwe na ngatĩ, njogũ, na nyamũ cia gĩthaka ĩngĩ. Mũtũũrĩre wao wa arĩithi na mĩĩtĩkĩro ya tene nĩĩteithĩtie kũrĩria matũũra manene ma gĩthaka.",
+    "animalsTitle": "Nyamũ Theru na Mĩĩtĩkĩro",
+    "animals": {
+      "cattle": {
+        "name": "Ngũkũ",
+        "desc": "Kĩheo kĩtheru kuuma kũ Enkai (Ngai), kĩ na bata kũ ũmenyekani na kũtũũra kwa andũ a Maasai"
+      },
+      "lions": {
+        "name": "Ngatĩ",
+        "desc": "Ciathĩĩtwo nĩ cia ũcamba; tene ciachũĩtwo nĩ njamba kwa mĩario ya gũkũra"
+      },
+      "elephants": {
+        "name": "Njogũ",
+        "desc": "Ciathĩĩtwo nĩ ũũgĩ na hinya; cĩrĩrĩagwo na kũrĩria kwa tene"
+      },
+      "giraffes": {
+        "name": "Ndũĩga",
+        "desc": "Cionekanaga ta nyamũ njega cĩhũũrũkaga matũũra mao ma irio"
+      }
+    }
+  },
+  "antiques": {
+    "title": "Indo cia Tene na Indo cia Kale",
+    "description": "Andũ a Maasai maũmbĩte indo cia kũũmĩrĩka, indo cia ũta, na indo cia kũĩtĩkĩra mĩaka mĩingĩ. Indo ĩci cĩonanĩria ũtonga wao wa mĩtũũrĩre na cĩrĩrĩraga gũkorwo cĩĩndu cia ũmenyekani na mĩtũũrĩre.",
+    "button": "Thĩĩ Ndũka",
+    "rungu": {
+      "name": "Rungu (Mũtĩ wa Gũtũpa)",
+      "desc": "Mũtĩ wa tene ũrĩa ũtũmĩkagwo nĩ njamba nĩ gũkũnga na kũua"
+    },
+    "shuka": {
+      "name": "Shuka (Ngũo Mũthune)",
+      "desc": "Ngũo mũthune ĩmenyekete ĩhumbagwo ta ngũo ya tene"
+    },
+    "beadedJewelry": {
+      "name": "Indo cia Shanga",
+      "desc": "Wĩra wa shanga ũrĩa ũonanĩria ũmenyekani, mĩaka, na ũmenyekani"
+    },
+    "spear": {
+      "name": "Mũũ (Enkudi)",
+      "desc": "Kĩndũ kĩa ũrũme na kĩndũ kĩa mbere kĩa njamba cia Gĩmaasai"
+    },
+    "shield": {
+      "name": "Ngũbũ (Olongu)",
+      "desc": "Ngũbũ cia kũsĩngĩra cĩapakĩtwo mĩthĩo ya kũũmĩrĩka yonanĩria ũmenyekani wa nyũmba"
+    },
+    "calabash": {
+      "name": "Gĩnya (Enkukuri)",
+      "desc": "Indo cia gĩnya cĩtũmĩkagwo kũrĩria mũthanyiko wa iria na thakame"
+    }
+  },
+  "preserve": {
+    "title": "Tũteithĩe Kũrĩria Ũtonga wa Gĩmaasai",
+    "description": "Ũrĩ na rũgano, mbaisĩ, kana ũmenyo wa kũneenana ũhoro wa mĩtũũrĩre ya Gĩmaasai?",
+    "button": "Tĩa kũ Peisi Ĩno"
+  }
+},
+
+
+
+
+
+
+
+
+ "about": {
+    "hero": {
+      "title": "Ũhoro wa Magical Africa",
+      "tagline": "Gũtũũra Thĩmu cia Afrika. Gũtega mĩrĩ. Gũaka mũcemanio."
+    },
+    "background": {
+      "sectionTitle": "Ũhoro",
+      "sectionTitleHighlight": "Witũ",
+      "paragraph1": "Magical.africa nĩ kĩama kĩa Pan-African gĩkĩruta wĩra harĩa thĩmu cia Afrika, mĩtugo, ũhoti, na tekinolojia ikũmanĩrĩire. Tũrĩ tũteithĩrie gũtũmĩka, gũkũra, na kũgĩa thĩmu cia mĩrĩ bũrũri wothe.",
+      "paragraph2": "Thĩmu cia Afrika nĩ cia bata mũno kwa ũhoti, maisha, na ũmwe wa mĩrĩ, no cinyingi itirĩ igĩtũmĩka wega mĩthemba ya thirikari na ngʼahi cia dijitali. Magical Africa nĩgũthondeka thĩna ũyũ na njĩra ya kũringa mĩrĩ na ũigana ũkũmaũra arĩa mamenye, arutani, atafiti, na aitũ a tekinolojia.",
+      "paragraph3": "Kwa gũtũmĩra tekinolojia ta kĩheo gĩa gũteithia ti gũcenjia tũteithagĩa gũtũika thĩmu cia Afrika na ũmenyo wa mĩtugo mĩthemba ya rĩu na njĩra ya wega, gũtũika andũ othe, na kũgĩa."
+    },
+    "approach": {
+      "title": "Njĩra Yitũ",
+      "description": "Tũnyitanĩtie mĩtugo, tekinolojia, na ũhoti gũtega mĩrĩ na gũtũũra ũthamaki wa Afrika.",
+      "items": {
+        "communityOwnership": "Ũnini wa Mĩrĩ",
+        "ethicalStewardship": "Gũteithĩria kwa Wega",
+        "sustainableImpact": "Gũteithĩria Kũgĩa",
+        "localPanAfrican": "Wa Gũkũ na Pan-African"
+      }
+    },
+    "whatWeDo": {
+      "title": "Ũndũ Tũrũtaga",
+      "slides": {
+        "datastewardship": {
+          "title": "Gũteithĩria Data ya Thĩmu na Mĩtugo ya Afrika",
+          "description": "Tũrũtagĩra wĩra na mĩrĩ gũandĩka, gũteithĩria, na gũtũũra thĩmu na mĩtugo ya Afrika na njĩra ihooyaga mũtũgo wa gũkũ, ũhoro, na maũndũ ma bata. Wĩra witũ nĩ ũtwĩte:",
+          "items": [
+            "Rũthĩmu rwa kwaria na mĩtugo ya kamũũrĩ",
+            "Mĩtugo ya gũthikĩrĩrio na maũndũ ma mũthenya",
+            "Gũandĩka ũthamaki wa mĩtugo",
+            "Gũandĩka thĩmu nyingi bũrũri wothe wa Afrika"
+          ]
+        },
+        "aiDataCollection": {
+          "title": "Gũkũũra Data ya AI ĩrĩngaga Mĩrĩ",
+          "description": "Magical Africa nĩyandĩkaga na nĩtongoria njĩra ya gũkũũra data ya wega ĩtongoriwo nĩ mĩrĩ ĩteithagĩa kugeithia AI ĩtũĩkaga thĩmu cia Afrika. Tũrĩngaga:",
+          "items": [
+            "Mũgambo, gũandĩka, na data ya mĩthemba mĩingi",
+            "Maũndũ ma gũtũmĩra ma kweli (ũhoti, mĩtugo, maisha)",
+            "Gũtũmĩra wega na gũriha",
+            "Gũteithĩria data na ũhoro"
+          ]
+        },
+        "education": {
+          "title": "Mĩrimo ya Ũhoti na Ũmenyo wa Mĩtugo",
+          "description": "Tũrũtagĩra wĩra thukuru, maũndũ ma gũthoma, na maũndũ ma mĩtugo mĩthemba mĩingi ya Afrika gũteithĩa gũthoma rũthĩmu, gũtwara ũmenyo, na gũcenjia gatĩgatĩ ka miaka. Tũrĩngaga:",
+          "items": [
+            "Maũndũ ma gũthoma thĩmu nyingi",
+            "Ũmenyo wa kamũũrĩ na ngano",
+            "Mĩhuko na mĩtugo ya kĩĩaro",
+            "Gũtũmĩra rĩĩka rĩa ũhoti na ũbuni"
+          ]
+        }
+      }
+    },
+    "principles": {
+      "title": "Mĩĩhigo Yitũ",
+      "items": [
+        "Pan-African na njĩra - ĩmĩkĩrĩire gũkũ, ĩnyitanĩtie bũrũri wothe",
+        "Mĩrĩ Mbere - Mĩrĩ nĩ aitũ, ti maũndũ ma data",
+        "Wega na Kũambĩrĩria - Mũĩrĩtu, kwĩhokeka, na thĩrĩ itingĩtarĩkwo",
+        "Gũtiĩra Mĩtugo - Rũthĩmu na mĩtugo nĩ mĩthemba ĩrĩ muoyo",
+        "Kwĩyũrũka na Gũkũũrana - Tũteithagĩa ũmenyo wĩyũrũka na gũthoma hamwe",
+        "AI ĩrĩngaga Andũ - Tekinolojia nĩya gũtũmĩkĩra andũ, ti kwĩhoya"
+      ]
+    },
+    "ai": {
+      "title": "Ũndũ Tũtũmĩraga AI",
+      "sections": {
+        "preparingData": {
+          "title": "Gũthondeka Data kwa AI ĩtũĩkaga Othe",
+          "items": [
+            "Gũtũa kwaria (ASR)",
+            "Gũandĩka-kũũrũka-mũgambo (TTS)",
+            "Vĩheo vya gũthoma vya mũgambo",
+            "Mĩrimo ya ũhoti na mĩtugo ya mĩthemba mĩingi"
+          ]
+        },
+        "research": {
+          "title": "Ũtafiti na Gũthima Wega Gũteithĩo nĩ AI",
+          "items": [
+            "Teithĩa na njĩra ya gũandĩka na kũĩguĩra",
+            "Wona thĩna wa kũgĩa rũthĩmu",
+            "Teithĩa gũthima wega ithaa hamwe na kwĩhokeka kwa andũ"
+          ]
+        },
+        "communityTools": {
+          "title": "Vĩheo Vĩtongoriwo nĩ Mĩrĩ",
+          "items": [
+            "Vĩheo vya gũthoma vĩteithĩo nĩ AI",
+            "Vĩheo vya ũhoti vya mũgambo na mĩthemba mĩingi",
+            "Maũndũ ma gũandĩka mĩtugo"
+          ]
+        }
+      }
+    },
+    "partners": {
+      "title": "Tũrũtagĩra Wĩra na Ai",
+      "description": "Tũrũtagĩra wĩra bũrũri wa Afrika na"
+    },
+    "team": {
+      "title": "Menyera Kĩama",
+      "description": "Mĩĩrio ya ngoro inyuma ya Magical Africa",
+      "members": {
+        "gloria": {
+          "name": "Gloria Machoka",
+          "role": "Mũtũmbũki Mwitũ"
+        },
+        "steve": {
+          "name": "Steve Kombo",
+          "role": "Mũtũmbũki"
+        },
+        "joel": {
+          "name": "Joel Makori",
+          "role": "Mũtongoria wa Ũigana wa Mĩrĩ"
+        }
+      }
+    },
+    "cta": {
+      "title": "Witũe Hamwe Gũtũũra Ngano ya Afrika ya Kweli",
+      "description": "Afrika ndĩĩhooyaga kũĩguĩrwo nĩ andũ a nja. Tũgatwara ngano yitũ tũengi na wĩhoko, na ũhoro, na ũbuni, na ũrĩri.",
+      "buttons": {
+        "contribute": "Tũmĩra Ngano Yaku",
+        "explore": "Rora Mĩrĩ",
+        "contact": "Ĩtũngĩria Ithũĩ"
+      }
+    }
+  }
+
 }

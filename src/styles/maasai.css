@@ -7,9 +7,9 @@
   line-height: 1.5rem;
   }
 
-.hero-section{
+.heroSection{
   height: 100vh;
-  background-image: url(images/maasai-women.jpg) !important;
+  background-image: url(/images/maasai-women.jpg) ;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
