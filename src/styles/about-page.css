@@ -310,15 +310,17 @@ border: 50%;
 }
 
 .img-a img{
-  width: 60%;
+  width: 40%;
 }
 
 .img-b img{
   width: 80%;
 }
 
+
+
 .img-d img{
-width: 40%;
+width: 30%;
 }
 
 
@@ -397,6 +399,12 @@ width: 40%;
   }
   .partner-a{
     height: 200px;
+  }
+  .working-with p{
+    padding-top: 2rem;
+  }
+  .partnering{
+    padding-top: 4rem;
   }
 }
 

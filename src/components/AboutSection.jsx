@@ -34,12 +34,12 @@ const AboutSection = () => {
 
   return (
     <section className="about-section">
-      <h1>{t('about.title')}</h1>
+      <h1>{t('about2.title')}</h1>
 
-      <p>{t('about.description')}</p>
+      <p>{t('about2.description')}</p>
 
       <button className="learn-more2" onClick={() => navigate('/about')}>
-        {t('about.learnMore')}
+        {t('about2.learnMore')}
       </button>
     </section>
   );

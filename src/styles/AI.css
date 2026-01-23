@@ -18,7 +18,7 @@
     justify-content: center;
     padding-left: 3rem;
     padding-right: 3rem;
-    gap: 30px;
+    gap: 80px;
   }
 
   .AI-section::before{
@@ -36,26 +36,34 @@
   .AI-section h1{
     color: white;
     z-index: 2;
+    text-align: center;
   }
 
   .AI-boxes{
     display: flex;
     flex-direction: row;
     width: 100%;
-    gap: 20px;
+    gap: 50px;
     z-index: 2;
+    align-items: center;
+    justify-content: center;
   }
 
   .AI-1{
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    height: 220px;
+    gap: 25px;
+    height: 250px;
     width: 100%;
-    max-width: 360px;
+    max-width: 420px;
     padding: 1rem;
-    background-color: #0006;
+    background-color: rgba(0, 0, 0, 0.4);
     transition: 0.3s ease;
+  }
+
+  .AI-heading{
+    height: 100%;
+    max-height: 30px;
   }
 
   .AI-1:hover{
@@ -65,6 +73,7 @@
   .AI-1 h1{
     font-size: 1.2rem;
     color: white;
+    text-align: left;
   }
 
   .AI-1 p{
@@ -74,7 +83,7 @@
     flex-direction: row;
     align-items: center;
     gap: 10px;
-    
+    padding-bottom: 5px;
   }
 
   .AI-1 p span{
@@ -90,4 +99,12 @@
   .AI-boxes{
     flex-direction: column;
   }
+  }
+
+  @media screen and (max-width:480px) {
+    .AI-section{
+      height: fit-content;
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+    }
   }

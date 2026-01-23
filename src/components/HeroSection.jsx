@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from './Navbar';
+import CultureCard from './CultureCard';
 
 const heroSlides = [
   {
@@ -62,9 +63,13 @@ const HeroSection = ({ children, customContent, backgroundImage }) => {
       className="heroSection" 
       style={{ backgroundImage: `url(${bgImage})` }}
     >
+
       <Navbar />
 
-      {customContent ? (
+      <CultureCard />
+
+
+{customContent ? (
         customContent
       ) : (
         <>

@@ -29,7 +29,7 @@ const About = () => {
   const principles = t('about.principles.items', { returnObjects: true });
 
   const team = [
-    { name: t('about.team.members.gloria.name'), role: t('about.team.members.gloria.role'), image: '/images/Gloria.jpeg' },
+    { name: t('about.team.members.gloria.name'), role: t('about.team.members.gloria.role'), image: '/images/Gloria(1).jpeg' },
     { name: t('about.team.members.steve.name'), role: t('about.team.members.steve.role'), image: '/images/Steve.jpeg' },
     { name: t('about.team.members.joel.name'), role: t('about.team.members.joel.role'), image: '/images/Joel-Makori.jpeg' }
   ];
@@ -168,11 +168,15 @@ const About = () => {
 
       {/* AI Section */}
       <div className='AI-section' style={{ backgroundImage: `url('public/images/drums2.jpg')` }}>
-        <h1>{t('about.ai.title')}</h1>
 
-        <div className='AI-boxes'>
+    
+        <h1>{t('about.ai.title')}</h1>
+     <div className='AI-boxes'>
           <div className='AI-1'>
+            <div className='AI-heading'>
             <h1>{t('about.ai.sections.preparingData.title')}</h1>
+            </div>
+
             <div>
               {t('about.ai.sections.preparingData.items', { returnObjects: true }).map((item, idx) => (
                 <p key={idx}><span></span>{item}</p>
@@ -181,7 +185,9 @@ const About = () => {
           </div>
 
           <div className='AI-1'>
+            <div className='AI-heading'>
             <h1>{t('about.ai.sections.research.title')}</h1>
+            </div>
             <div>
               {t('about.ai.sections.research.items', { returnObjects: true }).map((item, idx) => (
                 <p key={idx}><span></span>{item}</p>
@@ -190,7 +196,9 @@ const About = () => {
           </div>
 
           <div className='AI-1'>
+            <div className='AI-heading'>
             <h1>{t('about.ai.sections.communityTools.title')}</h1>
+            </div>
             <div>
               {t('about.ai.sections.communityTools.items', { returnObjects: true }).map((item, idx) => (
                 <p key={idx}><span></span>{item}</p>

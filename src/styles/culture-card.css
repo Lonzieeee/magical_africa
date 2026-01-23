@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+  line-height: 1.5rem;
+}
+
+
+.culture-card{
+ position: absolute;
+ right: 3rem;
+ display: flex;
+ flex-direction: column;
+ background-color: rgb(0, 0,0, 0.4);
+ height: 100%;
+ max-height: 600px;
+ max-width: 350px;
+ width: 100%;
+ z-index: 2;
+}
