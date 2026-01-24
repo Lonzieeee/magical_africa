@@ -109,7 +109,8 @@
   "tribes": "Makabila",
   "about": "Kuhusu",
   "language": "Lugha",
-  "marketplace": "Soko"
+  "marketplace": "Soko",
+  "academy": "Akademia"
 },
 
 
@@ -781,6 +782,53 @@
         "explore": "Chunguza Jamii",
         "contact": "Wasiliana Nasi"
       }
+    }
+  },
+
+
+
+   "cultureCard": {
+    "phrases": {
+      "title": "Misemo",
+      "proverbLabel": "Methali ya siku:",
+      "proverb": "Udadisi ulimuua paka",
+      "descriptionLabel": "Maelezo:",
+      "description": "Usemi unaonyesha kuwa udadisi, ukiachwa bila kuzuiliwa, unaweza kuongoza mtu kwenye hali hatari.",
+      "teachingLabel": "Mafundisho:",
+      "teaching": "Maswali au matendo fulani yanaweza kuleta shida.",
+      "learnMore": "Jifunze Zaidi"
+    },
+    "music": {
+      "title": "Muziki wa Kitamaduni",
+      "intro": "Muziki wa Kiafrika ni miongoni mwa mila za muziki za zamani zaidi duniani, uliosukwa kwa kina katika maisha ya jamii kupitia sherehe, matamasha, hadithi, dansi, na mazoezi ya kiroho.",
+      "popularGenres": "Maarufu",
+      "musicGenres": "Aina za Muziki",
+      "genres": {
+        "djembe": "Muziki wa Djembe",
+        "maasai": "Nyimbo za Maasai",
+        "isicathamiya": "Isicathamiya",
+        "benga": "Muziki wa Benga"
+      },
+      "listenTitle": "Sikiliza Muziki wa Kiafrika",
+      "tracks": {
+        "djembe": "Midundo ya Jadi ya Djembe",
+        "afrobeat": "Afrobeat ya Kisasa"
+      },
+      "learnMore": "Jifunze Zaidi"
+    },
+    "events": {
+      "title": "Matukio ya Kitamaduni",
+      "intro": "Matukio ya kitamaduni ya Kiafrika yanasherehekea urithi kwa kuunganisha jamii kupitia muziki, dansi, sanaa, chakula, na hadithi, kuheshimu mila huku tukikubali utambulisho wa kisasa wa Kiafrika.",
+      "festivalTitle": "Tamasha la Urithi la Kila Mwaka",
+      "festivalDate": "Julai 2026",
+      "festivalDescription": "Sherehe ya wiki nzima yenye maonyesho ya dansi za jadi, mviringo za ngoma, maonyesho ya sanaa, na vyakula halisi vya Kiafrika kutoka bara zima.",
+      "categories": {
+        "music": "Muziki",
+        "dance": "Dansi",
+        "food": "Chakula"
+      },
+      "bookNow": "Weka Sasa",
+      "seeMore": "Tazama Zaidi"
     }
   }
 

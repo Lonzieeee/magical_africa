@@ -110,7 +110,8 @@
   "tribes": "Izizwe",
   "about": "Mayelana",
   "language": "Ulimi",
-  "marketplace": "Imakethe"
+  "marketplace": "Imakethe",
+  "academy":"Akademi"
 },
 
 
@@ -785,6 +786,54 @@
         "explore": "Hlola Imiphakathi",
         "contact": "Xhumana Nathi"
       }
+    }
+  },
+
+
+
+
+   "cultureCard": {
+    "phrases": {
+      "title": "Izaga",
+      "proverbLabel": "Isaga sosuku:",
+      "proverb": "Ukufuna ukwazi kwabulala ikati",
+      "descriptionLabel": "Incazelo:",
+      "description": "Inkulumo ebonisa ukuthi ukufuna ukwazi, uma kungalawulwa, kungaholela emkhakheni ozingozini.",
+      "teachingLabel": "Isifundo:",
+      "teaching": "Imibuzo ethile noma izenzo zingaletha inkinga.",
+      "learnMore": "Funda Kabanzi"
+    },
+    "music": {
+      "title": "Umculo Wamasiko",
+      "intro": "Umculo wase-Afrika ungomunye wemikhuba yomculo emidala kakhulu emhlabeni, othandwe kakhulu ekuphileni komphakathi ngemicimbi, imibungazo, ukuxoxa izindaba, ukudansa, nezinqubo zokomoya.",
+      "popularGenres": "Okuthandwayo",
+      "musicGenres": "Izinhlobo Zomculo",
+      "genres": {
+        "djembe": "Umculo we-Djembe",
+        "maasai": "Amahubo ama-Maasai",
+        "isicathamiya": "Isicathamiya",
+        "benga": "Umculo we-Benga"
+      },
+      "listenTitle": "Lalela Umculo Wase-Afrika",
+      "tracks": {
+        "djembe": "Amasingqi e-Djembe Esintu",
+        "afrobeat": "I-Afrobeat Yesimanje"
+      },
+      "learnMore": "Funda Kabanzi"
+    },
+    "events": {
+      "title": "Imicimbi Yamasiko",
+      "intro": "Imicimbi yamasiko yase-Afrika igubha ifa ngokuhlanganisa imiphakathi ngomculo, ukudansa, ubuciko, ukudla, nokuxoxa izindaba, ihlonipha isiko ngenkathi yamukela ubunikazi bamanje base-Afrika.",
+      "festivalTitle": "Umkhosi Wefa Wonyaka",
+      "festivalDate": "Julayi 2026",
+      "festivalDescription": "Umgubho weviki elilodwa onezikhombisa zokudansa kwesintu, izindilinga zamasumba, imibukiso yobuciko, nokudla kwe-Afrika kweqiniso okuvela ezwenikazi lonke.",
+      "categories": {
+        "music": "Umculo",
+        "dance": "Ukudansa",
+        "food": "Ukudla"
+      },
+      "bookNow": "Bhukha Manje",
+      "seeMore": "Bona Okuningi"
     }
   }
 

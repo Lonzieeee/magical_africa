@@ -110,7 +110,8 @@
   "tribes": "Mĩhĩrĩga",
   "about": "Ũhoro",
   "language": "Rũthiomi",
-  "marketplace": "Ndũka"
+  "marketplace": "Ndũka",
+  "academy": "Akademi"
 },
 
 
@@ -714,6 +715,55 @@
         "explore": "Rora Mĩrĩ",
         "contact": "Ĩtũngĩria Ithũĩ"
       }
+    }
+  },
+
+
+
+
+
+   "cultureCard": {
+    "phrases": {
+      "title": "Thimo",
+      "proverbLabel": "Thimo ya ũmũthĩ:",
+      "proverb": "Kwenda kũmenya nĩkwo kwaragire mbiũ",
+      "descriptionLabel": "Ũtaũri:",
+      "description": "Kiugo kĩronyania atĩ kwenda kũmenya, rĩrĩa gũtarĩ kĩũigite, no gĩtũme mũndũ atoonye ũgwati-inĩ wa thĩĩna.",
+      "teachingLabel": "Ũrutani:",
+      "teaching": "Ciũria ciumwe kana maũndũ no matũme thĩĩna.",
+      "learnMore": "Menya Maũndũ Mangĩ"
+    },
+    "music": {
+      "title": "Mũkano wa Mũtũũrĩre",
+      "intro": "Mũkano wa Afrika nĩ ũmwe wa mĩtũũrĩre ya mũkano ya tene mũno thĩ-inĩ, ũrĩ ũndũ ũrĩa ũtangĩkĩrĩka na mũtũũrĩre wa andũ na ũndũ wa maũndũ, ikũngũĩro, ũhoro, kũina, na maũndũ ma ũhooi.",
+      "popularGenres": "Iria Iendeetwo",
+      "musicGenres": "Mĩthemba ya Mũkano",
+      "genres": {
+        "djembe": "Mũkano wa Djembe",
+        "maasai": "Nyĩmbo cia Maasai",
+        "isicathamiya": "Isicathamiya",
+        "benga": "Mũkano wa Benga"
+      },
+      "listenTitle": "Thikĩrĩria Mũkano wa Afrika",
+      "tracks": {
+        "djembe": "Mĩthiĩo ya Tene ya Djembe",
+        "afrobeat": "Afrobeat ya Ũmũthĩ"
+      },
+      "learnMore": "Menya Maũndũ Mangĩ"
+    },
+    "events": {
+      "title": "Maũndũ Ma Mũtũũrĩre",
+      "intro": "Maũndũ ma mũtũũrĩre ma Afrika magũngũyagia ũtũũre nĩ kũũnganĩrithia andũ na ũndũ wa mũkano, kũina, mĩhianano, irio, na kũheana ũhoro, ĩkĩĩthĩa mĩtũũrĩre ĩrĩa ĩkwĩtĩkĩra ũmenyi wa ũmũthĩ wa Afrika.",
+      "festivalTitle": "Gĩathĩ kĩa Ũtũũre kĩa Mwaka",
+      "festivalDate": "Mweri wa Mũgwanja 2026",
+      "festivalDescription": "Ikũngũĩro rĩa kiumia kĩmwe rĩrĩ na maũndũ ma kũina kwa tene, mĩgũnda ya ngoma, monya ma mĩhianano, na irio cia kĩla kĩndũ kĩa Afrika kuuma bũrũri wothe.",
+      "categories": {
+        "music": "Mũkano",
+        "dance": "Kũina",
+        "food": "Irio"
+      },
+      "bookNow": "Andĩka Ĩhinda Rĩu",
+      "seeMore": "Ona Maũndũ Mangĩ"
     }
   }
 

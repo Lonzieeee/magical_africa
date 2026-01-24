@@ -110,7 +110,8 @@
   "tribes": "Mĩsyĩ",
   "about": "Ũhoro",
   "language": "Lũthĩmo",
-  "marketplace": "Ndũka"
+  "marketplace": "Ndũka",
+    "academy": "Akademi"
 },
 
 
@@ -719,6 +720,55 @@
         "explore": "Lola Mii",
         "contact": "Neena na Ithwi"
       }
+    }
+  },
+
+
+
+
+
+   "cultureCard": {
+    "phrases": {
+      "title": "Nthimo",
+      "proverbLabel": "Mwĩthya wa ũmũthĩ:",
+      "proverb": "Wendete kũĩthya nĩyo yĩũitĩe mbiũ",
+      "descriptionLabel": "Ũtaũlĩo:",
+      "description": "Kĩambĩĩo kĩonania atĩ wendete wa kũĩthya, ũkaithya ũtakũsyokete, ũngĩtũma mũndũ atoonye maũndũ-inĩ ma ũthĩi.",
+      "teachingLabel": "Ũndũ ũtonanĩtie:",
+      "teaching": "Maũvoo mamwe kana matendo mekũleta thĩna.",
+      "learnMore": "Ĩthya Kĩĩngĩ"
+    },
+    "music": {
+      "title": "Mĩkano ya Ũtũũĩ",
+      "intro": "Mĩkano ya Afrika nĩyo ĩmwe wa ũtũũĩ wa mĩkano kũkũũ kũũ thĩ-inĩ, ĩkakolite kĩĩngĩ na maisha ma andũ kũlĩa maŨndũ, makũngũĩa, kũnena ngewa, kũina, na maũndũ ma ngai.",
+      "popularGenres": "Iria Iendeetwe",
+      "musicGenres": "Mĩthemba ya Mĩkano",
+      "genres": {
+        "djembe": "Mĩkano wa Djembe",
+        "maasai": "Nyĩmbo sya Maasai",
+        "isicathamiya": "Isicathamiya",
+        "benga": "Mĩkano wa Benga"
+      },
+      "listenTitle": "Thikĩĩia Mĩkano ya Afrika",
+      "tracks": {
+        "djembe": "Mĩthiĩo ya Ũtũũĩ ya Djembe",
+        "afrobeat": "Afrobeat ya Ũmũthĩ"
+      },
+      "learnMore": "Ĩthya Kĩĩngĩ"
+    },
+    "events": {
+      "title": "Maũndũ Ma Ũtũũĩ",
+      "intro": "Maũndũ ma ũtũũĩ ma Afrika makũngũĩa ũtũũĩ nĩ kũũnganĩthya andũ kũlĩa mĩkano, kũina, matini, ĩlya, na kũnena ngewa, ĩkĩĩthĩa ũtũũĩ na ũkũmenyithya ũmwe wa ũmũthĩ wa Afrika.",
+      "festivalTitle": "Ngũngũĩo ya Ũtũũĩ ya Mwaka",
+      "festivalDate": "Mwea wa Mũgwanja 2026",
+      "festivalDescription": "Makũngũĩa ma wĩĩa mũmwe na mona ma kũina kwa ũtũũĩ, mĩthĩo ya ngoma, mona ma matini, na ĩlya ya kĩla kĩĩndũ kya Afrika ĩkĩuma bala nzĩma.",
+      "categories": {
+        "music": "Mĩkano",
+        "dance": "Kũina",
+        "food": "Ĩlya"
+      },
+      "bookNow": "Ũkia Ĩu",
+      "seeMore": "Ona Kĩĩngĩ"
     }
   }
 

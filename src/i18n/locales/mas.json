@@ -109,7 +109,8 @@
   "tribes": "Iloshon",
   "about": "Tenebo",
   "language": "Enkutuk",
-  "marketplace": "Enkáng'"
+  "marketplace": "Enkáng'",
+  "academy": "ol aadet"
 },
 
 
@@ -714,6 +715,54 @@
         "explore": "Eitobiru Inkituaak",
         "contact": "Eitoki Enye"
       }
+    }
+  },
+
+
+
+
+   "cultureCard": {
+    "phrases": {
+      "title": "Inkutet",
+      "proverbLabel": "Enkutoto e nkare:",
+      "proverb": "Enkanyit eitubua nkishu",
+      "descriptionLabel": "Enkutoto:",
+      "description": "Enkutoto eitubua nkishu naa etubua olkeri meata esidai engishu.",
+      "teachingLabel": "Enkitoria:",
+      "teaching": "Inkibunga naakueny ai inkitobi kuna esidai taisere.",
+      "learnMore": "Iyiolo Kishomi"
+    },
+    "music": {
+      "title": "Enkishomi E Lturukul",
+      "intro": "Enkishomi e Afrika ore te nkishomi kitok naiborere oltau, neidim kishomi olowaru olong olpul nabo enkiguena, enkishomi, olotuno, oloshon, ai enkirikiet e laibon.",
+      "popularGenres": "Naaisiankiki",
+      "musicGenres": "Inkishomi Naadiffa",
+      "genres": {
+        "djembe": "Enkishomi E Djembe",
+        "maasai": "Enkishomi E Maasai",
+        "isicathamiya": "Isicathamiya",
+        "benga": "Enkishomi E Benga"
+      },
+      "listenTitle": "Iruku Enkishomi E Afrika",
+      "tracks": {
+        "djembe": "Enkishomi E Djembe E Lturukul",
+        "afrobeat": "Afrobeat E Sapuk"
+      },
+      "learnMore": "Iyiolo Kishomi"
+    },
+    "events": {
+      "title": "Inkiguena E Lturukul",
+      "intro": "Inkiguena e lturukul e Afrika eyiolou ilmurran nabo olotuno, oloshon, enkishomi, olkeri ai olterito, naitashe lturukul aiyiolo enkop e sapuk e Afrika.",
+      "festivalTitle": "Olkiguena Kulo Lari",
+      "festivalDate": "Olapa Koishuonkoi 2026",
+      "festivalDescription": "Enkiguena e wiki nabo enkitomon olowaru olong nabo oloshon e lturukul, olkinyapaa, ai olkeri ore te Afrika enkolong tonke.",
+      "categories": {
+        "music": "Enkishomi",
+        "dance": "Oloshon",
+        "food": "Olkeri"
+      },
+      "bookNow": "Ibeek Sapuk",
+      "seeMore": "Inyor Kishomi"
     }
   }
 

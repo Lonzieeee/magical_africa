@@ -111,7 +111,8 @@
   "tribes": "Ebo",
   "about": "Maka",
   "language": "Asụsụ",
-  "marketplace": "Ahịa"
+  "marketplace": "Ahịa",
+   "academy": "Akadẹmi"
 },
 
 
@@ -788,6 +789,55 @@
         "explore": "Chọpụta Obodo Dị Iche Iche",
         "contact": "Kpọtụrụ Anyị"
       }
+    }
+  },
+
+
+
+
+
+  "cultureCard": {
+    "phrases": {
+      "title": "Okwu Amamihe",
+      "proverbLabel": "Ilu nke ụbọchị:",
+      "proverb": "Ịchọ ịma ihe gburu nwamba",
+      "descriptionLabel": "Nkọwa:",
+      "description": "Okwu na-egosi na ịchọ ịma ihe, mgbe a na-adịghị achịkwa ya, nwere ike iduba mmadụ n'ọnọdụ dị ize ndụ.",
+      "teachingLabel": "Nkuzi:",
+      "teaching": "Ụfọdụ ajụjụ ma ọ bụ omume nwere ike iweta nsogbu.",
+      "learnMore": "Mụtakwuo"
+    },
+    "music": {
+      "title": "Egwu Omenala",
+      "intro": "Egwu Afrika bụ otu n'ime omenala egwu kacha ochie n'ụwa, nke ejikọtara n'ime ndụ obodo site na emume, mmemme, ịkọ akụkọ, ịgba egwu, na omume ime mmụọ.",
+      "popularGenres": "Ndị a ma ama",
+      "musicGenres": "Ụdị Egwu",
+      "genres": {
+        "djembe": "Egwu Djembe",
+        "maasai": "Ukwe Maasai",
+        "isicathamiya": "Isicathamiya",
+        "benga": "Egwu Benga"
+      },
+      "listenTitle": "Gee Egwu Afrika",
+      "tracks": {
+        "djembe": "Ụda Djembe Omenala",
+        "afrobeat": "Afrobeat Ọgbara Ọhụrụ"
+      },
+      "learnMore": "Mụtakwuo"
+    },
+    "events": {
+      "title": "Emume Omenala",
+      "intro": "Emume omenala Afrika na-eme ememe ihe nketa site n'ijikọ obodo ọnụ site na egwu, ịgba egwu, nka, nri, na ịkọ akụkọ, na-asọpụrụ omenala ebe ha na-anabata njirimara Afrika nke oge a.",
+      "festivalTitle": "Emume Ihe Nketa Kwa Afọ",
+      "festivalDate": "Julaị 2026",
+      "festivalDescription": "Emume izu ụka gosipụtara ihe ngosi ịgba egwu omenala, okirikiri ịgba egwu, ihe ngosi nka, na nri Afrika ezigbo sitere na kọntinent dum.",
+      "categories": {
+        "music": "Egwu",
+        "dance": "Ịgba Egwu",
+        "food": "Nri"
+      },
+      "bookNow": "Debanye Aha Ugbu a",
+      "seeMore": "Hụkwuo"
     }
   }
 

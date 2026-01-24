@@ -780,5 +780,51 @@
         "contact": "Contact Us"
       }
     }
+  },
+
+
+  "cultureCard": {
+    "phrases": {
+      "title": "Phrases",
+      "proverbLabel": "Proverb of the day:",
+      "proverb": "Curiosity killed the cat",
+      "descriptionLabel": "Description:",
+      "description": "An expression suggesting that curiosity, when unchecked, can lead one into risky or dangerous situations.",
+      "teachingLabel": "Teaching:",
+      "teaching": "Some questions or actions can lead to trouble.",
+      "learnMore": "Learn More"
+    },
+    "music": {
+      "title": "Cultural Music",
+      "intro": "African music is one of the world's oldest traditions, deeply woven into community life through ceremonies, celebrations, storytelling, dance, and spiritual practices.",
+      "popularGenres": "Popular",
+      "musicGenres": "Music Genres",
+      "genres": {
+        "djembe": "Djembe Music",
+        "maasai": "Maasai chants",
+        "isicathamiya": "Isicathamiya",
+        "benga": "Benga music"
+      },
+      "listenTitle": "Listen to African Music",
+      "tracks": {
+        "djembe": "Traditional Djembe Rhythms",
+        "afrobeat": "Contemporary Afrobeat"
+      },
+      "learnMore": "Learn More"
+    },
+    "events": {
+      "title": "Cultural Events",
+      "intro": "African cultural events celebrate heritage by uniting communities through music, dance, art, food, and storytelling, honoring tradition while embracing modern African identity.",
+      "festivalTitle": "Annual Heritage Festival",
+      "festivalDate": "July 2026",
+      "festivalDescription": "A week-long celebration featuring traditional dance performances, drum circles, art exhibitions, and authentic African cuisine from across the continent.",
+      "categories": {
+        "music": "Music",
+        "dance": "Dance",
+        "food": "Food"
+      },
+      "bookNow": "Book Now",
+      "seeMore": "See More"
+    }
   }
 }
