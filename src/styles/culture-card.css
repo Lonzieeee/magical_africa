@@ -13,11 +13,17 @@
 .culture-card{
  position: absolute;
  right: 3rem;
+ 
  display: flex;
  flex-direction: column;
- background-color: rgb(0, 0,0, 0.4);
+ /*
+ background-image:url(/images/afrcan-pattern3.png);
+ */
+ background-position: center;
+ background-repeat: no-repeat;
+ background-size: cover;
  height: 100%;
- max-height: 600px;
+ max-height: 670px;
  max-width: 350px;
  width: 100%;
  padding: 0.5rem;
@@ -25,11 +31,30 @@ overflow: hidden;
  z-index: 2;
 }
 
+.culture-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: -1;
+}
+
 .culture-card h1{
   color: white;
-  text-align: center;
+ 
   font-size: 1.5rem;
   font-weight: 400;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.culture-card h1 i{
+  color: rgb(210,123,53);
 }
 
 .phrase{
@@ -42,8 +67,7 @@ overflow: hidden;
 .phrase p{
   display: flex;
   flex-direction: column;
-
-  font-size: 1rem;
+ font-size: 1rem;
   font-weight: 400;
   color: white;
   width: 100%;
@@ -57,16 +81,199 @@ display: flex;
 flex-direction: row;
 gap: 10px;
 align-items: center;
-
+padding-left: 1.5rem;
+}
+.phrase-head{
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px;
+  
+}
+.phrase-head i{
+  color: rgb(181,161,145);
+}
+.get-more{
+  padding: 0.5rem 2rem;
+  border: none;
+  background-color: #145a34;
+  color: white;
+  position: absolute;
+  bottom: 2rem;
+  font-weight: 600;
+}
+.get-more:hover{
+  background-color: #1f6f43;
 }
 
 .dot{
-width: 10px;
-height: 10px;
-background-color: rgb(210, 123,53) !important;
+width: 10px !important;
+height: 10px !important;
+background-color: rgb(181, 161, 145) !important;
 border-radius: 50%;
 }
 
+.music-text{
+  color: white;
+  padding-top: 2rem;
+  font-size: 0.875rem;
+}
+
+.some-music{
+  color: white;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+.some-music span{
+  color: rgb(181, 161,145);
+}
+
+.music-genres{
+  display: flex;
+  flex-direction: row;
+ gap: 10px;
+ flex-wrap: wrap;
+}
+
+.music-genres span{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 0.5rem;
+  color: white;
+  background-color: #145a34;
+  border: none;
+  font-size: 0.8rem;
+}
+
+.music-genres span:hover{
+  background-color: #1f6f43;
+}
+.listen-music{
+  color: white;
+  padding-top: 1rem;
+}
+
+
+
+
+
+.audio {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.audio-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.audio-title {
+  color: rgb(181,161,145);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.audio-player {
+  width: 100%;
+  height: 40px;
+  border-radius: 25px;
+  outline: none;
+}
+
+.audio-player::-webkit-media-controls-panel {
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 25px;
+}
+
+.event-text{
+  color: white;
+  padding-top: 2rem;
+  font-size: 0.875rem;
+}
+.event{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: white;
+  height: fit-content;
+  margin-top: 2rem;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.event-head{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  align-items: center;
+}
+.date-span{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 0.5rem;
+   font-size: 0.875rem;
+   background-color: rgb(210,123,53);
+   color: white;
+   width: fit-content;
+}
+.event-description{
+  font-size: 0.875rem;
+}
+.event-buttons{
+  display: flex;
+  flex-direction: row;
+ justify-content: space-between;
+}
+.event-type{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.event-type button{
+  border: none;
+ padding-left: 0.3rem;
+ padding-right: 0.3rem;
+  font-size: 0.6rem;
+}
+.book-event{
+  background-color: #145a34;
+  color: white;
+  padding: 0rem 0.5rem !important;
+  font-weight: 600;
+  border: none;
+}
+.see-more{
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(181, 161, 145);
+  text-align: center;
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.see-more2{
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(181, 161, 145);
+  text-align: center;
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+}
 
 .slider {
   display: flex;
@@ -102,7 +309,7 @@ border-radius: 50%;
 
 
 .nav-dot.active {
-  background-color: rgb(181, 161,145);
+  background-color: rgb(210,123,53);
 }
 
 
