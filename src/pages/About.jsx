@@ -107,7 +107,7 @@ const About = () => {
                 </div>
                 <div 
                   className="solution-image"
-                  style={{ backgroundImage: `url('public/images/kitenge.jpg')` }}
+                  style={{ backgroundImage: `url('/images/kitenge.jpg')` }}
                 ></div>
               </div>
 
@@ -124,7 +124,7 @@ const About = () => {
                 </div>
                 <div 
                   className="solution-image"
-                  style={{ backgroundImage: `url('public/images/learn-language.jpg')` }}
+                  style={{ backgroundImage: `url('/images/learn-language.jpg')` }}
                 ></div>
               </div>
 
@@ -141,7 +141,7 @@ const About = () => {
                 </div>
                 <div 
                   className="solution-image"
-                  style={{ backgroundImage: `url('public/images/Oromo.jpg')` }}
+                  style={{ backgroundImage: `url('/images/Oromo.jpg')` }}
                 ></div>
               </div>
             </div>
@@ -167,7 +167,7 @@ const About = () => {
       </section>
 
       {/* AI Section */}
-      <div className='AI-section' style={{ backgroundImage: `url('public/images/drums2.jpg')` }}>
+      <div className='AI-section' style={{ backgroundImage: `url('/images/drums2.jpg')` }}>
 
     
         <h1>{t('about.ai.title')}</h1>
@@ -215,16 +215,16 @@ const About = () => {
 
         <div className='partnering img-a'>
           <div className='partner-a'>
-            <img src="public/images/aws.webp" alt="AWS" />
+            <img src="/images/aws.webp" alt="AWS" />
           </div>
           <div className='partner-a img-b'>
-            <img src="public/images/kuLogo.webp" alt="Kenyatta University" />
+            <img src="/images/kuLogo.webp" alt="Kenyatta University" />
           </div>
           <div className='partner-a img-c'>
-            <img src="public/images/download.png" alt="UNESCO" width={80} />
+            <img src="/images/download.png" alt="UNESCO" width={80} />
           </div>
           <div className='partner-a img-d'>
-            <img src="public/images/wikimedia.png" alt="Wikimedia Foundation" width={30} />
+            <img src="/images/wikimedia.png" alt="Wikimedia Foundation" width={30} />
           </div>
         </div>
       </div>
