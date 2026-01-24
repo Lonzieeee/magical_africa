@@ -80,22 +80,22 @@
 
 /* Different images for each leader */
 .leader-img1 {
-  background-image: url('images/African-storytelling.jpg');
+  background-image: url('/images/African-storytelling.jpg');
 }
 .leader-img2 {
-  background-image: url('images/drums.jpg');
+  background-image: url('/images/drums.jpg');
 }
 .leader-img3 {
-  background-image: url('images/explore-identity.jpg');
+  background-image: url('/images/explore-identity.jpg');
 }
 .leader-img4 {
-  background-image: url('images/hammer.jpg');
+  background-image: url('/images/hammer.jpg');
 }
 .leader-img5 {
-  background-image: url('images/explore-identity.jpg');
+  background-image: url('/images/explore-identity.jpg');
 }
 .leader-img6 {
-  background-image: url('images/Igbo.jpg');
+  background-image: url('/images/Igbo.jpg');
 }
 
 .leader-info {

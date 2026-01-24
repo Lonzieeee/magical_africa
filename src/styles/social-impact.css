@@ -61,7 +61,7 @@
 
 .impact1{
   height: 500px;
- background-image: url(images/maasai-necklaces.jpg);
+ background-image: url(/images/maasai-necklaces.jpg);
  background-position: center;
  background-repeat: no-repeat;
  background-size: cover;
@@ -122,7 +122,7 @@ opacity: 1;
   background-color: rgb(181, 161, 145) ;
 }
 .impact2{
- background-image: url(images/side-view-people-garage-sale.jpg);
+ background-image: url(/images/side-view-people-garage-sale.jpg);
   background-position: center;
  background-repeat: no-repeat;
  background-size: cover;

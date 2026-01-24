@@ -64,27 +64,27 @@
 
 /* Placeholder images - replace with actual images */
 .antique-img1 {
-  background-image: url(images/African-storytelling.jpg);
+  background-image: url(/images/African-storytelling.jpg);
 }
 
 .antique-img2 {
-  background-image: url(images/kitenge.jpg);
+  background-image: url(/images/kitenge.jpg);
 }
 
 .antique-img3 {
-  background-image: url(images/drums.jpg);
+  background-image: url(/images/drums.jpg);
 }
 
 .antique-img4 {
-  background-image: url(images/explore-identity.jpg);
+  background-image: url(/images/explore-identity.jpg);
 }
 
 .antique-img5 {
-  background-image: url(images/hammer.jpg);
+  background-image: url(/images/hammer.jpg);
 }
 
 .antique-img6 {
-  background-image: url(images/maasai-livestock.jpg);
+  background-image: url(/images/maasai-livestock.jpg);
 }
 
 .antique-info {
