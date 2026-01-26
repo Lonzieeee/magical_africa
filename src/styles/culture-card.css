@@ -29,7 +29,18 @@
  padding: 0.5rem;
 overflow: hidden; 
  z-index: 2;
+
+  /* Initial state - hidden and positioned off-screen */
+  opacity: 0;
+  transform: translateX(100%);
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
+
+.culture-card.slide-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
 
 .culture-card::before {
   content: '';

@@ -1,13 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
 import '../styles/culture-card.css';
 
 const CultureCard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
   const { t } = useTranslation();
 
+  useEffect(() => {
+    // Trigger the animation after a small delay
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
-    <div className='culture-card'>
+    <div className={`culture-card ${isVisible ? 'slide-in' : ''}`}>
 
       {/* SLIDER */}
       <div
