@@ -31,7 +31,8 @@ const About = () => {
   const team = [
     { name: t('about.team.members.gloria.name'), role: t('about.team.members.gloria.role'), image: '/images/Gloria(1).jpeg' },
     { name: t('about.team.members.steve.name'), role: t('about.team.members.steve.role'), image: '/images/Steve.jpeg' },
-    { name: t('about.team.members.joel.name'), role: t('about.team.members.joel.role'), image: '/images/Joel-Makori.jpeg' }
+    { name: t('about.team.members.joel.name'), role: t('about.team.members.joel.role'), image: '/images/Joel-Makori.jpeg' },
+     { name: t('about.team.members.Edewait.name'), role: t('about.team.members.Edewait.role'), image: '/images/Edwait.jpeg' }
   ];
 
   return (
