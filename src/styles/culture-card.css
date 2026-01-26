@@ -177,7 +177,8 @@ border-radius: 50%;
 }
 
 .audio-player {
-  width: 100%;
+  width: 100% !important;
+  max-width: 400px;
   height: 40px;
   border-radius: 25px;
   outline: none;
