@@ -84,20 +84,97 @@
 .item3{
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 25px;
   align-items: center;
 }
 .item3 a{
   text-decoration: none;
   font-size: 0.875rem;
   color: white;
-  
-  
-}
+  }
+
 .item3 i{
   font-size: 1rem;
   color: white;
   
+}
+
+#academy{
+display: flex;
+flex-direction: row;
+gap: 10px;
+align-items: center;
+}
+
+#contact-us{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+
+.events-icon{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+
+
+/* Icon with Tooltip Wrapper */
+.icon-with-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+/* Tooltip Styling */
+.icon-tooltip {
+  position: absolute;
+  bottom: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 6px 12px;
+  
+  font-size: 0.75rem;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Tooltip Arrow */
+.icon-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #333;
+}
+
+/* Show tooltip on hover */
+.icon-with-tooltip:hover .icon-tooltip {
+  opacity: 1;
+  visibility: visible;
+  bottom: -40px;
+}
+
+/* Adjust for scrolled navbar */
+.navbar.scrolled .icon-tooltip {
+  background-color: rgba(51, 51, 51, 0.95);
+}
+
+.navbar.scrolled .icon-tooltip::before {
+  border-bottom-color: rgba(51, 51, 51, 0.95);
 }
 
 .navbar.scrolled {

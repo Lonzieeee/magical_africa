@@ -10,6 +10,7 @@ import '../styles/AI.css';
 const About = () => {
   const { t } = useTranslation();
   const [solutionSlide, setSolutionSlide] = useState(0);
+  const [hoveredMember, setHoveredMember] = useState(null);
 
   const nextSolution = () => {
     setSolutionSlide((prev) => (prev + 1) % 3);
@@ -29,10 +30,36 @@ const About = () => {
   const principles = t('about.principles.items', { returnObjects: true });
 
   const team = [
-    { name: t('about.team.members.gloria.name'), role: t('about.team.members.gloria.role'), image: '/images/Gloria(1).jpeg' },
-    { name: t('about.team.members.steve.name'), role: t('about.team.members.steve.role'), image: '/images/Steve.jpeg' },
-    { name: t('about.team.members.joel.name'), role: t('about.team.members.joel.role'), image: '/images/Joel-Makori.jpeg' },
-     { name: t('about.team.members.Edewait.name'), role: t('about.team.members.Edewait.role'), image: '/images/Edwait.jpeg' }
+
+    { 
+      name: t('about.team.members.steve.name'), 
+      role: t('about.team.members.steve.role'), 
+      image: '/images/Steve.jpeg',
+      bio: 'The visionary behind Magical Africa, dedicated to reclaiming African narratives, preserving cultural heritage, and bridging tradition with technology and education for future generations.',
+      
+    },
+    { 
+      name: t('about.team.members.gloria.name'), 
+      role: t('about.team.members.gloria.role'), 
+      image: '/images/Gloria(1).jpeg',
+      bio: 'Co-founder of Magical Africa, committed to preserving African heritage, empowering young voices, and shaping a future where culture, education, and technology thrive together.',
+      
+    },
+    
+    { 
+      name: t('about.team.members.joel.name'), 
+      role: t('about.team.members.joel.role'), 
+      image: '/images/Joel-Makori.jpeg',
+      bio: 'Community Engagement Manager at Magical Africa, focused on building meaningful relationships, empowering local voices, and strengthening connections between culture, people, and purpose.',
+     
+    },
+    { 
+      name: t('about.team.members.Edewait.name'), 
+      role: t('about.team.members.Edewait.role'), 
+      image: '/images/Edwait.jpeg',
+      bio: 'UI/UX Designer at Magical Africa, crafting intuitive and visually engaging digital experiences that blend African identity, creativity, and user-centered design.',
+     
+    }
   ];
 
   return (
@@ -169,15 +196,12 @@ const About = () => {
 
       {/* AI Section */}
       <div className='AI-section' style={{ backgroundImage: `url('/images/drums2.jpg')` }}>
-
-    
         <h1>{t('about.ai.title')}</h1>
-     <div className='AI-boxes'>
+        <div className='AI-boxes'>
           <div className='AI-1'>
             <div className='AI-heading'>
-            <h1>{t('about.ai.sections.preparingData.title')}</h1>
+              <h1>{t('about.ai.sections.preparingData.title')}</h1>
             </div>
-
             <div>
               {t('about.ai.sections.preparingData.items', { returnObjects: true }).map((item, idx) => (
                 <p key={idx}><span></span>{item}</p>
@@ -187,7 +211,7 @@ const About = () => {
 
           <div className='AI-1'>
             <div className='AI-heading'>
-            <h1>{t('about.ai.sections.research.title')}</h1>
+              <h1>{t('about.ai.sections.research.title')}</h1>
             </div>
             <div>
               {t('about.ai.sections.research.items', { returnObjects: true }).map((item, idx) => (
@@ -198,7 +222,7 @@ const About = () => {
 
           <div className='AI-1'>
             <div className='AI-heading'>
-            <h1>{t('about.ai.sections.communityTools.title')}</h1>
+              <h1>{t('about.ai.sections.communityTools.title')}</h1>
             </div>
             <div>
               {t('about.ai.sections.communityTools.items', { returnObjects: true }).map((item, idx) => (
@@ -230,17 +254,33 @@ const About = () => {
         </div>
       </div>
 
-      {/* Team Section */}
+      {/* Team Section with Hover Modal */}
       <section className="team">
         <h1>{t('about.team.title')}</h1>
         <p>{t('about.team.description')}</p>
 
         <div className="team-section">
           {team.map((member, index) => (
-            <div className="team1" key={index}>
+            <div 
+              className="team1" 
+              key={index}
+              onMouseEnter={() => setHoveredMember(index)}
+              onMouseLeave={() => setHoveredMember(null)}
+            >
               <div className="team1-image">
-                <img src={member.image} alt="" />
+                <img src={member.image} alt={member.name} />
+                
+                {/* Hover Modal Overlay */}
+                <div className={`team-modal-overlay ${hoveredMember === index ? 'active' : ''}`}>
+                  <div className="team-modal-content">
+                   
+                    
+                    <p className="modal-bio">{member.bio}</p>
+                   
+                  </div>
+                </div>
               </div>
+
               <div className="team1-text">
                 <p className="team-name">{member.name}</p>
                 <p>{member.role}</p>
