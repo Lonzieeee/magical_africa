@@ -5,6 +5,7 @@ import '../styles/culture-card.css';
 const CultureCard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [proverbLang, setProverbLang] = useState('eng'); // Track proverb language
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -15,6 +16,20 @@ const CultureCard = () => {
 
     return () => clearTimeout(timer);
   }, []);
+
+  // Proverb content in both languages
+  const proverbContent = {
+    eng: {
+      proverb: "Curiosity killed the cat",
+      explanation: "An expression suggesting that curiosity, when unchecked, can lead one into risky or dangerous situations.",
+      teaching: "Some questions or actions can lead to trouble."
+    },
+    kisw: {
+      proverb: "Udadisi uliua paka",
+      explanation: "Msemo unaonyesha kwamba udadisi, unapokuwa haujauzuiwa, unaweza kusababisha mtu kuingia katika hali hatari.",
+      teaching: "Maswali au vitendo fulani vinaweza kusababisha matatizo."
+    }
+  };
 
   return (
     <div className={`culture-card ${isVisible ? 'slide-in' : ''}`}>
@@ -30,18 +45,46 @@ const CultureCard = () => {
 
           <div className='phrase'>
             <p>  
-              <p className='phrase-head'> <i className="fa-solid fa-check"></i>{t('cultureCard.phrases.proverbLabel')}</p>
-              <span>{t('cultureCard.phrases.proverb')}</span>
+              <p className='phrase-head'> 
+                <i className="fa-solid fa-check"></i>{t('cultureCard.phrases.proverbLabel')}
+
+                <div className='phrase-language'>
+                  <button 
+                    className={proverbLang === 'eng' ? 'active' : ''}
+                    onClick={() => setProverbLang('eng')}
+                  >
+                    Eng
+                  </button>
+                  <button 
+                    className={proverbLang === 'kisw' ? 'active' : ''}
+                    onClick={() => setProverbLang('kisw')}
+                  >
+                    Kisw
+                  </button>
+                </div>
+              </p>
+
+              <span className='proverb-itself'>
+                {proverbContent[proverbLang].proverb}
+              </span>
             </p>
 
             <p> 
-              <p className='phrase-head'> <i className="fa-solid fa-check"></i>{t('cultureCard.phrases.descriptionLabel')}</p>
-              <span>{t('cultureCard.phrases.description')}</span>
+              <p className='phrase-head'> 
+                <i className="fa-solid fa-check"></i>{t('cultureCard.phrases.descriptionLabel')}
+              </p>
+              <span className='provern-explanation'>
+                {proverbContent[proverbLang].explanation}
+              </span>
             </p>
 
             <p> 
-              <p className='phrase-head'> <i className="fa-solid fa-check"></i>{t('cultureCard.phrases.teachingLabel')}</p>
-              <span>{t('cultureCard.phrases.teaching')}</span>
+              <p className='phrase-head'> 
+                <i className="fa-solid fa-check"></i>{t('cultureCard.phrases.teachingLabel')}
+              </p>
+              <span className='proverb-teaching'>
+                {proverbContent[proverbLang].teaching}
+              </span>
             </p>
           </div>
 

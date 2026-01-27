@@ -99,6 +99,17 @@ const SideMenu = ({ isOpen, onClose }) => {
             {t('sideMenu.academy')} <i className="fa-solid fa-chevron-right"></i>
 
           </li>
+          
+          <li>
+             Events
+           <i className="fa-solid fa-chevron-right"></i>
+           </li>
+
+          <li>
+            Music 
+            <i className="fa-solid fa-chevron-right"></i>  
+         </li>
+          
         </ul>
       </div>
     </div>

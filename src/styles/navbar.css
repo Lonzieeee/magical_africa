@@ -601,7 +601,9 @@ align-items: center;
 
 
 @media screen and (max-width:768px) {
- 
+ .events-icon{
+  display: none;
+ }
 
   .search-btn{
     opacity: 1;
