@@ -700,15 +700,40 @@
       "members": {
         "gloria": {
           "name": "Gloria Machoka",
-          "role": "Mwanzilisi Mwekeki"
+          "role": "Mwanzilisi Mwekeki",
+          "bio": "Mũthomi wa lugha ya Kisii ũkũhũũgagia ngano, mĩtũkĩ, na kũthũkũmĩsya andũ aasa kĩndũ kĩa dijithali."
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Mwanzilisi"
+          "role": "Mwanzilisi",
+          "bio": "Mũthomi wa lugha ya Kisii ũkũtũũra ngano, mĩtũkĩ ya mũromo, na ũmenyo wa kĩkũlũ."
         },
         "joel": {
           "name": "Joel Makori",
-          "role": "Munangai wa Kuikethania na Mii"
+          "role": "Munangai wa Kuikethania na Mii",
+          "bio": "Mũthomi wa lugha ya Luo ũkũtũũra ũtũũnũ wa lugha na ngano cia andũ a kĩlaa."
+        },
+         "Edewait": {
+          "name": "Edewait Eric",
+          "role": "Teso",
+          "bio": "Mũthomi wa lugha ya Teso ũkũhũũgagia ciugo, thimo, na mĩtũkĩ ya mũromo."
+
+        },
+
+        "lorna": {
+          "name": "Lorna Wanderi",
+          "role": "Kikuyu",
+          "bio" : "Mũthomi wa lugha ya Kikuyu ũkũhũũgagia thimo, ngano, na ũtũũnũ wa lugha."
+        },
+        "ian": {
+          "name": "Ian Cheruiyot",
+          "role" : "Kalenjin",
+          "bio" : "Mũthomi wa lugha ya Kalenjin ũkũtũũra mĩtũkĩ, ngano, na urithi wa lugha."
+        },
+        "collins": {
+          "name": "Collins Omondi",
+          "role": "Luo",
+          "bio": "Mũthomi wa lugha ya Luo ũkũteithia kũandĩka lugha, ngano, na ũtũũnũ wa andũ."
         }
       }
     },

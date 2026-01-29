@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -11,6 +11,27 @@ const About = () => {
   const { t } = useTranslation();
   const [solutionSlide, setSolutionSlide] = useState(0);
   const [hoveredMember, setHoveredMember] = useState(null);
+  const [teamSlide, setTeamSlide] = useState(0);
+  const [membersPerSlide, setMembersPerSlide] = useState(3);
+
+  // Update members per slide based on screen width
+  useEffect(() => {
+    const updateMembersPerSlide = () => {
+      if (window.innerWidth <= 480) {
+        setMembersPerSlide(1); // Mobile: 1 at a time
+      } else if (window.innerWidth <= 768) {
+        setMembersPerSlide(1); // Tablet: 2 at a time
+      } else {
+        setMembersPerSlide(3); // Desktop: 3 at a time
+      }
+      setTeamSlide(0); // Reset to first slide
+    };
+
+    updateMembersPerSlide();
+    window.addEventListener('resize', updateMembersPerSlide);
+    
+    return () => window.removeEventListener('resize', updateMembersPerSlide);
+  }, []);
 
   const nextSolution = () => {
     setSolutionSlide((prev) => (prev + 1) % 3);
@@ -30,37 +51,62 @@ const About = () => {
   const principles = t('about.principles.items', { returnObjects: true });
 
   const team = [
-
     { 
       name: t('about.team.members.steve.name'), 
       role: t('about.team.members.steve.role'), 
       image: '/images/Steve.jpeg',
-      bio: 'The visionary behind Magical Africa, dedicated to reclaiming African narratives, preserving cultural heritage, and bridging tradition with technology and education for future generations.',
-      
+      bio: t('about.team.members.steve.bio'),
     },
     { 
       name: t('about.team.members.gloria.name'), 
       role: t('about.team.members.gloria.role'), 
       image: '/images/Gloria(1).jpeg',
-      bio: 'Co-founder of Magical Africa, committed to preserving African heritage, empowering young voices, and shaping a future where culture, education, and technology thrive together.',
-      
+      bio: t('about.team.members.gloria.bio'),
     },
-    
     { 
       name: t('about.team.members.joel.name'), 
       role: t('about.team.members.joel.role'), 
       image: '/images/Joel-Makori.jpeg',
-      bio: 'Community Engagement Manager at Magical Africa, focused on building meaningful relationships, empowering local voices, and strengthening connections between culture, people, and purpose.',
-     
+      bio: t('about.team.members.joel.bio'),
     },
     { 
       name: t('about.team.members.Edewait.name'), 
       role: t('about.team.members.Edewait.role'), 
       image: '/images/Edwait.jpeg',
-      bio: 'UI/UX Designer at Magical Africa, crafting intuitive and visually engaging digital experiences that blend African identity, creativity, and user-centered design.',
-     
-    }
+      bio: t('about.team.members.Edewait.bio'),
+    },
+    { 
+      name: t('about.team.members.ian.name'), 
+      role: t('about.team.members.ian.role'), 
+      image: '/images/Gloria(1).jpeg',
+      bio: t('about.team.members.ian.bio'),
+    },
+    { 
+      name: t('about.team.members.lorna.name'), 
+      role: t('about.team.members.lorna.role'), 
+      image: '/images/Joel-Makori.jpeg',
+      bio: t('about.team.members.lorna.bio'),
+    },
+
+    { 
+      name: t('about.team.members.collins.name'), 
+      role: t('about.team.members.collins.role'), 
+      image: '/images/Joel-Makori.jpeg',
+      bio: t('about.team.members.collins.bio'),
+    },
+
+
   ];
+
+  const totalTeamSlides = Math.ceil(team.length / membersPerSlide);
+
+  const nextTeam = () => {
+    setTeamSlide((prev) => (prev + 1) % totalTeamSlides);
+  };
+
+  const prevTeam = () => {
+    setTeamSlide((prev) => (prev - 1 + totalTeamSlides) % totalTeamSlides);
+  };
 
   return (
     <>
@@ -254,39 +300,53 @@ const About = () => {
         </div>
       </div>
 
-      {/* Team Section with Hover Modal */}
+      {/* Team Section with Carousel */}
       <section className="team">
         <h1>{t('about.team.title')}</h1>
         <p>{t('about.team.description')}</p>
 
-        <div className="team-section">
-          {team.map((member, index) => (
+        <div className='team-carousel'>
+          <div className='chev-prev5' onClick={prevTeam}>
+            <i className="fa-solid fa-chevron-left" id='prev-btn5'></i>
+          </div>
+
+          <div className="team-section-wrapper">
             <div 
-              className="team1" 
-              key={index}
-              onMouseEnter={() => setHoveredMember(index)}
-              onMouseLeave={() => setHoveredMember(null)}
+              className="team-section"
+              style={{ 
+                transform: `translateX(-${teamSlide * 100}%)`,
+              }}
             >
-              <div className="team1-image">
-                <img src={member.image} alt={member.name} />
-                
-                {/* Hover Modal Overlay */}
-                <div className={`team-modal-overlay ${hoveredMember === index ? 'active' : ''}`}>
-                  <div className="team-modal-content">
-                   
+              {team.map((member, index) => (
+                <div 
+                  className="team1" 
+                  key={index}
+                  onMouseEnter={() => setHoveredMember(index)}
+                  onMouseLeave={() => setHoveredMember(null)}
+                >
+                  <div className="team1-image">
+                    <img src={member.image} alt={member.name} />
                     
-                    <p className="modal-bio">{member.bio}</p>
-                   
+                    {/* Hover Modal Overlay */}
+                    <div className={`team-modal-overlay ${hoveredMember === index ? 'active' : ''}`}>
+                      <div className="team-modal-content">
+                        <p className="modal-bio">{member.bio}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="team1-text">
+                    <p className="team-name">{member.name}</p>
+                    <p>{member.role}</p>
                   </div>
                 </div>
-              </div>
-
-              <div className="team1-text">
-                <p className="team-name">{member.name}</p>
-                <p>{member.role}</p>
-              </div>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div className='chev-next5' onClick={nextTeam}>
+            <i className="fa-solid fa-chevron-right" id='next-btn5'></i>
+          </div>
         </div>
       </section>
 

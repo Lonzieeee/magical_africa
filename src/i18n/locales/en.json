@@ -755,24 +755,46 @@
     },
     "team": {
       "title": "Meet The Team",
-      "description": "The passionate minds behind Magical Africa",
+      "description": "The Linguistic Experts",
       "members": {
         "gloria": {
           "name": "Gloria Machoka",
-          "role": "Cofounder"
+          "role": "Kisii",
+          "bio": "A Kisii linguistic expert passionate about documenting native expressions, storytelling, and empowering youth to preserve African languages digitally."
+          
         },
         "steve": {
-          "name": "Steve Kombo",
-          "role": "Founder"
+          "name": "steve Kombo",
+          "role": "Kisii",
+          "bio" : "A Kisii linguistic expert focused on preserving indigenous narratives, oral traditions, and cultural knowledge through education, research, and technology."
         },
         "joel": {
           "name": "Joel Makori",
-          "role": "Community Engagement Manager"
+          "role": "Luo",
+          "bio": "A Luo linguistic expert dedicated to capturing authentic language use, oral histories, and strengthening community-centered cultural preservation."
         },
           "Edewait": {
           "name": "Edewait Eric",
-          "role": "UI/UX Designer"
+          "role": "Teso",
+          "bio": "A Teso linguistic expert committed to preserving indigenous vocabulary, idioms, and oral traditions for future generations."
+        },
+
+        "lorna": {
+          "name": "Lorna Wanderi",
+          "role": "Kikuyu",
+          "bio" : "A Kikuyu linguistic expert specializing in proverbs, oral traditions, and preserving language authenticity across generations."
+        },
+        "ian": {
+          "name": "Ian Cheruiyot",
+          "role" : "Kalenjin",
+          "bio" : "A Kikuyu linguistic expert specializing in proverbs, oral traditions, and preserving language authenticity across generations."
+        },
+        "collins": {
+          "name": "Collins Omondi",
+          "role": "Luo",
+          "bio": "A Luo linguistic expert supporting accurate documentation of language, storytelling, and cultural identity."
         }
+        
       }
     },
     "cta": {

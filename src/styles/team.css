@@ -25,48 +25,49 @@
   padding-top: 1rem;
 }
 
+.team-carousel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+  padding-left: 9rem;
+  padding-right: 9rem;
+  margin-top: 4rem;
+}
+
+.team-section-wrapper {
+  overflow: hidden;
+  width: 100%;
+  flex: 1;
+}
+
 .team-section{
   display: flex;
   flex-direction: row;
-  gap: 30px;
-  margin-top: 4rem;
+  gap: 29px;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding-left: 3rem;
-  padding-right: 3rem;
   padding-bottom: 4rem;
+  transition: transform 0.5s ease;
 }
 
 .team1{
-height: 500px;
-width: 100%;
-max-width: 400px;
-background-color: white;
-padding: 1rem ;
-display: flex;
-flex-direction: column;
+  height: 500px;
+  min-width: calc((100% - 60px) / 3);
+  max-width: 400px;
+  background-color: white;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
 }
-
-/*
-.team1-image{
-flex: 2;
-background-image: url(images/Oromo.jpg);
-background-position: center;
-background-size: contain;
-background-repeat: no-repeat;
-
-
-}
-*/
-
 
 .team1-image {
   flex: 2;
   width: 100%;
   height: 280px;
- overflow: hidden;
- position: relative;
+  overflow: hidden;
+  position: relative;
 }
 
 .team1-image img {
@@ -82,24 +83,23 @@ background-repeat: no-repeat;
   transform: scale(1.05);
 }
 
-
 .team1-text{
-flex: 1;
-display: flex;
-flex-direction: column;
-align-items: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .team-name{
-color: #EA580C;
+  color: #EA580C;
 }
 
 .about-footer{
   display: flex;
   flex-direction: column;
- padding-top: 4rem;
- padding-bottom: 4rem;
- align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  align-items: center;
 }
 
 .about-footer-box{
@@ -111,13 +111,13 @@ color: #EA580C;
   border: 1px solid #e5e3e3;
   align-items: center;
 }
+
 .about-footer-box h1{
   font-size: 1.5rem;
 }
 
 .about-footer-box p{
   font-size: 1rem;
- 
   padding-top: 1.2rem;
 }
 
@@ -127,7 +127,6 @@ color: #EA580C;
   flex-direction: row;
   gap: 20px;
   align-items: center;
-  
 }
 
 .btn1{
@@ -137,39 +136,38 @@ color: #EA580C;
   padding: 0.5rem 1rem;
   font-weight: 600;
   transition: 0.3s ease;
+  cursor: pointer;
 }
+
 .btn1:hover{
-background-color: #145a34;
+  background-color: #145a34;
 }
+
 .btn2{
   background-color: transparent;
   border: none;
   background-color: rgb(181,161,145);
   color: white;
-   padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
   font-weight: 600;
-   transition: 0.3s ease;
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 
 .btn3{
-   background-color: transparent;
+  background-color: transparent;
   border: 1px solid rgb(181,161,145);
-   padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
   font-weight: 600;
   margin-top: 1.2rem;
-   transition: 0.3s ease;
+  transition: 0.3s ease;
+  cursor: pointer;
 }
 
 .btn3:hover{
   background-color: rgb(181,161,145);
   color: white;
 }
-
-
-/* Team Image Container - needs position relative for overlay */
-
-
-
 
 /* Modal Overlay */
 .team-modal-overlay {
@@ -205,6 +203,19 @@ background-color: #145a34;
   transform: translateY(0);
 }
 
+.chev-next5, .chev-prev5 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.chev-next5:hover, .chev-prev5:hover {
+  opacity: 0.7;
+}
 
 .modal-bio {
   font-size: 0.875rem !important;
@@ -213,76 +224,118 @@ background-color: #145a34;
   font-weight: 400;
 }
 
-
-
-
-
-
-
-
-
-
 @media screen and (min-width:1440px) {
   .team-section{
     padding-bottom: 5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
+
+ 
 
   .about-footer-box{
     padding: 3rem;
     max-width: 800px;
   }
+
   .about-footer-box p{
     padding-top: 1.5rem;
   }
+
   .about-footer-buttons{
     padding-top: 1.8rem;
   }
+
   .team1{
     height: 650px;
     max-width: 450px;
   }
+
   .team p{
     padding-top: 2rem;
   }
-  .team-section{
+
+  .team-carousel{
     margin-top: 6rem;
+  }
+
+  .team-section{
     padding-bottom: 6rem;
   }
+
   .team1{
     padding: 2rem;
   }
+
   .team1 p{
     padding-top: 1.5rem;
   }
 }
 
-@media screen and (max-width:480px){
+/* Tablet: Show 2 items at a time */
+@media screen and (max-width:768px){
+  .team-carousel{
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
   .team-section{
-    flex-direction: column;
+    gap: 0;
   }
+
+  .team1{
+    min-width: calc((100% - 28px) / 2);
+    max-width: none;
+    width: 550px;
+    height: 750px;
+    
+  }
+}
+
+/* Mobile: Show 1 item at a time */
+@media screen and (max-width:480px){
+  .team-carousel{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .team-section{
+    gap: 0px;
+  }
+
+  .team1{
+    min-width: 100%;
+    max-width: none;
+    width:250px ;
+    height: 600px;
+  }
+
   .about-footer-box{
-  border: none;
-  padding-left: 1rem;
-  padding-right: 1rem;
+    border: none;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
+
   .about-footer{
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }
+
   .about-footer-box p{
     text-align: left;
   }
+
   .about-footer-buttons{
     padding-top: 2rem;
   }
+
   .about-footer-box p{
     padding-top: 1.5rem;
   }
-  .team-section{
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-   .modal-bio {
+
+  .modal-bio {
     font-size: 0.75rem;
+  }
+
+  .chev-next5, .chev-prev5 {
+    padding: 0.5rem;
   }
 }

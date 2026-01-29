@@ -766,15 +766,39 @@
       "members": {
         "gloria": {
           "name": "Gloria Machoka",
-          "role": "Umsunguli Ohlanganyela"
+          "role": "Umsunguli Ohlanganyela",
+          "bio": "Uchwepheshe wolimi lwesiKisii ogxile ekugcineni izisho, izindaba, nokunika intsha amandla edijithali."
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Umsunguli"
+          "role": "Umsunguli",
+          "bio": "Uchwepheshe wolimi lwesiKisii ogxile ekuvikeleni izinganekwane, amasiko omlomo, nolwazi lwesintu."
         },
         "joel": {
           "name": "Joel Makori",
-          "role": "Umphathi Wokuxhumana Nomphakathi"
+          "role": "Umphathi Wokuxhumana Nomphakathi",
+          "bio": "Uchwepheshe wolimi lwesiLuo ogxile ekusetshenzisweni kolimi oluqondile nasezindabeni zomlomo zomphakathi."
+        },
+         "Edewait": {
+          "name": "Edewait Eric",
+          "role": "Teso",
+          "bio": "Uchwepheshe wolimi lwesiTeso ogxile ekugcineni amagama, izaga, namasiko omlomo."
+        },
+
+        "lorna": {
+          "name": "Lorna Wanderi",
+          "role": "Kikuyu",
+          "bio" : "Uchwepheshe wolimi lwesiKikuyu ogxile ezagweni, izinganekwane, nasekuqiniseni ubuqiniso bolimi."
+        },
+        "ian": {
+          "name": "Ian Cheruiyot",
+          "role" : "Kalenjin",
+          "bio" : "Uchwepheshe wolimi lwesiKalenjin ogxile ekuvikeleni izisho, izinganekwane, namagugu olimi."
+        },
+        "collins": {
+          "name": "Collins Omondi",
+          "role": "Luo",
+          "bio": "Uchwepheshe wolimi lwesiLuo ogxile ekubhaleni ulimi, izindaba, nobuwena besintu."
         }
       }
     },

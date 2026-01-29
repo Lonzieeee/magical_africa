@@ -695,16 +695,42 @@
       "members": {
         "gloria": {
           "name": "Gloria Machoka",
-          "role": "Onaitumoki Pamoja"
+          "role": "Onaitumoki Pamoja",
+          "bio": "Oloing’oni le Kisii oshi ilomonok ngano, olomonok le nkishon, nabo enkop a nkerai."
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Onaitumoki"
+          "role": "Onaitumoki",
+          "bio": "Oloing’oni le Kisii oleng’oni ilomonok, enkop, nabo olomonok leloito le nkishon nabo teknolojia."
         },
         "joel": {
           "name": "Joel Makori",
-          "role": "Oleilikanai oo Inkituaak"
+          "role": "Oleilikanai oo Inkituaak",
+          "bio": "Oloing’oni le Luo oshi ilomonok enkiguran, ngano leloito, nabo olopololi le nkishon."
+        },
+         "Edewait": {
+          "name": "Edewait Eric",
+          "role": "Teso",
+          "bio": "Oloing’oni le Teso oleng’oni ilomonok enchorro, ngano, nabo olomonok leloito."
+
+        },
+
+        "lorna": {
+          "name": "Lorna Wanderi",
+          "role": "Kikuyu",
+          "bio" : "Oloing’oni le Kikuyu oshi ilomonok ngano, thimo, nabo enkiguran olomonok."
+        },
+        "ian": {
+          "name": "Ian Cheruiyot",
+          "role" : "Kalenjin",
+          "bio" : "Oloing’oni le Kalenjin oshi ilomonok olomonok le nkishon, ngano nabo enkiguran."
+        },
+        "collins": {
+          "name": "Collins Omondi",
+          "role": "Luo",
+          "bio": "Oloing’oni le Luo oleng’oni ilomonok ngano, enkiguran, nabo olomonok le nkishon."
         }
+        
       }
     },
     "cta": {

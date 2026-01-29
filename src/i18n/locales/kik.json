@@ -695,15 +695,40 @@
       "members": {
         "gloria": {
           "name": "Gloria Machoka",
-          "role": "Mũtũmbũki Mwitũ"
+          "role": "Mũtũmbũki Mwitũ",
+          "bio": "Mũthomi wa rũrĩmĩ rwa Kisii ũrĩa wĩhũũgagia ngano, mĩhĩrĩga, na kũheana ũhoro wa arũme a matukũ."
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Mũtũmbũki"
+          "role": "Mũtũmbũki",
+          "bio": "Mũthomi wa rũrĩmĩ rwa Kisii wĩra wake nĩ gũtũũra ngano cia kĩrĩra na ũmenyo wa gĩkũyũ."
         },
         "joel": {
           "name": "Joel Makori",
-          "role": "Mũtongoria wa Ũigana wa Mĩrĩ"
+          "role": "Mũtongoria wa Ũigana wa Mĩrĩ",
+          "bio": "Mũthomi wa rũrĩmĩ rwa Luo wĩra wake nĩ gũtũũra mũtugo wa rũrĩmĩ na ngano cia andũ."
+        },
+         "Edewait": {
+          "name": "Edewait Eric",
+          "role": "Teso",
+          "bio": "Mũthomi wa rũrĩmĩ rwa Teso ũrĩa wĩhũũgagia ciugo, thimo, na ngano cia tene."
+
+        },
+
+        "lorna": {
+          "name": "Lorna Wanderi",
+          "role": "Kikuyu",
+          "bio" : "Mũthomi wa rũrĩmĩ rwa Gĩkũyũ ũrĩa wĩhũũgagia thimo, ngano, na ũrĩa rũrĩmĩ rũrĩ."
+        },
+        "ian": {
+          "name": "Ian Cheruiyot",
+          "role" : "Kalenjin",
+          "bio" : "Mũthomi wa rũrĩmĩ rwa Kalenjin wĩra wake nĩ gũtũũra mĩhĩrĩga na ngano cia kĩrĩra."
+        },
+        "collins": {
+          "name": "Collins Omondi",
+          "role": "Luo",
+          "bio": "Mũthomi wa rũrĩmĩ rwa Luo ũkũteithia gũtũũra rũrĩmĩ, ngano, na ũndũ wa kĩrĩra."
         }
       }
     },

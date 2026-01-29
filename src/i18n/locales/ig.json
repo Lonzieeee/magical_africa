@@ -769,16 +769,42 @@
       "members": {
         "gloria": {
           "name": "Gloria Machoka",
-          "role": "Onye Ntọala Ibe"
+          "role": "Onye Ntọala Ibe",
+          "bio": "Ọkachamara n’asụsụ Kisii na-elekwasị anya n’akụkọ ifo, asụsụ nna ochie, na imezi ntorobịa."
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Onye Ntọala"
+          "role": "Onye Ntọala",
+          "bio": "Ọkachamara n’asụsụ Kisii na-elekwasị anya n’ichekwaa akụkọ ọdịnala na omenala site na mmụta na teknụzụ."
         },
         "joel": {
           "name": "Joel Makori",
-          "role": "Onye Njikwa Mmekọrịta Obodo"
+          "role": "Onye Njikwa Mmekọrịta Obodo",
+          "bio": "Ọkachamara n’asụsụ Luo na-elekwasị anya n’iji asụsụ ziri ezi na akụkọ ọdịnala obodo."
+        },
+        "Edewait": {
+          "name": "Edewait Eric",
+          "role": "Teso",
+          "bio": "Ọkachamara n’asụsụ Teso na-elekwasị anya n’ichekwaa okwu, ilu, na omenala nna ochie."
+        },
+
+        "lorna": {
+          "name": "Lorna Wanderi",
+          "role": "Kikuyu",
+          "bio" : "Ọkachamara n’asụsụ Kikuyu nke na-elekwasị anya n’ilu, akụkọ ifo, na ezi asụsụ."
+        },
+        "ian": {
+          "name": "Ian Cheruiyot",
+          "role" : "Kalenjin",
+          "bio" : "Ọkachamara n’asụsụ Kalenjin na-elekwasị anya n’ichekwaa asụsụ, akụkọ ọdịnala, na njirimara omenala."
+        },
+        "collins": {
+          "name": "Collins Omondi",
+          "role": "Luo",
+          "bio": "Ọkachamara n’asụsụ Luo na-akwado idekọ asụsụ, akụkọ, na njirimara omenala."
         }
+        
+
       }
     },
     "cta": {

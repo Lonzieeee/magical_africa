@@ -762,15 +762,39 @@
       "members": {
         "gloria": {
           "name": "Gloria Machoka",
-          "role": "Mwanzilishi Mwenza"
+          "role": "Mwanzilishi Mwenza",
+          "bio"  : "Mtaalamu wa lugha ya Kisii anayejitolea kuhifadhi misemo ya asili, hadithi, na kuwawezesha vijana kidijitali."
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Mwanzilishi"
+          "role": "Mwanzilishi",
+          "bio": "Mtaalamu wa lugha ya Kisii anayehifadhi simulizi za asili, mila za mdomo, na maarifa ya kitamaduni kupitia elimu na teknolojia."
         },
         "joel": {
           "name": "Joel Makori",
-          "role": "Meneja wa Ushirikiano wa Jamii"
+          "role": "Meneja wa Ushirikiano wa Jamii",
+          "bio": "Mtaalamu wa lugha ya Luo anayelenga matumizi sahihi ya lugha, historia za mdomo, na ushiriki wa jamii."
+        },
+         "Edewait": {
+          "name": "Edewait Eric",
+          "role": "Teso",
+          "bio": "Mtaalamu wa lugha ya Teso anayehifadhi msamiati, methali, na mila za mdomo kwa vizazi vijavyo."
+        },
+
+        "lorna": {
+          "name": "Lorna Wanderi",
+          "role": "Kikuyu",
+          "bio" : "Mtaalamu wa lugha ya Kikuyu anayebobea katika methali, ngano, na uhalisia wa lugha."
+        },
+        "ian": {
+          "name": "Ian Cheruiyot",
+          "role" : "Kalenjin",
+          "bio" : "Mtaalamu wa lugha ya Kalenjin anayelinda misemo ya kitamaduni, simulizi za jadi, na urithi wa lugha."
+        },
+        "collins": {
+          "name": "Collins Omondi",
+          "role": "Luo",
+          "bio": "Mtaalamu wa lugha ya Luo anayesaidia uhifadhi wa lugha, hadithi, na utambulisho wa kitamaduni."
         }
       }
     },
