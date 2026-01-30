@@ -9,8 +9,13 @@ import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Languages from '../components/Languages';
+import { useEffect } from 'react';
 
 const Home = () => {
+
+    useEffect(() => {
+    document.title = 'Magical Africa - The Real African Story';
+  }, []);
   return (
     <>
       <HeroSection />
