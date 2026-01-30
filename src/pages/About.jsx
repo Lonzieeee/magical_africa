@@ -7,6 +7,9 @@ import '../styles/impact.css';
 import '../styles/team.css';
 import '../styles/AI.css';
 
+
+
+
 const About = () => {
   const { t } = useTranslation();
   const [solutionSlide, setSolutionSlide] = useState(0);
@@ -40,6 +43,14 @@ const About = () => {
   const prevSolution = () => {
     setSolutionSlide((prev) => (prev - 1 + 3) % 3);
   };
+
+
+  //for the title
+
+    useEffect(() => {
+    document.title = 'About Magical Africa';
+  }, []);
+  
 
   const approaches = [
     { icon: 'fa-hands-helping', label: t('about.approach.items.communityOwnership') },

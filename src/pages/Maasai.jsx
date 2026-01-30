@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -97,6 +97,10 @@ const Maasai = () => {
     }));
   };
 
+
+    useEffect(() => {
+    document.title = 'Maasai Tribe - Maasai History, Culture, Traditions';
+  }, []);
   return (
     <>
       {/* Hero Section */}

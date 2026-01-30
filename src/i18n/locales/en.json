@@ -754,45 +754,45 @@
       "description": "We collaborate across Africa with"
     },
     "team": {
-      "title": "Meet The Team",
-      "description": "The Linguistic Experts",
+      "title": "The Development Team",
+      "description": "Preserving Culture, Language, and Identity Across Generations",
       "members": {
         "gloria": {
           "name": "Gloria Machoka",
-          "role": "Kisii",
-          "bio": "A Kisii linguistic expert passionate about documenting native expressions, storytelling, and empowering youth to preserve African languages digitally."
+          "role": "Youth Community Lead",
+          "bio": "Youth Community Lead at Magical Africa, passionate about amplifying youth voices, nurturing community connections, and engaging young people in culture, storytelling, and shared identity."
           
         },
         "steve": {
           "name": "steve Kombo",
-          "role": "Kisii",
-          "bio" : "A Kisii linguistic expert focused on preserving indigenous narratives, oral traditions, and cultural knowledge through education, research, and technology."
+          "role": "Founder",
+          "bio" : "Founder of Magical Africa, passionate about culture, community, and preserving African stories through digital spaces that connect people, languages, and heritage."
         },
         "joel": {
           "name": "Joel Makori",
-          "role": "Luo",
-          "bio": "A Luo linguistic expert dedicated to capturing authentic language use, oral histories, and strengthening community-centered cultural preservation."
+          "role": "Community Engagement Manager",
+          "bio": "Community Engagement Manager at Magical Africa, connecting people, supporting community initiatives, and ensuring vibrant participation in culture, storytelling, and heritage programs."
         },
           "Edewait": {
           "name": "Edewait Eric",
-          "role": "Teso",
-          "bio": "A Teso linguistic expert committed to preserving indigenous vocabulary, idioms, and oral traditions for future generations."
+          "role": "Linguistic Expert",
+          "bio": "Studies local and indigenous languages, records endangered words and stories, and ensures cultural meaning is preserved across the Magical Africa community."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Kikuyu",
-          "bio" : "A Kikuyu linguistic expert specializing in proverbs, oral traditions, and preserving language authenticity across generations."
+          "role": "Youth Cultural Fellow",
+          "bio" : "Supports cultural storytelling, engages youth in heritage initiatives, and helps preserve and share community traditions across Magical Africa."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Kalenjin",
-          "bio" : "A Kikuyu linguistic expert specializing in proverbs, oral traditions, and preserving language authenticity across generations."
+          "role" : "Community Language Translator",
+          "bio" : "Translates content across local languages, ensures community voices are accurately represented, and helps preserve culture through clear and inclusive communication."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
-          "bio": "A Luo linguistic expert supporting accurate documentation of language, storytelling, and cultural identity."
+          "role": "Language Bridge Coordinator",
+          "bio": "Connects communities across languages, coordinates translations, and ensures cultural meaning is preserved so all voices are understood and included on Magical Africa."
         }
         
       }
