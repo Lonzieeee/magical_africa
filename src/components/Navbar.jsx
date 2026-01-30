@@ -65,7 +65,7 @@ const Navbar = () => {
 
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
         <div className="item1">
-          <div className='magical-logo'>
+          <div className='magical-logo' onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             <img
               src="/images/magicaal-logo1-removebg-preview.png"
               alt="Magical Africa logo dark"
