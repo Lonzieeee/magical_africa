@@ -289,6 +289,9 @@
     height: 750px;
     
   }
+  .team p{
+    text-align: center;
+  }
 }
 
 /* Mobile: Show 1 item at a time */
