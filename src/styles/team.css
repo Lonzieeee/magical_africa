@@ -272,6 +272,20 @@
   }
 }
 
+
+@media screen and (max-width:1280px) {
+
+ .team-carousel{
+  padding-left: 3rem;
+  padding-right:3rem ;
+ }
+ .team-section{
+   padding-left: 1rem;
+   padding-right: 1rem;
+ }
+  
+}
+
 /* Tablet: Show 2 items at a time */
 @media screen and (max-width:768px){
   .team-carousel{
