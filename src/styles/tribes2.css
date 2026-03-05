@@ -238,13 +238,13 @@
       width: 10px;
       height: 10px;
       border-radius: 50%;
-      background-color: #ddd;
+      background-color: #ddd !important;
       cursor: pointer;
       transition: all 0.3s ease;
     }
 
     .dot.active {
-      background-color: rgb(181, 161, 145);
+      background-color: rgb(181, 161, 145) !important;
       width: 30px;
       border-radius: 5px;
     }

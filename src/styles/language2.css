@@ -1,0 +1,178 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+  line-height: 1.5rem;
+  
+}
+
+
+.learning-languages{
+ height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+  padding-top: 8rem;
+}
+.learning-languages h1{
+  font-size:  2rem ;
+ 
+}
+
+.the-languages{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 900px;
+  height: 100%;
+  max-height: 700px;
+ 
+  gap: 30px;
+ justify-content: center;
+
+}
+
+.la-1, .la-2, .la-3, .la-4{
+ width: 100%;
+ max-width: 200px;
+ height: 100%;
+ max-height: 200px;
+ background-color: transparent;
+ border: 1px solid rgb(181, 161, 145);
+ display: flex;
+ flex-direction: column;
+ gap: 20px;
+}
+
+.la-1-text{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+ padding-top: 1.5rem;
+ padding-bottom: 1.5rem;
+}
+
+.la-1-text h2{
+  color:#767676;
+  font-size: 1.1rem;
+}
+
+.la-1-text img{
+  height: 70px;
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+
+.welcome{
+  display: flex;
+ height: 80vh;
+ flex-direction: row;
+ align-items: center;
+ justify-content: center;
+
+}
+
+.welcome-content {
+  display: flex;
+  flex-direction: row;  /* row = side by side */
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.welcome-content img{
+ height: 120px;
+ width: 120px;
+
+}
+
+
+.tooltip-bubble {
+  position: relative;
+  background-color: #fff8f3;
+  border: 1px solid rgb(181, 161, 145);
+ 
+  padding: 14px 18px;
+  max-width: 220px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.tooltip-bubble p {
+  font-size: 0.9rem;
+  color: #4a3728;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  left: -10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-right: 10px solid rgb(181, 161, 145);
+}
+
+.tooltip-arrow::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: -7px;
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 9px solid #fff8f3;
+}
+
+.continue-button{
+ height: 20vh;
+ border-top: 1.5px solid #e5e3e3;
+ display: flex;
+align-items: center;
+justify-content: flex-end;
+padding-right: 3rem;
+}
+
+.continue-button button{
+  font-size: 1rem;
+  font-weight: 600;
+  padding:0.5rem  1rem; 
+  background-color: #1f6f43;
+  border: none;
+  color: white;
+
+}
+
+
+@media screen and (min-width:1440px) {
+  .continue-button button{
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+  }
+
+  .welcome-content img{
+ height: 140px;
+ width: 140px;
+
+}
+
+.tooltip-bubble {
+  max-width: 240px !important;
+}
+
+.tooltip-bubble p {
+  font-size: 1.1rem !important;
+}
+
+
+}

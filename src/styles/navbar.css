@@ -592,6 +592,31 @@ align-items: center;
   color: black;
 }
 
+/* ive added this here */
+
+.navbar.solid {
+  background-color: white;
+  border-bottom: 0.5px solid #e5e3e3;
+}
+
+.navbar.solid .menu,
+.navbar.solid .search,
+.navbar.solid .item2 h1,
+.navbar.solid .item3 a,
+.navbar.solid .item3 i,
+.navbar.solid .lang-btn {
+  color: black;
+}
+
+.navbar.solid .logo-dark {
+  display: none;
+}
+
+.navbar.solid .logo-light {
+  display: block;
+}
+
+
 /* Hide lang dropdown on mobile */
 @media screen and (max-width: 768px) {
   .lang-btn .fa-globe {

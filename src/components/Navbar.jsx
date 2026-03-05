@@ -17,7 +17,7 @@ const languages = [
   { code: 'zu', name: 'isiZulu' }
 ];
 
-const Navbar = () => {
+const Navbar = ({ solid }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
@@ -63,7 +63,7 @@ const Navbar = () => {
         onClose={() => setIsSideMenuOpen(false)} 
       />
 
-      <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${solid ? 'solid' : ''}`} >
         <div className="item1">
           <div className='magical-logo' onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             <img

@@ -89,16 +89,23 @@ const SideMenu = ({ isOpen, onClose }) => {
           <li onClick={() => handleNavigation('/about')}>
             {t('sideMenu.about')} <i className="fa-solid fa-chevron-right"></i>
           </li>
+
+         {/* 
           <li>
             {t('sideMenu.language')} <i className="fa-solid fa-chevron-right"></i>
           </li>
-          <li>
-            {t('sideMenu.marketplace')} <i className="fa-solid fa-chevron-right"></i>
-          </li>
-          <li>
+          */}
+
+            <li onClick={() => handleNavigation('/academy')}>
             {t('sideMenu.academy')} <i className="fa-solid fa-chevron-right"></i>
 
           </li>
+          
+          <li>
+            {t('sideMenu.marketplace')} <i className="fa-solid fa-chevron-right"></i>
+          </li>
+
+        
           
           <li>
              Events
