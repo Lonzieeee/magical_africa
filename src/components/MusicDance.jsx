@@ -73,7 +73,7 @@ import '../styles/music-dance.css'
 
 const slides = [
   {
-    image: '/images/side-view-people-garage-sale.jpg',
+    image: '/images/Oromo.jpg',
     title: 'Sauti za Busara — Zanzibar Music Festival',
     description:
       "Africa's most beloved Swahili music celebration, held within the ancient stone walls of Zanzibar's Old Fort. Four days of hypnotic taarab, bongo flava, and Afro-fusion under Indian Ocean stars.",
@@ -82,7 +82,7 @@ const slides = [
     duration: '4 Days',
   },
   {
-    image: '/images/side-view-people-garage-sale.jpg',
+    image: '/images/Igbo.jpg',
     title: 'Gnaoua World Music Festival',
     description:
       "Ancient Gnaoua spiritual music fuses with jazz, blues, and world rhythms in Essaouira's windswept Atlantic squares. One of Morocco's most iconic cultural celebrations.",

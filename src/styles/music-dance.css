@@ -253,10 +253,10 @@ background-image: url(/images/side-view-people-garage-sale.jpg);
 
 /* Active dot */
 .music-dots span.active {
-  background-color: rgb(181, 165, 145);
+  background-color: rgb(181, 161, 145);
   transform: scale(1.35);
 }
 
 .music-dots span:hover {
-  background-color: rgb(181, 165, 145);
+  background-color: rgb(181, 161, 145);
 }
