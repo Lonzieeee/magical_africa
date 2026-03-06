@@ -1,0 +1,98 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box ;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+
+.events-hero{
+  height: 100vh;
+  position: relative;
+background-image: url(/images/side-view-people-garage-sale.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+   
+}
+
+
+.events-hero::before {
+  content: '';
+  position: absolute;
+ 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
+}
+
+
+.events-hero-text{
+  position: absolute;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  bottom: 10%;
+  left: 3rem;
+  gap: 20px;
+}
+.events-hero-text span{
+  color: rgb(181, 161, 145);
+}
+
+.events-hero-text h1{
+color: white;
+font-size: 2.5rem;
+}
+
+.events-hero-text p{
+  color: white;
+  font-size: 1.2rem;
+  width: 70%;
+}
+
+.events-div{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 4rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+ 
+}
+
+.events-div1{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.events-div1 hr{
+ 
+ border: none;
+  border-top: 2.5px solid #EA580C;
+  width: 50px;
+}
+
+.events-div1 h1{
+  font-size: 1.5rem;
+  color: #EA580C;
+  font-weight: 400;
+}
+.event-lists{
+  
+  padding-top: 2rem;
+}
+
+.event-lists li.active{
+  font-weight: 600;
+}
+
+.event-lists li.active span{
+  background-color: #333;
+  color: white;
+}

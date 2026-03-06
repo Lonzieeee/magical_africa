@@ -1,0 +1,140 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+.Foods-div{
+  display: flex;
+  flex-direction: row;
+  padding-top: 10rem;
+  gap: 20px;
+  width: 100%;
+  
+  justify-content: center;
+}
+
+.food-div1, .food-div2, .food-div3, .food-div4{
+position: relative;
+width: 400px;
+height: 400px;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+}
+
+.food-div1::before, .food-div2::before, .food-div3::before, .food-div4::before{
+  content: '';
+  position: absolute;
+ 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
+}
+
+.food-div1 h1, .food-div2 h1, .food-div3 h1, .food-div4 h1{
+
+ text-align: center;
+  z-index: 2;
+  color: white;
+  line-height: 1.8rem;
+  font-size: 1.2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+
+.food-div1 p, .food-div2 p, .food-div3 p, .food-div4 p{
+z-index: 2;
+color: white;
+text-align: center;
+padding-top: 1rem;
+font-size: 0.875rem;
+padding-left: 1rem;
+padding-right: 1rem;
+}
+
+.food-div1{
+background-image: url(/images/beaded-jewelery.jpg);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+.food-div2{
+background-image: url(/images/nyama-choma.jpg);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+.food-div3{
+background-image: url(/images/string-instrument.jpg);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+.food-div4{
+background-image: url(/images/nigeria-wear.jpg);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+/* ── SLIDE-IN ANIMATION ── */
+@keyframes foodSlideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20vw);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.food-slide {
+  opacity: 0;
+  animation: foodSlideFromLeft 0.7s ease forwards;
+  animation-delay: 1.2s;
+}
+
+.food-delay-2 {
+  animation-delay: 0.8s;
+}
+
+.food-delay-3 {
+  animation-delay: 0.4s;
+}
+
+.food-delay-4 {
+  animation-delay: 0s;
+}
+
+.food-book{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding-top: 6rem;
+}
+
+.food-book button{
+  background-color: #1f6f43;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.food-book button:hover{
+  background-color: #145a34;
+}

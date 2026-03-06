@@ -4,6 +4,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Tribes from './pages/Tribes';
 import Maasai from './pages/Maasai';
+import Events from './pages/Events';
 import './styles/index.css';
 import Academy from './pages/Academy';
 import Language2 from './components/Language2';
@@ -12,6 +13,8 @@ import Language4 from './components/Language4';
 import Language5 from './components/Language5';
 import Language6 from './components/Language6';
 import Language7 from './components/Language7';
+
+
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
           <Route path="/language5" element={ <Language5 /> } />
           <Route path="/language6" element={ <Language6 /> } />
           <Route path="/language7" element={ <Language7 /> } />
+          <Route path="/events" element={ <Events /> } />
+        
 
         </Routes>
       </Router>

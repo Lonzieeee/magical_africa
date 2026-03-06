@@ -107,7 +107,7 @@ const SideMenu = ({ isOpen, onClose }) => {
 
         
           
-          <li>
+          <li onClick={()=> handleNavigation('/events')}>
              Events
            <i className="fa-solid fa-chevron-right"></i>
            </li>

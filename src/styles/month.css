@@ -1,0 +1,214 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+.event-month{
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding-top: 3rem;
+  background-color: rgb(242, 239, 235);
+ padding-bottom: 2rem;
+}
+
+.months{
+  display: flex;
+  flex-direction: row;
+ align-items: center;
+ justify-content: center;
+ width: 100%;
+ gap: 20px;
+ padding-top: 4rem;
+}
+.months2{
+    display: flex;
+  flex-direction: row;
+ align-items: center;
+ justify-content: center;
+ width: 100%;
+ gap: 20px;
+ padding-top: 1rem;
+}
+
+.event-month h1{
+  font-size: 1.5rem;
+  text-align: center;
+}
+.event-month p{
+  font-size: 1rem;
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.jan, .feb, .march, .april{
+width: 200px;
+height: 120px;
+background-color: #fff8f3;
+border: 1px solid rgb(181, 161, 145);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 10px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.jan:hover, .feb:hover, .march:hover, .april:hover{
+   background: rgb(181, 161, 145);
+  color: white !important;
+   border-color:rgb(181, 161, 145);
+}
+
+.jan:hover h1, .feb:hover h1, .march:hover h1, .april:hover h1{
+color: white;
+}
+
+.jan h1, .feb h1, .march h1, .april h1{
+font-size: 1rem;
+color: #4a3728;
+
+}
+
+
+.jan p, .feb p, .march p, .april p{
+padding-top: 0rem;
+font-size: 0.875rem;
+}
+
+.month-event{
+  display: flex;
+  flex-direction: column;
+  max-width: 860px;
+ 
+  width: 100%;
+  align-self: center;
+  padding-top: 2rem;
+}
+
+.month-event h1{
+  align-self: self-start;
+  padding-bottom: 3rem;
+}
+
+
+.jan-events{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  gap: 20px;
+  
+}
+
+.jan-event1{
+
+width: 100%;
+height: fit-content;
+padding: 1rem;
+border: 1px solid rgba(200, 97, 26, 0.18);
+background: #1a2e1e;
+}
+
+.jan-event2{
+
+width: 100%;
+height: fit-content;
+padding: 1rem;
+border: 1px solid rgba(200, 97, 26, 0.18);
+background: #1a2e1e;
+}
+
+.jan-event-location{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.jan-event-location button{
+  background-color: #1f6f43;
+  border: none;
+  color: white;
+  font-size: 0.7rem;
+  padding-top: 0rem !important;
+  padding-bottom: 0rem !important;
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+  font-weight: 600;
+}
+
+.jan-event1 h1, .jan-event2 h1{
+  font-size: 1.2rem;
+  text-align: start;
+  padding-bottom: 0rem;
+  color: #f2ddb0;
+}
+
+.jan-event1 h2, .jan-event2 h2{
+font-size: 0.9rem;
+font-weight: 400;
+color: #c8611a;
+
+}
+
+.jan-event1 p, .jan-event2 p{
+  font-size: 0.875rem;
+padding-top: 0.875rem;
+  text-align: start;
+  color: rgba(242, 221, 176, 0.6);
+}
+
+.jan-event1 hr, .jan-event2 hr{
+margin-top: 1rem;
+margin-bottom: 1rem;
+height: 1px;
+border: none;
+background-color: rgba(200, 97, 26, 0.18);
+}
+
+
+/* ── ADD TO BOTTOM OF month.css ── */
+
+@keyframes monthEvSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.month-ev-slideup {
+  opacity: 0;
+  animation: monthEvSlideUp 0.6s ease forwards;
+}
+
+.month-ev-delay-1 {
+  animation-delay: 0s;
+}
+
+.month-ev-delay-2 {
+  animation-delay: 0.2s;
+}
+
+.month-ev-delay-3 {
+  animation-delay: 0.4s;
+}
+
+
+.jan.month-active, .feb.month-active, .march.month-active, .april.month-active {
+  background: #1f6f43;
+  border-color: #1f6f43;
+}
+
+.jan.month-active h1, .feb.month-active h1, .march.month-active h1, .april.month-active h1 {
+  color: white;
+}
+
+.jan.month-active p, .feb.month-active p, .march.month-active p, .april.month-active p {
+  color: white;
+}
