@@ -57,6 +57,15 @@ gap: 10px;
 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
+.click-here{
+  width: 860px;
+  
+  align-self: center;
+}
+.click-here p{
+  text-align: start;
+}
+
 .jan:hover, .feb:hover, .march:hover, .april:hover{
    background: rgb(181, 161, 145);
   color: white !important;

@@ -131,6 +131,14 @@ const Events = () => {
           </div>
         </div>
 
+        <div className='click-here'>
+
+          <p>
+            👆 Select a month above to see events
+          </p>
+
+        </div>
+
         {/* EVENTS — only show after January is clicked */}
         <div className='month-event' ref={monthEventRef}>
 
