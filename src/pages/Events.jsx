@@ -5,6 +5,7 @@ import '../styles/events.css'
 import MusicDance from '../components/MusicDance';
 import Ceremonies from '../components/Ceremonies';
 import Foods from '../components/Foods';
+import Footer from '../components/Footer'
 import '../styles/month.css'
 
 const Events = () => {
@@ -182,6 +183,9 @@ const Events = () => {
         </div>
 
       </div>
+
+
+      <Footer />
     </>
   )
 }
