@@ -153,7 +153,7 @@
 /* Start hidden and below */
 .tribe1, .tribe2, .tribe3 {
   opacity: 0;
-  transform: translateY(60px);
+  transform: translateY(120px);
   transition: opacity 0.6s ease, transform 0.6s ease, flex 1.3s ease;
 }
 
