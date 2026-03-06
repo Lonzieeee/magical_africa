@@ -142,7 +142,7 @@ const Language4 = () => {
 
         <div className='why-language2'>
           <img src="/images/woman2.png" alt="" />
-          <div className='tooltip-bubble'>
+          <div className='tooltip-bubble' key={tooltipText}>
             <span className='tooltip-arrow'></span>
             <p>{tooltipText}</p>
           </div>
@@ -163,11 +163,27 @@ const Language4 = () => {
 
       </div>
 
+  {/* 
       <div className='continue-button'>
         <button onClick={() => navigate('/language5')}>
           Continue
         </button>
       </div>
+
+      */}
+
+
+      <div className='continue-button'>
+  <button
+    onClick={() => selectedReason && navigate('/language5')}
+    disabled={!selectedReason}
+    className={selectedReason ? 'btn-active' : 'btn-inactive'}
+  >
+    Continue
+  </button>
+</div>
+
+
     </>
   );
 };

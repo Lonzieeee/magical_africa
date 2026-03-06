@@ -117,7 +117,7 @@ const Language5 = () => {
 
         <div className='how-well-question'>
           <img src="/images/woman2.png" alt="" />
-          <div className='tooltip-bubble'>
+          <div className='tooltip-bubble' key={tooltipText}>
             <span className='tooltip-arrow'></span>
             <p>{tooltipText}</p>
           </div>
@@ -130,6 +130,8 @@ const Language5 = () => {
               className={`${id} ${selectedWell === id ? 'well-selected' : ''}`}
               onClick={() => handleWellClick(id)}
             >
+
+              <img src="/images/one.svg" alt="" />
               <p>{label}</p>
             </div>
           ))}
@@ -137,11 +139,30 @@ const Language5 = () => {
 
       </div>
 
+
+    {/* 
       <div className='continue-button'>
         <button onClick={() => navigate('/language6')}>
           Continue
         </button>
       </div>
+
+    */}
+
+    <div className='continue-button'>
+  <button
+    onClick={() => selectedWell && navigate('/language6')}
+    disabled={!selectedWell}
+    className={selectedWell ? 'btn-active' : 'btn-inactive'}
+  >
+    Continue
+  </button>
+</div>
+
+
+      
+
+
     </>
   );
 };

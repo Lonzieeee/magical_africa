@@ -41,7 +41,7 @@ const Language6 = () => {
         <div className='greeting2'>
           <img src="/images/afternoon.png" alt="" />
           <p className='actual'>Mura Mono</p>
-          <p className='translation'>Meaning - Good Afternon</p>
+          <p className='translation'>Meaning - Good Afternoon</p>
           
           
         </div>
@@ -51,7 +51,7 @@ const Language6 = () => {
           <img src="/images/sunset.png" alt="" />
           
           <p className='actual'>Bwairire</p>
-          <p className='translation'>Menaing - Good Evening</p>
+          <p className='translation'>Meaning - Good Evening</p>
           
 
 

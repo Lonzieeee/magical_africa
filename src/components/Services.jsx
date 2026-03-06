@@ -124,16 +124,17 @@ const Services = () => {
         </div>
 
         <div className="service-wrap">
-          <div className="wrap1">
+          <div className="wrap1" >
             <h1>{service.title}</h1>
             <p>{service.description}</p>
             <button className="learn-more">{t('services.learnMore')}</button>
           </div>
 
           <div 
-            className="wrap2" 
+            className="wrap2"
+           
             style={{ backgroundImage: `url(${service.image})` }}
-          ></div>
+           ></div>
         </div>
 
         <div className="i">

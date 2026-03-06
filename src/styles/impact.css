@@ -87,6 +87,18 @@
 }
 
 
+.impact-div {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.impact-div.impact-div-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
 @media screen and (min-width:1440px) {
   .our-impact{
     padding-top: 4rem;

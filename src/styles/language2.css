@@ -154,11 +154,48 @@ padding-right: 3rem;
 }
 
 
+@keyframes slideFromLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-20vw); /* ✅ fully off screen */
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.la-1, .la-2, .la-3, .la-4 {
+  opacity: 0; /* hidden before animation starts */
+  animation: slideFromLeft 0.7s ease forwards;
+}
+
+/* ✅ Bigger stagger gaps so each card finishes before next one starts */
+.la-3 {
+  animation-delay: 1.2s;
+}
+
+.la-1 {
+  animation-delay: 0.8s;
+}
+
+.la-2 {
+  animation-delay: 0.4s;
+}
+
+.la-4 {
+  animation-delay: 0s;
+}
+
+
+
 @media screen and (min-width:1440px) {
+  /*
   .continue-button button{
     padding: 1rem 1.5rem;
     font-size: 1.5rem;
   }
+    */
 
   .welcome-content img{
  height: 140px;
@@ -175,4 +212,53 @@ padding-right: 3rem;
 }
 
 
+}
+
+
+@media screen and (max-width:768px) {
+
+  .learning-languages {
+    height: auto;
+    padding-top: 8rem;
+    padding-bottom: 2rem;
+    gap: 30px;
+  }
+
+  .learning-languages h1 {
+    font-size: 1.5rem;
+  }
+
+  .the-languages {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 0 1rem;
+  }
+
+  .la-1, .la-2, .la-3, .la-4 {
+    max-width: 140px;
+    max-height: 160px;
+  }
+
+  .la-1-text img {
+    height: 50px;
+    width: 90px;
+  }
+
+  .la-1-text h2 {
+    font-size: 0.9rem;
+  }
+
+  .continue-button {
+    padding-right: 1.5rem;
+  }
+
+}
+
+
+@media screen and (max-width:480px) {
+  .continue-button{
+   height: 10vh;
+  }
 }

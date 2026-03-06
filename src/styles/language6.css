@@ -71,6 +71,54 @@ width:250px ;
 }
 
 .Greetings{
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
+}
+
+
+
+
+@media screen and (max-width:768px) {
+  .greeting1, .greeting2, .greeting3{
+ height: 220px;
+ width: 220px;
+}
+
+.greeting1 img, .greeting2 img, .greeting3 img{
+height: 100px;
+width:100px ;
+}
+
+
+ .greeting1 p, .greeting2 p, .greeting3 p{
+ text-align: center;
+ }
+
+  
+}
+
+
+@media screen and (max-width:480px) {
+  .Greetings{
+    flex-direction: column;
+  }
+
+    .greeting1, .greeting2, .greeting3{
+ height: 200px;
+ width: 280px;
+}
+
+.greeting1 img, .greeting2 img, .greeting3 img{
+height: 100px;
+width:100px ;
+}
+.Simple-Greetings{
+  padding-top: 8rem;
+  gap: 50px;
+  overflow: auto;
+  height: fit-content;
+  padding-bottom: 4rem;
+  
+}
+  
 }

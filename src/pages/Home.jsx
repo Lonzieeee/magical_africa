@@ -9,6 +9,7 @@ import FAQ from '../components/FAQ';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
 import Languages from '../components/Languages';
+import Culture from '../components/Culture';
 import { useEffect } from 'react';
 
 const Home = () => {
@@ -25,6 +26,7 @@ const Home = () => {
       <Marketplace />
       <TribesSection />
       <SocialImpact />
+      <Culture />
       <Partners />
       <FAQ />
       <Contact />

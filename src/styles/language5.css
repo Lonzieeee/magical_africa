@@ -59,6 +59,10 @@ padding-top: 2rem;
 
 }
 
+.well1 img , .well2 img, .well3 img, .well4 img, .well5{
+
+}
+
 /* Hover effect */
 .well1:hover, .well2:hover, .well3:hover, .well4:hover {
   background-color: #EFEFEF;
@@ -70,6 +74,9 @@ padding-top: 2rem;
   background-color: #EFEFEF !important;
 
 }
+
+
+
 
 
 @media screen and (min-width:1440px) {
@@ -90,4 +97,16 @@ padding-top: 2rem;
 .tooltip-bubble p {
   font-size: 1.1rem !important;
 }
+}
+
+
+@media screen and ( max-width:480px) {
+  .how-well-answers{
+    padding-left: rem;
+   
+  }
+
+  .how-well{
+    height: 90vh;
+  }
 }

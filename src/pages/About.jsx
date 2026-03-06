@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -16,6 +16,120 @@ const About = () => {
   const [hoveredMember, setHoveredMember] = useState(null);
   const [teamSlide, setTeamSlide] = useState(0);
   const [membersPerSlide, setMembersPerSlide] = useState(3);
+
+
+  const problemRef = useRef(null);
+
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const image = entry.target.querySelector('.problem-image');
+        const text = entry.target.querySelector('.problem-text');
+
+        if (entry.isIntersecting) {
+          image?.classList.add('problem-image-visible');
+          text?.classList.add('problem-text-visible');
+        } else {
+          image?.classList.remove('problem-image-visible');
+          text?.classList.remove('problem-text-visible');
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  if (problemRef.current) observer.observe(problemRef.current);
+  return () => observer.disconnect();
+}, []);
+
+
+
+const impactRef = useRef(null);
+
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const divs = entry.target.querySelectorAll('.impact-div');
+
+        if (entry.isIntersecting) {
+          divs.forEach((div, index) => {
+            setTimeout(() => {
+              div.classList.add('impact-div-visible');
+            }, index * 150);
+          });
+        } else {
+          divs.forEach((div) => {
+            div.classList.remove('impact-div-visible');
+          });
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  if (impactRef.current) observer.observe(impactRef.current);
+  return () => observer.disconnect();
+}, []);
+
+
+const aiRef = useRef(null);
+
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const boxes = entry.target.querySelectorAll('.AI-1');
+
+        if (entry.isIntersecting) {
+          boxes.forEach((box, index) => {
+            setTimeout(() => {
+              box.classList.add('ai-visible');
+            }, index * 200);
+          });
+        } else {
+          boxes.forEach((box) => {
+            box.classList.remove('ai-visible');
+          });
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  if (aiRef.current) observer.observe(aiRef.current);
+  return () => observer.disconnect();
+}, []);
+
+
+const partnersRef = useRef(null);
+
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const partners = entry.target.querySelectorAll('.partner-a');
+
+        if (entry.isIntersecting) {
+          partners.forEach((partner, index) => {
+            setTimeout(() => {
+              partner.classList.add('partner-visible');
+            }, index * 150);
+          });
+        } else {
+          partners.forEach((partner) => {
+            partner.classList.remove('partner-visible');
+          });
+        }
+      });
+    },
+    { threshold: 0.2 }
+  );
+
+  if (partnersRef.current) observer.observe(partnersRef.current);
+  return () => observer.disconnect();
+}, []);
 
   // Update members per slide based on screen width
   useEffect(() => {
@@ -133,7 +247,7 @@ const About = () => {
       </div>
 
       {/* Problem Section */}
-      <section className="problem-page">
+      <section className="problem-page" ref={problemRef}>
         <div 
           className="problem-image"
           style={{ backgroundImage: 'url(/images/Learn-Language2.jpg)' }}
@@ -155,7 +269,7 @@ const About = () => {
         <h1>{t('about.approach.title')}</h1>
         <p>{t('about.approach.description')}</p>
 
-        <div className="impact-boxes">
+        <div className="impact-boxes" ref={impactRef}>
           {approaches.map((item, index) => (
             <div className="impact-div" key={index}>
               <i className={`fa-solid ${item.icon} impact-icon`}></i>
@@ -254,7 +368,7 @@ const About = () => {
       {/* AI Section */}
       <div className='AI-section' style={{ backgroundImage: `url('/images/drums2.jpg')` }}>
         <h1>{t('about.ai.title')}</h1>
-        <div className='AI-boxes'>
+        <div className='AI-boxes' ref={aiRef}>
           <div className='AI-1'>
             <div className='AI-heading'>
               <h1>{t('about.ai.sections.preparingData.title')}</h1>
@@ -295,7 +409,7 @@ const About = () => {
         <h1>{t('about.partners.title')}</h1>
         <p>{t('about.partners.description')}</p>
 
-        <div className='partnering img-a'>
+        <div className='partnering img-a' ref={partnersRef}>
           <div className='partner-a'>
             <img src="/images/aws.webp" alt="AWS" />
           </div>

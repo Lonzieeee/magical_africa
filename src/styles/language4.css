@@ -123,6 +123,38 @@ padding-top: 2rem;
 }
 
 
+.continue-button button.btn-inactive {
+  background-color: #EFEFEF;
+  color: black;
+  cursor: not-allowed;
+}
+
+.continue-button button.btn-active {
+  background-color: #1f6f43;
+  color: white;
+  cursor: pointer;
+}
+
+
+@keyframes popIn {
+  0% {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.tooltip-bubble {
+  animation: popIn 0.3s ease forwards;
+}
+
 @media screen and (min-width:1440px) {
 
   .reason1, .reason2, .reason3, .reason4, .reason5, .reason6{
@@ -152,4 +184,10 @@ padding-top: 2rem;
   font-size: 1.2rem;
 }
 
+}
+
+@media screen and (max-width:480px){
+  .why-language{
+    height: 90vh;
+  }
 }
