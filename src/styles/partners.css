@@ -141,6 +141,23 @@ font-weight: 400;
     display: none;
     
   }
+
+   .partners-boxes,
+  .partners-text2 {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .partners-boxes.slide-in-left,
+  .partners-text2.slide-in-right {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .partners-text2 {
+    transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+  }
 }
 
 @media screen and (max-width:480px) {

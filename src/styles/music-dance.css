@@ -260,3 +260,51 @@ background-image: url(/images/side-view-people-garage-sale.jpg);
 .music-dots span:hover {
   background-color: rgb(181, 161, 145);
 }
+
+@media screen and (max-width:1280px) {
+  .wrapper1,
+.wrapper2{
+
+  max-width: 500px;
+  height: 400px;
+
+}
+
+
+
+}
+
+
+@media screen and (max-width:768px) {
+  .music-wrapper{
+    flex-direction: column;
+    padding: 0 0rem;
+   
+  }
+  
+.wrapper1,
+.wrapper2 {
+  max-width: 100%;
+ 
+}
+
+.music-dots{
+  padding-top: 3rem;
+}
+
+.wrapper2{
+  
+  justify-content: start;
+  height: fit-content;
+}
+
+
+
+}
+
+
+@media screen and (max-width:480px) {
+  .wrapper2 h1{
+    line-height: 2rem;
+  }
+}

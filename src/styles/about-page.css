@@ -337,6 +337,35 @@ width: 30%;
 }
 
 
+
+
+/* Start hidden */
+.problem-image {
+  opacity: 0;
+  transform: translateX(-200px);
+  transition: opacity 0.4s ease, transform 2s ease;
+}
+
+.problem-text {
+  opacity: 0;
+  transform: translateX(200px);
+  transition: opacity 0.4s ease, transform 2s ease;
+}
+
+/* Triggered when visible */
+.problem-image.problem-image-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.problem-text.problem-text-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+
+
 /* Responsive */
 @media screen and (max-width: 768px) {
   .our-solution{
@@ -365,32 +394,26 @@ width: 30%;
   .problem-page{
     padding-bottom: 2rem;
   }
+
+
+   .problem-image,
+  .problem-text {
+    opacity: 0;
+    transform: translateY(100px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .problem-image.problem-image-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .problem-text.problem-text-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+  }
  
-}
-
-
-/* Start hidden */
-.problem-image {
-  opacity: 0;
-  transform: translateX(-200px);
-  transition: opacity 0.4s ease, transform 2s ease;
-}
-
-.problem-text {
-  opacity: 0;
-  transform: translateX(200px);
-  transition: opacity 0.4s ease, transform 2s ease;
-}
-
-/* Triggered when visible */
-.problem-image.problem-image-visible {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.problem-text.problem-text-visible {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 
@@ -452,6 +475,7 @@ width: 30%;
   .mission-vision{
     left: 1rem;
     padding-right: 1rem;
+    bottom: 5%;
   }
   .problem-page{
   flex-direction: column;
