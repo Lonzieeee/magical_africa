@@ -440,6 +440,11 @@
       }
       .tribes-hero-content p{
         font-size: 1rem;
+        width: 90%;
+      }
+
+      .tribes-hero-content{
+        bottom: 5%;
       }
     
     }
