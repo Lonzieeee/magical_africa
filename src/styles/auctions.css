@@ -168,3 +168,28 @@
   opacity: 1;
   transform: translateX(0);
 }
+
+
+@media screen and (max-width: 1280px){
+
+  .Auctions-div{
+    height: fit-content;
+  }
+
+  .Auction-boxes{
+    padding-top: 4rem;
+  }
+  .Auction-box1{
+    max-width: 350px;
+    height: 550px;
+  }
+  .Auction-box1-b h2{
+    height: 40px;
+  }
+
+  .auction-p{
+
+    height: 85px;
+  }
+  
+}

@@ -95,3 +95,19 @@ height: 300px;
   text-align: start;
   color: black;
 }
+
+@media screen and (max-width:1280px) {
+
+  .pottery-grid img{
+width: 200px;
+height: 200px;
+}
+
+
+.pot2 img, .pot4 img{
+  width: 100px;
+  height: 100px;
+ 
+}
+  
+}

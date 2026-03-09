@@ -52,3 +52,12 @@ gap: 20px;
   background-color: rgb(181, 161, 145);
   color: white;
 }
+
+@media screen and (max-width:1280px) {
+
+  .Shop-div{
+    padding-top: 5rem;
+  }
+  
+  
+}
