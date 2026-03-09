@@ -177,6 +177,15 @@ border: none;
 background-color: rgba(200, 97, 26, 0.18);
 }
 
+.event-month-p{
+  color: black;
+  text-align: center !important;
+}
+
+.click-here-p{
+  color: black;
+}
+
 
 /* ── ADD TO BOTTOM OF month.css ── */
 

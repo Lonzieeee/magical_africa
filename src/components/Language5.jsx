@@ -132,7 +132,7 @@ const Language5 = () => {
             >
 
               <img src="/images/one.svg" alt="" />
-              <p>{label}</p>
+              <p className='how-well-p'>{label}</p>
             </div>
           ))}
         </div>

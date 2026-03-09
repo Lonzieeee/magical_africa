@@ -156,7 +156,7 @@ const Language4 = () => {
               onClick={() => handleReasonClick(id)}
             >
               <img src={img} alt="" />
-              <p>{label}</p>
+              <p className='why-language-p'>{label}</p>
             </div>
           ))}
         </div>

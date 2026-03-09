@@ -1,0 +1,177 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+.artisans-div{
+  height: 100vh;
+  background-color: rgb(242, 239, 235);
+  padding-top: 6rem;
+}
+
+.makers-heading{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.makers-heading hr{
+  border: none;
+  border-top: 2.5px solid #EA580C;
+  width: 50px;
+}
+
+.makers-heading h3{
+  font-size: 1rem;
+  color: #EA580C;
+  font-weight: 400;
+}
+
+.artisans-title{
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+  padding-top: 2rem;
+}
+
+.artisans-subtitle{
+  text-align: center;
+  padding-top: 1rem;
+  font-size: 0.875rem;
+}
+
+
+.artisans{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.artisans-wrapper{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding-top: 6rem;
+}
+
+.artisan1, .artisan2, .artisan3{
+width: 400px;
+height: 500px;
+background-color: white;
+display: flex;
+flex-direction: column;
+gap: 10px;
+align-items: center;
+justify-content: center;
+}
+
+.artisan1 span{
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-image: url(/images/Gloria.jpeg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.artisan2 span{
+   width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-image: url(/images/Edwait.jpeg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+
+.artisan3 span{
+   width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-image: url(/images/Steve.jpeg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.artisans-wrapper h4{
+font-size: 1rem;
+font-weight: 400;
+color: rgb(181, 161, 145);
+}
+
+.artisans-wrapper p{
+  font-size: 0.875rem;
+}
+
+.artisans-wrapper button{
+  background-color: #1f6f43;
+  color: white;
+  padding: 0.2rem 0.4rem;
+ border: none;
+ font-size: 0.875rem;
+ font-weight: 600;
+}
+.artisans-wrapper button:hover{
+  background-color: #145a34;
+}
+
+.market-conclusion{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+  gap: 30px;
+}
+
+.market-conclusion-buttons{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding-top: 1rem;
+}
+
+
+.market-conclusion-buttons input{
+width: 300px;
+display: flex;
+flex-direction: row;
+border: 1px solid #EA580C;
+padding-left: 1rem;
+outline: none;
+
+}
+
+.market-conclusion-buttons input:focus{
+  border: 1px solid #EA580C;
+}
+
+.market-conclusion h1{
+  color: rgb(48, 48, 48);
+  font-size: 2rem;
+}
+
+.market-conclusion-buttons button{
+  padding: 0.5rem 2rem;
+  border: none;
+  background-color: #1f6f43;
+  color: white;
+  font-weight: 600;
+}
+
+.artisans-wrapper h3{
+  color: rgb(48, 48, 48);
+}

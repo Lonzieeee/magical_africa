@@ -1,0 +1,77 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+.Carvings-div{
+  height: 130vh;
+  width: 100%;
+  background-color: yellow;
+  margin-top: 6rem;
+  display: grid;
+  
+  grid-template-columns: 1fr 1fr; /* 2 columns */
+  grid-template-rows: 1fr 1fr;    /* 2 rows */
+}
+
+.carving{
+  background-color: white;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.carving::before{
+   content: '';
+  position: absolute;
+ 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
+}
+
+
+.cav1{
+  background-image: url(/images/beaded-jewelery.jpg);
+}
+
+.cav2{
+  background-image: url(/images/woman-mask.png);
+}
+
+.cav3{
+  background-image: url(/images/maasai-bracelets.jpg);
+}
+
+.cav4{
+  background-image: url(/images/nigeria-wear.jpg);
+}
+
+.carving-description{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 2;
+  left: 40%;
+  bottom: 5%;
+ 
+}
+
+.carving-description p{
+  font-size: 1rem;
+  color: white;
+}
+
+.carving-description h3{
+  font-size: 2rem;
+  color: white;
+}

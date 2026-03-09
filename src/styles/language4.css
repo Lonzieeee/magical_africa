@@ -94,6 +94,10 @@ padding-top: 2rem;
 
 }
 
+.why-language-p{
+  color: black;
+}
+
 
 .reason1, .reason2, .reason3, .reason4, .reason5, .reason6{
   display: flex;

@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+.Pottery-div{
+  display: flex;
+  flex-direction: row;
+  margin-top: 6rem;
+  width: 100%;
+  height: 92vh;
+ 
+}
+
+.pottery1{
+ width: 100%;
+height: 100%;
+background-image: url(/images/pottery-image1.jpg);
+ background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.pottery2{
+  background-color: yellow;
+width: 100%;
+height: 100%;
+
+display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns */
+  grid-template-rows: 1fr 1fr;    /* 2 rows */
+}
+
+.pottery-grid{
+  background-color: white;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+ 
+}
+
+.pot2, .pot1{
+     border-top: 0.5px solid #e5e3e3;
+}
+.pot1{
+  border-right: 0.5px solid #e5e3e3;
+}
+
+.pot3, .pot4{
+   border-top: 0.5px solid #e5e3e3;
+   border-bottom: 0.5px solid #e5e3e3;
+}
+.pot3{
+  border-right: 0.5px solid #e5e3e3;
+}
+.pottery-grid img{
+width: 300px;
+height: 300px;
+}
+
+
+.pot2 img, .pot4 img{
+  width: 200px;
+  height: 200px;
+ 
+}
+
+.pottery-content{
+  position: absolute;
+  left: 2rem;
+  bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+
+}
+
+.pottery-content h3{
+  color:  rgb(48, 48, 48);
+  text-align: start !important;
+}
+
+.pottery-content h3{
+  font-size: 1rem;
+}
+
+.pottery-content p{
+  font-size: 0.7rem;
+  text-align: start;
+  color: black;
+}

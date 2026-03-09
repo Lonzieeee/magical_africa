@@ -13,7 +13,7 @@ import Language4 from './components/Language4';
 import Language5 from './components/Language5';
 import Language6 from './components/Language6';
 import Language7 from './components/Language7';
-
+import Market from './pages/Market';
 
 
 function App() {
@@ -33,6 +33,7 @@ function App() {
           <Route path="/language6" element={ <Language6 /> } />
           <Route path="/language7" element={ <Language7 /> } />
           <Route path="/events" element={ <Events /> } />
+           <Route path="/market" element={ <Market /> } />
         
 
         </Routes>

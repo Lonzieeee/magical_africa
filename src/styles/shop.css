@@ -1,0 +1,54 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box ;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+.Shop-div{
+  height: fit-content;
+  /*
+  background-color: rgb(242, 239, 235);
+  */
+  padding-top: 3rem;
+}
+
+
+.Shop-div h1{
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.collection-description{
+  font-size: 0.875rem;
+  text-align: center !important;
+  padding-top: 1rem;
+  color: black;
+}
+
+.collection-div{
+display: flex;
+flex-direction: row;
+align-items: center;
+justify-content: center;
+padding-top: 3rem;
+gap: 20px;
+}
+
+.collection-div button{
+  border: 1px solid rgb(181, 161, 145);
+  padding: 0.5rem 1rem;
+  background-color: #fff8f3;
+}
+
+.collection-div button:hover{
+  background-color: rgb(181, 161, 145);
+  color: white;
+}
+
+.collection-div button.active {
+  background-color: rgb(181, 161, 145);
+  color: white;
+}

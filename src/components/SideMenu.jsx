@@ -101,7 +101,7 @@ const SideMenu = ({ isOpen, onClose }) => {
 
           </li>
           
-          <li>
+          <li onClick={()=> handleNavigation('/market')}>
             {t('sideMenu.marketplace')} <i className="fa-solid fa-chevron-right"></i>
           </li>
 

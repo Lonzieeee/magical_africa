@@ -66,7 +66,7 @@ const Events = () => {
       <div className='event-month'>
 
         <h1>Find Events by Month</h1>
-        <p>Browse African cultural events happening throughout the year</p>
+        <p className='event-month-p'>Browse African cultural events happening throughout the year</p>
 
         <div className='months'>
 
@@ -134,7 +134,7 @@ const Events = () => {
 
         <div className='click-here'>
 
-          <p>
+          <p className='click-here-p'>
             👆 Select a month above to see events
           </p>
 

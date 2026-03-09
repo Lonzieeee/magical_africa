@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+.African-jewelery{
+  display: flex;
+  flex-direction: row;
+  margin-top: 6rem;
+  width: 100%;
+ height: 92vh;
+ 
+}
+
+.African-jewelery1{
+
+width: 100%;
+height: 100%;
+background-image: url(/images/Golden-set.jpg);
+ background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.African-jewelery2{
+background-color: yellow;
+width: 100%;
+height: 100%;
+
+display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 columns */
+  grid-template-rows: 1fr 1fr;    /* 2 rows */
+ 
+
+}
+
+.grid-item{
+  background-color: white;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.grid-item::before {
+  content: '';
+  position: absolute;
+ 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
+}
+
+
+.grid-item-description{
+  position: absolute;
+  left: 2rem;
+  bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+
+}
+
+.grid-item-description h3{
+  color: white;
+  text-align: start !important;
+}
+
+.grid-item-description h3{
+  font-size: 1rem;
+}
+
+.grid-item-description p{
+  font-size: 0.7rem;
+  text-align: start;
+  color: white;
+}
+
+.item-a{
+  background-image: url(/images/beaded-jewelery.jpg);
+}
+
+.item-b{
+  background-image: url(/images/woman-mask.png);
+}
+
+.item-c{
+  background-image: url(/images/maasai-bracelets.jpg);
+}
+
+.item-d{
+  background-image: url(/images/nigeria-wear.jpg);
+}
