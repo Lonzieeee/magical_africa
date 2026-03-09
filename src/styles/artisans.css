@@ -57,7 +57,7 @@
 .artisans-wrapper{
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 30px;
   align-items: center;
   justify-content: center;
   width: 100%;
