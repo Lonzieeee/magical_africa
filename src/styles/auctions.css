@@ -95,11 +95,14 @@
  color: #EA580C;
  font-weight: 400;
  font-size: 0.875rem;
+ padding-bottom: 0.2rem;
 }
 .Auction-box1-b h2{
-  height: 50px;
+  height: 30px;
   color: rgb(48, 48, 48);
+  font-size: 1.3rem;
 }
+
 
 .auction-p{
   text-align: start !important;

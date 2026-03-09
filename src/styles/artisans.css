@@ -167,7 +167,7 @@ outline: none;
 .market-conclusion-buttons button{
   padding: 0.5rem 2rem;
   border: none;
-  background-color: #1f6f43;
+  background-color: rgb(181, 161, 145);
   color: white;
   font-weight: 600;
 }
