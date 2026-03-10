@@ -75,3 +75,20 @@
   font-size: 2rem;
   color: white;
 }
+
+@media screen and (max-width:768px) {
+
+  .carving-description{
+    left: 25%;
+  }
+  
+}
+
+@media screen and (max-width:480px) {
+
+    .Carvings-div{
+    grid-template-columns: 1fr; /* one column */
+    grid-template-rows: auto;   /* rows adjust automatically */
+  }
+  
+}

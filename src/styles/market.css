@@ -96,3 +96,29 @@ color: #EA580C;
 .market-hero-population span h3{
   color: rgb(181, 161, 145);
 }
+
+
+@media screen and (max-width:768px) {
+
+  .market-hero-content{
+ left: 2rem;
+ bottom: 5%;
+  }
+  
+}
+
+@media screen and (max-width:480px) {
+  .market-hero-content h1{
+    font-size: 1.4rem;
+  }
+
+  .market-hero-content p{
+    font-size: 0.875rem;
+  }
+  .market-heading h3{
+    font-size: 1rem;
+  }
+  .market-hero-content{
+    left: 1rem;
+  }
+}

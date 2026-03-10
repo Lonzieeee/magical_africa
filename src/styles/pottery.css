@@ -111,3 +111,26 @@ height: 200px;
 }
   
 }
+
+@media screen and (max-width:768px) {
+  .Pottery-div{
+    flex-direction: column;
+    height: 100vh;
+  }
+}
+
+@media screen and (max-width:480px) {
+
+  .pottery-grid img{
+width: 120px;
+height: 120px;
+}
+
+
+.pot2 img, .pot4 img{
+  width: 80px;
+  height: 80px;
+ 
+}
+  
+}

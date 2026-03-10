@@ -186,3 +186,44 @@ outline: none;
     height: 420px;
   }
 }
+
+@media screen and (max-width:768px) {
+  .artisans-wrapper{
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .artisan1, .artisan2, .artisan3{
+    width: 100%;
+  }
+}
+
+@media screen and (max-width:480px) {
+
+
+
+  .artisans-subtitle{
+     padding-left: 1rem;
+    padding-right: 1rem;
+  }
+    .artisans-wrapper{
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .market-conclusion p{
+   text-align: center;
+  }
+
+  .market-conclusion{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .market-conclusion-buttons input{
+    
+  }
+  
+}

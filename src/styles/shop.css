@@ -61,3 +61,11 @@ gap: 20px;
   
   
 }
+
+
+@media screen and (max-width:480px) {
+  .collection-div{
+    flex-wrap: wrap;
+   
+  }
+}

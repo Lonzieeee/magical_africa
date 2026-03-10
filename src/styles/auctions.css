@@ -193,3 +193,23 @@
   }
   
 }
+
+@media screen and (max-width:768px) {
+  .Auction-boxes{
+    flex-direction: column;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  .Auction-box1{
+    max-width: 100%;
+  }
+
+
+}
+
+@media screen and (max-width:480px) {
+  .Auction-boxes{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

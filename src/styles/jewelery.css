@@ -97,3 +97,11 @@ display: grid;
 .item-d{
   background-image: url(/images/nigeria-wear.jpg);
 }
+
+
+@media screen and (max-width:768px) {
+  .African-jewelery{
+    flex-direction: column;
+    height: 100vh;
+  }
+}
