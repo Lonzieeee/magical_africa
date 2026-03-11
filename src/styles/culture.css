@@ -102,18 +102,18 @@ height: 3px;
 }
 
 .ceremony-image{
-   background-image: url(/images/African-storytelling.jpg);
+   background-image: url(/images/African-storytelling2.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   flex: 1.7;
 }
 
-.img1 { background-image: url(/images/explore-identity.jpg); }
-.img2 { background-image: url(/images/Igbo.jpg); }
-.img3 { background-image: url(/images/kitenge2.jpg); }
-.img4 { background-image: url(/images/learn-language.jpg); }
-.img5 { background-image: url(/images/Learn-Language2.jpg); }
+.img1 { background-image: url(/images/explore-identity2.jpg); }
+.img2 { background-image: url(/images/Igbo2.jpg); }
+.img3 { background-image: url(/images/kitenge2-latest.jpg); }
+.img4 { background-image: url(/images/learn-language-kids.jpg); }
+.img5 { background-image: url(/images/Learn-Language3.jpg); }
 
 
 .ceremony-text{
@@ -180,15 +180,15 @@ height: 3px;
 }
 
 .food1:nth-child(1){
-  background-image: url(/images/nyama-choma.jpg);
+  background-image: url(/images/nyama-choma2.jpg);
 }
 
 .food1:nth-child(2){
-  background-image: url(/images/hammer.jpg);
+  background-image: url(/images/hammer2.jpg);
 }
 
 .food1:nth-child(3){
-  background-image: url(/images/maasai-livestock.jpg);
+  background-image: url(/images/maasai-livestock2.jpg);
 }
 
 

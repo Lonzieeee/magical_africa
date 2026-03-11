@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import '../styles/events.css'
@@ -21,6 +21,12 @@ const Events = () => {
       monthEventRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
   };
+
+
+  
+      useEffect(() => {
+      document.title = ' Discover African Cultural Events';
+    }, []);
 
   return (
     <>

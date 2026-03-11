@@ -93,11 +93,11 @@
 }
 
 .tribe1 {
-  background-image: url(/images/Oromo.jpg);
+  background-image: url(/images/Oromo2.jpg);
 }
 
 .tribe1::before {
-  background-image: url(/images/Oromo.jpg);
+  background-image: url(/images/Oromo2.jpg);
 }
 
 .tribe2 {
@@ -109,11 +109,11 @@
 }
 
 .tribe3 {
-  background-image: url(/images/Igbo.jpg);
+  background-image: url(/images/Igbo2.jpg);
 }
 
 .tribe3::before {
-  background-image: url(/images/Igbo.jpg);
+  background-image: url(/images/Igbo2.jpg);
 }
 
 .tribe1:hover, .tribe2:hover, .tribe3:hover {

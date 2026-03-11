@@ -55,7 +55,7 @@ const Tribes = () => {
 
   return (
     <>
-      <div className="heroSection" style={{ backgroundImage: 'url(/images/pyramids.jpg)' }}>
+      <div className="heroSection" style={{ backgroundImage: 'url(/images/pyramids2.jpg)' }}>
         <Navbar />
         
         <div className="tribes-hero-content">

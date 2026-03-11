@@ -19,7 +19,7 @@
 
 width: 100%;
 height: 100%;
-background-image: url(/images/Golden-set.jpg);
+background-image: url(/images/Golden-set2.jpg);
  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -83,19 +83,19 @@ display: grid;
 }
 
 .item-a{
-  background-image: url(/images/beaded-jewelery.jpg);
+  background-image: url(/images/beaded-jewelery2.jpg);
 }
 
 .item-b{
-  background-image: url(/images/woman-mask.png);
+  background-image: url(/images/woman-mask2.png);
 }
 
 .item-c{
-  background-image: url(/images/maasai-bracelets.jpg);
+  background-image: url(/images/maasai-bracelets2.jpg);
 }
 
 .item-d{
-  background-image: url(/images/nigeria-wear.jpg);
+  background-image: url(/images/nigeria-wear2.jpg);
 }
 
 

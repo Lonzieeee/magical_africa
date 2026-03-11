@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import Languages from '../components/Languages';
 import Culture from '../components/Culture';
 import { useEffect } from 'react';
+import Patterns from '../components/Patterns';
 
 const Home = () => {
 
@@ -21,7 +22,9 @@ const Home = () => {
     <>
       <HeroSection />
       <Services />
+      <Patterns />
       <Languages />
+      <Patterns />
       <AboutSection />
       <Marketplace />
       <TribesSection />

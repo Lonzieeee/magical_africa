@@ -235,7 +235,7 @@ useEffect(() => {
 
   return (
     <>
-      <div className="heroSection" style={{ backgroundImage: 'url(/images/pyramids.jpg)' }}>
+      <div className="heroSection" style={{ backgroundImage: 'url(/images/pyramids2.jpg)' }}>
         <Navbar />
         
         <div className="mission-vision">
@@ -250,7 +250,7 @@ useEffect(() => {
       <section className="problem-page" ref={problemRef}>
         <div 
           className="problem-image"
-          style={{ backgroundImage: 'url(/images/Learn-Language2.jpg)' }}
+          style={{ backgroundImage: 'url(/images/Learn-Language3.jpg)' }}
         ></div>
         
         <div className="problem-text">
@@ -306,7 +306,7 @@ useEffect(() => {
                 </div>
                 <div 
                   className="solution-image"
-                  style={{ backgroundImage: `url('/images/kitenge.jpg')` }}
+                  style={{ backgroundImage: `url('/images/kitenge-latest.jpg')` }}
                 ></div>
               </div>
 
@@ -323,7 +323,7 @@ useEffect(() => {
                 </div>
                 <div 
                   className="solution-image"
-                  style={{ backgroundImage: `url('/images/learn-language.jpg')` }}
+                  style={{ backgroundImage: `url('/images/learn-language-kids.jpg')` }}
                 ></div>
               </div>
 
@@ -340,7 +340,7 @@ useEffect(() => {
                 </div>
                 <div 
                   className="solution-image"
-                  style={{ backgroundImage: `url('/images/Oromo.jpg')` }}
+                  style={{ backgroundImage: `url('/images/Oromo2.jpg')` }}
                 ></div>
               </div>
             </div>
@@ -366,7 +366,7 @@ useEffect(() => {
       </section>
 
       {/* AI Section */}
-      <div className='AI-section' style={{ backgroundImage: `url('/images/drums2.jpg')` }}>
+      <div className='AI-section' style={{ backgroundImage: `url('/images/drums2-latest.jpg')` }}>
         <h1>{t('about.ai.title')}</h1>
         <div className='AI-boxes' ref={aiRef}>
           <div className='AI-1'>

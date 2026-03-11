@@ -26,7 +26,7 @@ const Language2 = () => {
   <div className='the-languages'>
 
 
-       <div className='la-3' onClick={()=> handleNavigation('/language3')}>
+       <div className='la-3' onClick={()=> handleNavigation('/welcome')}>
 
       <div className='la-1-text'>
 

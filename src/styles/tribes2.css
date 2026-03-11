@@ -136,40 +136,40 @@
 
     /* Different background images for each community */
     .community-image.zulu {
-      background-image: url('/images/maasai-women.jpg');
+      background-image: url('/images/maasai-women-latest.jpg');
     }
     .community-image.yoruba {
-      background-image: url('/images/African2.jpg');
+      background-image: url('/images/African-latest.jpg');
     }
     .community-image.kikuyu {
-      background-image: url('/images/African-storytelling.jpg');
+      background-image: url('/images/African-storytelling2.jpg');
     }
     .community-image.maasai {
-      background-image: url('/images/drums.jpg');
+      background-image: url('/images/drums-latest.jpg');
     }
     .community-image.ashanti {
-      background-image: url('/images/Oromo.jpg');
+      background-image: url('/images/Oromo2.jpg');
     }
     .community-image.hausa {
-      background-image: url('/images/kitenge.jpg');
+      background-image: url('/images/kitenge-latest.jpg');
     }
     .community-image.igbo {
-      background-image: url('/images/kitenge2.jpg');
+      background-image: url('/images/kitenge2-latest.jpg');
     }
     .community-image.amhara {
       background-image: url('/images/learn-language.jpg');
     }
     .community-image.berber {
-      background-image: url('/images/Learn-Language2.jpg');
+      background-image: url('/images/Learn-Language3.jpg');
     }
     .community-image.swahili {
-      background-image: url('/images/maasai-wear.jpg');
+      background-image: url('/images/maasai-wear2.jpg');
     }
     .community-image.wolof {
-      background-image: url('/images/wind-instrument.jpg');
+      background-image: url('/images/wind-instrument2.jpg');
     }
     .community-image.fulani {
-      background-image: url('/images/Igbo.jpg');
+      background-image: url('/images/Igbo2.jpg');
     }
 
     .community-content {

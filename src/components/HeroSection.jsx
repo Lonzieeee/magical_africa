@@ -1,39 +1,40 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import CultureCard from './CultureCard';
 
 const heroSlides = [
   {
-    image: '/images/pyramids.jpg',
+    image: '/images/pyramids2.jpg',
     title: 'Welcome To Magical Africa',
     subtitle: 'The Real African Story',
     name: '',
     flag: null
   },
   {
-    image: '/images/swahili-community.jpg',
+    image: '/images/swahili-community2.jpg',
     title: 'Karibu Magical Africa',
     subtitle: 'Safari Halisi ya Afrika',
     name: '(Swahili)',
     flag: '/images/Kenyan-flag.png'
   },
   {
-    image: '/images/maasai.jpg',
+    image: '/images/maasai2.jpg',
     title: 'Pooki sidai eitu oshi',
     subtitle: 'Nwee ahụmịhe omenala bara ụba',
     name: '(Maasai)',
     flag: '/images/Kenyan-flag.png'
   },
   {
-    image: '/images/Igbo.jpg',
+    image: '/images/Igbo2.jpg',
     title: 'Mee ka ịmata omenala bara ụba',
     subtitle: 'Mee emume ihe nketa Afrịka',
     name: '(Igbo)',
     flag: '/images/Nigeria-flag.png'
   },
   {
-    image: '/images/zulu.jpg',
+    image: '/images/zulu2.jpg',
     title: 'Hlola izimangaliso zemvelo',
     subtitle: 'Ubuhle obudlula umcabango',
     name: '(Zulu)',
@@ -44,6 +45,12 @@ const heroSlides = [
 const HeroSection = ({ children, customContent, backgroundImage }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { t } = useTranslation();
+  const navigate = useNavigate(); // 👈 1. create navigate
+
+  // 👈 2. define the handler
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
 
   useEffect(() => {
     if (backgroundImage) return;
@@ -80,17 +87,17 @@ const HeroSection = ({ children, customContent, backgroundImage }) => {
             </div>
 
             <div className="hero-boxes">
-              <div className="hero-box">
+              <div className="hero-box" onClick={()=> handleNavigation('/academy')}>
                 <i className="fa-solid fa-comments"></i>
                 <p>{t('hero.learnLanguage')}</p>
               </div>
 
-              <div className="hero-box">
+              <div className="hero-box" onClick={()=> handleNavigation('/tribes')}>
                 <i className="fa-solid fa-mask"></i>
                 <p>{t('hero.exploreCulture')}</p>
               </div>
 
-              <div className="hero-box">
+              <div className="hero-box" onClick={()=> handleNavigation('/market')}>
                 <i className="fa-solid fa-scroll"></i>
                 <p>{t('hero.visitAntiques')}</p>
               </div>

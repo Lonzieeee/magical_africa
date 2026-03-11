@@ -118,24 +118,39 @@ const Navbar = ({ solid }) => {
         <div className="item3">
           <div className='events-icon'>
             <div className="icon-with-tooltip">
-              <a href="#" id='academy'>
+              <a href="academy" id='academy'>
+                
                 <i className="fa-solid fa-school"></i>
+                
+                Academy
               </a>
+              {/* 
               <span className="icon-tooltip">Academy</span>
+
+              */}
             </div>
 
             <div className="icon-with-tooltip">
-              <a href="#" id='events'>
+              <a href="events" id='events'>
+               
                 <i className="fa-solid fa-masks-theater"></i>
+                Events
               </a>
+              {/*
               <span className="icon-tooltip">Events</span>
+               */}
             </div>
 
             <div className="icon-with-tooltip">
               <a href="#" id='music'>
-                <i className="fa-solid fa-music"></i>
+                 <i className="fa-solid fa-music"></i>
+              
+                 Music
+               
               </a>
+              {/* 
               <span className="icon-tooltip">Music</span>
+              */}
             </div>
           </div>
 
@@ -145,9 +160,11 @@ const Navbar = ({ solid }) => {
                 e.preventDefault();
                 setIsAuthModalOpen(true);
               }}>
-                {t('nav.signIn')}
+               
                 <i className="fa-regular fa-user" id="user-icon"></i>
+                 {t('nav.signIn')}
               </a>
+              
             </>
           ) : (
             <>

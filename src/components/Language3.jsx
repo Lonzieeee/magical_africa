@@ -47,7 +47,7 @@ const Language3 = () => {
    <Navbar solid />
    <div className='welcome'>
     <div className='welcome-content'>
-      <img src="/images/woman2.png" alt="img" />
+      <img src="/images/woman2-latest.png" alt="img" />
       <div className='tooltip-bubble'>
         <span className='tooltip-arrow'></span>
         <p>Welcome to <strong>Magical Africa Academy</strong> — let's learn Ekegusii</p>
@@ -57,7 +57,7 @@ const Language3 = () => {
 
    <div className='continue-button'>
 
-   <button onClick={()=> handleNavigation('/language4')}>
+   <button onClick={()=> handleNavigation('/welcome-learningReason')}>
      Continue
     </button>
 

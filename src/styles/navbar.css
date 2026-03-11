@@ -114,6 +114,10 @@ align-items: center;
   align-items: center;
 }
 
+#contact-us i{
+  color: rgb(181, 161, 145);
+}
+
 .events-icon{
   display: flex;
   flex-direction: row;
@@ -617,7 +621,32 @@ align-items: center;
   display: block;
 }
 
+#academy i{
+color: rgb(181, 161, 145);
+}
 
+#events{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+#events i{
+  color: rgb(181, 161, 145);
+}
+
+#music{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+#music i{
+  color: rgb(181, 161, 145);
+}
 /* Hide lang dropdown on mobile */
 @media screen and (max-width: 768px) {
   .lang-btn .fa-globe {

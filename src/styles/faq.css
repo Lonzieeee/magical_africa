@@ -9,10 +9,13 @@
 }
 
 .FAQ{
+  
   height: fit-content;
   background-color: rgb(242, 239, 235);
   padding-top: 2rem;
 }
+
+
 
 .FAQ h1{
   font-size: 1.5rem;

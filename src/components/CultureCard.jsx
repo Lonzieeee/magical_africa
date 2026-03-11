@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import '../styles/culture-card.css';
 
 const CultureCard = () => {
@@ -7,6 +8,12 @@ const CultureCard = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [proverbLang, setProverbLang] = useState('eng'); // Track proverb language
   const { t } = useTranslation();
+  const navigate = useNavigate(); // 👈 1. create navigate
+
+  // 👈 2. define the handler
+  const handleNavigation = (path) => {
+    navigate(path);
+  };
 
   useEffect(() => {
     // Trigger the animation after a small delay
@@ -88,7 +95,7 @@ const CultureCard = () => {
             </p>
           </div>
 
-          <button className='get-more'>{t('cultureCard.phrases.learnMore')}</button>
+          <button className='get-more' onClick={()=> handleNavigation('/academy')}>{t('cultureCard.phrases.learnMore')}</button>
         </div>
 
         {/* SECTION 2 */}
@@ -151,7 +158,7 @@ const CultureCard = () => {
               <button className='book-event'>{t('cultureCard.events.bookNow')}</button>
             </div>
           </div>
-          <p className='see-more'>{t('cultureCard.events.seeMore')} <i className="fa-solid fa-arrow-right"></i></p>
+          <p className='see-more' onclick={()=> handleNavigation('/events')}>{t('cultureCard.events.seeMore')} <i className="fa-solid fa-arrow-right"></i></p>
         </div>
       </div>
 

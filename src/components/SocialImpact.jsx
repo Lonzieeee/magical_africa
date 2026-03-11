@@ -84,6 +84,7 @@ export default SocialImpact;
 
 import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import '../styles/social-impact.css';
 
 const SocialImpact = () => {
@@ -114,12 +115,20 @@ const SocialImpact = () => {
     return () => observer.disconnect();
   }, []);
 
+    const navigate = useNavigate(); // 👈 1. create navigate
+  
+    // 👈 2. define the handler
+    const handleNavigation = (path) => {
+      navigate(path);
+    };
+  
+
   return (
     <section className="social-impact">
       <div className="text">
         <h1>{t('socialImpact.title')}</h1>
         <p>{t('socialImpact.description')}</p>
-        <span>
+        <span onClick={()=> handleNavigation('/about')}>
           {t('socialImpact.learnMore')} <i className="fa-solid fa-arrow-right"></i>
         </span>
       </div>

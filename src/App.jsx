@@ -26,12 +26,12 @@ function App() {
           <Route path="/tribes" element={<Tribes />} />
           <Route path="/maasai" element={<Maasai />} />
           <Route path="/academy" element={ <Academy />} />
-          <Route path="/language2" element={ <Language2 /> } />
-          <Route path="/language3" element={ <Language3 /> } />
-          <Route path="/language4" element={ <Language4 /> } />
-          <Route path="/language5" element={ <Language5 /> } />
-          <Route path="/language6" element={ <Language6 /> } />
-          <Route path="/language7" element={ <Language7 /> } />
+          <Route path="/register" element={ <Language2 /> } />
+          <Route path="/welcome" element={ <Language3 /> } />
+          <Route path="/welcome-learningReason" element={ <Language4 /> } />
+          <Route path="/welcome-languageKnowledge" element={ <Language5 /> } />
+          <Route path="/Simple-Greetings" element={ <Language6 /> } />
+          <Route path="/Common-nouns" element={ <Language7 /> } />
           <Route path="/events" element={ <Events /> } />
            <Route path="/market" element={ <Market /> } />
         

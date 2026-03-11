@@ -63,7 +63,7 @@ const Language6 = () => {
 
 
    <div className='continue-button'>
-        <button onClick={() => navigate('/language7')}>
+        <button onClick={() => navigate('/Common-nouns')}>
           Next
         </button>
       </div>

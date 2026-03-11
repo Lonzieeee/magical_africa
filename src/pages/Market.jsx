@@ -44,6 +44,15 @@ const Market = () => {
   return () => observer.disconnect();
 }, []);
 
+
+  //for the title
+
+    useEffect(() => {
+    document.title = 'Buy Authentic African Products';
+  }, []);
+
+
+
   return (
     <>
     

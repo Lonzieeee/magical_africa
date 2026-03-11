@@ -101,7 +101,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="FAQ">
+    <section className="FAQ" >
       <h1>{t('faq.title')}</h1>
 
       <div className="questions-section">

@@ -116,7 +116,7 @@ const Language5 = () => {
       <div className='how-well'>
 
         <div className='how-well-question'>
-          <img src="/images/woman2.png" alt="" />
+          <img src="/images/woman2-latest.png" alt="" />
           <div className='tooltip-bubble' key={tooltipText}>
             <span className='tooltip-arrow'></span>
             <p>{tooltipText}</p>
@@ -151,7 +151,7 @@ const Language5 = () => {
 
     <div className='continue-button'>
   <button
-    onClick={() => selectedWell && navigate('/language6')}
+    onClick={() => selectedWell && navigate('/Simple-Greetings')}
     disabled={!selectedWell}
     className={selectedWell ? 'btn-active' : 'btn-inactive'}
   >

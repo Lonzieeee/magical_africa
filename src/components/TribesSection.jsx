@@ -85,6 +85,7 @@ export default TribesSection;
 
  import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import '../styles/tribes.css';
 
 const TribesSection = () => {
@@ -117,6 +118,14 @@ const TribesSection = () => {
     return () => observer.disconnect();
   }, []);
 
+    const navigate = useNavigate(); // 👈 1. create navigate
+  
+    // 👈 2. define the handler
+    const handleNavigation = (path) => {
+      navigate(path);
+    };
+  
+
   return (
     <section className="tribes">
       <h1>{t('tribes.title')}</h1>
@@ -141,7 +150,7 @@ const TribesSection = () => {
 
       <div className="view-more2">
         <hr />
-        <button className="show-btn3">
+        <button className="show-btn3" onClick={()=> handleNavigation('/tribes')}>
           <span>{t('tribes.viewAll')}</span>
         </button>
       </div>

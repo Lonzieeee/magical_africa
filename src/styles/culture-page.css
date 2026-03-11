@@ -1,261 +1,332 @@
 *{
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: border-box ;
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.025rem;
-  line-height: 1.5rem;
-  
-}
-
-.culture-page{
-  height: 100vh;
-  position: relative;
-background-image: url(/images/side-view-people-garage-sale.jpg);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-   
 }
 
 
-.culture-page::before {
-  content: '';
-  position: absolute;
- 
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6); 
-  z-index: 1;
-}
-
-
-.culture-page-heading{
-  font-size: 1.5rem;
-  color: white;
-  text-align: center;
- position: relative;
- padding-top: 6rem;
- z-index: 2;
- font-weight: 400;
-}
-
-.culture-page-para{
-  font-size: 1rem;
-  color: white;
-  text-align: center;
-  padding-top: 2rem;
-  position: relative;
-  z-index: 2;
-}
-
-
-.culture-cards{
-  display: flex;
-  flex-direction: row;
-  width: 100%;
+.culture-section{
+background-color: #0f0f0f;
 height: fit-content;
-padding-top: 8rem;
-  gap: 30px;
-  justify-content: center;
-  align-items: center;
-position: relative;
-z-index: 2;
-
-}
-
-.culture-card1, .culture-card2, .culture-card3{
-width:400px ;
-height: 400px !important;
-background-color: rgba(0, 0, 0, 0.4);
 display: flex;
 flex-direction: column;
-padding: 2rem 1.5rem;
+position: relative;
+padding-top: 4rem;
+padding-left: 3rem;
+padding-right: 3rem;
+padding-bottom: 4rem;
 }
 
-.culture-card1 h1, .culture-card2 h1, .culture-card3 h1{
-text-align: start;
-font-weight: 400;
-color: white;
-font-size: 1.2rem;
-
-}
-
-
-.culture-list {
-  list-style: none;
-  padding-top: 0rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: start;
-}
-
-.culture-list li {
-  position: relative;
-  color: white;
-  font-size: 0.875rem;
-  padding-left: 1.5rem;
-}
-
-.culture-list li::before {
+.culture-section::before{
   content: '';
   position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background-color: #EA580C;
+  inset: 0;
+
+  background-image:
+  repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 50px,
+    rgba(234,88,12,0.03) 50px,
+    rgba(234,88,12,0.03) 51px
+  ),
+  repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 50px,
+    rgba(234,88,12,0.03) 50px,
+    rgba(234,88,12,0.03) 51px
+  );
+
+   pointer-events: none;
+    z-index: 0;
 }
 
-.culture-page-button{
+.culture-section1{
+  display: flex;
+  flex-direction: column;
+}
+
+.culture-section-heading{
   display: flex;
   flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  padding-bottom: 2rem;
+  
+}
+
+.culture-section-heading hr{
+  border: none;
+  border-top: 2.5px solid #EA580C;
+  width: 50px;
+}
+
+.culture-section-heading h3{
+  color: #EA580C;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.culture-section1 h1{
+color: white;
+
+}
+
+.culture-section1 h1 span{
+  color: #EA580C;
+}
+
+.culture-section1 p{
+color: #888;
+max-width: 560px;
+padding-top: 1.5rem;
+font-size: 0.875rem;
+}
+
+.culture-section2{
+  display: flex;
+  flex-direction: row;
+  margin-top: 3rem;
+  align-items: center;
+ 
+  width: 100%;
+  gap: 1.4rem;
+}
+
+.culture-section2-a{
+  width: 100%;
+  
+  height: 450px;
+  background-color: #1a1a1a;
+  border: 1px solid rgba(234,88,12,0.25);
+}
+
+.culture-section2-b{
+    width: 100%;
+ background: #EA580C;
+  height: 450px;
+ 
+  border: 1px solid #EA580C;
+}
+
+.culture-section2-c{
+    width: 100%;
+  
+  height: 450px;
+  background-color: #1e1e1e;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+
+/* ── Card inner content ── */
+
+.culture-section2-a,
+.culture-section2-b,
+.culture-section2-c {
+  padding: 1.8rem 1.6rem;
+  
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-visible {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+
+
+
+.culture-section2-b::after {
+  content: '';
+  position: absolute;
+  top: -30px; left: -30px;
+  width: 160px; height: 160px;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.culture-section2-c::after {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 140px; height: 140px;
+  background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Icon badge */
+.card-icon {
+  font-size: 1.4rem;
+  width: 50px;
+  height: 50px;
+  border-radius: 13px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  z-index: 2;
-  padding-top: 8rem;
-  padding-right: 3rem;
-  
+  margin-bottom: 1.1rem;
+  background: rgba(255,255,255,0.07);
+}
+.card-icon-orange {
+  background: rgba(255,255,255,0.18);
 }
 
-.culture-page-button button{
-  background-color: #1f6f43;
-  color: white;
+/* Card headings */
+.culture-section2-a h2,
+.culture-section2-b h2,
+.culture-section2-c h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+  color: #fff;
+ 
+}
+
+.card-title-accent {
+  color: #EA580C;
+  font-style: italic;
+}
+.card-title-block {
+  
+  font-style: italic;
+}
+
+/* Divider */
+.card-divider {
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  margin-bottom: 1.2rem;
+}
+.card-divider-orange { background: #EA580C; }
+.card-divider-white  { background: rgba(255,255,255,0.4); }
+
+
+
+/* Button */
+.culture-page-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+.culture-page-button button {
+  background: transparent;
+  border: 1px solid #EA580C;
+  color: #EA580C;
   padding: 0.5rem 1rem;
-  border: none;
+  font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+.culture-page-button button:hover {
+  background: #EA580C;
+  color: #ffffff;
  
 }
 
-.culture-page-button button:hover{
-  background-color: #145a34;
+.festivals-info{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.culture-card2 span{
-  color: rgb(181, 161, 145);
-}
-
-.culture-card1 span{
-  color: rgb(181, 161, 145);
-}
-
-
-/* Start hidden and below */
-.culture-card1, .culture-card2, .culture-card3 {
-  opacity: 0;
-  transform: translateY(120px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-
-/* Triggered when visible */
-.culture-card1.card-visible,
-.culture-card2.card-visible,
-.culture-card3.card-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-
-@media screen and (max-width:1280px) {
-  .culture-card1, .culture-card2, .culture-card3{
-
-    width:300px ;
-    height: 300px !important;
-
-  }
-
-  .culture-page-heading{
-    font-size: 1.5rem;
-    padding-top: 4rem;
-  }
-  .culture-page-para{
-    font-size: 0.875rem;
-    padding-top: 1rem;
-  }
-
-  .culture-page{
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-
-  .culture-card1 h1, .culture-card2 h1, .culture-card3 h1{
-    font-size: 1.2rem;
-  }
-
-  .culture-list li{
-    font-size: 0.875rem;
-  }
-
-  .culture-list{
-    gap: 0.5rem;
-    padding-top: 0rem;
-  }
-
-  .culture-cards{
-    padding-top: 4rem;
-  }
-
-  .culture-list li::before{
-    width:9px ;
-    height: 9px;
-  }
-
-  .culture-page-button{
-    padding-top: 2.5rem;
-  }
-
-  .culture-page-button button{
-  background-color: #1f6f43;
+.festivals-info h4{
   color: white;
-  padding: 0.5rem 0.875rem;
-  border: none;
-  font-size: 0.875rem;
-  font-weight: 600;
+  font-size: 0.75rem;
+  padding-bottom: 0rem;
+}
+
+.festivals-info p{
+  color: #888;
+  font-size: 0.7rem;
  
 }
+
+.festivals-info hr{
+  border: none;
+  border-top:1px solid #888;
+}
+
+.festivals-list{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-top: 1rem;
+}
+
+
+.festivals-info2{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.festivals-info2 h4{
+color: white;
+  font-size: 0.75rem;
   
 }
+
+.festivals-info2 p{
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 0.7rem;
+ 
+}
+
+.art-hr{
+ border-top: 1px solid rgba(255, 255, 255, 0.4);
+ border: none;
+}
+
 
 @media screen and (max-width:768px) {
-  .culture-page-heading{
-    text-align: start;
-  }
-  .culture-page-para{
-    text-align: start;
-  }
-  .culture-cards{
+  .culture-section2{
     flex-direction: column;
-    align-items: start;
-  }
-  .culture-card1, .culture-card2, .culture-card3{
-    width: 100%;
-    height: 220px !important;
-    padding: 1rem 1.5rem;
-  }
-  .culture-list{
-    gap: 0.1rem;
-  }
-  
-  .culture-cards{
-    gap: 10px;
   }
 }
 
 @media screen and (max-width:480px) {
-  .culture-page{
-    padding-left: 1rem;
-    padding-right: 1rem;
-    height: fit-content;
-    padding-bottom: 2rem;
+  .culture-section1 h1{
+    line-height: 2rem;
   }
-  .culture-cards{
-    padding-top: 2rem;
+  .culture-section2{
+    gap: 30px;
   }
 
+  .culture-section{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+@media screen and (min-width:1440px) {
+
+  .culture-section{
+    padding-left: 3rem;
+    padding-right: 3rem;
+    
+    padding-top: 6rem;
+  }
+  .culture-section2{
+    height: 100%;
+    margin-top: 4rem;
+  }
+  .culture-section h1{
+    padding-top: 2rem;
+  }
+  .culture-page-button{
+  margin-top: 4rem;
+  margin-bottom: 1rem;
+  }
 }

@@ -70,7 +70,7 @@
 
 .Auction-box1-a, .Auction-box2-a, .Auction-box3-a{
   height: 350px;
-  background-image: url(/images/kitenge.jpg);
+  background-image: url(/images/kitenge-latest.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -78,11 +78,11 @@
 }
 
 .Auction-box2-a{
-  background-image: url(/images/spear.jpg);
+  background-image: url(/images/spear2.jpg);
 }
 
 .Auction-box3-a{
-  background-image: url(/images/Oromo.jpg);
+  background-image: url(/images/Oromo2.jpg);
 }
 
 .Auction-box1-b{

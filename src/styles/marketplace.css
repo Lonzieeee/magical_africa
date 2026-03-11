@@ -9,11 +9,13 @@
 }
 
 
+
 .marketplace h1{
 font-size: 1.5rem;
 padding-top: 2rem;
 font-weight: 400;
 text-align: center;
+
 }
 
 ul{
@@ -52,6 +54,7 @@ ul li span{
   height: 20px;
   border-radius: 50%;
   font-size: 0.875rem;
+  
 }
 
  ul li.active span{
@@ -197,6 +200,10 @@ ul li span{
   height: 0.5px;
   width: 70px;
 }
+
+
+
+
 
 
   @media screen and (min-width:1440px) {

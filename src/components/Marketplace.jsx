@@ -90,6 +90,7 @@ export default Marketplace;
 
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import '../styles/marketplace.css';
 
 const Marketplace = () => {
@@ -100,38 +101,46 @@ const Marketplace = () => {
     {
       name: t('marketplace.categories.jewelery'),
       sections: [
-        { image: '/images/maasai-bracelets.jpg', title: t('marketplace.items.maasaiBracelets.title'), description: t('marketplace.items.maasaiBracelets.description'), price: '$15' },
-        { image: '/images/beaded-jewelery.jpg', title: t('marketplace.items.beadedJewelery.title'), description: t('marketplace.items.beadedJewelery.description'), price: '$75' },
-        { image: '/images/maasai-necklaces.jpg', title: t('marketplace.items.maasaiNecklaces.title'), description: t('marketplace.items.maasaiNecklaces.description'), price: '$65' }
+        { image: '/images/maasai-bracelets2.jpg', title: t('marketplace.items.maasaiBracelets.title'), description: t('marketplace.items.maasaiBracelets.description'), price: '$15' },
+        { image: '/images/beaded-jewelery2.jpg', title: t('marketplace.items.beadedJewelery.title'), description: t('marketplace.items.beadedJewelery.description'), price: '$75' },
+        { image: '/images/maasai-necklaces2.jpg', title: t('marketplace.items.maasaiNecklaces.title'), description: t('marketplace.items.maasaiNecklaces.description'), price: '$65' }
       ]
     },
     {
       name: t('marketplace.categories.garments'),
       sections: [
-        { image: '/images/nigeria-wear.jpg', title: t('marketplace.items.ankaraGown.title'), description: t('marketplace.items.ankaraGown.description'), price: '$200' },
-        { image: '/images/maasai-wear.jpg', title: t('marketplace.items.maasaiLeso.title'), description: t('marketplace.items.maasaiLeso.description'), price: '$120' },
-        { image: '/images/kitenge.jpg', title: t('marketplace.items.kitenge.title'), description: t('marketplace.items.kitenge.description'), price: '$100' }
+        { image: '/images/nigeria-wear2.jpg', title: t('marketplace.items.ankaraGown.title'), description: t('marketplace.items.ankaraGown.description'), price: '$200' },
+        { image: '/images/maasai-wear2.jpg', title: t('marketplace.items.maasaiLeso.title'), description: t('marketplace.items.maasaiLeso.description'), price: '$120' },
+        { image: '/images/kitenge-latest.jpg', title: t('marketplace.items.kitenge.title'), description: t('marketplace.items.kitenge.description'), price: '$100' }
       ]
     },
     {
       name: t('marketplace.categories.toolsArtefacts'),
       sections: [
-        { image: '/images/hammer.jpg', title: t('marketplace.items.carpentryTools.title'), description: t('marketplace.items.carpentryTools.description'), price: '$300' },
-        { image: '/images/shoka.png', title: t('marketplace.items.farmingTools.title'), description: t('marketplace.items.farmingTools.description'), price: '$150' },
-        { image: '/images/spear.jpg', title: t('marketplace.items.traditionalSpears.title'), description: t('marketplace.items.traditionalSpears.description'), price: '$80' }
+        { image: '/images/hammer2.jpg', title: t('marketplace.items.carpentryTools.title'), description: t('marketplace.items.carpentryTools.description'), price: '$300' },
+        { image: '/images/shoka2.png', title: t('marketplace.items.farmingTools.title'), description: t('marketplace.items.farmingTools.description'), price: '$150' },
+        { image: '/images/spear2.jpg', title: t('marketplace.items.traditionalSpears.title'), description: t('marketplace.items.traditionalSpears.description'), price: '$80' }
       ]
     },
     {
       name: t('marketplace.categories.musicalInstruments'),
       sections: [
-        { image: '/images/drums.jpg', title: t('marketplace.items.drums.title'), description: t('marketplace.items.drums.description'), price: '$400' },
-        { image: '/images/string-instrument.jpg', title: t('marketplace.items.stringInstruments.title'), description: t('marketplace.items.stringInstruments.description'), price: '$200' },
-        { image: '/images/wind-instrument.jpg', title: t('marketplace.items.windInstruments.title'), description: t('marketplace.items.windInstruments.description'), price: '$150' }
+        { image: '/images/drums-latest.jpg', title: t('marketplace.items.drums.title'), description: t('marketplace.items.drums.description'), price: '$400' },
+        { image: '/images/string-instrument2.jpg', title: t('marketplace.items.stringInstruments.title'), description: t('marketplace.items.stringInstruments.description'), price: '$200' },
+        { image: '/images/wind-instrument2.jpg', title: t('marketplace.items.windInstruments.title'), description: t('marketplace.items.windInstruments.description'), price: '$150' }
       ]
     }
   ];
 
   const currentData = marketplaceData[activeCategory];
+
+    const navigate = useNavigate(); // 👈 1. create navigate
+  
+    // 👈 2. define the handler
+    const handleNavigation = (path) => {
+      navigate(path);
+    };
+  
 
   return (
     <section className="marketplace">
@@ -166,7 +175,7 @@ const Marketplace = () => {
       </div>
 
       <div className="show-all2">
-        <button className="show-btn2">{t('marketplace.viewAll')}</button>
+        <button className="show-btn2" onClick={()=> handleNavigation('/market')}>{t('marketplace.viewAll')}</button>
       </div>
     </section>
   );

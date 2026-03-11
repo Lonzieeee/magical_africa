@@ -1,99 +1,65 @@
 
-{/*
+{/* 
 import React from 'react'
 import '../styles/culture-page.css'
 
 const Culture = () => {
   return (
-
-
-    <div className='culture-page'>
-
-
-      <h1 className='culture-page-heading'>African Cultural Events</h1>
-
-      <p className='culture-page-para'>
-
-        African cultural events celebrate heritage by uniting communities through music, dance, art, food, and storytelling, honoring tradition while embracing modern African identity.
-      </p>
-
-
-
-      <div className='culture-cards'>
-
-        <div className='culture-card1'>
-         <h1>
-         <span>Music</span>  festivals
-         </h1>
-
-         <ul className='culture-list'>
-            <li>Afropolis Music Festival</li>
-            <li>Lagos Jazz Series</li>
-            <li>Sauti za Busara</li>
-            <li>Bushfire Festival</li>
-            <li>Fiesta de la Música</li>
-          </ul>
-
-        
-        </div>
-
-        <div className='culture-card2'>
-          <h1>
-            Food & <span>Cultural festivals</span>
-          </h1>
-
-           <ul className='culture-list'>
-            <li>Cape Town Food & Wine Festival</li>
-            <li>Nairobi Food Festival</li>
-            <li>Chale Wote Street Art Festival</li>
-            <li>Zanzibar Cultural Festival</li>
-            <li>Festival sur le Niger</li>
-          </ul>
-        </div>
-
-        <div className='culture-card3'>
-
-          <h1>
-            Art and Craft fairs
-          </h1>
-
-           <ul className='culture-list'>
-            <li>Kigali Art Exhibition</li>
-            <li>African Craft Market</li>
-            <li>Dakar Biennale</li>
-            <li>Zimbabwe International Trade Fair</li>
-            <li>Accra Art Week</li>
-          </ul>
-
-        </div>
-
-
-
-      </div>
-
-
-      <div className='culture-page-button'>
+    
+  <>
   
-      <button>
-        Learn More
-      </button>
+  <div className='culture-section'> 
+
+    <div className='culture-section1'>
+
+    <div className='culture-section-heading'>
+      <hr />
+      <h3>
+        Celebrate the Continent
+      </h3>
+
+    </div>  
+
+    <h1>African <span>Cultural</span> Events</h1>
+
+    <p>
+      African cultural events celebrate heritage by uniting communities through music, dance, art, food, and storytelling — honoring tradition while embracing modern African identity.
+    </p>
+
+    </div>
+
+
+    <div className='culture-section2'>
+
+      <div className='culture-section2-a'>
 
       </div>
 
+       <div className='culture-section2-b'>
 
+      </div>
+
+        <div className='culture-section2-c'>
+
+      </div>
 
 
 
     </div>
+
+
+  </div>
+  </>
+
   )
 }
 
 export default Culture
 
- */}
+*/}
 
 
- import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import '../styles/culture-page.css'
 
 const Culture = () => {
@@ -103,9 +69,7 @@ const Culture = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          // ✅ cards defined OUTSIDE if/else so both blocks can access it
-          const cards = entry.target.querySelectorAll('.culture-card1, .culture-card2, .culture-card3');
-
+          const cards = entry.target.querySelectorAll('.culture-section2-a, .culture-section2-b, .culture-section2-c');
           if (entry.isIntersecting) {
             cards.forEach((card, index) => {
               setTimeout(() => {
@@ -125,54 +89,157 @@ const Culture = () => {
   }, []);
 
   return (
-    <div className='culture-page'>
-      <h1 className='culture-page-heading'>African Cultural Events</h1>
-      <p className='culture-page-para'>
-        African cultural events celebrate heritage by uniting communities through music, dance, art, food, and storytelling, honoring tradition while embracing modern African identity.
-      </p>
+    <>
+      <div className='culture-section'>
 
-      <div className='culture-cards' ref={cardsRef}>
+        <div className='culture-section1'>
 
-        <div className='culture-card1'>
-          <h1><span>Music</span> festivals</h1>
-          <ul className='culture-list'>
-            <li>Afropolis Music Festival</li>
-            <li>Lagos Jazz Series</li>
-            <li>Sauti za Busara</li>
-            <li>Bushfire Festival</li>
-            <li>Fiesta de la Música</li>
-          </ul>
+          <div className='culture-section-heading'>
+            <hr />
+            <h3>Celebrate the Continent</h3>
+          </div>
+
+          <h1>African <span>Cultural</span> Events</h1>
+
+          <p>
+            African cultural events celebrate heritage by uniting communities through music, dance, art, food, and storytelling — honoring tradition while embracing modern African identity.
+          </p>
+
         </div>
 
-        <div className='culture-card2'>
-          <h1>Food & <span>Cultural festivals</span></h1>
-          <ul className='culture-list'>
-            <li>Cape Town Food & Wine Festival</li>
-            <li>Nairobi Food Festival</li>
-            <li>Chale Wote Street Art Festival</li>
-            <li>Zanzibar Cultural Festival</li>
-            <li>Festival sur le Niger</li>
-          </ul>
+        <div className='culture-section2' ref={cardsRef}>
+
+          {/* Card A - Music */}
+          <div className='culture-section2-a'>
+            <div className='card-icon'>🎵</div>
+            <h2><span className='card-title-accent'>Music</span> Festivals</h2>
+            <div className='card-divider card-divider-orange' />
+
+            <div className='festivals-list'>
+
+           
+
+           <div className='festivals-info'>
+           
+           <h4>Afropolis Music Festival</h4>
+           <p>📍 Lagos, Nigeria</p>
+           <hr />
+
+
+           </div>
+
+           <div className='festivals-info'>
+           
+           <h4>Sauti za Busara</h4>
+           <p>📍 Zanzibar, Tanzania</p>
+           <hr />
+
+
+           </div>
+           <div className='festivals-info'>
+           
+           <h4>Bushfire Festival</h4>
+           <p>📍 Malkerns, Eswatini</p>
+           <hr />
+
+
+           </div>
+
+            </div>
+            
+          </div>
+
+          {/* Card B - Food & Culture */}
+          <div className='culture-section2-b'>
+            <div className='card-icon card-icon-orange'>🍲</div>
+            <h2>Food & <span className='card-title-block'>Cultural Festivals</span></h2>
+            <div className='card-divider card-divider-white' />
+
+             <div className='festivals-list'>
+
+           
+
+           <div className='festivals-info2'>
+           
+           <h4>Cape Town Food & Wine Festival</h4>
+           <p>📍 Cape Town, SA</p>
+           <hr />
+
+
+           </div>
+
+           <div className='festivals-info2'>
+           
+           <h4>Nairobi Food Festival</h4>
+           <p>📍 Nairobi, Kenya</p>
+           <hr />
+
+
+           </div>
+           <div className='festivals-info2'>
+           
+           <h4>Zanzibar Cultural Festival</h4>
+           <p>📍 Zanzibar, Tanzania</p>
+           <hr />
+
+
+           </div>
+
+            </div>
+
+            
+          </div>
+
+          {/* Card C - Art & Crafts */}
+          <div className='culture-section2-c'>
+            <div className='card-icon'>🎨</div>
+            <h2>Art and <span className='card-title-accent'>Craft Fairs</span></h2>
+            <div className='card-divider card-divider-orange' />
+
+
+             <div className='festivals-list'>
+
+           
+
+           <div className='festivals-info'>
+           
+           <h4>Accra Art Week</h4>
+           <p>📍 Accra, Ghana</p>
+           <hr className='art-hr' />
+
+
+           </div>
+
+           <div className='festivals-info'>
+           
+           <h4>Kigali Art Exhibition</h4>
+           <p>📍 Kigali, Rwanda</p>
+           <hr className='art-hr' />
+
+
+           </div>
+           <div className='festivals-info'>
+           
+           <h4>African Craft Market</h4>
+           <p>📍 Pan-Africa</p>
+           <hr  className='art-hr'/>
+
+
+           </div>
+
+            </div>
+          
+          </div>
+
         </div>
 
-        <div className='culture-card3'>
-          <h1>Art and Craft fairs</h1>
-          <ul className='culture-list'>
-            <li>Kigali Art Exhibition</li>
-            <li>African Craft Market</li>
-            <li>Dakar Biennale</li>
-            <li>Zimbabwe International Trade Fair</li>
-            <li>Accra Art Week</li>
-          </ul>
+        <div className='culture-page-button'>
+          <button>Learn More</button>
         </div>
 
       </div>
-
-      <div className='culture-page-button'>
-        <button>Learn More</button>
-      </div>
-    </div>
-  );
+    </>
+  )
 }
 
 export default Culture

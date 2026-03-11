@@ -15,7 +15,7 @@ const Pottery = () => {
 
       <div className='pottery-grid pot1'>
 
-        <img src="images/pottery-image2.png"
+        <img src="images/pottery2-image2.png"
          alt="" />
 
            <div className='pottery-content'>
@@ -27,7 +27,7 @@ const Pottery = () => {
       </div>
       <div className='pottery-grid pot2'>
 
-        <img src="images/pottery-image5.png" alt="" />
+        <img src="images/pottery4-image5.png" alt="" />
 
         <div className='pottery-content'>
            <p>Ceramic Cup</p>
@@ -39,7 +39,7 @@ const Pottery = () => {
       </div>
       <div className='pottery-grid pot3'>
 
-        <img src="images/pottery-image3.png" alt="" />
+        <img src="images/pottery3-image3.png" alt="" />
 
         <div className='pottery-content'>
            <p>Vace</p>
@@ -51,7 +51,7 @@ const Pottery = () => {
       </div>
       <div className='pottery-grid pot4'>
 
-        <img src="images/pottery-image6.png" alt="" />
+        <img src="images/pottery5-image6.png" alt="" />
 
         <div className='pottery-content'>
            <p>Bowl</p>
