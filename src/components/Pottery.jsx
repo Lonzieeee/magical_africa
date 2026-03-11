@@ -20,9 +20,16 @@ const Pottery = () => {
 
            <div className='pottery-content'>
            <p>Golden Mask</p>
-          <h3>Add to Cart</h3>
+           <button>Add to Cart</button>
 
         </div>
+
+         <div className='seller4-price'>
+
+        <p>Price : $25</p>
+
+      </div>
+
 
       </div>
       <div className='pottery-grid pot2'>
@@ -31,9 +38,15 @@ const Pottery = () => {
 
         <div className='pottery-content'>
            <p>Ceramic Cup</p>
-          <h3>Add to Cart</h3>
+           <button>Add to Cart</button>
 
         </div>
+
+         <div className='seller4-price'>
+
+        <p>Price : $25</p>
+
+      </div>
 
 
       </div>
@@ -43,9 +56,15 @@ const Pottery = () => {
 
         <div className='pottery-content'>
            <p>Vace</p>
-          <h3>Add to Cart</h3>
+         <button>Add to Cart</button>
 
         </div>
+
+         <div className='seller4-price'>
+
+        <p>Price : $25</p>
+
+      </div>
 
 
       </div>
@@ -55,9 +74,14 @@ const Pottery = () => {
 
         <div className='pottery-content'>
            <p>Bowl</p>
-          <h3>Add to Cart</h3>
-
+          <button>Add to cart</button>
         </div>
+
+         <div className='seller4-price'>
+
+        <p>Price : $25</p>
+
+      </div>
 
 
       </div>

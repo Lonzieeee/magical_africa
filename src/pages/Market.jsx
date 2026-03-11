@@ -8,9 +8,40 @@ import Carvings from '../components/Carvings';
 import Pottery from '../components/Pottery';
 import Footer from '../components/Footer';
 import '../styles/artisans.css'
+import '../styles/best-sellers.css'
 
 
 const Market = () => {
+
+  const marketHeroImages = [
+  '/images/side-view-people-garage-sale2.jpg',
+  '/images/african-jewelery.jpg',
+  '/images/african-atire.jpg',
+  '/images/african-spices.jpg',
+  '/images/carvings-image.jpg',
+  '/images/african-painting2.jpg'
+];
+
+const marketHeroLabels = [
+  '',           // slide 1 — no label
+  'Jewellery',
+  'Textiles',
+  'Spices & Food',
+  'Carvings',
+  'Artefacts'
+];
+
+const [currentSlide, setCurrentSlide] = useState(0);
+
+    // 👇 Rotating background image interval
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % marketHeroImages.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+
 
   const [activeCategory, setActiveCategory] = useState('jewellery');
   const auctionRef = useRef(null);
@@ -56,7 +87,7 @@ const Market = () => {
   return (
     <>
     
-    <div className='market-hero'>
+    <div className='market-hero'  style={{ backgroundImage: `url(${marketHeroImages[currentSlide]})` }}>
        <Navbar />
        <div className='market-hero-content'>
        <div className='market-heading'>
@@ -83,9 +114,170 @@ const Market = () => {
         </span>
        </div>
        </div>
+
+
+       <div className='market-hero-content2'>
+
+       <h2>{marketHeroLabels[currentSlide]}</h2>
+
+       </div>
     </div>
 
-    {/* ref is placed here so observer watches the whole auctions section */}
+
+
+    <div className='best-sellers-div'>
+    
+    <h1>Best Seller Items</h1>
+
+    <p>Handpicked favourites from across the continent</p>
+
+    <div className='best-seller-wrapper'>
+
+
+      <div className='best-seller1 sel1'>
+      
+      <img src="/images/pottery2-image2.png" alt="" />
+
+      <div className='best-seller1-content'>
+
+        <p>Golden Mask</p>
+            <button>
+              Add to Cart
+            </button>
+
+      </div>
+
+      <div className='seller-price'>
+
+        <p>Price : $45</p>
+
+      </div>
+
+      </div>
+
+      <div className='best-seller1 sel2'>
+        <img src="/images/pottery3-image3.png" alt="" />
+        <div className='best-seller1-content'>
+
+       <p>Vace</p>
+            <button>
+              Add to Cart
+            </button>
+
+      </div>
+
+       <div className='seller-price'>
+
+        <p>Price : $76</p>
+
+      </div>
+
+
+      </div>
+
+      <div className='best-seller1 sel3'>
+
+        <img src="/images/pottery4-image5.png" alt="" />
+        <div className='best-seller1-content'>
+
+           <p>Mug</p>
+            <button>
+              Add to Cart
+            </button>
+
+      </div>
+
+       <div className='seller-price'>
+
+        <p>Price : $25</p>
+
+      </div>
+
+        
+      </div>
+
+      <div className='best-seller1 sel4'>
+
+        <img src="/images/pottery5-image6.png" alt="" />
+        <div className='best-seller1-content'>
+
+          <p>Bowl</p>
+            <button>
+              Add to Cart
+            </button>
+
+      </div>
+
+       <div className='seller-price'>
+
+        <p>Price : $30</p>
+
+      </div>
+
+
+      </div>
+
+    </div>
+
+
+
+
+    </div>
+
+    
+
+    <div className='Shop-div'>
+
+  <h1>
+   Shop The Collection
+  </h1>
+
+  <p className='collection-description'>
+
+    Authentic goods made by local artisans across the continent
+  </p>
+    
+
+    <div className='collection-div'>
+  <button 
+    className={activeCategory === 'jewellery' ? 'active' : ''}
+    onClick={() => setActiveCategory('jewellery')}
+  >Jewellery</button>
+  <button
+    className={activeCategory === 'carvings' ? 'active' : ''}
+    onClick={() => setActiveCategory('carvings')}
+  >Carvings</button>
+
+  <button
+    className={activeCategory === 'pottery' ? 'active' : ''}
+    onClick={() => setActiveCategory('pottery')}
+  >Pottery</button>
+  <button
+    className={activeCategory === 'textiles' ? 'active' : ''}
+    onClick={() => setActiveCategory('textiles')}
+  >Textiles</button>
+  
+  <button
+    className={activeCategory === 'baskets' ? 'active' : ''}
+    onClick={() => setActiveCategory('baskets')}
+  >Baskets</button>
+  <button
+    className={activeCategory === 'spices' ? 'active' : ''}
+    onClick={() => setActiveCategory('spices')}
+  >Spice and Food</button>
+</div>
+
+{/* Renders below the Shop div */}
+{activeCategory === 'jewellery' && <Jewelery />}
+{activeCategory === 'carvings' && <Carvings />}
+{activeCategory === 'pottery' && <Pottery />}
+
+    </div>
+
+
+
+
+{/* ref is placed here so observer watches the whole auctions section */}
     <div className='Auctions-div' ref={auctionRef}>
 
        <div className='auctions-div1'>
@@ -151,53 +343,9 @@ const Market = () => {
     </div>
 
 
-    <div className='Shop-div'>
 
-  <h1>
-   Shop The Collection
-  </h1>
 
-  <p className='collection-description'>
 
-    Authentic goods made by local artisans across the continent
-  </p>
-    
-
-    <div className='collection-div'>
-  <button 
-    className={activeCategory === 'jewellery' ? 'active' : ''}
-    onClick={() => setActiveCategory('jewellery')}
-  >Jewellery</button>
-  <button
-    className={activeCategory === 'carvings' ? 'active' : ''}
-    onClick={() => setActiveCategory('carvings')}
-  >Carvings</button>
-
-  <button
-    className={activeCategory === 'pottery' ? 'active' : ''}
-    onClick={() => setActiveCategory('pottery')}
-  >Pottery</button>
-  <button
-    className={activeCategory === 'textiles' ? 'active' : ''}
-    onClick={() => setActiveCategory('textiles')}
-  >Textiles</button>
-  
-  <button
-    className={activeCategory === 'baskets' ? 'active' : ''}
-    onClick={() => setActiveCategory('baskets')}
-  >Baskets</button>
-  <button
-    className={activeCategory === 'spices' ? 'active' : ''}
-    onClick={() => setActiveCategory('spices')}
-  >Spice and Food</button>
-</div>
-
-{/* Renders below the Shop div */}
-{activeCategory === 'jewellery' && <Jewelery />}
-{activeCategory === 'carvings' && <Carvings />}
-{activeCategory === 'pottery' && <Pottery />}
-
-    </div>
 
 
 

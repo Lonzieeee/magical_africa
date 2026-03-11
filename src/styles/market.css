@@ -41,6 +41,18 @@ background-image: url(/images/side-view-people-garage-sale2.jpg);
   
 }
 
+.market-hero-content2{
+  position: absolute;
+  z-index: 2;
+  right: 3rem;
+ top: 18%;
+}
+
+.market-hero-content2 h2{
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
 .market-heading{
   display: flex;
   flex-direction: row;
@@ -104,6 +116,13 @@ color: #EA580C;
  left: 2rem;
  bottom: 5%;
   }
+
+  .market-hero-content2{
+  position: absolute;
+  z-index: 2;
+  right: 3rem;
+ top: 10%;
+}
   
 }
 
@@ -121,4 +140,10 @@ color: #EA580C;
   .market-hero-content{
     left: 1rem;
   }
+    .market-hero-content2{
+  position: absolute;
+  z-index: 2;
+  right: 3rem;
+ top: 12%;
+}
 }

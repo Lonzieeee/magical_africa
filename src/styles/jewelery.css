@@ -98,6 +98,18 @@ display: grid;
   background-image: url(/images/nigeria-wear2.jpg);
 }
 
+.seller-price2{
+  position: absolute;
+  top: 1rem !important;
+  right: 1rem;
+  z-index: 2;
+}
+
+.seller-price2 p{
+  color: white;
+  font-size: 0.75rem;
+}
+
 
 @media screen and (max-width:768px) {
   .African-jewelery{

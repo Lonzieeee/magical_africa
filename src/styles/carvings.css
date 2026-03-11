@@ -76,6 +76,31 @@
   color: white;
 }
 
+.carving-description button{
+  padding: 0.2rem 1rem;
+  font-size: 0.875rem;
+  border: 2px solid rgb(210, 123, 53);
+  background-color: transparent;
+  color: rgb(210, 123, 53);
+}
+
+.carving-description button:hover{
+  background-color: rgb(210, 123, 53);
+  color: white;
+}
+
+.seller-price3{
+  position: absolute;
+  top: 1rem !important;
+  right: 1rem;
+  z-index: 2;
+}
+
+.seller-price3 p{
+  color: white;
+  font-size: 0.75rem;
+}
+
 @media screen and (max-width:768px) {
 
   .carving-description{

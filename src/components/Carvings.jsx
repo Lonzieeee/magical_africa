@@ -15,9 +15,15 @@ const Carvings = () => {
 
        <h3>Golden stool</h3>
 
-       <p>Add to Cart</p>
+      <button>Add to Cart</button>
 
         
+      </div>
+
+       <div className='seller-price3'>
+
+        <p>Price : $45</p>
+
       </div>
 
     </div>
@@ -30,9 +36,15 @@ const Carvings = () => {
 
        <h3>Golden stool</h3>
 
-       <p>Add to Cart</p>
+       <button>Add to Cart</button>
 
         
+      </div>
+
+       <div className='seller-price3'>
+
+        <p>Price : $45</p>
+
       </div>
 
 
@@ -46,9 +58,15 @@ const Carvings = () => {
 
        <h3>Golden stool</h3>
 
-       <p>Add to Cart</p>
+       <button>Add to Cart</button>
 
         
+      </div>
+
+       <div className='seller-price3'>
+
+        <p>Price : $45</p>
+
       </div>
 
 
@@ -62,9 +80,15 @@ const Carvings = () => {
 
        <h3>Golden stool</h3>
 
-       <p>Add to Cart</p>
+      <button>Add to Cart</button>
 
         
+      </div>
+
+       <div className='seller-price3'>
+
+        <p>Price : $45</p>
+
       </div>
 
 

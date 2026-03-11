@@ -23,6 +23,13 @@ const Jewelery = () => {
 
         </div>
 
+         <div className='seller-price2'>
+
+        <p>Price : $45</p>
+
+      </div>
+
+
       </div>
       <div className="grid-item item-b">
 
@@ -31,6 +38,13 @@ const Jewelery = () => {
           <h3>Add to Cart</h3>
 
         </div>
+
+         <div className='seller-price2'>
+
+        <p>Price : $45</p>
+
+      </div>
+
 
       </div>
       <div className="grid-item item-c">
@@ -41,6 +55,13 @@ const Jewelery = () => {
 
         </div>
 
+         <div className='seller-price2'>
+
+        <p>Price : $45</p>
+
+      </div>
+
+
       </div>
       <div className="grid-item item-d">
 
@@ -49,6 +70,13 @@ const Jewelery = () => {
           <h3>Add to Cart</h3>
 
         </div>
+
+         <div className='seller-price2'>
+
+        <p>Price : $45</p>
+
+      </div>
+
 
       </div>
 

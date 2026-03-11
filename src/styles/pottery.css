@@ -60,14 +60,14 @@ display: grid;
   border-right: 0.5px solid #e5e3e3;
 }
 .pottery-grid img{
-width: 300px;
-height: 300px;
+width: 150px !important;
+height: 150px !important;
 }
 
 
 .pot2 img, .pot4 img{
-  width: 200px;
-  height: 200px;
+  width: 100px !important;
+  height: 100px !important;
  
 }
 
@@ -94,6 +94,33 @@ height: 300px;
   font-size: 0.7rem;
   text-align: start;
   color: black;
+}
+
+
+.pottery-content button{
+  background-color: rgb(48, 48, 48);
+  color: white;
+  font-size: 0.7rem;
+  padding: 0.2rem 0.4rem;
+  border: none;
+  font-weight: 600;
+}
+
+.pottery-content button:hover{
+  border: 1px solid rgb(48, 48, 48);
+  background-color: transparent;
+  color: rgb(48, 48, 48);
+}
+
+.seller4-price{
+  position: absolute;
+  top: 0rem;
+  right: 1rem;
+}
+
+.seller4-price p{
+  color: rgb(210, 123, 53);
+  font-size: 0.75rem;
 }
 
 @media screen and (max-width:1280px) {
