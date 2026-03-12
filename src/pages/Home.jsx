@@ -23,13 +23,13 @@ const Home = () => {
     <>
       <HeroSection />
       <Services />
-      <Patterns />
+     
       <Languages />
       
       <AboutSection />
      
       <Marketplace />
-       <Pattern2 />
+      
       <TribesSection />
       <SocialImpact />
       <Culture />

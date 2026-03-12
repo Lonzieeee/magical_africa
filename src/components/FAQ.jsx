@@ -102,7 +102,11 @@ const FAQ = () => {
 
   return (
     <section className="FAQ" >
-      <h1>{t('faq.title')}</h1>
+     {/*  <h1>{t('faq.title')}</h1>*/}
+
+     <h1>Frequently Asked <span>Questions</span></h1>
+
+     <p>Get answers to common questions about Africa</p>
 
       <div className="questions-section">
         {faqData.map((item, index) => (

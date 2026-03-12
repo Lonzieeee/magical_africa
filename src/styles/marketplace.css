@@ -10,6 +10,8 @@
 
 
 
+
+
 .marketplace h1{
 font-size: 1.5rem;
 padding-top: 2rem;
@@ -27,6 +29,7 @@ ul{
   justify-content: center;
   margin-top: 2rem;
   gap: 20px;
+
 }
 
 ul li{
@@ -72,7 +75,8 @@ ul li span{
   height: 350px;
   gap: 30px;
   padding: 30px 120px;
-  
+  z-index: 2;
+  position: relative;
 }
 
  
