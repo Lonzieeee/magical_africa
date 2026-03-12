@@ -31,6 +31,15 @@ const Events = () => {
   return (
     <>
       <div className='events-hero'>
+
+         <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="events-hero-video"
+    src="/images/afrcan-events-video.mp4"
+  />
         <Navbar />
         <div className='events-hero-text'>
           <h1>African <span>Cultural Events</span></h1>

@@ -10,12 +10,16 @@
 .events-hero{
   height: 100vh;
   position: relative;
+  /*
 background-image: url(/images/side-view-people-garage-sale2.jpg);
+*/
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
    
 }
+
+
 
 
 .events-hero::before {
@@ -27,6 +31,17 @@ background-image: url(/images/side-view-people-garage-sale2.jpg);
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4); 
   z-index: 1;
+}
+
+
+.events-hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
 
 

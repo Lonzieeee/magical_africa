@@ -55,7 +55,18 @@ const Tribes = () => {
 
   return (
     <>
-      <div className="heroSection" style={{ backgroundImage: 'url(/images/pyramids2.jpg)' }}>
+      <div className="heroSection">
+
+        <video
+    autoPlay
+    muted
+    loop
+    playsInline
+    className="hero-video"
+    src="/images/african-tribes-video.mp4"
+  />
+
+
         <Navbar />
         
         <div className="tribes-hero-content">

@@ -12,6 +12,7 @@ import Languages from '../components/Languages';
 import Culture from '../components/Culture';
 import { useEffect } from 'react';
 import Patterns from '../components/Patterns';
+import Pattern2 from '../components/Pattern2'
 
 const Home = () => {
 
@@ -24,9 +25,11 @@ const Home = () => {
       <Services />
       <Patterns />
       <Languages />
-      <Patterns />
+      
       <AboutSection />
+     
       <Marketplace />
+       <Pattern2 />
       <TribesSection />
       <SocialImpact />
       <Culture />
