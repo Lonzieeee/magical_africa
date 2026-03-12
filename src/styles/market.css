@@ -110,6 +110,12 @@ color: #EA580C;
 }
 
 
+@media screen and (min-width:1440px) {
+  .market-hero-content2{
+    top: 11%;
+  }
+}
+
 @media screen and (max-width:768px) {
 
   .market-hero-content{

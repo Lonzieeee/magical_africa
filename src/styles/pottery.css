@@ -60,14 +60,14 @@ display: grid;
   border-right: 0.5px solid #e5e3e3;
 }
 .pottery-grid img{
-width: 150px !important;
-height: 150px !important;
+width: 250px !important;
+height: 250px !important;
 }
 
 
 .pot2 img, .pot4 img{
-  width: 100px !important;
-  height: 100px !important;
+  width: 150px !important;
+  height: 150px !important;
  
 }
 
@@ -114,7 +114,7 @@ height: 150px !important;
 
 .seller4-price{
   position: absolute;
-  top: 0rem;
+  top: 1rem;
   right: 1rem;
 }
 
