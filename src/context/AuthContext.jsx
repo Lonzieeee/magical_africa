@@ -21,8 +21,12 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+export const auth = getAuth(app);        // ✅ added export
+export const db = getFirestore(app);     // ✅ added export
+/*
 const auth = getAuth(app);
 const db = getFirestore(app);
+*/
 const googleProvider = new GoogleAuthProvider();
 
 const AuthContext = createContext();

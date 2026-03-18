@@ -1,0 +1,157 @@
+/* signIn.css — matches academy-signIn.css style */
+
+.signIn-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 140px;
+  min-height: 100vh;
+}
+
+.signIn-title {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  height: fit-content;
+}
+
+.signIn-title img {
+  height: 60px;
+}
+
+.signIn-title h1 {
+  font-size: 1rem;
+}
+
+.signIn-title h1 span {
+  display: block;
+  text-align: center;
+  color: #1f6f43;
+}
+
+.signIn-form {
+  width: 450px;
+  margin-top: 4rem;
+  padding: 1.5rem 1rem;
+  height: fit-content;
+  border: 1px solid #e5e3e3;
+}
+
+.signIn-form h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(48, 48, 48);
+}
+
+.signIn-form h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(181, 161, 145);
+  margin-bottom: 1.5rem;
+}
+
+.signIn-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 1rem;
+}
+
+.signIn-field label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgb(48, 48, 48);
+}
+
+.signIn-field input {
+  font-size: 0.875rem;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #e5e3e3;
+  outline: none;
+  font-family: 'Poppins', sans-serif;
+  transition: border-color 0.2s;
+}
+
+.signIn-field input:focus {
+  border-color: #1f6f43;
+}
+
+.signIn-forgot {
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+.signIn-forgot a {
+  font-size: 0.8rem;
+  color: rgb(181, 161, 145);
+  text-decoration: none;
+}
+
+.signIn-forgot a:hover {
+  text-decoration: underline;
+}
+
+.signIn-submit {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+.signIn-submit button {
+  width: 100%;
+  border: none;
+  color: white;
+  background-color: rgb(48, 48, 48);
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.signIn-submit button:hover:not(:disabled) {
+  border: 2px solid rgb(48, 48, 48);
+  color: black;
+  background-color: transparent;
+}
+
+.signIn-submit button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.signIn-or {
+  display: flex;
+  flex-direction: row;
+  margin-top: 1rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.signIn-or hr {
+  flex: 1;
+}
+
+.signIn-register {
+  margin-top: 1rem;
+}
+
+.signIn-register p {
+  text-align: center;
+  font-size: 0.875rem;
+}
+
+.signIn-register a {
+  color: rgb(181, 161, 145);
+  text-decoration: none;
+}
+
+.signIn-register a:hover {
+  text-decoration: underline;
+}

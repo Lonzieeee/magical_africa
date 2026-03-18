@@ -14,6 +14,17 @@ import Language5 from './components/Language5';
 import Language6 from './components/Language6';
 import Language7 from './components/Language7';
 import Market from './pages/Market';
+import Academy2 from './pages/Academy2';
+
+import AcademyLogin from './components/AcademyLogin';
+import Teacher from './components/Teacher';
+import Curriculum from './components/Curriculum';
+import Lesson from './components/Lesson';
+import Learner from './components/Learner';
+import CourseContentPage from './components/CourseContentPage';
+import TeacherDashboard from './components/TeacherDashboard';
+
+
 
 
 function App() {
@@ -34,7 +45,18 @@ function App() {
           <Route path="/Common-nouns" element={ <Language7 /> } />
           <Route path="/events" element={ <Events /> } />
            <Route path="/market" element={ <Market /> } />
-        
+           <Route path="/academy2" element={ <Academy2 /> } />
+           <Route path="/academy-signIn" element={<AcademyLogin />} />
+          <Route path="/teacher" element={ <Teacher /> } /> 
+          <Route path="/curriculum" element={
+          <Curriculum /> } />
+          <Route path='/lesson' element={
+          <Lesson /> } />
+          <Route path='/learner' element={
+          <Learner />  
+          } />
+          <Route path='/course-content' element={<CourseContentPage />} />
+          <Route path='/teacher-dashboard' element={<TeacherDashboard />} />
 
         </Routes>
       </Router>

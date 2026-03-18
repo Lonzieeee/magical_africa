@@ -1,0 +1,223 @@
+/* courseCard.css — matches teacher.css style: no border-radius, Poppins, sharp borders */
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+  line-height: 1.5rem;
+}
+
+/* ── Section wrapper ── */
+.course-card-section {
+  margin-top: 3rem;
+  width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-bottom: 4rem;
+}
+
+.course-card-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(48, 48, 48);
+  margin-bottom: 0.2rem;
+}
+
+.course-card-section-sub {
+  font-size: 0.8rem;
+  color: rgb(181, 161, 145);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Card ── */
+.course-card {
+  width: 320px;
+  border: 1px solid #e5e3e3;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Image area ── */
+.course-card-image {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-bottom: 1px solid #e5e3e3;
+  background-color: #f3f3f3;
+}
+
+.course-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.course-card-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #f5f5f5;
+}
+
+.course-card-image-placeholder span {
+  font-size: 2rem;
+  color: #d1cdc7;
+}
+
+.course-card-image-placeholder p {
+  font-size: 0.75rem;
+  color: rgb(181, 161, 145);
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* ── Card body ── */
+.course-card-body {
+  padding: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.course-card-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: rgb(30, 30, 30);
+  line-height: 1.4rem;
+}
+
+.course-card-desc {
+  font-size: 0.78rem;
+  color: rgb(80, 80, 80);
+  line-height: 1.3rem;
+}
+
+.course-card-author {
+  font-size: 0.72rem;
+  color: rgb(181, 161, 145);
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+/* ── Meta badges row ── */
+.course-card-meta {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 0.3rem;
+}
+
+.course-card-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  letter-spacing: 0.03rem;
+}
+
+.badge-beginner {
+  background-color: #e6f4ea;
+  color: #1f6f43;
+  border: 1px solid #1f6f43;
+}
+
+.badge-hard {
+  background-color: #fdecea;
+  color: #b91c1c;
+  border: 1px solid #b91c1c;
+}
+
+.course-card-star {
+  font-size: 0.75rem;
+  color: #f5a623;
+  font-weight: 600;
+}
+
+.course-card-meta-text {
+  font-size: 0.72rem;
+  color: rgb(120, 120, 120);
+}
+.course-card-meta-text2{
+    font-size: 0.72rem;
+  color: rgb(120, 120, 120);
+}
+
+/* ── Footer: price + cart ── */
+.course-card-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid #e5e3e3;
+}
+
+.course-card-prices {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.course-card-sale-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgb(30, 30, 30);
+}
+
+.course-card-reg-price {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+
+.course-card-cart-btn {
+  background-color: transparent;
+  border: 1px solid #1f6f43;
+  color: #1f6f43;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.course-card-cart-btn:hover {
+  background-color: #1f6f43;
+  color: white;
+}
+
+/* ── Featured image upload box (inside teacher-dec2) ── */
+.featured-image-box {
+  height: 100px;
+  border: 1px solid #e5e3e3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.featured-image-box:hover {
+  border-color: #1f6f43;
+}
+
+.upload-placeholder {
+  font-size: 0.78rem;
+  color: rgb(181, 161, 145);
+  pointer-events: none;
+}

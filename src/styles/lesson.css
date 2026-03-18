@@ -1,0 +1,496 @@
+/* lesson.css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+  line-height: 1.5rem;
+}
+
+.lesson-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  font-family: 'Poppins', sans-serif;
+  padding-bottom: 4rem;
+}
+
+/* ── Page header ── */
+.lesson-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 1200px;
+  margin-bottom: 1.5rem;
+}
+
+.lesson-back-btn {
+  background-color: transparent;
+  border: 1px solid #e5e3e3;
+  color: rgb(48, 48, 48);
+  width: 32px;
+  height: 32px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.lesson-back-btn:hover {
+  border-color: rgb(48, 48, 48);
+  background-color: #f0f0f0;
+}
+
+.lesson-header h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(48, 48, 48);
+  margin: 0;
+}
+
+/* ── Outer container ── */
+.lesson-div {
+  width: 1200px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid #e5e3e3;
+}
+
+/* ── Scrollable body ── */
+.lesson-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+/* ── Topic block ── */
+.lesson-topic-block {
+  border: 1px solid #e5e3e3;
+}
+
+/* Top bar */
+.lesson-topic-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid #e5e3e3;
+}
+
+.drag-icon {
+  color: #b0b8cc;
+  font-size: 0.9rem;
+  cursor: grab;
+  letter-spacing: -2px;
+}
+
+.lesson-topic-title {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  font-family: 'Poppins', sans-serif;
+  color: rgb(48, 48, 48);
+  outline: none;
+}
+
+.lesson-topic-title::placeholder {
+  color: #c4bfb8;
+}
+
+.lesson-topic-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.lesson-topic-actions button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #9ca3af;
+  padding: 2px 5px;
+  transition: color 0.2s;
+}
+
+.lesson-topic-actions button:hover {
+  color: rgb(48, 48, 48);
+}
+
+/* Description */
+.lesson-topic-body {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid #e5e3e3;
+}
+
+.lesson-textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid #e5e3e3;
+  background-color: #ffffff;
+  color: rgb(48, 48, 48);
+  resize: vertical;
+  outline: none;
+}
+
+.lesson-textarea:focus {
+  border-color: #1f6f43;
+}
+
+.lesson-topic-ok-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 0.6rem;
+}
+
+.lesson-cancel-btn {
+  background: transparent;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+}
+
+.lesson-cancel-btn:hover {
+  color: rgb(48, 48, 48);
+}
+
+.lesson-ok-btn {
+  background: transparent;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: rgb(181, 161, 145);
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+}
+
+.lesson-ok-btn:hover {
+  text-decoration: underline;
+}
+
+/* ── Lesson items list ── */
+.lesson-items-list {
+  border-bottom: 1px solid #e5e3e3;
+  background-color: #fafafa;
+}
+
+.lesson-item-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.lesson-item-row:last-child {
+  border-bottom: none;
+}
+
+.lesson-item-icon {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  flex-shrink: 0;
+}
+
+.lesson-item-edit {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.lesson-type-select {
+  padding: 0.25rem 0.4rem;
+  font-size: 0.78rem;
+  border: 1px solid #e5e3e3;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  color: rgb(48, 48, 48);
+  cursor: pointer;
+}
+
+.lesson-type-select:focus {
+  border-color: #1f6f43;
+}
+
+.lesson-item-input {
+  flex: 1;
+  padding: 0.28rem 0.5rem;
+  font-size: 0.8rem;
+  border: 1px solid #e5e3e3;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  color: rgb(48, 48, 48);
+  min-width: 120px;
+}
+
+.lesson-item-input:focus {
+  border-color: #1f6f43;
+}
+
+.lesson-item-duration {
+  max-width: 110px;
+  flex: none;
+}
+
+.lesson-item-ok {
+  background: transparent;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1f6f43;
+  cursor: pointer;
+  padding: 0.2rem 0.4rem;
+}
+
+.lesson-item-ok:hover {
+  text-decoration: underline;
+}
+
+.lesson-item-cancel {
+  background: transparent;
+  border: none;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.lesson-item-cancel:hover {
+  color: #b91c1c;
+}
+
+/* Confirmed lesson row */
+.lesson-item-confirmed {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.lesson-item-name {
+  flex: 1;
+  font-size: 0.83rem;
+  color: rgb(48, 48, 48);
+}
+
+.lesson-item-dur {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  min-width: 36px;
+  text-align: right;
+}
+
+.lesson-item-edit-btn {
+  background: transparent;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  color: #1f6f43;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.lesson-item-edit-btn:hover {
+  text-decoration: underline;
+}
+
+.lesson-item-del {
+  background: transparent;
+  border: none;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.lesson-item-del:hover {
+  color: #b91c1c;
+}
+
+.lesson-max-note {
+  font-size: 0.72rem;
+  color: rgb(181, 161, 145);
+  padding: 0.4rem 1rem;
+}
+
+/* ── Bottom action buttons ── */
+.lesson-topic-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 1rem;
+}
+
+.lesson-footer-left {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.lesson-action-btn {
+  background: #ffffff;
+  border: 1px solid #e5e3e3;
+  color: rgb(48, 48, 48);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lesson-action-btn:hover:not(:disabled) {
+  border-color: rgb(181, 161, 145);
+  color: rgb(181, 161, 145);
+}
+
+.lesson-action-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.lesson-footer-right {
+  display: flex;
+}
+
+.lesson-import-btn {
+  background: #ffffff;
+  border: 1px solid #e5e3e3;
+  color: rgb(48, 48, 48);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lesson-import-btn:hover {
+  border-color: rgb(48, 48, 48);
+  background-color: rgb(48, 48, 48);
+  color: white;
+}
+
+/* ── Add Topic button ── */
+.lesson-add-topic-btn {
+  align-self: flex-start;
+  background-color: #1f6f43;
+  border: 1px solid #1f6f43;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.45rem 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lesson-add-topic-btn:hover {
+  background-color: #145a34;
+}
+
+/* ── Footer nav ── */
+.lesson-footer-nav {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e3e3;
+  background-color: #ffffff;
+}
+
+.lesson-prev-btn {
+  background: transparent;
+  border: 1px solid #e5e3e3;
+  color: rgb(48, 48, 48);
+  width: 34px;
+  height: 34px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.lesson-prev-btn:hover {
+  border-color: rgb(48, 48, 48);
+  background-color: #f5f5f5;
+}
+
+.lesson-next-btn {
+  background-color: rgb(48, 48, 48);
+  border: none;
+  color: white;
+  padding: 0.4rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.lesson-next-btn:hover {
+  background-color: transparent;
+  border: 2px solid rgb(48, 48, 48);
+  color: rgb(48, 48, 48);
+}
+
+/* ── Preview label ── */
+.lesson-preview-label {
+  width: 1200px;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+.lesson-preview-label h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(30, 30, 30);
+}
+
+.lesson-preview-label p {
+  font-size: 0.8rem;
+  color: rgb(181, 161, 145);
+  margin-top: 0.2rem;
+}
+
+.lesson-item-url {
+  width: 100%;
+  margin-top: 6px;
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.lesson-item-video-tag {
+  font-size: 12px;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 2px 8px;
+  border-radius: 4px;
+}

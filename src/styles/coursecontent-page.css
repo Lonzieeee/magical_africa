@@ -1,0 +1,13 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+  line-height: 1.5rem;
+}
+
+.course-page{
+ height: fit-content;
+ padding-top: 80px;
+}

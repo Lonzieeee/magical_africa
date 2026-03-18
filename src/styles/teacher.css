@@ -1,0 +1,288 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+  line-height: 1.5rem;
+}
+
+.teacher-div{
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 120px;
+  padding-bottom: 2rem;
+  background-color: #f9f9f9;
+}
+
+.teacher-div h1{
+  font-size: 2.5rem;
+}
+
+.teacher-div h1 span{
+  display: block;
+  text-align: center;
+  padding-top: 1rem;
+  color: #1f6f43;
+}
+
+.teacher-div p{
+  padding-top: 1.5rem;
+  font-size: 1rem;
+  
+}
+
+.teacher-div p span{
+  display: block;
+  text-align: center;
+}
+
+
+.teachers-decription-div{
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 100%;
+padding-top: 4rem;
+height: 100%;
+}
+
+
+.teachers-dec{
+  display: flex;
+  flex-direction: row;
+  width: 1200px;
+  height: 700px;
+  border: 1px solid #e5e3e3;
+  padding: 1rem;
+  
+}
+
+
+.teacher-dec1{
+  width: 100%;
+  
+  display: flex;
+  flex-direction: column;
+  flex: 1.4;
+  padding-left: 10rem;
+  padding-right: 1rem;
+}
+.teacher-dec1 label{
+  font-size: 0.875rem;
+}
+
+.teacher-dec1 input{
+  border: 1px solid #e5e3e3;
+  outline: none;
+}
+
+.teacher-dec1 input:focus{
+  border: 1px solid #1f6f43;
+}
+
+
+
+.dec1{
+  display: flex;
+  flex-direction: column;
+}
+
+
+.dec1 input{
+padding:0.75rem 0.5rem ;
+
+}
+.teacher-dec2{
+width: 100%;
+
+flex: 1;
+}
+
+.teacher-dec2 label{
+  font-size:  0.875rem;
+}
+
+.dec2{
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dec2 input{
+  height: 120px;
+}
+
+.dec3{
+   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.dec3-a{
+  display: flex;
+  flex-direction: row;
+  height: 200px;
+  border: 1px solid #e5e3e3;
+}
+
+.dec3-b{
+display: flex;
+flex-direction: column;
+flex: 1;
+border-right: 1px solid #e5e3e3;
+}
+
+.dec3-c{
+display: flex;
+flex-direction: column;
+flex: 2.8;
+padding: 1rem;
+}
+
+.max-students{
+display: flex;
+flex-direction: column;
+}
+
+.max-students label{
+  
+}
+
+.difficulty-level{
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+}
+
+.difficulty-level select{
+  padding: 0.75rem 0.5rem;
+  border: 1px solid #e5e3e3;
+  outline: none;
+}
+
+.difficulty-level select:focus{
+  border: 1px solid #1f6f43;
+}
+
+
+.dec3-b {
+  display: flex;
+  flex-direction: column;
+}
+
+.dec3-b button{
+  display: flex;
+  flex-direction: row;
+  padding-left: 0.5rem;
+  background-color: transparent;
+  border: none;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+}
+
+.general{
+border-bottom: 1px solid #e5e3e3 !important;
+border-left: 2px solid rgb(181, 161, 145) !important;
+}
+.content-drip{
+  border-bottom: 1px solid #e5e3e3 !important;
+}
+
+.teacher-next-div{
+  width: 100%;
+  display: flex;
+ padding-top: 4rem;
+
+ flex-direction: row-reverse;
+}
+
+.teacher-next-btn{
+
+padding: 0.1rem 1rem;
+background-color: transparent;
+border: 1px solid #e5e3e3;
+}
+.teacher-next-btn:hover{
+  border: 1px solid black;
+   background-color: #f0f0f0;
+}
+.teacher-dec2{
+  display: flex;
+  flex-direction: column;
+  padding-right: 8rem;
+  padding-left: 1rem;
+}
+
+.dec2-a{
+display: flex;
+flex-direction: column;
+}
+
+.dec2-a div{
+  height: 100px;
+  border: 1px solid #e5e3e3;
+}
+
+.dec2-b{
+  margin-top: 1rem;
+}
+
+.dec2-b div{
+  height: 100px;
+  border: 1px solid #e5e3e3;
+}
+
+.dec2-c{
+  display: flex;
+flex-direction: column;
+gap: 10px;
+margin-top: 4rem;
+}
+
+.dec2-c div{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+.dec2-c div label{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.dec2-d{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-top: 1rem;
+}
+
+.dec2-d input{
+  border: 1px solid #e5e3e3;
+  outline: none;
+}
+
+.dec2-d input:focus{
+  border: 1px solid #1f6f43;
+}
+.reg-price{
+display: flex;
+flex-direction: column;
+}
+
+.reg-price input{
+  padding-left: 0.5rem;
+}
+
+.sale-price{
+display: flex;
+flex-direction: column;
+}
+
+.sale-price input{
+  padding-left: 0.5rem;
+}
