@@ -262,3 +262,10 @@ background-color: transparent;
 .academy-already a:hover{
   text-decoration: underline;
 }
+
+
+@media screen and (max-width:480px) {
+  .academy-form{
+    border: none;
+  }
+}

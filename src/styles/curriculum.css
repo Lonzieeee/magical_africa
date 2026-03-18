@@ -138,3 +138,33 @@ justify-content: center;
   border: 1px solid black;
   background-color: #f0f0f0;
 }
+
+@media screen and (max-width:1024px) {
+
+  .curriculum-dec{
+    width: 100%;
+  }
+
+  .curriculum-div-dec{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+    .curriculum-div{
+    padding-top: 140px;
+  }
+  
+  
+}
+
+@media screen and (max-width:480px) {
+  .curriculum-div h1{
+    text-align: center;
+    line-height: 2.5rem;
+  }
+
+  .curriculum-div-p{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+}

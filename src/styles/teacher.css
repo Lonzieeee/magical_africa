@@ -286,3 +286,77 @@ flex-direction: column;
 .sale-price input{
   padding-left: 0.5rem;
 }
+
+
+@media screen and (max-width:1024px) {
+
+  .teachers-decription-div{
+    padding-left: 2rem;
+    padding-right:2rem ;
+  
+  }
+  .teacher-div{
+    padding-top: 160px;
+  }
+  .teachers-dec{
+    width: 100%;
+  }
+  .teacher-dec1{
+    padding-left: 2rem ;
+    flex: 1 !important;
+  }
+  .teacher-dec2{
+    padding-right: 2rem;
+    
+  }
+}
+
+@media screen and (max-width:768px) {
+    .teachers-decription-div{
+    padding-left: 1rem;
+    padding-right:1rem ;
+  
+  }
+  .teacher-dec1{
+    padding-left: 0rem;
+  }
+  .teacher-dec2{
+    padding-right: 0rem;
+    padding-left: 0rem;
+  }
+  .teachers-dec{
+    gap: 10px;
+  }
+}
+
+@media screen and (max-width:480px) {
+
+  .teachers-dec{
+    flex-direction: column;
+    border: none;
+    height: fit-content;
+  }
+  .teachers-decription-div{
+    padding-left: 0rem ;
+    padding-right: 0rem;
+  }
+    .teacher-dec1{
+    padding-left: 0rem;
+  }
+  .teacher-dec2{
+    padding-right: 0rem;
+  }
+  .teacher-div h1{
+    text-align: center;
+    line-height: 2.5rem;
+  }
+
+  .teacher-div p{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .teacher-div{
+    padding-bottom: 1rem;
+  }
+
+}

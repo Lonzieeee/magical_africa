@@ -349,3 +349,131 @@
   font-size: 0.875rem;
   color: rgb(181, 161, 145);
 }
+
+
+
+
+@media screen and (max-width: 1024px) {
+
+  .cc-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+    padding: 2.5rem 2rem;
+  }
+
+
+  .cc-hero-inner {
+    max-width: 100%;
+  }
+
+  /* Card goes full width and centers under the hero text */
+  .cc-hero-card {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-self: center;
+  }
+
+  .cc-includes-section {
+    width: 100%;
+    padding: 2rem 2rem;
+  }
+
+  .cc-content-section {
+    width: 100%;
+    padding: 2rem 2rem 4rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .cc-hero {
+    padding: 2rem 1.5rem;
+    gap: 1.5rem;
+  }
+
+  
+
+  .cc-includes-section {
+    padding: 1.5rem 1.5rem;
+  }
+
+  /* Includes grid goes single column */
+  .cc-includes-grid {
+    grid-template-columns: 1fr;
+    gap: 0.6rem;
+  }
+
+  .cc-content-section {
+    padding: 1.5rem 1.5rem 3rem;
+  }
+
+  /* Content header stacks */
+  .cc-content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  /* Topic header tighter padding */
+  .cc-topic-header {
+    padding: 0.8rem 1rem;
+  }
+
+  /* Lesson rows less indent */
+  .cc-lesson-row {
+    padding: 0.6rem 1rem 0.6rem 2rem;
+  }
+
+  .cc-topic-desc {
+    padding: 0.7rem 1rem 0.5rem 2rem;
+  }
+
+  .cc-no-lessons {
+    padding: 0.7rem 1rem 0.7rem 2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+
+  .cc-hero {
+    padding: 2rem 1rem;
+  }
+
+  .cc-includes-section {
+    padding: 1.5rem 1rem;
+  }
+
+  .cc-content-section {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  /* Topic right meta hides on very small screens to avoid squishing */
+  .cc-topic-right {
+    display: none;
+  }
+
+  /* Lesson row goes full left-indent removed */
+  .cc-lesson-row {
+    padding: 0.6rem 0.75rem 0.6rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .cc-lesson-right {
+    gap: 0.5rem;
+  }
+
+  .cc-topic-desc {
+    padding: 0.7rem 0.75rem 0.5rem 1.5rem;
+  }
+
+  .cc-no-lessons {
+    padding: 0.7rem 0.75rem 0.7rem 1.5rem;
+  }
+
+  .cc-hero-meta {
+    gap: 0.4rem;
+  }
+}

@@ -96,10 +96,14 @@ const SideMenu = ({ isOpen, onClose }) => {
           </li>
           */}
 
+          {/* 
+
             <li onClick={() => handleNavigation('/academy')}>
             {t('sideMenu.academy')} <i className="fa-solid fa-chevron-right"></i>
 
           </li>
+
+          */}
 
 
           <li onClick={() => handleNavigation('/academy2')}>
