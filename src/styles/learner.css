@@ -26,3 +26,44 @@ padding-top: 140px;}
   justify-content: center;
   gap: 20px;
 }
+
+.learner2{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
+  font-size: 0.875rem;
+}
+
+.learner2-a{
+  padding: 0.5rem 1rem;
+  border: 1px solid rgb(181, 161, 145);
+  background-color: #fff8f3;
+
+}
+
+.learner2-a:hover{
+  background-color: rgb(181, 161, 145);
+  color: white;
+}
+
+/* Active filter button */
+.learner2-active {
+  background-color: rgb(181, 161, 145);
+  color: white;
+ 
+}
+
+/* Slide in from left animation */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

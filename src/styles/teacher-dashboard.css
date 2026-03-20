@@ -1,0 +1,217 @@
+/* ── Base styles ── */
+.td-wrapper {
+  background-color: #f0f0f0;
+  min-height: 100vh;
+}
+
+.td-container {
+  padding: 140px 140px 60px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.td-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.td-header h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgb(30, 30, 30);
+}
+
+.td-create-btn {
+  background-color: #1f6f43;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.td-create-btn:hover {
+  background-color: #145a34;
+}
+
+.td-empty {
+  text-align: center;
+  padding: 60px;
+  color: #888;
+}
+
+.td-empty p {
+  font-size: 18px;
+}
+
+.td-empty-btn {
+  margin-top: 16px;
+  background-color: #1f6f43;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.td-empty-btn:hover {
+  background-color: #145a34;
+}
+
+.td-course-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 16px;
+  background-color: #fff;
+}
+
+.td-course-info h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+  color: rgb(30, 30, 30);
+}
+
+.td-course-info p {
+  margin: 0 0 4px;
+  color: #666;
+  font-size: 14px;
+}
+
+.td-course-tags {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.td-tag-difficulty {
+  font-size: 12px;
+  background-color: #e8f5e9;
+  color: #1f6f43;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.td-tag-price {
+  font-size: 12px;
+  background-color: #e3f2fd;
+  color: #1565c0;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.td-tag-topics {
+  font-size: 12px;
+  color: #888;
+}
+
+.td-course-actions {
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.td-edit-btn {
+  background-color: #4284f4;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.td-edit-btn:hover {
+  background-color: #2563eb;
+}
+
+.td-delete-btn {
+  background-color: #c62828;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color 0.2s;
+}
+
+.td-delete-btn:hover {
+  background-color: #991b1b;
+}
+
+/* ── Responsive — 480px ── */
+@media screen and (max-width: 480px) {
+
+  .td-container {
+    padding: 100px 16px 40px;
+  }
+
+  .td-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .td-header h1 {
+    font-size: 1.2rem;
+  }
+
+  .td-create-btn {
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+  .td-course-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px;
+  }
+
+  .td-course-info h3 {
+    font-size: 0.95rem;
+  }
+
+  .td-course-info p {
+    font-size: 13px;
+  }
+
+  .td-course-actions {
+    width: 100%;
+  }
+
+  .td-edit-btn,
+  .td-delete-btn {
+    flex: 1;
+    text-align: center;
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+
+  .td-empty {
+    padding: 40px 16px;
+  }
+
+  .td-empty p {
+    font-size: 15px;
+  }
+
+  .td-empty-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

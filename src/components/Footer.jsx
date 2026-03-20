@@ -65,12 +65,33 @@ const Footer = () => {
           <Link to="/">Magical Africa</Link>
           <p>{t('footer.tagline')}</p>
 
+
+    {/* 
           <div className="footer-icons">
             <span><i className="fa-brands fa-facebook-f"></i></span>
             <span><i className="fa-brands fa-instagram"></i></span>
             <span><i className="fa-brands fa-x-twitter"></i></span>
             <span><i className="fa-brands fa-tiktok"></i></span>
           </div>
+    */}
+
+
+    <div className="footer-icons">
+  <span onClick={() => window.open('https://www.facebook.com/profile.php?id=61583415501249', '_blank')}>
+    <i className="fa-brands fa-facebook-f"></i>
+  </span>
+  <span onClick={() => window.open('https://www.instagram.com/africa_magical/', '_blank')}>
+    <i className="fa-brands fa-instagram"></i>
+  </span>
+  <span onClick={() => window.open('https://x.com/MagicalAfr23463', '_blank')}>
+    <i className="fa-brands fa-x-twitter"></i>
+  </span>
+  <span onClick={() => window.open('https://www.tiktok.com/@exploremagicalafr', '_blank')}>
+    <i className="fa-brands fa-tiktok"></i>
+  </span>
+</div>
+
+
         </div>
 
         <div className="link2">

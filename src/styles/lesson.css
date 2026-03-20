@@ -495,6 +495,145 @@
   border-radius: 4px;
 }
 
+
+/* ── Quiz Builder ── */
+.quiz-builder {
+  border-top: 1px solid #e5e3e3;
+  background-color: #fafff9;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.quiz-builder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1f6f43;
+}
+
+.quiz-count {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  font-weight: 400;
+}
+
+.quiz-question-block {
+  border: 1px solid #e5e3e3;
+  background-color: #ffffff;
+  padding: 0.8rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.quiz-question-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.quiz-q-num {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1f6f43;
+  flex-shrink: 0;
+}
+
+.quiz-question-input {
+  flex: 1;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.82rem;
+  border: 1px solid #e5e3e3;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  color: rgb(48, 48, 48);
+}
+
+.quiz-question-input:focus {
+  border-color: #1f6f43;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding-left: 1rem;
+}
+
+.quiz-option-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quiz-option-input {
+  flex: 1;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.8rem;
+  border: 1px solid #e5e3e3;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+  color: rgb(48, 48, 48);
+}
+
+.quiz-option-input:focus {
+  border-color: #1f6f43;
+}
+
+.quiz-correct-tag {
+  font-size: 0.72rem;
+  color: #1f6f43;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.quiz-question-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 0.3rem;
+}
+
+.quiz-confirmed-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.quiz-confirmed-text {
+  font-size: 0.83rem;
+  color: rgb(48, 48, 48);
+  flex: 1;
+}
+
+.quiz-add-question-btn {
+  align-self: flex-start;
+  background: transparent;
+  border: 1px dashed #1f6f43;
+  color: #1f6f43;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.35rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.quiz-add-question-btn:hover {
+  background-color: #1f6f43;
+  color: white;
+}
+
+.quiz-btn-active {
+  border-color: #1f6f43 !important;
+  color: #1f6f43 !important;
+}
+
 @media screen and (max-width: 1024px) {
 
   .lesson-page {

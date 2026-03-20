@@ -113,6 +113,10 @@
   color: white;
 }
 
+.footer-icons span {
+  cursor: pointer;
+}
+
 @media screen and (min-width:1440px) {
   .footer{
     padding-left: 5rem;

@@ -143,6 +143,11 @@
   color: #f5a623;
   font-weight: 600;
 }
+.course-card-type{
+  font-size: 0.72rem;
+  color: rgb(120, 120, 120);
+
+}
 
 .course-card-meta-text {
   font-size: 0.72rem;

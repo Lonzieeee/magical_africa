@@ -3,8 +3,8 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { db } from '../context/AuthContext'
 import { doc, getDoc } from 'firebase/firestore'
 import CourseContent from '../components/Coursecontent'
+import Quiz from '../components/Quiz'
 import Navbar from '../components/Navbar'
-import '../styles/coursecontent-page.css'
 
 const CourseContentPage = () => {
   const location = useLocation()
@@ -13,20 +13,22 @@ const CourseContentPage = () => {
 
   const [course, setCourse] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [selectedTopic, setSelectedTopic] = useState(null)
+  const [showQuiz, setShowQuiz] = useState(false) // ✅ add this
 
   useEffect(() => {
     const fetchCourse = async () => {
-      if (!courseId) {
-        navigate('/dashboard')
-        return
-      }
-
+      if (!courseId) { navigate('/learner'); return }
       try {
         const courseDoc = await getDoc(doc(db, 'courses', courseId))
         if (courseDoc.exists()) {
-          setCourse({ id: courseDoc.id, ...courseDoc.data() })
+          const data = { id: courseDoc.id, ...courseDoc.data() }
+          setCourse(data)
+          // Default to first topic that has a quiz
+          const firstQuizTopic = data.topics?.find(t => t.quiz && t.quiz.length > 0)
+          if (firstQuizTopic) setSelectedTopic(firstQuizTopic)
         } else {
-          navigate('/dashboard')
+          navigate('/learner')
         }
       } catch (err) {
         console.log('Error fetching course:', err)
@@ -34,29 +36,24 @@ const CourseContentPage = () => {
         setLoading(false)
       }
     }
-
     fetchCourse()
   }, [courseId])
 
-  if (loading) {
-    return (
-      <>
-        <Navbar solid />
-        <div style={{ textAlign: 'center', padding: '60px', fontSize: '18px' }}>
-          Loading course...
-        </div>
-      </>
-    )
-  }
+  if (loading) return (
+    <>
+      <Navbar solid />
+      <div style={{ textAlign: 'center', padding: '60px', fontSize: '18px' }}>Loading course...</div>
+    </>
+  )
 
   if (!course) return null
+
+  // Get all topics that have quizzes
+  const topicsWithQuiz = course.topics?.filter(t => t.quiz && t.quiz.length > 0) || []
 
   return (
     <>
       <Navbar solid />
-
-      <div className='course-page'>
-
       <CourseContent
         topics={course.topics || []}
         title={course.title}
@@ -66,10 +63,69 @@ const CourseContentPage = () => {
         regularPrice={course.regularPrice}
         salePrice={course.salePrice}
         maxStudents={course.maxStudents}
+        featuredImage={course.featuredImage}
+        courseType={course.courseType}
+        onQuizClick={() => setShowQuiz(prev => !prev)}
+        showQuiz={showQuiz}
       />
 
+     {/* ✅ Quiz section — shows when Quizzes & assignments is clicked */}
+{showQuiz && (
+  <div style={{ width: '1200px', margin: '0 auto', paddingBottom: '4rem' }}>
 
+    {topicsWithQuiz.length === 0 ? (
+      // ✅ No quizzes message
+      <div style={{
+        textAlign: 'center',
+        padding: '40px',
+        border: '1px dashed #e5e3e3',
+        color: '#9ca3af',
+        fontFamily: 'Poppins, sans-serif',
+        fontSize: '0.9rem',
+        margin: '2rem 0'
+      }}>
+        📝 No quizzes available for this course yet.
       </div>
+    ) : (
+      <>
+        {/* Topic selector if multiple topics have quizzes */}
+        {topicsWithQuiz.length > 1 && (
+          <div style={{ display: 'flex', gap: '10px', margin: '2rem 0 1rem', flexWrap: 'wrap' }}>
+            <p style={{ fontSize: '0.85rem', color: '#555', marginRight: '8px', alignSelf: 'center' }}>
+              Select topic quiz:
+            </p>
+            {topicsWithQuiz.map(t => (
+              <button
+                key={t.id}
+                onClick={() => setSelectedTopic(t)}
+                style={{
+                  padding: '6px 16px',
+                  border: '1px solid',
+                  borderColor: selectedTopic?.id === t.id ? '#1f6f43' : '#e5e3e3',
+                  backgroundColor: selectedTopic?.id === t.id ? '#1f6f43' : 'white',
+                  color: selectedTopic?.id === t.id ? 'white' : 'rgb(48,48,48)',
+                  fontFamily: 'Poppins, sans-serif',
+                  fontSize: '0.8rem',
+                  cursor: 'pointer'
+                }}
+              >
+                {t.title || 'Untitled Topic'}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {selectedTopic && (
+          <Quiz
+            quiz={selectedTopic.quiz}
+            topicTitle={selectedTopic.title}
+          />
+        )}
+      </>
+    )}
+
+  </div>
+)}
     </>
   )
 }

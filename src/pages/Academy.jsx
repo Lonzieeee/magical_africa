@@ -35,13 +35,13 @@ const Academy = () => {
 
      <div className='welcome-text'>
 
-      <h1>Learn The Languages of <span>Africa</span></h1>
+      <h1>Learn Skills From Across <span>Africa</span></h1>
 
       <p>
-        Master Swahili, Zulu, Yoruba, Amharic and more the world's most vibrant tongues, made fun.
+       Discover courses in crafts, culture, art, music and more — taught by real African educators from across the continent.
      </p>
 
-     <button onClick={() => handleNavigation ('/register')}>Get Started</button>
+     <button onClick={() => handleNavigation ('/learner')}>Get Started</button>
 
      </div>
 

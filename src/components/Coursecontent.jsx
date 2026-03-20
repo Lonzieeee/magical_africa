@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import '../styles/courseContent.css'
 import CourseCard from '../components/Coursecard'
+import { useNavigate } from 'react-router-dom'
 
-const CourseContent = ({ topics = [], title, description, difficulty, teacherName, regularPrice, maxStudents, salePrice, featuredImage,  }) => {
+const CourseContent = ({ topics = [], title, description, difficulty, teacherName, regularPrice, maxStudents, salePrice, featuredImage, courseType, onQuizClick, showQuiz  }) => {
   // Track which topic sections are expanded
   const [expanded, setExpanded] = useState({})
 
@@ -12,6 +13,8 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
 
   // Count total lessons across all topics
   const totalLessons = topics.reduce((acc, t) => acc + (t.lessons ? t.lessons.length : 0), 0)
+
+   const navigate = useNavigate()
 
   return (
     <div className='cc-page'>
@@ -24,6 +27,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             <span>Academy</span>
             <span className='cc-chevron'>&#8250;</span>
             <span>{difficulty || 'All Levels'}</span>
+            
             <span className='cc-chevron'>&#8250;</span>
             <span className='cc-breadcrumb-active'>{title || 'Course'}</span>
           </div>
@@ -42,7 +46,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
 
         
      <p className='cc-hero-author'>
-     Created by <span>{teacherName || 'magical.africa Academy'}</span>
+     Created by <span onClick={()=> navigate('/teacher-dashboard')}>{teacherName || 'magical.africa Academy'}</span>
      </p>
 
           <div className='cc-hero-meta'>
@@ -52,10 +56,21 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             {/* 
             <span className='cc-meta-item'>&#9733; 0.0 &nbsp;&#183;&nbsp; 0 ratings</span>
             */}
+
+           
            
             <span className='cc-meta-item'>
+            
+     
      {maxStudents ? `${maxStudents} Students` : 'No Students'}
      </span>
+
+    {/* 
+      <span className='cc-coursetype'>  &#183; 
+              Artisan
+            </span>
+            */}
+      <span className='cc-coursetype'>&#183; {courseType || 'General'}</span>      
             <span className='cc-meta-item'>&#183; {totalLessons} lessons</span>
             <span className='cc-meta-item'>&#183; {topics.length} topics</span>
           </div>
@@ -72,6 +87,8 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             salePrice={salePrice}
             maxStudents={maxStudents}
             featuredImage={featuredImage}
+            teacherName={teacherName}
+            courseType={courseType}
           />
         </div>
         
@@ -91,10 +108,22 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             <span className='cc-include-icon'>&#8681;</span>
             <span>Downloadable materials</span>
           </div>
+          {/* 
           <div className='cc-include-item'>
             <span className='cc-include-icon'>&#128203;</span>
             <span>Quizzes &amp; assignments</span>
           </div>
+        */}
+
+        <div
+  className='cc-include-item'
+  onClick={onQuizClick}
+  style={{ cursor: 'pointer' }}
+>
+  <span className='cc-include-icon'>&#128203;</span>
+  <span>Quizzes &amp; assignments</span>
+</div>
+
           <div className='cc-include-item'>
             <span className='cc-include-icon'>&#128241;</span>
             <span>Access on mobile &amp; desktop</span>

@@ -126,7 +126,7 @@ flex: 1;
 .dec3-a{
   display: flex;
   flex-direction: row;
-  height: 200px;
+  height: fit-content;
   border: 1px solid #e5e3e3;
 }
 
@@ -287,6 +287,12 @@ flex-direction: column;
   padding-left: 0.5rem;
 }
 
+
+.course-type{
+  display: flex;
+flex-direction: column;
+margin-top: 1rem;
+}
 
 @media screen and (max-width:1024px) {
 

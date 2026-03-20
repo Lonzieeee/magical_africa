@@ -4,7 +4,10 @@ import Navbar from '../components/Navbar'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import { useAuth } from '../context/AuthContext'
+/*
 import { collection, addDoc, setDoc, doc, getDoc } from 'firebase/firestore'
+*/
+import { collection, addDoc, setDoc, updateDoc, doc, getDoc } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 
 const Teacher = () => {
@@ -19,6 +22,7 @@ const Teacher = () => {
   const [description, setDescription] = useState('')
   const [difficulty, setDifficulty] = useState('Beginner')
   const [maxStudents, setMaxStudents] = useState('')
+  const [courseType, setCourseType] = useState('')
   const [pricingModel, setPricingModel] = useState('free')
   const [regularPrice, setRegularPrice] = useState('')
   const [salePrice, setSalePrice] = useState('')
@@ -54,6 +58,7 @@ const Teacher = () => {
             setDescription(data.description || '')
             setDifficulty(data.difficulty || 'Beginner')
             setMaxStudents(data.maxStudents || '')
+            setCourseType(data.courseType || '')  // ✅ this was missing!
             setPricingModel(data.pricingModel || 'free')
             setRegularPrice(data.regularPrice || '')
             setSalePrice(data.salePrice || '')
@@ -98,8 +103,9 @@ const Teacher = () => {
       const existingCourseId = localStorage.getItem('currentCourseId')
       let courseId
 
+      /*
       if (existingCourseId) {
-        // ✅ Update existing course
+       
         await setDoc(doc(db, 'courses', existingCourseId), {
           title,
           description,
@@ -113,13 +119,35 @@ const Teacher = () => {
           createdAt: new Date().toISOString()
         })
         courseId = existingCourseId
-      } else {
+      } 
+       */
+      
+      if (existingCourseId) {
+  // ✅ Use updateDoc so topics are NOT wiped out
+  await updateDoc(doc(db, 'courses', existingCourseId), {
+    title,
+    description,
+    difficulty,
+    maxStudents: maxStudents || 'Unlimited',
+    courseType: courseType || '',   // ✅ add this
+    pricingModel,
+    regularPrice: regularPrice || '0',
+    salePrice: salePrice || '0',
+    teacherName,
+    teacherId: currentUser.uid,
+    updatedAt: new Date().toISOString()
+  })
+  courseId = existingCourseId
+}
+      
+      else {
         // ✅ Create brand new course
         const docRef = await addDoc(collection(db, 'courses'), {
           title,
           description,
           difficulty,
           maxStudents: maxStudents || 'Unlimited',
+           courseType: courseType || '',   // ✅ add this
           pricingModel,
           regularPrice: regularPrice || '0',
           salePrice: salePrice || '0',
@@ -189,6 +217,27 @@ const Teacher = () => {
                         <label>Maximum Students</label>
                         <input type="text" value={maxStudents} onChange={e => setMaxStudents(e.target.value)} />
                       </div>
+                    {/* 
+                      <div className='course-type'>
+                      <label>Type of Course</label>
+                      <input type="text" />
+
+                        
+
+                      </div>
+                    */}
+
+    <div className='course-type'>
+   <label>Type of Course</label>
+   <input
+    type="text"
+    value={courseType}
+    onChange={e => setCourseType(e.target.value)}
+    placeholder="e.g. Artisan, Pottery, Language..."
+   />
+</div>
+
+
                       <div className='difficulty-level'>
                         <label>Difficulty Level</label>
                         <select value={difficulty} onChange={e => setDifficulty(e.target.value)}>

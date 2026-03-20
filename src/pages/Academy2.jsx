@@ -65,7 +65,7 @@ const Academy2 = () => {
         if (role === 'teacher') {
           navigate('/teacher-dashboard')
         } else {
-          navigate('/learner') // 👈 change to your learner page
+          navigate('/academy') // 👈 change to your learner page
         }
       }, 2000)
 
@@ -143,7 +143,7 @@ const Academy2 = () => {
               className={role === 'teacher' ? 'learner' : 'teacher'}
               onClick={() => setRole('teacher')}
             >
-              Teacher
+              Tutor
             </button>
           </div>
 
@@ -190,7 +190,7 @@ const Academy2 = () => {
               <label>Subject / Expertise</label>
               <input
                 type="text"
-                placeholder="e.g. Mathematics, Swahili..."
+                placeholder="e.g. Artisan, Pottery, Language, Woodwork...."
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
               />

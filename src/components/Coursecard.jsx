@@ -1,7 +1,7 @@
 import React from 'react'
 import '../styles/courseCard.css'
 
-const CourseCard = ({ title, description, difficulty, regularPrice, salePrice, featuredImage, teacherName, maxStudents }) => {
+const CourseCard = ({ title, description, difficulty, regularPrice, salePrice, featuredImage, teacherName, maxStudents, courseType }) => {
   return (
     <div className='course-card'>
 
@@ -11,7 +11,7 @@ const CourseCard = ({ title, description, difficulty, regularPrice, salePrice, f
           ? <img src={featuredImage} alt="Course thumbnail" />
           : <div className='course-card-image-placeholder'>
               <span>&#128444;</span>
-              <p>Upload a featured image above</p>
+              <p>Image</p>
             </div>
         }
       </div>
@@ -29,27 +29,25 @@ const CourseCard = ({ title, description, difficulty, regularPrice, salePrice, f
             : 'Your course description will appear here.'}
         </p>
 
-        {/* ✅ Shows teacher's real name */}
         <p className='course-card-author'>
-             <span>Created By</span>
-           {teacherName || 'magical.africa Academy'}
+          <span>Created By</span>
+          {teacherName || 'magical.africa Academy'}
         </p>
 
-        {/* Badges */}
         <div className='course-card-meta'>
           <span className={`course-card-badge ${difficulty === 'Hard' ? 'badge-hard' : 'badge-beginner'}`}>
             {difficulty || 'Beginner'}
           </span>
-          {/* 
-          <span className='course-card-star'>&#9733; 0.0</span>
-          */}
-         <span className='course-card-meta-text2'>
-     {maxStudents ? `${maxStudents} Students` : 'No Students'}
-     </span>
+          <span className='course-card-meta-text2'>
+            {maxStudents ? `${maxStudents} Students` : 'No Students'}
+          </span>
+          {/* ✅ Dynamic course type */}
+          <span className='course-card-type'>
+            &#183; {courseType || 'General'}
+          </span>
           <span className='course-card-meta-text'>&#183; All Levels</span>
         </div>
 
-        {/* Price + cart */}
         <div className='course-card-footer'>
           <div className='course-card-prices'>
             <span className='course-card-sale-price'>
