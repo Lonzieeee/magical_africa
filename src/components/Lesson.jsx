@@ -440,10 +440,15 @@ const Lesson = () => {
           </div>
         </div>
 
+        {/* 
+
         <div className='lesson-preview-label'>
           <h3>Course Content Preview</h3>
           <p>This is how your curriculum will appear to students.</p>
         </div>
+        */}
+      
+      {/* 
 
         <CourseContent
           topics={topics}
@@ -453,6 +458,7 @@ const Lesson = () => {
           teacherName={courseInfo.teacherName}
           courseType={courseInfo.courseType}
         />
+        */}
 
       </div>
     </>
