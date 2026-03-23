@@ -200,12 +200,19 @@ border-left: 2px solid rgb(181, 161, 145) !important;
 
  flex-direction: row-reverse;
 }
+.teacher-next-btn-div{
+
+padding-top: 7rem;
+display: flex;
+flex-direction: row-reverse;
+}
 
 .teacher-next-btn{
 
 padding: 0.1rem 1rem;
 background-color: transparent;
 border: 1px solid #e5e3e3;
+
 }
 .teacher-next-btn:hover{
   border: 1px solid black;

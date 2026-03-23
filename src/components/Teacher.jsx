@@ -251,9 +251,13 @@ const Teacher = () => {
               </div>
 
               <div className='teacher-next-div'>
+
+                {/*
                 <button className='teacher-next-btn' onClick={handleNext} disabled={loading || success}>
                   {loading ? 'Saving...' : 'Next ›'}
                 </button>
+                 */}
+
               </div>
             </div>
 
@@ -289,7 +293,17 @@ const Teacher = () => {
                   <label>Sale Price ($)</label>
                   <input type="text" value={salePrice} onChange={e => setSalePrice(e.target.value)} placeholder="e.g. 11.99" />
                 </div>
+
+                
               </div>
+
+              <div className='teacher-next-btn-div'>
+
+             <button className='teacher-next-btn' onClick={handleNext} disabled={loading || success}>
+                  {loading ? 'Saving...' : 'Next ›'}
+                </button>
+              </div>
+
             </div>
 
           </div>
