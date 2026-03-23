@@ -86,7 +86,7 @@ const Lesson = () => {
         ...t,
         lessons: [...t.lessons, {
           id: Date.now(), title: '', type: 'video',
-          duration: '', videoURL: '', editingTitle: true
+          duration: '', videoURL: '', fileData: '', fileName: '', editingTitle: true
         }]
       }
     }))
@@ -115,6 +115,52 @@ const Lesson = () => {
         : t
     ))
   }
+
+  // ✅ Handle notes file upload — converts to base64
+  {/* 
+  const handleNotesUpload = (topicId, lessonId, file) => {
+    if (!file) return
+    const reader = new FileReader()
+    reader.onloadend = () => {
+      updateLesson(topicId, lessonId, 'fileData', reader.result) 
+      updateLesson(topicId, lessonId, 'fileName', file.name)    
+    }
+    reader.readAsDataURL(file)
+  }
+
+
+  */}
+
+
+
+  const handleNotesUpload = (topicId, lessonId, file) => {
+  if (!file) return
+
+  if (file.size > 500 * 1024) {
+    alert(`File too large (${(file.size / 1024).toFixed(0)}KB). Please upload a file under 500KB.`)
+    return
+  }
+
+  const reader = new FileReader()
+  reader.onloadend = () => {
+    setTopics(prev => prev.map(t =>
+      t.id === topicId
+        ? {
+            ...t,
+            lessons: t.lessons.map(l =>
+              l.id === lessonId
+                ? { ...l, fileData: reader.result, fileName: file.name }
+                : l
+            )
+          }
+        : t
+    ))
+  }
+  reader.readAsDataURL(file)
+}
+
+
+
 
   // ── Quiz actions ──
   const toggleQuizBuilder = (topicId) => {
@@ -197,8 +243,13 @@ const Lesson = () => {
         title: t.title,
         description: t.description,
         lessons: t.lessons.map(l => ({
-          id: l.id, title: l.title, type: l.type,
-          duration: l.duration, videoURL: l.videoURL || ''
+          id: l.id,
+          title: l.title,
+          type: l.type,
+          duration: l.duration,
+          videoURL: l.videoURL || '',
+          fileData: l.fileData || '',    // ✅ save notes base64
+          fileName: l.fileName || ''     // ✅ save notes filename
         })),
         // ✅ Save quiz questions
         quiz: (t.quiz || []).map(q => ({
@@ -214,15 +265,10 @@ const Lesson = () => {
         topics: cleanTopics,
         updatedAt: new Date().toISOString()
       })
-    
-      /*
-      setSaveMsg('✅ Curriculum saved successfully!')
-      setTimeout(() => setSaveMsg(''), 3000)
-      */
 
       setSaveMsg('✅ Curriculum saved successfully!')
       setTimeout(() => {
-      navigate('/teacher-dashboard')
+        navigate('/teacher-dashboard')
       }, 1500)
     } catch (err) {
       console.log('Save error:', err)
@@ -300,20 +346,44 @@ const Lesson = () => {
                         <span className='lesson-item-icon'>{lesson.type === 'video' ? '▶' : '📄'}</span>
                         {lesson.editingTitle ? (
                           <div className='lesson-item-edit'>
+
+                            {/* Type selector */}
                             <select className='lesson-type-select' value={lesson.type}
                               onChange={e => updateLesson(topic.id, lesson.id, 'type', e.target.value)}>
                               <option value='video'>Video</option>
                               <option value='notes'>Notes / Article</option>
                             </select>
+
+                            {/* Lesson title */}
                             <input type='text' className='lesson-item-input' placeholder='Lesson title...'
                               value={lesson.title} onChange={e => updateLesson(topic.id, lesson.id, 'title', e.target.value)} />
+
+                            {/* Duration */}
                             <input type='text' className='lesson-item-input lesson-item-duration' placeholder='Duration e.g. 5:30'
                               value={lesson.duration} onChange={e => updateLesson(topic.id, lesson.id, 'duration', e.target.value)} />
+
+                            {/* ✅ Video URL — only shown for video type */}
                             {lesson.type === 'video' && (
                               <input type='text' className='lesson-item-input lesson-item-url'
                                 placeholder='Paste YouTube or Vimeo URL...'
                                 value={lesson.videoURL} onChange={e => updateLesson(topic.id, lesson.id, 'videoURL', e.target.value)} />
                             )}
+
+                            {/* ✅ Notes file upload — only shown for notes type */}
+                            {lesson.type === 'notes' && (
+                              <div className='lesson-notes-upload'>
+                                <input
+                                  type='file'
+                                  accept='.pdf,.doc,.docx,.txt'
+                                  className='lesson-item-input'
+                                  onChange={e => handleNotesUpload(topic.id, lesson.id, e.target.files[0])}
+                                />
+                                {lesson.fileName && (
+                                  <span className='lesson-notes-filename'>📄 {lesson.fileName}</span>
+                                )}
+                              </div>
+                            )}
+
                             <button className='lesson-item-ok' onClick={() => confirmLesson(topic.id, lesson.id)}>Ok</button>
                             <button className='lesson-item-cancel' onClick={() => deleteLesson(topic.id, lesson.id)}>&#128465;</button>
                           </div>
@@ -321,7 +391,13 @@ const Lesson = () => {
                           <div className='lesson-item-confirmed'>
                             <span className='lesson-item-name'>{lesson.title || `Lesson ${li + 1}`}</span>
                             <span className='lesson-item-dur'>{lesson.duration}</span>
-                            {lesson.videoURL && <span className='lesson-item-video-tag'>🎬 Video linked</span>}
+                            {lesson.videoURL && lesson.type === 'video' && (
+                              <span className='lesson-item-video-tag'>🎬 Video linked</span>
+                            )}
+                            {/* ✅ Show file linked badge for notes */}
+                            {lesson.fileName && lesson.type === 'notes' && (
+                              <span className='lesson-item-video-tag'>📄 {lesson.fileName}</span>
+                            )}
                             <button className='lesson-item-edit-btn' onClick={() => updateLesson(topic.id, lesson.id, 'editingTitle', true)}>Edit</button>
                             <button className='lesson-item-del' onClick={() => deleteLesson(topic.id, lesson.id)}>&#128465;</button>
                           </div>
@@ -439,26 +515,6 @@ const Lesson = () => {
             </button>
           </div>
         </div>
-
-        {/* 
-
-        <div className='lesson-preview-label'>
-          <h3>Course Content Preview</h3>
-          <p>This is how your curriculum will appear to students.</p>
-        </div>
-        */}
-      
-      {/* 
-
-        <CourseContent
-          topics={topics}
-          title={courseInfo.title}
-          description={courseInfo.description}
-          difficulty={courseInfo.difficulty}
-          teacherName={courseInfo.teacherName}
-          courseType={courseInfo.courseType}
-        />
-        */}
 
       </div>
     </>

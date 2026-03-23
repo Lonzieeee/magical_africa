@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { db } from '../context/AuthContext'
 import { doc, getDoc } from 'firebase/firestore'
@@ -14,7 +14,10 @@ const CourseContentPage = () => {
   const [course, setCourse] = useState(null)
   const [loading, setLoading] = useState(true)
   const [selectedTopic, setSelectedTopic] = useState(null)
-  const [showQuiz, setShowQuiz] = useState(false) // ✅ add this
+  const [showQuiz, setShowQuiz] = useState(false)
+
+  // Ref to scroll to quiz section
+  const quizRef = useRef(null)
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -24,7 +27,6 @@ const CourseContentPage = () => {
         if (courseDoc.exists()) {
           const data = { id: courseDoc.id, ...courseDoc.data() }
           setCourse(data)
-          // Default to first topic that has a quiz
           const firstQuizTopic = data.topics?.find(t => t.quiz && t.quiz.length > 0)
           if (firstQuizTopic) setSelectedTopic(firstQuizTopic)
         } else {
@@ -48,8 +50,20 @@ const CourseContentPage = () => {
 
   if (!course) return null
 
-  // Get all topics that have quizzes
   const topicsWithQuiz = course.topics?.filter(t => t.quiz && t.quiz.length > 0) || []
+
+  // Toggle quiz visibility and scroll to it when opening
+  const handleQuizClick = () => {
+    setShowQuiz(prev => {
+      const next = !prev
+      if (next) {
+        setTimeout(() => {
+          quizRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }, 100)
+      }
+      return next
+    })
+  }
 
   return (
     <>
@@ -65,67 +79,65 @@ const CourseContentPage = () => {
         maxStudents={course.maxStudents}
         featuredImage={course.featuredImage}
         courseType={course.courseType}
-        onQuizClick={() => setShowQuiz(prev => !prev)}
+        onQuizClick={handleQuizClick}  //  uses new handler
         showQuiz={showQuiz}
       />
 
-     {/* ✅ Quiz section — shows when Quizzes & assignments is clicked */}
-{showQuiz && (
-  <div style={{ width: '1200px', margin: '0 auto', paddingBottom: '4rem' }}>
+      {/* Quiz section — ref attached so we can scroll to it */}
+      {showQuiz && (
+        <div ref={quizRef} style={{ width: '1200px', margin: '0 auto', paddingBottom: '4rem' }}>
 
-    {topicsWithQuiz.length === 0 ? (
-      // ✅ No quizzes message
-      <div style={{
-        textAlign: 'center',
-        padding: '40px',
-        border: '1px dashed #e5e3e3',
-        color: '#9ca3af',
-        fontFamily: 'Poppins, sans-serif',
-        fontSize: '0.9rem',
-        margin: '2rem 0'
-      }}>
-        📝 No quizzes available for this course yet.
-      </div>
-    ) : (
-      <>
-        {/* Topic selector if multiple topics have quizzes */}
-        {topicsWithQuiz.length > 1 && (
-          <div style={{ display: 'flex', gap: '10px', margin: '2rem 0 1rem', flexWrap: 'wrap' }}>
-            <p style={{ fontSize: '0.85rem', color: '#555', marginRight: '8px', alignSelf: 'center' }}>
-              Select topic quiz:
-            </p>
-            {topicsWithQuiz.map(t => (
-              <button
-                key={t.id}
-                onClick={() => setSelectedTopic(t)}
-                style={{
-                  padding: '6px 16px',
-                  border: '1px solid',
-                  borderColor: selectedTopic?.id === t.id ? '#1f6f43' : '#e5e3e3',
-                  backgroundColor: selectedTopic?.id === t.id ? '#1f6f43' : 'white',
-                  color: selectedTopic?.id === t.id ? 'white' : 'rgb(48,48,48)',
-                  fontFamily: 'Poppins, sans-serif',
-                  fontSize: '0.8rem',
-                  cursor: 'pointer'
-                }}
-              >
-                {t.title || 'Untitled Topic'}
-              </button>
-            ))}
-          </div>
-        )}
+          {topicsWithQuiz.length === 0 ? (
+            <div style={{
+              textAlign: 'center',
+              padding: '40px',
+              border: '1px dashed #e5e3e3',
+              color: '#9ca3af',
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: '0.9rem',
+              margin: '2rem 0'
+            }}>
+              📝 No quizzes available for this course yet.
+            </div>
+          ) : (
+            <>
+              {topicsWithQuiz.length > 1 && (
+                <div style={{ display: 'flex', gap: '10px', margin: '2rem 0 1rem', flexWrap: 'wrap' }}>
+                  <p style={{ fontSize: '0.85rem', color: '#555', marginRight: '8px', alignSelf: 'center' }}>
+                    Select topic quiz:
+                  </p>
+                  {topicsWithQuiz.map(t => (
+                    <button
+                      key={t.id}
+                      onClick={() => setSelectedTopic(t)}
+                      style={{
+                        padding: '6px 16px',
+                        border: '1px solid',
+                        borderColor: selectedTopic?.id === t.id ? '#1f6f43' : '#e5e3e3',
+                        backgroundColor: selectedTopic?.id === t.id ? '#1f6f43' : 'white',
+                        color: selectedTopic?.id === t.id ? 'white' : 'rgb(48,48,48)',
+                        fontFamily: 'Poppins, sans-serif',
+                        fontSize: '0.8rem',
+                        cursor: 'pointer'
+                      }}
+                    >
+                      {t.title || 'Untitled Topic'}
+                    </button>
+                  ))}
+                </div>
+              )}
 
-        {selectedTopic && (
-          <Quiz
-            quiz={selectedTopic.quiz}
-            topicTitle={selectedTopic.title}
-          />
-        )}
-      </>
-    )}
+              {selectedTopic && (
+                <Quiz
+                  quiz={selectedTopic.quiz}
+                  topicTitle={selectedTopic.title}
+                />
+              )}
+            </>
+          )}
 
-  </div>
-)}
+        </div>
+      )}
     </>
   )
 }

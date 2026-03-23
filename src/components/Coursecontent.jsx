@@ -1,20 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import '../styles/courseContent.css'
 import CourseCard from '../components/Coursecard'
 import { useNavigate } from 'react-router-dom'
 
-const CourseContent = ({ topics = [], title, description, difficulty, teacherName, regularPrice, maxStudents, salePrice, featuredImage, courseType, onQuizClick, showQuiz  }) => {
-  // Track which topic sections are expanded
+const CourseContent = ({ topics = [], title, description, difficulty, teacherName, regularPrice, maxStudents, salePrice, featuredImage, courseType, onQuizClick, showQuiz }) => {
   const [expanded, setExpanded] = useState({})
+  const [showNotes, setShowNotes] = useState(false)
+
+  const notesRef = useRef(null)
+  const navigate = useNavigate()
 
   const toggleTopic = (id) => {
     setExpanded(prev => ({ ...prev, [id]: !prev[id] }))
   }
 
-  // Count total lessons across all topics
   const totalLessons = topics.reduce((acc, t) => acc + (t.lessons ? t.lessons.length : 0), 0)
 
-   const navigate = useNavigate()
+  // ✅ Collect all notes lessons that have an uploaded file across all topics
+  const allNotes = topics.flatMap(topic =>
+    (topic.lessons || [])
+      .filter(l => l.type === 'notes' && l.fileData)
+      .map(l => ({ ...l, topicTitle: topic.title }))
+  )
+
+  // ✅ Clicking "Course notes & articles" — reveal panel and scroll to it
+  const handleNotesClick = () => {
+    setShowNotes(true)
+    setTimeout(() => {
+      notesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 100)
+  }
 
   return (
     <div className='cc-page'>
@@ -27,7 +42,6 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             <span>Academy</span>
             <span className='cc-chevron'>&#8250;</span>
             <span>{difficulty || 'All Levels'}</span>
-            
             <span className='cc-chevron'>&#8250;</span>
             <span className='cc-breadcrumb-active'>{title || 'Course'}</span>
           </div>
@@ -37,47 +51,24 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             {description || 'Course description will appear here.'}
           </p>
 
-           
-           {/* 
           <p className='cc-hero-author'>
-            Created by <span>magical.africa Academy</span>
+            Created by <span onClick={() => navigate('/teacher-dashboard')}>{teacherName || 'magical.africa Academy'}</span>
           </p>
-          */}
-
-        
-     <p className='cc-hero-author'>
-     Created by <span onClick={()=> navigate('/teacher-dashboard')}>{teacherName || 'magical.africa Academy'}</span>
-     </p>
 
           <div className='cc-hero-meta'>
             <span className={`cc-badge ${difficulty === 'Hard' ? 'cc-badge-hard' : 'cc-badge-beginner'}`}>
               {difficulty || 'Beginner'}
             </span>
-            {/* 
-            <span className='cc-meta-item'>&#9733; 0.0 &nbsp;&#183;&nbsp; 0 ratings</span>
-            */}
-
-           
-           
             <span className='cc-meta-item'>
-            
-     
-     {maxStudents ? `${maxStudents} Students` : 'No Students'}
-     </span>
-
-    {/* 
-      <span className='cc-coursetype'>  &#183; 
-              Artisan
+              {maxStudents ? `${maxStudents} Students` : 'No Students'}
             </span>
-            */}
-      <span className='cc-coursetype'>&#183; {courseType || 'General'}</span>      
+            <span className='cc-coursetype'>&#183; {courseType || 'General'}</span>
             <span className='cc-meta-item'>&#183; {totalLessons} lessons</span>
             <span className='cc-meta-item'>&#183; {topics.length} topics</span>
           </div>
 
         </div>
 
-       
         <div className='cc-hero-card'>
           <CourseCard
             title={title}
@@ -91,8 +82,6 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             courseType={courseType}
           />
         </div>
-        
-
 
       </div>
 
@@ -100,44 +89,48 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
       <div className='cc-includes-section'>
         <h2 className='cc-section-title'>This course includes:</h2>
         <div className='cc-includes-grid'>
+
           <div className='cc-include-item'>
             <span className='cc-include-icon'>&#9654;</span>
             <span>On-demand video lessons</span>
           </div>
+
           <div className='cc-include-item'>
             <span className='cc-include-icon'>&#8681;</span>
             <span>Downloadable materials</span>
           </div>
-          {/* 
-          <div className='cc-include-item'>
+
+          <div className='cc-include-item' onClick={onQuizClick} style={{ cursor: 'pointer' }}>
             <span className='cc-include-icon'>&#128203;</span>
             <span>Quizzes &amp; assignments</span>
           </div>
-        */}
-
-        <div
-  className='cc-include-item'
-  onClick={onQuizClick}
-  style={{ cursor: 'pointer' }}
->
-  <span className='cc-include-icon'>&#128203;</span>
-  <span>Quizzes &amp; assignments</span>
-</div>
 
           <div className='cc-include-item'>
             <span className='cc-include-icon'>&#128241;</span>
             <span>Access on mobile &amp; desktop</span>
           </div>
-          <div className='cc-include-item'>
+
+          {/* ✅ Clicking this reveals the notes download panel */}
+          <div
+            className='cc-include-item'
+            onClick={handleNotesClick}
+            style={{ cursor: 'pointer' }}
+          >
             <span className='cc-include-icon'>&#128196;</span>
             <span>Course notes &amp; articles</span>
           </div>
+
           <div className='cc-include-item'>
             <span className='cc-include-icon'>&#127942;</span>
             <span>Certificate of completion</span>
           </div>
+
         </div>
       </div>
+
+     
+
+
 
       {/* ══ SECTION 3: Course content ══ */}
       <div className='cc-content-section'>
@@ -161,7 +154,6 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
           {topics.length} section{topics.length !== 1 ? 's' : ''} &nbsp;&#183;&nbsp; {totalLessons} lesson{totalLessons !== 1 ? 's' : ''}
         </p>
 
-        {/* Topics list */}
         <div className='cc-topics-list'>
           {topics.length === 0 ? (
             <div className='cc-empty'>No topics added yet.</div>
@@ -169,11 +161,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             topics.map((topic, ti) => (
               <div key={topic.id} className='cc-topic-block'>
 
-                {/* Topic header row — click to expand */}
-                <div
-                  className='cc-topic-header'
-                  onClick={() => toggleTopic(topic.id)}
-                >
+                <div className='cc-topic-header' onClick={() => toggleTopic(topic.id)}>
                   <div className='cc-topic-left'>
                     <span className={`cc-topic-chevron ${expanded[topic.id] ? 'cc-chevron-open' : ''}`}>
                       &#8249;
@@ -189,7 +177,6 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
                   </div>
                 </div>
 
-                {/* Topic description if expanded */}
                 {expanded[topic.id] && (
                   <div className='cc-topic-body'>
 
@@ -197,47 +184,55 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
                       <p className='cc-topic-desc'>{topic.description}</p>
                     )}
 
-                    {/* Lessons list */}
                     {topic.lessons && topic.lessons.length > 0 ? (
                       topic.lessons.map((lesson, li) => (
                         <div key={lesson.id} className='cc-lesson-row'>
-                          <div className='cc-lesson-left'>
-                            {/* 
-                            <span className='cc-lesson-icon'>
-                              {lesson.type === 'video' ? '&#9654;' : '&#128196;'}
-                            </span>
-                            */}
 
+                          <div className='cc-lesson-left'>
                             <span className='cc-lesson-title'>
-                              {lesson.title || `Lesson ${li + 1}`}
+                              {/* ✅ If notes type with file — clicking the title downloads the PDF */}
+                              {lesson.type === 'notes' && lesson.fileData ? (
+                                <a
+                                  href={lesson.fileData}
+                                  download={lesson.fileName || 'course-notes'}
+                                  className='cc-lesson-download'
+                                >
+                                  📄 {lesson.title || `Lesson ${li + 1}`}
+                                </a>
+                              ) : (
+                                // ✅ Video or notes without file — just show the title
+                                <span>{lesson.title || `Lesson ${li + 1}`}</span>
+                              )}
                             </span>
                           </div>
+
                           <div className='cc-lesson-right'>
-
-                          {/* 
-                            {lesson.type === 'video' && (
-                              <span className='cc-lesson-preview'>&#9654; Preview</span>
+                            {/* ✅ Video preview link */}
+                            {lesson.type === 'video' && lesson.videoURL && (
+                              <a
+                                href={lesson.videoURL}
+                                target='_blank'
+                                rel='noopener noreferrer'
+                                className='cc-lesson-preview'
+                              >
+                                &#9654; Preview
+                              </a>
                             )}
-
-                          */}
-
-
-                          {lesson.type === 'video' && lesson.videoURL && (
-                            
-     <a
-      href={lesson.videoURL}
-      target='_blank'
-      rel='noopener noreferrer'
-      className='cc-lesson-preview'
-  >
-    &#9654; Preview
-  </a>
-)}
-
+                            {/* ✅ Notes download tag in the right side too */}
+                            {lesson.type === 'notes' && lesson.fileData && (
+                              <a
+                                href={lesson.fileData}
+                                download={lesson.fileName || 'course-notes'}
+                                className='cc-lesson-preview'
+                              >
+                                &#8659; Download
+                              </a>
+                            )}
                             <span className='cc-lesson-duration'>
                               {lesson.duration || '—'}
                             </span>
                           </div>
+
                         </div>
                       ))
                     ) : (
@@ -253,6 +248,49 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
         </div>
 
       </div>
+
+
+
+ {/* ✅ NOTES PANEL — shown when "Course notes & articles" is clicked */}
+      {showNotes && (
+        <div className='cc-notes-section' ref={notesRef}>
+          <div className='cc-content-header2'>
+            <h2 className='cc-section-title2'>&#128196; Course Notes &amp; Articles</h2>
+            <button className='cc-expand-all' onClick={() => setShowNotes(false)}>Hide</button>
+          </div>
+
+          {allNotes.length === 0 ? (
+            <p className='cc-no-lessons'>No notes have been uploaded for this course yet.</p>
+          ) : (
+            <div className='cc-notes-list'>
+              {allNotes.map((note, i) => (
+                <div key={note.id || i} className='cc-note-item'>
+                  <div className='cc-note-info'>
+                    <span className='cc-note-icon'>📄</span>
+                    <div>
+                      <p className='cc-note-title'>{note.title || `Note ${i + 1}`}</p>
+                      {note.topicTitle && (
+                        <p className='cc-note-topic'>From: {note.topicTitle}</p>
+                      )}
+                    </div>
+                  </div>
+                  {/* ✅ Download button */}
+                  <a
+                    href={note.fileData}
+                    download={note.fileName || 'course-notes'}
+                    className='cc-note-download-btn'
+                  >
+                    &#8659; Download
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+
+
 
     </div>
   )
