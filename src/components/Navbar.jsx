@@ -118,7 +118,7 @@ const Navbar = ({ solid }) => {
         <div className="item3">
           <div className='events-icon'>
             <div className="icon-with-tooltip">
-              <a href="academy" id='academy'>
+              <a href="academy2" id='academy'>
                 
                 <i className="fa-solid fa-school"></i>
                 

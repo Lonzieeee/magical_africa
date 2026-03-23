@@ -4,10 +4,7 @@ import Navbar from '../components/Navbar'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import { useAuth } from '../context/AuthContext'
-/*
-import { collection, addDoc, setDoc, doc, getDoc } from 'firebase/firestore'
-*/
-import { collection, addDoc, setDoc, updateDoc, doc, getDoc } from 'firebase/firestore'
+import { collection, addDoc, updateDoc, doc, getDoc } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 
 const Teacher = () => {
@@ -26,7 +23,7 @@ const Teacher = () => {
   const [pricingModel, setPricingModel] = useState('free')
   const [regularPrice, setRegularPrice] = useState('')
   const [salePrice, setSalePrice] = useState('')
-  const [featuredImage, setFeaturedImage] = useState(null)
+  const [featuredImage, setFeaturedImage] = useState(null)  // base64 string or Firebase URL
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
@@ -58,10 +55,17 @@ const Teacher = () => {
             setDescription(data.description || '')
             setDifficulty(data.difficulty || 'Beginner')
             setMaxStudents(data.maxStudents || '')
-            setCourseType(data.courseType || '')  // ✅ this was missing!
+            setCourseType(data.courseType || '')
             setPricingModel(data.pricingModel || 'free')
             setRegularPrice(data.regularPrice || '')
             setSalePrice(data.salePrice || '')
+            // ✅ Load saved image — from Firestore first, fallback to localStorage
+            if (data.featuredImage) {
+              setFeaturedImage(data.featuredImage)
+            } else {
+              const savedImage = localStorage.getItem('courseImage')
+              if (savedImage) setFeaturedImage(savedImage)
+            }
           }
         } catch (err) {
           console.log('Error loading course:', err)
@@ -69,14 +73,24 @@ const Teacher = () => {
       }
       loadCourse()
     } else {
-      // ✅ New course — clear localStorage so no old courseId is reused
+      // ✅ New course — clear localStorage so no old data is reused
       localStorage.removeItem('currentCourseId')
+      localStorage.removeItem('courseImage')
     }
   }, [authReady, editCourseId])
 
+  // ✅ Converts image to base64 and saves to localStorage for preview
   const handleImageUpload = (e) => {
     const file = e.target.files[0]
-    if (file) setFeaturedImage(URL.createObjectURL(file))
+    if (file) {
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        const base64 = reader.result
+        setFeaturedImage(base64)                     // ✅ live preview in the box
+        localStorage.setItem('courseImage', base64)  // ✅ persist in localStorage
+      }
+      reader.readAsDataURL(file)
+    }
   }
 
   const handleNext = async () => {
@@ -103,57 +117,38 @@ const Teacher = () => {
       const existingCourseId = localStorage.getItem('currentCourseId')
       let courseId
 
-      /*
       if (existingCourseId) {
-       
-        await setDoc(doc(db, 'courses', existingCourseId), {
+        // ✅ Use updateDoc so topics are NOT wiped out
+        await updateDoc(doc(db, 'courses', existingCourseId), {
           title,
           description,
           difficulty,
           maxStudents: maxStudents || 'Unlimited',
+          courseType: courseType || '',
           pricingModel,
           regularPrice: regularPrice || '0',
           salePrice: salePrice || '0',
+          featuredImage: featuredImage || '',   // ✅ save base64 to Firestore
           teacherName,
           teacherId: currentUser.uid,
-          createdAt: new Date().toISOString()
+          updatedAt: new Date().toISOString(),
         })
         courseId = existingCourseId
-      } 
-       */
-      
-      if (existingCourseId) {
-  // ✅ Use updateDoc so topics are NOT wiped out
-  await updateDoc(doc(db, 'courses', existingCourseId), {
-    title,
-    description,
-    difficulty,
-    maxStudents: maxStudents || 'Unlimited',
-    courseType: courseType || '',   // ✅ add this
-    pricingModel,
-    regularPrice: regularPrice || '0',
-    salePrice: salePrice || '0',
-    teacherName,
-    teacherId: currentUser.uid,
-    updatedAt: new Date().toISOString()
-  })
-  courseId = existingCourseId
-}
-      
-      else {
+      } else {
         // ✅ Create brand new course
         const docRef = await addDoc(collection(db, 'courses'), {
           title,
           description,
           difficulty,
           maxStudents: maxStudents || 'Unlimited',
-           courseType: courseType || '',   // ✅ add this
+          courseType: courseType || '',
           pricingModel,
           regularPrice: regularPrice || '0',
           salePrice: salePrice || '0',
+          featuredImage: featuredImage || '',   // ✅ save base64 to Firestore
           teacherName,
           teacherId: currentUser.uid,
-          createdAt: new Date().toISOString()
+          createdAt: new Date().toISOString(),
         })
         courseId = docRef.id
         localStorage.setItem('currentCourseId', courseId)
@@ -217,26 +212,16 @@ const Teacher = () => {
                         <label>Maximum Students</label>
                         <input type="text" value={maxStudents} onChange={e => setMaxStudents(e.target.value)} />
                       </div>
-                    {/* 
+
                       <div className='course-type'>
-                      <label>Type of Course</label>
-                      <input type="text" />
-
-                        
-
+                        <label>Type of Course</label>
+                        <input
+                          type="text"
+                          value={courseType}
+                          onChange={e => setCourseType(e.target.value)}
+                          placeholder="e.g. Artisan, Pottery, Language..."
+                        />
                       </div>
-                    */}
-
-    <div className='course-type'>
-   <label>Type of Course</label>
-   <input
-    type="text"
-    value={courseType}
-    onChange={e => setCourseType(e.target.value)}
-    placeholder="e.g. Artisan, Pottery, Language..."
-   />
-</div>
-
 
                       <div className='difficulty-level'>
                         <label>Difficulty Level</label>
@@ -250,25 +235,35 @@ const Teacher = () => {
                 </div>
               </div>
 
-              <div className='teacher-next-div'>
-
-                {/*
-                <button className='teacher-next-btn' onClick={handleNext} disabled={loading || success}>
-                  {loading ? 'Saving...' : 'Next ›'}
-                </button>
-                 */}
-
-              </div>
+              <div className='teacher-next-div'></div>
             </div>
 
             <div className='teacher-dec2'>
               <div className='dec2-a'>
                 <label>Featured Image</label>
-                <div className='featured-image-box' onClick={() => fileInputRef.current.click()}
-                  style={{ backgroundImage: featuredImage ? `url(${featuredImage})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                  {!featuredImage && <span className='upload-placeholder'>&#43; Click to upload image</span>}
+                {/* ✅ Click div to open file picker */}
+                <div
+                  className='featured-image-box'
+                  onClick={() => fileInputRef.current.click()}
+                  style={{
+                    backgroundImage: featuredImage ? `url(${featuredImage})` : 'none',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {!featuredImage && (
+                    <span className='upload-placeholder'>&#43; Click to upload image</span>
+                  )}
                 </div>
-                <input type="file" accept="image/*" ref={fileInputRef} style={{ display: 'none' }} onChange={handleImageUpload} />
+                {/* ✅ Hidden file input */}
+                <input
+                  type="file"
+                  accept="image/*"
+                  ref={fileInputRef}
+                  style={{ display: 'none' }}
+                  onChange={handleImageUpload}
+                />
               </div>
 
               <div className='dec2-b'>
@@ -279,8 +274,12 @@ const Teacher = () => {
               <div className='dec2-c'>
                 <label>Pricing Model</label>
                 <div>
-                  <label><input type="radio" name="pricing" value="free" checked={pricingModel === 'free'} onChange={e => setPricingModel(e.target.value)} /> Free</label>
-                  <label><input type="radio" name="pricing" value="paid" checked={pricingModel === 'paid'} onChange={e => setPricingModel(e.target.value)} /> Paid</label>
+                  <label>
+                    <input type="radio" name="pricing" value="free" checked={pricingModel === 'free'} onChange={e => setPricingModel(e.target.value)} /> Free
+                  </label>
+                  <label>
+                    <input type="radio" name="pricing" value="paid" checked={pricingModel === 'paid'} onChange={e => setPricingModel(e.target.value)} /> Paid
+                  </label>
                 </div>
               </div>
 
@@ -293,13 +292,10 @@ const Teacher = () => {
                   <label>Sale Price ($)</label>
                   <input type="text" value={salePrice} onChange={e => setSalePrice(e.target.value)} placeholder="e.g. 11.99" />
                 </div>
-
-                
               </div>
 
               <div className='teacher-next-btn-div'>
-
-             <button className='teacher-next-btn' onClick={handleNext} disabled={loading || success}>
+                <button className='teacher-next-btn' onClick={handleNext} disabled={loading || success}>
                   {loading ? 'Saving...' : 'Next ›'}
                 </button>
               </div>

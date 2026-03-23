@@ -1,5 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
+import { getStorage } from 'firebase/storage'
+
+
 import { 
   getAuth, 
   onAuthStateChanged, 
@@ -23,6 +26,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);        // ✅ added export
 export const db = getFirestore(app);     // ✅ added export
+export const storage = getStorage(app)   // same Firebase app instance
 /*
 const auth = getAuth(app);
 const db = getFirestore(app);
