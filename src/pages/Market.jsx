@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/Navbar';
+import { Helmet } from 'react-helmet-async';
 import '../styles/market.css'
 import '../styles/auctions.css'
 import '../styles/shop.css'
@@ -77,11 +78,22 @@ const [currentSlide, setCurrentSlide] = useState(0);
 
 
   //for the title
-
+/*
     useEffect(() => {
     document.title = 'Buy Authentic African Products';
   }, []);
+*/
 
+
+<Helmet>
+  <title>African Marketplace — Buy Authentic African Products</title>
+  <meta name="description" content="Shop authentic African products from artisans and creators across the continent. Discover handcrafted goods, traditional crafts, clothing, jewelry and more." />
+  <meta name="keywords" content="African marketplace, buy African products, authentic African crafts, African artisans, handmade African goods, African jewelry, African clothing" />
+  <meta property="og:title" content="African Marketplace — Buy Authentic African Products" />
+  <meta property="og:description" content="Shop authentic handcrafted African products from artisans and creators across the continent." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://magical.africa/market" />
+</Helmet>
 
 
   return (

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import { Helmet } from 'react-helmet-async';
 import '../styles/events.css'
 import MusicDance from '../components/MusicDance';
 import Ceremonies from '../components/Ceremonies';
@@ -23,13 +24,29 @@ const Events = () => {
   };
 
 
-  
+/*  
       useEffect(() => {
       document.title = ' Discover African Cultural Events';
     }, []);
 
+ */
+
+    
+
   return (
     <>
+
+
+    <Helmet>
+  <title>African Cultural Events — Discover & Celebrate Africa</title>
+  <meta name="description" content="Discover and attend authentic African cultural events happening across the continent and around the world. Celebrate African music, art, food, dance and traditions." />
+  <meta name="keywords" content="African events, African cultural events, African festivals, African music events, African art events, African dance, celebrate Africa" />
+  <meta property="og:title" content="African Cultural Events — Discover & Celebrate Africa" />
+  <meta property="og:description" content="Discover authentic African cultural events happening across the continent and around the world." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://yourwebsite.com/events" />
+</Helmet>
+
       <div className='events-hero'>
 
          <video

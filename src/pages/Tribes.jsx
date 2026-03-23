@@ -4,6 +4,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { Helmet } from 'react-helmet-async';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SearchSection from '../components/SearchSection';
@@ -48,13 +49,29 @@ const Tribes = () => {
     setCurrentSlide((prev) => (prev - 1 + communitiesData.length) % communitiesData.length);
   };
 
-
+/*
     useEffect(() => {
     document.title = 'African Tribes and Communities';
   }, []);
 
+  */
+
   return (
     <>
+
+
+    <Helmet>
+  <title>African Tribes & Communities — Magical Africa</title>
+  <meta name="description" content="Explore the rich diversity of African tribes and communities. Learn about their traditions, cultures, customs and way of life." />
+  <meta name="keywords" content="African tribes, African communities, African culture, African traditions, Maasai, Zulu, Yoruba, Ashanti" />
+  <meta property="og:title" content="African Tribes & Communities — Magical Africa" />
+  <meta property="og:description" content="Explore the rich diversity of African tribes and communities. Learn about their traditions, cultures and way of life." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://magical.africa/tribes" />
+</Helmet>
+
+
+
       <div className="heroSection">
 
         <video

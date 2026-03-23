@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/academy-signIn.css'
 import { useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 import { auth, db } from '../context/AuthContext'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
@@ -86,6 +87,19 @@ const Academy2 = () => {
 
   return (
     <>
+
+
+<Helmet>
+  <title>Magical Africa Academy — Learn African Skills & Courses</title>
+  <meta name="description" content="Join Magical Africa Academy and learn African skills from talented educators across the continent. Browse courses in Artisan, Pottery, Language, Woodwork and more." />
+  <meta name="keywords" content="Magical Africa Academy, African courses, learn African skills, African educators, Artisan, Pottery, African language courses, Woodwork" />
+  <meta property="og:title" content="Magical Africa Academy — Learn African Skills & Courses" />
+  <meta property="og:description" content="Browse and enroll in courses taught by talented African educators. Learn Artisan, Pottery, Language, Woodwork and more." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://magical.africa/academy2" />
+</Helmet>
+
+
       <Navbar solid />
 
       <div className="academy-signIn">

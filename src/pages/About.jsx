@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { Helmet } from 'react-helmet-async';
 import '../styles/about-page.css';
 import '../styles/impact.css';
 import '../styles/team.css';
@@ -159,12 +160,14 @@ useEffect(() => {
   };
 
 
-  //for the title
-
+ //for the about page
+/*
     useEffect(() => {
     document.title = 'About Magical Africa';
   }, []);
   
+  */
+
 
   const approaches = [
     { icon: 'fa-hands-helping', label: t('about.approach.items.communityOwnership') },
@@ -235,6 +238,19 @@ useEffect(() => {
 
   return (
     <>
+
+
+<Helmet>
+  <title>About Magical Africa — Our Story & Mission</title>
+  <meta name="description" content="Learn about Magical Africa — a pan-African platform dedicated to preserving and celebrating African languages, culture, knowledge and heritage." />
+  <meta name="keywords" content="About Magical Africa, African platform, African heritage, pan-African, African culture preservation" />
+  <meta property="og:title" content="About Magical Africa — Our Story & Mission" />
+  <meta property="og:description" content="A pan-African platform dedicated to preserving and celebrating African languages, culture and heritage." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://magical.africa/about" />
+</Helmet>
+
+
       <div className="heroSection" style={{ backgroundImage: 'url(/images/pyramids2.jpg)' }}>
         <Navbar />
         
