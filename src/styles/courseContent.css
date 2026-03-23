@@ -360,6 +360,17 @@
 }
 
 
+a.cc-lesson-preview {
+  text-decoration: none;
+  color: #1f6f43;
+  cursor: pointer;
+}
+
+a.cc-lesson-preview:hover {
+  text-decoration: underline;
+}
+
+
 
 
 @media screen and (max-width: 1024px) {

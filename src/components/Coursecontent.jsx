@@ -213,9 +213,27 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
                             </span>
                           </div>
                           <div className='cc-lesson-right'>
+
+                          {/* 
                             {lesson.type === 'video' && (
                               <span className='cc-lesson-preview'>&#9654; Preview</span>
                             )}
+
+                          */}
+
+
+                          {lesson.type === 'video' && lesson.videoURL && (
+                            
+     <a
+      href={lesson.videoURL}
+      target='_blank'
+      rel='noopener noreferrer'
+      className='cc-lesson-preview'
+  >
+    &#9654; Preview
+  </a>
+)}
+
                             <span className='cc-lesson-duration'>
                               {lesson.duration || '—'}
                             </span>
