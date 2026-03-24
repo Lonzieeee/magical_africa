@@ -61,7 +61,7 @@ const Tribes = () => {
 
 
     <Helmet>
-  <title>African Tribes & Communities — Magical Africa</title>
+  <title>Tribes — Magical Africa</title>
   <meta name="description" content="Explore the rich diversity of African tribes and communities. Learn about their traditions, cultures, customs and way of life." />
   <meta name="keywords" content="African tribes, African communities, African culture, African traditions, Maasai, Zulu, Yoruba, Ashanti" />
   <meta property="og:title" content="African Tribes & Communities — Magical Africa" />

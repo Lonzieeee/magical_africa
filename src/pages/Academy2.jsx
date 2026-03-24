@@ -90,7 +90,7 @@ const Academy2 = () => {
 
 
 <Helmet>
-  <title>Magical Africa Academy — Learn African Skills & Courses</title>
+  <title>Academy - Magical Africa</title>
   <meta name="description" content="Join Magical Africa Academy and learn African skills from talented educators across the continent. Browse courses in Artisan, Pottery, Language, Woodwork and more." />
   <meta name="keywords" content="Magical Africa Academy, African courses, learn African skills, African educators, Artisan, Pottery, African language courses, Woodwork" />
   <meta property="og:title" content="Magical Africa Academy — Learn African Skills & Courses" />

@@ -38,7 +38,7 @@ const Events = () => {
 
 
     <Helmet>
-  <title>African Cultural Events — Discover & Celebrate Africa</title>
+  <title>Events - Magical Africa</title>
   <meta name="description" content="Discover and attend authentic African cultural events happening across the continent and around the world. Celebrate African music, art, food, dance and traditions." />
   <meta name="keywords" content="African events, African cultural events, African festivals, African music events, African art events, African dance, celebrate Africa" />
   <meta property="og:title" content="African Cultural Events — Discover & Celebrate Africa" />

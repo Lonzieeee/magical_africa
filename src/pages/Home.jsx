@@ -27,7 +27,7 @@ const Home = () => {
     <>
 
  <Helmet>
-        <title>Magical Africa — The Real African Story</title>
+        <title>Home — Magical Africa</title>
         <meta name="description" content="Discover the real African story — explore African cultures, languages, crafts, tribes, marketplace and academy all in one place." />
         <meta name="keywords" content="Magical Africa, African culture, African languages, African crafts, African tribes, Africa academy" />
         <meta property="og:title" content="Magical Africa — The Real African Story" />
