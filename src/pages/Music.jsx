@@ -7,6 +7,9 @@ const Music = () => {
     <>
       {/* HERO */}
       <div className="music-hero">
+
+
+        
         <Navbar />
         <div className='music-hero-content'>
           <h1 className='music-hero-title'>
@@ -83,9 +86,13 @@ const Music = () => {
         <p className="music-section-sub">Ancient tools of sound that carry centuries of culture and story</p>
         <div className="music-instruments-grid">
           <div className="music-instrument-card">
+
+          <div className='music-instrumnet-card-box'>
+            
             <div className="music-instrument-icon">🪗</div>
             <h4>Kora</h4>
             <p>21-string harp-lute from West Africa. The instrument of griots — storytellers and historians.</p>
+            </div>  
           </div>
           <div className="music-instrument-card">
             <div className="music-instrument-icon">🥁</div>

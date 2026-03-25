@@ -88,7 +88,7 @@ const HeroSection = ({ children, customContent, backgroundImage }) => {
             </div>
 
             <div className="hero-boxes">
-              <div className="hero-box" onClick={()=> handleNavigation('/academy')}>
+              <div className="hero-box" onClick={()=> handleNavigation('/academy2')}>
                 <i className="fa-solid fa-comments"></i>
                 <p>{t('hero.learnLanguage')}</p>
               </div>

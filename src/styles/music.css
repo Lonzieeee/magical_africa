@@ -12,7 +12,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-image: url(/images/african-spices.jpg);
+  background-image: url(/images/african-music.jpeg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -96,7 +96,7 @@
   font-size: 0.95rem;
   color: #6B6B6B;
   margin-bottom: 2.5rem;
-  font-weight: 300;
+  font-weight: 400;
   margin-top: 1rem;
 }
 
@@ -174,7 +174,7 @@ background-image: url(/images/kitenge2-latest.jpg);
   color: #444444;
   line-height: 1.75;
   margin-bottom: 1rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .music-artists-line {
@@ -211,8 +211,28 @@ justify-content: center;
   padding: 1.5rem 1rem;
   text-align: center;
   transition: box-shadow 0.2s, transform 0.2s;
+  background-image:url(/images/african-music.jpeg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
 }
 
+.music-instrument-card::before{
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4);
+  z-index: 1;
+}
+.music-instrument-card-box{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  gap: 20px;
+}
 .music-instrument-card:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
   transform: translateY(-2px);
@@ -221,6 +241,8 @@ justify-content: center;
 .music-instrument-icon {
   font-size: 2.2rem;
   margin-bottom: 0.6rem;
+  z-index: 2;
+  position: absolute;
 }
 
 .music-instrument-card h4 {
@@ -230,12 +252,16 @@ justify-content: center;
   margin-bottom: 0.3rem;
   font-weight: 700;
   letter-spacing: 0;
+  z-index: 2;
+  position: absolute;
 }
 
 .music-instrument-card p {
   font-size: 0.78rem;
   color: #6B6B6B;
   line-height: 1.5;
+  z-index: 2;
+  position: absolute;
 }
 
 /* ===== ARTISTS ===== */
