@@ -156,15 +156,11 @@ const Navbar = ({ solid }) => {
 
           {!user ? (
             <>
-              <a href="#" id="contact-us" onClick={(e) => {
-                e.preventDefault();
-                setIsAuthModalOpen(true);
-              }}>
+              <a href="#" id="contact-us" onClick={()=> navigate('/academy2')}>
                
                 <i className="fa-regular fa-user" id="user-icon"></i>
                  {t('nav.signIn')}
               </a>
-              
             </>
           ) : (
             <>
