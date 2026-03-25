@@ -475,6 +475,7 @@ text-decoration: none;
     align-items: flex-start;
     gap: 3rem;
     padding: 2.5rem 2rem;
+    padding-top: 120px;
   }
 
 
@@ -499,12 +500,18 @@ text-decoration: none;
     width: 100%;
     padding: 2rem 2rem 4rem;
   }
+
+  .cc-notes-section{
+    width: 100%;
+ 
+  }
 }
 
 @media screen and (max-width: 768px) {
 
   .cc-hero {
-    padding: 2rem 1.5rem;
+    padding: 3rem 1.5rem;
+    padding-top:120px;
     gap: 1.5rem;
   }
 
@@ -548,12 +555,17 @@ text-decoration: none;
   .cc-no-lessons {
     padding: 0.7rem 1rem 0.7rem 2rem;
   }
+  .cc-notes-section{
+    padding-left:1.5rem ;
+    padding-right: 1.5rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
 
-  .cc-hero {
-    padding: 2rem 1rem;
+  .cc-hero{
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .cc-includes-section {
@@ -590,5 +602,9 @@ text-decoration: none;
 
   .cc-hero-meta {
     gap: 0.4rem;
+  }
+  .cc-notes-section{
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 }

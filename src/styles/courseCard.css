@@ -226,3 +226,10 @@
   color: rgb(181, 161, 145);
   pointer-events: none;
 }
+
+
+@media screen and (max-width:480px) {
+  .course-card{
+    width: 100%;
+  }
+}

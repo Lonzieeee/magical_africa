@@ -85,7 +85,7 @@ const CourseContentPage = () => {
 
       {/* Quiz section — ref attached so we can scroll to it */}
       {showQuiz && (
-        <div ref={quizRef} style={{ width: '1200px', margin: '0 auto', paddingBottom: '4rem' }}>
+        <div ref={quizRef} style={{  width: '1200px', maxWidth: '100%' , margin: '0 auto', paddingBottom: '4rem' }}>
 
           {topicsWithQuiz.length === 0 ? (
             <div style={{
