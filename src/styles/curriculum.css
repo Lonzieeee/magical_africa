@@ -165,6 +165,14 @@ justify-content: center;
   .curriculum-div-p{
     padding-left: 1rem;
     padding-right: 1rem;
+    text-align: center;
+  }
+
+  .curriculum2 p{
+    text-align: center;
+  }
+  .curriculum2 h2{
+    text-align: center;
   }
 
 }
