@@ -6,28 +6,29 @@ import CultureCard from './CultureCard';
 
 const heroSlides = [
   {
-    image: '/images/pyramids2.jpg',
+    image: '/images/african-pottery2.jpg',
     title: 'Welcome To Magical Africa',
     subtitle: 'The Real African Story',
     name: '',
     flag: null
   },
   {
-    image: '/images/swahili-community2.jpg',
+    image: '/images/wood_carving.webp',
     title: 'Karibu Magical Africa',
     subtitle: 'Safari Halisi ya Afrika',
     name: '(Swahili)',
     flag: '/images/Kenyan-flag.png'
   },
   {
-    image: '/images/maasai2.jpg',
+    image: '/images/african-basketry.jpg',
     title: 'Pooki sidai eitu oshi',
     subtitle: 'Nwee ahụmịhe omenala bara ụba',
     name: '(Maasai)',
     flag: '/images/Kenyan-flag.png'
   },
+  
   {
-    image: '/images/Igbo2.jpg',
+    image: '/images/african-instrument.avif',
     title: 'Mee ka ịmata omenala bara ụba',
     subtitle: 'Mee emume ihe nketa Afrịka',
     name: '(Igbo)',
