@@ -1,0 +1,356 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+  line-height: 1.5rem;
+}
+
+/* ===== HERO ===== */
+.music-hero {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-image: url(/images/african-spices.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.music-hero::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.music-hero-content {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  bottom: 10%;
+  left: 3rem;
+  gap: 20px;
+  z-index: 2;
+}
+
+.music-hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.music-hero-highlight {
+  color: #B5935A;
+}
+
+.music-hero-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.7;
+  font-weight: 400;
+  max-width: 600px;
+  letter-spacing: 0.025rem;
+}
+
+/* ===== SECTIONS ===== */
+.music-section {
+  padding: 4rem 3rem;
+  background: #ffffff;
+ 
+}
+
+.music-section-alt {
+  background: #F5F0EB;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  
+ 
+}
+
+.music-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #3D2B1F;
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.music-gold {
+  color: #B5935A;
+}
+
+.music-section-sub {
+  font-size: 0.95rem;
+  color: #6B6B6B;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+  margin-top: 1rem;
+}
+
+/* ===== GENRES ===== */
+.music-genre-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  align-items: center;
+}
+
+.music-genre-reverse {
+  direction: rtl;
+}
+
+.music-genre-reverse > * {
+  direction: ltr;
+}
+
+.music-genre-img {
+ 
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #F0EBE3;
+}
+
+.music-img-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: linear-gradient(135deg, #e8ddd0, #d4c4b0);
+   background-image: url(/images/african-spices.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.place1{
+background-image: url(/images/pyramids2.jpg);
+}
+.place2{
+background-image: url(/images/Igbo2.jpg);
+}
+.place3{
+background-image: url(/images/kitenge2-latest.jpg);
+}
+.place4{
+
+}
+
+.music-genre-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #3D2B1F;
+  margin-bottom: 0.75rem;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.music-region-badge {
+  font-size: 0.78rem;
+  color: #6B6B6B;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.04em;
+}
+
+.music-genre-text p {
+  font-size: 0.95rem;
+  color: #444444;
+  line-height: 1.75;
+  margin-bottom: 1rem;
+  font-weight: 300;
+}
+
+.music-artists-line {
+  font-size: 0.85rem;
+  color: #6B6B6B;
+}
+
+.music-artists-line strong {
+  color: #3D2B1F;
+  font-weight: 500;
+}
+
+/* ===== INSTRUMENTS ===== */
+.music-instruments-grid {
+ display: flex;
+ flex-direction: row;
+ margin-top: 2rem;
+ padding-bottom: 2rem;
+gap: 1rem;
+flex-wrap: wrap;
+align-items: center;
+justify-content: center;
+}
+
+.music-instrument-card {
+  background: #ffffff;
+  border: 1px solid #E0D8CF;
+  width: 300px;
+  height: 300px;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.music-instrument-card:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
+  transform: translateY(-2px);
+}
+
+.music-instrument-icon {
+  font-size: 2.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.music-instrument-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #3D2B1F;
+  margin-bottom: 0.3rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.music-instrument-card p {
+  font-size: 0.78rem;
+  color: #6B6B6B;
+  line-height: 1.5;
+}
+
+/* ===== ARTISTS ===== */
+.music-artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.25rem;
+}
+
+.music-artist-card {
+  background: #ffffff;
+  border: 1px solid #E0D8CF;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.music-artist-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
+  transform: translateY(-2px);
+}
+
+.music-artist-avatar {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+}
+
+.music-artist-info {
+  padding: 1rem 1.1rem 1.25rem;
+}
+
+.music-artist-info h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #3D2B1F;
+  margin-bottom: 2px;
+  letter-spacing: 0;
+}
+
+.music-artist-genre {
+  display: block;
+  font-size: 0.75rem;
+  color: #B5935A;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+}
+
+.music-artist-info p {
+  font-size: 0.8rem;
+  color: #6B6B6B;
+  line-height: 1.55;
+}
+
+/* ===== GLOBAL INFLUENCE ===== */
+.music-influence-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.music-influence-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  border: 1px solid #E0D8CF;
+  border-top: 3px solid #2D6A4F;
+}
+
+.music-influence-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #3D2B1F;
+  margin-bottom: 0.4rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.music-influence-card p {
+  font-size: 0.82rem;
+  color: #6B6B6B;
+  line-height: 1.6;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .music-section {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .music-hero-content {
+    left: 1.5rem;
+    bottom: 8%;
+  }
+
+  .music-genre-feature {
+    grid-template-columns: 1fr;
+  }
+
+  .music-genre-reverse {
+    direction: ltr;
+  }
+
+  .music-instruments-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .music-artists-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .music-influence-grid {
+    grid-template-columns: 1fr;
+  }
+}

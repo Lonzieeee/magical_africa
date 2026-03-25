@@ -388,12 +388,16 @@ a.cc-lesson-preview:hover {
 /* for the notes upload notes */
 
 .cc-notes-section { 
-  padding: 30px 40px;
+    padding:30px 40px;
+    padding-left: 2rem;
+    padding-right: 2rem;
   border: 1px solid #eee; 
-  margin-left: 2rem;
- 
-  align-self: flex-start;
+
+  width: 1200px;
+
+
 }
+
 
 .cc-content-header2{
   display: flex;
@@ -405,7 +409,7 @@ a.cc-lesson-preview:hover {
 }
 
 .cc-section-title2{
-
+font-size: 1.1rem;
 }
 
 .cc-notes-list { 

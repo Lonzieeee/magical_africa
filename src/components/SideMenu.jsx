@@ -125,7 +125,7 @@ const SideMenu = ({ isOpen, onClose }) => {
            <i className="fa-solid fa-chevron-right"></i>
            </li>
 
-          <li>
+          <li onClick={()=> handleNavigation('/music')}>
             Music 
             <i className="fa-solid fa-chevron-right"></i>  
          </li>

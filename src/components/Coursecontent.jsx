@@ -253,6 +253,8 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
 
  {/* ✅ NOTES PANEL — shown when "Course notes & articles" is clicked */}
       {showNotes && (
+
+      
         <div className='cc-notes-section' ref={notesRef}>
           <div className='cc-content-header2'>
             <h2 className='cc-section-title2'>&#128196; Course Notes &amp; Articles</h2>
@@ -287,6 +289,8 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             </div>
           )}
         </div>
+
+
       )}
 
 

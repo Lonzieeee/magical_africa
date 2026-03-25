@@ -23,6 +23,7 @@ import Learner from './components/Learner';
 import CourseContentPage from './components/CourseContentPage';
 import TeacherDashboard from './components/TeacherDashboard';
 import ProtectedRoute from './components/ProtectedRoute'
+import Music from './pages/Music';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/market" element={<Market />} />
           <Route path="/academy2" element={<Academy2 />} />
           <Route path="/academy-signIn" element={<AcademyLogin />} />
+          <Route path="/music" element={<Music />} />
 
           {/* ── Teacher-only routes ── */}
           <Route path="/teacher" element={
