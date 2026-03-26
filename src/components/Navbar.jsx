@@ -24,7 +24,7 @@ const Navbar = ({ solid }) => {
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [logoutMessage, setLogoutMessage] = useState(false);
   
-  const { user, logout, getInitials, getFullName } = useAuth();
+  const { user, userData, logout, getInitials, getFullName } = useAuth();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
@@ -44,6 +44,20 @@ const Navbar = ({ solid }) => {
     localStorage.setItem('language', langCode);
     setIsLangDropdownOpen(false);
   };
+
+    const handleAcademyNavigation = () => {
+      if (!user) {
+        navigate('/academy-signIn');
+        return;
+      }
+
+      if (userData?.role === 'teacher') {
+        navigate('/teacher-dashboard');
+        return;
+      }
+
+      navigate('/learner');
+    };
 
   {/* 
   const handleLogout = async () => {
@@ -230,7 +244,7 @@ const Navbar = ({ solid }) => {
                 <div className="dropdown-section-title">{t('nav.yourAccounts')}</div>
                 */}
                 
-                <div className="dropdown-option">
+                <div className="dropdown-option" onClick={handleAcademyNavigation}>
                   <span>Academy</span>
                 </div>
                 

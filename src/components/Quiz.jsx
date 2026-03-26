@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../styles/quiz.css'
 
-const Quiz = ({ quiz = [], topicTitle = '' }) => {
+const Quiz = ({ quiz = [], topicTitle = '', onSubmitResult }) => {
   const [answers, setAnswers] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
@@ -20,6 +20,9 @@ const Quiz = ({ quiz = [], topicTitle = '' }) => {
     })
     setScore(correct)
     setSubmitted(true)
+    if (onSubmitResult) {
+      onSubmitResult({ score: correct, total: quiz.length })
+    }
   }
 
   const handleRetry = () => {

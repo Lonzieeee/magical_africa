@@ -9,12 +9,13 @@ const ProtectedRoute = ({ children, allowedRole }) => {
   if (loading) return <div style={{ padding: '40px', textAlign: 'center' }}>Loading...</div>
 
   // Not logged in — redirect to login
-  if (!user) return <Navigate to='/academy-SignIn' />
+  if (!user) return <Navigate to='/academy-signIn' />
 
   // Logged in but wrong role — redirect to their correct page
   if (allowedRole && userData?.role !== allowedRole) {
     if (userData?.role === 'learner') return <Navigate to='/learner' />
-    return <Navigate to='/academy-SignIn' />
+    if (userData?.role === 'teacher') return <Navigate to='/teacher-dashboard' />
+    return <Navigate to='/academy-signIn' />
   }
 
   return children
