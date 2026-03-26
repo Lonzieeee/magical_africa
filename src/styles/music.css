@@ -65,7 +65,7 @@
 .music-section {
   padding: 4rem 3rem;
   background: #ffffff;
- 
+
 }
 
 .music-section-alt {
@@ -74,8 +74,6 @@
   justify-content: center;
   display: flex;
   flex-direction: column;
-  
- 
 }
 
 .music-section-title {
@@ -118,7 +116,6 @@
 }
 
 .music-genre-img {
- 
   position: relative;
   overflow: hidden;
   aspect-ratio: 4 / 3;
@@ -134,23 +131,15 @@
   justify-content: center;
   font-size: 5rem;
   background: linear-gradient(135deg, #e8ddd0, #d4c4b0);
-   background-image: url(/images/african-spices.jpg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
 }
-.place1{
-background-image: url(/images/pyramids2.jpg);
-}
-.place2{
-background-image: url(/images/Igbo2.jpg);
-}
-.place3{
-background-image: url(/images/kitenge2-latest.jpg);
-}
-.place4{
 
-}
+.place1 { background-image: url(/images/afrobeats.webp); }
+.place2 { background-image: url(/images/amapiano.avif); }
+.place3 { background-image: url(/images/benga.webp); }
+.place4 { background-image: url(/images/african-music.jpeg); }
 
 .music-genre-text h3 {
   font-family: 'Playfair Display', serif;
@@ -189,14 +178,14 @@ background-image: url(/images/kitenge2-latest.jpg);
 
 /* ===== INSTRUMENTS ===== */
 .music-instruments-grid {
- display: flex;
- flex-direction: row;
- margin-top: 2rem;
- padding-bottom: 2rem;
-gap: 1rem;
-flex-wrap: wrap;
-align-items: center;
-justify-content: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .music-instrument-card {
@@ -204,35 +193,49 @@ justify-content: center;
   border: 1px solid #E0D8CF;
   width: 300px;
   height: 300px;
- display: flex;
- flex-direction: column;
- align-items: center;
- justify-content: center;
-  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1.5rem;
   text-align: center;
   transition: box-shadow 0.2s, transform 0.2s;
-  background-image:url(/images/african-music.jpeg);
+  background-image: url(/images/african-music.jpeg);
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
 }
 
-.music-instrument-card::before{
+.music-instrument-card::before {
   content: '';
   position: absolute;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   z-index: 1;
 }
-.music-instrument-card-box{
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  gap: 20px;
+
+.instrument1{
+  background-image: url(/images/kora.jpg);
 }
+.instrument2{
+   background-image: url(/images/njembe.jpg);
+}
+.instrument3{
+   background-image: url(/images/mbira.webp);
+}
+.instrument4{
+   background-image: url(/images/talking-drum.jpg);
+}
+.instrument5{
+   background-image: url(/images/Krar.webp);
+}
+.instrument6{
+   background-image: url(/images/Balafoon.jpg);
+}
+
 .music-instrument-card:hover {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.07);
   transform: translateY(-2px);
@@ -242,81 +245,113 @@ justify-content: center;
   font-size: 2.2rem;
   margin-bottom: 0.6rem;
   z-index: 2;
-  position: absolute;
+  position: relative;
 }
 
 .music-instrument-card h4 {
   font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  color: #3D2B1F;
-  margin-bottom: 0.3rem;
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
   font-weight: 700;
   letter-spacing: 0;
   z-index: 2;
-  position: absolute;
+  position: relative;
 }
 
 .music-instrument-card p {
   font-size: 0.78rem;
-  color: #6B6B6B;
+  color: rgba(255, 255, 255, 0.85);
   line-height: 1.5;
   z-index: 2;
-  position: absolute;
+  position: relative;
 }
 
-/* ===== ARTISTS ===== */
+/* ===== ARTISTS — HOVER REVEAL ===== */
 .music-artists-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 1.25rem;
+  margin-bottom: 2rem;
 }
 
 .music-artist-card {
-  background: #ffffff;
-  border: 1px solid #E0D8CF;
+  position: relative;
+  height: 300px;
   border-radius: 12px;
   overflow: hidden;
-  transition: box-shadow 0.2s, transform 0.2s;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.music-artist-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.09);
-  transform: translateY(-2px);
-}
+/* Each artist card background image — replace with your actual artist images */
+.artist1 { background-image: url(/images/fela-kuti.avif); background-color: #5C3A1E; }
+.artist2 { background-image: url(/images/miriam-makeba.png); background-color: #3A2A1A; }
+.artist3 { background-image: url(/images/burna-boy.jpg); background-color: #1B3A2A; }
+.artist4 { background-image: url(/images/tems.jpg); background-color: #2A1A3A; }
+.artist5 { background-image: url(/images/ali-fraka.jpg); background-color: #1A2A3A; }
+.artist6 { background-image: url(/images/youssoundour.jpeg); background-color: #3A2A10; }
+.artist7 { background-image: url(/images/ima-thomas.jpg); background-color: #3A2A10; }
 
-.music-artist-avatar {
-  height: 72px;
+/* Dark overlay — hidden by default, fades in on hover */
+.music-artist-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.2rem;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  opacity: 0;
+  transition: opacity 0.35s ease;
 }
 
-.music-artist-info {
-  padding: 1rem 1.1rem 1.25rem;
+.music-artist-card:hover .music-artist-overlay {
+  opacity: 1;
 }
 
-.music-artist-info h4 {
+/* Text inside overlay slides up slightly on hover */
+.music-artist-overlay h4 {
   font-family: 'Playfair Display', serif;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: #3D2B1F;
-  margin-bottom: 2px;
+  color: #ffffff;
+  margin-bottom: 4px;
   letter-spacing: 0;
+  transform: translateY(10px);
+  transition: transform 0.35s ease;
 }
 
-.music-artist-genre {
+.music-artist-card:hover .music-artist-overlay h4 {
+  transform: translateY(0);
+}
+
+.music-artist-overlay .music-artist-genre {
   display: block;
   font-size: 0.75rem;
   color: #B5935A;
   font-weight: 500;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
+  transform: translateY(10px);
+  transition: transform 0.35s ease 0.04s;
 }
 
-.music-artist-info p {
+.music-artist-card:hover .music-artist-overlay .music-artist-genre {
+  transform: translateY(0);
+}
+
+.music-artist-overlay p {
   font-size: 0.8rem;
-  color: #6B6B6B;
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.55;
+  transform: translateY(10px);
+  transition: transform 0.35s ease 0.08s;
+}
+
+.music-artist-card:hover .music-artist-overlay p {
+  transform: translateY(0);
 }
 
 /* ===== GLOBAL INFLUENCE ===== */
@@ -376,7 +411,34 @@ justify-content: center;
     grid-template-columns: repeat(2, 1fr);
   }
 
+  .music-artist-card {
+    height: 240px;
+  }
+
   .music-influence-grid {
     grid-template-columns: 1fr;
   }
+}
+
+@media screen and (max-width:480px) {
+.music-section-sub{
+  text-align: center;
+}
+.music-section{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.music-instruments-grid{
+  padding-left: 0rem;
+  padding-right: 0rem;
+  
+}
+
+.music-section-title{
+  text-align: center;
+}
+.music-instrument-card{
+  width: 100%;
+}
+
 }
