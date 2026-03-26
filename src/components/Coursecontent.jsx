@@ -1,9 +1,25 @@
 import React, { useState, useRef } from 'react'
+import { FaFileAlt } from 'react-icons/fa'
 import '../styles/courseContent.css'
 import CourseCard from '../components/Coursecard'
 import { useNavigate } from 'react-router-dom'
 
-const CourseContent = ({ topics = [], title, description, difficulty, teacherName, regularPrice, maxStudents, salePrice, featuredImage, courseType, onQuizClick, showQuiz }) => {
+const CourseContent = ({
+  topics = [],
+  title,
+  description,
+  difficulty,
+  teacherName,
+  regularPrice,
+  maxStudents,
+  salePrice,
+  featuredImage,
+  courseType,
+  onQuizClick,
+  completedLessonIds = [],
+  onToggleLessonComplete,
+  isPreviewMode = false
+}) => {
   const [expanded, setExpanded] = useState({})
   const [showNotes, setShowNotes] = useState(false)
 
@@ -100,7 +116,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             <span>Downloadable materials</span>
           </div>
 
-          <div className='cc-include-item' onClick={onQuizClick} style={{ cursor: 'pointer' }}>
+          <div className='cc-include-item' onClick={onQuizClick} style={{ cursor: onQuizClick ? 'pointer' : 'default' }}>
             <span className='cc-include-icon'>&#128203;</span>
             <span>Quizzes &amp; assignments</span>
           </div>
@@ -134,6 +150,29 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
 
       {/* ══ SECTION 3: Course content ══ */}
       <div className='cc-content-section'>
+
+        {isPreviewMode ? (
+          <div className='cc-progress-strip'>
+            <div className='cc-progress-strip-top'>
+              <h3>Course Preview</h3>
+              <span>Explore full details before adding or buying.</span>
+            </div>
+          </div>
+        ) : (
+          <div className='cc-progress-strip'>
+            <div className='cc-progress-strip-top'>
+              <h3>Your Progress</h3>
+              <span>{completedLessonIds.length}/{totalLessons} lessons completed</span>
+            </div>
+            <div className='cc-progress-strip-bar'>
+              <span
+                style={{
+                  width: `${totalLessons > 0 ? Math.round((completedLessonIds.length / totalLessons) * 100) : 0}%`
+                }}
+              />
+            </div>
+          </div>
+        )}
 
         <div className='cc-content-header'>
           <h2 className='cc-section-title'>Course content</h2>
@@ -188,50 +227,72 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
                       topic.lessons.map((lesson, li) => (
                         <div key={lesson.id} className='cc-lesson-row'>
 
-                          <div className='cc-lesson-left'>
-                            <span className='cc-lesson-title'>
-                              {/*  If notes type with file — clicking the title downloads the PDF */}
-                              {lesson.type === 'notes' && lesson.fileData ? (
-                                <a
-                                  href={lesson.fileData}
-                                  download={lesson.fileName || 'course-notes'}
-                                  className='cc-lesson-download'
-                                >
-                                  📄 {lesson.title || `Lesson ${li + 1}`}
-                                </a>
-                              ) : (
-                                //  Video or notes without file — just show the title
-                                <span>{lesson.title || `Lesson ${li + 1}`}</span>
-                              )}
-                            </span>
-                          </div>
+                          {(() => {
+                            const lessonId = String(lesson.id || `${topic.id}-${li}`)
+                            const isCompleted = completedLessonIds.includes(lessonId)
 
-                          <div className='cc-lesson-right'>
-                            {/*  Video preview link */}
-                            {lesson.type === 'video' && lesson.videoURL && (
-                              <a
-                                href={lesson.videoURL}
-                                target='_blank'
-                                rel='noopener noreferrer'
-                                className='cc-lesson-preview'
-                              >
-                                &#9654; Preview
-                              </a>
-                            )}
-                            {/*  Notes download tag in the right side too */}
-                            {lesson.type === 'notes' && lesson.fileData && (
-                              <a
-                                href={lesson.fileData}
-                                download={lesson.fileName || 'course-notes'}
-                                className='cc-lesson-preview'
-                              >
-                                &#8659; Download
-                              </a>
-                            )}
-                            <span className='cc-lesson-duration'>
-                              {lesson.duration || '—'}
-                            </span>
-                          </div>
+                            return (
+                              <>
+
+                                <div className='cc-lesson-left'>
+                                  <span className='cc-lesson-title'>
+                                    {/*  If notes type with file — clicking the title downloads the PDF */}
+                                    {lesson.type === 'notes' && lesson.fileData ? (
+                                      <a
+                                        href={lesson.fileData}
+                                        download={lesson.fileName || 'course-notes'}
+                                        className='cc-lesson-download'
+                                        onClick={() => onToggleLessonComplete && onToggleLessonComplete(lessonId, { action: 'complete', source: 'notes-download' })}
+                                      >
+                                        <FaFileAlt className='cc-inline-file-icon' /> {lesson.title || `Lesson ${li + 1}`}
+                                      </a>
+                                    ) : (
+                                      //  Video or notes without file — just show the title
+                                      <span>{lesson.title || `Lesson ${li + 1}`}</span>
+                                    )}
+                                  </span>
+                                </div>
+
+                                <div className='cc-lesson-right'>
+                                  {/*  Video preview link */}
+                                  {lesson.type === 'video' && lesson.videoURL && (
+                                    <a
+                                      href={lesson.videoURL}
+                                      target='_blank'
+                                      rel='noopener noreferrer'
+                                      className='cc-lesson-preview'
+                                      onClick={() => onToggleLessonComplete && onToggleLessonComplete(lessonId, { action: 'complete', source: 'video-preview' })}
+                                    >
+                                      &#9654; Preview
+                                    </a>
+                                  )}
+                                  {/*  Notes download tag in the right side too */}
+                                  {lesson.type === 'notes' && lesson.fileData && (
+                                    <a
+                                      href={lesson.fileData}
+                                      download={lesson.fileName || 'course-notes'}
+                                      className='cc-lesson-preview'
+                                      onClick={() => onToggleLessonComplete && onToggleLessonComplete(lessonId, { action: 'complete', source: 'notes-download' })}
+                                    >
+                                      &#8659; Download
+                                    </a>
+                                  )}
+                                  <span className='cc-lesson-duration'>
+                                    {lesson.duration || '—'}
+                                  </span>
+                                  {onToggleLessonComplete && (
+                                    <button
+                                      className={`cc-complete-btn ${isCompleted ? 'cc-complete-btn-done' : ''}`}
+                                      onClick={() => onToggleLessonComplete(lessonId, { action: isCompleted ? 'undo' : 'complete', source: 'manual' })}
+                                    >
+                                      {isCompleted ? 'Undo Completion' : 'Mark Complete'}
+                                    </button>
+                                  )}
+                                </div>
+
+                              </>
+                            )
+                          })()}
 
                         </div>
                       ))
@@ -257,7 +318,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
       
         <div className='cc-notes-section' ref={notesRef}>
           <div className='cc-content-header2'>
-            <h2 className='cc-section-title2'>&#128196; Course Notes &amp; Articles</h2>
+            <h2 className='cc-section-title2'><FaFileAlt className='cc-inline-file-icon' /> Course Notes &amp; Articles</h2>
             <button className='cc-expand-all' onClick={() => setShowNotes(false)}>Hide</button>
           </div>
 
@@ -268,7 +329,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
               {allNotes.map((note, i) => (
                 <div key={note.id || i} className='cc-note-item'>
                   <div className='cc-note-info'>
-                    <span className='cc-note-icon'>📄</span>
+                    <span className='cc-note-icon'><FaFileAlt /></span>
                     <div>
                       <p className='cc-note-title'>{note.title || `Note ${i + 1}`}</p>
                       {note.topicTitle && (
