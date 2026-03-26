@@ -27,6 +27,10 @@
   border: 1px solid var(--ld-sage);
   background-color: rgba(145, 165, 133, 0.2);
   color: var(--ld-black);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 10px 16px;
   font-weight: 700;
   width: 100%;
@@ -98,18 +102,41 @@
 .learner-catchy-message {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   line-height: 1.45;
   font-weight: 600;
   animation: learner-message-rise 620ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
-.learner-wave-icon {
-  color: var(--ld-orange);
-  font-size: 1rem;
-  transform-origin: 72% 82%;
-  animation: learner-wave-better 2.6s cubic-bezier(0.36, 0, 0.2, 1) infinite;
-  filter: drop-shadow(0 0 0 rgba(213, 115, 26, 0));
+.learner-orbit-signal {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+}
+
+.learner-orbit-core {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  background: var(--ld-orange);
+  box-shadow: 0 0 0 0 rgba(213, 115, 26, 0.35);
+  animation: learner-core-pulse 1.8s ease-out infinite;
+}
+
+.learner-orbit-ring {
+  position: absolute;
+  inset: 1px;
+  border: 1px solid rgba(213, 115, 26, 0.55);
+  border-radius: 50%;
+  animation: learner-ring-spin 3.8s linear infinite;
+}
+
+.learner-orbit-ring-two {
+  inset: 3px;
+  border-color: rgba(163, 7, 12, 0.4);
+  animation-duration: 2.5s;
+  animation-direction: reverse;
 }
 
 @keyframes learner-message-rise {
@@ -124,47 +151,74 @@
   }
 }
 
-@keyframes learner-wave-better {
+@keyframes learner-core-pulse {
   0% {
-    transform: rotate(0deg) scale(1);
-    filter: drop-shadow(0 0 0 rgba(213, 115, 26, 0));
+    box-shadow: 0 0 0 0 rgba(213, 115, 26, 0.4);
   }
 
-  8% {
-    transform: rotate(18deg) scale(1.03);
-  }
-
-  16% {
-    transform: rotate(-12deg) scale(1);
-  }
-
-  24% {
-    transform: rotate(16deg) scale(1.03);
-    filter: drop-shadow(0 0 6px rgba(213, 115, 26, 0.2));
-  }
-
-  32% {
-    transform: rotate(-8deg) scale(1);
-  }
-
-  40% {
-    transform: rotate(10deg) scale(1.02);
-  }
-
-  48% {
-    transform: rotate(0deg) scale(1);
-    filter: drop-shadow(0 0 0 rgba(213, 115, 26, 0));
+  70% {
+    box-shadow: 0 0 0 10px rgba(213, 115, 26, 0);
   }
 
   100% {
-    transform: rotate(0deg) scale(1);
-    filter: drop-shadow(0 0 0 rgba(213, 115, 26, 0));
+    box-shadow: 0 0 0 0 rgba(213, 115, 26, 0);
+  }
+}
+
+@keyframes learner-ring-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.learner-courses-intro {
+  font-size: 0.84rem;
+  color: var(--ld-text-medium);
+  margin: -8px 0 14px;
+}
+
+.learner-completed-badge {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ld-red);
+  border: 1px solid rgba(163, 7, 12, 0.3);
+  background-color: rgba(163, 7, 12, 0.08);
+}
+
+.learner-mycourse-ready .learner-next-lesson {
+  color: var(--ld-orange);
+}
+
+.learner-mycourse-completed .learner-next-lesson {
+  color: var(--ld-red);
+}
+
+.learner-resume-btn-secondary {
+  background-color: var(--ld-black);
+}
+
+.learner-resume-btn-secondary:hover {
+  background-color: #242424;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .learner-orbit-core,
+  .learner-orbit-ring {
+    animation: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .learner-catchy-message,
-  .learner-wave-icon {
+  .learner-orbit-core,
+  .learner-orbit-ring {
     animation: none;
   }
 

@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import { FaStar } from 'react-icons/fa'
+import { FaChevronLeft, FaStar } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import {
@@ -387,7 +387,8 @@ const TeacherDashboard = () => {
       <div className='td-layout'>
         <aside className='td-sidebar'>
           <button className='td-back-btn' onClick={() => navigate('/')}>
-            {'<- Back to Website'}
+            <FaChevronLeft aria-hidden='true' />
+            <span>Back to Website</span>
           </button>
 
           <div className='td-sidebar-brand'>

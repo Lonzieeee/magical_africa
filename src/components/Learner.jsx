@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { FaBell, FaBolt, FaClock, FaFire, FaGraduationCap, FaRegHandPaper, FaStore } from 'react-icons/fa'
+import { FaBell, FaBolt, FaChevronLeft, FaClock, FaFire, FaGraduationCap, FaStore } from 'react-icons/fa'
 import '../styles/learner.css'
 import { db } from '../context/AuthContext'
 import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
@@ -40,6 +40,22 @@ const mergeCourseMaps = (serverMap = {}, localMap = {}) => {
   })
 
   return merged
+}
+
+const calculateStreak = (previousDate, currentStreak = 0) => {
+  const now = new Date()
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate())
+
+  if (!previousDate) return 1
+
+  const parsed = new Date(previousDate)
+  if (Number.isNaN(parsed.getTime())) return 1
+  const previous = new Date(parsed.getFullYear(), parsed.getMonth(), parsed.getDate())
+
+  const diffDays = Math.floor((today.getTime() - previous.getTime()) / (24 * 60 * 60 * 1000))
+  if (diffDays <= 0) return Math.max(1, currentStreak || 1)
+  if (diffDays === 1) return Math.max(1, currentStreak + 1)
+  return 1
 }
 
 const Learner = () => {
@@ -426,6 +442,79 @@ const Learner = () => {
     return myCourses
   }, [courseView, myCourses, progressMap])
 
+  const completedCourseTitles = useMemo(() => {
+    return myCourses
+      .filter((course) => (progressMap[course.id]?.completion || 0) >= 100)
+      .map((course) => course.title || 'Untitled Course')
+  }, [myCourses, progressMap])
+
+  const courseViewMeta = useMemo(() => {
+    if (courseView === 'in-progress') {
+      return {
+        title: 'Continue Learning',
+        subtitle: 'Pick up from where you left off and protect your streak.',
+        emptyText: 'No in-progress courses yet. Start a course from My Courses to continue learning here.'
+      }
+    }
+    if (courseView === 'ready') {
+      return {
+        title: 'Ready To Start',
+        subtitle: 'These are enrolled courses you have not started yet.',
+        emptyText: 'Nothing is waiting to start right now. Add a new course from the store.'
+      }
+    }
+    if (courseView === 'completed') {
+      return {
+        title: 'Completed Courses',
+        subtitle: 'Finished courses stay here for revision and certificate tracking.',
+        emptyText: 'No completed courses yet. Finish a course to unlock it here.'
+      }
+    }
+    return {
+      title: 'My Courses',
+      subtitle: 'Your full personal library of enrolled and purchased courses.',
+      emptyText: 'You have not added or bought any course yet.'
+    }
+  }, [courseView])
+
+  useEffect(() => {
+    if (!user?.uid) return
+
+    const completedCourseCount = Object.values(progressMap).filter((item) => (item.completion || 0) >= 100).length
+    const derivedBadges = ['Swahili Beginner', 'Storytelling Explorer']
+    const derivedMilestones = ['First Course Started']
+
+    if (completedCourseCount >= 1) {
+      derivedBadges.push('Course Finisher')
+      derivedMilestones.push('First Course Completed')
+    }
+    if (completedCourseCount >= 3) {
+      derivedBadges.push('Consistent Graduate')
+      derivedMilestones.push('Three Courses Completed')
+    }
+
+    const mergedBadges = Array.from(new Set([...(achievements.badges || []), ...derivedBadges]))
+    const mergedMilestones = Array.from(new Set([...(achievements.milestones || []), ...derivedMilestones]))
+
+    const nextAchievements = {
+      certificates: completedCourseCount,
+      badges: mergedBadges,
+      milestones: mergedMilestones
+    }
+
+    const isSame = JSON.stringify(nextAchievements) === JSON.stringify(achievements)
+    if (isSame) return
+
+    setAchievements(nextAchievements)
+
+    setDoc(doc(db, 'learnerProgress', user.uid), {
+      achievements: nextAchievements,
+      updatedAt: new Date().toISOString()
+    }, { merge: true }).catch((error) => {
+      console.log('Could not sync achievements to cloud:', error)
+    })
+  }, [progressMap, user?.uid])
+
   const handleFilter = (type) => {
     setActiveFilter(prev => (prev === type ? null : type))
   }
@@ -548,9 +637,28 @@ const Learner = () => {
   const handleResumeCourse = async (courseId) => {
     localStorage.setItem('lastLearnerCourseId', courseId)
     if (user) {
+      const existingCourse = progressMap[courseId] || {}
+      const nowIso = new Date().toISOString()
+      const nextStreak = calculateStreak(existingCourse.lastActiveAt, existingCourse.streak || 0)
+
+      const nextProgressMap = {
+        ...progressMap,
+        [courseId]: {
+          ...existingCourse,
+          started: true,
+          lastActiveAt: nowIso,
+          updatedAt: nowIso,
+          streak: nextStreak
+        }
+      }
+
+      setProgressMap(nextProgressMap)
+      persistLocalProgressMap(nextProgressMap)
+
       await setDoc(doc(db, 'learnerProgress', user.uid), {
+        courses: nextProgressMap,
         lastActiveCourseId: courseId,
-        updatedAt: new Date().toISOString()
+        updatedAt: nowIso
       }, { merge: true })
     }
     navigate('/course-content', { state: { courseId } })
@@ -596,7 +704,8 @@ const Learner = () => {
       <div className='learner-shell'>
         <aside className='learner-sidebar'>
           <button className='learner-back-btn' onClick={() => navigate('/')}>
-            {'<- Back to Website'}
+            <FaChevronLeft aria-hidden='true' />
+            <span>Back to Website</span>
           </button>
 
           <div className='learner-sidebar-brand'>
@@ -709,9 +818,13 @@ const Learner = () => {
             <div className='learner-greeting'>
               <h3>Welcome, {learnerName}</h3>
               <p className='learner-catchy-message'>
-                <FaRegHandPaper className='learner-wave-icon' />
+                <span className='learner-orbit-signal' aria-hidden='true'>
+                  <span className='learner-orbit-core' />
+                  <span className='learner-orbit-ring learner-orbit-ring-one' />
+                  <span className='learner-orbit-ring learner-orbit-ring-two' />
+                </span>
                 <span>
-                  Your African learning adventure is live. Jump into your next lesson and keep your streak glowing.
+                  Your learning pulse is active. Keep your streak alive by continuing one lesson today.
                 </span>
               </p>
             </div>
@@ -994,10 +1107,11 @@ const Learner = () => {
 
           {!loading && activeSection === 'courses' && (
             <section className='learner-panel'>
-              <h1>My Courses</h1>
+              <h1>{courseViewMeta.title}</h1>
+              <p className='learner-courses-intro'>{courseViewMeta.subtitle}</p>
 
               {myCoursesForView.length === 0 && (
-                <p className='learner-empty'>No course matches this view yet. Try another learning filter.</p>
+                <p className='learner-empty'>{courseViewMeta.emptyText}</p>
               )}
 
               <div className='learner-store-grid'>
@@ -1006,9 +1120,10 @@ const Learner = () => {
                   const completion = progress.completion || 0
                   const nextLessonLabel = getNextLessonLabel(course, progress)
                   const lastOpenedLabel = formatLastOpened(progress)
+                  const isCompleted = completion >= 100
 
                   return (
-                    <article key={course.id} className='learner-store-card learner-mycourse-card'>
+                    <article key={course.id} className={`learner-store-card learner-mycourse-card learner-mycourse-${courseView}`}>
                       <div className='learner-store-image'>
                         {course.featuredImage
                           ? <img src={course.featuredImage} alt={course.title || 'Course image'} />
@@ -1018,27 +1133,36 @@ const Learner = () => {
                       <div className='learner-store-body'>
                         <div>
                           <h3>{course.title || 'Untitled Course'}</h3>
+                          {isCompleted && <span className='learner-completed-badge'>Completed</span>}
                           <p>{course.description || 'No description yet.'}</p>
                           <div className='learner-course-meta'>
                             <span>{course.courseType || 'General'}</span>
                             <span>{progress.paid ? 'Paid' : 'Free'}</span>
-                            <span>{progress.started ? 'In Progress' : 'Ready to Start'}</span>
+                            <span>{completion >= 100 ? 'Completed' : progress.started ? 'In Progress' : 'Ready to Start'}</span>
                           </div>
                         </div>
 
-                        <div className='learner-progress-row'>
-                          <p>Progress: {completion}%</p>
-                          <div className='learner-progress-bar'>
-                            <div style={{ width: `${completion}%` }} />
+                        {courseView !== 'ready' && (
+                          <div className='learner-progress-row'>
+                            <p>Progress: {completion}%</p>
+                            <div className='learner-progress-bar'>
+                              <div style={{ width: `${completion}%` }} />
+                            </div>
                           </div>
-                        </div>
+                        )}
 
                         <p className='learner-last-opened'>{lastOpenedLabel}</p>
                         <p className='learner-next-lesson'>{nextLessonLabel}</p>
 
-                        <button className='learner-resume-btn' onClick={() => handleResumeCourse(course.id)}>
-                          Resume
-                        </button>
+                        {courseView === 'completed' ? (
+                          <button className='learner-resume-btn learner-resume-btn-secondary' onClick={() => handleViewCourseDetails(course.id)}>
+                            Review Course
+                          </button>
+                        ) : (
+                          <button className='learner-resume-btn' onClick={() => handleResumeCourse(course.id)}>
+                            {courseView === 'ready' ? 'Start Course' : 'Resume'}
+                          </button>
+                        )}
                       </div>
                     </article>
                   )
@@ -1087,6 +1211,12 @@ const Learner = () => {
                 {(achievements.badges || []).map(badge => (
                   <span key={badge}>{badge}</span>
                 ))}
+              </div>
+
+              <div className='learner-tag-list'>
+                {completedCourseTitles.length === 0
+                  ? <span>No certificates yet. Complete a full course to unlock certificates.</span>
+                  : completedCourseTitles.map((title) => <span key={title}>Certificate: {title}</span>)}
               </div>
             </section>
           )}

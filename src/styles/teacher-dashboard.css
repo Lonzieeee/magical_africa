@@ -110,6 +110,10 @@
   border: 1px solid var(--td-sage);
   background-color: rgba(145, 165, 133, 0.2);
   color: var(--td-black);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   padding: 10px 16px;
   font-weight: 700;
   width: 100%;
