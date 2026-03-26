@@ -191,10 +191,18 @@ export default Culture
 import React, { useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next';
 import '../styles/culture-page.css'
+import { useNavigate } from 'react-router-dom';
 
 const Culture = () => {
   const { t } = useTranslation();
   const cardsRef = useRef(null);
+   const navigate = useNavigate(); // 👈 1. create navigate
+      
+        // 👈 2. define the handler
+        const handleNavigation = (path) => {
+          navigate(path);
+        };
+  
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -327,7 +335,7 @@ const Culture = () => {
 
         </div>
 
-        <div className='culture-page-button'>
+        <div className='culture-page-button' onClick={()=> handleNavigation('/events')}>
           <button>{t('culture.learnMore')}</button>
         </div>
 

@@ -1031,7 +1031,132 @@
       }
     }
   }
-}
+},
+
+
+
+  "music": {
+    "hero": {
+      "titleStart": "Ilifa le",
+      "titleAccent": "Mculo",
+      "titleEnd": "wase-Afrika",
+      "subtitle": "Kusuka emsindweni wamandulo wedjembe kuze kufike ukuphakama kwe-Afrobeats ne-Amapiano — thola izwi elabumba izwe."
+    },
+    "explore": {
+      "title": "Hlola",
+      "titleAccent": "Umculo",
+      "subtitle": "Thola izwi zase-Afrika, izitali, izinto zokushaya umculo kanye nomthelela womhlaba",
+      "keyArtists": "Izitali Ezibalulekile:",
+      "genre1": {
+        "location": "Nigeria na Ghana — Afrika eNtshonalanga",
+        "name": "Afrobeats",
+        "description": "Isenzakalo somhlaba wonke esihlanganisa i-highlife, i-funk, ne-hip-hop. Yazalwa eLagos, i-Afrobeats isikhulile yaba enye yezindlela ezinamandla kakhulu zomculo emhlabeni — imisindo ephelelwayo eyaphatha izindawo zokudansa kusuka eNairobi kuze kufike eNew York.",
+        "artists": "Burna Boy, Wizkid, Davido, Tems, Omah Lay"
+      },
+      "genre2": {
+        "location": "Afrika Enyakatho",
+        "name": "Amapiano",
+        "description": "Ukuxuba okukhethekile kwe-deep house, i-jazz, nokukhala kwengoma yomuthi. Yazalwa emizini yase-Soweto, i-Amapiano isasazekile kulo lonke izwe futhi manje ilawula izinhla zamazwe kanye nezinkundla zokusakaza umculo.",
+        "artists": "Kabza De Small, DJ Maphorisa, Tyler ICU, Focalistic"
+      },
+      "genre3": {
+        "location": "Kenya — Afrika eMpumalanga",
+        "name": "Benga",
+        "description": "Isitayela somculo sase-Kenya — imisindo engaguquki yegitare lase-acoustic ebekwe phezu kwezindlela zomculo lwesiLuo. I-Benga isisekelo somculo odumile wase-Kenya neyisenzo esingachazeki sase-Afrika eMpumalanga.",
+        "artists": "D.O. Misiani, Ochieng Kabaselleh, Victoria Kings"
+      },
+      "genre4": {
+        "location": "Ghana — Afrika eNtshonalanga",
+        "name": "Highlife",
+        "description": "Esinye sezinhlobo zasendulo zomculo wase-Afrika, ehlanganisa izwi zebhande lethusi nezindlela zabantu baseGhana. Ekhethekile, ejabulisayo, nengapheliyo — inhlobo eyabeka isisekelo somculo owanengi wase-Afrika eNtshonalanga.",
+        "artists": "E.T. Mensah, Amakye Dede, Daddy Lumba"
+      }
+    },
+    "instruments": {
+      "title": "Izinto Zomculo",
+      "titleAccent": "zase-Afrika",
+      "subtitle": "Izinto zasendulo zezwi ezinikeza amakhulu eminyaka ensikazi nezindaba",
+      "kora": {
+        "name": "Kora",
+        "description": "I-harp-lute enezikhala eziyi-21 evela e-Afrika eNtshonalanga. Umculo wezitshali — abalandi balokhu kanye nabalandi bezimbali."
+      },
+      "djembe": {
+        "name": "Djembe",
+        "description": "Ingoma edumile emhlabeni evela eGuinea. Ibaluleke emcimbini nasekugujweni komphakathi."
+      },
+      "mbira": {
+        "name": "Mbira",
+        "description": "Ipiyano lesikhomba sase-Zimbabwe — umculo womoya osetshenziswa ukuxhumana nokhokho."
+      },
+      "talkingDrum": {
+        "name": "Ingoma Esikhulumayo",
+        "description": "Ingoma enegama like-i-hour-glass elingitha izilimi zemsindo, esetshenziswa ukuxhumana kude."
+      },
+      "krar": {
+        "name": "Krar",
+        "description": "I-lyre enezikhala ezinhlanu evela e-Ethiopia nase-Eritrea enemsindo onamandla onganyelwe ngamasiko asendulo."
+      },
+      "balafon": {
+        "name": "Balafon",
+        "description": "I-xylophone yomuthi ethandwayo eMali, eSenegal, naseCôte d'Ivoire."
+      }
+    },
+    "artists": {
+      "title": "Izitali",
+      "titleAccent": "Ezikhethiwe",
+      "subtitle": "Izinganekwane nezinkanyezi eziphakama kulo lonke izwekazi",
+      "artist1": {
+        "genre": "Afrobeat • Nigeria",
+        "description": "Ubaba we-Afrobeat. Umculo wakhe wawuyimpinduko, wezombusazwe, futhi awupheli."
+      },
+      "artist2": {
+        "genre": "Afropop • Afrika eNingizimu",
+        "description": "\"Mama Africa\" — izwi lobuhle nokumelana elivakalalise emhlabeni wonke."
+      },
+      "artist3": {
+        "genre": "Afrobeats • Nigeria",
+        "description": "Isinqobi se-Grammy esaletha i-Afrobeats kuyo yonke izwekazi."
+      },
+      "artist4": {
+        "genre": "Afro-soul • Nigeria",
+        "description": "Izwi elachaza isizukulwane esihlanganisa i-soul, i-R&B, ne-Afrobeats."
+      },
+      "artist5": {
+        "genre": "Blues • Mali",
+        "description": "Waqinisekisa ukuxhumana okujulile phakathi komculo wase-Afrika eNtshonalanga ne-blues yase-Amerika."
+      },
+      "artist6": {
+        "genre": "Mbalax • Senegal",
+        "description": "Esinye sezwi ezidumile kakhulu e-Afrika, ehlanganisa amasiko amaWolof nezwi lomhlaba."
+      },
+      "artist7": {
+        "genre": "Blues • Mali",
+        "description": "Waqinisekisa ukuxhumana okujulile phakathi komculo wase-Afrika eNtshonalanga ne-blues yase-Amerika."
+      }
+    },
+    "influence": {
+      "title": "Umthelela",
+      "titleAccent": "Wase-Afrika",
+      "subtitle": "Ukuthi imisindo yase-Afrika yalubumba kanjani umculo omhlaba wonke owuzwa",
+      "jazz": {
+        "name": "Jazz & Blues",
+        "description": "Izilinganiso ze-pentatonic, imiqondo yokuphendula-nokukhuluma, nokuxuba ngobuciko komculo wase-Afrika ngezigaba zikhokho be-Jazz ne-Blues."
+      },
+      "reggae": {
+        "name": "Reggae",
+        "description": "I-reggae yaseJamaica ithwala ilifa elinzulu lemisindo yase-Afrika ngomgqele, ne-Rastafari ixhumeke ngokusobala emilandweni yase-Ethiopia."
+      },
+      "hiphop": {
+        "name": "Hip-Hop",
+        "description": "Isiko legriot lolwimi lwezinkulumo, ukulanda izindaba, nokuphendula-nokukhuluma lamukelwa kabanzi njengoyisemkhulu woMoya we-hip-hop."
+      },
+      "electronic": {
+        "name": "Umculo we-Electronic",
+        "description": "Kusuka e-Amapiano kuye e-Afrobeats, izakhiwo zemisindo yase-Afrika zibumba kabusha isiko lamaklabhu emhlabeni wonke kanye nokwenziwa kwe-pop enkulu."
+      }
+    }
+  }
+
 
 
 }

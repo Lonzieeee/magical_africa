@@ -963,6 +963,132 @@
       }
     }
   }
-}
+},
+
+
+
+
+  "music": {
+    "hero": {
+      "titleStart": "Enkiama",
+      "titleAccent": "Oo-nkiama",
+      "titleEnd": "Afrika",
+      "subtitle": "Iltung'ana oo-lkiama oo-dany nabo Afrobeats na Amapiano — ilkiamata iltung'ana oo enkiama oo-timpa entim."
+    },
+    "explore": {
+      "title": "Amu",
+      "titleAccent": "Enkiama",
+      "subtitle": "Amu enkiama oo Afrika, ilkiamojoki, iltipilikishu na enkiama nabo entim",
+      "keyArtists": "Ilkiamojoki Ilooretoki:",
+      "genre1": {
+        "location": "Nigeria nabo Ghana — Afrika Oo-ngʼolon",
+        "name": "Afrobeats",
+        "description": "Enkiama oo entim itipilikishu highlife, funk, nabo hip-hop. Etirishi Lagos, Afrobeats etoo enkiama iloolbaa oo entim — iltung'ana iltimata oo ilterito taa Nairobi nabo New York.",
+        "artists": "Burna Boy, Wizkid, Davido, Tems, Omah Lay"
+      },
+      "genre2": {
+        "location": "Afrika Oo-kirikiti",
+        "name": "Amapiano",
+        "description": "Enkiama itipilikishu deep house, jazz, nabo olkiama oo oltim. Etirishi Soweto, Amapiano etimpa olkejek woothe nabo amu timpa chati oo entim nabo majukwaa oo enkiama.",
+        "artists": "Kabza De Small, DJ Maphorisa, Tyler ICU, Focalistic"
+      },
+      "genre3": {
+        "location": "Kenya — Afrika Oo-kitok",
+        "name": "Benga",
+        "description": "Enkiama oo Kenya — iltung'ana oo gitaa itipilikishu enkiama oo Luo. Benga etoo enkiama oo enkiama Kenya nabo enkiama oo Afrika Oo-kitok.",
+        "artists": "D.O. Misiani, Ochieng Kabaselleh, Victoria Kings"
+      },
+      "genre4": {
+        "location": "Ghana — Afrika Oo-ngʼolon",
+        "name": "Highlife",
+        "description": "Enkiama oo enkiama ooki oo Afrika, itipilikishu enkiama oo bendi nabo iltung'ana oo Ghana. Enkiama ilkiamojoki, oo enkiyiani, nabo entim woothe — enkiama itimishi enkiama oo Afrika Oo-ngʼolon.",
+        "artists": "E.T. Mensah, Amakye Dede, Daddy Lumba"
+      }
+    },
+    "instruments": {
+      "title": "Iltipilikishu",
+      "titleAccent": "Afrika",
+      "subtitle": "Iltipilikishu ooki oo enkiama ilkiamata oo-kiteri oo entayio nabo enkiama",
+      "kora": {
+        "name": "Kora",
+        "description": "Enkiama oo nyuzi 21 taa Afrika Oo-ngʼolon. Olkiama oo ilkiamojoki — iltimata nabo ilkiamata."
+      },
+      "djembe": {
+        "name": "Djembe",
+        "description": "Olkiama oo entim taa Guinea. Enkiama kake oo ilkiamata nabo enkiyiani oo enkiama."
+      },
+      "mbira": {
+        "name": "Mbira",
+        "description": "Enkiama oo kidole oo Zimbabwe — olkiama oo enkiterunoto enkiama nabo ilkituaak."
+      },
+      "talkingDrum": {
+        "name": "Olkiama Oo-nkiama",
+        "description": "Olkiama oo enkiama itipilikishu enkiama oo ndimi, enkiama nabo enkiterunoto oo enkiama."
+      },
+      "krar": {
+        "name": "Krar",
+        "description": "Enkiama oo nyuzi itano taa Ethiopia nabo Eritrea enkiama nzuri oo enkiama ooki."
+      },
+      "balafon": {
+        "name": "Balafon",
+        "description": "Xylophone oo oltim enkiamata kake oo Mali, Senegal, nabo Côte d'Ivoire."
+      }
+    },
+    "artists": {
+      "title": "Ilkiamojoki",
+      "titleAccent": "Ilooretoki",
+      "subtitle": "Enkiama oo ilkiamata nabo ilkiamojoki irigʼata taa olkejek woothe",
+      "artist1": {
+        "genre": "Afrobeat • Nigeria",
+        "description": "Baba oo Afrobeat. Enkiama yake etoo oo enkiama, oo olkiama, nabo entim woothe."
+      },
+      "artist2": {
+        "genre": "Afropop • Afrika Oo-kirikiti",
+        "description": "\"Mama Afrika\" — enkiama oo enkiyiani nabo enkiama oo entim woothe."
+      },
+      "artist3": {
+        "genre": "Afrobeats • Nigeria",
+        "description": "Enkiama Grammy etimata Afrobeats olkejek woothe."
+      },
+      "artist4": {
+        "genre": "Afro-soul • Nigeria",
+        "description": "Enkiama itipilikishu enkiama, R&B, nabo Afrobeats."
+      },
+      "artist5": {
+        "genre": "Blues • Mali",
+        "description": "Enkiama entim kati oo enkiama Afrika Oo-ngʼolon nabo blues Amerika."
+      },
+      "artist6": {
+        "genre": "Mbalax • Senegal",
+        "description": "Enkiama oo ilkiamojoki ilooretoki Afrika, itipilikishu enkiama oo Wolof nabo enkiama oo entim."
+      },
+      "artist7": {
+        "genre": "Blues • Mali",
+        "description": "Enkiama entim kati oo enkiama Afrika Oo-ngʼolon nabo blues Amerika."
+      }
+    },
+    "influence": {
+      "title": "Enkiama",
+      "titleAccent": "Afrika",
+      "subtitle": "Amu iltung'ana oo Afrika itipilikishu enkiama oo entim woothe",
+      "jazz": {
+        "name": "Jazz & Blues",
+        "description": "Enkiama pentatonic, mĩhango oo majibu, nabo iltung'ana oo enkiama Afrika etoo enkiama oo Jazz nabo Blues."
+      },
+      "reggae": {
+        "name": "Reggae",
+        "description": "Reggae Jamaica enkiamata enkiama oo Afrika, nabo Rastafari enkiamata enkiama oo Ethiopia."
+      },
+      "hiphop": {
+        "name": "Hip-Hop",
+        "description": "Enkiama oo griot oo enkiama, enkiamata, nabo majibu etoo enkiama oo hip-hop."
+      },
+      "electronic": {
+        "name": "Enkiama Kielektroniki",
+        "description": "Taa Amapiano nabo Afrobeats, iltung'ana oo Afrika itipilikishu enkiama oo vilabu entim nabo pop."
+      }
+    }
+  }
+
 
 }
