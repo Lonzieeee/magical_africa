@@ -16,14 +16,14 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
 
   const totalLessons = topics.reduce((acc, t) => acc + (t.lessons ? t.lessons.length : 0), 0)
 
-  // ✅ Collect all notes lessons that have an uploaded file across all topics
+  // Collect all notes lessons that have an uploaded file across all topics
   const allNotes = topics.flatMap(topic =>
     (topic.lessons || [])
       .filter(l => l.type === 'notes' && l.fileData)
       .map(l => ({ ...l, topicTitle: topic.title }))
   )
 
-  // ✅ Clicking "Course notes & articles" — reveal panel and scroll to it
+  // Clicking "Course notes & articles" — reveal panel and scroll to it
   const handleNotesClick = () => {
     setShowNotes(true)
     setTimeout(() => {
@@ -110,7 +110,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
             <span>Access on mobile &amp; desktop</span>
           </div>
 
-          {/* ✅ Clicking this reveals the notes download panel */}
+          {/*  Clicking this reveals the notes download panel */}
           <div
             className='cc-include-item'
             onClick={handleNotesClick}
@@ -190,7 +190,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
 
                           <div className='cc-lesson-left'>
                             <span className='cc-lesson-title'>
-                              {/* ✅ If notes type with file — clicking the title downloads the PDF */}
+                              {/*  If notes type with file — clicking the title downloads the PDF */}
                               {lesson.type === 'notes' && lesson.fileData ? (
                                 <a
                                   href={lesson.fileData}
@@ -200,14 +200,14 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
                                   📄 {lesson.title || `Lesson ${li + 1}`}
                                 </a>
                               ) : (
-                                // ✅ Video or notes without file — just show the title
+                                //  Video or notes without file — just show the title
                                 <span>{lesson.title || `Lesson ${li + 1}`}</span>
                               )}
                             </span>
                           </div>
 
                           <div className='cc-lesson-right'>
-                            {/* ✅ Video preview link */}
+                            {/*  Video preview link */}
                             {lesson.type === 'video' && lesson.videoURL && (
                               <a
                                 href={lesson.videoURL}
@@ -218,7 +218,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
                                 &#9654; Preview
                               </a>
                             )}
-                            {/* ✅ Notes download tag in the right side too */}
+                            {/*  Notes download tag in the right side too */}
                             {lesson.type === 'notes' && lesson.fileData && (
                               <a
                                 href={lesson.fileData}
@@ -251,7 +251,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
 
 
 
- {/* ✅ NOTES PANEL — shown when "Course notes & articles" is clicked */}
+ {/* NOTES PANEL — shown when "Course notes & articles" is clicked */}
       {showNotes && (
 
       
@@ -276,7 +276,7 @@ const CourseContent = ({ topics = [], title, description, difficulty, teacherNam
                       )}
                     </div>
                   </div>
-                  {/* ✅ Download button */}
+                  {/*  Download button */}
                   <a
                     href={note.fileData}
                     download={note.fileName || 'course-notes'}

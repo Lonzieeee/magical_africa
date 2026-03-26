@@ -6,38 +6,40 @@ import CultureCard from './CultureCard';
 
 const heroSlides = [
   {
-    image: '/images/african-pottery2.jpg',
-    title: 'Welcome To Magical Africa',
-    subtitle: 'The Real African Story',
+    image: '/images/Igbo2.jpg',
+    title: 'Learn Valuable Traditional Skills Online - Traditional skills reimagined for today',
+   
+    subtitle: 'Welcome To Magical Africa',
     name: '',
-    flag: null
+    flag: '/images/Nigeria-flag.png'
   },
   {
     image: '/images/wood_carving.webp',
-    title: 'Karibu Magical Africa',
-    subtitle: 'Safari Halisi ya Afrika',
+     subtitle: 'Wood Carving',
+    title: 'Build hands-on carving skills from scratch',
+   
     name: '(Swahili)',
     flag: '/images/Kenyan-flag.png'
   },
   {
     image: '/images/african-basketry.jpg',
-    title: 'Pooki sidai eitu oshi',
-    subtitle: 'Nwee ahụmịhe omenala bara ụba',
+    subtitle: 'Basket Weaving',
+    title: 'Learn Basket Weaving Techniques',
     name: '(Maasai)',
     flag: '/images/Kenyan-flag.png'
   },
   
   {
     image: '/images/african-instrument.avif',
-    title: 'Mee ka ịmata omenala bara ụba',
-    subtitle: 'Mee emume ihe nketa Afrịka',
+    subtitle: 'Instrument Making',
+    title: 'Master the Art of Instrument Making',
     name: '(Igbo)',
     flag: '/images/Nigeria-flag.png'
   },
   {
-    image: '/images/zulu2.jpg',
-    title: 'Hlola izimangaliso zemvelo',
-    subtitle: 'Ubuhle obudlula umcabango',
+    image: '/images/african-pottery2.jpg',
+    subtitle: 'Pottery',
+    title: 'Create and shape ceramics from clay',
     name: '(Zulu)',
     flag: '/images/South-African-flag.png'
   }
@@ -83,8 +85,10 @@ const HeroSection = ({ children, customContent, backgroundImage }) => {
         <>
           <div className="hero-stuff">
             <div className="hero-text">
-              <h1>{slide.title}</h1>
-              <p>{slide.subtitle}</p>
+              <h1>{slide.subtitle}</h1>
+              <p>{slide.title}</p>
+             
+            
             </div>
 
             <div className="hero-boxes">

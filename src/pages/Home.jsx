@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import Patterns from '../components/Patterns';
 import Pattern2 from '../components/Pattern2'
+import PopularCourses from '../components/PopularCourses';
 
 const Home = () => {
 
@@ -39,13 +40,10 @@ const Home = () => {
 
       <HeroSection />
       <Services />
-     
       <Languages />
-      
       <AboutSection />
-     
       <Marketplace />
-      
+      <PopularCourses />
       <TribesSection />
       <SocialImpact />
       <Culture />

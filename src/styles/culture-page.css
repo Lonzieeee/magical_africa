@@ -60,12 +60,12 @@ padding-bottom: 4rem;
 
 .culture-section-heading hr{
   border: none;
-  border-top: 2.5px solid #EA580C;
+  border-top: 2.5px solid rgb(181, 161, 145);
   width: 50px;
 }
 
 .culture-section-heading h3{
-  color: #EA580C;
+  color: rgb(181, 161, 145);
   font-size: 1rem;
   font-weight: 400;
 }
@@ -76,7 +76,7 @@ color: white;
 }
 
 .culture-section1 h1 span{
-  color: #EA580C;
+  color: rgb(210, 123, 53);
 }
 
 .culture-section1 p{
@@ -101,15 +101,19 @@ font-size: 0.875rem;
   
   height: 450px;
   background-color: #1a1a1a;
+
   border: 1px solid rgba(234,88,12,0.25);
+/*
+  border:1px solid rgb(181, 161, 145);
+  */
 }
 
 .culture-section2-b{
     width: 100%;
- background: #EA580C;
+ background: rgb(181, 161, 145);
   height: 450px;
  
-  border: 1px solid #EA580C;
+  border: 1px solid rgb(181, 161, 145);
 }
 
 .culture-section2-c{
@@ -191,11 +195,11 @@ font-size: 0.875rem;
 }
 
 .card-title-accent {
-  color: #EA580C;
+  color: rgb(181, 161, 145);
   font-style: italic;
 }
 .card-title-block {
-  
+  color: #1a1a1a;
   font-style: italic;
 }
 
@@ -206,8 +210,8 @@ font-size: 0.875rem;
   border-radius: 2px;
   margin-bottom: 1.2rem;
 }
-.card-divider-orange { background: #EA580C; }
-.card-divider-white  { background: rgba(255,255,255,0.4); }
+.card-divider-orange { background: rgb(210, 123, 53); }
+.card-divider-white  { background: rgba(234, 88, 12, 0.25); }
 
 
 
@@ -219,8 +223,8 @@ font-size: 0.875rem;
 }
 .culture-page-button button {
   background: transparent;
-  border: 1px solid #EA580C;
-  color: #EA580C;
+  border: 1px solid rgb(210, 123, 53);
+  color: rgb(210, 123, 53);
   padding: 0.5rem 1rem;
   font-family: 'Poppins', sans-serif;
   font-size: 0.875rem;
@@ -230,7 +234,7 @@ font-size: 0.875rem;
   transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 .culture-page-button button:hover {
-  background: #EA580C;
+  background: rgb(210, 123, 53);
   color: #ffffff;
  
 }
@@ -279,9 +283,13 @@ color: white;
 }
 
 .festivals-info2 p{
-  color: rgba(255, 255, 255, 0.4);
+  color: #1a1a1a;
   font-size: 0.7rem;
  
+}
+
+.festivals-info2 hr{
+  
 }
 
 .art-hr{

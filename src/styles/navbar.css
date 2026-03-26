@@ -647,6 +647,9 @@ color: rgb(181, 161, 145);
 #music i{
   color: rgb(181, 161, 145);
 }
+.title2{
+    color: rgb(210, 123, 53);
+  }
 /* Hide lang dropdown on mobile */
 @media screen and (max-width: 768px) {
   .lang-btn .fa-globe {
@@ -708,6 +711,7 @@ font-size: 1.5rem;
   .hero-box p{
     font-size: 0.875rem;
   }
+
 
 }
 

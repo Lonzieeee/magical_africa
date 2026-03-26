@@ -11,9 +11,10 @@ const AcademyLogin = () => {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [success, setSuccess] = useState(false)  // ✅ added
+  const [success, setSuccess] = useState(false)  // added
 
   const navigate = useNavigate()
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -37,7 +38,7 @@ const AcademyLogin = () => {
           if (userData.role === 'teacher') {
             navigate('/teacher-dashboard')
           } else {
-            navigate('/academy') // 👈 change to your learner page
+            navigate('/academy') // change to your learner page
           }
         }, 2000)
 
@@ -83,7 +84,7 @@ const AcademyLogin = () => {
           <h1>Welcome Back</h1>
           <h2>Sign in to your account</h2>
 
-          {/* ✅ Success Message */}
+          {/*  Success Message */}
           {success && (
             <div style={{
               backgroundColor: '#d4edda',

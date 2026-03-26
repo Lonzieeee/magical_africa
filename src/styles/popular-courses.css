@@ -1,0 +1,255 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box ;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+.popular-course-div{
+  background: linear-gradient(135deg, #fafafa, #fff);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+
+}
+
+.popular-course-div h1{
+  font-size: 1.5rem;
+  font-weight: 400;
+  text-align: center;
+}
+
+.popular-content-div-p{
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 0.875rem;
+ 
+}
+.pop{
+ text-align: start;
+  margin-top: 2rem;
+  color: rgb(210, 123, 53);
+  font-size: 0.875rem;
+  padding-bottom: 0.5rem;
+  font-weight: 600;
+  
+}
+
+.pop-div{
+  width: 820px;
+  align-self: center;
+
+}
+
+.pop-bottom{
+
+color: #1f6f43; 
+padding-top: 0.5rem;
+font-weight: 600;
+display: flex;
+flex-direction: row;
+gap: 10px;
+align-items: center;
+font-size: 0.875rem;
+}
+
+.pop-bottom-div{
+  width: 820px;
+  align-self: center;
+ 
+ justify-content: flex-end;
+  display: flex;
+  flex-direction: row;
+}
+
+
+.popular-div{
+  display: flex;
+  flex-direction: row;
+ 
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.popular1{
+  width: 400px;
+  height: 500px;
+ position: relative;
+  background-image: url(/images/african-pottery2.jpg);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+.popular1::before{
+    content: '';
+  position: absolute;
+ 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
+}
+.popular2{
+ width: 400px;
+ height:500px;
+
+ display: flex;
+ flex-direction: column;
+gap: 20px;
+
+}
+
+.popular2-a{
+
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: row;
+gap: 20px;
+}
+
+.popular2-b{
+
+width: 100%;
+height: 100%;
+display: flex;
+flex-direction: row;
+gap: 20px;
+}
+
+.popular2-a1{
+background-color: aquamarine;
+width: 100%;
+height: 100%;
+position: relative;
+background-image: url(/images/african-instrument.avif);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+.popular2-a1::before{
+    content: '';
+  position: absolute;
+ 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
+}
+.popular2-a2{
+background-color: aquamarine;
+width: 100%;
+height: 100%;
+background-image: url(/images/african-basketry.jpg);
+position: relative;
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+.popular2-a2::before{
+    content: '';
+  position: absolute;
+ 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
+}
+.popular2-b1{
+background-color: aquamarine;
+width: 100%;
+height: 100%;
+position: relative;
+background-image: url(/images/African-cooking.avif);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+.popular2-b1::before{
+    content: '';
+  position: absolute;
+ 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
+}
+.popular2-b2{
+background-color: aquamarine;
+width: 100%;
+height: 100%;
+position: relative;
+background-image: url(/images/wood_carving.webp);
+background-position: center;
+background-size: cover;
+background-repeat: no-repeat;
+}
+
+.popular2-b2::before{
+    content: '';
+  position: absolute;
+ 
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); 
+  z-index: 1;
+}
+
+.popular-div-content{
+position: absolute;
+z-index: 2;
+color: white;
+font-size: 0.675rem;
+padding-top: 1rem;
+padding-left: 0.5rem;
+}
+
+@media screen and (min-width:1440px) {
+  .popular1{
+  
+    width: 500px;
+    height: 600px;
+  }
+  .popular2{
+    width: 500px;
+    height: 600px;
+  }
+
+  .pop-div{
+    width: 1020px;
+  }
+  .pop-bottom-div{
+    width: 1020px;
+  }
+}
+
+@media screen and (max-width:768px) {
+  .pop-div{
+    width: 100%;
+  }
+  .pop-bottom-div{
+    width: 100%;
+  }
+  .popular-course-div{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media screen and (max-width:480px) {
+    .popular-course-div{
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .popular-div{
+    flex-direction: column;
+  }
+}

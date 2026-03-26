@@ -22,6 +22,7 @@ const Navbar = ({ solid }) => {
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
+  const [logoutMessage, setLogoutMessage] = useState(false);
   
   const { user, logout, getInitials, getFullName } = useAuth();
   const { t, i18n } = useTranslation();
@@ -44,6 +45,7 @@ const Navbar = ({ solid }) => {
     setIsLangDropdownOpen(false);
   };
 
+  {/* 
   const handleLogout = async () => {
     try {
       await logout();
@@ -52,9 +54,32 @@ const Navbar = ({ solid }) => {
       console.error('Error logging out:', error);
     }
   };
+  */}
+
+
+ const handleLogout = async () => {
+  try {
+    // show message FIRST
+    setLogoutMessage(true);
+
+    // then logout after a tiny delay
+    setTimeout(async () => {
+      await logout();
+    }, 1000);
+
+    // hide message after 3 sec
+    setTimeout(() => {
+      setLogoutMessage(false);
+    }, 5000);
+
+  } catch (error) {
+    console.error('Error logging out:', error);
+  }
+};
 
   return (
     <>
+
       <div className={`menu-overlay ${isSideMenuOpen ? 'active' : ''}`} 
            onClick={() => setIsSideMenuOpen(false)} />
       
@@ -62,6 +87,26 @@ const Navbar = ({ solid }) => {
         isOpen={isSideMenuOpen} 
         onClose={() => setIsSideMenuOpen(false)} 
       />
+
+{/* This is for the logout message */}
+      {logoutMessage && (
+  <div style={{
+    position: 'fixed',
+    top: '90px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    zIndex: '9999',
+    backgroundColor: '#d4edda',
+    color: '#155724',
+    border: '1px solid #c3e6cb',
+    borderRadius: '8px',
+    padding: '12px 20px',
+    fontWeight: '500',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+  }}>
+    Logged out successfully! Redirecting...
+  </div>
+)}
 
       <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${solid ? 'solid' : ''}`} >
         <div className="item1">
@@ -118,13 +163,14 @@ const Navbar = ({ solid }) => {
         <div className="item3">
           <div className='events-icon'>
             <div className="icon-with-tooltip">
+               {/* 
               <a href="academy2" id='academy'>
                 
                 <i className="fa-solid fa-school"></i>
                 
                 Academy
               </a>
-              {/* 
+             
               <span className="icon-tooltip">Academy</span>
 
               */}
@@ -180,11 +226,12 @@ const Navbar = ({ solid }) => {
                   </div>
                   <i className="fa-solid fa-check"></i>
                 </div>
-                
+                {/* 
                 <div className="dropdown-section-title">{t('nav.yourAccounts')}</div>
+                */}
                 
                 <div className="dropdown-option">
-                  <span>{t('nav.addAccount')}</span>
+                  <span>Academy</span>
                 </div>
                 
                 <div className="dropdown-option logout-option" onClick={handleLogout}>
