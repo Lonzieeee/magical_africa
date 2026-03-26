@@ -44,7 +44,7 @@ function App() {
           <Route path="/Common-nouns" element={<Language7 />} />
           <Route path="/events" element={<Events />} />
           <Route path="/market" element={<Market />} />
-          <Route path="/academy2" element={<Academy2 />} />
+          <Route path="/academy-signUp" element={<Academy2 />} />
           <Route path="/academy-signIn" element={<AcademyLogin />} />
           <Route path="/music" element={<Music />} />
 

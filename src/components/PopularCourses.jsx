@@ -101,10 +101,13 @@ import React from 'react'
 import { useTranslation } from 'react-i18next';
 import '../styles/popular-courses.css'
 import { useNavigate } from 'react-router-dom';
+import useAcademyNavigation from "../hooks/useAcademyNavigation";
+
 
 
 const PopularCourses = () => {
   const { t } = useTranslation();
+   const goToAcademy = useAcademyNavigation();
 
 
       const navigate = useNavigate(); // 👈 1. create navigate
@@ -172,7 +175,7 @@ const PopularCourses = () => {
         </div>
 
         <div className='pop-bottom-div'>
-          <p className='pop-bottom' onClick={()=> navigate('/academy2')}>
+          <p className='pop-bottom' onClick={goToAcademy}>
             {t('popularCourses.viewMore')}
             <i className="fa-solid fa-arrow-right"></i>
           </p>

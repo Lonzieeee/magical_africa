@@ -270,7 +270,10 @@
     "languages": "Languages",
     "about": "About",
     "marketplace": "Marketplace",
-    "contact": "Contact"
+    "contact": "Contact",
+    "music": "Music",
+    "academy": "Academy",
+    "events": "Events"
   },
   "terms": "Terms of Use",
   "privacy": "Privacy Policy",

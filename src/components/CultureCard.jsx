@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import '../styles/culture-card.css';
+import useAcademyNavigation from "../hooks/useAcademyNavigation";
 
 const CultureCard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+
   const [proverbLang, setProverbLang] = useState('eng'); // Track proverb language
   const { t } = useTranslation();
+  const goToAcademy = useAcademyNavigation();
   const navigate = useNavigate(); // 👈 1. create navigate
 
   // 👈 2. define the handler
@@ -15,14 +17,7 @@ const CultureCard = () => {
     navigate(path);
   };
 
-  useEffect(() => {
-    // Trigger the animation after a small delay
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 300);
 
-    return () => clearTimeout(timer);
-  }, []);
 
   // Proverb content in both languages
   const proverbContent = {
@@ -39,7 +34,7 @@ const CultureCard = () => {
   };
 
   return (
-    <div className={`culture-card ${isVisible ? 'slide-in' : ''}`}>
+    <div className="culture-card">
 
       {/* SLIDER */}
       <div
@@ -95,7 +90,7 @@ const CultureCard = () => {
             </p>
           </div>
 
-          <button className='get-more' onClick={()=> handleNavigation('/academy')}>{t('cultureCard.phrases.learnMore')}</button>
+          <button className='get-more' onClick={goToAcademy}>{t('cultureCard.phrases.learnMore')}</button>
         </div>
 
         {/* SECTION 2 */}
@@ -132,7 +127,7 @@ const CultureCard = () => {
               </audio>
             </div>
           </div>
-          <p className='see-more2'>{t('cultureCard.music.learnMore')} <i className="fa-solid fa-arrow-right"></i></p>
+          <p className='see-more2' onclick={()=> handleNavigation('/music')}>{t('cultureCard.music.learnMore')} <i className="fa-solid fa-arrow-right"></i></p>
         </div>
 
         {/* SECTION 3 */}
@@ -177,4 +172,6 @@ const CultureCard = () => {
   )
 }
 
-export default CultureCard;
+{/* export default CultureCard; */}
+
+export default React.memo(CultureCard);

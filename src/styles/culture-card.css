@@ -30,16 +30,33 @@
 overflow: hidden; 
  z-index: 2;
 
-  /* Initial state - hidden and positioned off-screen */
+  /* Initial state - hidden and positioned off-screen 
   opacity: 0;
   transform: translateX(100%);
-  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+ transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+ */
+   animation: slideInFromRight 0.8s ease-out 0.3s both;
 }
 
-.culture-card.slide-in {
-  opacity: 1;
-  transform: translateX(0);
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
+
+.culture-card {
+  /* replace opacity/transform/transition with this */
+  animation: slideInFromRight 0.8s ease-out 0.3s both;
+}
+
+/* remove .culture-card.slide-in entirely */
+
+
 
 
 .culture-card::before {
@@ -286,6 +303,7 @@ border-radius: 50%;
   gap: 10px;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .slider {

@@ -16,7 +16,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+    /* your existing styles... 
+  transition: background-image 0.5s ease-in-out;
+  */
 }
 
 

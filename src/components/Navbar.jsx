@@ -191,7 +191,7 @@ const Navbar = ({ solid }) => {
             </div>
 
             <div className="icon-with-tooltip">
-              <a href="events" id='events'>
+              <a href="#" id='events' onClick={()=> navigate('/events')}>
                
                 <i className="fa-solid fa-masks-theater"></i>
                {t('nav.events')}
@@ -202,7 +202,7 @@ const Navbar = ({ solid }) => {
             </div>
 
             <div className="icon-with-tooltip">
-              <a href="#" id='music'>
+              <a href="#" id='music' onClick={()=> navigate('/music')}>
                  <i className="fa-solid fa-music"></i>
               
                 {t('nav.music')}
@@ -216,7 +216,7 @@ const Navbar = ({ solid }) => {
 
           {!user ? (
             <>
-              <a href="#" id="contact-us" onClick={()=> navigate('/academy2')}>
+              <a href="#" id="contact-us" onClick={()=> navigate('/academy-signUp')}>
                
                 <i className="fa-regular fa-user" id="user-icon"></i>
                  {t('nav.signIn')}
