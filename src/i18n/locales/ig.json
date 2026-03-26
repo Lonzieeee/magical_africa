@@ -1,6 +1,8 @@
 {
   "nav": {
     "menu": "Ndepụta",
+    "events": "Emume",
+    "music": "Egwu",
     "language": "Asụsụ",
     "signIn": "Banye",
     "logOut": "Pụọ",
@@ -112,7 +114,9 @@
   "about": "Maka",
   "language": "Asụsụ",
   "marketplace": "Ahịa",
-   "academy": "Akadẹmi"
+  "academy": "Akadẹmi",
+  "events": "Emume",
+  "music": "Egwu"
 },
 
 
@@ -225,6 +229,8 @@
 
 "faq": {
   "title": "Ajụjụ A Na-ajụkarị",
+  "titlespan": "",
+  "subtitle2": "Nweta azịza na ajụjụ ndị a na-ajụkarị banyere Africa",
   "items": {
     "whatIs": {
       "question": "Gịnị bụ Magical Africa?",
@@ -865,6 +871,172 @@
       "bookNow": "Debanye Aha Ugbu a",
       "seeMore": "Hụkwuo"
     }
+  },
+
+
+  "popularCourses": {
+  "title": "Usoro anyị",
+  "subtitle": "Chọpụta ọtụtụ usoro nke ndị nkuzi Africa na-akụzi na ọchịchọ — site na ọrụ omenala gaa na nka omenala, enwere ihe maka onye ọ bụla.",
+  "popularLabel": "Usoro A Na-ama Ama",
+  "pottery": "Usoro ịkọ arọ",
+  "instrumentMaking": "Ime igwe egwu",
+  "weaving": "Usoro ịkọ akwa",
+  "cooking": "Usoro isi nri",
+  "woodCarving": "Usoro ịkọ osisi",
+  "viewMore": "Lee ọzọ"
+},
+
+
+"culture": {
+  "tagline": "Nọọ Mọnwu Kọntinent",
+  "titleStart": "Emume",
+  "titleAccent": "Omenala",
+  "titleEnd": "Africa",
+  "description": "Emume omenala Africa na-eme ihe mgbaru ọsọ nke ihe nketa site n'iziko obodo site na egwu, ịgba ọgọ, nka, nri, na ịkọ akụkọ — na-asọpụrụ omenala mgbe na-anabata ịdị onwe onye Africa ọhụrụ.",
+  "learnMore": "Mụta Ọzọ",
+  "music": {
+    "titleAccent": "Egwu",
+    "titleRest": "Emume",
+    "festival1": { "name": "Emume Egwu Afropolis", "location": "Lagos, Nigeria" },
+    "festival2": { "name": "Sauti za Busara", "location": "Zanzibar, Tanzania" },
+    "festival3": { "name": "Emume Bushfire", "location": "Malkerns, Eswatini" }
+  },
+  "food": {
+    "titleStart": "Nri &",
+    "titleAccent": "Emume Omenala",
+    "festival1": { "name": "Emume Nri & Mmanya Cape Town", "location": "Cape Town, SA" },
+    "festival2": { "name": "Emume Nri Nairobi", "location": "Nairobi, Kenya" },
+    "festival3": { "name": "Emume Omenala Zanzibar", "location": "Zanzibar, Tanzania" }
+  },
+  "art": {
+    "titleStart": "Nka na",
+    "titleAccent": "Ahịa Ọrụ Aka",
+    "festival1": { "name": "Izu Ọchịchọ Nka Accra", "location": "Accra, Ghana" },
+    "festival2": { "name": "Ihe Ngosi Nka Kigali", "location": "Kigali, Rwanda" },
+    "festival3": { "name": "Ahịa Ọrụ Aka Africa", "location": "Pan-Africa" }
   }
+},
+
+
+
+"market": {
+  "hero": {
+    "tagline": "Ahịa Africa",
+    "titleStart": "Chọpụta",
+    "titleAccent": "Ihe Ndị Dị Mma",
+    "titleEnd": "nke Africa",
+    "description": "Site na ihe ndị a na-atọ ọnụ ahịa gaa na ngwá ọrụ aka nke ndị ọrụ aka ndị mpaghara — nweta mpịakọta nke omenala dị ndụ nke kọntinent.",
+    "stats": { "artisans": "Ndị Ọrụ Aka", "products": "Ngwá Ahịa", "countries": "Mba" },
+    "labels": { "jewellery": "Ịchọ Mma", "textiles": "Akwa", "spices": "Ose & Nri", "carvings": "Ịkọ Osisi", "artefacts": "Ihe Ochie" }
+  },
+  "bestSellers": {
+    "title": "Ihe Ndị A Na-ere Kachasị",
+    "subtitle": "Ihe ndị a họpụtara site n'izụ bara ọnụ n'ofe kọntinent",
+    "addToCart": "Tinye n'Ụgbọ",
+    "price": "Ọnụ Ahịa",
+    "item1": { "name": "Ihe Isi Igolde" },
+    "item2": { "name": "Ite" },
+    "item3": { "name": "Iko" },
+    "item4": { "name": "Efere" }
+  },
+  "shop": {
+    "title": "Zụta Nchịkọta",
+    "subtitle": "Ihe ndị ezigbo eziokwu nke ndị ọrụ aka mpaghara mere n'ofe kọntinent",
+    "categories": {
+      "jewellery": "Ịchọ Mma", "carvings": "Ịkọ Osisi", "pottery": "Ịkọ Arọ",
+      "textiles": "Akwa", "baskets": "Akpa", "spices": "Ose na Nri"
+    }
+  },
+  "auctions": {
+    "tagline": "Otu Ugboro, Ugboro Abụọ",
+    "title": "Ahịa Dị Ndụ",
+    "subtitle": "Tụọ ọnụ n'ihe nka Africa dị ọnụ, ịchọ mma, na ihe omenala",
+    "currentBid": "Ọnụ Ugbu A",
+    "placeBid": "Tụọ Ọnụ",
+    "item1": {
+      "category": "Ihe Ochie · Africa Ọdịda Anyanwụ",
+      "name": "Ihe Anọdụ Ọchịchọ Ọdọ Ọhụrụ nke Benin nke Narị Afọ nke 19",
+      "description": "Ihe anọdụ ọchịchọ ọdọ ọhụrụ sitere n'Alaeze Benin, na-egosi dike eze n'ọchịchọ. Ebumnuche ejiri enyocha.",
+      "timeLeft": "Awa 2 nkeji 14 fọdụrụ"
+    },
+    "item2": {
+      "category": "Ihe Isi · Africa Etiti",
+      "name": "Ihe Isi Ememe nke Alaeze Kuba",
+      "description": "Ihe isi ịchụ arụsị nke etinyere aka na ọcha sitere na Democratic Republic of Congo."
+    },
+    "item3": {
+      "category": "Ngwa Egwu · Africa Ọwụwa Anyanwụ",
+      "name": "Oud Ochie nke Swahili Taarab",
+      "description": "Oud nke etinyere aka nke narị afọ nke 19 sitere n'ụsọ oyi nke Swahili, nwere ọrụ dị mma."
+    }
+  },
+  "artisans": {
+    "tagline": "Zụlite ndị Ọrụ",
+    "title": "Ndị Ọrụ Aka A Họpụtara",
+    "subtitle": "Ndị mmadụ ezigbo, ọrụ aka ezigbo — ịzụta ọ bụla na-akwado onye ọrụ aka mpaghara ozugbo",
+    "follow": "Soro Onye Ọrụ Aka",
+    "artisan1": { "craft": "Ịchọ Mma na Ngwaọchọ Mma", "location": "Rift Valley, Kenya", "items": "Ihe 42 edepụtara" },
+    "artisan2": { "craft": "Ịkọ Osisi", "location": "Dar es Salaam, Tanzania", "items": "Ihe 28 edepụtara" },
+    "artisan3": { "craft": "Ịkọ Akwa na Akpa", "location": "Bolgatanga, Ghana", "items": "Ihe 32 edepụtara" }
+  },
+  "newsletter": {
+    "title": "Ghara Ịhapụ Ihe Ọ Bụla",
+    "subtitle": "Nweta ọkwa mgbe ndị ọrụ aka ọhụrụ depụtara ihe na mgbe ahịa ndị dị ndụ amalite",
+    "placeholder": "Tinye adreesị email gị",
+    "button": "Gbaa M Ọkwa"
+  }
+},
+
+
+"events": {
+  "hero": {
+    "titleStart": "Emume",
+    "titleAccent": "Omenala Africa",
+    "description": "Site na emume igwe ilu na Sahel gaa n'abalị masquerade na Lagos - banye n'ọkụ nke ndụ nke kọntinent"
+  },
+  "explore": {
+    "title": "Chọpụta Emume",
+    "categories": {
+      "music": "Egwu na Ịgba Ọgọ",
+      "ceremonies": "Emume Omenala",
+      "food": "Emume Nri",
+      "art": "Nka na Ọrụ Aka",
+      "film": "Ihe Nkiri na Egwuregwu"
+    }
+  },
+  "byMonth": {
+    "title": "Chọta Emume site na Ọnwa",
+    "subtitle": "Tụlee emume omenala Africa na-eme n'ọgwụgwụ afọ",
+    "selectPrompt": "👆 Họrọ ọnwa dị n'elu iji hụ emume",
+    "bookNow": "Dee Aha Ugbu A",
+    "months": {
+      "january": "Jenụwarị", "february": "Febrụwarị", "march": "Maachị", "april": "Eprel",
+      "may": "Mee", "june": "Jun", "july": "Julaị", "august": "Ọgọst",
+      "september": "Septemba", "october": "Ọktoba", "november": "Novemba", "december": "Disemba"
+    },
+    "eventCount": {
+      "zero": "Emume 0", "one": "Emume 1", "two": "Emume 2",
+      "three": "Emume 3", "four": "Emume 4", "five": "Emume 5", "six": "Emume 6"
+    },
+    "janEvents": {
+      "title": "Emume na Jenụwarị",
+      "event1": {
+        "category": "Egwu · Africa Ndịda",
+        "name": "Emume Bushfire",
+        "description": "Ọchịchọ pụrụ iche nke ndị nka na ndị na-egwu egwu Africa n'Alaeze Eswatini. Egwu, ịkọ akụkọ, na mmụọ obodo n'otu ọnọdụ ugwu.",
+        "location": "Malkerns, Eswatini"
+      },
+      "event2": {
+        "category": "Emume Omenala · Africa Ọdịda Anyanwụ",
+        "name": "Emume Odwira",
+        "description": "Ndị Ashanti nke Ghana na-asacha ochere ha ma na-asọpụrụ ndị nna ha n'emume izu ọchịchọ a jupụtara na njem, ịgba ọgọ, igwe ilu, ịhụ uri na oriri.",
+        "location": "Kumasi, Ghana"
+      }
+    }
+  }
+}
+
+
+
 
 }

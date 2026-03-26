@@ -1,6 +1,8 @@
 {
   "nav": {
     "menu": "Menu",
+    "events": "Events",
+    "music": "Music",
     "language": "Language",
     "signIn": "Sign In",
     "logOut": "Log out",
@@ -111,7 +113,9 @@
   "about": "About",
   "language": "Language",
   "marketplace": "Marketplace",
-  "academy": "Academy"
+  "academy": "Academy",
+  "events": "Events",
+  "music": "Music"
 },
 
 
@@ -223,7 +227,9 @@
 
 
 "faq": {
-  "title": "Frequently Asked Questions",
+  "title": "Frequently Asked ",
+  "titlespan": "Questions",
+  "subtitle2": "Get answers to common questions about Africa",
   "items": {
     "whatIs": {
       "question": "What is Magical Africa?",
@@ -852,5 +858,176 @@
       "bookNow": "Book Now",
       "seeMore": "See More"
     }
+  },
+
+
+
+
+  "popularCourses": {
+  "title": "Our courses",
+  "subtitle": "Explore a wide range of courses taught by passionate African educators — from traditional crafts to cultural arts, there is something for everyone.",
+  "popularLabel": "Popular Courses",
+  "pottery": "Pottery courses",
+  "instrumentMaking": "Instrument making",
+  "weaving": "Weaving courses",
+  "cooking": "Cooking courses",
+  "woodCarving": "Wood-carving courses",
+  "viewMore": "View more"
+},
+
+
+
+"culture": {
+  "tagline": "Celebrate the Continent",
+  "titleStart": "African",
+  "titleAccent": "Cultural",
+  "titleEnd": "Events",
+  "description": "African cultural events celebrate heritage by uniting communities through music, dance, art, food, and storytelling — honoring tradition while embracing modern African identity.",
+  "learnMore": "Learn More",
+  "music": {
+    "titleAccent": "Music",
+    "titleRest": "Festivals",
+    "festival1": { "name": "Afropolis Music Festival", "location": "Lagos, Nigeria" },
+    "festival2": { "name": "Sauti za Busara", "location": "Zanzibar, Tanzania" },
+    "festival3": { "name": "Bushfire Festival", "location": "Malkerns, Eswatini" }
+  },
+  "food": {
+    "titleStart": "Food &",
+    "titleAccent": "Cultural Festivals",
+    "festival1": { "name": "Cape Town Food & Wine Festival", "location": "Cape Town, SA" },
+    "festival2": { "name": "Nairobi Food Festival", "location": "Nairobi, Kenya" },
+    "festival3": { "name": "Zanzibar Cultural Festival", "location": "Zanzibar, Tanzania" }
+  },
+  "art": {
+    "titleStart": "Art and",
+    "titleAccent": "Craft Fairs",
+    "festival1": { "name": "Accra Art Week", "location": "Accra, Ghana" },
+    "festival2": { "name": "Kigali Art Exhibition", "location": "Kigali, Rwanda" },
+    "festival3": { "name": "African Craft Market", "location": "Pan-Africa" }
+  }
+},
+
+
+
+"market": {
+  "hero": {
+    "tagline": "African Marketplace",
+    "titleStart": "Discover",
+    "titleAccent": "Authentic",
+    "titleEnd": "African Treasures",
+    "description": "From rare artefacts up for auction to handcrafted goods by local artisans — own a piece of the continent's living culture.",
+    "stats": { "artisans": "Artisans", "products": "Products", "countries": "Countries" },
+    "labels": { "jewellery": "Jewellery", "textiles": "Textiles", "spices": "Spices & Food", "carvings": "Carvings", "artefacts": "Artefacts" }
+  },
+  "bestSellers": {
+    "title": "Best Seller Items",
+    "subtitle": "Handpicked favourites from across the continent",
+    "addToCart": "Add to Cart",
+    "price": "Price",
+    "item1": { "name": "Golden Mask" },
+    "item2": { "name": "Vase" },
+    "item3": { "name": "Mug" },
+    "item4": { "name": "Bowl" }
+  },
+  "shop": {
+    "title": "Shop The Collection",
+    "subtitle": "Authentic goods made by local artisans across the continent",
+    "categories": {
+      "jewellery": "Jewellery", "carvings": "Carvings", "pottery": "Pottery",
+      "textiles": "Textiles", "baskets": "Baskets", "spices": "Spice and Food"
+    }
+  },
+  "auctions": {
+    "tagline": "Going Once, Going Twice",
+    "title": "Live Auctions",
+    "subtitle": "Bid on rare African art, jewellery, and cultural artefacts",
+    "currentBid": "Current Bid",
+    "placeBid": "Place Bid",
+    "item1": {
+      "category": "Artefact . West Africa",
+      "name": "19th Century Benin Bronze Warrior Plaque",
+      "description": "An exceptionally rare cast bronze relief plaque from the Kingdom of Benin, depicting a royal warrior in ceremonial dress. Provenance verified.",
+      "timeLeft": "2h 14m left"
+    },
+    "item2": {
+      "category": "Mask · Central Africa",
+      "name": "Kuba Kingdom Ceremonial Mask",
+      "description": "Handcarved and painted ritual mask from the Democratic Republic of Congo."
+    },
+    "item3": {
+      "category": "Instrument · East Africa",
+      "name": "Antique Swahili Taarab Oud",
+      "description": "19th century hand-crafted oud from the Swahili coast, with intricate inlay work."
+    }
+  },
+  "artisans": {
+    "tagline": "Meet the Makers",
+    "title": "Featured Artisans",
+    "subtitle": "Real people, real craft — every purchase supports a local artisan directly",
+    "follow": "Follow Artisan",
+    "artisan1": { "craft": "Beadwork and Jewellery", "location": "Rift Valley, Kenya", "items": "42 items listed" },
+    "artisan2": { "craft": "Wood Sculpture", "location": "Dar es Salaam, Tanzania", "items": "28 items listed" },
+    "artisan3": { "craft": "Weaving and Baskets", "location": "Bolgatanga, Ghana", "items": "32 items listed" }
+  },
+  "newsletter": {
+    "title": "Never Miss a Drop",
+    "subtitle": "Get notified when new artisans list items and when live auctions go live",
+    "placeholder": "Enter your email address",
+    "button": "Notify Me"
+  }
+},
+
+
+"events": {
+  "hero": {
+    "titleStart": "African",
+    "titleAccent": "Cultural Events",
+    "description": "From thundering drum festivals on the Sahel to glittering masquerade nights in Lagos - dive into the living heartbeat of the continent"
+  },
+  "explore": {
+    "title": "Explore Events",
+    "categories": {
+      "music": "Music and Dance",
+      "ceremonies": "Traditional Ceremonies",
+      "food": "Food Festivals",
+      "art": "Art and Craft",
+      "film": "Film and Theatre"
+    }
+  },
+  "byMonth": {
+    "title": "Find Events by Month",
+    "subtitle": "Browse African cultural events happening throughout the year",
+    "selectPrompt": "👆 Select a month above to see events",
+    "bookNow": "Book Now",
+    "months": {
+      "january": "January", "february": "February", "march": "March", "april": "April",
+      "may": "May", "june": "June", "july": "July", "august": "August",
+      "september": "September", "october": "October", "november": "November", "december": "December"
+    },
+    "eventCount": {
+      "zero": "0 Events", "one": "1 Event", "two": "2 Events",
+      "three": "3 Events", "four": "4 Events", "five": "5 Events", "six": "6 Events"
+    },
+    "janEvents": {
+      "title": "Events in January",
+      "event1": {
+        "category": "Music · Southern Africa",
+        "name": "Bushfire Festival",
+        "description": "An extraordinary gathering of African artists and performers in the Kingdom of Eswatini. Music, storytelling, and community spirit in one mountain setting.",
+        "location": "Malkerns, Eswatini"
+      },
+      "event2": {
+        "category": "Ceremony · West Africa",
+        "name": "Odwira Festival",
+        "description": "The Ashanti people of Ghana purify their stools and honour ancestors in this week-long ceremony filled with processions, dancing, drumming, singing and feasting.",
+        "location": "Kumasi, Ghana"
+      }
+    }
   }
 }
+
+
+
+}
+
+
