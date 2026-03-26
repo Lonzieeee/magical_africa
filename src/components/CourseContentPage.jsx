@@ -470,41 +470,24 @@ const CourseContentPage = () => {
 
       {/* Quiz section — ref attached so we can scroll to it */}
       {showQuiz && !isPreviewMode && (
-        <div ref={quizRef} style={{  width: '1200px', maxWidth: '100%' , margin: '0 auto', paddingBottom: '4rem' }}>
+        <div ref={quizRef} className='cc-quiz-wrap'>
 
           {topicsWithQuiz.length === 0 ? (
-            <div style={{
-              textAlign: 'center',
-              padding: '40px',
-              border: '1px dashed #e5e3e3',
-              color: '#9ca3af',
-              fontFamily: 'Poppins, sans-serif',
-              fontSize: '0.9rem',
-              margin: '2rem 0'
-            }}>
-              <MdQuiz style={{ marginRight: '8px', verticalAlign: 'middle' }} /> No quizzes available for this course yet.
+            <div className='cc-quiz-empty'>
+              <MdQuiz className='cc-quiz-empty-icon' /> No quizzes available for this course yet.
             </div>
           ) : (
             <>
               {topicsWithQuiz.length > 1 && (
-                <div style={{ display: 'flex', gap: '10px', margin: '2rem 0 1rem', flexWrap: 'wrap' }}>
-                  <p style={{ fontSize: '0.85rem', color: '#555', marginRight: '8px', alignSelf: 'center' }}>
+                <div className='cc-quiz-topic-switch'>
+                  <p className='cc-quiz-topic-label'>
                     Select topic quiz:
                   </p>
                   {topicsWithQuiz.map(t => (
                     <button
                       key={t.id}
                       onClick={() => setSelectedTopic(t)}
-                      style={{
-                        padding: '6px 16px',
-                        border: '1px solid',
-                        borderColor: selectedTopic?.id === t.id ? '#1f6f43' : '#e5e3e3',
-                        backgroundColor: selectedTopic?.id === t.id ? '#1f6f43' : 'white',
-                        color: selectedTopic?.id === t.id ? 'white' : 'rgb(48,48,48)',
-                        fontFamily: 'Poppins, sans-serif',
-                        fontSize: '0.8rem',
-                        cursor: 'pointer'
-                      }}
+                      className={`cc-quiz-topic-btn ${selectedTopic?.id === t.id ? 'active' : ''}`}
                     >
                       {t.title || 'Untitled Topic'}
                     </button>
