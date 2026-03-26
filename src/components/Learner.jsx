@@ -273,6 +273,24 @@ const Learner = () => {
     })
   }, [filteredCourses, ownedCourses, showPublishedOnly])
 
+  const publishedNowWindowDays = 30
+
+  const publishedNowCourses = useMemo(() => {
+    const myCourseIds = new Set(ownedCourses.map(course => course.id))
+    const now = Date.now()
+    const windowMs = publishedNowWindowDays * 24 * 60 * 60 * 1000
+
+    return filteredCourses.filter((course) => {
+      if (myCourseIds.has(course.id)) return false
+      const isPublished = course.status === 'Published' || !course.status
+      if (!isPublished) return false
+
+      const publishedAt = getPublishedTimestamp(course)
+      if (!publishedAt) return false
+      return now - publishedAt <= windowMs
+    })
+  }, [filteredCourses, ownedCourses])
+
   const suggestedCoursesForView = useMemo(() => {
     if (storeView === 'free') {
       return suggestedCourses.filter(course => getCoursePrice(course) === 0)
@@ -281,10 +299,10 @@ const Learner = () => {
       return suggestedCourses.filter(course => getCoursePrice(course) > 0)
     }
     if (storeView === 'published') {
-      return suggestedCourses.filter(course => course.status === 'Published' || !course.status)
+      return publishedNowCourses
     }
     return suggestedCourses
-  }, [storeView, suggestedCourses])
+  }, [storeView, suggestedCourses, publishedNowCourses])
 
   const totalStoreCourses = useMemo(() => {
     const myCourseIds = new Set(ownedCourses.map(course => course.id))
@@ -295,6 +313,40 @@ const Learner = () => {
     const myCourseIds = new Set(ownedCourses.map(course => course.id))
     return filteredCourses.filter(course => {
       if (myCourseIds.has(course.id)) return false
+      return course.status === 'Published' || !course.status
+    }).length
+  }, [filteredCourses, ownedCourses])
+
+  const totalFreeStoreCourses = useMemo(() => {
+    const myCourseIds = new Set(ownedCourses.map(course => course.id))
+    return filteredCourses.filter(course => {
+      if (myCourseIds.has(course.id)) return false
+      return getCoursePrice(course) === 0
+    }).length
+  }, [filteredCourses, ownedCourses])
+
+  const publishedFreeStoreCourses = useMemo(() => {
+    const myCourseIds = new Set(ownedCourses.map(course => course.id))
+    return filteredCourses.filter(course => {
+      if (myCourseIds.has(course.id)) return false
+      if (getCoursePrice(course) > 0) return false
+      return course.status === 'Published' || !course.status
+    }).length
+  }, [filteredCourses, ownedCourses])
+
+  const totalPaidStoreCourses = useMemo(() => {
+    const myCourseIds = new Set(ownedCourses.map(course => course.id))
+    return filteredCourses.filter(course => {
+      if (myCourseIds.has(course.id)) return false
+      return getCoursePrice(course) > 0
+    }).length
+  }, [filteredCourses, ownedCourses])
+
+  const publishedPaidStoreCourses = useMemo(() => {
+    const myCourseIds = new Set(ownedCourses.map(course => course.id))
+    return filteredCourses.filter(course => {
+      if (myCourseIds.has(course.id)) return false
+      if (getCoursePrice(course) === 0) return false
       return course.status === 'Published' || !course.status
     }).length
   }, [filteredCourses, ownedCourses])
@@ -395,11 +447,38 @@ const Learner = () => {
     setMenuOpen((prev) => ({ ...prev, [menu]: !prev[menu] }))
   }
 
-  const getCoursePrice = (course) => {
+  function getCoursePrice(course) {
     if (course.pricingModel === 'free') return 0
     const sale = Number(course.salePrice || 0)
     const regular = Number(course.regularPrice || 0)
     return sale > 0 ? sale : regular
+  }
+
+  function getPublishedTimestamp(course) {
+    const candidates = [course.publishedAt, course.updatedAt, course.createdAt]
+
+    for (const value of candidates) {
+      if (!value) continue
+
+      if (typeof value === 'string' || typeof value === 'number') {
+        const parsed = new Date(value).getTime()
+        if (!Number.isNaN(parsed) && parsed > 0) return parsed
+      }
+
+      if (value && typeof value === 'object') {
+        if (typeof value.toDate === 'function') {
+          const parsed = value.toDate().getTime()
+          if (!Number.isNaN(parsed) && parsed > 0) return parsed
+        }
+
+        if (typeof value.seconds === 'number') {
+          const parsed = value.seconds * 1000
+          if (!Number.isNaN(parsed) && parsed > 0) return parsed
+        }
+      }
+    }
+
+    return 0
   }
 
   const handleAcquireCourse = async (course) => {
@@ -673,22 +752,39 @@ const Learner = () => {
           )}
 
           {!loading && activeSection === 'store' && (
-            <section className='learner-panel'>
-              <h1><FaStore /> Course Store</h1>
-              <div className='learner-store-badges'>
-                <button
-                  className={showPublishedOnly ? 'active' : ''}
-                  onClick={() => setShowPublishedOnly(true)}
-                >
-                  {publishedStoreCourses} Published
-                </button>
-                <button
-                  className={!showPublishedOnly ? 'active' : ''}
-                  onClick={() => setShowPublishedOnly(false)}
-                >
-                  {totalStoreCourses} All In Store
-                </button>
-              </div>
+            <section className={`learner-panel learner-panel--store ${storeView === 'free' ? 'learner-panel--store-free' : ''}`}>
+              {storeView !== 'free' && <h1><FaStore /> Course Store</h1>}
+              {storeView === 'all' ? (
+                <div className='learner-store-badges'>
+                  <button
+                    className={showPublishedOnly ? 'active' : ''}
+                    onClick={() => setShowPublishedOnly(true)}
+                  >
+                    {publishedStoreCourses} Published
+                  </button>
+                  <button
+                    className={!showPublishedOnly ? 'active' : ''}
+                    onClick={() => setShowPublishedOnly(false)}
+                  >
+                    {totalStoreCourses} All In Store
+                  </button>
+                </div>
+              ) : storeView === 'free' ? (
+                <div className='learner-store-free-stats'>
+                  <span className='learner-store-free-pill'>{totalFreeStoreCourses} Free Available</span>
+                  <span className='learner-store-free-pill'>{publishedFreeStoreCourses} Published Free</span>
+                </div>
+              ) : storeView === 'paid' ? (
+                <div className='learner-store-free-stats'>
+                  <span className='learner-store-free-pill'>{totalPaidStoreCourses} Premium Available</span>
+                  <span className='learner-store-free-pill'>{publishedPaidStoreCourses} Published Premium</span>
+                </div>
+              ) : (
+                <div className='learner-store-free-stats'>
+                  <span className='learner-store-free-pill'>{suggestedCoursesForView.length} Published Now</span>
+                  <span className='learner-store-free-pill'>Last {publishedNowWindowDays} Days</span>
+                </div>
+              )}
 
               <div className='learner-categories'>
                 {categories.map(cat => (
@@ -702,90 +798,126 @@ const Learner = () => {
                 ))}
               </div>
 
-              <div className='learner-suggested-header'>
-                <label className='learner-toggle'>
-                  <input
-                    type='checkbox'
-                    checked={showPublishedOnly}
-                    onChange={(e) => setShowPublishedOnly(e.target.checked)}
-                  />
-                  <span>Only Published</span>
-                </label>
-              </div>
-
-              {storeView === 'free' && (
-                <div className='learner-free-strip'>
-                  <h2>Free Learning Picks</h2>
-                  <p>
-                    {suggestedCoursesForView.length > 0
-                      ? `${suggestedCoursesForView.length} free course${suggestedCoursesForView.length > 1 ? 's' : ''} ready for you right now.`
-                      : 'No free courses are available right now.'}
-                  </p>
+              {storeView !== 'published' ? (
+                <div className='learner-suggested-header'>
+                  <label className='learner-toggle'>
+                    <input
+                      type='checkbox'
+                      checked={showPublishedOnly}
+                      onChange={(e) => setShowPublishedOnly(e.target.checked)}
+                    />
+                    <span>{storeView === 'free' ? 'Published Free Only' : storeView === 'paid' ? 'Published Premium Only' : 'Only Published'}</span>
+                  </label>
+                </div>
+              ) : (
+                <div className='learner-suggested-header learner-suggested-header-note'>
+                  <span>Showing newly published courses only.</span>
                 </div>
               )}
 
-              {suggestedCoursesForView.length === 0 && (
-                storeView === 'free'
-                  ? (
-                    <div className='learner-free-empty'>
-                      <div className='scor' aria-hidden='true'>
-                        <div className='scor-head'>
-                          <div className='scor-face'>
-                            <div className='scor-eye scor-eye-left' />
-                            <div className='scor-eye scor-eye-right' />
-                            <div className='scor-face-lower'>
-                              <div className='scor-nose' />
-                              <div className='scor-mouth'>
-                                <div className='scor-mouth-outer' />
-                                <div className='scor-mouth-inner' />
+              <div
+                className='learner-store-view-stage'
+                key={`store-${storeView}-${activeFilter || 'all'}-${showPublishedOnly ? 'published' : 'all'}`}
+              >
+                {storeView === 'free' && (
+                  <div className='learner-free-strip'>
+                    <h2>Free Learning Picks</h2>
+                    <p>
+                      {suggestedCoursesForView.length > 0
+                        ? `${suggestedCoursesForView.length} free course${suggestedCoursesForView.length > 1 ? 's' : ''} ready for you right now.`
+                        : 'No free courses are available right now.'}
+                    </p>
+                  </div>
+                )}
+
+                {storeView === 'paid' && (
+                  <div className='learner-free-strip'>
+                    <h2>Premium Learning Picks</h2>
+                    <p>
+                      {suggestedCoursesForView.length > 0
+                        ? `${suggestedCoursesForView.length} premium course${suggestedCoursesForView.length > 1 ? 's' : ''} available with deeper guided content.`
+                        : 'No premium courses are available in this filter yet.'}
+                    </p>
+                  </div>
+                )}
+
+                {storeView === 'published' && (
+                  <div className='learner-free-strip'>
+                    <h2>Published Now</h2>
+                    <p>
+                      {suggestedCoursesForView.length > 0
+                        ? `${suggestedCoursesForView.length} course${suggestedCoursesForView.length > 1 ? 's' : ''} published in the last ${publishedNowWindowDays} days.`
+                        : `No newly published courses in the last ${publishedNowWindowDays} days for this filter.`}
+                    </p>
+                  </div>
+                )}
+
+                {suggestedCoursesForView.length === 0 && (
+                  storeView === 'free'
+                    ? (
+                      <div className='learner-free-empty'>
+                        <div className='scor' aria-hidden='true'>
+                          <div className='scor-head'>
+                            <div className='scor-face'>
+                              <div className='scor-eye scor-eye-left' />
+                              <div className='scor-eye scor-eye-right' />
+                              <div className='scor-face-lower'>
+                                <div className='scor-nose' />
+                                <div className='scor-mouth'>
+                                  <div className='scor-mouth-outer' />
+                                  <div className='scor-mouth-inner' />
+                                </div>
+                                <div className='scor-mouth-line' />
                               </div>
-                              <div className='scor-mouth-line' />
+                              <div className='scor-blush scor-blush-left' />
+                              <div className='scor-blush scor-blush-right' />
                             </div>
-                            <div className='scor-blush scor-blush-left' />
-                            <div className='scor-blush scor-blush-right' />
+                            <div className='scor-face-fluff scor-face-fluff-left' />
+                            <div className='scor-face-fluff scor-face-fluff-right' />
+                            <div className='scor-ear scor-ear-left' />
+                            <div className='scor-ear-right-wrap'>
+                              <div className='scor-ear scor-ear-right' />
+                              <div className='scor-ear-right-fluff' />
+                            </div>
                           </div>
-                          <div className='scor-face-fluff scor-face-fluff-left' />
-                          <div className='scor-face-fluff scor-face-fluff-right' />
-                          <div className='scor-ear scor-ear-left' />
-                          <div className='scor-ear-right-wrap'>
-                            <div className='scor-ear scor-ear-right' />
-                            <div className='scor-ear-right-fluff' />
+                          <div className='scor-body'>
+                            <div className='scor-tail' />
+                            <div className='scor-torso' />
+                            <div className='scor-neck' />
+                            <div className='scor-arm scor-arm-left' />
+                            <div className='scor-arm scor-arm-right' />
+                            <div className='scor-leg scor-leg-left'>
+                              <div className='scor-leg-foot'>
+                                <div className='scor-leg-foot-pad' />
+                              </div>
+                            </div>
+                            <div className='scor-leg scor-leg-right'>
+                              <div className='scor-leg-foot'>
+                                <div className='scor-leg-foot-pad' />
+                              </div>
+                            </div>
                           </div>
                         </div>
-                        <div className='scor-body'>
-                          <div className='scor-tail' />
-                          <div className='scor-torso' />
-                          <div className='scor-neck' />
-                          <div className='scor-arm scor-arm-left' />
-                          <div className='scor-arm scor-arm-right' />
-                          <div className='scor-leg scor-leg-left'>
-                            <div className='scor-leg-foot'>
-                              <div className='scor-leg-foot-pad' />
-                            </div>
-                          </div>
-                          <div className='scor-leg scor-leg-right'>
-                            <div className='scor-leg-foot'>
-                              <div className='scor-leg-foot-pad' />
-                            </div>
-                          </div>
-                        </div>
+
+                        <p className='learner-free-empty-title'>No free courses available right now</p>
+                        <p className='learner-free-empty-text'>New free classes drop often. In the meantime, explore premium options curated for your learning journey.</p>
+                        <button
+                          className='learner-free-empty-btn'
+                          onClick={() => openSection('store', { storeView: 'paid' })}
+                        >
+                          Check Paid Courses
+                        </button>
                       </div>
+                      )
+                    : storeView === 'paid'
+                      ? <p className='learner-empty'>No premium courses match this filter yet.</p>
+                      : storeView === 'published'
+                        ? <p className='learner-empty'>No newly published courses in the selected category yet.</p>
+                        : <p className='learner-empty'>No available courses to buy right now.</p>
+                )}
 
-                      <p className='learner-free-empty-title'>No free courses available right now</p>
-                      <p className='learner-free-empty-text'>New free classes drop often. In the meantime, explore premium options curated for your learning journey.</p>
-                      <button
-                        className='learner-free-empty-btn'
-                        onClick={() => openSection('store', { storeView: 'paid' })}
-                      >
-                        Check Paid Courses
-                      </button>
-                    </div>
-                    )
-                  : <p className='learner-empty'>No available courses to buy right now.</p>
-              )}
-
-              <div className='learner-store-grid'>
-                {suggestedCoursesForView.map(course => {
+                <div className='learner-store-grid'>
+                  {suggestedCoursesForView.map(course => {
                   const price = getCoursePrice(course)
                   const isPaid = price > 0
                   const isOwned = Boolean(progressMap[course.id]?.addedToLibrary || progressMap[course.id]?.paid)
@@ -830,7 +962,8 @@ const Learner = () => {
                       </div>
                     </article>
                   )
-                })}
+                  })}
+                </div>
               </div>
             </section>
           )}
