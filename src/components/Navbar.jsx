@@ -194,7 +194,7 @@ const Navbar = ({ solid }) => {
               <a href="events" id='events'>
                
                 <i className="fa-solid fa-masks-theater"></i>
-                Events
+               {t('nav.events')}
               </a>
               {/*
               <span className="icon-tooltip">Events</span>
@@ -205,7 +205,7 @@ const Navbar = ({ solid }) => {
               <a href="#" id='music'>
                  <i className="fa-solid fa-music"></i>
               
-                 Music
+                {t('nav.music')}
                
               </a>
               {/* 

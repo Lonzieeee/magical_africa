@@ -1,6 +1,8 @@
 {
   "nav": {
     "menu": "Imenyu",
+    "events": "Izikhungo",
+    "music": "Umculo",
     "language": "Ulimi",
     "signIn": "Ngena",
     "logOut": "Phuma",
@@ -111,7 +113,9 @@
   "about": "Mayelana",
   "language": "Ulimi",
   "marketplace": "Imakethe",
-  "academy":"Akademi"
+  "academy":"Akademi",
+  "events": "Izikhungo",
+  "music": "Umculo"
 },
 
 
@@ -219,6 +223,7 @@
 
 "partners": {
   "title": "Abalingani Bethu",
+ 
   "description": "Sibambisana nezinhlangano ezihlanganyela umbono wethu wokulondoloza nokugubha isiko lase-Afrika. Ndawonye, senza umthelela omkhulu."
 },
 
@@ -227,6 +232,8 @@
 
 "faq": {
   "title": "Imibuzo Evame Ukubuzwa",
+   "titlespan": "",
+  "subtitle2": "Thola izimpenduloemibuzo evamile mayelana ne-Afrika",
   "items": {
     "whatIs": {
       "question": "Iyini i-Magical Africa?",
@@ -859,7 +866,172 @@
       "bookNow": "Bhukha Manje",
       "seeMore": "Bona Okuningi"
     }
+  },
+
+
+
+  "popularCourses": {
+  "title": "Izifundo zethu",
+  "subtitle": "Hlola izikhungo ezahlukene ezifundiswa othisha base-Afrika abanentshisekelo — kusuka ezikhunjini zendabuko kuya ezintweni zasemiphakathini, kukhona okuthile kuwo wonke umuntu.",
+  "popularLabel": "Izifundo Ezidumile",
+  "pottery": "Izifundo zobumba",
+  "instrumentMaking": "Ukwenza izinsimbi zomculo",
+  "weaving": "Izifundo zokuphothula",
+  "cooking": "Izifundo zokupheka",
+  "woodCarving": "Izifundo zokusika umuthi",
+  "viewMore": "Buka okwengeziwe"
+},
+
+
+
+"culture": {
+  "tagline": "Gcobisa iKhonthinenti",
+  "titleStart": "Izikhungo",
+  "titleAccent": "Zamasiko",
+  "titleEnd": "ase-Afrika",
+  "description": "Izikhungo zamasikoase-Afrika zigubha ifa ngokuhlanganisa imiphakathi ngomculo, ukudansa, ubuciko, ukudla, nokulandisa izindaba — ihlonipha amasiko ngenkathi igona ubunikazi baseAfrika banamuhla.",
+  "learnMore": "Funda Okwengeziwe",
+  "music": {
+    "titleAccent": "Umculo",
+    "titleRest": "Izigcawu",
+    "festival1": { "name": "Isigcawu Somculo i-Afropolis", "location": "Lagos, Nigeria" },
+    "festival2": { "name": "Sauti za Busara", "location": "Zanzibar, Tanzania" },
+    "festival3": { "name": "Isigcawu i-Bushfire", "location": "Malkerns, Eswatini" }
+  },
+  "food": {
+    "titleStart": "Ukudla &",
+    "titleAccent": "Izigcawu Zamasiko",
+    "festival1": { "name": "Isigcawu Sokudla & Wayini i-Cape Town", "location": "Cape Town, iNingizimu Afrika" },
+    "festival2": { "name": "Isigcawu Sokudla i-Nairobi", "location": "Nairobi, eKenya" },
+    "festival3": { "name": "Isigcawu Samasiko i-Zanzibar", "location": "Zanzibar, Tanzania" }
+  },
+  "art": {
+    "titleStart": "Ubuciko",
+    "titleAccent": "Nezitolo Zobuchwepheshe",
+    "festival1": { "name": "Iviki Lobuciko i-Accra", "location": "Accra, Ghana" },
+    "festival2": { "name": "Umcimbi Wobuciko i-Kigali", "location": "Kigali, Rwanda" },
+    "festival3": { "name": "Imakethe Yobuchwepheshe base-Afrika", "location": "Pan-Afrika" }
   }
+},
+
+
+"market": {
+  "hero": {
+    "tagline": "Imakethe yase-Afrika",
+    "titleStart": "Thola",
+    "titleAccent": "Izikhazimulo Zoqobo",
+    "titleEnd": "zase-Afrika",
+    "description": "Kusuka ezintweni ezivame ukuqaliswa ukukhankanywa emabhidini kuya empahla eyenziwe ngesandla izindlunkulu zendawo — thola ingxenye yamasiko aphilayo ezweni.",
+    "stats": { "artisans": "Izindlunkulu", "products": "Imikhiqizo", "countries": "Amazwe" },
+    "labels": { "jewellery": "Amashokobezi", "textiles": "Izindwangu", "spices": "Izilimo & Ukudla", "carvings": "Ukuqopha", "artefacts": "Izinto Zakudala" }
+  },
+  "bestSellers": {
+    "title": "Imikhiqizo Ethengwa Kakhulu",
+    "subtitle": "Izintandokazi ezikhethwe kulo lonke izwekazi",
+    "addToCart": "Engeza eKhalathini",
+    "price": "Intengo",
+    "item1": { "name": "Imaski Yegolide" },
+    "item2": { "name": "Ibhodwe" },
+    "item3": { "name": "Inkomishi" },
+    "item4": { "name": "Isitsha" }
+  },
+  "shop": {
+    "title": "Thenga Uqoqo",
+    "subtitle": "Imikhiqizo yeqiniso eyenziwe izindlunkulu zendawo kulo lonke izwekazi",
+    "categories": {
+      "jewellery": "Amashokobezi", "carvings": "Ukuqopha", "pottery": "Ukwenza Izitsha",
+      "textiles": "Izindwangu", "baskets": "Izingobozi", "spices": "Izilimo Nokudla"
+    }
+  },
+  "auctions": {
+    "tagline": "Kanye, Kabili",
+    "title": "Amabhidi Aphilayo",
+    "subtitle": "Bida izinto eziyigugu ze-Afrika, amashokobezi, nezinto zamasiko",
+    "currentBid": "Ibhidi Lamanje",
+    "placeBid": "Beka Ibhidi",
+    "item1": {
+      "category": "Into Yakudala · Afrika Entshonalanga",
+      "name": "Ibhodi Lethusi le-Benin Lekhulu Leminyaka le-19",
+      "description": "Ibhodi eliyigugu kakhulu lethusi livela eNdlunkulu yase-Benin, libonisa ibutho elimkhulu lasebukhosini ngengubo yemikhosi. Umsuka uqinisekisiwe.",
+      "timeLeft": "2h 14m kusele"
+    },
+    "item2": {
+      "category": "Imaski · Afrika Emaphakathi",
+      "name": "Imaski Yemikhosi yoMbuso wase-Kuba",
+      "description": "Imaski yemikhosi eqoshwe ngangesandla evela eNdaweni Yentando Yeningi yase-Congo."
+    },
+    "item3": {
+      "category": "Umculo · Afrika Enshonalanga",
+      "name": "I-Oud Yase-Swahili Yakudala",
+      "description": "I-oud eyenziwe ngesandla yekhulu leminyaka le-19 evela ogwini lwase-Swahili, enenhlonipho yokusika."
+    }
+  },
+  "artisans": {
+    "tagline": "Hlangana Nabenzi",
+    "title": "Izindlunkulu Ezikhethiwe",
+    "subtitle": "Abantu beqiniso, ubuciko beqiniso — ukuthenga ngakunye kusekela indlunkulu yendawo ngokuqondile",
+    "follow": "Landela Indlunkulu",
+    "artisan1": { "craft": "Ukwenza Amalunga Namashokobezi", "location": "Rift Valley, eKenya", "items": "Izinto ezingama-42 ezikhona" },
+    "artisan2": { "craft": "Ukuqopha Ngomuthi", "location": "Dar es Salaam, eTanzania", "items": "Izinto ezingama-28 ezikhona" },
+    "artisan3": { "craft": "Ukuphothula Nezingobozi", "location": "Bolgatanga, eGhana", "items": "Izinto ezingama-32 ezikhona" }
+  },
+  "newsletter": {
+    "title": "Ungaphuthi Lutho",
+    "subtitle": "Thola isaziso lapho izindlunkulu ezintsha zidweba izinto nokuthi amabhidi aphilayo aqala nini",
+    "placeholder": "Faka ikheli lakho le-imeyili",
+    "button": "Ngxavusha Mina"
+  }
+},
+
+
+
+"events": {
+  "hero": {
+    "titleStart": "Izikhungo",
+    "titleAccent": "Zamasiko ase-Afrika",
+    "description": "Kusuka emakhosini ombhiyozo wezigubhu e-Sahel kuya ebusuku obukhazimulayo basemasikweni e-Lagos - ngena enhliziyweni ephilayo yezwekazi"
+  },
+  "explore": {
+    "title": "Hlola Izikhungo",
+    "categories": {
+      "music": "Umculo Nokudansa",
+      "ceremonies": "Imikhosi Yendabuko",
+      "food": "Izigcawu Zokudla",
+      "art": "Ubuciko Nobuchwepheshe",
+      "film": "Ifilamu Nezindawo Zokudlala"
+    }
+  },
+  "byMonth": {
+    "title": "Thola Izikhungo Ngenyanga",
+    "subtitle": "Bhrowuza izikhungo zamasiko ase-Afrika ezenzeka unyaka wonke",
+    "selectPrompt": "👆 Khetha inyanga engenhla ukuze ubone izikhungo",
+    "bookNow": "Buka Manje",
+    "months": {
+      "january": "Januwari", "february": "Februwari", "march": "Mashi", "april": "Ephreli",
+      "may": "Meyi", "june": "Juni", "july": "Julayi", "august": "Agasti",
+      "september": "Septemba", "october": "Okthoba", "november": "Novemba", "december": "Disemba"
+    },
+    "eventCount": {
+      "zero": "0 Izikhungo", "one": "1 Isigcawu", "two": "2 Izikhungo",
+      "three": "3 Izikhungo", "four": "4 Izikhungo", "five": "5 Izikhungo", "six": "6 Izikhungo"
+    },
+    "janEvents": {
+      "title": "Izikhungo ZakaJanuwari",
+      "event1": {
+        "category": "Umculo · Afrika Eningizimu",
+        "name": "Isigcawu i-Bushfire",
+        "description": "Ukuhlangana okumangalisayo kwamaziko nabadlali base-Afrika eMbusweni wase-Eswatini. Umculo, ukuxoxa izindaba, nomoya womphakathi endaweni yentaba eyodwa.",
+        "location": "Malkerns, Eswatini"
+      },
+      "event2": {
+        "category": "Umkhosi · Afrika Entshonalanga",
+        "name": "Isigcawu i-Odwira",
+        "description": "Abantu base-Ashanti base-Ghana bahlanza izihlalo zabo banikelele abaphansi kulomkhosi osingethwe izinsuku eziyisikhombisa ogcwele izinqumo, ukugida, ukushaya izigubhu, ukucula nokudla.",
+        "location": "Kumasi, Ghana"
+      }
+    }
+  }
+}
 
 
 }

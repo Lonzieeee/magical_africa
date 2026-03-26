@@ -121,12 +121,12 @@ const SideMenu = ({ isOpen, onClose }) => {
         
           
           <li onClick={()=> handleNavigation('/events')}>
-             Events
+             {t('sideMenu.events')}
            <i className="fa-solid fa-chevron-right"></i>
            </li>
 
           <li onClick={()=> handleNavigation('/music')}>
-            Music 
+      {t('sideMenu.music')}
             <i className="fa-solid fa-chevron-right"></i>  
          </li>
           

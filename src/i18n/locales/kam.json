@@ -1,6 +1,8 @@
 {
   "nav": {
     "menu": "Menyu",
+    "events": "Matukio",
+    "music": "Nyimbo",
     "language": "Lũthĩmo",
     "signIn": "Ĩngĩa",
     "logOut": "Uma",
@@ -111,7 +113,9 @@
   "about": "Ũhoro",
   "language": "Lũthĩmo",
   "marketplace": "Ndũka",
-    "academy": "Akademi"
+  "academy": "Akademi",
+  "events": "Matukio",
+  "music": "Nyimbo"
 },
 
 
@@ -224,6 +228,8 @@
 
 "faq": {
   "title": "Maũvũĩso Ala Mavũĩawa Mũno",
+  "titlespan": "",
+  "subtitle2": "Ona majibu ya maswali ya kawaidaa kuhusu Afrika",
   "items": {
     "whatIs": {
       "question": "Magical Africa nĩ kĩĩ?",
@@ -795,6 +801,170 @@
       "bookNow": "Ũkia Ĩu",
       "seeMore": "Ona Kĩĩngĩ"
     }
+  },
+
+
+  "popularCourses": {
+  "title": "Masomo yetu",
+  "subtitle": "Gundua masomo mengi yanayofunzwa na walimu wa Afrika wenye bidii — kutoka kwa ufundi wa zamani hadi sanaa za kimila, kuna kitu kwa kila mtu.",
+  "popularLabel": "Masomo Maarufu",
+  "pottery": "Masomo ya ufinyanzi",
+  "instrumentMaking": "Kutengeneza vyombo vya muziki",
+  "weaving": "Masomo ya kusuka",
+  "cooking": "Masomo ya kupika",
+  "woodCarving": "Masomo ya kuchonga mbao",
+  "viewMore": "Ona zaidi"
+},
+
+
+"culture": {
+  "tagline": "Sherehekea Bara",
+  "titleStart": "Matukio ya",
+  "titleAccent": "Utamaduni",
+  "titleEnd": "Afrika",
+  "description": "Matukio ya utamaduni wa Afrika yanasherehekea urithi kwa kuunganisha jamii kupitia nyimbo, ngoma, sanaa, chakula, na hadithi — kuheshimu mila huku yakikumbatia utambulisho wa kisasa wa Afrika.",
+  "learnMore": "Ũndũ Ingĩ",
+  "music": {
+    "titleAccent": "Nyimbo",
+    "titleRest": "Tamasha",
+    "festival1": { "name": "Tamasha la Nyimbo Afropolis", "location": "Lagos, Nigeria" },
+    "festival2": { "name": "Sauti za Busara", "location": "Zanzibar, Tanzania" },
+    "festival3": { "name": "Tamasha la Bushfire", "location": "Malkerns, Eswatini" }
+  },
+  "food": {
+    "titleStart": "Chakula &",
+    "titleAccent": "Tamasha za Utamaduni",
+    "festival1": { "name": "Tamasha la Chakula & Divai Cape Town", "location": "Cape Town, Afrika Kusini" },
+    "festival2": { "name": "Tamasha la Chakula Nairobi", "location": "Nairobi, Kenya" },
+    "festival3": { "name": "Tamasha la Utamaduni Zanzibar", "location": "Zanzibar, Tanzania" }
+  },
+  "art": {
+    "titleStart": "Sanaa na",
+    "titleAccent": "Maonyesho ya Ufundi",
+    "festival1": { "name": "Wiki ya Sanaa Accra", "location": "Accra, Ghana" },
+    "festival2": { "name": "Maonyesho ya Sanaa Kigali", "location": "Kigali, Rwanda" },
+    "festival3": { "name": "Soko la Ufundi Afrika", "location": "Pan-Afrika" }
   }
+},
+
+
+"market": {
+  "hero": {
+    "tagline": "Isoko ya Afrika",
+    "titleStart": "Ona",
+    "titleAccent": "Vĩndũ Vya Kweli",
+    "titleEnd": "vya Afrika",
+    "description": "Kuuma kwa vĩndũ vya isoko hadi vĩndũ vya mikono vya andu a ũhiano wa ndĩ — ikala na gĩcio kya mĩtũũrĩre ya Afrika.",
+    "stats": { "artisans": "Andu a Ũhiano", "products": "Vĩndũ", "countries": "Mayũmba ma Taĩfa" },
+    "labels": { "jewellery": "Itura", "textiles": "Nguo", "spices": "Irio & Viungo", "carvings": "Ũkorwo wa Mĩtĩ", "artefacts": "Vĩndũ vya Kale" }
+  },
+  "bestSellers": {
+    "title": "Vĩndũ Vya Kũuzwa Nene",
+    "subtitle": "Vĩndũ vya gũthomeka vya kũhĩtwo kuuma bara yothe",
+    "addToCart": "Ongeza kwa Mkokoteni",
+    "price": "Thogora",
+    "item1": { "name": "Itura ya Dhahabu" },
+    "item2": { "name": "Ĩtĩna" },
+    "item3": { "name": "Gĩkombe" },
+    "item4": { "name": "Mbakuli" }
+  },
+  "shop": {
+    "title": "Gũra Vĩndũ",
+    "subtitle": "Vĩndũ vya kĩgongona vya andu a ũhiano wa ndĩ kote Afrika",
+    "categories": {
+      "jewellery": "Itura", "carvings": "Ũkorwo wa Mĩtĩ", "pottery": "Ũhiano wa Vĩndũ",
+      "textiles": "Nguo", "baskets": "Vikapu", "spices": "Viungo na Irio"
+    }
+  },
+  "auctions": {
+    "tagline": "Ĩmwe, Ilĩ",
+    "title": "Isoko ya Sĩa Ĩno",
+    "subtitle": "Ikara na zabuni kwa vĩndũ vya nka Afrika, itura, na vĩndũ vya mĩtũũrĩre",
+    "currentBid": "Zabuni ya Sĩa Ĩno",
+    "placeBid": "Ikara na Zabuni",
+    "item1": {
+      "category": "Kĩndũ kya Kale · Afrika ya Ũtũ",
+      "name": "Bamba ya Shaba ya Benin ya Mĩaka 19",
+      "description": "Bamba ya nadra sana ya shaba kuuma Alaeze ya Benin, yonyesha shujaa wa kifalme. Chanzo kimethibitishwa.",
+      "timeLeft": "Saa 2 dakika 14 cigĩrĩte"
+    },
+    "item2": {
+      "category": "Itura ya Isi · Afrika ya Katĩ",
+      "name": "Itura ya Isi ya Ũgwati wa Kuba",
+      "description": "Itura ya isi iliyochongwa na kupakwa rangi kuuma Democratic Republic of Congo."
+    },
+    "item3": {
+      "category": "Kĩgĩcũnji · Afrika ya Ũtũ wa Eno",
+      "name": "Oud ya Kale ya Swahili Taarab",
+      "description": "Oud iliyoundwa kwa mikono ya mĩaka 19 kuuma pwani ya Swahili, na kazi nzuri ya uingizaji."
+    }
+  },
+  "artisans": {
+    "tagline": "Onana na Andu a Ũhiano",
+    "title": "Andu a Ũhiano Aonekaga",
+    "subtitle": "Andu a kĩeli, ũhiano wa kĩeli — kũgũra kwĩ nakĩ gũtũũrana na mũndũ wa ũhiano wa ndĩ",
+    "follow": "Kũrũkĩra Mũhiano",
+    "artisan1": { "craft": "Ũhiano wa Itura na Vĩndũ", "location": "Rift Valley, Kenya", "items": "Vĩndũ 42 vya kũonekana" },
+    "artisan2": { "craft": "Ũkorwo wa Mĩtĩ", "location": "Dar es Salaam, Tanzania", "items": "Vĩndũ 28 vya kũonekana" },
+    "artisan3": { "craft": "Ũsukaji na Vikapu", "location": "Bolgatanga, Ghana", "items": "Vĩndũ 32 vya kũonekana" }
+  },
+  "newsletter": {
+    "title": "Ũtikagĩe Kĩndũ",
+    "subtitle": "Bata arifa andu a ũhiano apya maoneka na isoko ya sĩa ĩno ikinĩa",
+    "placeholder": "Injĩra anwani yaku ya barua pepe",
+    "button": "Nĩarifu"
+  }
+},
+
+
+"events": {
+  "hero": {
+    "titleStart": "Matukio ya",
+    "titleAccent": "Mĩtũũrĩre ya Afrika",
+    "description": "Kuuma matamasha ya ngoma kule Sahel hadi usiku wa maonyesho Lagos - ingĩa muhiano wa moyo wa bara"
+  },
+  "explore": {
+    "title": "Ona Matukio",
+    "categories": {
+      "music": "Nyimbo na Mĩthiũrũko",
+      "ceremonies": "Mĩtũũrĩre ya Kale",
+      "food": "Matamasha ya Irio",
+      "art": "Nka na Ũhiano wa Mikono",
+      "film": "Filamu na Ũsanidi"
+    }
+  },
+  "byMonth": {
+    "title": "Tafuta Matukio kwa Mwezi",
+    "subtitle": "Vinjari matukio ya mĩtũũrĩre ya Afrika yanayotokea mwaka mzima",
+    "selectPrompt": "👆 Chagua mwezi hapo juu kuona matukio",
+    "bookNow": "Hifadhi Sasa",
+    "months": {
+      "january": "Januari", "february": "Februari", "march": "Machi", "april": "Aprili",
+      "may": "Mei", "june": "Juni", "july": "Julai", "august": "Agosti",
+      "september": "Septemba", "october": "Oktoba", "november": "Novemba", "december": "Desemba"
+    },
+    "eventCount": {
+      "zero": "Vĩndũ 0", "one": "Kĩndũ 1", "two": "Vĩndũ 2",
+      "three": "Vĩndũ 3", "four": "Vĩndũ 4", "five": "Vĩndũ 5", "six": "Vĩndũ 6"
+    },
+    "janEvents": {
+      "title": "Matukio ya Januari",
+      "event1": {
+        "category": "Nyimbo · Afrika ya Kusini",
+        "name": "Matamasha ya Bushfire",
+        "description": "Mkusanyiko wa ajabu wa wasanii wa Afrika katika Alaeze ya Eswatini. Nyimbo, hadithi, na roho ya jamii katika mazingira ya mlima.",
+        "location": "Malkerns, Eswatini"
+      },
+      "event2": {
+        "category": "Mĩtũũrĩre · Afrika ya Ũtũ",
+        "name": "Matamasha ya Odwira",
+        "description": "Andu a Ashanti a Ghana masafisha viti vyao na kuheshimu mababu katika sherehe hii ya wiki iliyojaa maandamano, ngoma, nyimbo na karamu.",
+        "location": "Kumasi, Ghana"
+      }
+    }
+  }
+}
+
+
 
 }

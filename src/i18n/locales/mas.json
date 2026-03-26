@@ -1,6 +1,8 @@
 {
   "nav": {
     "menu": "Enkitáábùà",
+    "events": "Enkiama",
+    "music": "Mĩhĩrĩga",
     "language": "Enkutuk",
     "signIn": "Nídó",
     "logOut": "Péé",
@@ -110,7 +112,9 @@
   "about": "Tenebo",
   "language": "Enkutuk",
   "marketplace": "Enkáng'",
-  "academy": "ol aadet"
+  "academy": "ol aadet",
+  "events": "Enkiama",
+  "music": "Mĩhĩrĩga"
 },
 
 
@@ -224,6 +228,9 @@
 
 "faq": {
   "title": "Inkitáábùàin Naáròrè",
+  "titlespan": "",
+
+  "subtitle2": "Nɛ́ɛta ijibu ye maswali ya kawaida pee Afrika",
   "items": {
     "whatIs": {
       "question": "Kake Magical Africa?",
@@ -790,6 +797,172 @@
       "bookNow": "Ibeek Sapuk",
       "seeMore": "Inyor Kishomi"
     }
+  },
+
+
+  "popularCourses": {
+  "title": "Enkiama leng'eno",
+  "subtitle": "Iyiook enkiama nabo olopeny ole nkishon e-Africa — esitoki enkiama ye nkejek gaa enkiama ye nkoisikir, kake aji kake entito.",
+  "popularLabel": "Enkiama Nabo",
+  "pottery": "Enkiama ye ilchamus",
+  "instrumentMaking": "Arok ye ilkisonko",
+  "weaving": "Enkiama ye nkejek",
+  "cooking": "Enkiama ye nkima",
+  "woodCarving": "Enkiama ye olbul",
+  "viewMore": "Iyiook kake"
+},
+
+
+
+"culture": {
+  "tagline": "Siririka Enkiama ye Afrika",
+  "titleStart": "Enkiama",
+  "titleAccent": "ye Nkoisikir",
+  "titleEnd": "e Afrika",
+  "description": "Enkiama ye nkoisikir e Afrika esiririka nkejek ye nkisonko olopeny ole mĩhĩrĩga kupitia mĩhĩrĩga, ngoma, nka, nkima, na nkoisikir — esopurua nkejek mgbe egona ubunikazi wa Afrika.",
+  "learnMore": "Iyiook Kake",
+  "music": {
+    "titleAccent": "Mĩhĩrĩga",
+    "titleRest": "Enkiama",
+    "festival1": { "name": "Enkiama ya Mĩhĩrĩga Afropolis", "location": "Lagos, Nigeria" },
+    "festival2": { "name": "Sauti za Busara", "location": "Zanzibar, Tanzania" },
+    "festival3": { "name": "Enkiama Bushfire", "location": "Malkerns, Eswatini" }
+  },
+  "food": {
+    "titleStart": "Nkima &",
+    "titleAccent": "Enkiama ye Nkoisikir",
+    "festival1": { "name": "Enkiama ya Nkima & Divai Cape Town", "location": "Cape Town, Afrika Kusini" },
+    "festival2": { "name": "Enkiama ya Nkima Nairobi", "location": "Nairobi, Kenya" },
+    "festival3": { "name": "Enkiama ye Nkoisikir Zanzibar", "location": "Zanzibar, Tanzania" }
+  },
+  "art": {
+    "titleStart": "Nka nabo",
+    "titleAccent": "Enkiama ye Ufundi",
+    "festival1": { "name": "Enkiama ya Nka Accra", "location": "Accra, Ghana" },
+    "festival2": { "name": "Enkiama ya Nka Kigali", "location": "Kigali, Rwanda" },
+    "festival3": { "name": "Soko ya Ufundi Afrika", "location": "Pan-Afrika" }
   }
+},
+
+
+
+
+"market": {
+  "hero": {
+    "tagline": "Enkiama ye Ng'eno e Afrika",
+    "titleStart": "Iyiook",
+    "titleAccent": "Inkishu Nabo",
+    "titleEnd": "e Afrika",
+    "description": "Esitoki enkiama ye ilchamus ole nkejek gaa inkishu ye nkoisikir ye ilkisonko ole nkiama — nweta oltung'ani ye nkoisikir ole taa e Afrika.",
+    "stats": { "artisans": "Ilkisonko", "products": "Inkishu", "countries": "Intiretai" },
+    "labels": { "jewellery": "Ilkilorit", "textiles": "Nkejek", "spices": "Ilchamus & Nkima", "carvings": "Olbul", "artefacts": "Inkishu Nabo" }
+  },
+  "bestSellers": {
+    "title": "Inkishu Ole Etapari Nabo",
+    "subtitle": "Inkishu ole ehitoritie esitoki e Afrika",
+    "addToCart": "Injek e Oltung'ani",
+    "price": "Enkiama",
+    "item1": { "name": "Oltung'ani ye Olodoi" },
+    "item2": { "name": "Olchani" },
+    "item3": { "name": "Olkopo" },
+    "item4": { "name": "Enkiama ye Nkima" }
+  },
+  "shop": {
+    "title": "Sorre Enkiama",
+    "subtitle": "Inkishu ezigbo eziokwu nke ilkisonko ole nkiama kote e Afrika",
+    "categories": {
+      "jewellery": "Ilkilorit", "carvings": "Olbul", "pottery": "Ilchamus ye Oldung'a",
+      "textiles": "Nkejek", "baskets": "Enkiama ye Olbul", "spices": "Ilchamus na Nkima"
+    }
+  },
+  "auctions": {
+    "tagline": "Amu, Arru",
+    "title": "Enkiama Ole Taa",
+    "subtitle": "Pee enkiama ye nka Afrika, ilkilorit, na inkishu ye nkoisikir",
+    "currentBid": "Enkiama Ole Taa",
+    "placeBid": "Injek Enkiama",
+    "item1": {
+      "category": "Inkishu Nabo · Afrika Oodo",
+      "name": "Oltung'ani ye Shaba ye Benin ye Nariai 19",
+      "description": "Oltung'ani adimu sana ye shaba esitoki e Alaeze ye Benin, ebonisa ilkisonko ole nkiama. Chanzo kimethibitishwa.",
+      "timeLeft": "Awa 2 nkeji 14 efoduru"
+    },
+    "item2": {
+      "category": "Oltung'ani ye Isi · Afrika Etiti",
+      "name": "Oltung'ani ye Isi ye Kuba",
+      "description": "Oltung'ani ye isi eqoshwe ngangesandla evela e Congo."
+    },
+    "item3": {
+      "category": "Ilkisonko ye Mĩhĩrĩga · Afrika Odo",
+      "name": "Oud Nabo ye Swahili Taarab",
+      "description": "Oud etengenezwa kwa mikono ye nariai 19 esitoki pwani ye Swahili, nwere ọrụ dị mma."
+    }
+  },
+  "artisans": {
+    "tagline": "Zulita Ilkisonko",
+    "title": "Ilkisonko Ole Ehitoritie",
+    "subtitle": "Ilkisonko ezigbo, inkishu ezigbo — enkiama nabo esupport ilkisonko ole nkiama",
+    "follow": "Sorre Olkisonko",
+    "artisan1": { "craft": "Ilkilorit na Inkishu ye Olodoi", "location": "Rift Valley, Kenya", "items": "Inkishu 42 edheputhara" },
+    "artisan2": { "craft": "Olbul ye Olbosho", "location": "Dar es Salaam, Tanzania", "items": "Inkishu 28 edheputhara" },
+    "artisan3": { "craft": "Nkejek na Enkiama ye Olbul", "location": "Bolgatanga, Ghana", "items": "Inkishu 32 edheputhara" }
+  },
+  "newsletter": {
+    "title": "Mepata Enkiama Nabo",
+    "subtitle": "Nweta ọkwa mgbe ilkisonko ọhụrụ edheputhara inkishu na mgbe enkiama ole taa amalite",
+    "placeholder": "Injek email yoo",
+    "button": "Gbaa Mo Ọkwa"
+  }
+},
+
+
+
+"events": {
+  "hero": {
+    "titleStart": "Enkiama",
+    "titleAccent": "ye Nkoisikir e Afrika",
+    "description": "Esitoki enkiama ye ngoma e Sahel gaa enkiama ye masquerade e Lagos - injek e oltung'ani ole taa e Afrika"
+  },
+  "explore": {
+    "title": "Iyiook Enkiama",
+    "categories": {
+      "music": "Mĩhĩrĩga na Ngoma",
+      "ceremonies": "Enkiama ye Nkoisikir",
+      "food": "Enkiama ye Nkima",
+      "art": "Nka na Ũhiano",
+      "film": "Filamu na Enkiama"
+    }
+  },
+  "byMonth": {
+    "title": "Tafuta Enkiama kwa Olapa",
+    "subtitle": "Vinjari enkiama ye nkoisikir e Afrika yanayotokea mwaka mzima",
+    "selectPrompt": "👆 Chagua olapa hapo juu kuona enkiama",
+    "bookNow": "Hifadhi Sasa",
+    "months": {
+      "january": "Januari", "february": "Februari", "march": "Machi", "april": "Aprili",
+      "may": "Mei", "june": "Juni", "july": "Julai", "august": "Agosti",
+      "september": "Septemba", "october": "Oktoba", "november": "Novemba", "december": "Desemba"
+    },
+    "eventCount": {
+      "zero": "Enkiama 0", "one": "Enkiama 1", "two": "Enkiama 2",
+      "three": "Enkiama 3", "four": "Enkiama 4", "five": "Enkiama 5", "six": "Enkiama 6"
+    },
+    "janEvents": {
+      "title": "Enkiama ye Januari",
+      "event1": {
+        "category": "Mĩhĩrĩga · Afrika ye Kusini",
+        "name": "Enkiama ye Bushfire",
+        "description": "Oltung'ani wa ajabu wa ilkisonko e Afrika e Alaeze ye Eswatini. Mĩhĩrĩga, nkoisikir, na oltung'ani wa jamii katika mazingira ya mlima.",
+        "location": "Malkerns, Eswatini"
+      },
+      "event2": {
+        "category": "Enkiama ye Nkoisikir · Afrika ye Ũtũ",
+        "name": "Enkiama ye Odwira",
+        "description": "Ilkisonko a Ashanti e Ghana masafisha viti na kuheshimu mababu katika enkiama hii ya wiki iliyojaa maandamano, ngoma, nyimbo na karamu.",
+        "location": "Kumasi, Ghana"
+      }
+    }
+  }
+}
 
 }
