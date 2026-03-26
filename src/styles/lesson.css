@@ -1,74 +1,64 @@
 /* lesson.css */
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.lesson-page {
+  width: 100%;
   font-family: 'Poppins', sans-serif;
   letter-spacing: 0.025rem;
   line-height: 1.5rem;
 }
 
-.lesson-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 120px;
-  min-height: 100vh;
-  background-color: #f9f9f9;
-  font-family: 'Poppins', sans-serif;
-  padding-bottom: 4rem;
+.lesson-main {
+  display: grid;
+  align-content: start;
 }
 
-/* ── Page header ── */
-.lesson-header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  width: 1200px;
-  margin-bottom: 1.5rem;
+.lesson-panel {
+  max-width: 1180px;
 }
 
-.lesson-back-btn {
-  background-color: transparent;
-  border: 1px solid #e5e3e3;
-  color: rgb(48, 48, 48);
-  width: 32px;
-  height: 32px;
-  font-size: 1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
+.lesson-lead {
+  margin-top: -2px;
+  margin-bottom: 12px;
+  font-size: 0.88rem;
+  color: var(--td-text-medium);
 }
 
-.lesson-back-btn:hover {
-  border-color: rgb(48, 48, 48);
-  background-color: #f0f0f0;
-}
-
-.lesson-header h2 {
-  font-size: 1rem;
+.lesson-save-msg {
+  text-align: center;
+  padding: 10px;
+  margin: 8px auto 12px;
+  max-width: 540px;
+  border: 1px solid var(--td-border-soft);
   font-weight: 600;
-  color: rgb(48, 48, 48);
-  margin: 0;
+  font-size: 0.84rem;
+}
+
+.lesson-save-msg.ok {
+  background-color: rgba(145, 165, 133, 0.18);
+  color: var(--td-black);
+}
+
+.lesson-save-msg.err {
+  background-color: rgba(163, 7, 12, 0.12);
+  color: var(--td-red);
 }
 
 /* ── Outer container ── */
 .lesson-div {
-  width: 1200px;
-  height: 700px;
+  width: 100%;
+  min-height: 700px;
+  height: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid #e5e3e3;
+  border: 1px solid var(--td-border-soft);
+  background-color: var(--td-white);
 }
 
 /* ── Scrollable body ── */
 .lesson-body {
   flex: 1;
-  overflow-y: auto;
+  overflow-y: visible;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -636,14 +626,8 @@
 
 @media screen and (max-width: 1024px) {
 
-  .lesson-page {
-    padding-top: 160px;
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-
-  .lesson-header {
-    width: 100%;
+  .lesson-panel {
+    max-width: none;
   }
 
   .lesson-div {
@@ -692,9 +676,8 @@
 
 @media screen and (max-width: 768px) {
 
-  .lesson-page {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+  .lesson-panel {
+    padding: 14px;
   }
 
   /* Topic topbar — let title shrink */

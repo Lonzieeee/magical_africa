@@ -38,7 +38,7 @@ const AcademyLogin = () => {
           if (userData.role === 'teacher') {
             navigate('/teacher-dashboard')
           } else {
-            navigate('/academy') // change to your learner page
+            navigate('/learner')
           }
         }, 2000)
 

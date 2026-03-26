@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import { FaCheckCircle, FaRedoAlt, FaTimesCircle } from 'react-icons/fa'
+import { MdQuiz } from 'react-icons/md'
 import '../styles/quiz.css'
 
-const Quiz = ({ quiz = [], topicTitle = '' }) => {
+const Quiz = ({ quiz = [], topicTitle = '', onSubmitResult }) => {
   const [answers, setAnswers] = useState({})
   const [submitted, setSubmitted] = useState(false)
   const [score, setScore] = useState(0)
@@ -20,6 +22,9 @@ const Quiz = ({ quiz = [], topicTitle = '' }) => {
     })
     setScore(correct)
     setSubmitted(true)
+    if (onSubmitResult) {
+      onSubmitResult({ score: correct, total: quiz.length })
+    }
   }
 
   const handleRetry = () => {
@@ -34,7 +39,7 @@ const Quiz = ({ quiz = [], topicTitle = '' }) => {
     <div className='quiz-page'>
 
       <div className='quiz-header'>
-        <h2>📝 Topic Quiz</h2>
+        <h2><MdQuiz className='quiz-title-icon' /> Topic Quiz</h2>
         {topicTitle && <p className='quiz-topic-name'>{topicTitle}</p>}
       </div>
 
@@ -67,8 +72,8 @@ const Quiz = ({ quiz = [], topicTitle = '' }) => {
                       disabled={submitted}
                     />
                     <span>{opt}</span>
-                    {submitted && isCorrect && <span className='quiz-tick'>✅</span>}
-                    {isWrong && <span className='quiz-cross'>❌</span>}
+                    {submitted && isCorrect && <span className='quiz-tick'><FaCheckCircle /></span>}
+                    {isWrong && <span className='quiz-cross'><FaTimesCircle /></span>}
                   </label>
                 )
               })}
@@ -95,17 +100,17 @@ const Quiz = ({ quiz = [], topicTitle = '' }) => {
       ) : (
         <div className='quiz-result'>
           <div className='quiz-score-box'>
-            <h3>🎉 You scored: <span>{score}/{quiz.length}</span></h3>
+            <h3>You scored: <span>{score}/{quiz.length}</span></h3>
             <p>
               {score === quiz.length
-                ? 'Perfect score! Excellent work! 🌟'
+                ? 'Perfect score! Excellent work!'
                 : score >= quiz.length / 2
-                  ? 'Good job! Keep it up! 💪'
-                  : 'Keep practicing, you\'ll get there! 📚'}
+                  ? 'Good job! Keep it up!'
+                  : 'Keep practicing, you\'ll get there!'}
             </p>
           </div>
           <button className='quiz-retry-btn' onClick={handleRetry}>
-            🔄 Try Again
+            <FaRedoAlt /> Try Again
           </button>
         </div>
       )}
