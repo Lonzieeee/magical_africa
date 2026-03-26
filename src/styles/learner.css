@@ -1535,6 +1535,25 @@
     position: static;
     height: auto;
     min-height: 0;
+    gap: 12px;
+  }
+
+  .learner-nav-groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .learner-greeting {
+    margin-bottom: 12px;
+  }
+
+  .learner-catchy-message {
+    align-items: flex-start;
+  }
+
+  .learner-store-free-stats,
+  .learner-store-badges {
+    margin-bottom: 10px;
   }
 
   .learner-metrics-grid {
@@ -1551,8 +1570,51 @@
     padding: 16px;
   }
 
+  .learner-sidebar {
+    padding: 14px;
+  }
+
+  .learner-nav-groups {
+    grid-template-columns: 1fr;
+  }
+
+  .learner-back-btn {
+    padding: 9px 12px;
+    font-size: 0.88rem;
+  }
+
   .learner-panel h1 {
     font-size: 1.3rem;
+  }
+
+  .learner-courses-intro {
+    margin-top: -4px;
+  }
+
+  .learner-suggested-header {
+    justify-content: flex-start;
+  }
+
+  .learner-categories {
+    gap: 8px;
+  }
+
+  .learner-categories button {
+    font-size: 0.78rem;
+    padding: 6px 10px;
+  }
+
+  .learner-suggested-actions {
+    flex-direction: column;
+  }
+
+  .learner-suggested-actions button {
+    width: 100%;
+  }
+
+  .scor {
+    transform: scale(0.9);
+    transform-origin: center top;
   }
 
   .learner-course-card {
@@ -1569,6 +1631,27 @@
 }
 
 @media screen and (max-width: 480px) {
+  .learner-main {
+    padding: 12px;
+  }
+
+  .learner-greeting {
+    padding: 10px 10px;
+  }
+
+  .learner-catchy-message {
+    font-size: 0.78rem;
+  }
+
+  .learner-free-empty-text {
+    font-size: 0.82rem;
+    padding: 0 4px;
+  }
+
+  .scor {
+    transform: scale(0.8);
+  }
+
   .learner-metrics-grid {
     grid-template-columns: 1fr;
   }

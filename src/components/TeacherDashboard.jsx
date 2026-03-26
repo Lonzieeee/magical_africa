@@ -18,6 +18,12 @@ const TeacherDashboard = () => {
   const navigate = useNavigate()
   const { userData } = useAuth()
   const [activeSection, setActiveSection] = useState('courses')
+  const [menuOpen, setMenuOpen] = useState({
+    teaching: true,
+    learners: true,
+    insights: false,
+    content: false
+  })
   const [courses, setCourses] = useState([])
   const [enrollments, setEnrollments] = useState([])
   const [announcements, setAnnouncements] = useState([])
@@ -382,6 +388,10 @@ const TeacherDashboard = () => {
     navigate('/lesson', { state: { courseId } })
   }
 
+  const toggleMenu = (menu) => {
+    setMenuOpen((prev) => ({ ...prev, [menu]: !prev[menu] }))
+  }
+
   return (
     <div className='td-dashboard'>
       <div className='td-layout'>
@@ -396,23 +406,116 @@ const TeacherDashboard = () => {
             <h2>Tutor Dashboard</h2>
           </div>
 
-          <button className={`td-nav-btn ${activeSection === 'courses' ? 'active' : ''}`} onClick={() => setActiveSection('courses')}>Courses</button>
-          <button className={`td-nav-btn ${activeSection === 'builder' ? 'active' : ''}`} onClick={() => setActiveSection('builder')}>Course Builder</button>
-          <button className={`td-nav-btn ${activeSection === 'students' ? 'active' : ''}`} onClick={() => setActiveSection('students')}>Students</button>
-          <button className={`td-nav-btn ${activeSection === 'analytics' ? 'active' : ''}`} onClick={() => setActiveSection('analytics')}>Analytics</button>
-          <button className={`td-nav-btn ${activeSection === 'quizzes' ? 'active' : ''}`} onClick={() => setActiveSection('quizzes')}>Quizzes & Assessments</button>
-          <button className={`td-nav-btn ${activeSection === 'culture' ? 'active' : ''}`} onClick={() => setActiveSection('culture')}>Cultural Content</button>
-          <button className={`td-nav-btn ${activeSection === 'language' ? 'active' : ''}`} onClick={() => setActiveSection('language')}>Language Tools</button>
-          <button className={`td-nav-btn ${activeSection === 'messages' ? 'active' : ''}`} onClick={() => setActiveSection('messages')}>Messages</button>
-          <button className={`td-nav-btn ${activeSection === 'reviews' ? 'active' : ''}`} onClick={() => setActiveSection('reviews')}>Reviews</button>
-          <button className={`td-nav-btn ${activeSection === 'earnings' ? 'active' : ''}`} onClick={() => setActiveSection('earnings')}>Earnings</button>
+          <div className='td-nav-groups'>
+            <div className='td-nav-group'>
+              <button
+                className={`td-nav-group-title ${menuOpen.teaching ? 'expanded' : ''}`}
+                onClick={() => toggleMenu('teaching')}
+                aria-expanded={menuOpen.teaching}
+              >
+                Teaching Hub
+              </button>
+              {menuOpen.teaching && (
+                <div className='td-nav-submenu'>
+                  <button className={`td-nav-subitem ${activeSection === 'courses' ? 'active' : ''}`} onClick={() => setActiveSection('courses')}>Courses</button>
+                  <button className={`td-nav-subitem ${activeSection === 'builder' ? 'active' : ''}`} onClick={() => setActiveSection('builder')}>Course Builder</button>
+                  <button className={`td-nav-subitem ${activeSection === 'quizzes' ? 'active' : ''}`} onClick={() => setActiveSection('quizzes')}>Quizzes & Assessments</button>
+                </div>
+              )}
+            </div>
+
+            <div className='td-nav-group'>
+              <button
+                className={`td-nav-group-title ${menuOpen.learners ? 'expanded' : ''}`}
+                onClick={() => toggleMenu('learners')}
+                aria-expanded={menuOpen.learners}
+              >
+                Learners
+              </button>
+              {menuOpen.learners && (
+                <div className='td-nav-submenu'>
+                  <button className={`td-nav-subitem ${activeSection === 'students' ? 'active' : ''}`} onClick={() => setActiveSection('students')}>Students</button>
+                  <button className={`td-nav-subitem ${activeSection === 'messages' ? 'active' : ''}`} onClick={() => setActiveSection('messages')}>Messages</button>
+                  <button className={`td-nav-subitem ${activeSection === 'reviews' ? 'active' : ''}`} onClick={() => setActiveSection('reviews')}>Reviews</button>
+                </div>
+              )}
+            </div>
+
+            <div className='td-nav-group'>
+              <button
+                className={`td-nav-group-title ${menuOpen.insights ? 'expanded' : ''}`}
+                onClick={() => toggleMenu('insights')}
+                aria-expanded={menuOpen.insights}
+              >
+                Insights
+              </button>
+              {menuOpen.insights && (
+                <div className='td-nav-submenu'>
+                  <button className={`td-nav-subitem ${activeSection === 'analytics' ? 'active' : ''}`} onClick={() => setActiveSection('analytics')}>Analytics</button>
+                  <button className={`td-nav-subitem ${activeSection === 'earnings' ? 'active' : ''}`} onClick={() => setActiveSection('earnings')}>Earnings</button>
+                </div>
+              )}
+            </div>
+
+            <div className='td-nav-group'>
+              <button
+                className={`td-nav-group-title ${menuOpen.content ? 'expanded' : ''}`}
+                onClick={() => toggleMenu('content')}
+                aria-expanded={menuOpen.content}
+              >
+                Cultural & Language
+              </button>
+              {menuOpen.content && (
+                <div className='td-nav-submenu'>
+                  <button className={`td-nav-subitem ${activeSection === 'culture' ? 'active' : ''}`} onClick={() => setActiveSection('culture')}>Cultural Content</button>
+                  <button className={`td-nav-subitem ${activeSection === 'language' ? 'active' : ''}`} onClick={() => setActiveSection('language')}>Language Tools</button>
+                </div>
+              )}
+            </div>
+          </div>
         </aside>
 
         <main className='td-main'>
-          {loading && <p>Loading dashboard...</p>}
+          {loading && (
+            <div className='td-loading-wrap'>
+              <div className='td-coffee' role='img' aria-label='Coffee cup spinning and stretching from side to side'>
+                <div className='td-coffee__cup'>
+                  <div className='td-coffee__cup-part td-coffee__cup-part--a' />
+                  <div className='td-coffee__cup-part td-coffee__cup-part--b' />
+                  <div className='td-coffee__cup-part td-coffee__cup-part--c' />
+                  <div className='td-coffee__cup-part td-coffee__cup-part--d' />
+                  <div className='td-coffee__cup-part td-coffee__cup-part--e' />
+                  <svg className='td-coffee__cup-part td-coffee__cup-part--f' width='96' height='60' viewBox='0 0 96 60' aria-hidden='true'>
+                    <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
+                      <path className='td-coffee__cup-handle' d='M64,4.413s6.64-2.913,11-2.913c11.739,0,19.5,10.759,19.5,22.497,0,23.475-45,22.497-45,22.497' />
+                    </g>
+                  </svg>
+                </div>
+
+                <svg className='td-coffee__steam' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
+                  <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
+                    <path className='td-coffee__steam-part td-coffee__steam-part--a' d='M13.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
+                    <path className='td-coffee__steam-part td-coffee__steam-part--b' d='M27.844,54s-5.652-10.174-4.522-16.957,6.869-11.564,9.043-18.087c2.261-6.783-4.522-16.957-4.522-16.957' />
+                    <path className='td-coffee__steam-part td-coffee__steam-part--c' d='M40.434,50.999c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
+                  </g>
+                </svg>
+
+                <svg className='td-coffee__steam td-coffee__steam--right' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
+                  <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
+                    <path className='td-coffee__steam-part td-coffee__steam-part--d' d='M19.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
+                    <path className='td-coffee__steam-part td-coffee__steam-part--e' d='M34.434,44c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
+                  </g>
+                </svg>
+              </div>
+            </div>
+          )}
 
           {!loading && activeSection === 'courses' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Teaching Hub</span>
+                <p>Manage your active catalog, publish updates, and keep course quality consistent.</p>
+              </div>
               <div className='td-header'>
                 <h1>
                   Courses
@@ -458,7 +561,11 @@ const TeacherDashboard = () => {
           )}
 
           {!loading && activeSection === 'builder' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Creation Studio</span>
+                <p>Design modules, pricing, and media in one flow before opening classic builders.</p>
+              </div>
               <h1>Course Builder</h1>
               <div className='td-builder-layout'>
                 <article className='td-builder-form'>
@@ -583,7 +690,11 @@ const TeacherDashboard = () => {
           )}
 
           {!loading && activeSection === 'students' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Learner Pulse</span>
+                <p>Track learner activity, completion momentum, and who may need additional support.</p>
+              </div>
               <h1>Students</h1>
               {enrollments.length === 0 ? (
                 <p className='td-empty-text'>No enrolled students yet.</p>
@@ -615,7 +726,11 @@ const TeacherDashboard = () => {
           )}
 
           {!loading && activeSection === 'analytics' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Insights</span>
+                <p>Understand completion trends, engagement health, and top-performing course experiences.</p>
+              </div>
               <h1>Analytics & Insights</h1>
               <div className='td-stat-grid'>
                 <article>
@@ -666,7 +781,11 @@ const TeacherDashboard = () => {
           )}
 
           {!loading && activeSection === 'quizzes' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Assessment Lab</span>
+                <p>Build formative checks and improve learning outcomes with structured quiz feedback loops.</p>
+              </div>
               <h1>Quizzes & Assessments</h1>
               <div className='td-quick-grid'>
                 <article>
@@ -683,7 +802,11 @@ const TeacherDashboard = () => {
           )}
 
           {!loading && activeSection === 'culture' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Cultural Archive</span>
+                <p>Preserve local stories and practices with lessons that center authenticity and context.</p>
+              </div>
               <h1>Cultural Content</h1>
               <div className='td-quick-grid'>
                 <article>
@@ -699,7 +822,11 @@ const TeacherDashboard = () => {
           )}
 
           {!loading && activeSection === 'language' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Language Studio</span>
+                <p>Blend vocabulary, pronunciation, and daily-use phrases for practical language confidence.</p>
+              </div>
               <h1>Language Tools</h1>
               <div className='td-quick-grid'>
                 <article>
@@ -715,7 +842,11 @@ const TeacherDashboard = () => {
           )}
 
           {!loading && activeSection === 'messages' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Communication Desk</span>
+                <p>Keep learners aligned through timely announcements, reminders, and learning nudges.</p>
+              </div>
               <h1>Messages & Announcements</h1>
               <div className='td-message-box'>
                 <textarea
@@ -738,7 +869,11 @@ const TeacherDashboard = () => {
           )}
 
           {!loading && activeSection === 'reviews' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Feedback Radar</span>
+                <p>Read learner sentiment quickly and use ratings to prioritize your next improvements.</p>
+              </div>
               <h1>Reviews & Feedback</h1>
               <div className='td-review-summary'>
                 <article>
@@ -775,7 +910,11 @@ const TeacherDashboard = () => {
           )}
 
           {!loading && activeSection === 'earnings' && (
-            <section>
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>Monetization</span>
+                <p>Track payout readiness and prepare your premium catalog for sustainable revenue.</p>
+              </div>
               <h1>Earnings</h1>
               <p className='td-empty-text'>Revenue and payouts can be enabled once monetization is activated.</p>
             </section>
