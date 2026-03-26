@@ -1,16 +1,60 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { FaBell, FaBolt, FaClock, FaFire, FaGraduationCap, FaStore } from 'react-icons/fa'
+import { FaBell, FaBolt, FaClock, FaFire, FaGraduationCap, FaRegHandPaper, FaStore } from 'react-icons/fa'
 import '../styles/learner.css'
 import { db } from '../context/AuthContext'
 import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
+const getLocalProgressKey = (uid) => `learnerProgressBackup_${uid}`
+
+const toMs = (value) => {
+  if (!value) return 0
+  const parsed = new Date(value).getTime()
+  return Number.isNaN(parsed) ? 0 : parsed
+}
+
+const pickLatestProgress = (serverProgress = {}, localProgress = {}) => {
+  const serverTime = Math.max(
+    toMs(serverProgress.updatedAt),
+    toMs(serverProgress.lastActiveAt),
+    toMs(serverProgress.purchasedAt)
+  )
+  const localTime = Math.max(
+    toMs(localProgress.updatedAt),
+    toMs(localProgress.lastActiveAt),
+    toMs(localProgress.purchasedAt)
+  )
+
+  return localTime > serverTime
+    ? { ...serverProgress, ...localProgress }
+    : { ...localProgress, ...serverProgress }
+}
+
+const mergeCourseMaps = (serverMap = {}, localMap = {}) => {
+  const merged = {}
+  const allCourseIds = new Set([...Object.keys(serverMap), ...Object.keys(localMap)])
+
+  allCourseIds.forEach((courseId) => {
+    merged[courseId] = pickLatestProgress(serverMap[courseId], localMap[courseId])
+  })
+
+  return merged
+}
+
 const Learner = () => {
   const navigate = useNavigate()
   const { user, userData, getFullName } = useAuth()
 
   const [activeSection, setActiveSection] = useState('store')
+  const [storeView, setStoreView] = useState('all')
+  const [courseView, setCourseView] = useState('all')
+  const [menuOpen, setMenuOpen] = useState({
+    discover: true,
+    learning: true,
+    growth: false,
+    community: false
+  })
   const [courses, setCourses] = useState([])
   const [progressMap, setProgressMap] = useState({})
   const [achievements, setAchievements] = useState({
@@ -25,6 +69,17 @@ const Learner = () => {
   const [showPublishedOnly, setShowPublishedOnly] = useState(true)
   const [actionToast, setActionToast] = useState(null)
   const [acquiringCourseId, setAcquiringCourseId] = useState('')
+
+  const persistLocalProgressMap = (nextProgressMap) => {
+    if (!user?.uid) return
+    localStorage.setItem(
+      getLocalProgressKey(user.uid),
+      JSON.stringify({
+        courses: nextProgressMap,
+        updatedAt: new Date().toISOString()
+      })
+    )
+  }
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -76,12 +131,35 @@ const Learner = () => {
           ...enrollmentCourses
         }
 
-        setProgressMap(mergedCourses)
+        const localBackupRaw = localStorage.getItem(getLocalProgressKey(user.uid))
+        let localBackupCourses = {}
+        if (localBackupRaw) {
+          try {
+            const parsedLocalBackup = JSON.parse(localBackupRaw)
+            localBackupCourses = parsedLocalBackup?.courses || {}
+          } catch (parseError) {
+            localStorage.removeItem(getLocalProgressKey(user.uid))
+          }
+        }
+
+        const mergedWithLocal = mergeCourseMaps(mergedCourses, localBackupCourses)
+
+        setProgressMap(mergedWithLocal)
         setAchievements(savedProgressData.achievements || achievements)
+        persistLocalProgressMap(mergedWithLocal)
+
+        const mergedSnapshot = JSON.stringify(mergedWithLocal)
+        const savedSnapshot = JSON.stringify(mergedCourses)
+        if (mergedSnapshot !== savedSnapshot) {
+          await setDoc(doc(db, 'learnerProgress', user.uid), {
+            courses: mergedWithLocal,
+            updatedAt: new Date().toISOString()
+          }, { merge: true })
+        }
 
         if (!(progressDocResult.status === 'fulfilled' && progressDocResult.value.exists())) {
           await setDoc(doc(db, 'learnerProgress', user.uid), {
-            courses: mergedCourses,
+            courses: mergedWithLocal,
             achievements: {
               certificates: 0,
               badges: ['Swahili Beginner', 'Storytelling Explorer'],
@@ -195,6 +273,19 @@ const Learner = () => {
     })
   }, [filteredCourses, ownedCourses, showPublishedOnly])
 
+  const suggestedCoursesForView = useMemo(() => {
+    if (storeView === 'free') {
+      return suggestedCourses.filter(course => getCoursePrice(course) === 0)
+    }
+    if (storeView === 'paid') {
+      return suggestedCourses.filter(course => getCoursePrice(course) > 0)
+    }
+    if (storeView === 'published') {
+      return suggestedCourses.filter(course => course.status === 'Published' || !course.status)
+    }
+    return suggestedCourses
+  }, [storeView, suggestedCourses])
+
   const totalStoreCourses = useMemo(() => {
     const myCourseIds = new Set(ownedCourses.map(course => course.id))
     return filteredCourses.filter(course => !myCourseIds.has(course.id)).length
@@ -260,15 +351,48 @@ const Learner = () => {
     return user?.email?.split('@')[0] || 'Learner'
   }, [getFullName, userData, user])
 
+  const myCoursesForView = useMemo(() => {
+    if (courseView === 'in-progress') {
+      return myCourses.filter((course) => {
+        const completion = progressMap[course.id]?.completion || 0
+        return completion > 0 && completion < 100
+      })
+    }
+    if (courseView === 'ready') {
+      return myCourses.filter((course) => {
+        const progress = progressMap[course.id] || {}
+        const completion = progress.completion || 0
+        return completion === 0 && !progress.started
+      })
+    }
+    if (courseView === 'completed') {
+      return myCourses.filter((course) => {
+        const completion = progressMap[course.id]?.completion || 0
+        return completion >= 100
+      })
+    }
+    return myCourses
+  }, [courseView, myCourses, progressMap])
+
   const handleFilter = (type) => {
     setActiveFilter(prev => (prev === type ? null : type))
   }
 
-  const openSection = (section) => {
+  const openSection = (section, options = {}) => {
     setActiveSection(section)
+    if (options.storeView) {
+      setStoreView(options.storeView)
+    }
+    if (options.courseView) {
+      setCourseView(options.courseView)
+    }
     if (section === 'courses') {
       setActiveFilter(null)
     }
+  }
+
+  const toggleMenu = (menu) => {
+    setMenuOpen((prev) => ({ ...prev, [menu]: !prev[menu] }))
   }
 
   const getCoursePrice = (course) => {
@@ -306,6 +430,7 @@ const Learner = () => {
     }
 
     setProgressMap(nextProgressMap)
+    persistLocalProgressMap(nextProgressMap)
 
     try {
       await setDoc(doc(db, 'learnerProgress', user.uid), {
@@ -332,6 +457,10 @@ const Learner = () => {
           : `${course.title || 'Course'} added to My Courses.`
       )
       setTimeout(() => setActionToast(null), 2600)
+    } catch (error) {
+      console.log('Could not sync enrollment to cloud, keeping local backup:', error)
+      setActionToast(`${course.title || 'Course'} saved locally. It will sync when connection is stable.`)
+      setTimeout(() => setActionToast(null), 3200)
     } finally {
       setAcquiringCourseId('')
     }
@@ -396,27 +525,102 @@ const Learner = () => {
             <h2>Learner Dashboard</h2>
           </div>
 
-          <button className={`learner-nav-btn ${activeSection === 'store' ? 'active' : ''}`} onClick={() => openSection('store')}>
-            Course Store
-          </button>
-          <button className={`learner-nav-btn ${activeSection === 'courses' ? 'active' : ''}`} onClick={() => openSection('courses')}>
-            My Courses
-          </button>
-          <button className={`learner-nav-btn ${activeSection === 'progress' ? 'active' : ''}`} onClick={() => openSection('progress')}>
-            Progress Overview
-          </button>
-          <button className={`learner-nav-btn ${activeSection === 'notifications' ? 'active' : ''}`} onClick={() => openSection('notifications')}>
-            Notifications
-          </button>
-          <button className={`learner-nav-btn ${activeSection === 'achievements' ? 'active' : ''}`} onClick={() => openSection('achievements')}>
-            Certifications & Achievements
-          </button>
-          <button className={`learner-nav-btn ${activeSection === 'culture' ? 'active' : ''}`} onClick={() => openSection('culture')}>
-            Cultural Exploration Hub
-          </button>
-          <button className={`learner-nav-btn ${activeSection === 'language' ? 'active' : ''}`} onClick={() => openSection('language')}>
-            Language Practice
-          </button>
+          <div className='learner-nav-groups'>
+            <div className='learner-nav-group'>
+              <button
+                className={`learner-nav-group-title ${menuOpen.discover ? 'expanded' : ''}`}
+                onClick={() => toggleMenu('discover')}
+                aria-expanded={menuOpen.discover}
+              >
+                Discover
+              </button>
+              {menuOpen.discover && (
+                <div className='learner-nav-submenu'>
+                  <button className={`learner-nav-subitem ${activeSection === 'store' && storeView === 'all' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'all' })}>
+                    Course Store
+                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'store' && storeView === 'free' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'free' })}>
+                    Free Courses
+                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'store' && storeView === 'paid' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'paid' })}>
+                    Premium Courses
+                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'store' && storeView === 'published' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'published' })}>
+                    Published Now
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className='learner-nav-group'>
+              <button
+                className={`learner-nav-group-title ${menuOpen.learning ? 'expanded' : ''}`}
+                onClick={() => toggleMenu('learning')}
+                aria-expanded={menuOpen.learning}
+              >
+                My Learning
+              </button>
+              {menuOpen.learning && (
+                <div className='learner-nav-submenu'>
+                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'all' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'all' })}>
+                    My Courses
+                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'in-progress' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'in-progress' })}>
+                    Continue Learning
+                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'ready' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'ready' })}>
+                    Ready To Start
+                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'completed' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'completed' })}>
+                    Completed Courses
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className='learner-nav-group'>
+              <button
+                className={`learner-nav-group-title ${menuOpen.growth ? 'expanded' : ''}`}
+                onClick={() => toggleMenu('growth')}
+                aria-expanded={menuOpen.growth}
+              >
+                Growth
+              </button>
+              {menuOpen.growth && (
+                <div className='learner-nav-submenu'>
+                  <button className={`learner-nav-subitem ${activeSection === 'progress' ? 'active' : ''}`} onClick={() => openSection('progress')}>
+                    Progress Overview
+                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'achievements' ? 'active' : ''}`} onClick={() => openSection('achievements')}>
+                    Certifications & Achievements
+                  </button>
+                </div>
+              )}
+            </div>
+
+            <div className='learner-nav-group'>
+              <button
+                className={`learner-nav-group-title ${menuOpen.community ? 'expanded' : ''}`}
+                onClick={() => toggleMenu('community')}
+                aria-expanded={menuOpen.community}
+              >
+                Community & Practice
+              </button>
+              {menuOpen.community && (
+                <div className='learner-nav-submenu'>
+                  <button className={`learner-nav-subitem ${activeSection === 'notifications' ? 'active' : ''}`} onClick={() => openSection('notifications')}>
+                    Notifications
+                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'culture' ? 'active' : ''}`} onClick={() => openSection('culture')}>
+                    Cultural Exploration Hub
+                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'language' ? 'active' : ''}`} onClick={() => openSection('language')}>
+                    Language Practice
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
         </aside>
 
         <main className='learner-main'>
@@ -425,7 +629,12 @@ const Learner = () => {
           {!loading && (
             <div className='learner-greeting'>
               <h3>Welcome, {learnerName}</h3>
-              <p>Your courses and progress are saved automatically whenever you come back.</p>
+              <p className='learner-catchy-message'>
+                <FaRegHandPaper className='learner-wave-icon' />
+                <span>
+                  Your African learning adventure is live. Jump into your next lesson and keep your streak glowing.
+                </span>
+              </p>
             </div>
           )}
 
@@ -472,12 +681,12 @@ const Learner = () => {
                 </label>
               </div>
 
-              {suggestedCourses.length === 0 && (
+              {suggestedCoursesForView.length === 0 && (
                 <p className='learner-empty'>No available courses to buy right now.</p>
               )}
 
               <div className='learner-store-grid'>
-                {suggestedCourses.map(course => {
+                {suggestedCoursesForView.map(course => {
                   const price = getCoursePrice(course)
                   const isPaid = price > 0
                   const isOwned = Boolean(progressMap[course.id]?.addedToLibrary || progressMap[course.id]?.paid)
@@ -555,12 +764,12 @@ const Learner = () => {
             <section className='learner-panel'>
               <h1>My Courses</h1>
 
-              {myCourses.length === 0 && (
-                <p className='learner-empty'>You have not added or bought any course yet.</p>
+              {myCoursesForView.length === 0 && (
+                <p className='learner-empty'>No course matches this view yet. Try another learning filter.</p>
               )}
 
               <div className='learner-store-grid'>
-                {myCourses.map(course => {
+                {myCoursesForView.map(course => {
                   const progress = progressMap[course.id] || {}
                   const completion = progress.completion || 0
                   const nextLessonLabel = getNextLessonLabel(course, progress)
