@@ -15,9 +15,17 @@
 }
 
 .quiz-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
   font-size: 1.1rem;
   font-weight: 700;
   color: rgb(30, 30, 30);
+}
+
+.quiz-title-icon {
+  color: #1f6f43;
+  font-size: 1.1rem;
 }
 
 .quiz-topic-name {
@@ -163,6 +171,9 @@
 }
 
 .quiz-retry-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   background: transparent;
   border: 1px solid #1f6f43;
   color: black;

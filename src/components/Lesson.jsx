@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from '../components/Navbar'
 import '../styles/lesson.css'
+import '../styles/teacher-dashboard.css'
 import { useNavigate, useLocation } from 'react-router-dom'
 import CourseContent from '../components/Coursecontent'
 import { db, auth } from '../context/AuthContext'
 import { doc, setDoc, getDoc } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
+import { FaChevronLeft } from 'react-icons/fa'
 
 const Lesson = () => {
   const navigate = useNavigate()
@@ -279,29 +280,53 @@ const Lesson = () => {
   }
 
   return (
-    <>
-      <Navbar solid />
-      <div className='lesson-page'>
+    <div className='td-dashboard lesson-dashboard'>
+      <div className='td-layout'>
+        <aside className='td-sidebar'>
+          <button className='td-back-btn' onClick={() => navigate('/teacher-dashboard')} type='button'>
+            <FaChevronLeft aria-hidden='true' />
+            <span>Back to Tutor Dashboard</span>
+          </button>
 
-        <div className='lesson-header'>
-          <button className='lesson-back-btn' onClick={() => navigate('/curriculum')}>&#8592;</button>
-          <h2>Curriculum</h2>
-        </div>
-
-        {saveMsg && (
-          <div style={{
-            textAlign: 'center', padding: '10px', margin: '10px auto',
-            maxWidth: '500px', borderRadius: '8px',
-            backgroundColor: saveMsg.includes('✅') ? '#d4edda' : '#f8d7da',
-            color: saveMsg.includes('✅') ? '#155724' : '#721c24',
-            fontWeight: '500'
-          }}>
-            {saveMsg}
+          <div className='td-sidebar-brand'>
+            <img src='/images/magicaal-logo1-removebg-preview.png' alt='Magical Africa logo' />
+            <h2>Tutor Dashboard</h2>
           </div>
-        )}
 
-        <div className='lesson-div'>
-          <div className='lesson-body'>
+          <div className='td-nav-groups'>
+            <div className='td-nav-group'>
+              <button className='td-nav-group-title expanded' type='button' aria-expanded='true'>
+                Teaching Hub
+              </button>
+              <div className='td-nav-submenu'>
+                <button className='td-nav-subitem' onClick={() => navigate('/teacher-dashboard')} type='button'>
+                  Courses
+                </button>
+                <button className='td-nav-subitem' onClick={() => navigate('/curriculum')} type='button'>
+                  Curriculum
+                </button>
+                <button className='td-nav-subitem active' type='button'>
+                  Lesson Builder
+                </button>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <main className='td-main lesson-main'>
+          <section className='td-panel td-view-stage lesson-panel'>
+            <h1>Lesson Builder</h1>
+            <p className='lesson-lead'>Create focused lessons, upload notes, and add topic quizzes without leaving your tutor workspace.</p>
+
+            {saveMsg && (
+              <div className={`lesson-save-msg ${saveMsg.includes('✅') ? 'ok' : 'err'}`}>
+                {saveMsg}
+              </div>
+            )}
+
+            <div className='lesson-page'>
+              <div className='lesson-div'>
+                <div className='lesson-body'>
             {topics.map((topic) => (
               <div key={topic.id} className='lesson-topic-block'>
 
@@ -486,38 +511,41 @@ const Lesson = () => {
                 <div className='lesson-topic-footer'>
                   <div className='lesson-footer-left'>
                     <button className='lesson-action-btn'
-                      onClick={() => addLesson(topic.id)} disabled={topic.lessons.length >= 5}>
+                        onClick={() => addLesson(topic.id)} disabled={topic.lessons.length >= 5} type='button'>
                       &#43; Lesson
                     </button>
                     <button
                       className={`lesson-action-btn ${topic.showQuizBuilder ? 'quiz-btn-active' : ''}`}
                       onClick={() => toggleQuizBuilder(topic.id)}
+                        type='button'
                     >
                       &#43; Quiz {topic.quiz && topic.quiz.length > 0 ? `(${topic.quiz.length})` : ''}
                     </button>
-                    <button className='lesson-action-btn'>&#43; Certificate</button>
+                      <button className='lesson-action-btn' type='button'>&#43; Certificate</button>
                   </div>
                   <div className='lesson-footer-right'>
-                    <button className='lesson-import-btn'>&#8659; Import Quiz</button>
+                      <button className='lesson-import-btn' type='button'>&#8659; Import Quiz</button>
                   </div>
                 </div>
 
               </div>
             ))}
 
-            <button className='lesson-add-topic-btn' onClick={addTopic}>&#43; Add Topic</button>
-          </div>
+                  <button className='lesson-add-topic-btn' onClick={addTopic} type='button'>&#43; Add Topic</button>
+                </div>
 
-          <div className='lesson-footer-nav'>
-            <button className='lesson-prev-btn' onClick={() => navigate('/curriculum')}>&#8249;</button>
-            <button className='lesson-next-btn' onClick={handleSave} disabled={saving}>
-              {saving ? 'Saving...' : 'Next ›'}
-            </button>
-          </div>
-        </div>
-
+                <div className='lesson-footer-nav'>
+                  <button className='lesson-prev-btn' onClick={() => navigate('/curriculum')} type='button'>&#8249;</button>
+                  <button className='lesson-next-btn' onClick={handleSave} disabled={saving} type='button'>
+                    {saving ? 'Saving...' : 'Save & Return'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
       </div>
-    </>
+    </div>
   )
 }
 
