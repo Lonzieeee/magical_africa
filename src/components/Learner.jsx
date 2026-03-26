@@ -638,7 +638,39 @@ const Learner = () => {
             </div>
           )}
 
-          {loading && <p className='learner-loading'>Loading your dashboard...</p>}
+          {loading && (
+            <div className='learner-loading-wrap'>
+              <div className='learner-coffee' role='img' aria-label='Coffee cup spinning and stretching from side to side'>
+                <div className='learner-coffee__cup'>
+                  <div className='learner-coffee__cup-part learner-coffee__cup-part--a' />
+                  <div className='learner-coffee__cup-part learner-coffee__cup-part--b' />
+                  <div className='learner-coffee__cup-part learner-coffee__cup-part--c' />
+                  <div className='learner-coffee__cup-part learner-coffee__cup-part--d' />
+                  <div className='learner-coffee__cup-part learner-coffee__cup-part--e' />
+                  <svg className='learner-coffee__cup-part learner-coffee__cup-part--f' width='96' height='60' viewBox='0 0 96 60' aria-hidden='true'>
+                    <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
+                      <path className='learner-coffee__cup-handle' d='M64,4.413s6.64-2.913,11-2.913c11.739,0,19.5,10.759,19.5,22.497,0,23.475-45,22.497-45,22.497' />
+                    </g>
+                  </svg>
+                </div>
+
+                <svg className='learner-coffee__steam' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
+                  <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
+                    <path className='learner-coffee__steam-part learner-coffee__steam-part--a' d='M13.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
+                    <path className='learner-coffee__steam-part learner-coffee__steam-part--b' d='M27.844,54s-5.652-10.174-4.522-16.957,6.869-11.564,9.043-18.087c2.261-6.783-4.522-16.957-4.522-16.957' />
+                    <path className='learner-coffee__steam-part learner-coffee__steam-part--c' d='M40.434,50.999c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
+                  </g>
+                </svg>
+
+                <svg className='learner-coffee__steam learner-coffee__steam--right' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
+                  <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
+                    <path className='learner-coffee__steam-part learner-coffee__steam-part--d' d='M19.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
+                    <path className='learner-coffee__steam-part learner-coffee__steam-part--e' d='M34.434,44c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
+                  </g>
+                </svg>
+              </div>
+            </div>
+          )}
 
           {!loading && activeSection === 'store' && (
             <section className='learner-panel'>
@@ -681,8 +713,75 @@ const Learner = () => {
                 </label>
               </div>
 
+              {storeView === 'free' && (
+                <div className='learner-free-strip'>
+                  <h2>Free Learning Picks</h2>
+                  <p>
+                    {suggestedCoursesForView.length > 0
+                      ? `${suggestedCoursesForView.length} free course${suggestedCoursesForView.length > 1 ? 's' : ''} ready for you right now.`
+                      : 'No free courses are available right now.'}
+                  </p>
+                </div>
+              )}
+
               {suggestedCoursesForView.length === 0 && (
-                <p className='learner-empty'>No available courses to buy right now.</p>
+                storeView === 'free'
+                  ? (
+                    <div className='learner-free-empty'>
+                      <div className='scor' aria-hidden='true'>
+                        <div className='scor-head'>
+                          <div className='scor-face'>
+                            <div className='scor-eye scor-eye-left' />
+                            <div className='scor-eye scor-eye-right' />
+                            <div className='scor-face-lower'>
+                              <div className='scor-nose' />
+                              <div className='scor-mouth'>
+                                <div className='scor-mouth-outer' />
+                                <div className='scor-mouth-inner' />
+                              </div>
+                              <div className='scor-mouth-line' />
+                            </div>
+                            <div className='scor-blush scor-blush-left' />
+                            <div className='scor-blush scor-blush-right' />
+                          </div>
+                          <div className='scor-face-fluff scor-face-fluff-left' />
+                          <div className='scor-face-fluff scor-face-fluff-right' />
+                          <div className='scor-ear scor-ear-left' />
+                          <div className='scor-ear-right-wrap'>
+                            <div className='scor-ear scor-ear-right' />
+                            <div className='scor-ear-right-fluff' />
+                          </div>
+                        </div>
+                        <div className='scor-body'>
+                          <div className='scor-tail' />
+                          <div className='scor-torso' />
+                          <div className='scor-neck' />
+                          <div className='scor-arm scor-arm-left' />
+                          <div className='scor-arm scor-arm-right' />
+                          <div className='scor-leg scor-leg-left'>
+                            <div className='scor-leg-foot'>
+                              <div className='scor-leg-foot-pad' />
+                            </div>
+                          </div>
+                          <div className='scor-leg scor-leg-right'>
+                            <div className='scor-leg-foot'>
+                              <div className='scor-leg-foot-pad' />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p className='learner-free-empty-title'>No free courses available right now</p>
+                      <p className='learner-free-empty-text'>New free classes drop often. In the meantime, explore premium options curated for your learning journey.</p>
+                      <button
+                        className='learner-free-empty-btn'
+                        onClick={() => openSection('store', { storeView: 'paid' })}
+                      >
+                        Check Paid Courses
+                      </button>
+                    </div>
+                    )
+                  : <p className='learner-empty'>No available courses to buy right now.</p>
               )}
 
               <div className='learner-store-grid'>
