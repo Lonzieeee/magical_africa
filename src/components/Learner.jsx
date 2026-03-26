@@ -371,6 +371,10 @@ const Learner = () => {
     return new Set(ownedCourses.map(course => course.teacherId).filter(Boolean))
   }, [ownedCourses])
 
+  const myEnrolledCourseIds = useMemo(() => {
+    return new Set(ownedCourses.map(course => course.id).filter(Boolean))
+  }, [ownedCourses])
+
   const teacherNameById = useMemo(() => {
     const map = {}
     allCourses.forEach(course => {
@@ -384,8 +388,19 @@ const Learner = () => {
   const learnerAnnouncements = useMemo(() => {
     if (announcements.length === 0) return []
     if (myTeacherIds.size === 0) return announcements.slice(0, 12)
-    return announcements.filter(item => myTeacherIds.has(item.teacherId)).slice(0, 20)
-  }, [announcements, myTeacherIds])
+
+    return announcements
+      .filter((item) => {
+        if (!myTeacherIds.has(item.teacherId)) return false
+
+        if (item.courseId) {
+          return myEnrolledCourseIds.has(item.courseId)
+        }
+
+        return true
+      })
+      .slice(0, 20)
+  }, [announcements, myTeacherIds, myEnrolledCourseIds])
 
   const summary = useMemo(() => {
     const values = ownedCourses.map(course => progressMap[course.id] || {})
@@ -1181,6 +1196,7 @@ const Learner = () => {
                   {learnerAnnouncements.map(item => (
                     <article key={item.id} className='learner-notification-card'>
                       <h3>{teacherNameById[item.teacherId] || 'Tutor Announcement'}</h3>
+                      <span className='learner-notification-course'>{item.courseTitle || 'General update'}</span>
                       <p>{item.message || 'No message content.'}</p>
                       <small>{item.createdAt ? new Date(item.createdAt).toLocaleString() : 'Just now'}</small>
                     </article>

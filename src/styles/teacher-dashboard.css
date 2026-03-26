@@ -579,7 +579,9 @@
 }
 
 .td-section-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.28px;
@@ -589,6 +591,20 @@
   background-color: rgba(163, 7, 12, 0.08);
   padding: 3px 8px;
   margin-bottom: 6px;
+}
+
+.td-badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 4px;
+  border: 1px solid rgba(163, 7, 12, 0.4);
+  background-color: rgba(163, 7, 12, 0.14);
+  color: var(--td-red);
+  font-size: 0.62rem;
+  line-height: 1;
 }
 
 .td-section-lead p {
@@ -735,7 +751,7 @@
 
 .td-builder-layout {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1fr;
   gap: 12px;
 }
 
@@ -780,6 +796,77 @@
   font-size: 0.8rem;
 }
 
+.td-builder-help {
+  font-size: 0.78rem;
+  color: var(--td-text-medium);
+  margin-top: -2px;
+}
+
+.td-builder-stepper {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.td-builder-step {
+  border: 1px solid var(--td-border-strong);
+  background: transparent;
+  color: var(--td-black);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.td-builder-step-index {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--td-border-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  background-color: rgba(145, 165, 133, 0.12);
+}
+
+.td-builder-step.is-active {
+  border-color: rgba(163, 7, 12, 0.45);
+  background-color: rgba(163, 7, 12, 0.08);
+  color: var(--td-red);
+}
+
+.td-builder-step.is-active .td-builder-step-index {
+  border-color: rgba(163, 7, 12, 0.45);
+  background-color: rgba(163, 7, 12, 0.16);
+}
+
+.td-builder-step.is-complete {
+  border-color: rgba(145, 165, 133, 0.75);
+  background-color: rgba(145, 165, 133, 0.2);
+}
+
+.td-builder-step.is-complete .td-builder-step-index {
+  border-color: rgba(145, 165, 133, 0.85);
+  background-color: rgba(145, 165, 133, 0.3);
+}
+
+.td-builder-step.is-locked {
+  opacity: 0.65;
+}
+
+.td-builder-step:disabled {
+  cursor: not-allowed;
+}
+
+.td-builder-step-panel {
+  display: grid;
+  gap: 10px;
+}
+
 .td-builder-image-preview {
   width: 100%;
   max-width: 320px;
@@ -800,6 +887,53 @@
   gap: 8px;
   border-top: 1px solid var(--td-border-soft);
   padding-top: 10px;
+}
+
+.td-builder-actions--main {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.td-builder-actions--secondary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  border-top: none;
+  padding-top: 8px;
+}
+
+.td-builder-actions--secondary .td-status-btn,
+.td-builder-actions--secondary .td-edit-btn,
+.td-builder-actions--secondary .td-delete-btn,
+.td-builder-actions--secondary .td-classic-action {
+  background: transparent;
+  border: 1px solid var(--td-border-strong);
+  color: var(--td-black);
+}
+
+.td-builder-actions--secondary .td-status-btn:hover,
+.td-builder-actions--secondary .td-edit-btn:hover,
+.td-builder-actions--secondary .td-delete-btn:hover,
+.td-builder-actions--secondary .td-classic-action:hover {
+  background-color: rgba(145, 165, 133, 0.18);
+}
+
+.td-builder-more {
+  margin-top: 2px;
+  border: 1px dashed var(--td-border-strong);
+  background-color: var(--td-surface-soft);
+  padding: 8px 10px;
+}
+
+.td-builder-more summary {
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--td-black);
+}
+
+.td-builder-more[open] summary {
+  margin-bottom: 6px;
 }
 
 .td-builder-primary {
@@ -1044,11 +1178,114 @@
   color: var(--td-text-muted);
 }
 
+.td-chart-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.td-chart-card {
+  background-color: var(--td-white);
+  border: 1px solid var(--td-border-soft);
+  box-shadow: 0 1px 4px rgba(17, 24, 39, 0.04);
+  padding: 12px;
+}
+
+.td-chart-card h3 {
+  font-size: 0.88rem;
+  margin-bottom: 10px;
+}
+
+.td-bar-chart {
+  display: grid;
+  gap: 8px;
+}
+
+.td-bar-row {
+  display: grid;
+  grid-template-columns: minmax(80px, 1fr) 2fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.td-bar-label {
+  font-size: 0.76rem;
+  color: var(--td-text-medium);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.td-bar-track {
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+  background-color: rgba(145, 165, 133, 0.25);
+}
+
+.td-bar-track span {
+  display: block;
+  height: 100%;
+  background-color: var(--td-orange);
+}
+
+.td-bar-row strong {
+  font-size: 0.76rem;
+  color: var(--td-black);
+}
+
+.td-line-chart-wrap {
+  background: linear-gradient(180deg, rgba(145, 165, 133, 0.08) 0%, rgba(255, 255, 255, 0.25) 100%);
+  border: 1px solid rgba(145, 165, 133, 0.2);
+  padding: 8px;
+}
+
+.td-line-chart {
+  width: 100%;
+  height: 180px;
+}
+
+.td-line-axis {
+  stroke: rgba(145, 165, 133, 0.45);
+  stroke-width: 2;
+  fill: none;
+}
+
+.td-line-path {
+  stroke: var(--td-red);
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .td-message-box {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 10px;
   margin-bottom: 14px;
+}
+
+.td-message-controls {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.td-message-controls label {
+  font-size: 0.8rem;
+  color: var(--td-text-medium);
+  font-weight: 700;
+}
+
+.td-message-controls select {
+  max-width: 360px;
+  border: 1px solid var(--td-border-strong);
+  background-color: var(--td-white);
+  color: var(--td-black);
+  font-size: 0.84rem;
+  padding: 9px 10px;
 }
 
 .td-message-box textarea {
@@ -1075,6 +1312,12 @@
   box-shadow: 0 1px 4px rgba(17, 24, 39, 0.04);
 }
 
+.td-announcement-list h3 {
+  font-size: 0.8rem;
+  color: var(--td-red);
+  margin-bottom: 4px;
+}
+
 .td-announcement-list p {
   font-size: 0.87rem;
   margin-bottom: 4px;
@@ -1090,6 +1333,51 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   margin-bottom: 14px;
+}
+
+.td-review-controls {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.td-review-controls label {
+  font-size: 0.8rem;
+  color: var(--td-text-medium);
+  font-weight: 700;
+}
+
+.td-review-controls select {
+  max-width: 360px;
+  border: 1px solid var(--td-border-strong);
+  background-color: var(--td-white);
+  color: var(--td-black);
+  font-size: 0.84rem;
+  padding: 9px 10px;
+}
+
+.td-review-controls-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.td-review-clear-btn {
+  border: 1px solid var(--td-border-strong);
+  background: transparent;
+  color: var(--td-black);
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 9px 12px;
+}
+
+.td-review-clear-btn:hover:not(:disabled) {
+  background-color: rgba(145, 165, 133, 0.18);
+}
+
+.td-review-clear-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 .td-review-summary article {
@@ -1186,6 +1474,10 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
+  .td-chart-grid {
+    grid-template-columns: 1fr;
+  }
+
   .td-builder-layout {
     grid-template-columns: 1fr;
   }
@@ -1225,7 +1517,24 @@
     grid-template-columns: 1fr;
   }
 
+  .td-bar-row {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
   .td-builder-grid-two {
+    grid-template-columns: 1fr;
+  }
+
+  .td-builder-actions--main {
+    grid-template-columns: 1fr;
+  }
+
+  .td-builder-actions--secondary {
+    grid-template-columns: 1fr;
+  }
+
+  .td-builder-stepper {
     grid-template-columns: 1fr;
   }
 
@@ -1240,6 +1549,19 @@
   .td-message-box {
     grid-template-columns: 1fr;
   }
+
+  .td-message-controls select {
+    max-width: none;
+  }
+
+  .td-review-controls select {
+    max-width: none;
+  }
+
+  .td-review-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -1253,6 +1575,12 @@
 
   .td-section-badge {
     font-size: 0.68rem;
+  }
+
+  .td-badge-icon {
+    min-width: 18px;
+    height: 18px;
+    font-size: 0.58rem;
   }
 
   .td-sidebar .td-nav-btn,

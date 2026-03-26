@@ -29,11 +29,14 @@ const TeacherDashboard = () => {
   const [announcements, setAnnouncements] = useState([])
   const [reviews, setReviews] = useState([])
   const [announcementText, setAnnouncementText] = useState('')
+  const [announcementCourseId, setAnnouncementCourseId] = useState('')
+  const [reviewCourseFilter, setReviewCourseFilter] = useState('')
   const [loading, setLoading] = useState(true)
   const [authReady, setAuthReady] = useState(false)
   const [builderMode, setBuilderMode] = useState('create')
   const [editingCourseId, setEditingCourseId] = useState('')
   const [builderSaving, setBuilderSaving] = useState(false)
+  const [builderStep, setBuilderStep] = useState('basics')
   const [builderMessage, setBuilderMessage] = useState('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
@@ -55,6 +58,22 @@ const TeacherDashboard = () => {
     fetchDashboardData()
   }, [authReady])
 
+  useEffect(() => {
+    if (courses.length === 0) {
+      setAnnouncementCourseId('')
+      setReviewCourseFilter('')
+      return
+    }
+
+    if (!announcementCourseId || !courses.some(course => course.id === announcementCourseId)) {
+      setAnnouncementCourseId(courses[0].id)
+    }
+
+    if (reviewCourseFilter && !courses.some(course => course.id === reviewCourseFilter)) {
+      setReviewCourseFilter('')
+    }
+  }, [courses, announcementCourseId, reviewCourseFilter])
+
   const fetchDashboardData = async () => {
     try {
       const currentTeacherId = auth.currentUser?.uid
@@ -72,6 +91,14 @@ const TeacherDashboard = () => {
         course.tutorId ||
         course.createdBy ||
         course.authorId ||
+        ''
+      )
+
+      const resolveReviewTeacherId = (review) => (
+        review.teacherId ||
+        review.tutorId ||
+        review.createdBy ||
+        review.authorId ||
         ''
       )
 
@@ -110,8 +137,8 @@ const TeacherDashboard = () => {
 
       const myReviews = reviewDocs
         .map(d => ({ id: d.id, ...d.data() }))
-        .filter(item => item.teacherId === currentTeacherId || myCourseIds.has(item.courseId))
-        .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
+        .filter(item => resolveReviewTeacherId(item) === currentTeacherId || myCourseIds.has(item.courseId))
+        .sort((a, b) => (b.updatedAt || b.createdAt || '').localeCompare(a.updatedAt || a.createdAt || ''))
 
       setEnrollments(myEnrollments)
       setAnnouncements(teacherAnnouncements)
@@ -145,6 +172,7 @@ const TeacherDashboard = () => {
     setFeaturedImage('')
     setEditingCourseId('')
     setBuilderMode('create')
+    setBuilderStep('basics')
     setBuilderMessage('')
   }
 
@@ -165,6 +193,7 @@ const TeacherDashboard = () => {
 
   const handleEdit = (course) => {
     populateBuilderForm(course)
+    setBuilderStep('basics')
     setActiveSection('builder')
   }
 
@@ -185,6 +214,7 @@ const TeacherDashboard = () => {
 
   const handleCreateNew = () => {
     resetBuilderForm()
+    setBuilderStep('basics')
     setActiveSection('builder')
   }
 
@@ -274,15 +304,27 @@ const TeacherDashboard = () => {
 
   const handlePostAnnouncement = async () => {
     if (!announcementText.trim()) return
+    const selectedCourse = courses.find(course => course.id === announcementCourseId)
+    if (courses.length > 0 && !selectedCourse) {
+      return
+    }
+
     try {
       const createdAt = new Date().toISOString()
-      const docRef = await addDoc(collection(db, 'announcements'), {
+      const nextAnnouncement = {
         teacherId: auth.currentUser?.uid,
+        courseId: selectedCourse?.id || '',
+        courseTitle: selectedCourse?.title || '',
         message: announcementText.trim(),
         createdAt
+      }
+
+      const docRef = await addDoc(collection(db, 'announcements'), {
+        ...nextAnnouncement
       })
+
       setAnnouncements(prev => [
-        { id: docRef.id, teacherId: auth.currentUser?.uid, message: announcementText.trim(), createdAt },
+        { id: docRef.id, ...nextAnnouncement },
         ...prev
       ])
       setAnnouncementText('')
@@ -327,6 +369,31 @@ const TeacherDashboard = () => {
     })
   }, [courses, enrollments])
 
+  const chartCourses = useMemo(() => {
+    return [...coursePerformance]
+      .sort((a, b) => b.learners - a.learners)
+      .slice(0, 6)
+  }, [coursePerformance])
+
+  const learnerCompletionLinePoints = useMemo(() => {
+    if (chartCourses.length === 0) return ''
+
+    const width = 520
+    const height = 180
+    const maxLearners = Math.max(...chartCourses.map(item => item.learners), 1)
+
+    return chartCourses.map((item, index) => {
+      const x = chartCourses.length === 1
+        ? width / 2
+        : (index / (chartCourses.length - 1)) * width
+      const learnerRatio = item.learners / maxLearners
+      const completionRatio = (item.avgCompletion || 0) / 100
+      const combined = (learnerRatio * 0.45) + (completionRatio * 0.55)
+      const y = height - (combined * height)
+      return `${x},${y}`
+    }).join(' ')
+  }, [chartCourses])
+
   const reviewSummary = useMemo(() => {
     const totalReviews = reviews.length
     const averageRating = totalReviews === 0
@@ -341,34 +408,25 @@ const TeacherDashboard = () => {
 
   const activeBuilderCourse = useMemo(() => {
     if (!editingCourseId) return null
-    return courses.find(course => course.id === editingCourseId) || null
+    return courses.find((course) => course.id === editingCourseId) || null
   }, [courses, editingCourseId])
 
-  const builderOutline = useMemo(() => {
-    if (!activeBuilderCourse) {
-      return {
-        topics: [],
-        totalLessons: 0,
-        totalQuizzes: 0
-      }
-    }
+  const filteredReviews = useMemo(() => {
+    if (!reviewCourseFilter) return reviews
+    return reviews.filter((review) => review.courseId === reviewCourseFilter)
+  }, [reviews, reviewCourseFilter])
 
-    const topics = Array.isArray(activeBuilderCourse.topics) ? activeBuilderCourse.topics : []
-    const totalLessons = topics.reduce((count, topic) => {
-      const lessons = Array.isArray(topic.lessons) ? topic.lessons.length : 0
-      return count + lessons
-    }, 0)
-    const totalQuizzes = topics.reduce((count, topic) => {
-      const quizzes = Array.isArray(topic.quizzes) ? topic.quizzes.length : 0
-      return count + quizzes
-    }, 0)
+  const filteredReviewSummary = useMemo(() => {
+    const totalReviews = filteredReviews.length
+    const averageRating = totalReviews === 0
+      ? 0
+      : (filteredReviews.reduce((acc, review) => acc + (review.rating || 0), 0) / totalReviews)
 
     return {
-      topics,
-      totalLessons,
-      totalQuizzes
+      totalReviews,
+      averageRating: Number(averageRating.toFixed(1))
     }
-  }, [activeBuilderCourse])
+  }, [filteredReviews])
 
   const openClassicCoursePage = async () => {
     const courseId = await saveCourse()
@@ -391,6 +449,34 @@ const TeacherDashboard = () => {
   const toggleMenu = (menu) => {
     setMenuOpen((prev) => ({ ...prev, [menu]: !prev[menu] }))
   }
+
+  const handleSaveDraftAndMove = async (nextStep) => {
+    const courseId = await saveCourse()
+    if (!courseId) return
+    setBuilderStep(nextStep)
+  }
+
+  const handleBuilderStepChange = (nextStep) => {
+    if (nextStep === 'basics') {
+      setBuilderStep(nextStep)
+      return
+    }
+
+    if (!editingCourseId) {
+      setBuilderMessage('Save your draft in Basics first to unlock the next step.')
+      return
+    }
+
+    setBuilderStep(nextStep)
+  }
+
+  const canAccessAdvancedBuilderSteps = Boolean(editingCourseId)
+  const basicsCompleted = Boolean(editingCourseId)
+  const curriculumCompleted = basicsCompleted && (
+    builderStep === 'publish' ||
+    (Array.isArray(activeBuilderCourse?.topics) && activeBuilderCourse.topics.length > 0)
+  )
+  const publishCompleted = basicsCompleted && (activeBuilderCourse?.status === 'Published')
 
   return (
     <div className='td-dashboard'>
@@ -513,7 +599,10 @@ const TeacherDashboard = () => {
           {!loading && activeSection === 'courses' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Teaching Hub</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>TH</span>
+                  Teaching Hub
+                </span>
                 <p>Manage your active catalog, publish updates, and keep course quality consistent.</p>
               </div>
               <div className='td-header'>
@@ -563,7 +652,10 @@ const TeacherDashboard = () => {
           {!loading && activeSection === 'builder' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Creation Studio</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>CS</span>
+                  Creation Studio
+                </span>
                 <p>Design modules, pricing, and media in one flow before opening classic builders.</p>
               </div>
               <h1>Course Builder</h1>
@@ -571,119 +663,175 @@ const TeacherDashboard = () => {
                 <article className='td-builder-form'>
                   <h3>{builderMode === 'edit' ? 'Edit Course' : 'Create Course'}</h3>
                   {builderMessage && <p className='td-builder-message'>{builderMessage}</p>}
+                  <p className='td-builder-help'>Follow the guided flow: save draft, structure curriculum, then publish.</p>
 
-                  <label>Title</label>
-                  <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Course title...' />
-
-                  <label>Description</label>
-                  <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Course description...' />
-
-                  <div className='td-builder-grid-two'>
-                    <div>
-                      <label>Difficulty</label>
-                      <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
-                        <option value='Beginner'>Beginner</option>
-                        <option value='Hard'>Hard</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label>Course Type</label>
-                      <input value={courseType} onChange={(e) => setCourseType(e.target.value)} placeholder='e.g. Pottery' />
-                    </div>
-                  </div>
-
-                  <div className='td-builder-grid-two'>
-                    <div>
-                      <label>Maximum Students</label>
-                      <input value={maxStudents} onChange={(e) => setMaxStudents(e.target.value)} placeholder='Unlimited' />
-                    </div>
-                    <div>
-                      <label>Pricing Model</label>
-                      <select value={pricingModel} onChange={(e) => setPricingModel(e.target.value)}>
-                        <option value='free'>Free</option>
-                        <option value='paid'>Paid</option>
-                      </select>
-                    </div>
-                  </div>
-
-                  <div className='td-builder-grid-two'>
-                    <div>
-                      <label>Regular Price ($)</label>
-                      <input value={regularPrice} onChange={(e) => setRegularPrice(e.target.value)} placeholder='64.99' />
-                    </div>
-                    <div>
-                      <label>Sale Price ($)</label>
-                      <input value={salePrice} onChange={(e) => setSalePrice(e.target.value)} placeholder='11.99' />
-                    </div>
-                  </div>
-
-                  <label>Featured Image</label>
-                  <input type='file' accept='image/*' onChange={handleImageUpload} />
-
-                  {featuredImage && (
-                    <div className='td-builder-image-preview'>
-                      <img src={featuredImage} alt='Course preview' />
-                    </div>
-                  )}
-
-                  <div className='td-builder-actions'>
-                    <button className='td-create-btn td-builder-primary' onClick={saveCourse} disabled={builderSaving}>
-                      {builderSaving ? 'Saving...' : 'Save Course'}
+                  <div className='td-builder-stepper' role='tablist' aria-label='Course builder steps'>
+                    <button
+                      className={`td-builder-step ${builderStep === 'basics' ? 'is-active' : ''} ${basicsCompleted ? 'is-complete' : ''}`}
+                      onClick={() => handleBuilderStepChange('basics')}
+                      role='tab'
+                      aria-selected={builderStep === 'basics'}
+                      type='button'
+                    >
+                      <span className='td-builder-step-index'>{basicsCompleted ? 'V' : '1'}</span>
+                      <span>Basics</span>
                     </button>
-                    <button className='td-status-btn td-builder-secondary' onClick={() => handleSaveAndGo('/curriculum')} disabled={builderSaving}>
-                      Save & Open Curriculum
+                    <button
+                      className={`td-builder-step ${builderStep === 'curriculum' ? 'is-active' : ''} ${curriculumCompleted ? 'is-complete' : ''} ${canAccessAdvancedBuilderSteps ? '' : 'is-locked'}`}
+                      onClick={() => handleBuilderStepChange('curriculum')}
+                      role='tab'
+                      aria-selected={builderStep === 'curriculum'}
+                      type='button'
+                      disabled={!canAccessAdvancedBuilderSteps}
+                    >
+                      <span className='td-builder-step-index'>{curriculumCompleted ? 'V' : '2'}</span>
+                      <span>Curriculum</span>
                     </button>
-                    <button className='td-edit-btn td-builder-secondary' onClick={() => handleSaveAndGo('/lesson')} disabled={builderSaving}>
-                      Save & Open Lesson Builder
-                    </button>
-                    <button className='td-delete-btn' onClick={() => setActiveSection('courses')}>
-                      Manage My Courses
+                    <button
+                      className={`td-builder-step ${builderStep === 'publish' ? 'is-active' : ''} ${publishCompleted ? 'is-complete' : ''} ${canAccessAdvancedBuilderSteps ? '' : 'is-locked'}`}
+                      onClick={() => handleBuilderStepChange('publish')}
+                      role='tab'
+                      aria-selected={builderStep === 'publish'}
+                      type='button'
+                      disabled={!canAccessAdvancedBuilderSteps}
+                    >
+                      <span className='td-builder-step-index'>{publishCompleted ? 'V' : '3'}</span>
+                      <span>Publish</span>
                     </button>
                   </div>
-                </article>
 
-                <article className='td-builder-preview'>
-                  <h3>Builder Overview</h3>
-                  <p>Keep working here for a uniform dashboard experience, or jump into the original pages when needed.</p>
+                  {builderStep === 'basics' && (
+                    <div className='td-builder-step-panel'>
+                      <label>Title</label>
+                      <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Course title...' />
 
-                  {activeBuilderCourse ? (
-                    <>
-                      <div className='td-builder-stats'>
-                        <span>{builderOutline.topics.length} Modules</span>
-                        <span>{builderOutline.totalLessons} Lessons</span>
-                        <span>{builderOutline.totalQuizzes} Quizzes</span>
+                      <label>Description</label>
+                      <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Course description...' />
+
+                      <div className='td-builder-grid-two'>
+                        <div>
+                          <label>Difficulty</label>
+                          <select value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
+                            <option value='Beginner'>Beginner</option>
+                            <option value='Hard'>Hard</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label>Course Type</label>
+                          <input value={courseType} onChange={(e) => setCourseType(e.target.value)} placeholder='e.g. Pottery' />
+                        </div>
                       </div>
 
-                      {builderOutline.topics.length === 0 ? (
-                        <p className='td-empty-text'>No curriculum added yet. Save and open Curriculum to start structuring modules.</p>
-                      ) : (
-                        <ul className='td-builder-outline'>
-                          {builderOutline.topics.slice(0, 4).map((topic, index) => (
-                            <li key={topic.id || `${topic.title || 'topic'}-${index}`}>
-                              <strong>{topic.title || `Module ${index + 1}`}</strong>
-                              <span>
-                                {(Array.isArray(topic.lessons) ? topic.lessons.length : 0)} lessons · {(Array.isArray(topic.quizzes) ? topic.quizzes.length : 0)} quizzes
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
+                      <div className='td-builder-grid-two'>
+                        <div>
+                          <label>Maximum Students</label>
+                          <input value={maxStudents} onChange={(e) => setMaxStudents(e.target.value)} placeholder='Unlimited' />
+                        </div>
+                        <div>
+                          <label>Featured Image</label>
+                          <input type='file' accept='image/*' onChange={handleImageUpload} />
+                        </div>
+                      </div>
+
+                      {featuredImage && (
+                        <div className='td-builder-image-preview'>
+                          <img src={featuredImage} alt='Course preview' />
+                        </div>
                       )}
-                    </>
-                  ) : (
-                    <p className='td-empty-text'>Create or edit a course to unlock curriculum preview and classic workflow shortcuts.</p>
+
+                      <div className='td-builder-actions td-builder-actions--main'>
+                        <button className='td-create-btn td-builder-primary' onClick={saveCourse} disabled={builderSaving} type='button'>
+                          {builderSaving ? 'Saving...' : 'Save Draft'}
+                        </button>
+                        <button className='td-status-btn td-builder-secondary' onClick={() => handleSaveDraftAndMove('curriculum')} disabled={builderSaving} type='button'>
+                          Save and Continue
+                        </button>
+                      </div>
+                    </div>
                   )}
 
-                  <div className='td-builder-classic-actions'>
-                    <button className='td-status-btn td-classic-action' onClick={openClassicCoursePage} disabled={builderSaving}>
-                      Open Classic Course Page
-                    </button>
-                    <button className='td-edit-btn td-classic-action' onClick={openClassicCurriculum} disabled={builderSaving}>
-                      Open Classic Curriculum
-                    </button>
-                    <button className='td-edit-btn td-classic-action' onClick={openClassicLessonBuilder} disabled={builderSaving}>
-                      Open Classic Lesson Builder
-                    </button>
-                  </div>
+                  {builderStep === 'curriculum' && (
+                    <div className='td-builder-step-panel'>
+                      <p className='td-empty-text'>Use curriculum tools to structure modules, lessons, and assessments.</p>
+                      <div className='td-builder-actions td-builder-actions--main'>
+                        <button className='td-status-btn td-builder-secondary' onClick={() => handleSaveAndGo('/curriculum')} disabled={builderSaving} type='button'>
+                          Open Curriculum
+                        </button>
+                        <button className='td-edit-btn td-builder-secondary' onClick={() => handleSaveAndGo('/lesson')} disabled={builderSaving} type='button'>
+                          Open Lesson Builder
+                        </button>
+                      </div>
+                      <div className='td-builder-actions td-builder-actions--main'>
+                        <button className='td-create-btn' onClick={() => handleBuilderStepChange('basics')} type='button'>
+                          Back to Basics
+                        </button>
+                        <button className='td-status-btn' onClick={() => handleBuilderStepChange('publish')} type='button'>
+                          Continue to Publish
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
+                  {builderStep === 'publish' && (
+                    <div className='td-builder-step-panel'>
+                      <div className='td-builder-grid-two'>
+                        <div>
+                          <label>Pricing Model</label>
+                          <select value={pricingModel} onChange={(e) => setPricingModel(e.target.value)}>
+                            <option value='free'>Free</option>
+                            <option value='paid'>Paid</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label>Current Status</label>
+                          <input value={activeBuilderCourse?.status || 'Draft'} readOnly />
+                        </div>
+                      </div>
+
+                      <div className='td-builder-grid-two'>
+                        <div>
+                          <label>Regular Price ($)</label>
+                          <input value={regularPrice} onChange={(e) => setRegularPrice(e.target.value)} placeholder='64.99' />
+                        </div>
+                        <div>
+                          <label>Sale Price ($)</label>
+                          <input value={salePrice} onChange={(e) => setSalePrice(e.target.value)} placeholder='11.99' />
+                        </div>
+                      </div>
+
+                      <div className='td-builder-actions td-builder-actions--main'>
+                        <button className='td-create-btn td-builder-primary' onClick={saveCourse} disabled={builderSaving} type='button'>
+                          {builderSaving ? 'Saving...' : 'Save Publishing Details'}
+                        </button>
+                        <button
+                          className='td-status-btn td-builder-secondary'
+                          onClick={() => activeBuilderCourse && handleToggleStatus(activeBuilderCourse)}
+                          disabled={!activeBuilderCourse}
+                          type='button'
+                        >
+                          {(activeBuilderCourse?.status || 'Draft') === 'Published' ? 'Move to Draft' : 'Publish Course'}
+                        </button>
+                      </div>
+
+                      <details className='td-builder-more'>
+                        <summary>More options</summary>
+                        <div className='td-builder-actions td-builder-actions--secondary'>
+                          <button className='td-status-btn td-classic-action' onClick={openClassicCoursePage} disabled={builderSaving} type='button'>
+                            Open Classic Course Page
+                          </button>
+                          <button className='td-edit-btn td-classic-action' onClick={openClassicCurriculum} disabled={builderSaving} type='button'>
+                            Open Classic Curriculum
+                          </button>
+                          <button className='td-edit-btn td-classic-action' onClick={openClassicLessonBuilder} disabled={builderSaving} type='button'>
+                            Open Classic Lesson Builder
+                          </button>
+                          <button className='td-delete-btn' onClick={() => setActiveSection('courses')} type='button'>
+                            Back to My Courses
+                          </button>
+                        </div>
+                      </details>
+                    </div>
+                  )}
                 </article>
               </div>
             </section>
@@ -692,7 +840,10 @@ const TeacherDashboard = () => {
           {!loading && activeSection === 'students' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Learner Pulse</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>LP</span>
+                  Learner Pulse
+                </span>
                 <p>Track learner activity, completion momentum, and who may need additional support.</p>
               </div>
               <h1>Students</h1>
@@ -728,7 +879,10 @@ const TeacherDashboard = () => {
           {!loading && activeSection === 'analytics' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Insights</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>IN</span>
+                  Insights
+                </span>
                 <p>Understand completion trends, engagement health, and top-performing course experiences.</p>
               </div>
               <h1>Analytics & Insights</h1>
@@ -777,13 +931,51 @@ const TeacherDashboard = () => {
                   </article>
                 ))}
               </div>
+
+              <div className='td-chart-grid'>
+                <article className='td-chart-card'>
+                  <h3>Completion by Course (Bar)</h3>
+                  {chartCourses.length === 0 ? (
+                    <p className='td-empty-text'>Bar chart appears once courses and learner activity exist.</p>
+                  ) : (
+                    <div className='td-bar-chart'>
+                      {chartCourses.map((item) => (
+                        <div key={item.id} className='td-bar-row'>
+                          <span className='td-bar-label'>{item.title}</span>
+                          <div className='td-bar-track'>
+                            <span style={{ width: `${item.avgCompletion}%` }} />
+                          </div>
+                          <strong>{item.avgCompletion}%</strong>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </article>
+
+                <article className='td-chart-card'>
+                  <h3>Learner Reach + Completion (Line)</h3>
+                  {chartCourses.length === 0 ? (
+                    <p className='td-empty-text'>Line chart appears after your first enrollments.</p>
+                  ) : (
+                    <div className='td-line-chart-wrap'>
+                      <svg viewBox='0 0 520 180' className='td-line-chart' role='img' aria-label='Learner reach and completion trend line'>
+                        <polyline points='0,180 520,180' className='td-line-axis' />
+                        <polyline points={learnerCompletionLinePoints} className='td-line-path' />
+                      </svg>
+                    </div>
+                  )}
+                </article>
+              </div>
             </section>
           )}
 
           {!loading && activeSection === 'quizzes' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Assessment Lab</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>AL</span>
+                  Assessment Lab
+                </span>
                 <p>Build formative checks and improve learning outcomes with structured quiz feedback loops.</p>
               </div>
               <h1>Quizzes & Assessments</h1>
@@ -804,7 +996,10 @@ const TeacherDashboard = () => {
           {!loading && activeSection === 'culture' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Cultural Archive</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>CA</span>
+                  Cultural Archive
+                </span>
                 <p>Preserve local stories and practices with lessons that center authenticity and context.</p>
               </div>
               <h1>Cultural Content</h1>
@@ -824,7 +1019,10 @@ const TeacherDashboard = () => {
           {!loading && activeSection === 'language' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Language Studio</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>LS</span>
+                  Language Studio
+                </span>
                 <p>Blend vocabulary, pronunciation, and daily-use phrases for practical language confidence.</p>
               </div>
               <h1>Language Tools</h1>
@@ -844,22 +1042,46 @@ const TeacherDashboard = () => {
           {!loading && activeSection === 'messages' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Communication Desk</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>CD</span>
+                  Communication Desk
+                </span>
                 <p>Keep learners aligned through timely announcements, reminders, and learning nudges.</p>
               </div>
               <h1>Messages & Announcements</h1>
+              <div className='td-message-controls'>
+                <label htmlFor='announcement-course'>Target Course</label>
+                <select
+                  id='announcement-course'
+                  value={announcementCourseId}
+                  onChange={(e) => setAnnouncementCourseId(e.target.value)}
+                >
+                  <option value=''>Select a course</option>
+                  {courses.map((course) => (
+                    <option key={course.id} value={course.id}>
+                      {course.title || 'Untitled Course'}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div className='td-message-box'>
                 <textarea
                   value={announcementText}
                   onChange={(e) => setAnnouncementText(e.target.value)}
-                  placeholder='Write an update to your learners...'
+                  placeholder='Write an update to learners in this selected course...'
                 />
-                <button onClick={handlePostAnnouncement}>Post Announcement</button>
+                <button onClick={handlePostAnnouncement} disabled={courses.length > 0 && !announcementCourseId}>Post Announcement</button>
               </div>
+
+              {courses.length > 0 && !announcementCourseId && (
+                <p className='td-empty-text'>Choose a course first so this message reaches the right learners.</p>
+              )}
 
               <div className='td-announcement-list'>
                 {announcements.map(item => (
                   <article key={item.id}>
+                    <h3>{item.courseTitle || 'General Announcement'}</h3>
                     <p>{item.message}</p>
                     <small>{item.createdAt ? new Date(item.createdAt).toLocaleString() : 'Just now'}</small>
                   </article>
@@ -871,25 +1093,54 @@ const TeacherDashboard = () => {
           {!loading && activeSection === 'reviews' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Feedback Radar</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>FR</span>
+                  Feedback Radar
+                </span>
                 <p>Read learner sentiment quickly and use ratings to prioritize your next improvements.</p>
               </div>
               <h1>Reviews & Feedback</h1>
+              <div className='td-review-controls'>
+                <label htmlFor='review-course-filter'>Filter by course</label>
+                <div className='td-review-controls-row'>
+                  <select
+                    id='review-course-filter'
+                    value={reviewCourseFilter}
+                    onChange={(e) => setReviewCourseFilter(e.target.value)}
+                  >
+                    <option value=''>All courses</option>
+                    {courses.map((course) => (
+                      <option key={course.id} value={course.id}>
+                        {course.title || 'Untitled Course'}
+                      </option>
+                    ))}
+                  </select>
+                  <button
+                    className='td-review-clear-btn'
+                    type='button'
+                    onClick={() => setReviewCourseFilter('')}
+                    disabled={!reviewCourseFilter}
+                  >
+                    Clear filter
+                  </button>
+                </div>
+              </div>
+
               <div className='td-review-summary'>
                 <article>
                   <h3>Average Rating</h3>
-                  <p>{reviewSummary.averageRating}/5</p>
+                  <p>{filteredReviewSummary.averageRating}/5</p>
                 </article>
                 <article>
                   <h3>Total Reviews</h3>
-                  <p>{reviewSummary.totalReviews}</p>
+                  <p>{filteredReviewSummary.totalReviews}</p>
                 </article>
               </div>
-              {reviews.length === 0 ? (
+              {filteredReviews.length === 0 ? (
                 <p className='td-empty-text'>No reviews yet. Learner reviews will appear here.</p>
               ) : (
                 <div className='td-review-list'>
-                  {reviews.map(review => (
+                  {filteredReviews.map(review => (
                     <article key={review.id} className='td-review-card'>
                       <div className='td-review-head'>
                         <h3>{review.courseTitle || 'Course Review'}</h3>
@@ -912,7 +1163,10 @@ const TeacherDashboard = () => {
           {!loading && activeSection === 'earnings' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>Monetization</span>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>MO</span>
+                  Monetization
+                </span>
                 <p>Track payout readiness and prepare your premium catalog for sustainable revenue.</p>
               </div>
               <h1>Earnings</h1>

@@ -1479,6 +1479,17 @@
   margin-bottom: 6px;
 }
 
+.learner-notification-course {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--ld-red);
+  border: 1px solid rgba(163, 7, 12, 0.3);
+  background-color: rgba(163, 7, 12, 0.08);
+  padding: 2px 8px;
+  margin-bottom: 7px;
+}
+
 .learner-notification-card small {
   font-size: 0.76rem;
   color: var(--ld-text-soft);
