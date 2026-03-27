@@ -6,6 +6,7 @@ import { Helmet } from 'react-helmet-async'
 import { auth, db } from '../context/AuthContext'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
+import SmallFooter from '../components/SmallFooter'
 
 const Academy2 = () => {
   const [role, setRole] = useState('learner')
@@ -17,6 +18,7 @@ const Academy2 = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const navigate = useNavigate()
 
@@ -189,6 +191,8 @@ const Academy2 = () => {
             />
           </div>
 
+          {/* 
+
           <div className='academy-info3'>
             <label>Password</label>
             <input
@@ -197,6 +201,27 @@ const Academy2 = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+          */}
+
+          <div className='academy-info3' style={{ position: 'relative' }}>
+  <label>Password</label>
+  <input
+    type={showPassword ? 'text' : 'password'}
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+  />
+  <i
+    className={`fa-regular ${showPassword ? 'fa-eye' : 'fa-eye-slash'}`}
+    onClick={() => setShowPassword(!showPassword)}
+    style={{
+      position: 'absolute',
+      right: '12px',
+      bottom: '10px',
+      cursor: 'pointer',
+      color: 'rgb(181, 161, 145)'
+    }}
+  />
+</div>
 
           {/* Extra field shown only for teachers */}
           {role === 'teacher' && (
@@ -227,11 +252,13 @@ const Academy2 = () => {
           </div>
 
           <div className='academy-already'>
-            <p>Already have an account? <a href="#" onClick={() => navigate('/academy-SignIn')}>Sign In</a></p>
+            <p>Already have an account? <a href="" onClick={() => navigate('/academy-SignIn')}>Sign In</a></p>
           </div>
 
         </div>
       </div>
+
+      <SmallFooter />
     </>
   )
 }

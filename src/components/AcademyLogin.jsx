@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
+import SmallFooter from './SmallFooter'
 
 const AcademyLogin = () => {
   const [email, setEmail] = useState('')
@@ -12,6 +13,7 @@ const AcademyLogin = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [success, setSuccess] = useState(false)  // added
+   const [showPassword, setShowPassword] = useState(false)
 
   const navigate = useNavigate()
  
@@ -129,6 +131,8 @@ const AcademyLogin = () => {
               />
             </div>
 
+            
+         {/* 
             <div className="signIn-field">
               <label>Password</label>
               <input
@@ -139,6 +143,32 @@ const AcademyLogin = () => {
                 required
               />
             </div>
+            */}
+
+
+            <div className="signIn-field" style={{ position: 'relative' }}>
+  <label>Password</label>
+  <input
+    type={showPassword ? 'text' : 'password'}
+    placeholder="Enter your password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+    required
+  />
+  <i
+    className={`fa-regular ${showPassword ? 'fa-eye' : 'fa-eye-slash'}`}
+    onClick={() => setShowPassword(!showPassword)}
+    style={{
+      position: 'absolute',
+      right: '12px',
+      bottom: '10px',
+      cursor: 'pointer',
+      color: '#888'
+    }}
+  />
+</div>
+
+
 
             <div className="signIn-forgot">
               <a href="#">Forgot password?</a>
@@ -159,11 +189,14 @@ const AcademyLogin = () => {
           </div>
 
           <div className="signIn-register">
-            <p>Don't have an account? <a href="#" onClick={() => navigate('/academy2')}>Create Account</a></p>
+            <p>Don't have an account? <a href="" onClick={() => navigate('/academy-signUp')}>Create Account</a></p>
           </div>
 
         </div>
       </div>
+
+
+      <SmallFooter />
     </>
   )
 }
