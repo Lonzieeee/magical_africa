@@ -1,5 +1,20 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import { FaBell, FaChevronLeft, FaStar } from 'react-icons/fa'
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ComposedChart,
+  Legend,
+  Line,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
+} from 'recharts'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import {
@@ -8,6 +23,7 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  onSnapshot,
   query,
   updateDoc,
   where
@@ -62,6 +78,26 @@ const TeacherDashboard = () => {
   useEffect(() => {
     if (!authReady) return
     fetchDashboardData()
+  }, [authReady])
+
+  useEffect(() => {
+    if (!authReady) return
+    const currentTeacherId = auth.currentUser?.uid
+    if (!currentTeacherId) return
+
+    const enrollmentQuery = query(collection(db, 'enrollments'), where('teacherId', '==', currentTeacherId))
+    const unsubscribe = onSnapshot(
+      enrollmentQuery,
+      (snapshot) => {
+        const nextEnrollments = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+        setEnrollments(nextEnrollments)
+      },
+      (error) => {
+        console.log('Realtime enrollment listener failed:', error)
+      }
+    )
+
+    return () => unsubscribe()
   }, [authReady])
 
   useEffect(() => {
@@ -511,64 +547,15 @@ const TeacherDashboard = () => {
       .slice(0, 6)
   }, [coursePerformance])
 
-  const chartWidth = 520
-  const chartHeight = 180
-
-  const maxLearnersForCharts = useMemo(() => {
-    return Math.max(...chartCourses.map((item) => item.learners || 0), 1)
+  const chartData = useMemo(() => {
+    return chartCourses.map((item) => ({
+      id: item.id,
+      title: item.title,
+      shortTitle: (item.title || 'Course').slice(0, 18),
+      learners: Number(item.learners || 0),
+      completion: Number(item.avgCompletion || 0)
+    }))
   }, [chartCourses])
-
-  const learnerTickValues = useMemo(() => {
-    const max = maxLearnersForCharts
-    if (max <= 1) return [0, 1]
-
-    const step = Math.max(1, Math.ceil(max / 4))
-    const ticks = [0, step, step * 2, step * 3, max]
-    return [...new Set(ticks)].sort((a, b) => a - b)
-  }, [maxLearnersForCharts])
-
-  const completionTickValues = [0, 25, 50, 75, 100]
-
-  const learnerLineSeries = useMemo(() => {
-    if (chartCourses.length === 0) return []
-
-    return chartCourses.map((item, index) => {
-      const x = chartCourses.length === 1
-        ? chartWidth / 2
-        : (index / (chartCourses.length - 1)) * chartWidth
-      const ratio = (item.learners || 0) / maxLearnersForCharts
-      const y = chartHeight - (ratio * chartHeight)
-      return {
-        id: item.id,
-        title: item.title,
-        value: item.learners || 0,
-        x,
-        y
-      }
-    })
-  }, [chartCourses, chartWidth, chartHeight, maxLearnersForCharts])
-
-  const completionLineSeries = useMemo(() => {
-    if (chartCourses.length === 0) return []
-
-    return chartCourses.map((item, index) => {
-      const x = chartCourses.length === 1
-        ? chartWidth / 2
-        : (index / (chartCourses.length - 1)) * chartWidth
-      const ratio = (item.avgCompletion || 0) / 100
-      const y = chartHeight - (ratio * chartHeight)
-      return {
-        id: item.id,
-        title: item.title,
-        value: item.avgCompletion || 0,
-        x,
-        y
-      }
-    })
-  }, [chartCourses, chartWidth, chartHeight])
-
-  const learnerLinePoints = useMemo(() => learnerLineSeries.map((point) => `${point.x},${point.y}`).join(' '), [learnerLineSeries])
-  const completionLinePoints = useMemo(() => completionLineSeries.map((point) => `${point.x},${point.y}`).join(' '), [completionLineSeries])
 
   const completionPie = useMemo(() => {
     const base = {
@@ -586,7 +573,7 @@ const TeacherDashboard = () => {
           inProgress: 0,
           notStarted: 0
         },
-        gradient: 'conic-gradient(#d9e3d4 0deg 360deg)'
+        pieData: []
       }
     }
 
@@ -604,76 +591,17 @@ const TeacherDashboard = () => {
 
     counts.total = enrollments.length
 
-    const completedRatio = counts.completed / counts.total
-    const inProgressRatio = counts.inProgress / counts.total
-    const notStartedRatio = counts.notStarted / counts.total
-
     const percentages = {
-      completed: Math.round(completedRatio * 100),
-      inProgress: Math.round(inProgressRatio * 100)
+      completed: Math.round((counts.completed / counts.total) * 100),
+      inProgress: Math.round((counts.inProgress / counts.total) * 100)
     }
     percentages.notStarted = Math.max(0, 100 - percentages.completed - percentages.inProgress)
 
-    const completedDeg = completedRatio * 360
-    const inProgressDeg = inProgressRatio * 360
-    const notStartedDeg = notStartedRatio * 360
-
-    const toRadians = (angleDeg) => (angleDeg - 90) * (Math.PI / 180)
-    const polarToCartesian = (cx, cy, radius, angleDeg) => ({
-      x: cx + (radius * Math.cos(toRadians(angleDeg))),
-      y: cy + (radius * Math.sin(toRadians(angleDeg)))
-    })
-
-    const describeArcPath = (cx, cy, radius, startDeg, endDeg) => {
-      const start = polarToCartesian(cx, cy, radius, startDeg)
-      const end = polarToCartesian(cx, cy, radius, endDeg)
-      const largeArcFlag = endDeg - startDeg > 180 ? 1 : 0
-      return [
-        `M ${cx} ${cy}`,
-        `L ${start.x} ${start.y}`,
-        `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${end.x} ${end.y}`,
-        'Z'
-      ].join(' ')
-    }
-
-    const segments = []
-    const separators = []
-    let cursor = 0
-
-    const completedEnd = cursor + completedDeg
-    if (completedDeg > 0) {
-      segments.push({
-        key: 'completed',
-        color: '#1f6f43',
-        path: describeArcPath(70, 70, 66, cursor, completedEnd)
-      })
-      if (completedEnd < 360) {
-        separators.push(polarToCartesian(70, 70, 66, completedEnd))
-      }
-    }
-    cursor = completedEnd
-
-    const progressEnd = cursor + inProgressDeg
-    if (inProgressDeg > 0) {
-      segments.push({
-        key: 'inProgress',
-        color: '#d5731a',
-        path: describeArcPath(70, 70, 66, cursor, progressEnd)
-      })
-      if (progressEnd < 360) {
-        separators.push(polarToCartesian(70, 70, 66, progressEnd))
-      }
-    }
-    cursor = progressEnd
-
-    const notStartedEnd = cursor + notStartedDeg
-    if (notStartedDeg > 0) {
-      segments.push({
-        key: 'notStarted',
-        color: '#9aa59a',
-        path: describeArcPath(70, 70, 66, cursor, notStartedEnd)
-      })
-    }
+    const pieData = [
+      { name: 'Completed', value: percentages.completed, color: '#1f6f43' },
+      { name: 'In Progress', value: percentages.inProgress, color: '#d5731a' },
+      { name: 'Not Started', value: percentages.notStarted, color: '#9aa59a' }
+    ]
 
     return {
       ...counts,
@@ -682,8 +610,7 @@ const TeacherDashboard = () => {
         inProgress: percentages.inProgress,
         notStarted: percentages.notStarted
       },
-      segments,
-      separators
+      pieData
     }
   }, [enrollments])
 
@@ -1475,133 +1402,73 @@ const TeacherDashboard = () => {
               </div>
 
               <div className='td-chart-grid'>
-                <article className='td-chart-card'>
-                  <h3>Completion by Course (Bar)</h3>
-                  {chartCourses.length === 0 ? (
-                    <p className='td-empty-text'>Bar chart appears once courses and learner activity exist.</p>
+                <article className='td-chart-card td-chart-card-wide'>
+                  <h3>Course Performance (Bar + Line)</h3>
+                  <p className='td-chart-subtitle'>X-axis: courses, left Y-axis: completion %, right Y-axis: learner count.</p>
+                  {chartData.length === 0 ? (
+                    <p className='td-empty-text'>Chart appears once courses and learner activity exist.</p>
                   ) : (
-                    <div className='td-bar-chart'>
-                      {chartCourses.map((item) => (
-                        <div key={item.id} className='td-bar-row'>
-                          <span className='td-bar-label'>{item.title}</span>
-                          <div className='td-bar-track'>
-                            <span style={{ width: `${item.avgCompletion}%` }} />
-                          </div>
-                          <strong>{item.avgCompletion}%</strong>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </article>
-
-                <article className='td-chart-card'>
-                  <h3>Learner Reach (Line)</h3>
-                  {chartCourses.length === 0 ? (
-                    <p className='td-empty-text'>Line chart appears after your first enrollments.</p>
-                  ) : (
-                    <div className='td-line-chart-wrap'>
-                      <svg viewBox='0 0 520 180' className='td-line-chart' role='img' aria-label='Learner reach trend line'>
-                        {learnerTickValues.map((tick) => {
-                          const y = chartHeight - ((tick / maxLearnersForCharts) * chartHeight)
-                          return (
-                            <g key={`learner-tick-${tick}`}>
-                              <line x1='0' y1={y} x2='520' y2={y} className='td-line-grid' />
-                              <text x='4' y={Math.max(12, y - 3)} className='td-line-axis-label'>{tick}</text>
-                            </g>
-                          )
-                        })}
-
-                        <polyline points='0,180 520,180' className='td-line-axis' />
-                        <polyline points={learnerLinePoints} className='td-line-path td-line-path-learners' />
-
-                        {learnerLineSeries.map((point) => (
-                          <g key={`learner-point-${point.id}`}>
-                            <circle cx={point.x} cy={point.y} r='3.5' className='td-line-point td-line-point-learners' />
-                            <text x={point.x} y={Math.max(12, point.y - 8)} textAnchor='middle' className='td-line-point-label'>
-                              {point.value}
-                            </text>
-                          </g>
-                        ))}
-                      </svg>
+                    <div className='td-recharts-wrap'>
+                      <ResponsiveContainer width='100%' height={320}>
+                        <ComposedChart data={chartData} margin={{ top: 14, right: 20, left: 8, bottom: 16 }}>
+                          <CartesianGrid strokeDasharray='3 3' stroke='rgba(145,165,133,0.24)' />
+                          <XAxis dataKey='shortTitle' tick={{ fontSize: 11 }} interval={0} angle={-14} textAnchor='end' height={46} />
+                          <YAxis yAxisId='left' domain={[0, 100]} tick={{ fontSize: 11 }} tickFormatter={(value) => `${value}%`} />
+                          <YAxis yAxisId='right' orientation='right' tick={{ fontSize: 11 }} allowDecimals={false} />
+                          <Tooltip
+                            formatter={(value, name) => {
+                              if (name === 'Completion %') return [`${value}%`, name]
+                              return [value, name]
+                            }}
+                            labelFormatter={(label) => `Course: ${label}`}
+                          />
+                          <Legend />
+                          <Bar yAxisId='left' dataKey='completion' name='Completion %' fill='#d5731a' radius={[3, 3, 0, 0]} barSize={24} />
+                          <Line yAxisId='right' type='monotone' dataKey='learners' name='Learners' stroke='#a3070c' strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                        </ComposedChart>
+                      </ResponsiveContainer>
                     </div>
                   )}
                 </article>
 
                 <article className='td-chart-card'>
                   <h3>Completion Distribution</h3>
+                  <p className='td-chart-subtitle'>Pie partitions are percentage-based and dynamically recalculated from enrollments.</p>
                   {completionPie.total === 0 ? (
                     <p className='td-empty-text'>Pie chart appears after your first enrollments.</p>
                   ) : (
                     <div className='td-pie-layout'>
-                      <svg viewBox='0 0 140 140' className='td-pie-chart' role='img' aria-label='Completion distribution pie chart'>
-                        {completionPie.segments.map((segment) => (
-                          <path
-                            key={segment.key}
-                            d={segment.path}
-                            fill={segment.color}
-                            stroke='#ffffff'
-                            strokeWidth='2.4'
-                          />
-                        ))}
-
-                        {completionPie.separators.map((point, index) => (
-                          <line
-                            key={`separator-${index}`}
-                            x1='70'
-                            y1='70'
-                            x2={point.x}
-                            y2={point.y}
-                            stroke='#ffffff'
-                            strokeWidth='1.5'
-                          />
-                        ))}
-
-                        <circle cx='70' cy='70' r='24' fill='#ffffff' />
-                        <text x='70' y='66' textAnchor='middle' className='td-pie-center-value'>
-                          {completionPie.total}
-                        </text>
-                        <text x='70' y='80' textAnchor='middle' className='td-pie-center-label'>
-                          learners
-                        </text>
-                      </svg>
+                      <div className='td-pie-chart-wrap'>
+                        <ResponsiveContainer width='100%' height={260}>
+                          <PieChart>
+                            <Pie
+                              data={completionPie.pieData}
+                              dataKey='value'
+                              nameKey='name'
+                              cx='50%'
+                              cy='50%'
+                              innerRadius={54}
+                              outerRadius={96}
+                              paddingAngle={2.4}
+                              stroke='#ffffff'
+                              strokeWidth={2.2}
+                              label={({ name, value }) => `${name} ${value}%`}
+                            >
+                              {completionPie.pieData.map((entry) => (
+                                <Cell key={entry.name} fill={entry.color} />
+                              ))}
+                            </Pie>
+                            <Tooltip formatter={(value) => [`${value}%`, 'Share']} />
+                          </PieChart>
+                        </ResponsiveContainer>
+                        <p className='td-pie-center-inline'>Total learners: {completionPie.total}</p>
+                        <p className='td-pie-note'>Each slice is proportional to enrollment status share.</p>
+                      </div>
                       <div className='td-pie-legend'>
                         <p><span className='td-pie-dot is-completed' /> Completed: {completionPie.percentages.completed}%</p>
                         <p><span className='td-pie-dot is-progress' /> In Progress: {completionPie.percentages.inProgress}%</p>
                         <p><span className='td-pie-dot is-not-started' /> Not Started: {completionPie.percentages.notStarted}%</p>
                       </div>
-                    </div>
-                  )}
-                </article>
-
-                <article className='td-chart-card'>
-                  <h3>Completion Trend (Line)</h3>
-                  {chartCourses.length === 0 ? (
-                    <p className='td-empty-text'>Completion trend appears after learner progress starts.</p>
-                  ) : (
-                    <div className='td-line-chart-wrap'>
-                      <svg viewBox='0 0 520 180' className='td-line-chart' role='img' aria-label='Average completion trend line'>
-                        {completionTickValues.map((tick) => {
-                          const y = chartHeight - ((tick / 100) * chartHeight)
-                          return (
-                            <g key={`completion-tick-${tick}`}>
-                              <line x1='0' y1={y} x2='520' y2={y} className='td-line-grid' />
-                              <text x='4' y={Math.max(12, y - 3)} className='td-line-axis-label'>{tick}%</text>
-                            </g>
-                          )
-                        })}
-
-                        <polyline points='0,180 520,180' className='td-line-axis' />
-                        <polyline points={completionLinePoints} className='td-line-path td-line-path-completion' />
-
-                        {completionLineSeries.map((point) => (
-                          <g key={`completion-point-${point.id}`}>
-                            <circle cx={point.x} cy={point.y} r='3.5' className='td-line-point td-line-point-completion' />
-                            <text x={point.x} y={Math.max(12, point.y - 8)} textAnchor='middle' className='td-line-point-label'>
-                              {point.value}%
-                            </text>
-                          </g>
-                        ))}
-                      </svg>
                     </div>
                   )}
                 </article>

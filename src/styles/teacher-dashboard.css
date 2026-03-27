@@ -1393,12 +1393,27 @@
   background-color: var(--td-white);
   border: 1px solid var(--td-border-soft);
   box-shadow: 0 1px 4px rgba(17, 24, 39, 0.04);
-  padding: 12px;
+  padding: 14px;
 }
 
 .td-chart-card h3 {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
+  margin-bottom: 6px;
+}
+
+.td-chart-subtitle {
+  font-size: 0.76rem;
+  color: var(--td-text-medium);
   margin-bottom: 10px;
+}
+
+.td-recharts-wrap {
+  width: 100%;
+  min-height: 320px;
+}
+
+.td-chart-card-wide {
+  grid-column: span 2;
 }
 
 .td-bar-chart {
@@ -1452,17 +1467,20 @@
 
 .td-pie-layout {
   display: grid;
-  grid-template-columns: 140px 1fr;
+  grid-template-columns: minmax(240px, 1fr) 1fr;
   gap: 12px;
   align-items: center;
 }
 
+.td-pie-chart-wrap {
+  border: 1px solid rgba(145, 165, 133, 0.2);
+  background: linear-gradient(180deg, rgba(145, 165, 133, 0.08) 0%, rgba(255, 255, 255, 0.3) 100%);
+  padding: 8px;
+}
+
 .td-pie-chart {
-  width: 140px;
-  height: 140px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 1px solid rgba(145, 165, 133, 0.25);
+  width: 100%;
+  height: 260px;
 }
 
 .td-pie-legend {
@@ -1498,6 +1516,19 @@
   background-color: #9aa59a;
 }
 
+.td-pie-center-inline {
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--td-text-medium);
+  font-weight: 700;
+}
+
+.td-pie-note {
+  margin-top: 2px;
+  font-size: 0.74rem;
+  color: var(--td-text-soft);
+}
+
 .td-line-axis {
   stroke: rgba(145, 165, 133, 0.45);
   stroke-width: 2;
@@ -1529,38 +1560,6 @@
 
 .td-line-path-completion {
   stroke: var(--td-red);
-}
-
-.td-line-point {
-  stroke: #ffffff;
-  stroke-width: 1.5;
-}
-
-.td-line-point-learners {
-  fill: var(--td-orange);
-}
-
-.td-line-point-completion {
-  fill: var(--td-red);
-}
-
-.td-line-point-label {
-  font-size: 9px;
-  fill: #2f3b2f;
-  font-weight: 700;
-}
-
-.td-pie-center-value {
-  font-size: 12px;
-  font-weight: 800;
-  fill: #1f6f43;
-}
-
-.td-pie-center-label {
-  font-size: 8px;
-  font-weight: 700;
-  fill: #5f6d60;
-  letter-spacing: 0.3px;
 }
 
 .td-message-box {
@@ -1799,9 +1798,12 @@
     grid-template-columns: 1fr;
   }
 
+  .td-chart-card-wide {
+    grid-column: auto;
+  }
+
   .td-pie-layout {
     grid-template-columns: 1fr;
-    justify-items: start;
   }
 
   .td-builder-layout {

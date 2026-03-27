@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import {
   FaCertificate,
   FaChevronLeft,
@@ -22,6 +22,7 @@ const CourseContent = ({
   maxStudents,
   salePrice,
   featuredImage,
+  courseId,
   courseType,
   onQuizClick,
   completedLessonIds = [],
@@ -34,11 +35,45 @@ const CourseContent = ({
   onPreviewAction
 }) => {
   const [expanded, setExpanded] = useState({})
-  const [showNotes, setShowNotes] = useState(false)
+  const [activeTab, setActiveTab] = useState('overview')
+  const [visitedTabs, setVisitedTabs] = useState({ overview: true })
 
   const notesRef = useRef(null)
+  const includesRef = useRef(null)
+  const flowRef = useRef(null)
   const contentSectionRef = useRef(null)
   const navigate = useNavigate()
+  const courseIdentity = String(courseId || title || 'default-course').trim().toLowerCase().replace(/\s+/g, '-')
+  const tabStateStorageKey = `ma-course-tab-state:${courseIdentity}`
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(tabStateStorageKey)
+      if (!stored) return
+      const parsed = JSON.parse(stored)
+      if (parsed?.activeTab) {
+        setActiveTab(parsed.activeTab)
+      }
+      if (parsed?.visitedTabs && typeof parsed.visitedTabs === 'object') {
+        setVisitedTabs((prev) => ({ ...prev, ...parsed.visitedTabs, overview: true }))
+      }
+    } catch {
+      setActiveTab('overview')
+      setVisitedTabs({ overview: true })
+    }
+  }, [tabStateStorageKey])
+
+  useEffect(() => {
+    try {
+      const stateToStore = JSON.stringify({
+        activeTab,
+        visitedTabs
+      })
+      localStorage.setItem(tabStateStorageKey, stateToStore)
+    } catch {
+      // Ignore storage write errors (private mode, quota, etc.)
+    }
+  }, [activeTab, visitedTabs, tabStateStorageKey])
 
   const toggleTopic = (id) => {
     setExpanded(prev => ({ ...prev, [id]: !prev[id] }))
@@ -63,6 +98,16 @@ const CourseContent = ({
     contentSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
+  const markTabVisited = (tabKey) => {
+    setVisitedTabs((prev) => ({ ...prev, [tabKey]: true }))
+  }
+
+  const jumpToSection = (tabKey, sectionRef) => {
+    setActiveTab(tabKey)
+    markTabVisited(tabKey)
+    sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
   // Collect all notes lessons that have an uploaded file across all topics
   const allNotes = topics.flatMap(topic =>
     (topic.lessons || [])
@@ -72,10 +117,19 @@ const CourseContent = ({
 
   // Clicking "Course notes & articles" — reveal panel and scroll to it
   const handleNotesClick = () => {
-    setShowNotes(true)
+    setActiveTab('notes')
+    markTabVisited('notes')
     setTimeout(() => {
       notesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 100)
+  }
+
+  const contentTabCompleted = totalLessons > 0 && completedLessonIds.length >= totalLessons
+  const tabMeta = {
+    overview: { done: Boolean(visitedTabs.overview) },
+    workflow: { done: Boolean(visitedTabs.workflow) },
+    content: { done: contentTabCompleted },
+    notes: { done: Boolean(visitedTabs.notes) }
   }
 
   return (
@@ -167,8 +221,33 @@ const CourseContent = ({
         </div>
       )}
 
+      <div className='cc-page-nav'>
+        <button className={`cc-page-tab ${activeTab === 'overview' ? 'active' : ''} ${tabMeta.overview.done ? 'is-done' : ''}`} type='button' onClick={() => jumpToSection('overview', includesRef)}>
+          <span>Page 1: Overview</span>
+          {tabMeta.overview.done && <strong>✓</strong>}
+        </button>
+        <button className={`cc-page-tab ${activeTab === 'workflow' ? 'active' : ''} ${tabMeta.workflow.done ? 'is-done' : ''}`} type='button' onClick={() => jumpToSection('workflow', flowRef)}>
+          <span>Page 2: Workflow</span>
+          {tabMeta.workflow.done && <strong>✓</strong>}
+        </button>
+        <button className={`cc-page-tab ${activeTab === 'content' ? 'active' : ''} ${tabMeta.content.done ? 'is-done' : ''}`} type='button' onClick={() => jumpToSection('content', contentSectionRef)}>
+          <span>Page 3: Content</span>
+          {tabMeta.content.done && <strong>✓</strong>}
+        </button>
+        <button className={`cc-page-tab ${activeTab === 'notes' ? 'active' : ''} ${tabMeta.notes.done ? 'is-done' : ''}`} type='button' onClick={handleNotesClick}>
+          <span>Page 4: Notes</span>
+          {tabMeta.notes.done && <strong>✓</strong>}
+        </button>
+      </div>
+
       {/* ══ SECTION 2: What this course includes ══ */}
-      <div className='cc-includes-section'>
+      {activeTab === 'overview' && (
+      <div className='cc-includes-section cc-tab-panel' ref={includesRef}>
+        <div className='cc-page-divider-head'>
+          <span className='cc-page-step'>Page 1</span>
+          <h2>Overview & Includes</h2>
+          <p>Start here to understand what you get in this course before moving into the learning flow.</p>
+        </div>
         <h2 className='cc-section-title'>This course includes:</h2>
         <div className='cc-includes-grid'>
 
@@ -209,13 +288,43 @@ const CourseContent = ({
 
         </div>
       </div>
+      )}
+
+      {activeTab === 'workflow' && (
+      <div className='cc-flow-strip cc-tab-panel' ref={flowRef}>
+        <div className='cc-page-divider-head'>
+          <span className='cc-page-step'>Page 2</span>
+          <h2>Learning Workflow</h2>
+          <p>Use these direct actions to move quickly through lessons, notes, and quiz checkpoints.</p>
+        </div>
+        <article className='cc-flow-card'>
+          <h3>{isPreviewMode ? 'Start Here' : 'Continue Here'}</h3>
+          <p>
+            {isPreviewMode
+              ? 'Scan section structure first, then open details or notes to evaluate the course quickly.'
+              : (nextLesson ? `Pick up directly from ${nextLesson.title} and keep your momentum.` : 'You are done with all current lessons. Revisit notes and quizzes anytime.')}
+          </p>
+        </article>
+        <article className='cc-flow-card cc-flow-card-actions'>
+          <button className='cc-flow-btn' onClick={() => jumpToSection('content', contentSectionRef)} type='button'>Go to Lessons</button>
+          <button className='cc-flow-btn cc-flow-btn-alt' onClick={handleNotesClick} type='button'>Open Notes</button>
+          <button className='cc-flow-btn cc-flow-btn-alt' onClick={onQuizClick} type='button' disabled={!onQuizClick}>Open Quiz</button>
+        </article>
+      </div>
+      )}
 
      
 
 
 
       {/* ══ SECTION 3: Course content ══ */}
-      <div className='cc-content-section' ref={contentSectionRef}>
+      {activeTab === 'content' && (
+      <div className='cc-content-section cc-tab-panel' ref={contentSectionRef}>
+        <div className='cc-page-divider-head'>
+          <span className='cc-page-step'>Page 3</span>
+          <h2>Lessons & Sections</h2>
+          <p>Expand each section and complete lessons in sequence to keep progress moving.</p>
+        </div>
 
         {!isPreviewMode && (
           <div className='cc-learning-sticky'>
@@ -414,17 +523,23 @@ const CourseContent = ({
         </div>
 
       </div>
+      )}
 
 
 
  {/* NOTES PANEL — shown when "Course notes & articles" is clicked */}
-      {showNotes && (
+      {activeTab === 'notes' && (
 
       
-        <div className='cc-notes-section' ref={notesRef}>
+        <div className='cc-notes-section cc-tab-panel' ref={notesRef}>
+          <div className='cc-page-divider-head'>
+            <span className='cc-page-step'>Page 4</span>
+            <h2>Notes & Downloads</h2>
+            <p>Access printable notes and reading materials for revision and offline study.</p>
+          </div>
           <div className='cc-content-header2'>
             <h2 className='cc-section-title2'><FaFileAlt className='cc-inline-file-icon' /> Course Notes &amp; Articles</h2>
-            <button className='cc-expand-all' onClick={() => setShowNotes(false)}>Hide</button>
+            <button className='cc-expand-all' onClick={() => jumpToSection('content', contentSectionRef)}>Back to Content</button>
           </div>
 
           {allNotes.length === 0 ? (

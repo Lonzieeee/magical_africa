@@ -264,6 +264,15 @@
   background-color: rgba(145, 165, 133, 0.3);
 }
 
+.learner-certificate-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(145, 165, 133, 0.4);
+  background-color: rgba(145, 165, 133, 0.12);
+  padding: 5px 8px;
+}
+
 .learner-mycourse-ready .learner-next-lesson {
   color: var(--ld-orange);
 }

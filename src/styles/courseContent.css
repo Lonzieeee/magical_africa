@@ -34,13 +34,12 @@
 }
 
 .cc-learning-focus {
-  width: 1200px;
-  max-width: 100%;
+  width: 100%;
   margin: 1.2rem auto 0;
   border: 1px solid #cfe3d5;
   background: linear-gradient(180deg, #eaf7ef 0%, #dff1e7 100%);
   box-shadow: var(--cc-panel-shadow);
-  padding: 12px 14px;
+  padding: 12px clamp(1rem, 4vw, 3rem);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -69,6 +68,88 @@
 .cc-learning-focus-stats strong {
   font-size: 0.95rem;
   color: #145a34;
+}
+
+.cc-page-nav {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  padding: 0.9rem clamp(1rem, 4vw, 3rem) 0;
+  position: sticky;
+  top: 74px;
+  z-index: 11;
+  background: linear-gradient(180deg, rgba(251, 252, 250, 0.97) 0%, rgba(251, 252, 250, 0.86) 100%);
+  backdrop-filter: blur(4px);
+}
+
+.cc-page-nav button {
+  border: 1px solid #d2ddd3;
+  background-color: #ffffff;
+  color: #2f3a32;
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 8px 10px;
+}
+
+.cc-page-tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.cc-page-tab strong {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.72rem;
+  background-color: #adbead;
+  color: #ffffff;
+}
+
+.cc-page-nav button:hover {
+  border-color: #1f6f43;
+  color: #1f6f43;
+  background-color: #eef6f1;
+}
+
+.cc-page-nav button.active {
+  border-color: #1f6f43;
+  background-color: #1f6f43;
+  color: #ffffff;
+}
+
+.cc-page-tab.is-done {
+  border-color: #8ea88f;
+  background-color: #eff5ef;
+}
+
+.cc-page-tab.is-done strong {
+  background-color: #2f7a45;
+}
+
+.cc-page-tab.active strong {
+  background-color: rgba(255, 255, 255, 0.34);
+}
+
+.cc-tab-panel {
+  animation: cc-tab-fade 220ms ease;
+}
+
+@keyframes cc-tab-fade {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .cc-toast {
@@ -298,12 +379,102 @@
 
 /* ══ INCLUDES ══ */
 .cc-includes-section {
-  width: 1200px;
-  padding: 2rem 1.2rem;
-  margin-top: 1.2rem;
+  width: 100%;
+  padding: 2rem clamp(1rem, 4vw, 3rem);
+  margin-top: 0.8rem;
   border: 1px solid var(--cc-panel-border);
   background-color: #fff;
   box-shadow: var(--cc-panel-shadow);
+}
+
+.cc-flow-strip {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 0.9rem clamp(1rem, 4vw, 3rem) 0;
+  border: 1px solid var(--cc-panel-border);
+  background-color: #ffffff;
+  box-shadow: var(--cc-panel-shadow);
+}
+
+.cc-page-divider-head {
+  border-bottom: 1px solid #e3e9e2;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.cc-page-step {
+  display: inline-block;
+  border: 1px solid rgba(31, 111, 67, 0.35);
+  background-color: rgba(31, 111, 67, 0.08);
+  color: #1f6f43;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.03rem;
+  padding: 2px 8px;
+  margin-bottom: 4px;
+}
+
+.cc-page-divider-head h2 {
+  font-size: 1rem;
+  color: #26352b;
+  margin-bottom: 2px;
+}
+
+.cc-page-divider-head p {
+  font-size: 0.78rem;
+  color: #5f6c60;
+}
+
+.cc-flow-card {
+  border: 1px solid #d9e5d9;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f8f1 100%);
+  padding: 12px;
+}
+
+.cc-flow-card h3 {
+  font-size: 0.9rem;
+  color: #1f6f43;
+  margin-bottom: 4px;
+}
+
+.cc-flow-card p {
+  font-size: 0.8rem;
+  color: #4f6052;
+}
+
+.cc-flow-card-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.cc-flow-btn {
+  border: 1px solid #1f6f43;
+  background-color: #1f6f43;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 8px 10px;
+}
+
+.cc-flow-btn:hover:not(:disabled) {
+  background-color: #145a34;
+}
+
+.cc-flow-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.cc-flow-btn-alt {
+  background-color: #ffffff;
+  color: #1f6f43;
+}
+
+.cc-flow-btn-alt:hover:not(:disabled) {
+  background-color: #e9f3ec;
 }
 
 .cc-section-title {
@@ -346,10 +517,13 @@
 
 /* ══ COURSE CONTENT ══ */
 .cc-content-section {
-  width: min(1200px, 100%);
-  padding: 1.8rem 0 3.2rem;
+  width: 100%;
+  padding: 1.1rem clamp(1rem, 4vw, 3rem) 3.2rem;
   display: grid;
   gap: 14px;
+  border: 1px solid var(--cc-panel-border);
+  background-color: #fff;
+  box-shadow: var(--cc-panel-shadow);
 }
 
 .cc-learning-sticky {
@@ -746,11 +920,11 @@ a.cc-lesson-preview:hover {
 /* for the notes upload notes */
 
 .cc-notes-section { 
-  padding: 1.4rem 1.6rem;
+  padding: 1.4rem clamp(1rem, 4vw, 3rem);
   border: 1px solid var(--cc-panel-border);
   box-shadow: var(--cc-panel-shadow);
   background-color: #fff;
-  width: min(1200px, 100%);
+  width: 100%;
   margin: 0 auto 1rem;
 
 
@@ -781,23 +955,23 @@ a.cc-lesson-preview:hover {
 }
 
 .cc-review-section {
-  width: min(1200px, 100%);
+  width: 100%;
   border: 1px solid var(--cc-panel-border);
   box-shadow: var(--cc-panel-shadow);
   background-color: #fff;
   margin: 0 auto 3rem;
-  padding: 20px;
+  padding: 20px clamp(1rem, 4vw, 3rem);
 }
 
 .cc-review-gate-note {
-  width: min(1200px, 100%);
+  width: 100%;
   margin: 0 auto 12px;
   border: 1px solid #f0dcc0;
   background: linear-gradient(180deg, #fff8ec 0%, #fff3df 100%);
   color: #7a5600;
   font-size: 0.8rem;
   font-weight: 600;
-  padding: 9px 12px;
+  padding: 9px clamp(1rem, 4vw, 3rem);
 }
 
 .cc-review-submitted-note {
@@ -1017,6 +1191,11 @@ text-decoration: none;
     padding: 1.4rem 2rem;
   }
 
+  .cc-flow-strip {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
   .cc-preview-cta {
     width: 100%;
     margin-top: 96px;
@@ -1061,6 +1240,22 @@ text-decoration: none;
 
   .cc-includes-section {
     padding: 1.2rem 1.5rem;
+  }
+
+  .cc-flow-strip {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .cc-page-nav {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    top: 68px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .cc-flow-card-actions {
+    grid-template-columns: 1fr;
   }
 
   /* Includes grid goes single column */
@@ -1212,6 +1407,18 @@ text-decoration: none;
 
   .cc-includes-section {
     padding: 1.5rem 1rem;
+  }
+
+  .cc-flow-strip {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .cc-page-nav {
+    grid-template-columns: 1fr;
+    top: 64px;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
 
   .cc-content-section {

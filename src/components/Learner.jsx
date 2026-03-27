@@ -820,20 +820,27 @@ const Learner = () => {
       <stop offset="0%" stop-color="#f8f4ea" />
       <stop offset="100%" stop-color="#e7f0e8" />
     </linearGradient>
+    <linearGradient id="badge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a24f" />
+      <stop offset="100%" stop-color="#b18233" />
+    </linearGradient>
   </defs>
   <rect width="1600" height="1130" fill="url(#bg)" />
   <rect x="50" y="50" width="1500" height="1030" fill="none" stroke="#1f6f43" stroke-width="8" />
   <rect x="80" y="80" width="1440" height="970" fill="none" stroke="#d4a24f" stroke-width="2" />
-  <text x="800" y="220" text-anchor="middle" font-family="Georgia, serif" font-size="64" fill="#1f6f43">Certificate of Completion</text>
-  <text x="800" y="320" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="30" fill="#4a4a4a">This certifies that</text>
-  <text x="800" y="420" text-anchor="middle" font-family="Georgia, serif" font-size="72" fill="#a3070c">${safeName}</text>
-  <text x="800" y="500" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="30" fill="#4a4a4a">has successfully completed</text>
-  <text x="800" y="590" text-anchor="middle" font-family="Georgia, serif" font-size="54" fill="#1f6f43">${safeCourse}</text>
-  <text x="800" y="680" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="28" fill="#4a4a4a">on ${completionDate}</text>
-  <line x1="320" y1="850" x2="640" y2="850" stroke="#1f6f43" stroke-width="2" />
-  <line x1="960" y1="850" x2="1280" y2="850" stroke="#1f6f43" stroke-width="2" />
-  <text x="480" y="890" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="22" fill="#4a4a4a">Learner Signature</text>
-  <text x="1120" y="890" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="22" fill="#4a4a4a">Magical Africa Academy</text>
+  <circle cx="800" cy="170" r="42" fill="url(#badge)" />
+  <text x="800" y="180" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#ffffff">MA</text>
+  <text x="800" y="260" text-anchor="middle" font-family="Georgia, serif" font-size="66" fill="#1f6f43">Certificate of Completion</text>
+  <text x="800" y="342" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="30" fill="#4a4a4a">This certificate certifies that</text>
+  <text x="800" y="440" text-anchor="middle" font-family="Georgia, serif" font-size="76" fill="#a3070c">${safeName}</text>
+  <text x="800" y="518" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="30" fill="#4a4a4a">has successfully completed the course</text>
+  <text x="800" y="606" text-anchor="middle" font-family="Georgia, serif" font-size="56" fill="#1f6f43">${safeCourse}</text>
+  <text x="800" y="684" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="28" fill="#4a4a4a">Completion date: ${completionDate}</text>
+  <line x1="960" y1="846" x2="1320" y2="846" stroke="#1f6f43" stroke-width="2" />
+  <text x="1140" y="822" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="52" fill="#1f6f43">Magical Africa</text>
+  <text x="1140" y="884" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="21" fill="#4a4a4a">Authorized Signature</text>
+  <text x="1140" y="914" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="21" fill="#4a4a4a">Magical Africa Academy</text>
+  <text x="240" y="960" text-anchor="start" font-family="Poppins, Arial, sans-serif" font-size="19" fill="#667065">Certificate ID: MA-${Date.now()}</text>
 </svg>`
 
     const blob = new Blob([certificateSvg], { type: 'image/svg+xml;charset=utf-8' })
@@ -1388,14 +1395,14 @@ const Learner = () => {
                 {completedCourseTitles.length === 0
                   ? <span>No certificates yet. Complete a full course to unlock certificates.</span>
                   : completedCourses.map((course) => (
-                    <span key={course.id}>
-                      Certificate: {course.title}
+                    <span key={course.id} className='learner-certificate-item'>
+                      <strong>Certificate:</strong> {course.title}
                       <button
                         className='learner-certificate-btn'
                         type='button'
                         onClick={() => handleDownloadCertificate(course.title, course.completedAt)}
                       >
-                        Download
+                        Download Certificate
                       </button>
                     </span>
                   ))}
