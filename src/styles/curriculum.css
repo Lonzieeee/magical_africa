@@ -4,43 +4,50 @@
 
 .curriculum-main {
   display: grid;
-  align-content: start;
+  align-content: stretch;
 }
 
-.curriculum-panel {
-  max-width: 980px;
+.curriculum-stage {
+  width: 100%;
+  min-height: calc(100vh - 120px);
+  margin: 0;
+  padding: clamp(16px, 3vw, 36px) clamp(8px, 2vw, 20px);
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 12px;
+  text-align: center;
 }
 
 .curriculum-lead {
   margin-top: -4px;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   font-size: 0.9rem;
   color: var(--td-text-medium);
+  max-width: 72ch;
 }
 
-.curriculum-content-card {
-  border: 1px solid var(--td-border-soft);
-  background-color: var(--td-white);
-  box-shadow: 0 1px 4px rgba(17, 24, 39, 0.04);
-  padding: 20px;
+.curriculum-focus {
+  width: min(1080px, 100%);
+  padding: clamp(12px, 2.2vw, 24px);
   display: grid;
   justify-items: center;
   text-align: center;
-  gap: 10px;
+  gap: 16px;
 }
 
-.curriculum-content-card img {
-  width: min(320px, 100%);
+.curriculum-focus img {
+  width: min(460px, 100%);
   height: auto;
   object-fit: contain;
 }
 
-.curriculum-content-card h2 {
+.curriculum-focus h2 {
   font-size: 1.2rem;
   color: var(--td-black);
 }
 
-.curriculum-content-card p {
+.curriculum-focus p {
   font-size: 0.88rem;
   color: var(--td-text-medium);
   max-width: 56ch;
@@ -48,31 +55,63 @@
 
 .curriculum-actions {
   width: 100%;
-  margin-top: 6px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+  margin-top: 26px;
+  display: flex;
+  justify-content: flex-end;
+  padding-right: clamp(4px, 1.2vw, 14px);
 }
 
 .curriculum-actions .td-create-btn,
-.curriculum-actions .curriculum-next-btn {
-  width: 100%;
+.curriculum-actions .curriculum-next-btn,
+.curriculum-actions .curriculum-btn-outline {
+  width: auto;
+  min-width: 160px;
 }
 
 .curriculum-actions .curriculum-next-btn {
+  background: transparent;
+  color: var(--td-black);
   border: 1px solid var(--td-border-strong);
+  padding: 12px 16px;
+}
+
+.curriculum-actions .curriculum-next-btn:hover {
+  background-color: rgba(145, 165, 133, 0.18);
+}
+
+.curriculum-actions .curriculum-btn-outline {
+  background: transparent;
+  border: 1px solid var(--td-border-strong);
+  color: var(--td-black);
+  font-weight: 700;
+  padding: 12px 14px;
+}
+
+.curriculum-actions .curriculum-btn-outline:hover {
+  background-color: rgba(145, 165, 133, 0.18);
 }
 
 @media screen and (max-width: 768px) {
-  .curriculum-content-card {
-    padding: 16px;
+  .curriculum-main {
+    align-content: start;
   }
 
-  .curriculum-content-card h2 {
+  .curriculum-stage {
+    min-height: auto;
+    padding: 8px 0 0;
+  }
+
+  .curriculum-focus h2 {
     font-size: 1.06rem;
   }
 
   .curriculum-actions {
-    grid-template-columns: 1fr;
+    justify-content: stretch;
+    margin-top: 16px;
+    padding-right: 0;
+  }
+
+  .curriculum-actions .curriculum-next-btn {
+    width: 100%;
   }
 }

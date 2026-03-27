@@ -1,0 +1,87 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isSelf(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function isCourseOwner(courseId) {
+      return isSignedIn()
+        && courseId is string
+        && exists(/databases/$(database)/documents/courses/$(courseId))
+        && (
+          get(/databases/$(database)/documents/courses/$(courseId)).data.teacherId == request.auth.uid ||
+          get(/databases/$(database)/documents/courses/$(courseId)).data.tutorId == request.auth.uid ||
+          get(/databases/$(database)/documents/courses/$(courseId)).data.createdBy == request.auth.uid ||
+          get(/databases/$(database)/documents/courses/$(courseId)).data.authorId == request.auth.uid
+        );
+    }
+
+    match /users/{userId} {
+      allow read, write: if isSelf(userId);
+    }
+
+    match /courses/{courseId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.resource.data.teacherId == request.auth.uid;
+      allow update, delete: if isSignedIn() && resource.data.teacherId == request.auth.uid;
+    }
+
+    match /learnerProgress/{learnerId} {
+      allow read, write: if isSelf(learnerId);
+    }
+
+    match /enrollments/{enrollmentId} {
+      allow read: if isSignedIn() && (
+        resource.data.learnerId == request.auth.uid ||
+        resource.data.teacherId == request.auth.uid ||
+        isCourseOwner(resource.data.courseId)
+      );
+
+      allow create, update: if isSignedIn() && (
+        request.resource.data.learnerId == request.auth.uid ||
+        request.resource.data.teacherId == request.auth.uid ||
+        isCourseOwner(request.resource.data.courseId)
+      );
+
+      allow delete: if isSignedIn() && (
+        resource.data.learnerId == request.auth.uid ||
+        resource.data.teacherId == request.auth.uid ||
+        isCourseOwner(resource.data.courseId)
+      );
+    }
+
+    match /announcements/{announcementId} {
+      allow read: if isSignedIn();
+
+      allow create: if isSignedIn()
+        && request.resource.data.teacherId == request.auth.uid
+        && request.resource.data.message is string
+        && request.resource.data.message.size() > 0
+        && request.resource.data.message.size() <= 2000
+        && request.resource.data.createdAt is string
+        && request.resource.data.type == 'course-announcement'
+        && (!('courseId' in request.resource.data) || request.resource.data.courseId is string)
+        && (!('courseTitle' in request.resource.data) || request.resource.data.courseTitle is string);
+
+      allow update, delete: if isSignedIn() && resource.data.teacherId == request.auth.uid;
+    }
+
+    match /reviews/{reviewId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.resource.data.learnerId == request.auth.uid;
+      allow update, delete: if isSignedIn() && (
+        resource.data.learnerId == request.auth.uid ||
+        resource.data.teacherId == request.auth.uid
+      );
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
