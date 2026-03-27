@@ -108,7 +108,7 @@ export const AuthProvider = ({ children }) => {
   const getInitials = () => {
     if (userData) {
       const firstName = userData.firstName || "";
-      const lastName = userData.lastName || "";
+      const lastName = userData.lastName || userData.secondName || "";
       return (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
     }
     if (user?.displayName) {
@@ -120,7 +120,7 @@ export const AuthProvider = ({ children }) => {
 
   const getFullName = () => {
     if (userData) {
-      return `${userData.firstName || ""} ${userData.lastName || ""}`.trim();
+      return `${userData.firstName || ""} ${userData.lastName || userData.secondName || ""}`.trim();
     }
     return user?.displayName || "";
   };

@@ -110,6 +110,9 @@ const CourseContentPage = () => {
       const today = toDateKey()
 
       await upsertCourseProgress((existing) => {
+        const resolvedTeacherId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
+        const resolvedTeacherName = course.teacherName || course.tutorName || course.authorName || 'Tutor'
+
         let streak = existing.streak || 0
         const previousDate = existing.lastActiveDate || ''
         const savedCompletedLessonIds = existing.completedLessonIds || []
@@ -141,19 +144,23 @@ const CourseContentPage = () => {
           lastActiveDate: today,
           lastActiveAt: new Date().toISOString(),
           courseTitle: course.title || 'Course',
-          teacherId: course.teacherId || '',
-          teacherName: course.teacherName || ''
+          teacherId: resolvedTeacherId,
+          teacherName: resolvedTeacherName
         }
       })
 
+      const resolvedTeacherId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
+      const resolvedLearnerName = `${userData?.firstName || ''} ${userData?.lastName || userData?.secondName || ''}`.trim() || user.email || 'Learner'
+
       await setDoc(doc(db, 'enrollments', `${user.uid}_${courseId}`), {
         learnerId: user.uid,
-        teacherId: course.teacherId || '',
-        studentName: `${userData?.firstName || ''} ${userData?.lastName || ''}`.trim() || user.email || 'Learner',
+        teacherId: resolvedTeacherId,
+        studentName: resolvedLearnerName,
         studentEmail: user.email || '',
         courseId,
         courseTitle: course.title || 'Course',
         completion: totalLessons > 0 ? Math.round((completedLessonIds.length / totalLessons) * 100) : 0,
+        enrolledAt: new Date().toISOString(),
         lastActiveAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }, { merge: true })
@@ -329,11 +336,14 @@ const CourseContentPage = () => {
 
     setReviewSaving(true)
     try {
+      const resolvedTeacherId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
+      const resolvedLearnerName = `${userData?.firstName || ''} ${userData?.lastName || userData?.secondName || ''}`.trim() || user.email || 'Learner'
+
       await setDoc(doc(db, 'reviews', `${user.uid}_${courseId}`), {
         learnerId: user.uid,
         learnerEmail: user.email || '',
-        learnerName: `${userData?.firstName || ''} ${userData?.lastName || ''}`.trim() || user.email || 'Learner',
-        teacherId: course.teacherId || '',
+        learnerName: resolvedLearnerName,
+        teacherId: resolvedTeacherId,
         courseId,
         courseTitle: course.title || 'Course',
         rating: reviewRating,
@@ -363,6 +373,9 @@ const CourseContentPage = () => {
 
     setPreviewActionLoading(true)
     const price = getCoursePrice()
+    const resolvedTeacherId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
+    const resolvedTeacherName = course.teacherName || course.tutorName || course.authorName || 'Tutor'
+    const resolvedLearnerName = `${userData?.firstName || ''} ${userData?.lastName || userData?.secondName || ''}`.trim() || user.email || 'Learner'
 
     try {
       const progressRef = doc(db, 'learnerProgress', user.uid)
@@ -382,8 +395,8 @@ const CourseContentPage = () => {
         purchasedAt: new Date().toISOString(),
         courseTitle: course.title || 'Course',
         courseType: course.courseType || 'General',
-        teacherId: course.teacherId || '',
-        teacherName: course.teacherName || ''
+        teacherId: resolvedTeacherId,
+        teacherName: resolvedTeacherName
       }
 
       await setDoc(progressRef, {
@@ -396,14 +409,15 @@ const CourseContentPage = () => {
 
       await setDoc(doc(db, 'enrollments', `${user.uid}_${courseId}`), {
         learnerId: user.uid,
-        teacherId: course.teacherId || '',
-        studentName: `${userData?.firstName || ''} ${userData?.lastName || ''}`.trim() || user.email || 'Learner',
+        teacherId: resolvedTeacherId,
+        studentName: resolvedLearnerName,
         studentEmail: user.email || '',
         courseId,
         courseTitle: course.title || 'Course',
         completion: nextCourseProgress.completion,
         paid: price > 0,
         amountPaid: price,
+        enrolledAt: existingCourse.enrolledAt || new Date().toISOString(),
         lastActiveAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }, { merge: true })
