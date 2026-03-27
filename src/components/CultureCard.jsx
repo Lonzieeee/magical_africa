@@ -127,7 +127,7 @@ const CultureCard = () => {
               </audio>
             </div>
           </div>
-          <p className='see-more2' onclick={()=> handleNavigation('/music')}>{t('cultureCard.music.learnMore')} <i className="fa-solid fa-arrow-right"></i></p>
+          <p className='see-more2' onClick={()=> handleNavigation('/music')}>{t('cultureCard.music.learnMore')} <i className="fa-solid fa-arrow-right"></i></p>
         </div>
 
         {/* SECTION 3 */}
@@ -153,7 +153,7 @@ const CultureCard = () => {
               <button className='book-event'>{t('cultureCard.events.bookNow')}</button>
             </div>
           </div>
-          <p className='see-more' onclick={()=> handleNavigation('/events')}>{t('cultureCard.events.seeMore')} <i className="fa-solid fa-arrow-right"></i></p>
+          <p className='see-more' onClick={()=> handleNavigation('/events')}>{t('cultureCard.events.seeMore')} <i className="fa-solid fa-arrow-right"></i></p>
         </div>
       </div>
 

@@ -364,6 +364,10 @@ align-items: center;
   font-size: 1.2rem;
 }
 
+.hero-text h1{
+  color: #D5731A;
+}
+
 .hero-boxes{
   display: flex;
   flex-direction: row;
