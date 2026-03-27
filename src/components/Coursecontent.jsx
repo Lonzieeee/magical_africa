@@ -32,7 +32,9 @@ const CourseContent = ({
   previewPrice = 0,
   previewOwned = false,
   previewActionLoading = false,
-  onPreviewAction
+  onPreviewAction,
+  persistedTabState = null,
+  onPersistTabState
 }) => {
   const [expanded, setExpanded] = useState({})
   const [activeTab, setActiveTab] = useState('overview')
@@ -42,6 +44,7 @@ const CourseContent = ({
   const includesRef = useRef(null)
   const flowRef = useRef(null)
   const contentSectionRef = useRef(null)
+  const lastSyncedTabStateRef = useRef('')
   const navigate = useNavigate()
   const courseIdentity = String(courseId || title || 'default-course').trim().toLowerCase().replace(/\s+/g, '-')
   const tabStateStorageKey = `ma-course-tab-state:${courseIdentity}`
@@ -64,6 +67,38 @@ const CourseContent = ({
   }, [tabStateStorageKey])
 
   useEffect(() => {
+    if (!persistedTabState || typeof persistedTabState !== 'object') return
+
+    const allowedTabs = ['overview', 'workflow', 'content', 'notes']
+    const incomingTab = allowedTabs.includes(persistedTabState.activeTab)
+      ? persistedTabState.activeTab
+      : null
+    const incomingVisited = persistedTabState.visitedTabs && typeof persistedTabState.visitedTabs === 'object'
+      ? persistedTabState.visitedTabs
+      : null
+
+    if (!incomingTab && !incomingVisited) return
+
+    if (incomingTab) {
+      setActiveTab((prev) => (prev === incomingTab ? prev : incomingTab))
+    }
+
+    if (incomingVisited) {
+      setVisitedTabs((prev) => {
+        const next = { ...prev, ...incomingVisited, overview: true }
+        const prevSerialized = JSON.stringify(prev)
+        const nextSerialized = JSON.stringify(next)
+        return prevSerialized === nextSerialized ? prev : next
+      })
+    }
+
+    lastSyncedTabStateRef.current = JSON.stringify({
+      activeTab: incomingTab || activeTab,
+      visitedTabs: { ...visitedTabs, ...(incomingVisited || {}), overview: true }
+    })
+  }, [persistedTabState])
+
+  useEffect(() => {
     try {
       const stateToStore = JSON.stringify({
         activeTab,
@@ -74,6 +109,21 @@ const CourseContent = ({
       // Ignore storage write errors (private mode, quota, etc.)
     }
   }, [activeTab, visitedTabs, tabStateStorageKey])
+
+  useEffect(() => {
+    if (typeof onPersistTabState !== 'function') return
+
+    const payload = {
+      activeTab,
+      visitedTabs
+    }
+    const serialized = JSON.stringify(payload)
+
+    if (lastSyncedTabStateRef.current === serialized) return
+    lastSyncedTabStateRef.current = serialized
+
+    onPersistTabState(payload)
+  }, [activeTab, visitedTabs, onPersistTabState])
 
   const toggleTopic = (id) => {
     setExpanded(prev => ({ ...prev, [id]: !prev[id] }))

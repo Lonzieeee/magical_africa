@@ -32,6 +32,7 @@ const CourseContentPage = () => {
   const [courseCompletionPercent, setCourseCompletionPercent] = useState(0)
   const [previewOwned, setPreviewOwned] = useState(false)
   const [previewActionLoading, setPreviewActionLoading] = useState(false)
+  const [persistedTabState, setPersistedTabState] = useState(null)
 
   // Ref to scroll to quiz section
   const quizRef = useRef(null)
@@ -249,6 +250,44 @@ const CourseContentPage = () => {
 
     checkPreviewOwnership()
   }, [isPreviewMode, user, courseId])
+
+  useEffect(() => {
+    const loadPersistedTabState = async () => {
+      if (!user || !courseId) return
+
+      try {
+        const progressDoc = await getDoc(doc(db, 'learnerProgress', user.uid))
+        if (!progressDoc.exists()) {
+          setPersistedTabState(null)
+          return
+        }
+
+        const savedTabState = progressDoc.data()?.courses?.[courseId]?.tabState || null
+        setPersistedTabState(savedTabState)
+      } catch (error) {
+        console.log('Error loading persisted tab state:', error)
+      }
+    }
+
+    loadPersistedTabState()
+  }, [user, courseId])
+
+  const handlePersistTabState = async (tabState) => {
+    if (!user || !courseId || !course || isPreviewMode) return
+    if (!tabState || typeof tabState !== 'object') return
+
+    setPersistedTabState(tabState)
+
+    try {
+      await upsertCourseProgress((existing) => ({
+        ...existing,
+        tabState,
+        lastActiveAt: new Date().toISOString()
+      }))
+    } catch (error) {
+      console.log('Error persisting tab state:', error)
+    }
+  }
 
   if (loading) return (
     <>
@@ -484,6 +523,7 @@ const CourseContentPage = () => {
 
       <CourseContent
         topics={course.topics || []}
+        courseId={courseId}
         title={course.title}
         description={course.description}
         difficulty={course.difficulty}
@@ -502,6 +542,8 @@ const CourseContentPage = () => {
         previewOwned={previewOwned}
         previewActionLoading={previewActionLoading}
         onPreviewAction={handlePreviewAcquire}
+        persistedTabState={persistedTabState}
+        onPersistTabState={handlePersistTabState}
       />
 
       {/* Quiz section — ref attached so we can scroll to it */}
