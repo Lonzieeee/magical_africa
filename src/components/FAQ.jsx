@@ -30,7 +30,7 @@ const FAQ = () => {
       answer: t('faq.items.purchase.answer')
     }
   ];
-
+ 
   const toggleQuestion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };

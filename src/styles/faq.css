@@ -9,7 +9,7 @@
 }
 
 .FAQ{
-  background-image: url(/images/pattern4.jpg) !important;
+  background-image:url(/images/pattern4.jpg) !important;
   height: fit-content;
   padding-top: 2rem;
   position: relative;
@@ -19,7 +19,7 @@
 }
 
 .FAQ::before{
-    content: '';
+  content: '';
   position: absolute;
   top: 0;
   left: 0;

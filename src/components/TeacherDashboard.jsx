@@ -123,6 +123,9 @@ const TeacherDashboard = () => {
     }
   }, [courses, announcementCourseId, reviewCourseFilter])
 
+
+
+{/* 
   const fetchDashboardData = async () => {
     try {
       const currentTeacherId = auth.currentUser?.uid
@@ -198,6 +201,101 @@ const TeacherDashboard = () => {
       setLoading(false)
     }
   }
+    */}
+
+
+
+const fetchDashboardData = async () => {
+  try {
+    const currentTeacherId = auth.currentUser?.uid
+    if (!currentTeacherId) {
+      setCourses([])
+      setEnrollments([])
+      setAnnouncements([])
+      setReviews([])
+      setLoading(false)
+      return
+    }
+
+    const resolveCourseTeacherId = (course) => (
+      course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
+    )
+
+    const resolveReviewTeacherId = (review) => (
+      review.teacherId || review.tutorId || review.createdBy || review.authorId || ''
+    )
+
+    // Step 1 — fetch courses first so we have courseIds
+    const coursesSnapshot = await getDocs(collection(db, 'courses'))
+    const myCourses = coursesSnapshot.docs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(course => resolveCourseTeacherId(course) === currentTeacherId)
+      .sort((a, b) => {
+        const aTime = new Date(a.createdAt || a.updatedAt || 0).getTime()
+        const bTime = new Date(b.createdAt || b.updatedAt || 0).getTime()
+        return bTime - aTime
+      })
+
+    setCourses(myCourses)
+    const myCourseIds = new Set(myCourses.map(course => course.id))
+
+    // Step 2 — build enrollment queries (two queries, merged)
+    const enrollmentQueries = [
+      getDocs(query(collection(db, 'enrollments'), where('teacherId', '==', currentTeacherId)))
+    ]
+
+    const courseIdList = myCourses.map(c => c.id).filter(Boolean).slice(0, 10)
+    if (courseIdList.length > 0) {
+      enrollmentQueries.push(
+        getDocs(query(collection(db, 'enrollments'), where('courseId', 'in', courseIdList)))
+      )
+    }
+
+    // Step 3 — fetch everything else in parallel
+    const [announcementSnapshot, reviewSnapshot, ...enrollmentSnapshots] = await Promise.allSettled([
+      getDocs(collection(db, 'announcements')),
+      getDocs(collection(db, 'reviews')),
+      ...enrollmentQueries
+    ])
+
+    // Step 4 — merge and deduplicate enrollments
+    const enrollmentMap = new Map()
+    enrollmentSnapshots.forEach(result => {
+      if (result.status === 'fulfilled') {
+        result.value.docs.forEach(d => {
+          enrollmentMap.set(d.id, { id: d.id, ...d.data() })
+        })
+      }
+    })
+
+    const myEnrollments = Array.from(enrollmentMap.values())
+      .filter(item => item.teacherId === currentTeacherId || myCourseIds.has(item.courseId))
+
+    const announcementDocs = announcementSnapshot.status === 'fulfilled' ? announcementSnapshot.value.docs : []
+    const reviewDocs = reviewSnapshot.status === 'fulfilled' ? reviewSnapshot.value.docs : []
+
+    const teacherAnnouncements = announcementDocs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(item => item.teacherId === currentTeacherId)
+      .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
+
+    const myReviews = reviewDocs
+      .map(d => ({ id: d.id, ...d.data() }))
+      .filter(item => resolveReviewTeacherId(item) === currentTeacherId || myCourseIds.has(item.courseId))
+      .sort((a, b) => (b.updatedAt || b.createdAt || '').localeCompare(a.updatedAt || a.createdAt || ''))
+
+    setEnrollments(myEnrollments)
+    setAnnouncements(teacherAnnouncements)
+    setReviews(myReviews)
+
+  } catch (err) {
+    console.log('Error fetching dashboard data:', err)
+  } finally {
+    setLoading(false)
+  }
+}
+
+
 
   const markReviewsSeen = () => {
     const uid = auth.currentUser?.uid
