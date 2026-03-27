@@ -9,7 +9,7 @@
 }
 
 .FAQ{
-  background-image: url(images/pattern4.jpg);
+  background-image: url(/images/pattern4.jpg) !important;
   height: fit-content;
   padding-top: 2rem;
   position: relative;
