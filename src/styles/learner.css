@@ -88,6 +88,47 @@
   margin-bottom: 14px;
 }
 
+.learner-greeting-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.learner-alert-bell {
+  border: 1px solid rgba(145, 165, 133, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
+  color: var(--ld-black);
+  width: 38px;
+  height: 38px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.learner-alert-bell:hover {
+  background-color: rgba(145, 165, 133, 0.25);
+}
+
+.learner-alert-bell span {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  border: 1px solid rgba(163, 7, 12, 0.45);
+  background-color: var(--ld-red);
+  color: var(--ld-white);
+  font-size: 0.68rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .learner-greeting h3 {
   font-size: 1rem;
   color: var(--ld-black);
@@ -190,6 +231,37 @@
   color: var(--ld-red);
   border: 1px solid rgba(163, 7, 12, 0.3);
   background-color: rgba(163, 7, 12, 0.08);
+}
+
+.learner-course-state-pill {
+  display: inline-block;
+  margin-bottom: 6px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #1f6f43;
+  border: 1px solid rgba(31, 111, 67, 0.32);
+  background-color: rgba(31, 111, 67, 0.08);
+}
+
+.learner-inprogress-note {
+  font-size: 0.76rem;
+  color: var(--ld-text-medium);
+  margin-top: 8px;
+}
+
+.learner-certificate-btn {
+  margin-left: 8px;
+  border: 1px solid rgba(145, 165, 133, 0.5);
+  background-color: rgba(145, 165, 133, 0.18);
+  color: var(--ld-black);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 3px 8px;
+}
+
+.learner-certificate-btn:hover {
+  background-color: rgba(145, 165, 133, 0.3);
 }
 
 .learner-mycourse-ready .learner-next-lesson {

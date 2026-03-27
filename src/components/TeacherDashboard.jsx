@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import { FaChevronLeft, FaStar } from 'react-icons/fa'
+import { FaBell, FaChevronLeft, FaStar } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import {
@@ -52,6 +52,7 @@ const TeacherDashboard = () => {
   const [regularPrice, setRegularPrice] = useState('')
   const [salePrice, setSalePrice] = useState('')
   const [featuredImage, setFeaturedImage] = useState('')
+  const [reviewsSeenAt, setReviewsSeenAt] = useState('')
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, () => setAuthReady(true))
@@ -61,6 +62,13 @@ const TeacherDashboard = () => {
   useEffect(() => {
     if (!authReady) return
     fetchDashboardData()
+  }, [authReady])
+
+  useEffect(() => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    const seenAt = localStorage.getItem(`teacherReviewsSeenAt_${uid}`) || ''
+    setReviewsSeenAt(seenAt)
   }, [authReady])
 
   useEffect(() => {
@@ -154,6 +162,19 @@ const TeacherDashboard = () => {
       setLoading(false)
     }
   }
+
+  const markReviewsSeen = () => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    const now = new Date().toISOString()
+    setReviewsSeenAt(now)
+    localStorage.setItem(`teacherReviewsSeenAt_${uid}`, now)
+  }
+
+  useEffect(() => {
+    if (activeSection !== 'reviews') return
+    markReviewsSeen()
+  }, [activeSection])
 
   const handleDelete = async (courseId) => {
     if (!window.confirm('Are you sure you want to delete this course?')) return
@@ -490,24 +511,181 @@ const TeacherDashboard = () => {
       .slice(0, 6)
   }, [coursePerformance])
 
-  const learnerCompletionLinePoints = useMemo(() => {
-    if (chartCourses.length === 0) return ''
+  const chartWidth = 520
+  const chartHeight = 180
 
-    const width = 520
-    const height = 180
-    const maxLearners = Math.max(...chartCourses.map(item => item.learners), 1)
+  const maxLearnersForCharts = useMemo(() => {
+    return Math.max(...chartCourses.map((item) => item.learners || 0), 1)
+  }, [chartCourses])
+
+  const learnerTickValues = useMemo(() => {
+    const max = maxLearnersForCharts
+    if (max <= 1) return [0, 1]
+
+    const step = Math.max(1, Math.ceil(max / 4))
+    const ticks = [0, step, step * 2, step * 3, max]
+    return [...new Set(ticks)].sort((a, b) => a - b)
+  }, [maxLearnersForCharts])
+
+  const completionTickValues = [0, 25, 50, 75, 100]
+
+  const learnerLineSeries = useMemo(() => {
+    if (chartCourses.length === 0) return []
 
     return chartCourses.map((item, index) => {
       const x = chartCourses.length === 1
-        ? width / 2
-        : (index / (chartCourses.length - 1)) * width
-      const learnerRatio = item.learners / maxLearners
-      const completionRatio = (item.avgCompletion || 0) / 100
-      const combined = (learnerRatio * 0.45) + (completionRatio * 0.55)
-      const y = height - (combined * height)
-      return `${x},${y}`
-    }).join(' ')
-  }, [chartCourses])
+        ? chartWidth / 2
+        : (index / (chartCourses.length - 1)) * chartWidth
+      const ratio = (item.learners || 0) / maxLearnersForCharts
+      const y = chartHeight - (ratio * chartHeight)
+      return {
+        id: item.id,
+        title: item.title,
+        value: item.learners || 0,
+        x,
+        y
+      }
+    })
+  }, [chartCourses, chartWidth, chartHeight, maxLearnersForCharts])
+
+  const completionLineSeries = useMemo(() => {
+    if (chartCourses.length === 0) return []
+
+    return chartCourses.map((item, index) => {
+      const x = chartCourses.length === 1
+        ? chartWidth / 2
+        : (index / (chartCourses.length - 1)) * chartWidth
+      const ratio = (item.avgCompletion || 0) / 100
+      const y = chartHeight - (ratio * chartHeight)
+      return {
+        id: item.id,
+        title: item.title,
+        value: item.avgCompletion || 0,
+        x,
+        y
+      }
+    })
+  }, [chartCourses, chartWidth, chartHeight])
+
+  const learnerLinePoints = useMemo(() => learnerLineSeries.map((point) => `${point.x},${point.y}`).join(' '), [learnerLineSeries])
+  const completionLinePoints = useMemo(() => completionLineSeries.map((point) => `${point.x},${point.y}`).join(' '), [completionLineSeries])
+
+  const completionPie = useMemo(() => {
+    const base = {
+      completed: 0,
+      inProgress: 0,
+      notStarted: 0,
+      total: 0
+    }
+
+    if (enrollments.length === 0) {
+      return {
+        ...base,
+        percentages: {
+          completed: 0,
+          inProgress: 0,
+          notStarted: 0
+        },
+        gradient: 'conic-gradient(#d9e3d4 0deg 360deg)'
+      }
+    }
+
+    const counts = enrollments.reduce((acc, item) => {
+      const completion = Number(item.completion || 0)
+      if (completion >= 100) {
+        acc.completed += 1
+      } else if (completion > 0) {
+        acc.inProgress += 1
+      } else {
+        acc.notStarted += 1
+      }
+      return acc
+    }, { ...base })
+
+    counts.total = enrollments.length
+
+    const completedRatio = counts.completed / counts.total
+    const inProgressRatio = counts.inProgress / counts.total
+    const notStartedRatio = counts.notStarted / counts.total
+
+    const percentages = {
+      completed: Math.round(completedRatio * 100),
+      inProgress: Math.round(inProgressRatio * 100)
+    }
+    percentages.notStarted = Math.max(0, 100 - percentages.completed - percentages.inProgress)
+
+    const completedDeg = completedRatio * 360
+    const inProgressDeg = inProgressRatio * 360
+    const notStartedDeg = notStartedRatio * 360
+
+    const toRadians = (angleDeg) => (angleDeg - 90) * (Math.PI / 180)
+    const polarToCartesian = (cx, cy, radius, angleDeg) => ({
+      x: cx + (radius * Math.cos(toRadians(angleDeg))),
+      y: cy + (radius * Math.sin(toRadians(angleDeg)))
+    })
+
+    const describeArcPath = (cx, cy, radius, startDeg, endDeg) => {
+      const start = polarToCartesian(cx, cy, radius, startDeg)
+      const end = polarToCartesian(cx, cy, radius, endDeg)
+      const largeArcFlag = endDeg - startDeg > 180 ? 1 : 0
+      return [
+        `M ${cx} ${cy}`,
+        `L ${start.x} ${start.y}`,
+        `A ${radius} ${radius} 0 ${largeArcFlag} 1 ${end.x} ${end.y}`,
+        'Z'
+      ].join(' ')
+    }
+
+    const segments = []
+    const separators = []
+    let cursor = 0
+
+    const completedEnd = cursor + completedDeg
+    if (completedDeg > 0) {
+      segments.push({
+        key: 'completed',
+        color: '#1f6f43',
+        path: describeArcPath(70, 70, 66, cursor, completedEnd)
+      })
+      if (completedEnd < 360) {
+        separators.push(polarToCartesian(70, 70, 66, completedEnd))
+      }
+    }
+    cursor = completedEnd
+
+    const progressEnd = cursor + inProgressDeg
+    if (inProgressDeg > 0) {
+      segments.push({
+        key: 'inProgress',
+        color: '#d5731a',
+        path: describeArcPath(70, 70, 66, cursor, progressEnd)
+      })
+      if (progressEnd < 360) {
+        separators.push(polarToCartesian(70, 70, 66, progressEnd))
+      }
+    }
+    cursor = progressEnd
+
+    const notStartedEnd = cursor + notStartedDeg
+    if (notStartedDeg > 0) {
+      segments.push({
+        key: 'notStarted',
+        color: '#9aa59a',
+        path: describeArcPath(70, 70, 66, cursor, notStartedEnd)
+      })
+    }
+
+    return {
+      ...counts,
+      percentages: {
+        completed: percentages.completed,
+        inProgress: percentages.inProgress,
+        notStarted: percentages.notStarted
+      },
+      segments,
+      separators
+    }
+  }, [enrollments])
 
   const reviewSummary = useMemo(() => {
     const totalReviews = reviews.length
@@ -542,6 +720,51 @@ const TeacherDashboard = () => {
       averageRating: Number(averageRating.toFixed(1))
     }
   }, [filteredReviews])
+
+  const enrollmentByLearnerCourse = useMemo(() => {
+    const map = {}
+    enrollments.forEach((item) => {
+      const learnerId = item.learnerId || ''
+      const courseId = item.courseId || ''
+      if (!learnerId || !courseId) return
+      map[`${learnerId}_${courseId}`] = Number(item.completion || 0)
+    })
+    return map
+  }, [enrollments])
+
+  const reviewRows = useMemo(() => {
+    return filteredReviews.map((review) => {
+      const key = `${review.learnerId || ''}_${review.courseId || ''}`
+      const enrollmentCompletion = enrollmentByLearnerCourse[key]
+      const completion = Number(
+        review.completionPercent ??
+        enrollmentCompletion ??
+        review.completion ??
+        0
+      )
+
+      const completionLabel = completion >= 100
+        ? 'Completed successfully'
+        : `${completion}% complete`
+
+      return {
+        ...review,
+        completion,
+        completionLabel
+      }
+    })
+  }, [filteredReviews, enrollmentByLearnerCourse])
+
+  const unseenReviewsCount = useMemo(() => {
+    if (!reviewsSeenAt) return reviews.length
+    const seenTs = new Date(reviewsSeenAt).getTime()
+    if (Number.isNaN(seenTs)) return reviews.length
+
+    return reviews.filter((review) => {
+      const ts = new Date(review.updatedAt || review.createdAt || 0).getTime()
+      return !Number.isNaN(ts) && ts > seenTs
+    }).length
+  }, [reviews, reviewsSeenAt])
 
   const studentRows = useMemo(() => {
     const toTime = (value) => {
@@ -803,6 +1026,15 @@ const TeacherDashboard = () => {
         </aside>
 
         <main className='td-main'>
+          {!loading && (
+            <div className='td-top-alert-row'>
+              <button className='td-alert-bell' type='button' onClick={() => setActiveSection('reviews')}>
+                <FaBell aria-hidden='true' />
+                {unseenReviewsCount > 0 && <span>{unseenReviewsCount}</span>}
+              </button>
+            </div>
+          )}
+
           {loading && (
             <div className='td-loading-wrap'>
               <div className='td-coffee' role='img' aria-label='Coffee cup spinning and stretching from side to side'>
@@ -1263,14 +1495,112 @@ const TeacherDashboard = () => {
                 </article>
 
                 <article className='td-chart-card'>
-                  <h3>Learner Reach + Completion (Line)</h3>
+                  <h3>Learner Reach (Line)</h3>
                   {chartCourses.length === 0 ? (
                     <p className='td-empty-text'>Line chart appears after your first enrollments.</p>
                   ) : (
                     <div className='td-line-chart-wrap'>
-                      <svg viewBox='0 0 520 180' className='td-line-chart' role='img' aria-label='Learner reach and completion trend line'>
+                      <svg viewBox='0 0 520 180' className='td-line-chart' role='img' aria-label='Learner reach trend line'>
+                        {learnerTickValues.map((tick) => {
+                          const y = chartHeight - ((tick / maxLearnersForCharts) * chartHeight)
+                          return (
+                            <g key={`learner-tick-${tick}`}>
+                              <line x1='0' y1={y} x2='520' y2={y} className='td-line-grid' />
+                              <text x='4' y={Math.max(12, y - 3)} className='td-line-axis-label'>{tick}</text>
+                            </g>
+                          )
+                        })}
+
                         <polyline points='0,180 520,180' className='td-line-axis' />
-                        <polyline points={learnerCompletionLinePoints} className='td-line-path' />
+                        <polyline points={learnerLinePoints} className='td-line-path td-line-path-learners' />
+
+                        {learnerLineSeries.map((point) => (
+                          <g key={`learner-point-${point.id}`}>
+                            <circle cx={point.x} cy={point.y} r='3.5' className='td-line-point td-line-point-learners' />
+                            <text x={point.x} y={Math.max(12, point.y - 8)} textAnchor='middle' className='td-line-point-label'>
+                              {point.value}
+                            </text>
+                          </g>
+                        ))}
+                      </svg>
+                    </div>
+                  )}
+                </article>
+
+                <article className='td-chart-card'>
+                  <h3>Completion Distribution</h3>
+                  {completionPie.total === 0 ? (
+                    <p className='td-empty-text'>Pie chart appears after your first enrollments.</p>
+                  ) : (
+                    <div className='td-pie-layout'>
+                      <svg viewBox='0 0 140 140' className='td-pie-chart' role='img' aria-label='Completion distribution pie chart'>
+                        {completionPie.segments.map((segment) => (
+                          <path
+                            key={segment.key}
+                            d={segment.path}
+                            fill={segment.color}
+                            stroke='#ffffff'
+                            strokeWidth='2.4'
+                          />
+                        ))}
+
+                        {completionPie.separators.map((point, index) => (
+                          <line
+                            key={`separator-${index}`}
+                            x1='70'
+                            y1='70'
+                            x2={point.x}
+                            y2={point.y}
+                            stroke='#ffffff'
+                            strokeWidth='1.5'
+                          />
+                        ))}
+
+                        <circle cx='70' cy='70' r='24' fill='#ffffff' />
+                        <text x='70' y='66' textAnchor='middle' className='td-pie-center-value'>
+                          {completionPie.total}
+                        </text>
+                        <text x='70' y='80' textAnchor='middle' className='td-pie-center-label'>
+                          learners
+                        </text>
+                      </svg>
+                      <div className='td-pie-legend'>
+                        <p><span className='td-pie-dot is-completed' /> Completed: {completionPie.percentages.completed}%</p>
+                        <p><span className='td-pie-dot is-progress' /> In Progress: {completionPie.percentages.inProgress}%</p>
+                        <p><span className='td-pie-dot is-not-started' /> Not Started: {completionPie.percentages.notStarted}%</p>
+                      </div>
+                    </div>
+                  )}
+                </article>
+
+                <article className='td-chart-card'>
+                  <h3>Completion Trend (Line)</h3>
+                  {chartCourses.length === 0 ? (
+                    <p className='td-empty-text'>Completion trend appears after learner progress starts.</p>
+                  ) : (
+                    <div className='td-line-chart-wrap'>
+                      <svg viewBox='0 0 520 180' className='td-line-chart' role='img' aria-label='Average completion trend line'>
+                        {completionTickValues.map((tick) => {
+                          const y = chartHeight - ((tick / 100) * chartHeight)
+                          return (
+                            <g key={`completion-tick-${tick}`}>
+                              <line x1='0' y1={y} x2='520' y2={y} className='td-line-grid' />
+                              <text x='4' y={Math.max(12, y - 3)} className='td-line-axis-label'>{tick}%</text>
+                            </g>
+                          )
+                        })}
+
+                        <polyline points='0,180 520,180' className='td-line-axis' />
+                        <polyline points={completionLinePoints} className='td-line-path td-line-path-completion' />
+
+                        {completionLineSeries.map((point) => (
+                          <g key={`completion-point-${point.id}`}>
+                            <circle cx={point.x} cy={point.y} r='3.5' className='td-line-point td-line-point-completion' />
+                            <text x={point.x} y={Math.max(12, point.y - 8)} textAnchor='middle' className='td-line-point-label'>
+                              {point.value}%
+                            </text>
+                          </g>
+                        ))}
                       </svg>
                     </div>
                   )}
@@ -1533,22 +1863,26 @@ const TeacherDashboard = () => {
                   <p>{filteredReviewSummary.totalReviews}</p>
                 </article>
               </div>
-              {filteredReviews.length === 0 ? (
+              {reviewRows.length === 0 ? (
                 <p className='td-empty-text'>No reviews yet. Learner reviews will appear here.</p>
               ) : (
                 <div className='td-review-list'>
-                  {filteredReviews.map(review => (
+                  {reviewRows.map(review => (
                     <article key={review.id} className='td-review-card'>
                       <div className='td-review-head'>
                         <h3>{review.courseTitle || 'Course Review'}</h3>
                         <span>{review.learnerName || review.learnerEmail || 'Learner'}</span>
                       </div>
+                      <p className='td-review-completion'>{review.completionLabel}</p>
                       <div className='td-review-rating'>
                         {[1, 2, 3, 4, 5].map(star => (
                           <FaStar key={star} className={star <= (review.rating || 0) ? 'active' : ''} />
                         ))}
                       </div>
                       <p>{review.comment || 'No comment provided.'}</p>
+                      {review.improvementSuggestion && (
+                        <p className='td-review-improve'>What can we improve: {review.improvementSuggestion}</p>
+                      )}
                       <small>{review.createdAt ? new Date(review.createdAt).toLocaleString() : ''}</small>
                     </article>
                   ))}

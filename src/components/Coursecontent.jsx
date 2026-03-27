@@ -1,5 +1,13 @@
 import React, { useState, useRef } from 'react'
-import { FaFileAlt } from 'react-icons/fa'
+import {
+  FaCertificate,
+  FaChevronLeft,
+  FaClipboardList,
+  FaDownload,
+  FaFileAlt,
+  FaMobileAlt,
+  FaPlayCircle
+} from 'react-icons/fa'
 import '../styles/courseContent.css'
 import CourseCard from '../components/Coursecard'
 import { useNavigate } from 'react-router-dom'
@@ -18,12 +26,18 @@ const CourseContent = ({
   onQuizClick,
   completedLessonIds = [],
   onToggleLessonComplete,
-  isPreviewMode = false
+  isPreviewMode = false,
+  onBackToDashboard,
+  previewPrice = 0,
+  previewOwned = false,
+  previewActionLoading = false,
+  onPreviewAction
 }) => {
   const [expanded, setExpanded] = useState({})
   const [showNotes, setShowNotes] = useState(false)
 
   const notesRef = useRef(null)
+  const contentSectionRef = useRef(null)
   const navigate = useNavigate()
 
   const toggleTopic = (id) => {
@@ -31,6 +45,23 @@ const CourseContent = ({
   }
 
   const totalLessons = topics.reduce((acc, t) => acc + (t.lessons ? t.lessons.length : 0), 0)
+  const completionPercent = totalLessons > 0
+    ? Math.round((completedLessonIds.length / totalLessons) * 100)
+    : 0
+
+  const lessonSequence = topics.flatMap((topic, topicIndex) =>
+    (topic.lessons || []).map((lesson, lessonIndex) => ({
+      id: String(lesson.id || `${topic.id || `topic-${topicIndex}`}-${lessonIndex}`),
+      title: lesson.title || `Lesson ${lessonIndex + 1}`
+    }))
+  )
+
+  const completedSet = new Set((completedLessonIds || []).map(String))
+  const nextLesson = lessonSequence.find((lesson) => !completedSet.has(lesson.id))
+
+  const jumpToLessons = () => {
+    contentSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
   // Collect all notes lessons that have an uploaded file across all topics
   const allNotes = topics.flatMap(topic =>
@@ -48,11 +79,21 @@ const CourseContent = ({
   }
 
   return (
-    <div className='cc-page'>
+    <div className={`cc-page ${isPreviewMode ? 'is-preview-mode' : ''}`}>
 
       {/* ══ SECTION 1: Hero banner ══ */}
       <div className='cc-hero'>
         <div className='cc-hero-inner'>
+
+          <div className='cc-hero-topbar'>
+            <button className='cc-hero-back-btn' onClick={onBackToDashboard} type='button'>
+              <FaChevronLeft aria-hidden='true' />
+              <span>Back to Learner Dashboard</span>
+            </button>
+            <span className={`cc-hero-mode-badge ${isPreviewMode ? 'is-preview' : 'is-learning'}`}>
+              {isPreviewMode ? 'Preview Mode' : 'Learning Mode'}
+            </span>
+          </div>
 
           <div className='cc-breadcrumb'>
             <span>Academy</span>
@@ -68,7 +109,7 @@ const CourseContent = ({
           </p>
 
           <p className='cc-hero-author'>
-            Created by <span onClick={() => navigate('/teacher-dashboard')}>{teacherName || 'magical.africa Academy'}</span>
+            Created by <span onClick={() => navigate(isPreviewMode ? '/teacher-dashboard' : '/learner')}>{teacherName || 'magical.africa Academy'}</span>
           </p>
 
           <div className='cc-hero-meta'>
@@ -96,10 +137,35 @@ const CourseContent = ({
             featuredImage={featuredImage}
             teacherName={teacherName}
             courseType={courseType}
+            isPreviewMode={isPreviewMode}
+            completionPercent={completionPercent}
+            nextLessonTitle={nextLesson?.title || ''}
+            previewPrice={previewPrice}
+            previewOwned={previewOwned}
+            previewActionLoading={previewActionLoading}
+            onPreviewAction={onPreviewAction}
           />
         </div>
 
       </div>
+
+      {!isPreviewMode && (
+        <div className='cc-learning-focus'>
+          <div className='cc-learning-focus-text'>
+            <h3>Continue Learning</h3>
+            <p>
+              {nextLesson
+                ? `Next lesson: ${nextLesson.title}`
+                : 'All lessons completed. Great work!'}
+            </p>
+          </div>
+
+          <div className='cc-learning-focus-stats'>
+            <span>{completedLessonIds.length}/{totalLessons} lessons completed</span>
+            <strong>{completionPercent}%</strong>
+          </div>
+        </div>
+      )}
 
       {/* ══ SECTION 2: What this course includes ══ */}
       <div className='cc-includes-section'>
@@ -107,22 +173,22 @@ const CourseContent = ({
         <div className='cc-includes-grid'>
 
           <div className='cc-include-item'>
-            <span className='cc-include-icon'>&#9654;</span>
+            <span className='cc-include-icon'><FaPlayCircle /></span>
             <span>On-demand video lessons</span>
           </div>
 
           <div className='cc-include-item'>
-            <span className='cc-include-icon'>&#8681;</span>
+            <span className='cc-include-icon'><FaDownload /></span>
             <span>Downloadable materials</span>
           </div>
 
           <div className='cc-include-item' onClick={onQuizClick} style={{ cursor: onQuizClick ? 'pointer' : 'default' }}>
-            <span className='cc-include-icon'>&#128203;</span>
+            <span className='cc-include-icon'><FaClipboardList /></span>
             <span>Quizzes &amp; assignments</span>
           </div>
 
           <div className='cc-include-item'>
-            <span className='cc-include-icon'>&#128241;</span>
+            <span className='cc-include-icon'><FaMobileAlt /></span>
             <span>Access on mobile &amp; desktop</span>
           </div>
 
@@ -132,12 +198,12 @@ const CourseContent = ({
             onClick={handleNotesClick}
             style={{ cursor: 'pointer' }}
           >
-            <span className='cc-include-icon'>&#128196;</span>
+            <span className='cc-include-icon'><FaFileAlt /></span>
             <span>Course notes &amp; articles</span>
           </div>
 
           <div className='cc-include-item'>
-            <span className='cc-include-icon'>&#127942;</span>
+            <span className='cc-include-icon'><FaCertificate /></span>
             <span>Certificate of completion</span>
           </div>
 
@@ -149,7 +215,28 @@ const CourseContent = ({
 
 
       {/* ══ SECTION 3: Course content ══ */}
-      <div className='cc-content-section'>
+      <div className='cc-content-section' ref={contentSectionRef}>
+
+        {!isPreviewMode && (
+          <div className='cc-learning-sticky'>
+            <div className='cc-learning-sticky-left'>
+              <p className='cc-learning-sticky-label'>Learning Mode</p>
+              <span>{nextLesson ? `Up next: ${nextLesson.title}` : 'You have completed all current lessons.'}</span>
+            </div>
+            <div className='cc-learning-sticky-actions'>
+              <button className='cc-learning-btn' onClick={jumpToLessons} type='button'>Jump to Lessons</button>
+              {onQuizClick && (
+                <button className='cc-learning-btn cc-learning-btn-secondary' onClick={onQuizClick} type='button'>Open Quiz</button>
+              )}
+            </div>
+          </div>
+        )}
+
+        {isPreviewMode && (
+          <div className='cc-preview-ribbon'>
+            Preview only: lesson progress and quiz attempts are available after you start the course.
+          </div>
+        )}
 
         {isPreviewMode ? (
           <div className='cc-progress-strip'>
@@ -173,6 +260,21 @@ const CourseContent = ({
             </div>
           </div>
         )}
+
+        <div className='cc-overview-grid'>
+          <article className='cc-overview-card'>
+            <h3>Course Info</h3>
+            <p>{topics.length} sections, {totalLessons} lessons, level: {difficulty || 'Beginner'}.</p>
+          </article>
+          <article className='cc-overview-card'>
+            <h3>{isPreviewMode ? 'Preview Path' : 'Learning Path'}</h3>
+            <p>
+              {isPreviewMode
+                ? 'Review lessons, notes, and structure before adding this course to your learning dashboard.'
+                : (nextLesson ? `Next up: ${nextLesson.title}. Keep moving to complete your certificate path.` : 'Everything is completed. You can now revisit notes, quizzes, and downloads.')}
+            </p>
+          </article>
+        </div>
 
         <div className='cc-content-header'>
           <h2 className='cc-section-title'>Course content</h2>
@@ -254,6 +356,9 @@ const CourseContent = ({
                                 </div>
 
                                 <div className='cc-lesson-right'>
+                                  {isPreviewMode && (
+                                    <span className='cc-preview-lock'>Preview only</span>
+                                  )}
                                   {/*  Video preview link */}
                                   {lesson.type === 'video' && lesson.videoURL && (
                                     <a
