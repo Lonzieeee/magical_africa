@@ -8,7 +8,9 @@ import {
   getDocs,
   deleteDoc,
   doc,
-  updateDoc
+  query,
+  updateDoc,
+  where
 } from 'firebase/firestore'
 import { onAuthStateChanged } from 'firebase/auth'
 import { useAuth } from '../context/AuthContext'
@@ -30,6 +32,8 @@ const TeacherDashboard = () => {
   const [reviews, setReviews] = useState([])
   const [announcementText, setAnnouncementText] = useState('')
   const [announcementCourseId, setAnnouncementCourseId] = useState('')
+  const [announcementStatus, setAnnouncementStatus] = useState({ type: '', text: '' })
+  const [announcementPosting, setAnnouncementPosting] = useState(false)
   const [reviewCourseFilter, setReviewCourseFilter] = useState('')
   const [loading, setLoading] = useState(true)
   const [authReady, setAuthReady] = useState(false)
@@ -38,6 +42,7 @@ const TeacherDashboard = () => {
   const [builderSaving, setBuilderSaving] = useState(false)
   const [builderStep, setBuilderStep] = useState('basics')
   const [builderMessage, setBuilderMessage] = useState('')
+  const [builderErrors, setBuilderErrors] = useState({})
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [difficulty, setDifficulty] = useState('Beginner')
@@ -104,7 +109,7 @@ const TeacherDashboard = () => {
 
       const [coursesSnapshot, enrollmentSnapshot, announcementSnapshot, reviewSnapshot] = await Promise.allSettled([
         getDocs(collection(db, 'courses')),
-        getDocs(collection(db, 'enrollments')),
+        getDocs(query(collection(db, 'enrollments'), where('teacherId', '==', currentTeacherId))),
         getDocs(collection(db, 'announcements')),
         getDocs(collection(db, 'reviews'))
       ])
@@ -174,6 +179,7 @@ const TeacherDashboard = () => {
     setBuilderMode('create')
     setBuilderStep('basics')
     setBuilderMessage('')
+    setBuilderErrors({})
   }
 
   const populateBuilderForm = (course) => {
@@ -225,8 +231,65 @@ const TeacherDashboard = () => {
     const reader = new FileReader()
     reader.onloadend = () => {
       setFeaturedImage(reader.result || '')
+      setBuilderErrors((prev) => ({ ...prev, featuredImage: '' }))
     }
     reader.readAsDataURL(file)
+  }
+
+  const handlePricingModelChange = (value) => {
+    setPricingModel(value)
+    setBuilderErrors((prev) => ({
+      ...prev,
+      pricingModel: '',
+      regularPrice: '',
+      salePrice: ''
+    }))
+    if (value === 'free') {
+      setRegularPrice('0')
+      setSalePrice('0')
+    }
+  }
+
+  const validateBuilderForm = () => {
+    const nextErrors = {}
+
+    const trimmedTitle = title.trim()
+    const trimmedDescription = description.trim()
+    const normalizedMaxStudents = String(maxStudents || '').trim()
+    const normalizedRegularPrice = Number(regularPrice || 0)
+    const normalizedSalePrice = Number(salePrice || 0)
+
+    if (trimmedTitle.length < 3) {
+      nextErrors.title = 'Course title should be at least 3 characters.'
+    }
+
+    if (trimmedDescription.length < 12) {
+      nextErrors.description = 'Description should be at least 12 characters.'
+    }
+
+    if (normalizedMaxStudents && normalizedMaxStudents.toLowerCase() !== 'unlimited') {
+      const asNumber = Number(normalizedMaxStudents)
+      if (!Number.isFinite(asNumber) || asNumber <= 0) {
+        nextErrors.maxStudents = 'Use a positive number or leave empty for Unlimited.'
+      }
+    }
+
+    if (pricingModel === 'paid') {
+      if (!Number.isFinite(normalizedRegularPrice) || normalizedRegularPrice <= 0) {
+        nextErrors.regularPrice = 'Regular price must be greater than 0 for paid courses.'
+      }
+
+      if (!Number.isFinite(normalizedSalePrice) || normalizedSalePrice < 0) {
+        nextErrors.salePrice = 'Sale price must be 0 or higher.'
+      }
+
+      if (Number.isFinite(normalizedRegularPrice) && Number.isFinite(normalizedSalePrice) && normalizedSalePrice > normalizedRegularPrice) {
+        nextErrors.salePrice = 'Sale price cannot be greater than regular price.'
+      }
+    }
+
+    setBuilderErrors(nextErrors)
+    return Object.keys(nextErrors).length === 0
   }
 
   const saveCourse = async () => {
@@ -235,8 +298,8 @@ const TeacherDashboard = () => {
       return null
     }
 
-    if (!title.trim() || !description.trim()) {
-      setBuilderMessage('Please add at least course title and description.')
+    if (!validateBuilderForm()) {
+      setBuilderMessage('Please fix highlighted fields before continuing.')
       return null
     }
 
@@ -255,8 +318,8 @@ const TeacherDashboard = () => {
         maxStudents: maxStudents || 'Unlimited',
         courseType: courseType || '',
         pricingModel,
-        regularPrice: regularPrice || '0',
-        salePrice: salePrice || '0',
+        regularPrice: pricingModel === 'free' ? '0' : (regularPrice || '0'),
+        salePrice: pricingModel === 'free' ? '0' : (salePrice || '0'),
         featuredImage: featuredImage || '',
         teacherName,
         teacherId: auth.currentUser.uid,
@@ -303,19 +366,40 @@ const TeacherDashboard = () => {
   }
 
   const handlePostAnnouncement = async () => {
-    if (!announcementText.trim()) return
+    if (announcementPosting) return
+
+    const currentUser = auth.currentUser
+    if (!currentUser?.uid) {
+      setAnnouncementStatus({ type: 'error', text: 'You are not signed in. Please sign in again and retry.' })
+      return
+    }
+
+    const message = announcementText.trim()
+    if (!message) {
+      setAnnouncementStatus({ type: 'error', text: 'Write a message before posting.' })
+      return
+    }
+
+    if (courses.length > 0 && !announcementCourseId) {
+      setAnnouncementStatus({ type: 'error', text: 'Choose a target course before posting.' })
+      return
+    }
+
     const selectedCourse = courses.find(course => course.id === announcementCourseId)
     if (courses.length > 0 && !selectedCourse) {
+      setAnnouncementStatus({ type: 'error', text: 'Selected course could not be found. Refresh and try again.' })
       return
     }
 
     try {
+      setAnnouncementPosting(true)
       const createdAt = new Date().toISOString()
       const nextAnnouncement = {
-        teacherId: auth.currentUser?.uid,
+        teacherId: currentUser.uid,
         courseId: selectedCourse?.id || '',
         courseTitle: selectedCourse?.title || '',
-        message: announcementText.trim(),
+        message,
+        type: 'course-announcement',
         createdAt
       }
 
@@ -328,8 +412,39 @@ const TeacherDashboard = () => {
         ...prev
       ])
       setAnnouncementText('')
+      setAnnouncementStatus({
+        type: 'success',
+        text: selectedCourse
+          ? `Announcement posted to ${selectedCourse.title || 'selected course'}.`
+          : 'General announcement posted.'
+      })
     } catch (err) {
       console.log('Failed to post announcement:', err)
+      const errorCode = err?.code || ''
+
+      if (errorCode === 'permission-denied') {
+        setAnnouncementStatus({
+          type: 'error',
+          text: 'Firebase permission denied. Check Firestore rules for announcements write access.'
+        })
+      } else if (errorCode === 'unauthenticated') {
+        setAnnouncementStatus({
+          type: 'error',
+          text: 'Firebase reports unauthenticated session. Sign in again and retry.'
+        })
+      } else if (errorCode === 'unavailable') {
+        setAnnouncementStatus({
+          type: 'error',
+          text: 'Firestore service unavailable right now. Check network and retry in a moment.'
+        })
+      } else {
+        setAnnouncementStatus({
+          type: 'error',
+          text: 'Check your internet connection.'
+        })
+      }
+    } finally {
+      setAnnouncementPosting(false)
     }
   }
 
@@ -428,6 +543,121 @@ const TeacherDashboard = () => {
     }
   }, [filteredReviews])
 
+  const studentRows = useMemo(() => {
+    const toTime = (value) => {
+      if (!value) return 0
+      const parsed = new Date(value).getTime()
+      return Number.isNaN(parsed) ? 0 : parsed
+    }
+
+    return [...enrollments]
+      .sort((a, b) => {
+        const bTime = Math.max(toTime(b.updatedAt), toTime(b.lastActiveAt), toTime(b.createdAt), toTime(b.enrolledAt), toTime(b.purchasedAt))
+        const aTime = Math.max(toTime(a.updatedAt), toTime(a.lastActiveAt), toTime(a.createdAt), toTime(a.enrolledAt), toTime(a.purchasedAt))
+        return bTime - aTime
+      })
+      .map((item) => ({
+        id: item.id,
+        studentName: item.studentName || item.learnerName || item.studentEmail || item.learnerEmail || 'Learner',
+        studentEmail: item.studentEmail || item.learnerEmail || 'N/A',
+        courseTitle: item.courseTitle || 'Course',
+        completion: item.completion || 0,
+        paid: Boolean(item.paid),
+        amountPaid: Number(item.amountPaid || 0),
+        enrolledAt: item.enrolledAt || item.createdAt || item.purchasedAt || '',
+        lastActiveAt: item.lastActiveAt || item.updatedAt || ''
+      }))
+  }, [enrollments])
+
+  const quizInsights = useMemo(() => {
+    const defaultSettings = {
+      passMark: 70,
+      attemptsAllowed: 3,
+      feedbackMode: 'after-submit'
+    }
+
+    const courseRows = courses.map((course) => {
+      const topics = Array.isArray(course.topics) ? course.topics : []
+
+      let quizTopics = 0
+      let totalQuestions = 0
+      let configuredTopics = 0
+      let customRuleTopics = 0
+
+      topics.forEach((topic) => {
+        const questions = Array.isArray(topic.quiz) ? topic.quiz.length : 0
+        const hasQuiz = questions > 0
+        if (!hasQuiz) return
+
+        quizTopics += 1
+        totalQuestions += questions
+
+        const settings = topic.assessmentSettings
+        const hasSettings = Boolean(settings && typeof settings === 'object')
+        if (hasSettings) configuredTopics += 1
+
+        const passMark = Number(settings?.passMark ?? defaultSettings.passMark)
+        const attemptsAllowed = Number(settings?.attemptsAllowed ?? defaultSettings.attemptsAllowed)
+        const timeLimit = String(settings?.timeLimitMinutes ?? '').trim()
+        const randomizeQuestions = Boolean(settings?.randomizeQuestions)
+        const feedbackMode = settings?.feedbackMode ?? defaultSettings.feedbackMode
+
+        const hasCustomRules =
+          timeLimit !== '' ||
+          randomizeQuestions ||
+          passMark !== defaultSettings.passMark ||
+          attemptsAllowed !== defaultSettings.attemptsAllowed ||
+          feedbackMode !== defaultSettings.feedbackMode
+
+        if (hasCustomRules) customRuleTopics += 1
+      })
+
+      return {
+        id: course.id,
+        title: course.title || 'Untitled Course',
+        topicCount: topics.length,
+        quizTopics,
+        totalQuestions,
+        configuredTopics,
+        customRuleTopics
+      }
+    })
+
+    const totals = courseRows.reduce((acc, row) => ({
+      coursesWithQuizzes: acc.coursesWithQuizzes + (row.quizTopics > 0 ? 1 : 0),
+      quizTopics: acc.quizTopics + row.quizTopics,
+      totalQuestions: acc.totalQuestions + row.totalQuestions,
+      configuredTopics: acc.configuredTopics + row.configuredTopics,
+      customRuleTopics: acc.customRuleTopics + row.customRuleTopics
+    }), {
+      coursesWithQuizzes: 0,
+      quizTopics: 0,
+      totalQuestions: 0,
+      configuredTopics: 0,
+      customRuleTopics: 0
+    })
+
+    const topCourseRows = [...courseRows]
+      .filter((row) => row.quizTopics > 0)
+      .sort((a, b) => b.totalQuestions - a.totalQuestions)
+
+    return {
+      ...totals,
+      courseRows,
+      topCourseRows
+    }
+  }, [courses])
+
+  const openQuizBuilderFromQuizzes = (courseId) => {
+    if (courseId) {
+      localStorage.setItem('currentCourseId', courseId)
+      navigate('/lesson', { state: { courseId } })
+      return
+    }
+
+    navigate('/lesson')
+  }
+
   const openClassicCoursePage = async () => {
     const courseId = await saveCourse()
     if (!courseId) return
@@ -451,6 +681,11 @@ const TeacherDashboard = () => {
   }
 
   const handleSaveDraftAndMove = async (nextStep) => {
+    if (nextStep === 'curriculum') {
+      await handleSaveAndGo('/curriculum')
+      return
+    }
+
     const courseId = await saveCourse()
     if (!courseId) return
     setBuilderStep(nextStep)
@@ -477,6 +712,12 @@ const TeacherDashboard = () => {
     (Array.isArray(activeBuilderCourse?.topics) && activeBuilderCourse.topics.length > 0)
   )
   const publishCompleted = basicsCompleted && (activeBuilderCourse?.status === 'Published')
+
+  const builderMilestones = [
+    { label: 'Basics Complete', done: basicsCompleted },
+    { label: 'Curriculum Ready', done: curriculumCompleted },
+    { label: 'Publish Ready', done: publishCompleted }
+  ]
 
   return (
     <div className='td-dashboard'>
@@ -622,30 +863,43 @@ const TeacherDashboard = () => {
                 </div>
               )}
 
-              {courses.map(course => (
-                <article key={course.id} className='td-course-card'>
-                  <div className='td-course-info'>
-                    <h3>{course.title || 'Untitled Course'}</h3>
-                    <p>{course.description?.slice(0, 100) || 'No description yet.'}</p>
-                    <div className='td-course-tags'>
-                      <span className='td-tag-difficulty'>{course.difficulty || 'Beginner'}</span>
-                      <span className='td-tag-price'>
-                        {course.pricingModel === 'free' ? 'Free' : `$${course.salePrice || course.regularPrice || '0'}`}
+              <div className='td-course-grid'>
+                {courses.map(course => (
+                  <article key={course.id} className='td-course-card'>
+                    <div className='td-course-cover'>
+                      <span className={`td-course-status-chip ${(course.status || 'Draft') === 'Published' ? 'is-published' : 'is-draft'}`}>
+                        {course.status || 'Draft'}
                       </span>
-                      <span className='td-tag-topics'>{course.topics?.length || 0} modules</span>
-                      <span className='td-tag-status'>{course.status || 'Draft'}</span>
+                      {course.featuredImage
+                        ? <img src={course.featuredImage} alt={course.title || 'Course cover'} />
+                        : <div className='td-course-cover-placeholder'>No Cover</div>}
                     </div>
-                  </div>
 
-                  <div className='td-course-actions'>
-                    <button className='td-edit-btn' onClick={() => handleEdit(course)}>Edit</button>
-                    <button className='td-status-btn' onClick={() => handleToggleStatus(course)}>
-                      {course.status === 'Published' ? 'Move to Draft' : 'Publish'}
-                    </button>
-                    <button className='td-delete-btn' onClick={() => handleDelete(course.id)}>Delete</button>
-                  </div>
-                </article>
-              ))}
+                    <div className='td-course-content'>
+                      <div className='td-course-info'>
+                        <h3>{course.title || 'Untitled Course'}</h3>
+                        <p>{course.description?.slice(0, 120) || 'No description yet.'}</p>
+                        <div className='td-course-tags'>
+                          <span className='td-tag-difficulty'>{course.difficulty || 'Beginner'}</span>
+                          <span className='td-tag-price'>
+                            {course.pricingModel === 'free' ? 'Free' : `$${course.salePrice || course.regularPrice || '0'}`}
+                          </span>
+                          <span className='td-tag-topics'>{course.topics?.length || 0} modules</span>
+                          <span className='td-tag-status'>{course.status || 'Draft'}</span>
+                        </div>
+                      </div>
+
+                      <div className='td-course-actions'>
+                        <button className='td-edit-btn' onClick={() => handleEdit(course)}>Edit</button>
+                        <button className='td-status-btn' onClick={() => handleToggleStatus(course)}>
+                          {course.status === 'Published' ? 'Move to Draft' : 'Publish'}
+                        </button>
+                        <button className='td-delete-btn' onClick={() => handleDelete(course.id)}>Delete</button>
+                      </div>
+                    </div>
+                  </article>
+                ))}
+              </div>
             </section>
           )}
 
@@ -673,7 +927,7 @@ const TeacherDashboard = () => {
                       aria-selected={builderStep === 'basics'}
                       type='button'
                     >
-                      <span className='td-builder-step-index'>{basicsCompleted ? 'V' : '1'}</span>
+                      <span className='td-builder-step-index'>{basicsCompleted ? '✓' : '1'}</span>
                       <span>Basics</span>
                     </button>
                     <button
@@ -684,7 +938,7 @@ const TeacherDashboard = () => {
                       type='button'
                       disabled={!canAccessAdvancedBuilderSteps}
                     >
-                      <span className='td-builder-step-index'>{curriculumCompleted ? 'V' : '2'}</span>
+                      <span className='td-builder-step-index'>{curriculumCompleted ? '✓' : '2'}</span>
                       <span>Curriculum</span>
                     </button>
                     <button
@@ -695,18 +949,29 @@ const TeacherDashboard = () => {
                       type='button'
                       disabled={!canAccessAdvancedBuilderSteps}
                     >
-                      <span className='td-builder-step-index'>{publishCompleted ? 'V' : '3'}</span>
+                      <span className='td-builder-step-index'>{publishCompleted ? '✓' : '3'}</span>
                       <span>Publish</span>
                     </button>
+                  </div>
+
+                  <div className='td-builder-milestones'>
+                    {builderMilestones.map((milestone) => (
+                      <span key={milestone.label} className={`td-builder-milestone ${milestone.done ? 'is-done' : ''}`}>
+                        <span aria-hidden='true'>{milestone.done ? '✓' : '•'}</span>
+                        {milestone.label}
+                      </span>
+                    ))}
                   </div>
 
                   {builderStep === 'basics' && (
                     <div className='td-builder-step-panel'>
                       <label>Title</label>
                       <input value={title} onChange={(e) => setTitle(e.target.value)} placeholder='Course title...' />
+                      {builderErrors.title && <p className='td-field-error'>{builderErrors.title}</p>}
 
                       <label>Description</label>
                       <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder='Course description...' />
+                      {builderErrors.description && <p className='td-field-error'>{builderErrors.description}</p>}
 
                       <div className='td-builder-grid-two'>
                         <div>
@@ -726,7 +991,46 @@ const TeacherDashboard = () => {
                         <div>
                           <label>Maximum Students</label>
                           <input value={maxStudents} onChange={(e) => setMaxStudents(e.target.value)} placeholder='Unlimited' />
+                          {builderErrors.maxStudents && <p className='td-field-error'>{builderErrors.maxStudents}</p>}
                         </div>
+                        <div>
+                          <label>Pricing Model</label>
+                          <select value={pricingModel} onChange={(e) => handlePricingModelChange(e.target.value)}>
+                            <option value='free'>Free</option>
+                            <option value='paid'>Paid</option>
+                          </select>
+                          {builderErrors.pricingModel && <p className='td-field-error'>{builderErrors.pricingModel}</p>}
+                        </div>
+                      </div>
+
+                      {pricingModel === 'paid' && (
+                        <div className='td-builder-grid-two'>
+                          <div>
+                            <label>Regular Price ($)</label>
+                            <input
+                              value={regularPrice}
+                              onChange={(e) => setRegularPrice(e.target.value)}
+                              placeholder='64.99'
+                            />
+                            {builderErrors.regularPrice && <p className='td-field-error'>{builderErrors.regularPrice}</p>}
+                          </div>
+                          <div>
+                            <label>Sale Price ($)</label>
+                            <input
+                              value={salePrice}
+                              onChange={(e) => setSalePrice(e.target.value)}
+                              placeholder='11.99'
+                            />
+                            {builderErrors.salePrice && <p className='td-field-error'>{builderErrors.salePrice}</p>}
+                          </div>
+                        </div>
+                      )}
+
+                      {pricingModel === 'free' && (
+                        <p className='td-builder-note'>This course is free. Price fields are disabled.</p>
+                      )}
+
+                      <div className='td-builder-grid-two'>
                         <div>
                           <label>Featured Image</label>
                           <input type='file' accept='image/*' onChange={handleImageUpload} />
@@ -740,10 +1044,10 @@ const TeacherDashboard = () => {
                       )}
 
                       <div className='td-builder-actions td-builder-actions--main'>
-                        <button className='td-create-btn td-builder-primary' onClick={saveCourse} disabled={builderSaving} type='button'>
+                        <button className='td-create-btn td-builder-btn-primary' onClick={saveCourse} disabled={builderSaving} type='button'>
                           {builderSaving ? 'Saving...' : 'Save Draft'}
                         </button>
-                        <button className='td-status-btn td-builder-secondary' onClick={() => handleSaveDraftAndMove('curriculum')} disabled={builderSaving} type='button'>
+                        <button className='td-status-btn td-builder-btn-secondary' onClick={() => handleSaveDraftAndMove('curriculum')} disabled={builderSaving} type='button'>
                           Save and Continue
                         </button>
                       </div>
@@ -752,20 +1056,12 @@ const TeacherDashboard = () => {
 
                   {builderStep === 'curriculum' && (
                     <div className='td-builder-step-panel'>
-                      <p className='td-empty-text'>Use curriculum tools to structure modules, lessons, and assessments.</p>
+                      <p className='td-empty-text'>Curriculum opens as a dedicated builder screen for a seamless editing experience.</p>
                       <div className='td-builder-actions td-builder-actions--main'>
-                        <button className='td-status-btn td-builder-secondary' onClick={() => handleSaveAndGo('/curriculum')} disabled={builderSaving} type='button'>
-                          Open Curriculum
-                        </button>
-                        <button className='td-edit-btn td-builder-secondary' onClick={() => handleSaveAndGo('/lesson')} disabled={builderSaving} type='button'>
-                          Open Lesson Builder
-                        </button>
-                      </div>
-                      <div className='td-builder-actions td-builder-actions--main'>
-                        <button className='td-create-btn' onClick={() => handleBuilderStepChange('basics')} type='button'>
+                        <button className='td-create-btn td-builder-btn-secondary' onClick={() => handleBuilderStepChange('basics')} type='button'>
                           Back to Basics
                         </button>
-                        <button className='td-status-btn' onClick={() => handleBuilderStepChange('publish')} type='button'>
+                        <button className='td-status-btn td-builder-btn-primary' onClick={() => handleBuilderStepChange('publish')} type='button'>
                           Continue to Publish
                         </button>
                       </div>
@@ -777,7 +1073,7 @@ const TeacherDashboard = () => {
                       <div className='td-builder-grid-two'>
                         <div>
                           <label>Pricing Model</label>
-                          <select value={pricingModel} onChange={(e) => setPricingModel(e.target.value)}>
+                          <select value={pricingModel} onChange={(e) => handlePricingModelChange(e.target.value)}>
                             <option value='free'>Free</option>
                             <option value='paid'>Paid</option>
                           </select>
@@ -788,23 +1084,31 @@ const TeacherDashboard = () => {
                         </div>
                       </div>
 
-                      <div className='td-builder-grid-two'>
-                        <div>
-                          <label>Regular Price ($)</label>
-                          <input value={regularPrice} onChange={(e) => setRegularPrice(e.target.value)} placeholder='64.99' />
+                      {pricingModel === 'paid' && (
+                        <div className='td-builder-grid-two'>
+                          <div>
+                            <label>Regular Price ($)</label>
+                            <input value={regularPrice} onChange={(e) => setRegularPrice(e.target.value)} placeholder='64.99' />
+                            {builderErrors.regularPrice && <p className='td-field-error'>{builderErrors.regularPrice}</p>}
+                          </div>
+                          <div>
+                            <label>Sale Price ($)</label>
+                            <input value={salePrice} onChange={(e) => setSalePrice(e.target.value)} placeholder='11.99' />
+                            {builderErrors.salePrice && <p className='td-field-error'>{builderErrors.salePrice}</p>}
+                          </div>
                         </div>
-                        <div>
-                          <label>Sale Price ($)</label>
-                          <input value={salePrice} onChange={(e) => setSalePrice(e.target.value)} placeholder='11.99' />
-                        </div>
-                      </div>
+                      )}
+
+                      {pricingModel === 'free' && (
+                        <p className='td-builder-note'>This course is free. Price fields are disabled.</p>
+                      )}
 
                       <div className='td-builder-actions td-builder-actions--main'>
-                        <button className='td-create-btn td-builder-primary' onClick={saveCourse} disabled={builderSaving} type='button'>
+                        <button className='td-create-btn td-builder-btn-primary' onClick={saveCourse} disabled={builderSaving} type='button'>
                           {builderSaving ? 'Saving...' : 'Save Publishing Details'}
                         </button>
                         <button
-                          className='td-status-btn td-builder-secondary'
+                          className='td-status-btn td-builder-btn-secondary'
                           onClick={() => activeBuilderCourse && handleToggleStatus(activeBuilderCourse)}
                           disabled={!activeBuilderCourse}
                           type='button'
@@ -847,7 +1151,7 @@ const TeacherDashboard = () => {
                 <p>Track learner activity, completion momentum, and who may need additional support.</p>
               </div>
               <h1>Students</h1>
-              {enrollments.length === 0 ? (
+              {studentRows.length === 0 ? (
                 <p className='td-empty-text'>No enrolled students yet.</p>
               ) : (
                 <div className='td-table-wrap'>
@@ -855,17 +1159,23 @@ const TeacherDashboard = () => {
                     <thead>
                       <tr>
                         <th>Student</th>
+                        <th>Email</th>
                         <th>Course</th>
+                        <th>Payment</th>
                         <th>Completion %</th>
+                        <th>Enrolled</th>
                         <th>Last Active</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {enrollments.map(item => (
+                      {studentRows.map(item => (
                         <tr key={item.id}>
-                          <td>{item.studentName || item.studentEmail || 'Learner'}</td>
-                          <td>{item.courseTitle || 'Course'}</td>
-                          <td>{item.completion || 0}%</td>
+                          <td>{item.studentName}</td>
+                          <td>{item.studentEmail}</td>
+                          <td>{item.courseTitle}</td>
+                          <td>{item.paid ? `Paid ($${item.amountPaid || 0})` : 'Free'}</td>
+                          <td>{item.completion}%</td>
+                          <td>{item.enrolledAt ? new Date(item.enrolledAt).toLocaleDateString() : 'N/A'}</td>
                           <td>{item.lastActiveAt ? new Date(item.lastActiveAt).toLocaleDateString() : 'N/A'}</td>
                         </tr>
                       ))}
@@ -979,16 +1289,84 @@ const TeacherDashboard = () => {
                 <p>Build formative checks and improve learning outcomes with structured quiz feedback loops.</p>
               </div>
               <h1>Quizzes & Assessments</h1>
+              <div className='td-stat-grid td-quiz-stat-grid'>
+                <article>
+                  <h3>Courses with Quizzes</h3>
+                  <p>{quizInsights.coursesWithQuizzes}</p>
+                </article>
+                <article>
+                  <h3>Quiz-Ready Topics</h3>
+                  <p>{quizInsights.quizTopics}</p>
+                </article>
+                <article>
+                  <h3>Total Questions</h3>
+                  <p>{quizInsights.totalQuestions}</p>
+                </article>
+                <article>
+                  <h3>Custom Assessment Rules</h3>
+                  <p>{quizInsights.customRuleTopics}</p>
+                </article>
+              </div>
+
               <div className='td-quick-grid'>
                 <article>
-                  <h3>Create Quiz Per Lesson</h3>
-                  <p>Use the lesson builder to add multiple choice questions with auto grading.</p>
-                  <button onClick={() => navigate('/lesson')}>Open Quiz Builder</button>
+                  <h3>Build Quiz Content</h3>
+                  <p>Create questions per topic and configure pass mark, attempts, timing, and feedback behavior.</p>
+                  <button onClick={() => openQuizBuilderFromQuizzes(courses[0]?.id || '')}>Open Quiz Builder</button>
+                </article>
+                <article>
+                  <h3>Manage by Course</h3>
+                  <p>Review where quizzes already exist and jump straight into editing a specific course.</p>
+                  <button onClick={() => setActiveSection('courses')}>Open Courses</button>
                 </article>
                 <article>
                   <h3>Results Overview</h3>
-                  <p>Track performance and identify weak areas from learner submissions.</p>
+                  <p>Track learner performance, identify weak topics, and review completion trends in Analytics.</p>
+                  <button onClick={() => setActiveSection('analytics')}>View Analytics</button>
                 </article>
+              </div>
+
+              <div className='td-performance-list td-quiz-course-status'>
+                <h2>Course Quiz Status</h2>
+
+                {quizInsights.courseRows.length === 0 && (
+                  <p className='td-empty-text'>No courses found yet. Create a course first, then build quizzes.</p>
+                )}
+
+                {quizInsights.courseRows.length > 0 && (
+                  <div className='td-table-wrap'>
+                    <table className='td-table'>
+                      <thead>
+                        <tr>
+                          <th>Course</th>
+                          <th>Quiz Topics</th>
+                          <th>Total Questions</th>
+                          <th>Settings Applied</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {quizInsights.courseRows.map((row) => (
+                          <tr key={row.id}>
+                            <td>{row.title}</td>
+                            <td>{row.quizTopics}/{row.topicCount}</td>
+                            <td>{row.totalQuestions}</td>
+                            <td>{row.configuredTopics}/{row.quizTopics || 0}</td>
+                            <td>
+                              <button
+                                className='td-status-btn td-quiz-inline-btn'
+                                onClick={() => openQuizBuilderFromQuizzes(row.id)}
+                                type='button'
+                              >
+                                Open
+                              </button>
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
               </div>
             </section>
           )}
@@ -1049,12 +1427,20 @@ const TeacherDashboard = () => {
                 <p>Keep learners aligned through timely announcements, reminders, and learning nudges.</p>
               </div>
               <h1>Messages & Announcements</h1>
+              {announcementStatus.text && (
+                <p className={`td-builder-message ${announcementStatus.type === 'error' ? 'is-error' : ''}`}>
+                  {announcementStatus.text}
+                </p>
+              )}
               <div className='td-message-controls'>
                 <label htmlFor='announcement-course'>Target Course</label>
                 <select
                   id='announcement-course'
                   value={announcementCourseId}
-                  onChange={(e) => setAnnouncementCourseId(e.target.value)}
+                  onChange={(e) => {
+                    setAnnouncementCourseId(e.target.value)
+                    if (announcementStatus.text) setAnnouncementStatus({ type: '', text: '' })
+                  }}
                 >
                   <option value=''>Select a course</option>
                   {courses.map((course) => (
@@ -1068,10 +1454,18 @@ const TeacherDashboard = () => {
               <div className='td-message-box'>
                 <textarea
                   value={announcementText}
-                  onChange={(e) => setAnnouncementText(e.target.value)}
+                  onChange={(e) => {
+                    setAnnouncementText(e.target.value)
+                    if (announcementStatus.text) setAnnouncementStatus({ type: '', text: '' })
+                  }}
                   placeholder='Write an update to learners in this selected course...'
                 />
-                <button onClick={handlePostAnnouncement} disabled={courses.length > 0 && !announcementCourseId}>Post Announcement</button>
+                <button
+                  onClick={handlePostAnnouncement}
+                  disabled={announcementPosting || (courses.length > 0 && !announcementCourseId)}
+                >
+                  {announcementPosting ? 'Posting...' : 'Post Announcement'}
+                </button>
               </div>
 
               {courses.length > 0 && !announcementCourseId && (
@@ -1079,6 +1473,9 @@ const TeacherDashboard = () => {
               )}
 
               <div className='td-announcement-list'>
+                {announcements.length === 0 && (
+                  <p className='td-empty-text'>No announcements posted yet.</p>
+                )}
                 {announcements.map(item => (
                   <article key={item.id}>
                     <h3>{item.courseTitle || 'General Announcement'}</h3>

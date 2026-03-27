@@ -43,21 +43,18 @@ const Curriculum = () => {
         </aside>
 
         <main className='td-main curriculum-main'>
-          <section className='td-panel td-view-stage curriculum-panel'>
+          <section className='curriculum-stage td-view-stage'>
             <h1>Curriculum Builder</h1>
             <p className='curriculum-lead'>
               Structure your course into focused modules, lessons, and quizzes. Build clearly and publish with confidence.
             </p>
 
-            <div className='curriculum-content-card'>
-              <img src='/images/vector-image2.png' alt='Curriculum illustration' />
+            <div className='curriculum-focus'>
+              <img src='/images/Adobe%20Express%20-%20file(1).png' alt='Curriculum illustration' />
               <h2>Start Building Your Course</h2>
               <p>Add topics, lessons, and quizzes to create a complete learning journey.</p>
 
               <div className='curriculum-actions'>
-                <button className='td-create-btn' onClick={() => navigate('/lesson')} type='button'>
-                  Add Topic
-                </button>
                 <button className='td-status-btn curriculum-next-btn' onClick={() => navigate('/lesson')} type='button'>
                   Next
                 </button>

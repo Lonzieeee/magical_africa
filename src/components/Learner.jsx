@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { FaBell, FaBolt, FaChevronLeft, FaClock, FaFire, FaGraduationCap, FaStore } from 'react-icons/fa'
 import '../styles/learner.css'
 import { db } from '../context/AuthContext'
-import { collection, doc, getDoc, getDocs, query, setDoc, where } from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, onSnapshot, query, setDoc, where } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
@@ -85,6 +85,8 @@ const Learner = () => {
   const [showPublishedOnly, setShowPublishedOnly] = useState(true)
   const [actionToast, setActionToast] = useState(null)
   const [acquiringCourseId, setAcquiringCourseId] = useState('')
+  const [liveEnrollmentCourseIds, setLiveEnrollmentCourseIds] = useState([])
+  const [liveEnrollmentTeacherIds, setLiveEnrollmentTeacherIds] = useState([])
 
   const persistLocalProgressMap = (nextProgressMap) => {
     if (!user?.uid) return
@@ -201,6 +203,48 @@ const Learner = () => {
 
     fetchDashboardData()
   }, [user])
+
+  useEffect(() => {
+    if (!user?.uid) return
+
+    const announcementUnsubscribe = onSnapshot(
+      collection(db, 'announcements'),
+      (snapshot) => {
+        const announcementList = snapshot.docs
+          .map((announcementDoc) => ({ id: announcementDoc.id, ...announcementDoc.data() }))
+          .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
+
+        setAnnouncements(announcementList)
+      },
+      (error) => {
+        console.log('Announcement listener error:', error)
+      }
+    )
+
+    const enrollmentUnsubscribe = onSnapshot(
+      query(collection(db, 'enrollments'), where('learnerId', '==', user.uid)),
+      (snapshot) => {
+        const docs = snapshot.docs.map((item) => item.data())
+        const nextCourseIds = docs
+          .map((item) => item.courseId)
+          .filter(Boolean)
+        const nextTeacherIds = docs
+          .map((item) => item.teacherId)
+          .filter(Boolean)
+
+        setLiveEnrollmentCourseIds(nextCourseIds)
+        setLiveEnrollmentTeacherIds(nextTeacherIds)
+      },
+      (error) => {
+        console.log('Enrollment listener error:', error)
+      }
+    )
+
+    return () => {
+      announcementUnsubscribe()
+      enrollmentUnsubscribe()
+    }
+  }, [user?.uid])
 
   const categories = ['Language', 'Culture', 'History', 'Artisan', 'Pottery', 'Woodwork']
 
@@ -387,20 +431,23 @@ const Learner = () => {
 
   const learnerAnnouncements = useMemo(() => {
     if (announcements.length === 0) return []
-    if (myTeacherIds.size === 0) return announcements.slice(0, 12)
+
+    const effectiveCourseIds = new Set([...myEnrolledCourseIds, ...liveEnrollmentCourseIds])
+    const effectiveTeacherIds = new Set([...myTeacherIds, ...liveEnrollmentTeacherIds])
+
+    if (effectiveTeacherIds.size === 0 && effectiveCourseIds.size === 0) return []
 
     return announcements
       .filter((item) => {
-        if (!myTeacherIds.has(item.teacherId)) return false
-
+        const belongsToMyTutor = item.teacherId ? effectiveTeacherIds.has(item.teacherId) : false
         if (item.courseId) {
-          return myEnrolledCourseIds.has(item.courseId)
+          return effectiveCourseIds.has(item.courseId)
         }
 
-        return true
+        return belongsToMyTutor
       })
       .slice(0, 20)
-  }, [announcements, myTeacherIds, myEnrolledCourseIds])
+  }, [announcements, myTeacherIds, myEnrolledCourseIds, liveEnrollmentCourseIds, liveEnrollmentTeacherIds])
 
   const summary = useMemo(() => {
     const values = ownedCourses.map(course => progressMap[course.id] || {})
@@ -592,6 +639,9 @@ const Learner = () => {
     const price = getCoursePrice(course)
     const courseProgress = progressMap[course.id] || {}
 
+    const resolvedTeacherId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
+    const resolvedTeacherName = course.teacherName || course.tutorName || course.authorName || 'Tutor'
+
     const updatedCourseProgress = {
       completion: courseProgress.completion || 0,
       lessonsCompleted: courseProgress.lessonsCompleted || 0,
@@ -603,8 +653,8 @@ const Learner = () => {
       paid: price > 0,
       purchasedAt: new Date().toISOString(),
       courseTitle: course.title || 'Course',
-      teacherId: course.teacherId || '',
-      teacherName: course.teacherName || ''
+      teacherId: resolvedTeacherId,
+      teacherName: resolvedTeacherName
     }
 
     const nextProgressMap = {
@@ -623,13 +673,15 @@ const Learner = () => {
 
       await setDoc(doc(db, 'enrollments', `${user.uid}_${course.id}`), {
         learnerId: user.uid,
-        teacherId: course.teacherId || '',
+        teacherId: resolvedTeacherId,
         studentEmail: user.email || '',
+        studentName: learnerName,
         courseId: course.id,
         courseTitle: course.title || 'Course',
         completion: updatedCourseProgress.completion,
         paid: price > 0,
         amountPaid: price,
+        enrolledAt: courseProgress.enrolledAt || new Date().toISOString(),
         lastActiveAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }, { merge: true })
