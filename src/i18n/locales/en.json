@@ -270,7 +270,10 @@
     "languages": "Languages",
     "about": "About",
     "marketplace": "Marketplace",
-    "contact": "Contact"
+    "contact": "Contact",
+    "music": "Music",
+    "academy": "Academy",
+    "events": "Events"
   },
   "terms": "Terms of Use",
   "privacy": "Privacy Policy",
@@ -1024,10 +1027,137 @@
       }
     }
   }
+},
+
+
+
+
+  "music": {
+    "hero": {
+      "titleStart": "African",
+      "titleAccent": "Musical",
+      "titleEnd": "Heritage",
+      "subtitle": "From the ancient beat of the djembe to the global rise of Afrobeats and Amapiano — discover the sounds that shaped the world."
+    },
+    "explore": {
+      "title": "Explore",
+      "titleAccent": "Music",
+      "subtitle": "Discover African sounds, artists, instruments and global influence",
+      "keyArtists": "Key Artists:",
+      "genre1": {
+        "location": "Nigeria & Ghana — West Africa",
+        "name": "Afrobeats",
+        "description": "A global phenomenon blending highlife, funk, and hip-hop. Born in Lagos, Afrobeats has become one of the world's most dominant music forces — infectious rhythms that took over dancefloors from Nairobi to New York.",
+        "artists": "Burna Boy, Wizkid, Davido, Tems, Omah Lay"
+      },
+      "genre2": {
+        "location": "South Africa",
+        "name": "Amapiano",
+        "description": "A hypnotic blend of deep house, jazz, and log drum percussion. Born in Soweto's townships, Amapiano has swept the continent and is now dominating global charts and streaming platforms.",
+        "artists": "Kabza De Small, DJ Maphorisa, Tyler ICU, Focalistic"
+      },
+      "genre3": {
+        "location": "Kenya — East Africa",
+        "name": "Benga",
+        "description": "Kenya's indigenous pop style — driving acoustic guitar rhythms layered over traditional Luo melodies. Benga is the foundation of Kenyan popular music and one of East Africa's most distinctive sounds.",
+        "artists": "D.O. Misiani, Ochieng Kabaselleh, Victoria Kings"
+      },
+      "genre4": {
+        "location": "Ghana — West Africa",
+        "name": "Highlife",
+        "description": "One of Africa's oldest modern genres, mixing brass band sounds with Ghanaian folk rhythms. Sophisticated, joyful, and timeless — a genre that laid the foundation for much of West African pop.",
+        "artists": "E.T. Mensah, Amakye Dede, Daddy Lumba"
+      }
+    },
+    "instruments": {
+      "title": "Instruments of",
+      "titleAccent": "Africa",
+      "subtitle": "Ancient tools of sound that carry centuries of culture and story",
+      "kora": {
+        "name": "Kora",
+        "description": "21-string harp-lute from West Africa. The instrument of griots — storytellers and historians."
+      },
+      "djembe": {
+        "name": "Djembe",
+        "description": "The world-famous goblet drum from Guinea. Central to ceremonies and community celebrations."
+      },
+      "mbira": {
+        "name": "Mbira",
+        "description": "Zimbabwe's thumb piano — a spiritual instrument used to communicate with ancestors."
+      },
+      "talkingDrum": {
+        "name": "Talking Drum",
+        "description": "Hour-glass shaped drum that mimics tonal languages, used for long-distance communication."
+      },
+      "krar": {
+        "name": "Krar",
+        "description": "A five-string lyre from Ethiopia and Eritrea with a rich resonant sound tied to ancient tradition."
+      },
+      "balafon": {
+        "name": "Balafon",
+        "description": "A wooden xylophone beloved across Mali, Senegal, and Côte d'Ivoire."
+      }
+    },
+    "artists": {
+      "title": "Featured",
+      "titleAccent": "Artists",
+      "subtitle": "Legends and rising stars from across the continent",
+      "artist1": {
+        "genre": "Afrobeat • Nigeria",
+        "description": "Father of Afrobeat. His music was revolutionary, political, and immortal."
+      },
+      "artist2": {
+        "genre": "Afropop • South Africa",
+        "description": "\"Mama Africa\" — a voice of beauty and resistance heard around the world."
+      },
+      "artist3": {
+        "genre": "Afrobeats • Nigeria",
+        "description": "Grammy-winning African Giant who brought Afrobeats to every continent."
+      },
+      "artist4": {
+        "genre": "Afro-soul • Nigeria",
+        "description": "A generation-defining voice blending soul, R&B, and Afrobeats."
+      },
+      "artist5": {
+        "genre": "Blues • Mali",
+        "description": "Proved the deep connection between West African music and American blues."
+      },
+      "artist6": {
+        "genre": "Mbalax • Senegal",
+        "description": "One of Africa's most celebrated voices, fusing Wolof tradition with global sound."
+      },
+      "artist7": {
+        "genre": "Blues • Mali",
+        "description": "Proved the deep connection between West African music and American blues."
+      }
+    },
+    "influence": {
+      "title": "Africa's Global",
+      "titleAccent": "Influence",
+      "subtitle": "How African rhythms shaped the music the whole world listens to",
+      "jazz": {
+        "name": "Jazz & Blues",
+        "description": "The pentatonic scales, call-and-response patterns, and rhythmic complexity of African music are the direct ancestors of Jazz and Blues."
+      },
+      "reggae": {
+        "name": "Reggae",
+        "description": "Jamaican reggae carries deep African rhythmic heritage through the diaspora, with Rastafari explicitly rooted in Ethiopian traditions."
+      },
+      "hiphop": {
+        "name": "Hip-Hop",
+        "description": "The griot tradition of spoken word, storytelling, and call-and-response is widely acknowledged as a spiritual ancestor of hip-hop."
+      },
+      "electronic": {
+        "name": "Electronic Music",
+        "description": "From Amapiano to Afrobeats, African rhythm structures are reshaping global club culture and mainstream pop production."
+      }
+    }
+  }
+
 }
 
 
 
-}
+
 
 

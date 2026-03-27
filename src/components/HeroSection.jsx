@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 import CultureCard from './CultureCard';
+import useAcademyNavigation from "../hooks/useAcademyNavigation";
 
 const heroSlides = [
   {
@@ -10,7 +11,7 @@ const heroSlides = [
     title: 'Learn Valuable Traditional Skills Online - Traditional skills reimagined for today',
    
     subtitle: 'Welcome To Magical Africa',
-    name: '',
+    name: '(Igbo)',
     flag: '/images/Nigeria-flag.png'
   },
   {
@@ -48,6 +49,7 @@ const heroSlides = [
 const HeroSection = ({ children, customContent, backgroundImage }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { t } = useTranslation();
+  const goToAcademy = useAcademyNavigation();
   const navigate = useNavigate(); // 👈 1. create navigate
 
   // 👈 2. define the handler
@@ -64,6 +66,15 @@ const HeroSection = ({ children, customContent, backgroundImage }) => {
 
     return () => clearInterval(interval);
   }, [backgroundImage]);
+
+
+  // Add this useEffect in HeroSection, alongside your existing one
+useEffect(() => {
+  heroSlides.forEach((slide) => {
+    const img = new Image();
+    img.src = slide.image;
+  });
+}, []);
 
   const slide = heroSlides[currentSlide];
   const bgImage = backgroundImage || slide.image;
@@ -92,7 +103,7 @@ const HeroSection = ({ children, customContent, backgroundImage }) => {
             </div>
 
             <div className="hero-boxes">
-              <div className="hero-box" onClick={()=> handleNavigation('/academy2')}>
+              <div className="hero-box" onClick={goToAcademy}>
                 <i className="fa-solid fa-comments"></i>
                 <p>{t('hero.learnLanguage')}</p>
               </div>

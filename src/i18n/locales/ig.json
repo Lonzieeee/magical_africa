@@ -272,7 +272,10 @@
     "languages": "Asụsụ",
     "about": "Maka",
     "marketplace": "Ahịa",
-    "contact": "Kpọtụrụ"
+    "contact": "Kpọtụrụ",
+    "music": "Egwu",
+    "academy": "Akadẹmi",
+    "events": "Emume"
   },
   "terms": "Usoro Ojiji",
   "privacy": "Iwu Nzuzo",
@@ -1034,7 +1037,132 @@
       }
     }
   }
-}
+},
+
+
+
+  "music": {
+    "hero": {
+      "titleStart": "Ihe Nketa",
+      "titleAccent": "Egwu",
+      "titleEnd": "nke Afrika",
+      "subtitle": "Site na ụda ochie nke djembe ruo ọ dị ugbu a nke Afrobeats na Amapiano — chọpụta ụda ndị gbanwere ụwa."
+    },
+    "explore": {
+      "title": "Chọpụta",
+      "titleAccent": "Egwu",
+      "subtitle": "Chọpụta ụda Afrika, ndị ọrụ egwu, ngwa egwu na mmetụta ụwa",
+      "keyArtists": "Ndị Ọrụ Egwu Ndị Bụ Isi:",
+      "genre1": {
+        "location": "Nigeria na Ghana — Afrika Ọdịda Anyanwụ",
+        "name": "Afrobeats",
+        "description": "Ihe nke ụwa niile na-ejikọta highlife, funk, na hip-hop. Amụọ na Lagos, Afrobeats aghọwo otu n'ime ike egwu kacha ike n'ụwa — ụda na-aso na-ejide ọchịchọ ndị bi ụwa site na Nairobi ruo New York.",
+        "artists": "Burna Boy, Wizkid, Davido, Tems, Omah Lay"
+      },
+      "genre2": {
+        "location": "Afrika Ndị Ọwụwa Anyanwụ",
+        "name": "Amapiano",
+        "description": "Ngwakọta dị mma nke deep house, jazz, na ịkụ igwe nke akụ. Amụọ na ụlọ ndị bi na Soweto, Amapiano agbasapụla ala nile ma ugbu a na-achị chart ụwa na ihe nkesa egwu.",
+        "artists": "Kabza De Small, DJ Maphorisa, Tyler ICU, Focalistic"
+      },
+      "genre3": {
+        "location": "Kenya — Afrika Ọwụwa Anyanwụ",
+        "name": "Benga",
+        "description": "Ụdị egwu nke Kenya — ụda gitaa dị ike nke e dere n'elu egwu omenala Luo. Benga bụ ntọala nke egwu a ma ama nke Kenya na otu n'ime ụda pụrụ iche nke Afrika Ọwụwa Anyanwụ.",
+        "artists": "D.O. Misiani, Ochieng Kabaselleh, Victoria Kings"
+      },
+      "genre4": {
+        "location": "Ghana — Afrika Ọdịda Anyanwụ",
+        "name": "Highlife",
+        "description": "Otu n'ime ụdị egwu oge a ochie nke Afrika, na-agwakọta ụda bendi ọlaọcha na ụda ndị Ghana. Dị mkpa, dị mma, na nke na-adịgide adịgide — ụdị nke tọọ ntọala ọtụtụ nke egwu Afrika Ọdịda Anyanwụ.",
+        "artists": "E.T. Mensah, Amakye Dede, Daddy Lumba"
+      }
+    },
+    "instruments": {
+      "title": "Ngwa Egwu",
+      "titleAccent": "nke Afrika",
+      "subtitle": "Ngwa ochie nke ụda na-ebu ọtụtụ narị afọ nke omenala na akụkọ ifo",
+      "kora": {
+        "name": "Kora",
+        "description": "Harp-lute nwere eriri iri abụọ na otu si na Afrika Ọdịda Anyanwụ. Ngwa egwu nke griots — ndị na-akọ akụkọ na ndị ọkà mmụta ihe gara aga."
+      },
+      "djembe": {
+        "name": "Djembe",
+        "description": "Igwe ịkụ igwe a ma ama n'ụwa nke si na Guinea. Dị mkpa n'ọchichi na ọchịchọ ndị obodo."
+      },
+      "mbira": {
+        "name": "Mbira",
+        "description": "Piano mkpịsị aka nke Zimbabwe — ngwa egwu ime mmụọ a na-eji ịkparịta ụka na ndị nna ochie."
+      },
+      "talkingDrum": {
+        "name": "Igwe Ikwu Okwu",
+        "description": "Igwe ịkụ igwe dị ka ọchịchọ awa na-nacho asụsụ ụdaolu, a na-eji ya maka nkwukọrịta ogologo ụzọ."
+      },
+      "krar": {
+        "name": "Krar",
+        "description": "Lyre nwere eriri ise si na Ethiopia na Eritrea nwere ụda dị mma njikọ na omenala ochie."
+      },
+      "balafon": {
+        "name": "Balafon",
+        "description": "Xylophone osisi a hụrụ n'anya n'oge Mali, Senegal, na Côte d'Ivoire."
+      }
+    },
+    "artists": {
+      "title": "Ndị Ọrụ Egwu",
+      "titleAccent": "A Họọrọ",
+      "subtitle": "Ndị ama ama na kpakpando ndị ọhụrụ si na kọntịnent nile",
+      "artist1": {
+        "genre": "Afrobeat • Nigeria",
+        "description": "Nna nke Afrobeat. Egwu ya bụ ihe mgbanwe, nke ndọrọ ndọrọ ọchịchọ, na nke na-adịgide adịgide."
+      },
+      "artist2": {
+        "genre": "Afropop • Afrika Ndị Ọwụwa Anyanwụ",
+        "description": "\"Mama Afrika\" — olu mara mma na nke ọgọ nke ụwa nile nụrụ."
+      },
+      "artist3": {
+        "genre": "Afrobeats • Nigeria",
+        "description": "Onye nwụnye Grammy zoputara Afrobeats n'ụwa nile."
+      },
+      "artist4": {
+        "genre": "Afro-soul • Nigeria",
+        "description": "Olu na-akọwara ọgbọ na-agwakọta soul, R&B, na Afrobeats."
+      },
+      "artist5": {
+        "genre": "Blues • Mali",
+        "description": "Gosipụtara njikọ dị omimi dị n'etiti egwu Afrika Ọdịda Anyanwụ na blues Amerika."
+      },
+      "artist6": {
+        "genre": "Mbalax • Senegal",
+        "description": "Otu n'ime olu ndị a kọọrọ ọtụtụ mma n'Afrika, na-agwakọta ọdịnala Wolof na ụda ụwa."
+      },
+      "artist7": {
+        "genre": "Blues • Mali",
+        "description": "Gosipụtara njikọ dị omimi dị n'etiti egwu Afrika Ọdịda Anyanwụ na blues Amerika."
+      }
+    },
+    "influence": {
+      "title": "Mmetụta",
+      "titleAccent": "Afrika n'Ụwa",
+      "subtitle": "Otu ụda Afrika si agbanwe egwu ụwa nile na-ege ntị",
+      "jazz": {
+        "name": "Jazz & Blues",
+        "description": "Ọkọlọtọ pentatonic, ihe omume nke oku na nzaghachi, na mgbagwoju ụda nke egwu Afrika bụ isi nna nke Jazz na Blues."
+      },
+      "reggae": {
+        "name": "Reggae",
+        "description": "Reggae Jamaica na-ebu ihe nketa nke ụda Afrika site na diaspora, na Rastafari mejupụtara n'omenala Ethiopia."
+      },
+      "hiphop": {
+        "name": "Hip-Hop",
+        "description": "Omenala griot nke okwu ọnụ, ịkọ akụkọ, na oku na nzaghachi a na-ahụ n'ọnụ ọgụgụ dị ka isi nna ime mmụọ nke hip-hop."
+      },
+      "electronic": {
+        "name": "Egwu Electronic",
+        "description": "Site na Amapiano ruo Afrobeats, usoro ụda Afrika na-agbanwe omenala klọb ụwa na mmepụta pop buru ibu."
+      }
+    }
+  }
+
 
 
 

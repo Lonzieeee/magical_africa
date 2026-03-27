@@ -488,6 +488,13 @@ const Market = () => {
     return () => clearInterval(interval);
   }, []);
 
+useEffect(() => {
+  marketHeroImages.forEach((src) => {
+    const img = new Image();
+    img.src = src;
+  });
+}, []);
+
   const [activeCategory, setActiveCategory] = useState('jewellery');
   const auctionRef = useRef(null);
 

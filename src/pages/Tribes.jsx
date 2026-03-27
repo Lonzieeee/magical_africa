@@ -72,7 +72,7 @@ const Tribes = () => {
 
 
 
-      <div className="heroSection">
+      <div className="heroSection2">
 
         <video
     autoPlay

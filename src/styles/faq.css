@@ -9,9 +9,8 @@
 }
 
 .FAQ{
-  background-image: url(images/pattern4.jpg);
+  background-image: url(/images/pattern4.jpg) !important;
   height: fit-content;
-  background-color: rgb(242, 239, 235);
   padding-top: 2rem;
   position: relative;
   background-position: center;

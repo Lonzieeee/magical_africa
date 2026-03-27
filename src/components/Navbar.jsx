@@ -70,21 +70,38 @@ const Navbar = ({ solid }) => {
   };
   */}
 
+  {/* 
 
  const handleLogout = async () => {
   try {
-    // show message FIRST
+    
     setLogoutMessage(true);
 
-    // then logout after a tiny delay
+  
     setTimeout(async () => {
       await logout();
     }, 1000);
 
-    // hide message after 3 sec
+ 
     setTimeout(() => {
       setLogoutMessage(false);
-    }, 5000);
+    }, 3000);
+
+  } catch (error) {
+    console.error('Error logging out:', error);
+  }
+};
+*/}
+
+
+const handleLogout = async () => {
+  try {
+    setLogoutMessage(true);
+
+    setTimeout(async () => {
+      await logout(); // navigation happens here
+      setLogoutMessage(false); // hide immediately after logout
+    }, 1000);
 
   } catch (error) {
     console.error('Error logging out:', error);
@@ -191,7 +208,7 @@ const Navbar = ({ solid }) => {
             </div>
 
             <div className="icon-with-tooltip">
-              <a href="events" id='events'>
+              <a href="#" id='events' onClick={()=> navigate('/events')}>
                
                 <i className="fa-solid fa-masks-theater"></i>
                {t('nav.events')}
@@ -202,7 +219,7 @@ const Navbar = ({ solid }) => {
             </div>
 
             <div className="icon-with-tooltip">
-              <a href="#" id='music'>
+              <a href="#" id='music' onClick={()=> navigate('/music')}>
                  <i className="fa-solid fa-music"></i>
               
                 {t('nav.music')}
@@ -216,7 +233,7 @@ const Navbar = ({ solid }) => {
 
           {!user ? (
             <>
-              <a href="#" id="contact-us" onClick={()=> navigate('/academy2')}>
+              <a href="#" id="contact-us" onClick={()=> navigate('/academy-signUp')}>
                
                 <i className="fa-regular fa-user" id="user-icon"></i>
                  {t('nav.signIn')}

@@ -268,7 +268,10 @@
     "languages": "Lugha",
     "about": "Kuhusu",
     "marketplace": "Soko",
-    "contact": "Wasiliana"
+    "contact": "Wasiliana",
+     "music": "Nyimbo",
+    "academy": "Akademia",
+    "events": "Matukio"
   },
   "terms": "Masharti ya Matumizi",
   "privacy": "Sera ya Faragha",
@@ -1024,6 +1027,132 @@
       }
     }
   }
-}
+},
+
+
+
+
+  "music": {
+    "hero": {
+      "titleStart": "Urithi wa",
+      "titleAccent": "Muziki",
+      "titleEnd": "wa Afrika",
+      "subtitle": "Kutoka mapigo ya kale ya djembe hadi kupanda kwa Afrobeats na Amapiano — gundua sauti zilizobadilisha dunia."
+    },
+    "explore": {
+      "title": "Gundua",
+      "titleAccent": "Muziki",
+      "subtitle": "Gundua sauti za Afrika, wasanii, vyombo na ushawishi wa kimataifa",
+      "keyArtists": "Wasanii Wakuu:",
+      "genre1": {
+        "location": "Nigeria na Ghana — Afrika Magharibi",
+        "name": "Afrobeats",
+        "description": "Jambo la kimataifa linalochanganya highlife, funk, na hip-hop. Ilizaliwa Lagos, Afrobeats imekuwa moja ya nguvu kuu za muziki duniani — midundo ya kuambukiza iliyotawala sakafu za dansi kutoka Nairobi hadi New York.",
+        "artists": "Burna Boy, Wizkid, Davido, Tems, Omah Lay"
+      },
+      "genre2": {
+        "location": "Afrika Kusini",
+        "name": "Amapiano",
+        "description": "Mchanganyiko wa ajabu wa deep house, jazz, na ngoma. Ilizaliwa mitaa ya Soweto, Amapiano imesambaa bara lote na sasa inatawala chati za kimataifa na majukwaa ya kusambaza muziki.",
+        "artists": "Kabza De Small, DJ Maphorisa, Tyler ICU, Focalistic"
+      },
+      "genre3": {
+        "location": "Kenya — Afrika Mashariki",
+        "name": "Benga",
+        "description": "Mtindo wa asili wa muziki wa Kenya — midundo ya gitaa ya acoustic yenye nguvu iliyopachikwa juu ya nyimbo za jadi za Luo. Benga ni msingi wa muziki maarufu wa Kenya na moja ya sauti tofauti zaidi za Afrika Mashariki.",
+        "artists": "D.O. Misiani, Ochieng Kabaselleh, Victoria Kings"
+      },
+      "genre4": {
+        "location": "Ghana — Afrika Magharibi",
+        "name": "Highlife",
+        "description": "Moja ya aina za kisasa za zamani za muziki wa Afrika, inayochanganya sauti za bendi ya shaba na midundo ya jadi ya Ghana. Yenye heshima, ya furaha, na ya kudumu — aina iliyoweka msingi wa muziki mwingi wa Afrika Magharibi.",
+        "artists": "E.T. Mensah, Amakye Dede, Daddy Lumba"
+      }
+    },
+    "instruments": {
+      "title": "Vyombo vya",
+      "titleAccent": "Afrika",
+      "subtitle": "Zana za kale za sauti zinazobeba karne nyingi za utamaduni na hadithi",
+      "kora": {
+        "name": "Kora",
+        "description": "Kinanda chenye nyuzi 21 kutoka Afrika Magharibi. Chombo cha waganga wa hadithi — wasimulizi na wahistoria."
+      },
+      "djembe": {
+        "name": "Djembe",
+        "description": "Ngoma maarufu duniani kutoka Guinea. Muhimu katika sherehe na maadhimisho ya jamii."
+      },
+      "mbira": {
+        "name": "Mbira",
+        "description": "Kinanda cha kidole gumba cha Zimbabwe — chombo cha kiroho kinachotumiwa kuwasiliana na mababu."
+      },
+      "talkingDrum": {
+        "name": "Ngoma ya Mazungumzo",
+        "description": "Ngoma yenye umbo la saa inayoiga lugha za toni, inayotumiwa kwa mawasiliano ya masafa marefu."
+      },
+      "krar": {
+        "name": "Krar",
+        "description": "Kinanda chenye nyuzi tano kutoka Ethiopia na Eritrea chenye sauti nzuri inayohusiana na mila za kale."
+      },
+      "balafon": {
+        "name": "Balafon",
+        "description": "Xylophone ya mbao inayopendwa katika Mali, Senegal, na Côte d'Ivoire."
+      }
+    },
+    "artists": {
+      "title": "Wasanii",
+      "titleAccent": "Maarufu",
+      "subtitle": "Hadithi na nyota zinazochomoza kutoka bara zima",
+      "artist1": {
+        "genre": "Afrobeat • Nigeria",
+        "description": "Baba wa Afrobeat. Muziki wake ulikuwa wa mapinduzi, wa kisiasa, na wa milele."
+      },
+      "artist2": {
+        "genre": "Afropop • Afrika Kusini",
+        "description": "\"Mama Afrika\" — sauti ya urembo na upinzani iliyosikika kote duniani."
+      },
+      "artist3": {
+        "genre": "Afrobeats • Nigeria",
+        "description": "Mshindi wa Grammy aliyeeneza Afrobeats kila bara."
+      },
+      "artist4": {
+        "genre": "Afro-soul • Nigeria",
+        "description": "Sauti inayobainisha kizazi inayochanganya soul, R&B, na Afrobeats."
+      },
+      "artist5": {
+        "genre": "Blues • Mali",
+        "description": "Alithibitisha uhusiano wa kina kati ya muziki wa Afrika Magharibi na blues ya Marekani."
+      },
+      "artist6": {
+        "genre": "Mbalax • Senegal",
+        "description": "Moja ya sauti zilizoadhimishwa zaidi Afrika, inayochanganya mila ya Wolof na sauti ya kimataifa."
+      },
+      "artist7": {
+        "genre": "Blues • Mali",
+        "description": "Alithibitisha uhusiano wa kina kati ya muziki wa Afrika Magharibi na blues ya Marekani."
+      }
+    },
+    "influence": {
+      "title": "Ushawishi wa Kimataifa",
+      "titleAccent": "wa Afrika",
+      "subtitle": "Jinsi midundo ya Afrika ilivyobadilisha muziki ambao dunia yote huusikiliza",
+      "jazz": {
+        "name": "Jazz & Blues",
+        "description": "Mizani ya pentatonic, mifumo ya majibu, na utata wa midundo ya muziki wa Afrika ni mababu wa moja kwa moja wa Jazz na Blues."
+      },
+      "reggae": {
+        "name": "Reggae",
+        "description": "Reggae ya Jamaica hubeba urithi mzito wa midundo ya Afrika kupitia diaspora, na Rastafari inakaa wazi kwenye mila za Ethiopia."
+      },
+      "hiphop": {
+        "name": "Hip-Hop",
+        "description": "Mila ya griot ya lugha ya mazungumzo, hadithi, na majibu inakubaliwa kwa mapana kama babu wa kiroho wa hip-hop."
+      },
+      "electronic": {
+        "name": "Muziki wa Kielektroniki",
+        "description": "Kutoka Amapiano hadi Afrobeats, miundo ya midundo ya Afrika inabadilisha utamaduni wa vilabu duniani na uzalishaji wa pop kuu."
+      }
+    }
+  }
+
 
 }

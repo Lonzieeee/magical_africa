@@ -56,7 +56,7 @@ const SocialImpact = () => {
           <div className="impact-text">
             <h1>{t('socialImpact.artisans.title')}</h1>
             <p>{t('socialImpact.artisans.description')}</p>
-            <button className="read-more">{t('socialImpact.readMore')}</button>
+            <button className="read-more" onClick={()=> navigate('/market')}>{t('socialImpact.readMore')}</button>
           </div>
         </div>
 

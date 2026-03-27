@@ -272,7 +272,11 @@
     "languages": "Rũthiomi",
     "about": "Ũhoro",
     "marketplace": "Ndũka",
-    "contact": "Tũhũũrĩe"
+    "contact": "Tũhũũrĩe",
+    "music": "Nyimbo",
+    "academy": "Akadẹmi",
+    "events": "Matukio"
+    
   },
   "terms": "Maũndũ ma Kũhuthĩra",
   "privacy": "Maũndũ ma Ũhoro wa Thĩrĩ",
@@ -949,7 +953,132 @@
       }
     }
   }
-}
+},
+
+
+
+  "music": {
+    "hero": {
+      "titleStart": "Ũciũ wa",
+      "titleAccent": "Nyimbo",
+      "titleEnd": "cia Aafrika",
+      "subtitle": "Kuuma kũhũrũka kwa ngoma ya kale nginya kũgĩa kwa Afrobeats na Amapiano — tũmanagĩra thakame cia dunia."
+    },
+    "explore": {
+      "title": "Tarũra",
+      "titleAccent": "Nyimbo",
+      "subtitle": "Tarũra thakame cia Aafrika, aimbĩri, ngoma na ũtheru wa mũndũ wote",
+      "keyArtists": "Aimbĩri a Njenga:",
+      "genre1": {
+        "location": "Nigeria na Ghana — Aafrika Thagĩcĩ",
+        "name": "Afrobeats",
+        "description": "Ĩrĩa ya mũndũ wote ichanganya highlife, funk, na hip-hop. Yatũũrire Lagos, Afrobeats nĩyahinjiirie kuũrũrũkia ningĩ cia nyimbo cia dunia — midundo ya kũhingira irĩgĩrĩirie sakafu cia dansi kuuma Nairobi nginya New York.",
+        "artists": "Burna Boy, Wizkid, Davido, Tems, Omah Lay"
+      },
+      "genre2": {
+        "location": "Aafrika Thĩinĩ",
+        "name": "Amapiano",
+        "description": "Mĩchanganyiko wa deep house, jazz, na ngoma ya mũtĩ. Yatũũrire Soweto, Amapiano nĩyaanĩrĩire bara rĩothe na ũguo nĩyatawalagia chati cia kimataifa na majukwaa ya nyimbo.",
+        "artists": "Kabza De Small, DJ Maphorisa, Tyler ICU, Focalistic"
+      },
+      "genre3": {
+        "location": "Kenya — Aafrika Rũrĩng'i",
+        "name": "Benga",
+        "description": "Njira ya nyimbo ya Kenya ya mũthĩinĩ — midundo ya gitaa ĩkĩrimĩrĩra juu ya nyimbo cia Luo. Benga nĩyo mũsingi wa nyimbo cia Kenya na thakame ĩmwe ya kaĩ ya Aafrika Rũrĩng'i.",
+        "artists": "D.O. Misiani, Ochieng Kabaselleh, Victoria Kings"
+      },
+      "genre4": {
+        "location": "Ghana — Aafrika Thagĩcĩ",
+        "name": "Highlife",
+        "description": "Ĩmwe ya njira cia kale cia nyimbo cia Aafrika, ichanganya thakame cia bendi na midundo ya Ghana. Yenye heshima, ya gĩkeno, na ya rĩrĩa rĩothe — njira ĩyathiithagia mũsingi wa nyimbo nyingi cia Aafrika Thagĩcĩ.",
+        "artists": "E.T. Mensah, Amakye Dede, Daddy Lumba"
+      }
+    },
+    "instruments": {
+      "title": "Ngoma cia",
+      "titleAccent": "Aafrika",
+      "subtitle": "Mĩhango ya kale ya thakame ikoragĩa mĩaka ĩtarĩ na ũndũ na gĩkeno",
+      "kora": {
+        "name": "Kora",
+        "description": "Kinanda kĩa nyuzi 21 kuuma Aafrika Thagĩcĩ. Ngoma ya agendi — asimuliai na ahistoria."
+      },
+      "djembe": {
+        "name": "Djembe",
+        "description": "Ngoma maarufu ya dunia kuuma Guinea. Muhimu kwa sherehe na maadhimisho ya jamii."
+      },
+      "mbira": {
+        "name": "Mbira",
+        "description": "Kinanda kĩa kidole gũmba kĩa Zimbabwe — ngoma ya kĩroho ĩtũmĩkagĩra kũcookia na agĩkũrũ."
+      },
+      "talkingDrum": {
+        "name": "Ngoma ya Kũgaana",
+        "description": "Ngoma ĩna ũmbo wa saa iigaga thakame cia rurũ, ĩtũmĩkagĩra kwa maũndũ ya haraka ya mbali."
+      },
+      "krar": {
+        "name": "Krar",
+        "description": "Kinanda kĩa nyuzi itaano kuuma Ethiopia na Eritrea kĩna thakame nzuri ya mĩhango ya kale."
+      },
+      "balafon": {
+        "name": "Balafon",
+        "description": "Xylophone ya mũtĩ ĩpendagwa kũrĩa kwa Mali, Senegal, na Côte d'Ivoire."
+      }
+    },
+    "artists": {
+      "title": "Aimbĩri",
+      "titleAccent": "Aaganiirwo",
+      "subtitle": "Nyimbo cia athamaki na nyota irigĩrĩrio kuma bara rĩothe",
+      "artist1": {
+        "genre": "Afrobeat • Nigeria",
+        "description": "Baba wa Afrobeat. Nyimbo ciake ciakĩĩrĩire, cia kĩsiasa, na cia rĩrĩa rĩothe."
+      },
+      "artist2": {
+        "genre": "Afropop • Aafrika Thĩinĩ",
+        "description": "\"Mama Afrika\" — thakame ya ũrembo na ũgĩtĩkĩria wa dunia yothe."
+      },
+      "artist3": {
+        "genre": "Afrobeats • Nigeria",
+        "description": "Mshindi wa Grammy waaganĩire Afrobeats kũrĩa kwa bara rĩothe."
+      },
+      "artist4": {
+        "genre": "Afro-soul • Nigeria",
+        "description": "Thakame ĩhanagĩrĩite kizazi ichanganya soul, R&B, na Afrobeats."
+      },
+      "artist5": {
+        "genre": "Blues • Mali",
+        "description": "Aathĩĩrĩirie uhusiano mwega kati ya nyimbo cia Aafrika Thagĩcĩ na blues ya Amerika."
+      },
+      "artist6": {
+        "genre": "Mbalax • Senegal",
+        "description": "Ĩmwe ya thakame cia aaganiĩrĩrio ningĩ Aafrika, ichanganya mĩhango ya Wolof na thakame ya dunia."
+      },
+      "artist7": {
+        "genre": "Blues • Mali",
+        "description": "Aathĩĩrĩirie uhusiano mwega kati ya nyimbo cia Aafrika Thagĩcĩ na blues ya Amerika."
+      }
+    },
+    "influence": {
+      "title": "Ũtheru wa",
+      "titleAccent": "Aafrika",
+      "subtitle": "Ũrĩa midundo ya Aafrika ĩhindĩire nyimbo cia dunia yothe",
+      "jazz": {
+        "name": "Jazz & Blues",
+        "description": "Mizani ya pentatonic, mĩhango ya majibu, na ũmĩngo wa midundo ya nyimbo cia Aafrika nĩ mũsingi wa Jazz na Blues."
+      },
+      "reggae": {
+        "name": "Reggae",
+        "description": "Reggae ya Jamaica ikoragĩa ũciũ mwega wa midundo ya Aafrika, na Rastafari ĩkĩhũgĩra mĩhango ya Ethiopia."
+      },
+      "hiphop": {
+        "name": "Hip-Hop",
+        "description": "Mĩhango ya griot ya thakame ya ndaki, hadithi, na majibu nĩ mũsingi wa kĩroho wa hip-hop."
+      },
+      "electronic": {
+        "name": "Nyimbo cia Kielektroniki",
+        "description": "Kuuma Amapiano nginya Afrobeats, mĩhango ya midundo ya Aafrika ĩhindĩaga ũndũ wa vilabu dunia na utengenezaji wa pop."
+      }
+    }
+  }
+
 
 
 }

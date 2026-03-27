@@ -16,7 +16,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+    /* your existing styles... 
+  transition: background-image 0.5s ease-in-out;
+  */
 }
 
 
@@ -360,6 +362,10 @@ align-items: center;
 
 .hero-text p{
   font-size: 1.2rem;
+}
+
+.hero-text h1{
+  color: #D5731A;
 }
 
 .hero-boxes{
