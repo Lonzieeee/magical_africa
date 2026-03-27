@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 const getLocalProgressKey = (uid) => `learnerProgressBackup_${uid}`
+const getAnnouncementSeenKey = (uid) => `learnerAnnouncementSeenAt_${uid}`
 
 const toMs = (value) => {
   if (!value) return 0
@@ -75,18 +76,18 @@ const Learner = () => {
   const [progressMap, setProgressMap] = useState({})
   const [achievements, setAchievements] = useState({
     certificates: 0,
-    badges: ['Swahili Beginner', 'Storytelling Explorer'],
-    milestones: ['First Course Started']
+    badges: [],
+    milestones: []
   })
   const [announcements, setAnnouncements] = useState([])
 
   const [loading, setLoading] = useState(true)
   const [activeFilter, setActiveFilter] = useState(null)
-  const [showPublishedOnly, setShowPublishedOnly] = useState(true)
   const [actionToast, setActionToast] = useState(null)
   const [acquiringCourseId, setAcquiringCourseId] = useState('')
   const [liveEnrollmentCourseIds, setLiveEnrollmentCourseIds] = useState([])
   const [liveEnrollmentTeacherIds, setLiveEnrollmentTeacherIds] = useState([])
+  const [announcementSeenAt, setAnnouncementSeenAt] = useState('')
 
   const persistLocalProgressMap = (nextProgressMap) => {
     if (!user?.uid) return
@@ -163,7 +164,11 @@ const Learner = () => {
         const mergedWithLocal = mergeCourseMaps(mergedCourses, localBackupCourses)
 
         setProgressMap(mergedWithLocal)
-        setAchievements(savedProgressData.achievements || achievements)
+        setAchievements(savedProgressData.achievements || {
+          certificates: 0,
+          badges: [],
+          milestones: []
+        })
         persistLocalProgressMap(mergedWithLocal)
 
         const mergedSnapshot = JSON.stringify(mergedWithLocal)
@@ -180,8 +185,8 @@ const Learner = () => {
             courses: mergedWithLocal,
             achievements: {
               certificates: 0,
-              badges: ['Swahili Beginner', 'Storytelling Explorer'],
-              milestones: ['First Course Started']
+              badges: [],
+              milestones: []
             },
             updatedAt: new Date().toISOString()
           }, { merge: true })
@@ -244,6 +249,12 @@ const Learner = () => {
       announcementUnsubscribe()
       enrollmentUnsubscribe()
     }
+  }, [user?.uid])
+
+  useEffect(() => {
+    if (!user?.uid) return
+    const stored = localStorage.getItem(getAnnouncementSeenKey(user.uid)) || ''
+    setAnnouncementSeenAt(stored)
   }, [user?.uid])
 
   const categories = ['Language', 'Culture', 'History', 'Artisan', 'Pottery', 'Woodwork']
@@ -328,10 +339,16 @@ const Learner = () => {
     const myCourseIds = new Set(ownedCourses.map(course => course.id))
     return filteredCourses.filter(course => {
       if (myCourseIds.has(course.id)) return false
-      if (!showPublishedOnly) return true
-      return course.status === 'Published' || !course.status
+      return isCoursePublished(course)
     })
-  }, [filteredCourses, ownedCourses, showPublishedOnly])
+  }, [filteredCourses, ownedCourses])
+
+  const freeStoreCourses = useMemo(() => {
+    return filteredCourses.filter((course) => {
+      if (!isCoursePublished(course)) return false
+      return getCoursePrice(course) === 0
+    })
+  }, [filteredCourses])
 
   const publishedNowWindowDays = 30
 
@@ -342,7 +359,7 @@ const Learner = () => {
 
     return filteredCourses.filter((course) => {
       if (myCourseIds.has(course.id)) return false
-      const isPublished = course.status === 'Published' || !course.status
+      const isPublished = isCoursePublished(course)
       if (!isPublished) return false
 
       const publishedAt = getPublishedTimestamp(course)
@@ -353,7 +370,7 @@ const Learner = () => {
 
   const suggestedCoursesForView = useMemo(() => {
     if (storeView === 'free') {
-      return suggestedCourses.filter(course => getCoursePrice(course) === 0)
+      return freeStoreCourses
     }
     if (storeView === 'paid') {
       return suggestedCourses.filter(course => getCoursePrice(course) > 0)
@@ -362,37 +379,23 @@ const Learner = () => {
       return publishedNowCourses
     }
     return suggestedCourses
-  }, [storeView, suggestedCourses, publishedNowCourses])
-
-  const totalStoreCourses = useMemo(() => {
-    const myCourseIds = new Set(ownedCourses.map(course => course.id))
-    return filteredCourses.filter(course => !myCourseIds.has(course.id)).length
-  }, [filteredCourses, ownedCourses])
+  }, [storeView, suggestedCourses, publishedNowCourses, freeStoreCourses])
 
   const publishedStoreCourses = useMemo(() => {
     const myCourseIds = new Set(ownedCourses.map(course => course.id))
     return filteredCourses.filter(course => {
       if (myCourseIds.has(course.id)) return false
-      return course.status === 'Published' || !course.status
+      return isCoursePublished(course)
     }).length
   }, [filteredCourses, ownedCourses])
 
   const totalFreeStoreCourses = useMemo(() => {
-    const myCourseIds = new Set(ownedCourses.map(course => course.id))
-    return filteredCourses.filter(course => {
-      if (myCourseIds.has(course.id)) return false
-      return getCoursePrice(course) === 0
-    }).length
-  }, [filteredCourses, ownedCourses])
+    return freeStoreCourses.length
+  }, [freeStoreCourses])
 
   const publishedFreeStoreCourses = useMemo(() => {
-    const myCourseIds = new Set(ownedCourses.map(course => course.id))
-    return filteredCourses.filter(course => {
-      if (myCourseIds.has(course.id)) return false
-      if (getCoursePrice(course) > 0) return false
-      return course.status === 'Published' || !course.status
-    }).length
-  }, [filteredCourses, ownedCourses])
+    return freeStoreCourses.length
+  }, [freeStoreCourses])
 
   const totalPaidStoreCourses = useMemo(() => {
     const myCourseIds = new Set(ownedCourses.map(course => course.id))
@@ -407,7 +410,7 @@ const Learner = () => {
     return filteredCourses.filter(course => {
       if (myCourseIds.has(course.id)) return false
       if (getCoursePrice(course) === 0) return false
-      return course.status === 'Published' || !course.status
+      return isCoursePublished(course)
     }).length
   }, [filteredCourses, ownedCourses])
 
@@ -510,6 +513,16 @@ const Learner = () => {
       .map((course) => course.title || 'Untitled Course')
   }, [myCourses, progressMap])
 
+  const completedCourses = useMemo(() => {
+    return myCourses
+      .filter((course) => (progressMap[course.id]?.completion || 0) >= 100)
+      .map((course) => ({
+        id: course.id,
+        title: course.title || 'Untitled Course',
+        completedAt: progressMap[course.id]?.updatedAt || progressMap[course.id]?.lastActiveAt || new Date().toISOString()
+      }))
+  }, [myCourses, progressMap])
+
   const courseViewMeta = useMemo(() => {
     if (courseView === 'in-progress') {
       return {
@@ -543,8 +556,13 @@ const Learner = () => {
     if (!user?.uid) return
 
     const completedCourseCount = Object.values(progressMap).filter((item) => (item.completion || 0) >= 100).length
-    const derivedBadges = ['Swahili Beginner', 'Storytelling Explorer']
-    const derivedMilestones = ['First Course Started']
+    const hasStartedAnyCourse = Object.values(progressMap).some((item) => Boolean(item.started) || (item.completion || 0) > 0)
+    const derivedBadges = []
+    const derivedMilestones = []
+
+    if (hasStartedAnyCourse) {
+      derivedMilestones.push('First Course Started')
+    }
 
     if (completedCourseCount >= 1) {
       derivedBadges.push('Course Finisher')
@@ -592,6 +610,12 @@ const Learner = () => {
     if (section === 'courses') {
       setActiveFilter(null)
     }
+
+    if (section === 'notifications' && user?.uid) {
+      const now = new Date().toISOString()
+      setAnnouncementSeenAt(now)
+      localStorage.setItem(getAnnouncementSeenKey(user.uid), now)
+    }
   }
 
   const toggleMenu = (menu) => {
@@ -603,6 +627,10 @@ const Learner = () => {
     const sale = Number(course.salePrice || 0)
     const regular = Number(course.regularPrice || 0)
     return sale > 0 ? sale : regular
+  }
+
+  function isCoursePublished(course) {
+    return String(course?.status || '').trim().toLowerCase() === 'published'
   }
 
   function getPublishedTimestamp(course) {
@@ -722,13 +750,15 @@ const Learner = () => {
       setProgressMap(nextProgressMap)
       persistLocalProgressMap(nextProgressMap)
 
-      await setDoc(doc(db, 'learnerProgress', user.uid), {
+      setDoc(doc(db, 'learnerProgress', user.uid), {
         courses: nextProgressMap,
         lastActiveCourseId: courseId,
         updatedAt: nowIso
-      }, { merge: true })
+      }, { merge: true }).catch((error) => {
+        console.log('Could not sync resume progress immediately:', error)
+      })
     }
-    navigate('/course-content', { state: { courseId } })
+    navigate('/course-content', { state: { courseId, fromResume: true } })
   }
 
   const handleViewCourseDetails = (courseId) => {
@@ -764,6 +794,62 @@ const Learner = () => {
     const parsed = new Date(dateValue)
     if (Number.isNaN(parsed.getTime())) return 'Last opened: not yet'
     return `Last opened: ${parsed.toLocaleString()}`
+  }
+
+  const unseenAnnouncementsCount = useMemo(() => {
+    if (!announcementSeenAt) return learnerAnnouncements.length
+    const seenTime = toMs(announcementSeenAt)
+    return learnerAnnouncements.filter((item) => toMs(item.createdAt) > seenTime).length
+  }, [learnerAnnouncements, announcementSeenAt])
+
+  const handleDownloadCertificate = (courseTitle, completedAt) => {
+    const learnerDisplayName = learnerName || 'Learner'
+    const completionDate = (() => {
+      const parsed = new Date(completedAt || new Date().toISOString())
+      if (Number.isNaN(parsed.getTime())) return new Date().toLocaleDateString()
+      return parsed.toLocaleDateString()
+    })()
+
+    const safeName = learnerDisplayName.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    const safeCourse = (courseTitle || 'Course').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
+    const certificateSvg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1130" viewBox="0 0 1600 1130">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f8f4ea" />
+      <stop offset="100%" stop-color="#e7f0e8" />
+    </linearGradient>
+    <linearGradient id="badge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#d4a24f" />
+      <stop offset="100%" stop-color="#b18233" />
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="1130" fill="url(#bg)" />
+  <rect x="50" y="50" width="1500" height="1030" fill="none" stroke="#1f6f43" stroke-width="8" />
+  <rect x="80" y="80" width="1440" height="970" fill="none" stroke="#d4a24f" stroke-width="2" />
+  <circle cx="800" cy="170" r="42" fill="url(#badge)" />
+  <text x="800" y="180" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#ffffff">MA</text>
+  <text x="800" y="260" text-anchor="middle" font-family="Georgia, serif" font-size="66" fill="#1f6f43">Certificate of Completion</text>
+  <text x="800" y="342" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="30" fill="#4a4a4a">This certificate certifies that</text>
+  <text x="800" y="440" text-anchor="middle" font-family="Georgia, serif" font-size="76" fill="#a3070c">${safeName}</text>
+  <text x="800" y="518" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="30" fill="#4a4a4a">has successfully completed the course</text>
+  <text x="800" y="606" text-anchor="middle" font-family="Georgia, serif" font-size="56" fill="#1f6f43">${safeCourse}</text>
+  <text x="800" y="684" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="28" fill="#4a4a4a">Completion date: ${completionDate}</text>
+  <line x1="960" y1="846" x2="1320" y2="846" stroke="#1f6f43" stroke-width="2" />
+  <text x="1140" y="822" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="52" fill="#1f6f43">Magical Africa</text>
+  <text x="1140" y="884" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="21" fill="#4a4a4a">Authorized Signature</text>
+  <text x="1140" y="914" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="21" fill="#4a4a4a">Magical Africa Academy</text>
+  <text x="240" y="960" text-anchor="start" font-family="Poppins, Arial, sans-serif" font-size="19" fill="#667065">Certificate ID: MA-${Date.now()}</text>
+</svg>`
+
+    const blob = new Blob([certificateSvg], { type: 'image/svg+xml;charset=utf-8' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `${(courseTitle || 'course').replace(/\s+/g, '-').toLowerCase()}-certificate.svg`
+    link.click()
+    URL.revokeObjectURL(url)
   }
 
   return (
@@ -883,7 +969,13 @@ const Learner = () => {
 
           {!loading && (
             <div className='learner-greeting'>
-              <h3>Welcome, {learnerName}</h3>
+              <div className='learner-greeting-top'>
+                <h3>Welcome, {learnerName}</h3>
+                <button className='learner-alert-bell' type='button' onClick={() => openSection('notifications')}>
+                  <FaBell aria-hidden='true' />
+                  {unseenAnnouncementsCount > 0 && <span>{unseenAnnouncementsCount}</span>}
+                </button>
+              </div>
               <p className='learner-catchy-message'>
                 <span className='learner-orbit-signal' aria-hidden='true'>
                   <span className='learner-orbit-core' />
@@ -937,16 +1029,9 @@ const Learner = () => {
               {storeView === 'all' ? (
                 <div className='learner-store-badges'>
                   <button
-                    className={showPublishedOnly ? 'active' : ''}
-                    onClick={() => setShowPublishedOnly(true)}
+                    className='active'
                   >
                     {publishedStoreCourses} Published
-                  </button>
-                  <button
-                    className={!showPublishedOnly ? 'active' : ''}
-                    onClick={() => setShowPublishedOnly(false)}
-                  >
-                    {totalStoreCourses} All In Store
                   </button>
                 </div>
               ) : storeView === 'free' ? (
@@ -979,15 +1064,8 @@ const Learner = () => {
               </div>
 
               {storeView !== 'published' ? (
-                <div className='learner-suggested-header'>
-                  <label className='learner-toggle'>
-                    <input
-                      type='checkbox'
-                      checked={showPublishedOnly}
-                      onChange={(e) => setShowPublishedOnly(e.target.checked)}
-                    />
-                    <span>{storeView === 'free' ? 'Published Free Only' : storeView === 'paid' ? 'Published Premium Only' : 'Only Published'}</span>
-                  </label>
+                <div className='learner-suggested-header learner-suggested-header-note'>
+                  <span>{storeView === 'free' ? 'Showing published free courses only.' : storeView === 'paid' ? 'Showing published premium courses only.' : 'Showing published courses only.'}</span>
                 </div>
               ) : (
                 <div className='learner-suggested-header learner-suggested-header-note'>
@@ -997,7 +1075,7 @@ const Learner = () => {
 
               <div
                 className='learner-store-view-stage'
-                key={`store-${storeView}-${activeFilter || 'all'}-${showPublishedOnly ? 'published' : 'all'}`}
+                key={`store-${storeView}-${activeFilter || 'all'}-published`}
               >
                 {storeView === 'free' && (
                   <div className='learner-free-strip'>
@@ -1100,7 +1178,10 @@ const Learner = () => {
                   {suggestedCoursesForView.map(course => {
                   const price = getCoursePrice(course)
                   const isPaid = price > 0
-                  const isOwned = Boolean(progressMap[course.id]?.addedToLibrary || progressMap[course.id]?.paid)
+                  const courseProgress = progressMap[course.id] || {}
+                  const isOwned = Boolean(courseProgress.addedToLibrary || courseProgress.paid)
+                  const isCompleted = (courseProgress.completion || 0) >= 100
+                  const hasStarted = Boolean(courseProgress.started || (courseProgress.completion || 0) > 0)
                   const isAcquiring = acquiringCourseId === course.id
 
                   return (
@@ -1113,6 +1194,11 @@ const Learner = () => {
 
                       <div className='learner-store-body'>
                         <h3>{course.title || 'Untitled Course'}</h3>
+                        {storeView === 'free' && isOwned && (
+                          <span className='learner-course-state-pill'>
+                            {isCompleted ? 'Completed' : 'Acquired'}
+                          </span>
+                        )}
                         <p>{course.description || 'No description yet.'}</p>
                         <div className='learner-course-meta'>
                           <span>{course.courseType || 'General'}</span>
@@ -1129,11 +1215,22 @@ const Learner = () => {
                           </button>
                           <button
                             className='learner-buy-btn'
-                            disabled={isOwned || isAcquiring}
-                            onClick={() => handleAcquireCourse(course)}
+                            disabled={isAcquiring}
+                            onClick={() => {
+                              if (isOwned) {
+                                if (isCompleted) {
+                                  handleViewCourseDetails(course.id)
+                                  return
+                                }
+                                handleResumeCourse(course.id)
+                                return
+                              }
+
+                              handleAcquireCourse(course)
+                            }}
                           >
                             {isOwned
-                              ? 'In My Courses'
+                              ? (isCompleted ? 'Completed' : hasStarted ? 'Resume Course' : 'Start Course')
                               : isAcquiring
                                 ? 'Processing...'
                                 : (isPaid ? `Buy Course ($${price})` : 'Add Course')}
@@ -1185,6 +1282,11 @@ const Learner = () => {
                 {myCoursesForView.map(course => {
                   const progress = progressMap[course.id] || {}
                   const completion = progress.completion || 0
+                  const hasStarted = Boolean(
+                    progress.started ||
+                    completion > 0 ||
+                    (progress.completedLessonIds || []).length > 0
+                  )
                   const nextLessonLabel = getNextLessonLabel(course, progress)
                   const lastOpenedLabel = formatLastOpened(progress)
                   const isCompleted = completion >= 100
@@ -1205,29 +1307,37 @@ const Learner = () => {
                           <div className='learner-course-meta'>
                             <span>{course.courseType || 'General'}</span>
                             <span>{progress.paid ? 'Paid' : 'Free'}</span>
-                            <span>{completion >= 100 ? 'Completed' : progress.started ? 'In Progress' : 'Ready to Start'}</span>
+                            <span>{completion >= 100 ? 'Completed successfully' : progress.started ? 'In Progress' : 'Ready to Start'}</span>
                           </div>
+                          {courseView === 'in-progress' && (
+                            <p className='learner-inprogress-note'>
+                              Lessons in progress: {progress.lessonsCompleted || 0} • Completion: {completion}%
+                            </p>
+                          )}
+                          {courseView === 'ready' && (
+                            <p className='learner-inprogress-note'>
+                              Not started yet. Progress: 0%.
+                            </p>
+                          )}
                         </div>
 
-                        {courseView !== 'ready' && (
-                          <div className='learner-progress-row'>
-                            <p>Progress: {completion}%</p>
-                            <div className='learner-progress-bar'>
-                              <div style={{ width: `${completion}%` }} />
-                            </div>
+                        <div className='learner-progress-row'>
+                          <p>Progress: {completion}%</p>
+                          <div className='learner-progress-bar'>
+                            <div style={{ width: `${completion}%` }} />
                           </div>
-                        )}
+                        </div>
 
                         <p className='learner-last-opened'>{lastOpenedLabel}</p>
                         <p className='learner-next-lesson'>{nextLessonLabel}</p>
 
-                        {courseView === 'completed' ? (
+                        {(courseView === 'completed' || isCompleted) ? (
                           <button className='learner-resume-btn learner-resume-btn-secondary' onClick={() => handleViewCourseDetails(course.id)}>
                             Review Course
                           </button>
                         ) : (
                           <button className='learner-resume-btn' onClick={() => handleResumeCourse(course.id)}>
-                            {courseView === 'ready' ? 'Start Course' : 'Resume'}
+                            {hasStarted ? 'Resume' : 'Start Course'}
                           </button>
                         )}
                       </div>
@@ -1284,7 +1394,18 @@ const Learner = () => {
               <div className='learner-tag-list'>
                 {completedCourseTitles.length === 0
                   ? <span>No certificates yet. Complete a full course to unlock certificates.</span>
-                  : completedCourseTitles.map((title) => <span key={title}>Certificate: {title}</span>)}
+                  : completedCourses.map((course) => (
+                    <span key={course.id} className='learner-certificate-item'>
+                      <strong>Certificate:</strong> {course.title}
+                      <button
+                        className='learner-certificate-btn'
+                        type='button'
+                        onClick={() => handleDownloadCertificate(course.title, course.completedAt)}
+                      >
+                        Download Certificate
+                      </button>
+                    </span>
+                  ))}
               </div>
             </section>
           )}

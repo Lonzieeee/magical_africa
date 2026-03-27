@@ -16,6 +16,7 @@ const CourseContentPage = () => {
   const { user, userData } = useAuth()
   const courseId = location.state?.courseId
   const isPreviewMode = Boolean(location.state?.preview)
+  const fromResume = Boolean(location.state?.fromResume)
 
   const [course, setCourse] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -25,13 +26,31 @@ const CourseContentPage = () => {
   const [toast, setToast] = useState(null)
   const [reviewRating, setReviewRating] = useState(0)
   const [reviewComment, setReviewComment] = useState('')
+  const [reviewImprovement, setReviewImprovement] = useState('')
   const [reviewSaving, setReviewSaving] = useState(false)
+  const [reviewSubmitted, setReviewSubmitted] = useState(false)
+  const [courseCompletionPercent, setCourseCompletionPercent] = useState(0)
   const [previewOwned, setPreviewOwned] = useState(false)
   const [previewActionLoading, setPreviewActionLoading] = useState(false)
+  const [persistedTabState, setPersistedTabState] = useState(null)
 
   // Ref to scroll to quiz section
   const quizRef = useRef(null)
   const sessionStartedAtRef = useRef(Date.now())
+  const resumeToastShownRef = useRef(false)
+
+  useEffect(() => {
+    if (!fromResume || resumeToastShownRef.current) return
+
+    resumeToastShownRef.current = true
+    setToast({ type: 'info', message: 'Opening your course. Welcome back!' })
+
+    const timeout = setTimeout(() => {
+      setToast(null)
+    }, 1800)
+
+    return () => clearTimeout(timeout)
+  }, [fromResume])
 
   const toDateKey = (dateInput = new Date()) => {
     const d = new Date(dateInput)
@@ -130,6 +149,7 @@ const CourseContentPage = () => {
         const lessonsCompleted = savedCompletedLessonIds.length || existing.lessonsCompleted || 0
         const quizPercent = existing.lastQuizPercent || 0
         const completion = computeCompletionFromState(totalLessons, lessonsCompleted, quizPercent)
+        setCourseCompletionPercent(completion)
 
         return {
           ...existing,
@@ -194,6 +214,8 @@ const CourseContentPage = () => {
         const reviewData = reviewDoc.data()
         setReviewRating(reviewData.rating || 0)
         setReviewComment(reviewData.comment || '')
+        setReviewImprovement(reviewData.improvementSuggestion || '')
+        setReviewSubmitted(true)
       }
     }
 
@@ -229,6 +251,44 @@ const CourseContentPage = () => {
     checkPreviewOwnership()
   }, [isPreviewMode, user, courseId])
 
+  useEffect(() => {
+    const loadPersistedTabState = async () => {
+      if (!user || !courseId) return
+
+      try {
+        const progressDoc = await getDoc(doc(db, 'learnerProgress', user.uid))
+        if (!progressDoc.exists()) {
+          setPersistedTabState(null)
+          return
+        }
+
+        const savedTabState = progressDoc.data()?.courses?.[courseId]?.tabState || null
+        setPersistedTabState(savedTabState)
+      } catch (error) {
+        console.log('Error loading persisted tab state:', error)
+      }
+    }
+
+    loadPersistedTabState()
+  }, [user, courseId])
+
+  const handlePersistTabState = async (tabState) => {
+    if (!user || !courseId || !course || isPreviewMode) return
+    if (!tabState || typeof tabState !== 'object') return
+
+    setPersistedTabState(tabState)
+
+    try {
+      await upsertCourseProgress((existing) => ({
+        ...existing,
+        tabState,
+        lastActiveAt: new Date().toISOString()
+      }))
+    } catch (error) {
+      console.log('Error persisting tab state:', error)
+    }
+  }
+
   if (loading) return (
     <>
       <Navbar solid />
@@ -260,6 +320,7 @@ const CourseContentPage = () => {
     const lessonCount = (course.topics || []).reduce((acc, topic) => acc + (topic.lessons?.length || 0), 0)
     const quizPercent = total > 0 ? Math.round((score / total) * 100) : 0
     const completion = computeCompletionFromState(lessonCount, completedLessonIds.length, quizPercent)
+    setCourseCompletionPercent(completion)
 
     await upsertCourseProgress((existing) => {
       return {
@@ -302,6 +363,7 @@ const CourseContentPage = () => {
     const existingProgress = snapshot.exists() ? snapshot.data().courses?.[courseId] || {} : {}
     const quizPercent = existingProgress.lastQuizPercent || 0
     const nextCompletion = computeCompletionFromState(lessonCount, nextCompletedIds.length, quizPercent)
+    setCourseCompletionPercent(nextCompletion)
 
     await upsertCourseProgress((existing) => ({
       ...existing,
@@ -333,6 +395,14 @@ const CourseContentPage = () => {
     e.preventDefault()
     if (isPreviewMode) return
     if (!user || !courseId || !course || reviewRating < 1) return
+    if (courseCompletionPercent < 100 || reviewSubmitted) return
+
+    const shouldCollectImprovement = reviewRating > 0 && reviewRating < 3
+    if (shouldCollectImprovement && !reviewImprovement.trim()) {
+      setToast({ type: 'info', message: 'Please tell us what we can improve before submitting.' })
+      setTimeout(() => setToast(null), 2400)
+      return
+    }
 
     setReviewSaving(true)
     try {
@@ -346,12 +416,15 @@ const CourseContentPage = () => {
         teacherId: resolvedTeacherId,
         courseId,
         courseTitle: course.title || 'Course',
+        completionPercent: courseCompletionPercent,
         rating: reviewRating,
         comment: reviewComment,
+        improvementSuggestion: shouldCollectImprovement ? reviewImprovement.trim() : '',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }, { merge: true })
 
+      setReviewSubmitted(true)
       setToast({ type: 'success', message: 'Review submitted successfully.' })
       setTimeout(() => setToast(null), 2200)
     } catch (error) {
@@ -364,10 +437,15 @@ const CourseContentPage = () => {
   }
 
   const handlePreviewAcquire = async () => {
-    if (!user || !course || !courseId || previewActionLoading) return
+    if (!course || !courseId || previewActionLoading) return
+    if (!user) {
+      setToast({ type: 'info', message: 'Sign in as learner to add or buy this course.' })
+      setTimeout(() => setToast(null), 2200)
+      return
+    }
 
     if (previewOwned) {
-      navigate('/course-content', { state: { courseId } })
+      navigate('/course-content', { state: { courseId, fromResume: true } })
       return
     }
 
@@ -422,7 +500,7 @@ const CourseContentPage = () => {
         updatedAt: new Date().toISOString()
       }, { merge: true })
 
-      navigate('/course-content', { state: { courseId } })
+      navigate('/course-content', { state: { courseId, fromResume: true } })
     } catch (error) {
       console.log('Failed to acquire course from preview:', error)
       setToast({ type: 'info', message: 'Could not add this course right now. Please try again.' })
@@ -436,12 +514,6 @@ const CourseContentPage = () => {
     <>
       <Navbar solid />
 
-      <div className='cc-dashboard-back-row'>
-        <button className='cc-dashboard-back-btn' onClick={() => navigate('/learner')}>
-          {'<- Back to Learner Dashboard'}
-        </button>
-      </div>
-
       {toast && (
         <div className={`cc-toast cc-toast-${toast.type}`}>
           {toast.type === 'success' ? <FaCheckCircle /> : <FaUndoAlt />}
@@ -449,24 +521,9 @@ const CourseContentPage = () => {
         </div>
       )}
 
-      {isPreviewMode && (
-        <div className='cc-preview-cta'>
-          <div>
-            <h3>Interested in this course?</h3>
-            <p>Review the full curriculum first, then add or buy to unlock progress tracking.</p>
-          </div>
-          <button onClick={handlePreviewAcquire} disabled={previewActionLoading}>
-            {previewOwned
-              ? 'Continue Course'
-              : previewActionLoading
-                ? 'Processing...'
-                : (getCoursePrice() > 0 ? `Buy This Course ($${getCoursePrice()})` : 'Add This Course')}
-          </button>
-        </div>
-      )}
-
       <CourseContent
         topics={course.topics || []}
+        courseId={courseId}
         title={course.title}
         description={course.description}
         difficulty={course.difficulty}
@@ -480,6 +537,13 @@ const CourseContentPage = () => {
         completedLessonIds={completedLessonIds}
         onToggleLessonComplete={isPreviewMode ? undefined : handleToggleLessonComplete}
         isPreviewMode={isPreviewMode}
+        onBackToDashboard={() => navigate('/learner')}
+        previewPrice={getCoursePrice()}
+        previewOwned={previewOwned}
+        previewActionLoading={previewActionLoading}
+        onPreviewAction={handlePreviewAcquire}
+        persistedTabState={persistedTabState}
+        onPersistTabState={handlePersistTabState}
       />
 
       {/* Quiz section — ref attached so we can scroll to it */}
@@ -522,9 +586,21 @@ const CourseContentPage = () => {
         </div>
       )}
 
+      {!isPreviewMode && courseCompletionPercent < 100 && (
+        <div className='cc-review-gate-note'>
+          Complete 100% of this course to unlock reviews. Current progress: {courseCompletionPercent}%.
+        </div>
+      )}
+
       {!isPreviewMode && (
       <div className='cc-review-section'>
         <h2>Rate This Course</h2>
+        <p className='cc-review-help'>Share your experience after completing the full course.</p>
+        {reviewSubmitted && (
+          <p className='cc-review-submitted-note'>
+            Your review has been submitted. Editing is now locked for this course.
+          </p>
+        )}
         <form onSubmit={handleSubmitReview} className='cc-review-form'>
           <div className='cc-review-stars'>
             {[1, 2, 3, 4, 5].map(star => (
@@ -533,6 +609,7 @@ const CourseContentPage = () => {
                 key={star}
                 className={`cc-star-btn ${star <= reviewRating ? 'active' : ''}`}
                 onClick={() => setReviewRating(star)}
+                disabled={reviewSubmitted || courseCompletionPercent < 100}
               >
                 <FaStar />
               </button>
@@ -544,10 +621,24 @@ const CourseContentPage = () => {
             onChange={(e) => setReviewComment(e.target.value)}
             placeholder='Share your learning experience...'
             rows={4}
+            disabled={reviewSubmitted || courseCompletionPercent < 100}
           />
 
-          <button type='submit' disabled={reviewSaving || reviewRating < 1}>
-            {reviewSaving ? 'Saving...' : 'Submit Review'}
+          {reviewRating > 0 && reviewRating < 3 && (
+            <>
+              <label className='cc-review-improve-label'>What can we improve?</label>
+              <textarea
+                value={reviewImprovement}
+                onChange={(e) => setReviewImprovement(e.target.value)}
+                placeholder='Tell us where this course can be improved.'
+                rows={3}
+                disabled={reviewSubmitted || courseCompletionPercent < 100}
+              />
+            </>
+          )}
+
+          <button type='submit' disabled={reviewSaving || reviewRating < 1 || reviewSubmitted || courseCompletionPercent < 100 || (reviewRating < 3 && !reviewImprovement.trim())}>
+            {reviewSubmitted ? 'Review Submitted' : reviewSaving ? 'Saving...' : 'Submit Review'}
           </button>
         </form>
       </div>

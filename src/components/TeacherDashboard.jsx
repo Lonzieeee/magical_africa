@@ -1,5 +1,20 @@
 import React, { useMemo, useState, useEffect } from 'react'
-import { FaChevronLeft, FaStar } from 'react-icons/fa'
+import { FaBell, FaChevronLeft, FaStar } from 'react-icons/fa'
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  Cell,
+  ComposedChart,
+  Legend,
+  Line,
+  Pie,
+  PieChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis
+} from 'recharts'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import {
@@ -8,6 +23,7 @@ import {
   getDocs,
   deleteDoc,
   doc,
+  onSnapshot,
   query,
   updateDoc,
   where
@@ -52,6 +68,7 @@ const TeacherDashboard = () => {
   const [regularPrice, setRegularPrice] = useState('')
   const [salePrice, setSalePrice] = useState('')
   const [featuredImage, setFeaturedImage] = useState('')
+  const [reviewsSeenAt, setReviewsSeenAt] = useState('')
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, () => setAuthReady(true))
@@ -61,6 +78,33 @@ const TeacherDashboard = () => {
   useEffect(() => {
     if (!authReady) return
     fetchDashboardData()
+  }, [authReady])
+
+  useEffect(() => {
+    if (!authReady) return
+    const currentTeacherId = auth.currentUser?.uid
+    if (!currentTeacherId) return
+
+    const enrollmentQuery = query(collection(db, 'enrollments'), where('teacherId', '==', currentTeacherId))
+    const unsubscribe = onSnapshot(
+      enrollmentQuery,
+      (snapshot) => {
+        const nextEnrollments = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+        setEnrollments(nextEnrollments)
+      },
+      (error) => {
+        console.log('Realtime enrollment listener failed:', error)
+      }
+    )
+
+    return () => unsubscribe()
+  }, [authReady])
+
+  useEffect(() => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    const seenAt = localStorage.getItem(`teacherReviewsSeenAt_${uid}`) || ''
+    setReviewsSeenAt(seenAt)
   }, [authReady])
 
   useEffect(() => {
@@ -252,6 +296,19 @@ const fetchDashboardData = async () => {
 }
 
 
+
+  const markReviewsSeen = () => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    const now = new Date().toISOString()
+    setReviewsSeenAt(now)
+    localStorage.setItem(`teacherReviewsSeenAt_${uid}`, now)
+  }
+
+  useEffect(() => {
+    if (activeSection !== 'reviews') return
+    markReviewsSeen()
+  }, [activeSection])
 
   const handleDelete = async (courseId) => {
     if (!window.confirm('Are you sure you want to delete this course?')) return
@@ -588,24 +645,72 @@ const fetchDashboardData = async () => {
       .slice(0, 6)
   }, [coursePerformance])
 
-  const learnerCompletionLinePoints = useMemo(() => {
-    if (chartCourses.length === 0) return ''
-
-    const width = 520
-    const height = 180
-    const maxLearners = Math.max(...chartCourses.map(item => item.learners), 1)
-
-    return chartCourses.map((item, index) => {
-      const x = chartCourses.length === 1
-        ? width / 2
-        : (index / (chartCourses.length - 1)) * width
-      const learnerRatio = item.learners / maxLearners
-      const completionRatio = (item.avgCompletion || 0) / 100
-      const combined = (learnerRatio * 0.45) + (completionRatio * 0.55)
-      const y = height - (combined * height)
-      return `${x},${y}`
-    }).join(' ')
+  const chartData = useMemo(() => {
+    return chartCourses.map((item) => ({
+      id: item.id,
+      title: item.title,
+      shortTitle: (item.title || 'Course').slice(0, 18),
+      learners: Number(item.learners || 0),
+      completion: Number(item.avgCompletion || 0)
+    }))
   }, [chartCourses])
+
+  const completionPie = useMemo(() => {
+    const base = {
+      completed: 0,
+      inProgress: 0,
+      notStarted: 0,
+      total: 0
+    }
+
+    if (enrollments.length === 0) {
+      return {
+        ...base,
+        percentages: {
+          completed: 0,
+          inProgress: 0,
+          notStarted: 0
+        },
+        pieData: []
+      }
+    }
+
+    const counts = enrollments.reduce((acc, item) => {
+      const completion = Number(item.completion || 0)
+      if (completion >= 100) {
+        acc.completed += 1
+      } else if (completion > 0) {
+        acc.inProgress += 1
+      } else {
+        acc.notStarted += 1
+      }
+      return acc
+    }, { ...base })
+
+    counts.total = enrollments.length
+
+    const percentages = {
+      completed: Math.round((counts.completed / counts.total) * 100),
+      inProgress: Math.round((counts.inProgress / counts.total) * 100)
+    }
+    percentages.notStarted = Math.max(0, 100 - percentages.completed - percentages.inProgress)
+
+    const pieData = [
+      { name: 'Completed', value: percentages.completed, color: '#1f6f43' },
+      { name: 'In Progress', value: percentages.inProgress, color: '#d5731a' },
+      { name: 'Not Started', value: percentages.notStarted, color: '#9aa59a' }
+    ]
+
+    return {
+      ...counts,
+      percentages: {
+        completed: percentages.completed,
+        inProgress: percentages.inProgress,
+        notStarted: percentages.notStarted
+      },
+      pieData
+    }
+  }, [enrollments])
 
   const reviewSummary = useMemo(() => {
     const totalReviews = reviews.length
@@ -640,6 +745,51 @@ const fetchDashboardData = async () => {
       averageRating: Number(averageRating.toFixed(1))
     }
   }, [filteredReviews])
+
+  const enrollmentByLearnerCourse = useMemo(() => {
+    const map = {}
+    enrollments.forEach((item) => {
+      const learnerId = item.learnerId || ''
+      const courseId = item.courseId || ''
+      if (!learnerId || !courseId) return
+      map[`${learnerId}_${courseId}`] = Number(item.completion || 0)
+    })
+    return map
+  }, [enrollments])
+
+  const reviewRows = useMemo(() => {
+    return filteredReviews.map((review) => {
+      const key = `${review.learnerId || ''}_${review.courseId || ''}`
+      const enrollmentCompletion = enrollmentByLearnerCourse[key]
+      const completion = Number(
+        review.completionPercent ??
+        enrollmentCompletion ??
+        review.completion ??
+        0
+      )
+
+      const completionLabel = completion >= 100
+        ? 'Completed successfully'
+        : `${completion}% complete`
+
+      return {
+        ...review,
+        completion,
+        completionLabel
+      }
+    })
+  }, [filteredReviews, enrollmentByLearnerCourse])
+
+  const unseenReviewsCount = useMemo(() => {
+    if (!reviewsSeenAt) return reviews.length
+    const seenTs = new Date(reviewsSeenAt).getTime()
+    if (Number.isNaN(seenTs)) return reviews.length
+
+    return reviews.filter((review) => {
+      const ts = new Date(review.updatedAt || review.createdAt || 0).getTime()
+      return !Number.isNaN(ts) && ts > seenTs
+    }).length
+  }, [reviews, reviewsSeenAt])
 
   const studentRows = useMemo(() => {
     const toTime = (value) => {
@@ -901,6 +1051,15 @@ const fetchDashboardData = async () => {
         </aside>
 
         <main className='td-main'>
+          {!loading && (
+            <div className='td-top-alert-row'>
+              <button className='td-alert-bell' type='button' onClick={() => setActiveSection('reviews')}>
+                <FaBell aria-hidden='true' />
+                {unseenReviewsCount > 0 && <span>{unseenReviewsCount}</span>}
+              </button>
+            </div>
+          )}
+
           {loading && (
             <div className='td-loading-wrap'>
               <div className='td-coffee' role='img' aria-label='Coffee cup spinning and stretching from side to side'>
@@ -1341,35 +1500,73 @@ const fetchDashboardData = async () => {
               </div>
 
               <div className='td-chart-grid'>
-                <article className='td-chart-card'>
-                  <h3>Completion by Course (Bar)</h3>
-                  {chartCourses.length === 0 ? (
-                    <p className='td-empty-text'>Bar chart appears once courses and learner activity exist.</p>
+                <article className='td-chart-card td-chart-card-wide'>
+                  <h3>Course Performance (Bar + Line)</h3>
+                  <p className='td-chart-subtitle'>X-axis: courses, left Y-axis: completion %, right Y-axis: learner count.</p>
+                  {chartData.length === 0 ? (
+                    <p className='td-empty-text'>Chart appears once courses and learner activity exist.</p>
                   ) : (
-                    <div className='td-bar-chart'>
-                      {chartCourses.map((item) => (
-                        <div key={item.id} className='td-bar-row'>
-                          <span className='td-bar-label'>{item.title}</span>
-                          <div className='td-bar-track'>
-                            <span style={{ width: `${item.avgCompletion}%` }} />
-                          </div>
-                          <strong>{item.avgCompletion}%</strong>
-                        </div>
-                      ))}
+                    <div className='td-recharts-wrap'>
+                      <ResponsiveContainer width='100%' height={320}>
+                        <ComposedChart data={chartData} margin={{ top: 14, right: 20, left: 8, bottom: 16 }}>
+                          <CartesianGrid strokeDasharray='3 3' stroke='rgba(145,165,133,0.24)' />
+                          <XAxis dataKey='shortTitle' tick={{ fontSize: 11 }} interval={0} angle={-14} textAnchor='end' height={46} />
+                          <YAxis yAxisId='left' domain={[0, 100]} tick={{ fontSize: 11 }} tickFormatter={(value) => `${value}%`} />
+                          <YAxis yAxisId='right' orientation='right' tick={{ fontSize: 11 }} allowDecimals={false} />
+                          <Tooltip
+                            formatter={(value, name) => {
+                              if (name === 'Completion %') return [`${value}%`, name]
+                              return [value, name]
+                            }}
+                            labelFormatter={(label) => `Course: ${label}`}
+                          />
+                          <Legend />
+                          <Bar yAxisId='left' dataKey='completion' name='Completion %' fill='#d5731a' radius={[3, 3, 0, 0]} barSize={24} />
+                          <Line yAxisId='right' type='monotone' dataKey='learners' name='Learners' stroke='#a3070c' strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                        </ComposedChart>
+                      </ResponsiveContainer>
                     </div>
                   )}
                 </article>
 
                 <article className='td-chart-card'>
-                  <h3>Learner Reach + Completion (Line)</h3>
-                  {chartCourses.length === 0 ? (
-                    <p className='td-empty-text'>Line chart appears after your first enrollments.</p>
+                  <h3>Completion Distribution</h3>
+                  <p className='td-chart-subtitle'>Pie partitions are percentage-based and dynamically recalculated from enrollments.</p>
+                  {completionPie.total === 0 ? (
+                    <p className='td-empty-text'>Pie chart appears after your first enrollments.</p>
                   ) : (
-                    <div className='td-line-chart-wrap'>
-                      <svg viewBox='0 0 520 180' className='td-line-chart' role='img' aria-label='Learner reach and completion trend line'>
-                        <polyline points='0,180 520,180' className='td-line-axis' />
-                        <polyline points={learnerCompletionLinePoints} className='td-line-path' />
-                      </svg>
+                    <div className='td-pie-layout'>
+                      <div className='td-pie-chart-wrap'>
+                        <ResponsiveContainer width='100%' height={260}>
+                          <PieChart>
+                            <Pie
+                              data={completionPie.pieData}
+                              dataKey='value'
+                              nameKey='name'
+                              cx='50%'
+                              cy='50%'
+                              innerRadius={54}
+                              outerRadius={96}
+                              paddingAngle={2.4}
+                              stroke='#ffffff'
+                              strokeWidth={2.2}
+                              label={({ name, value }) => `${name} ${value}%`}
+                            >
+                              {completionPie.pieData.map((entry) => (
+                                <Cell key={entry.name} fill={entry.color} />
+                              ))}
+                            </Pie>
+                            <Tooltip formatter={(value) => [`${value}%`, 'Share']} />
+                          </PieChart>
+                        </ResponsiveContainer>
+                        <p className='td-pie-center-inline'>Total learners: {completionPie.total}</p>
+                        <p className='td-pie-note'>Each slice is proportional to enrollment status share.</p>
+                      </div>
+                      <div className='td-pie-legend'>
+                        <p><span className='td-pie-dot is-completed' /> Completed: {completionPie.percentages.completed}%</p>
+                        <p><span className='td-pie-dot is-progress' /> In Progress: {completionPie.percentages.inProgress}%</p>
+                        <p><span className='td-pie-dot is-not-started' /> Not Started: {completionPie.percentages.notStarted}%</p>
+                      </div>
                     </div>
                   )}
                 </article>
@@ -1631,22 +1828,26 @@ const fetchDashboardData = async () => {
                   <p>{filteredReviewSummary.totalReviews}</p>
                 </article>
               </div>
-              {filteredReviews.length === 0 ? (
+              {reviewRows.length === 0 ? (
                 <p className='td-empty-text'>No reviews yet. Learner reviews will appear here.</p>
               ) : (
                 <div className='td-review-list'>
-                  {filteredReviews.map(review => (
+                  {reviewRows.map(review => (
                     <article key={review.id} className='td-review-card'>
                       <div className='td-review-head'>
                         <h3>{review.courseTitle || 'Course Review'}</h3>
                         <span>{review.learnerName || review.learnerEmail || 'Learner'}</span>
                       </div>
+                      <p className='td-review-completion'>{review.completionLabel}</p>
                       <div className='td-review-rating'>
                         {[1, 2, 3, 4, 5].map(star => (
                           <FaStar key={star} className={star <= (review.rating || 0) ? 'active' : ''} />
                         ))}
                       </div>
                       <p>{review.comment || 'No comment provided.'}</p>
+                      {review.improvementSuggestion && (
+                        <p className='td-review-improve'>What can we improve: {review.improvementSuggestion}</p>
+                      )}
                       <small>{review.createdAt ? new Date(review.createdAt).toLocaleString() : ''}</small>
                     </article>
                   ))}
