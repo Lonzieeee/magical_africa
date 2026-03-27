@@ -11,7 +11,7 @@ const heroSlides = [
     title: 'Learn Valuable Traditional Skills Online - Traditional skills reimagined for today',
    
     subtitle: 'Welcome To Magical Africa',
-    name: '',
+    name: '(Igbo)',
     flag: '/images/Nigeria-flag.png'
   },
   {

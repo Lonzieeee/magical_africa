@@ -70,21 +70,38 @@ const Navbar = ({ solid }) => {
   };
   */}
 
+  {/* 
 
  const handleLogout = async () => {
   try {
-    // show message FIRST
+    
     setLogoutMessage(true);
 
-    // then logout after a tiny delay
+  
     setTimeout(async () => {
       await logout();
     }, 1000);
 
-    // hide message after 3 sec
+ 
     setTimeout(() => {
       setLogoutMessage(false);
-    }, 5000);
+    }, 3000);
+
+  } catch (error) {
+    console.error('Error logging out:', error);
+  }
+};
+*/}
+
+
+const handleLogout = async () => {
+  try {
+    setLogoutMessage(true);
+
+    setTimeout(async () => {
+      await logout(); // navigation happens here
+      setLogoutMessage(false); // hide immediately after logout
+    }, 1000);
 
   } catch (error) {
     console.error('Error logging out:', error);
