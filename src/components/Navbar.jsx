@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import SideMenu from './SideMenu';
 import AuthModal from './AuthModal';
+import useAcademyNavigation from "../hooks/useAcademyNavigation";
 import '../styles/navbar.css';
 import '../styles/hero-stuff.css';
 
@@ -23,6 +24,7 @@ const Navbar = ({ solid }) => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [logoutMessage, setLogoutMessage] = useState(false);
+  const goToAcademy = useAcademyNavigation();
   
   const { user, userData, logout, getInitials, getFullName } = useAuth();
   const { t, i18n } = useTranslation();
@@ -187,9 +189,34 @@ const handleLogout = async () => {
           </div>
         </div>
 
+
+        {/* 
+
         <div className="item2">
-          <h1 id="logo-header" onClick={() => navigate('/')}>Magical Africa</h1>
+         
+         <a href="" onClick={()=> navigate('/')}>Home</a>
+         <a href="" onClick={()=> navigate('/about')}>About</a>
+         <a href="" onClick={()=> navigate('/tribes')}>Tribes</a>
+        <a href="" onClick={()=> navigate('/academy-signIn')}>Academy</a>
+         <a href="" onClick={()=> {goToAcademy}}>Marketplace</a>
+     
+        
         </div>
+
+        */}
+
+
+    
+<div className="item2">
+  <NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.home')}</NavLink>
+  <NavLink to="/about" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.about')}</NavLink>
+  <NavLink to="/tribes" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.tribes')}</NavLink>
+  <NavLink to="/academy-signIn" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.academy')}</NavLink>
+  <NavLink to="/marketplace" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.marketplace')}</NavLink>
+</div>
+
+
+
 
         <div className="item3">
           <div className='events-icon'>
