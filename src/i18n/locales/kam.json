@@ -714,7 +714,7 @@
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Mwanzilisi",
+          "role": "Mwenyekiti wa Bodi",
           "bio": "Mũthomi wa lugha ya Kisii ũkũtũũra ngano, mĩtũkĩ ya mũromo, na ũmenyo wa kĩkũlũ."
         },
         "joel": {
@@ -724,19 +724,19 @@
         },
          "Edewait": {
           "name": "Edewait Eric",
-          "role": "Teso",
+          "role": "Mũnene wa Maudhui",
           "bio": "Mũthomi wa lugha ya Teso ũkũhũũgagia ciugo, thimo, na mĩtũkĩ ya mũromo."
 
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Kikuyu",
+          "role": "Mwanzilishi Mũendani",
           "bio" : "Mũthomi wa lugha ya Kikuyu ũkũhũũgagia thimo, ngano, na ũtũũnũ wa lugha."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Kalenjin",
+          "role" : "Mũtaalamu wa Lugha",
           "bio" : "Mũthomi wa lugha ya Kalenjin ũkũtũũra mĩtũkĩ, ngano, na urithi wa lugha."
         },
         "collins": {

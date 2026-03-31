@@ -179,18 +179,25 @@ useEffect(() => {
   const principles = t('about.principles.items', { returnObjects: true });
 
   const team = [
+     { 
+      name: t('about.team.members.gloria.name'), 
+      role: t('about.team.members.gloria.role'), 
+      image: '/images/Gloria(1).jpeg',
+      bio: t('about.team.members.gloria.bio'),
+    },
+       { 
+      name: t('about.team.members.lorna.name'), 
+      role: t('about.team.members.lorna.role'), 
+      image: '/images/Joel-Makori.jpeg',
+      bio: t('about.team.members.lorna.bio'),
+    },
     { 
       name: t('about.team.members.steve.name'), 
       role: t('about.team.members.steve.role'), 
       image: '/images/Steve.jpeg',
       bio: t('about.team.members.steve.bio'),
     },
-    { 
-      name: t('about.team.members.gloria.name'), 
-      role: t('about.team.members.gloria.role'), 
-      image: '/images/Gloria(1).jpeg',
-      bio: t('about.team.members.gloria.bio'),
-    },
+   
     { 
       name: t('about.team.members.joel.name'), 
       role: t('about.team.members.joel.role'), 
@@ -209,12 +216,7 @@ useEffect(() => {
       image: '/images/Gloria(1).jpeg',
       bio: t('about.team.members.ian.bio'),
     },
-    { 
-      name: t('about.team.members.lorna.name'), 
-      role: t('about.team.members.lorna.role'), 
-      image: '/images/Joel-Makori.jpeg',
-      bio: t('about.team.members.lorna.bio'),
-    },
+ 
 
     { 
       name: t('about.team.members.collins.name'), 

@@ -710,7 +710,7 @@
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Onaitumoki",
+          "role": "Olaitoriani loo Bodi",
           "bio": "Oloing’oni le Kisii oleng’oni ilomonok, enkop, nabo olomonok leloito le nkishon nabo teknolojia."
         },
         "joel": {
@@ -720,19 +720,19 @@
         },
          "Edewait": {
           "name": "Edewait Eric",
-          "role": "Teso",
+          "role": "Olaitoriani loo Maudhui",
           "bio": "Oloing’oni le Teso oleng’oni ilomonok enchorro, ngano, nabo olomonok leloito."
 
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Kikuyu",
+          "role": "Olaitoriani loo kusung",
           "bio" : "Oloing’oni le Kikuyu oshi ilomonok ngano, thimo, nabo enkiguran olomonok."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Kalenjin",
+          "role" : "Olopeny loo Lugha",
           "bio" : "Oloing’oni le Kalenjin oshi ilomonok olomonok le nkishon, ngano nabo enkiguran."
         },
         "collins": {

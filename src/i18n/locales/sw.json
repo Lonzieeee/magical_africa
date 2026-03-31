@@ -776,7 +776,7 @@
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Mwanzilishi",
+          "role": "Mwenyekiti wa Bodi",
           "bio": "Mtaalamu wa lugha ya Kisii anayehifadhi simulizi za asili, mila za mdomo, na maarifa ya kitamaduni kupitia elimu na teknolojia."
         },
         "joel": {
@@ -786,18 +786,18 @@
         },
          "Edewait": {
           "name": "Edewait Eric",
-          "role": "Teso",
+          "role": "Mkuu wa Maudhui",
           "bio": "Mtaalamu wa lugha ya Teso anayehifadhi msamiati, methali, na mila za mdomo kwa vizazi vijavyo."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Kikuyu",
+          "role": "Mwanzilishi Mwenza",
           "bio" : "Mtaalamu wa lugha ya Kikuyu anayebobea katika methali, ngano, na uhalisia wa lugha."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Kalenjin",
+          "role" : "Mtaalamu wa Lugha",
           "bio" : "Mtaalamu wa lugha ya Kalenjin anayelinda misemo ya kitamaduni, simulizi za jadi, na urithi wa lugha."
         },
         "collins": {
