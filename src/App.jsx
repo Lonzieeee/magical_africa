@@ -24,6 +24,7 @@ import CourseContentPage from './components/CourseContentPage';
 import TeacherDashboard from './components/TeacherDashboard';
 import ProtectedRoute from './components/ProtectedRoute'
 import Music from './pages/Music';
+import AcademyPage from './pages/AcademyPage';
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
           <Route path="/academy-signUp" element={<Academy2 />} />
           <Route path="/academy-signIn" element={<AcademyLogin />} />
           <Route path="/music" element={<Music />} />
+        <Route path="/academy-page"element={<AcademyPage />}
+         />
+
 
           {/* ── Teacher-only routes ── */}
           <Route path="/teacher" element={

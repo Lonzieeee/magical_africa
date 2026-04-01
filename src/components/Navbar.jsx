@@ -209,9 +209,14 @@ const handleLogout = async () => {
     
 <div className="item2">
   <NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.home')}</NavLink>
+  <NavLink to="/academy-page" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.academy')}</NavLink>
   <NavLink to="/about" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.about')}</NavLink>
+
+{/* 
   <NavLink to="/tribes" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.tribes')}</NavLink>
-  <NavLink to="/academy-signIn" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.academy')}</NavLink>
+*/}
+
+
   <NavLink to="/market" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.marketplace')}</NavLink>
 </div>
 
@@ -289,8 +294,20 @@ const handleLogout = async () => {
                 */}
                 
                 <div className="dropdown-option" onClick={handleAcademyNavigation}>
-                  <span>Academy</span>
+                  <span>{t('nav.academy')}</span>
                 </div>
+
+                 <div className="dropdown-option">
+                  <span>{t('nav.settings')}</span>
+                </div>
+
+
+
+
+
+
+
+
                 
                 <div className="dropdown-option logout-option" onClick={handleLogout}>
                   <span>{t('nav.logOut')}</span>

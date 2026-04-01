@@ -78,7 +78,7 @@ const PopularCourses = () => {
         </div>
 
         <div className='pop-bottom-div'>
-          <p className='pop-bottom' onClick={goToAcademy}>
+          <p className='pop-bottom' onClick={()=> handleNavigation('/academy-page')}>
             {t('popularCourses.viewMore')}
             <i className="fa-solid fa-arrow-right"></i>
           </p>

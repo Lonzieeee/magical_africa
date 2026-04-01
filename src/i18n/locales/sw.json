@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Menyu",
     "events": "Matukio",
+    "academy": "Akademia",
+    "settings": "Mipangilio",
     "music": "Nyimbo",
     "language": "Lugha",
     "signIn": "Ingia",
@@ -185,7 +187,7 @@
 "tribes": {
   "title": "Chunguza Makabila Yetu",
   "subtitle": "Safari kupitia makabila mbalimbali ya Afrika na mila za milele",
-  "viewAll": "Tazama Zote",
+  "viewAll": "Tazama Jamii",
   "oromo": {
     "name": "Oromo",
     "description": "Wenye asili ya Ethiopia, watu wa Oromo wanabeba urithi wa kiburi wa mila, umoja, na utambulisho wa kitamaduni. Wao ni kabila kubwa zaidi nchini, wakiunda takriban theluthi moja ya idadi ya watu wenye watu milioni 40."
@@ -679,10 +681,10 @@
       "title": "Mbinu Yetu",
       "description": "Tunachanganya utamaduni, teknolojia, na elimu kuwawezesha jamii na kuhifadhi urithi wa Kiafrika.",
       "items": {
-        "communityOwnership": "Umiliki wa Jamii",
-        "ethicalStewardship": "Usimamizi wa Kimaadili",
-        "sustainableImpact": "Athari Endelevu",
-        "localPanAfrican": "Ya Ndani na ya Ki-Afrika"
+        "communityOwnership": " Jifunze Lugha za Kiafrika",
+        "ethicalStewardship": "Jifunze Utamaduni na Ujuzi wa Kiafrika",
+        "sustainableImpact": "Soko la Vitu vya Kale na Vifaa vya Kiafrika Pekee",
+        "localPanAfrican": "Uhifadhi wa Lugha kwa AI"
       }
     },
     "whatWeDo": {

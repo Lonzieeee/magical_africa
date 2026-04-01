@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Imenyu",
     "events": "Izikhungo",
+    "academy": "Akademi",
+    "settings": "Izilungiselelo",
     "music": "Umculo",
     "language": "Ulimi",
     "signIn": "Ngena",
@@ -187,7 +189,7 @@
 "tribes": {
   "title": "Hlola Izizwe Zethu",
   "subtitle": "Uhambo olungezizwe ezahlukahlukene ze-Afrika namasiko angunaphakade",
-  "viewAll": "Buka Konke",
+  "viewAll": "Buka Imiphakathi",
   "oromo": {
     "name": "Oromo",
     "description": "Abakhe e-Ethiopia, abantu base-Oromo baphethe ifa lokuziqhenya lesiko, ubunye, nobunikazi besiko. Bayisizwe esikhulu kunazo zonke ezweni, benza cishe ingxenye yesithathu yabantu abangu-40 million."
@@ -684,10 +686,10 @@
       "title": "Indlela Yethu",
       "description": "Sihlanganisa amasiko, ubuchwepheshe, nemfundo ukuhlomisa imiphakathi nokulondoloza ifa laseAfrika.",
       "items": {
-        "communityOwnership": "Ubunikazi Bomphakathi",
-        "ethicalStewardship": "Ukuphatha Ngokuziphatha Kahle",
-        "sustainableImpact": "Umthelela Osimeme",
-        "localPanAfrican": "Wendawo ne-Pan-African"
+        "communityOwnership": " Funda Izilimi Zase-Afrika",
+        "ethicalStewardship": "Funda Amasiko Namakhono Ase-Afrika",
+        "sustainableImpact": "Imakethe Yezinto Zakudala Nezinto Zokwakha Zase-Afrika Ezikhethekile",
+        "localPanAfrican": "Ukulondolozwa Kwezilimi Nge-AI"
       }
     },
     "whatWeDo": {

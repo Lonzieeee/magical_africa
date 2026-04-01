@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FaPlay, FaPause } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
@@ -238,6 +239,22 @@ useEffect(() => {
     setTeamSlide((prev) => (prev - 1 + totalTeamSlides) % totalTeamSlides);
   };
 
+
+const heroVideoRef = useRef(null);
+const [isHeroPlaying, setIsHeroPlaying] = useState(true);
+
+const toggleHeroVideo = () => {
+  const video = heroVideoRef.current;
+  if (!video) return;
+  if (video.paused) {
+    video.play();
+    setIsHeroPlaying(true);
+  } else {
+    video.pause();
+    setIsHeroPlaying(false);
+  }
+};
+
   return (
     <>
 
@@ -253,6 +270,8 @@ useEffect(() => {
 </Helmet>
 
 
+
+{/* 
       <div className="heroSection" style={{ backgroundImage: 'url(/images/pyramids2.jpg)' }}>
         <Navbar />
         
@@ -263,6 +282,41 @@ useEffect(() => {
           </p>
         </div>
       </div>
+
+      */}
+
+
+  <div className="heroSection2 heroSection--video">
+  <Navbar />
+
+  {/* Background Video */}
+  <video
+    ref={heroVideoRef}
+    className="hero-video"
+    src="/images/about-video.mp4"   // 👈 replace with your actual video path
+    autoPlay
+    muted
+    loop
+    playsInline
+  />
+
+  {/* Dark overlay */}
+  <div className="hero-overlay" />
+
+  {/* Play/Pause Button */}
+  <button
+    className="hero-play-btn"
+    onClick={toggleHeroVideo}
+    aria-label={isHeroPlaying ? 'Pause video' : 'Play video'}
+  >
+    {isHeroPlaying ? <FaPause /> : <FaPlay />}
+  </button>
+
+  <div className="mission-vision">
+    <h1>{t('about.hero.title')}</h1>
+    <p className='about-tagline'>{t('about.hero.tagline')}</p>
+  </div>
+</div>
 
       {/* Problem Section */}
       <section className="problem-page" ref={problemRef}>

@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Enkitáábùà",
     "events": "Enkiama",
+    "academy": "ol aadet",
+    "settings": "Mipangilio",
     "music": "Mĩhĩrĩga",
     "language": "Enkutuk",
     "signIn": "Nídó",
@@ -186,7 +188,7 @@
 "tribes": {
   "title": "Eidim Iloshon Enatií",
   "subtitle": "Injore tené iloshon naápukunot e Afrika ó inkítùàátìn naápuò",
-  "viewAll": "Eitodolu Pooki",
+  "viewAll": "Tadamu Jamii",
   "oromo": {
     "name": "Oromo",
     "description": "Iltunganak le Oromo kulie Ethiopia, naákúàk enkíshón naatódòl e enkítùàátà, enkíyámà, ó enaitoi. Kéré ilosho apa kumok tené enkóp, naátúrù apa enkitálá e sídáì e iltunganak naátíí milioni 40."
@@ -613,10 +615,10 @@
       "title": "Enkoitoi Enye",
       "description": "Kinyorr enkanyit, teknoloji, nena esomasi neitobiru inkituaak nena kigil enkanyit oo Afrika.",
       "items": {
-        "communityOwnership": "Eiyieta Inkituaak",
-        "ethicalStewardship": "Eilikana Naitobiror",
-        "sustainableImpact": "Enaitoru Naitoru",
-        "localPanAfrican": "Enkop nena Pan-African"
+        "communityOwnership": "Jifunze Lugha za Afrika",
+        "ethicalStewardship": "Jifunze Utamaduni na Ujuzi wa Afrika",
+        "sustainableImpact": "Soko la Vifaa na Vitu vya Afrika vya Pekee",
+        "localPanAfrican": "Uhifadhi wa Lugha kwa AI"
       }
     },
     "whatWeDo": {

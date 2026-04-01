@@ -6,6 +6,77 @@
   letter-spacing: 0.025rem;
 }
 
+/* ── Hero Video Section ── */
+.heroSection2 {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1;
+}
+
+/* Keeps navbar & text above the video 
+.heroSection > nav,
+.heroSection .mission-vision {
+  position: relative;
+  z-index: 5;
+}
+  */
+
+
+/* Play / Pause button */
+.hero-play-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 28px;
+  z-index: 10;
+  background: transparent;
+  border: 2px solid rgba(210, 123, 23, 0.55);
+  color: rgb(210, 123, 53);
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.hero-play-btn:hover {
+  background: transparent;
+  transform: scale(1.08);
+}
+
+/* ── Responsive ── */
+@media screen and (max-width: 768px) {
+  .hero-play-btn {
+    bottom: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  }
+}
+
+
+
+
 .mission-vision{
   position: absolute;
   bottom: 10%;

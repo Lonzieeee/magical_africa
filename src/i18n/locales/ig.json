@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Ndepụta",
     "events": "Emume",
+    "academy": "Akadẹmi",
+    "settings": "Ntọala",
     "music": "Egwu",
     "language": "Asụsụ",
     "signIn": "Banye",
@@ -188,7 +190,7 @@
 "tribes": {
   "title": "Nyochaa Ebo Anyị",
   "subtitle": "Njem site na ebo dị iche iche nke Afrika na omenala ebighị ebi",
-  "viewAll": "Lee Niile",
+  "viewAll": "Lelee Obodo",
   "oromo": {
     "name": "Oromo",
     "description": "Ndị Oromo si Ethiopia, na-eburu ihe nketa mpako nke omenala, ịdị n'otu, na njirimara omenala. Ha bụ otu ndị kachasị ukwuu n'obodo ahụ, na-eme ihe dị ka otu ụzọ n'ụzọ atọ nke ndị mmadụ nwere ihe dị ka nde mmadụ 40."
@@ -686,10 +688,10 @@
       "title": "Usoro Anyị",
       "description": "Anyị na-ejikọ omenala, teknụzụ, na agụmakwụkwọ iji nye ndị obodo ike ma chekwaa ihe nketa Afrịka.",
       "items": {
-        "communityOwnership": "Ịnwe Obodo",
-        "ethicalStewardship": "Nlekọta Omume Ọma",
-        "sustainableImpact": "Mmetụta Na-adịgide",
-        "localPanAfrican": "Mpaghara & Pan-African"
+        "communityOwnership": "Mụta Asụsụ Afrịka",
+        "ethicalStewardship": "Mụta Omenala na Nkà Afrịka",
+        "sustainableImpact": "Ahịa Ngwa Omenala na Ngwaọrụ Afrịka Pụrụ Iche",
+        "localPanAfrican": "Nchekwa Asụsụ Site na AI"
       }
     },
     "whatWeDo": {

@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Menyu",
     "events": "Matukio",
+    "academy": "Akademi",
+    "settings": "Mipangilio",
     "music": "Nyimbo",
     "language": "Lũthĩmo",
     "signIn": "Ĩngĩa",
@@ -186,7 +188,7 @@
 "tribes": {
   "title": "Manya Mĩsyĩ Yĩtũ",
   "subtitle": "Thĩĩna kũtĩĩa mĩsyĩ ya Afilika ĩla ĩkũvathũkana na mĩtũũo ya tene",
-  "viewAll": "Ona Syothe",
+  "viewAll": "Tala Jamii",
   "oromo": {
     "name": "Oromo",
     "description": "Andũ a Oromo kuuma Ethiopia, makũvata ũtaũo wa kũĩyumĩa wa mĩtũũo, ũmwe, na ũmanyĩkĩlĩlyo wa mĩtũũo. Nĩmo mũsyĩ mũnene mũno ũsũ, makũũmba thĩka ĩmwe kũmĩĩna ĩtatũ ya andũ na andũ milioni 40."
@@ -617,10 +619,10 @@
       "title": "Njia Yitu",
       "description": "Twinganasya mila, teknolojia, na masomo kutetheesya mii na kusuvya wumwe wa Afrika.",
       "items": {
-        "communityOwnership": "Mwene wa Mii",
-        "ethicalStewardship": "Kuleka Kwawundu Mwega",
-        "sustainableImpact": "Utetheesyo Usimamae",
-        "localPanAfrican": "Wa Uku na Pan-African"
+        "communityOwnership": "Funda Izilimi Zase-Afrika",
+        "ethicalStewardship": "Lĩngũta Mĩthĩĩko na Wĩa wa Āfrika",
+        "sustainableImpact": "Soko ya Vitu vya Āfrika na Vifaa vya Pekee",
+        "localPanAfrican": "Uhifadhi wa Ndũimi kwa AI"
       }
     },
     "whatWeDo": {

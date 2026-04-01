@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Menyu",
     "events": "Matukio",
+    "academy":"Akademi", 
+    "settings": "Mipangilio",
     "music": "Nyimbo",
     "language": "Rũthiomi",
     "signIn": "Ĩngĩra",
@@ -187,7 +189,7 @@
 "tribes": {
   "title": "Menya Mĩhĩrĩga Yĩtũ",
   "subtitle": "Rũgendo rũthiĩre mĩhĩrĩga ya Abirika ĩrĩa ĩhũũranĩte na mĩtũũrĩre ya tene",
-  "viewAll": "Ona Ciothe",
+  "viewAll": "Tara Jamii",
   "oromo": {
     "name": "Oromo",
     "description": "Andũ a Oromo kuuma Ethiopia, makũũa ũtaũo wa kũĩgĩria wa mĩtũũrĩre, ũmwe, na ũmenyekani wa mĩtũũrĩre. Nĩo mũhĩrĩga mũnene mũno, makĩũmba thĩka ĩmwe kũmĩĩna ĩtatũ ya andũ na andũ milioni 40."
@@ -613,10 +615,10 @@
       "title": "Njĩra Yitũ",
       "description": "Tũnyitanĩtie mĩtugo, tekinolojia, na ũhoti gũtega mĩrĩ na gũtũũra ũthamaki wa Afrika.",
       "items": {
-        "communityOwnership": "Ũnini wa Mĩrĩ",
-        "ethicalStewardship": "Gũteithĩria kwa Wega",
-        "sustainableImpact": "Gũteithĩria Kũgĩa",
-        "localPanAfrican": "Wa Gũkũ na Pan-African"
+        "communityOwnership": "Rũgũta Ndirĩ cia Afrika",
+        "ethicalStewardship": "Lĩngũta Mĩthĩĩko na Wĩa wa Āfrika",
+        "sustainableImpact": "Thoko ya Ithaka na Ibikoresho cia Afrika cia Mũno",
+        "localPanAfrican": "Gũkũrũkĩra Ndirĩ na AI"
       }
     },
     "whatWeDo": {
