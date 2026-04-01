@@ -1160,8 +1160,84 @@
         "description": "Kusuka e-Amapiano kuye e-Afrobeats, izakhiwo zemisindo yase-Afrika zibumba kabusha isiko lamaklabhu emhlabeni wonke kanye nokwenziwa kwe-pop enkulu."
       }
     }
+  },
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Isikole se-Magical.Africa",
+      "titleStart": "Funda. Wakha. Thengisa",
+      "titleAccent": "Amakhono Akho Esiko",
+      "description": "Hlola umlando omuhle wase-Afrika ngezifundo zethu ze-inthanethi.",
+      "getStarted": "Qala Manje",
+      "browseCourses": "Bheka Izifundo"
+    },
+    "features": {
+      "languages": {
+        "title": "Funda Izilimi ZaseAfrika",
+        "subtitle": "Gqoka isiSwahili, isiYoruba, isiZulu nokuningi"
+      },
+      "arts": {
+        "title": "Thola Ubuciko Besiko",
+        "subtitle": "Umculo, Ukusina, Ubuciko nezinto Zomdabu"
+      },
+      "skills": {
+        "title": "Khulisa Amakhono Akho",
+        "subtitle": "Qala Ibhizinisi Lakho Lobukrelekrele"
+      }
+    },
+    "courses": {
+      "heading": "Izifundo Ezivelele",
+      "enrollNow": "Bhalisa Manje",
+      "items": {
+        "swahili": {
+          "title": "IsiSwahili Kubaqalayo",
+          "subtitle": "Qala Ukukhuluma IsiSwahili"
+        },
+        "drumming": {
+          "title": "Ukushaya Izigubhu ZaseAfrika",
+          "subtitle": "Imisindo Nezindlela"
+        },
+        "beadwork": {
+          "title": "Ukuhlobisa Ngamazhe Omdabu",
+          "subtitle": "Yenza Izinhlobonhlobo Ezinhle"
+        },
+        "cooking": {
+          "title": "Ukupheka Ukudla KwaseAfrika",
+          "subtitle": "Amaresiphi Amnandi AseAfrika"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Funda Izilimi ZaseAfrika",
+      "subtitle": "Khuluma njengomuntu wendawo! Gqoka izilimi zase-Afrika.",
+      "startLearning": "Qala Ukufunda Namuhla"
+    },
+    "community": {
+      "heading": "Joyina Umphakathi Wethu Wobukrelekrele",
+      "subtitle": "Xhumana Nabafundisi, Hlangana Nabafundi, Yabelana Ngesiko Lakho",
+      "items": {
+        "liveClasses": {
+          "title": "Izigcawu Ezibukhali nezifundo",
+          "subtitle": "Ukufunda Okushirikene"
+        },
+        "forums": {
+          "title": "Amaforamu Abafundi",
+          "subtitle": "Yabelana Uhlanganyele"
+        },
+        "mentorship": {
+          "title": "Ukuqeqeshwa Nokusekelwa",
+          "subtitle": "Ukuqondiswa Nokukhula"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Qala Uhambo Lwakho Namuhla!",
+      "joinNow": "Joyina Manje"
+    }
   }
-
-
-
 }
+
+
+

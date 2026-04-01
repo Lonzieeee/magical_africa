@@ -1093,7 +1093,83 @@
         "description": "Taa Amapiano nabo Afrobeats, iltung'ana oo Afrika itipilikishu enkiama oo vilabu entim nabo pop."
       }
     }
+  },
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Enkiama e Magical.Africa",
+      "titleStart": "Aiyiolo. Amu. Alak",
+      "titleAccent": "Enkisampu Ino Enkitok",
+      "description": "Iyiolo entorosi e Afrika amu inkishu inko nabo ole internet.",
+      "getStarted": "Amu Nabo",
+      "browseCourses": "Iyiolo Inkishu"
+    },
+    "features": {
+      "languages": {
+        "title": "Aiyiolo Enkiama e Afrika",
+        "subtitle": "Iyiolo Kiswahili, Kiyoruba, Kizulu nabo ingii"
+      },
+      "arts": {
+        "title": "Iyiolo Enkisampu e Entorosi",
+        "subtitle": "Enkiama, Entasim, Enkibolosho nabo Enkisampu"
+      },
+      "skills": {
+        "title": "Kiyiolo Enkisampu Ino",
+        "subtitle": "Amu Enkiama Ino e Enkibolosho"
+      }
+    },
+    "courses": {
+      "heading": "Inkishu Inko Nabo",
+      "enrollNow": "Eandikish Nabo",
+      "items": {
+        "swahili": {
+          "title": "Kiswahili amu Ilonyek",
+          "subtitle": "Amu Aiyiolo Kiswahili"
+        },
+        "drumming": {
+          "title": "Engoma e Afrika",
+          "subtitle": "Enkidong nabo Enkibolosho"
+        },
+        "beadwork": {
+          "title": "Enkibolosho e Entorosi",
+          "subtitle": "Amu Enkidong e Naibor"
+        },
+        "cooking": {
+          "title": "Enkibolosho e Enkiama e Afrika",
+          "subtitle": "Enkidong e Meeta e Afrika"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Aiyiolo Enkiama e Afrika",
+      "subtitle": "Aiyiolo ta oltungani e nabo! Iyiolo enkiama e Afrika.",
+      "startLearning": "Amu Aiyiolo Nabo"
+    },
+    "community": {
+      "heading": "Ingir Enkiama Ghitore e Enkibolosho",
+      "subtitle": "Aiyiolo nabo Ilonyek, Ungana nabo Ilonyek, Encongori Enkisampu Ino",
+      "items": {
+        "liveClasses": {
+          "title": "Madarasa e Nabo nabo Warsha",
+          "subtitle": "Aiyiolo nabo Enkibolosho"
+        },
+        "forums": {
+          "title": "Majukwaa e Ilonyek",
+          "subtitle": "Encongori nabo Enshirikiano"
+        },
+        "mentorship": {
+          "title": "Enkiama nabo Enkiterishoo",
+          "subtitle": "Enkiongoreri nabo Enkibolosho"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Amu Enkidong Ino Nabo!",
+      "joinNow": "Ingir Nabo"
+    }
   }
-
-
 }
+
+

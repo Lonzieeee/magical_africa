@@ -1154,7 +1154,83 @@
         "description": "Kutoka Amapiano hadi Afrobeats, miundo ya midundo ya Afrika inabadilisha utamaduni wa vilabu duniani na uzalishaji wa pop kuu."
       }
     }
+  },
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Chuo cha Magical.Africa",
+      "titleStart": "Jifunza. Jenga. Uza",
+      "titleAccent": "Ujuzi Wako wa Kitamaduni",
+      "description": "Gundua urithi tajiri wa Afrika kupitia kozi zetu za mtandaoni.",
+      "getStarted": "Anza Sasa",
+      "browseCourses": "Tazama Kozi"
+    },
+    "features": {
+      "languages": {
+        "title": "Jifunza Lugha za Kiafrika",
+        "subtitle": "Jifunza Kiswahili, Kiyoruba, Kizulu na zaidi"
+      },
+      "arts": {
+        "title": "Gundua Sanaa za Kitamaduni",
+        "subtitle": "Muziki, Ngoma, Ufundi na Mila"
+      },
+      "skills": {
+        "title": "Kua Ujuzi Wako",
+        "subtitle": "Anzisha Biashara Yako ya Ubunifu"
+      }
+    },
+    "courses": {
+      "heading": "Kozi Maarufu",
+      "enrollNow": "Jiandikishe Sasa",
+      "items": {
+        "swahili": {
+          "title": "Kiswahili kwa Wanaoanza",
+          "subtitle": "Anza Kuzungumza Kiswahili"
+        },
+        "drumming": {
+          "title": "Ngoma za Kiafrika",
+          "subtitle": "Midundo na Mbinu"
+        },
+        "beadwork": {
+          "title": "Ushonaji wa Mapambo ya Jadi",
+          "subtitle": "Tengeneza Mapambo ya Kupendeza"
+        },
+        "cooking": {
+          "title": "Kupika Vyakula vya Kiafrika",
+          "subtitle": "Mapishi Mazuri ya Kiafrika"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Jifunza Lugha za Kiafrika",
+      "subtitle": "Zungumza kama mzawa! Jifunza lugha za Afrika.",
+      "startLearning": "Anza Kujifunza Leo"
+    },
+    "community": {
+      "heading": "Jiunge na Jamii Yetu ya Ubunifu",
+      "subtitle": "Wasiliana na Wakufunzi, Ungana na Wanafunzi, Shiriki Urithi Wako",
+      "items": {
+        "liveClasses": {
+          "title": "Madarasa ya Moja kwa Moja na Warsha",
+          "subtitle": "Kujifunza kwa Kushirikiana"
+        },
+        "forums": {
+          "title": "Majukwaa ya Wanafunzi",
+          "subtitle": "Shiriki na Ushirikiane"
+        },
+        "mentorship": {
+          "title": "Ushauri na Msaada",
+          "subtitle": "Mwongozo na Maendeleo"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Anza Safari Yako Leo!",
+      "joinNow": "Jiunge Sasa"
+    }
   }
-
-
 }
+
+

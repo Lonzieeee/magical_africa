@@ -1079,8 +1079,85 @@
         "description": "Kuuma Amapiano nginya Afrobeats, mĩhango ya midundo ya Aafrika ĩhindĩaga ũndũ wa vilabu dunia na utengenezaji wa pop."
       }
     }
+  },
+
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Chuo kia Magical.Africa",
+      "titleStart": "Ĩgua. Ĩaka. Gũrĩa",
+      "titleAccent": "Ũhoti Waku wa Mĩgambo",
+      "description": "Hũhũria ũtukũ wa Afrika na masomo maitũ ya intaneti.",
+      "getStarted": "Andĩka Sasa",
+      "browseCourses": "Ongerera Masomo"
+    },
+    "features": {
+      "languages": {
+        "title": "Ĩgua Thĩinĩ wa Gĩthomo kĩa Afrika",
+        "subtitle": "Ĩgua Kiswahili, Kiyoruba, Kizulu na ingĩ"
+      },
+      "arts": {
+        "title": "Hũhũria Ũtũũru wa Mĩgambo",
+        "subtitle": "Mũhĩmĩ, Mĩkara, Ũwĩkĩo na Mĩgambo"
+      },
+      "skills": {
+        "title": "Kũkũra Ũhoti Waku",
+        "subtitle": "Andĩkĩria Kĩama Giaku kĩa Ũbunifu"
+      }
+    },
+    "courses": {
+      "heading": "Masomo Mahĩu",
+      "enrollNow": "Ĩandĩkĩria Sasa",
+      "items": {
+        "swahili": {
+          "title": "Kiswahili kwa Andĩka",
+          "subtitle": "Andĩkĩria Gũthĩmĩra Kiswahili"
+        },
+        "drumming": {
+          "title": "Ngoma cia Afrika",
+          "subtitle": "Mĩdũndo na Njĩra"
+        },
+        "beadwork": {
+          "title": "Ũshonaji wa Mapambo ya Mĩgambo",
+          "subtitle": "Ĩka Mapambo Maarufu"
+        },
+        "cooking": {
+          "title": "Gũtũa Irio cia Afrika",
+          "subtitle": "Mapishi Maarufu ya Afrika"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Ĩgua Thĩinĩ wa Gĩthomo kĩa Afrika",
+      "subtitle": "Thĩmĩra ta mũndũ wa haha! Ĩgua thĩinĩ wa gĩthomo kĩa Afrika.",
+      "startLearning": "Andĩkĩria Gũĩgua Ũmũthĩ"
+    },
+    "community": {
+      "heading": "Ingĩra Kĩama Giitũ kĩa Ũbunifu",
+      "subtitle": "Wasiliana na Arutani, Ungana na Arutwo, Congora Mĩgambo Yaku",
+      "items": {
+        "liveClasses": {
+          "title": "Madarasa ya Ũhũ na Warsha",
+          "subtitle": "Gũĩgua na Ũshirikiano"
+        },
+        "forums": {
+          "title": "Majukwaa ya Arutwo",
+          "subtitle": "Congora na Ũshirikiane"
+        },
+        "mentorship": {
+          "title": "Ũrĩithio na Ũteithio",
+          "subtitle": "Ũongoreri na Gũkũra"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Andĩkĩria Njĩra Yaku Ũmũthĩ!",
+      "joinNow": "Ingĩra Sasa"
+    }
   }
-
-
-
 }
+
+
+

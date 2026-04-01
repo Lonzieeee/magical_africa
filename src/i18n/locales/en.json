@@ -1154,9 +1154,87 @@
         "description": "From Amapiano to Afrobeats, African rhythm structures are reshaping global club culture and mainstream pop production."
       }
     }
-  }
+  },
 
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Magical.Africa Academy",
+      "titleStart": "Learn. Build. Market",
+      "titleAccent": "Your Cultural Skills",
+      "description": "Explore the rich heritage of Africa through our online courses.",
+      "getStarted": "Get Started",
+      "browseCourses": "Browse Courses"
+    },
+    "features": {
+      "languages": {
+        "title": "Learn African Languages",
+        "subtitle": "Master Swahili, Yoruba, Zulu & more"
+      },
+      "arts": {
+        "title": "Discover Cultural Arts",
+        "subtitle": "Music, Dance, Crafts & Traditions"
+      },
+      "skills": {
+        "title": "Grow Your Skills",
+        "subtitle": "Launch Your Creative Business"
+      }
+    },
+    "courses": {
+      "heading": "Featured Courses",
+      "enrollNow": "Enroll Now",
+      "items": {
+        "swahili": {
+          "title": "Swahili for Beginners",
+          "subtitle": "Start Speaking Swahili"
+        },
+        "drumming": {
+          "title": "African Drumming",
+          "subtitle": "Rhythms & Technique"
+        },
+        "beadwork": {
+          "title": "Traditional Beadwork",
+          "subtitle": "Create Stunning Accessories"
+        },
+        "cooking": {
+          "title": "African Cooking",
+          "subtitle": "Delicious African Recipes"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Learn African Languages",
+      "subtitle": "Speak like a local! Master the languages of Africa.",
+      "startLearning": "Start Learning Today"
+    },
+    "community": {
+      "heading": "Join Our Creative Community",
+      "subtitle": "Connect with Instructors, Network with Learners, Share Your Heritage",
+      "items": {
+        "liveClasses": {
+          "title": "Live Classes & Workshops",
+          "subtitle": "Interactive Learning"
+        },
+        "forums": {
+          "title": "Student Forums",
+          "subtitle": "Share & Collaborate"
+        },
+        "mentorship": {
+          "title": "Mentorship & Support",
+          "subtitle": "Guidance & Growth"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Start Your Journey Today!",
+      "joinNow": "Join Now"
+    }
+  }
 }
+
+
 
 
 

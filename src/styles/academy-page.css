@@ -8,12 +8,6 @@
 
 
 
-/* ═══════════════════════════════════════
-   MAGICAL AFRICA — ACADEMY PAGE
-   Palette: deep brown #3b1f0e, burnt orange rgb(210,123,58),
-            warm beige rgb(242,239,235), sand rgb(181,161,145)
-   Font: Poppins (inherits from global *)
-════════════════════════════════════════ */
 
 :root {
   --acad-brown: #3b1f0e;
@@ -449,8 +443,8 @@
   font-size: 0.85rem;
   font-family: 'Poppins', sans-serif;
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: translateY(0);
   transition: opacity 0.4s ease, transform 0.4s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
@@ -469,6 +463,9 @@
 .lang-chip-active {
   background: var(--acad-orange) !important;
   border-color: var(--acad-orange) !important;
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+
 }
 
 .lang-cta {
@@ -577,7 +574,12 @@
 ════════════════════════════════ */
 @media screen and (max-width: 1024px) {
   .courses-grid {
-    grid-template-columns: repeat(2, 1fr);
+/*
+  grid-template-columns: repeat(2, 1fr);
+*/
+  grid-template-columns: repeat(2, minmax(0, 320px));  
+  align-items: center;
+  justify-content: center;
   }
   .academy-courses-section {
     padding: 4rem 3rem;
@@ -603,11 +605,15 @@
   .academy-feature {
     justify-content: flex-start;
     width: 100%;
-    max-width: 320px;
+    max-width: 400px;
+    flex: none;
   }
 
   .courses-grid {
+    /*
     grid-template-columns: repeat(2, 1fr);
+    */
+    grid-template-columns: repeat(2, minmax(0, 320px));  
     gap: 1rem;
   }
 

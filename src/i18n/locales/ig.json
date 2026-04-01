@@ -1163,10 +1163,87 @@
         "description": "Site na Amapiano ruo Afrobeats, usoro ụda Afrika na-agbanwe omenala klọb ụwa na mmepụta pop buru ibu."
       }
     }
+  },
+
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Akwukwo nke Magical.Africa",
+      "titleStart": "Muta. Wuo. Ree",
+      "titleAccent": "Nka Gị nke Omenala",
+      "description": "Chọpụta ihe ọmụmụ dị ukwuu nke Africa site n'ihe ọmụmụ anyị n'ịntanetị.",
+      "getStarted": "Bido Ugbu a",
+      "browseCourses": "Lelee Ihe Ọmụmụ"
+    },
+    "features": {
+      "languages": {
+        "title": "Muta Asụsụ Africa",
+        "subtitle": "Muta Swahili, Yoruba, Zulu na ndị ọzọ"
+      },
+      "arts": {
+        "title": "Chọpụta Nka nke Omenala",
+        "subtitle": "Egwu, Egwuregwu, Ọrụ Aka na Omenala"
+      },
+      "skills": {
+        "title": "Kpalie Nka Gị",
+        "subtitle": "Malite Azụmaahịa Gị nke Ọrụ Aka"
+      }
+    },
+    "courses": {
+      "heading": "Ihe Ọmụmụ Pụtara Ìhè",
+      "enrollNow": "Debanye Aha Ugbu a",
+      "items": {
+        "swahili": {
+          "title": "Swahili maka Ndị Ọhụrụ",
+          "subtitle": "Bido Ikwu Swahili"
+        },
+        "drumming": {
+          "title": "Ikwa Igba Africa",
+          "subtitle": "Ụda na Usoro"
+        },
+        "beadwork": {
+          "title": "Ọrụ Aka Omenala",
+          "subtitle": "Mee Ihe Ịchọ Mma Dị Mma"
+        },
+        "cooking": {
+          "title": "Isi Nri Africa",
+          "subtitle": "Usoro Nri Dị Ụtọ nke Africa"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Muta Asụsụ Africa",
+      "subtitle": "Kwuo okwu dịka onye obodo! Muta asụsụ Africa.",
+      "startLearning": "Bido Ịmụta Taa"
+    },
+    "community": {
+      "heading": "Sonye n'Ọgbakọ Anyị nke Ọrụ Aka",
+      "subtitle": "Kpọtụrụ Ndị Nkuzi, Jikọọ na Ndị Ọmụmụ, Kekọrịta Omenala Gị",
+      "items": {
+        "liveClasses": {
+          "title": "Klaasị Dị Ndụ na Ọrụ Aka",
+          "subtitle": "Ọmụmụ nke Mmekọrịta"
+        },
+        "forums": {
+          "title": "Ebe Ndị Ọmụmụ",
+          "subtitle": "Kekọrịta ma Mekọọ"
+        },
+        "mentorship": {
+          "title": "Nduzi na Nkwado",
+          "subtitle": "Ọkọlọtọ na Uto"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Bido Njem Gị Taa!",
+      "joinNow": "Sonye Ugbu a"
+    }
   }
-
-
-
-
-
 }
+
+
+
+
+

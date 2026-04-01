@@ -1092,9 +1092,85 @@
         "description": "Kuuma Amapiano nginya Afrobeats, mĩhango ya midundo ya Aafrika ĩhindĩie ũndũ wa vilabu dunia na utengenezaji wa pop."
       }
     }
+  },
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Isikulu ya Magical.Africa",
+      "titleStart": "Ũndĩia. Ĩaka. Ũsyĩ",
+      "titleAccent": "Mĩĩlĩ Yaku ya Mĩtĩlĩlo",
+      "description": "Tũmia ũseo wa Afrika kũndĩia na masomo maitũ ya intaneti.",
+      "getStarted": "Anza Sasa",
+      "browseCourses": "Tala Masomo"
+    },
+    "features": {
+      "languages": {
+        "title": "Ũndĩia Mĩthĩ ya Afrika",
+        "subtitle": "Ũndĩia Kiswahili, Kiyoruba, Kizulu na ingi"
+      },
+      "arts": {
+        "title": "Kũmanya Ũtĩa wa Mĩtĩlĩlo",
+        "subtitle": "Mũthĩa, Mĩvĩlĩlo, Ũwĩkĩo na Mĩtĩlĩlo"
+      },
+      "skills": {
+        "title": "Kũkũa Mĩĩlĩ Yaku",
+        "subtitle": "Anza Biashara Yaku ya Ũbunifu"
+      }
+    },
+    "courses": {
+      "heading": "Masomo Maarufu",
+      "enrollNow": "Ĩandĩkĩsya Nĩsasa",
+      "items": {
+        "swahili": {
+          "title": "Kiswahili kwa Anaoanza",
+          "subtitle": "Anza Kũsemea Kiswahili"
+        },
+        "drumming": {
+          "title": "Ngoma sya Afrika",
+          "subtitle": "Mĩdũndo na Mbinu"
+        },
+        "beadwork": {
+          "title": "Ũshonaji wa Mapambo ya Mĩtĩlĩlo",
+          "subtitle": "Ĩka Mapambo Mazũ"
+        },
+        "cooking": {
+          "title": "Kupika Vyakula vya Afrika",
+          "subtitle": "Mapishi Mazũ ya Afrika"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Ũndĩia Mĩthĩ ya Afrika",
+      "subtitle": "Sema ta mwanake wa hapa! Ũndĩia mĩthĩ ya Afrika.",
+      "startLearning": "Anza Kũndĩia Ũmũnthĩ"
+    },
+    "community": {
+      "heading": "Ĩngĩa kwa Ũkundi Wetu wa Ũbunifu",
+      "subtitle": "Wasiliana na Akũndĩĩsya, Ungana na Anandĩa, Ĩtĩkĩa Mĩtĩlĩlo Yaku",
+      "items": {
+        "liveClasses": {
+          "title": "Madarasa ya Ũhũ na Warsha",
+          "subtitle": "Kũndĩia kwa Ũshĩrĩkĩano"
+        },
+        "forums": {
+          "title": "Majukwaa ya Anandĩa",
+          "subtitle": "Ĩtĩkĩa na Ũshĩrĩkĩane"
+        },
+        "mentorship": {
+          "title": "Ũshauri na Msaada",
+          "subtitle": "Mwongozo na Mũkũa"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Anza Nzĩa Yaku Ũmũnthĩ!",
+      "joinNow": "Ĩngĩa Sasa"
+    }
   }
-
-
-
-
 }
+
+
+
+
