@@ -768,7 +768,7 @@
       "description": "Tunashirikiana kote Afrika na"
     },
     "team": {
-      "title": "Kutana na Timu",
+      "title": "Wajumbe Wetu Muhimu wa Timu",
       "description": "Akili zenye shauku nyuma ya Magical Africa",
       "members": {
         "gloria": {
@@ -794,7 +794,7 @@
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Mwanzilishi Mwenza",
+          "role": "Mhandisi wa Uzoefu wa Mtumiaji",
           "bio" : "Mtaalamu wa lugha ya Kikuyu anayebobea katika methali, ngano, na uhalisia wa lugha."
         },
         "ian": {
@@ -804,7 +804,7 @@
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Mhandisi wa Kujifunza Mashine",
           "bio": "Mtaalamu wa lugha ya Luo anayesaidia uhifadhi wa lugha, hadithi, na utambulisho wa kitamaduni."
         }
       }

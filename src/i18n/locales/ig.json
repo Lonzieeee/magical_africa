@@ -775,7 +775,7 @@
       "description": "Anyị na-arụkọ ọrụ n'ofe Afrịka na"
     },
     "team": {
-      "title": "Zute Ndị Otu",
+      "title": "Ndị Isi Otu Anyị",
       "description": "Uche nwere mmasị n'azụ Magical Africa",
       "members": {
         "gloria": {
@@ -801,17 +801,17 @@
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Onye guzobere ya na ibe ya",
+          "role": "Injinia Ahụmịhe Onye Ọrụ",
           "bio" : "Ọkachamara n’asụsụ Kikuyu nke na-elekwasị anya n’ilu, akụkọ ifo, na ezi asụsụ."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Ọkachamara n’asụsụ",
+          "role" : "Injinia Nhazi Asụsụ Mmadụ (NLP)",
           "bio" : "Ọkachamara n’asụsụ Kalenjin na-elekwasị anya n’ichekwaa asụsụ, akụkọ ọdịnala, na njirimara omenala."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Injinia Mmụta Igwe",
           "bio": "Ọkachamara n’asụsụ Luo na-akwado idekọ asụsụ, akụkọ, na njirimara omenala."
         }
         

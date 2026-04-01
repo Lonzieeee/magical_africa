@@ -706,7 +706,7 @@
       "description": "Twendea wia muthini wa Afrika na"
     },
     "team": {
-      "title": "Manya Kikundi",
+      "title": "Andũ a Mũno a Timu Yetu",
       "description": "Miiyo ya moyo nyuma ya Magical Africa",
       "members": {
         "gloria": {
@@ -733,17 +733,17 @@
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Mwanzilishi Mũendani",
+          "role": "Mhandisi wa Uzoefu wa Mtumiaji",
           "bio" : "Mũthomi wa lugha ya Kikuyu ũkũhũũgagia thimo, ngano, na ũtũũnũ wa lugha."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Mũtaalamu wa Lugha",
+          "role" : "Mhandisi wa Usindikaji wa Ndũimi (NLP)",
           "bio" : "Mũthomi wa lugha ya Kalenjin ũkũtũũra mĩtũkĩ, ngano, na urithi wa lugha."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Mhandisi wa Kujifunza Mashine",
           "bio": "Mũthomi wa lugha ya Luo ũkũteithia kũandĩka lugha, ngano, na ũtũũnũ wa andũ."
         }
       }

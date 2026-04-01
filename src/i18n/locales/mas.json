@@ -702,7 +702,7 @@
       "description": "Kinyorr te nkop oo Afrika na"
     },
     "team": {
-      "title": "Inyie Iltunganak",
+      "title": "Wanachama Muhimu wa Timu Yetu",
       "description": "Ilkuak naishoo te nyuma oo Magical Africa",
       "members": {
         "gloria": {
@@ -729,17 +729,17 @@
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Olaitoriani loo kusung",
+          "role": "Mhandisi wa Uzoefu wa Mtumiaji",
           "bio" : "Oloing’oni le Kikuyu oshi ilomonok ngano, thimo, nabo enkiguran olomonok."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Olopeny loo Lugha",
+          "role" : "Mhandisi wa Usindikaji wa Lugha (NLP)",
           "bio" : "Oloing’oni le Kalenjin oshi ilomonok olomonok le nkishon, ngano nabo enkiguran."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Mhandisi wa Kujifunza Mashine",
           "bio": "Oloing’oni le Luo oleng’oni ilomonok ngano, enkiguran, nabo olomonok le nkishon."
         }
         

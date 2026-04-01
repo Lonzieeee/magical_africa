@@ -765,7 +765,7 @@
       "description": "We collaborate across Africa with"
     },
     "team": {
-      "title": "The Development Team",
+      "title": "Our key Team Members",
       "description": "Preserving Culture, Language, and Identity Across Generations",
       "members": {
         "gloria": {
@@ -792,17 +792,17 @@
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Co-Founder",
+          "role": "User Experience Engineer",
           "bio" : "Supports cultural storytelling, engages youth in heritage initiatives, and helps preserve and share community traditions across Magical Africa."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Language Expert",
+          "role" : "NLP Engineer",
           "bio" : "Translates content across local languages, ensures community voices are accurately represented, and helps preserve culture through clear and inclusive communication."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Language Bridge Coordinator",
+          "role": "Machine Learning Engineer",
           "bio": "Connects communities across languages, coordinates translations, and ensures cultural meaning is preserved so all voices are understood and included on Magical Africa."
         }
         

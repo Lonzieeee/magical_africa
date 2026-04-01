@@ -773,7 +773,7 @@
       "description": "Sibambisana e-Afrika yonke ne"
     },
     "team": {
-      "title": "Hlangana Nethimba",
+      "title": "Amalungu Ethimba Lethu Abalulekile",
       "description": "Izingqondo ezinentshisekelo ngemuva kwe-Magical Africa",
       "members": {
         "gloria": {
@@ -799,17 +799,17 @@
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Umsunguli Obambisene",
+          "role": "Unjiniyela Wesipiliyoni Somsebenzisi",
           "bio" : "Uchwepheshe wolimi lwesiKikuyu ogxile ezagweni, izinganekwane, nasekuqiniseni ubuqiniso bolimi."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Uchwepheshe Wezilimi",
+          "role" : "Unjiniyela Wokucubungula Ulimi Lwemvelo (NLP)",
           "bio" : "Uchwepheshe wolimi lwesiKalenjin ogxile ekuvikeleni izisho, izinganekwane, namagugu olimi."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Mhandisi wa Kujifunza Mashine",
           "bio": "Uchwepheshe wolimi lwesiLuo ogxile ekubhaleni ulimi, izindaba, nobuwena besintu."
         }
       }

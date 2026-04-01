@@ -702,7 +702,7 @@
       "description": "Tũrũtagĩra wĩra bũrũri wa Afrika na"
     },
     "team": {
-      "title": "Menyera Kĩama",
+      "title": "Andũ a Mũno a Timu Yetu",
       "description": "Mĩĩrio ya ngoro inyuma ya Magical Africa",
       "members": {
         "gloria": {
@@ -729,17 +729,17 @@
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Mũrũtani wa wanzilishi",
+          "role": "Mhandisi wa Uzoefu wa Mtumiaji",
           "bio" : "Mũthomi wa rũrĩmĩ rwa Gĩkũyũ ũrĩa wĩhũũgagia thimo, ngano, na ũrĩa rũrĩmĩ rũrĩ."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Mũtaalamu wa Rũgano",
+          "role" : "Mhandisi wa Gũthondeka Ndirĩ cia Andũ (NLP)",
           "bio" : "Mũthomi wa rũrĩmĩ rwa Kalenjin wĩra wake nĩ gũtũũra mĩhĩrĩga na ngano cia kĩrĩra."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Mhandisi wa Kujifunza Mashine",
           "bio": "Mũthomi wa rũrĩmĩ rwa Luo ũkũteithia gũtũũra rũrĩmĩ, ngano, na ũndũ wa kĩrĩra."
         }
       }
