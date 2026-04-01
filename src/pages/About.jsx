@@ -344,7 +344,10 @@ const toggleHeroVideo = () => {
         <div className="impact-boxes" ref={impactRef}>
           {approaches.map((item, index) => (
             <div className="impact-div" key={index}>
+              <span className='impact-icon-span
+              '>
               <i className={`fa-solid ${item.icon} impact-icon`}></i>
+              </span>
               <p>{item.label}</p>
             </div>
           ))}

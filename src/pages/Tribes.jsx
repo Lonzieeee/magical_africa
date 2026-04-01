@@ -74,9 +74,9 @@ const Tribes = () => {
 
       <div className="heroSection2">
 
-        <video
+    <video
     autoPlay
-    muted
+    
     loop
     playsInline
     className="hero-video"
