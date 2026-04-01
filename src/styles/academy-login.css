@@ -150,6 +150,7 @@
 .signIn-register a {
   color: rgb(181, 161, 145);
   text-decoration: none;
+  cursor: pointer;
 }
 
 .signIn-register a:hover {

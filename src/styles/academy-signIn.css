@@ -264,6 +264,7 @@ background-color: transparent;
 
 .academy-already a{
   color: rgb(181, 161, 145);
+  cursor: pointer;
 }
 
 .academy-already a:hover{

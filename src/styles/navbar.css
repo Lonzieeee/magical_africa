@@ -147,6 +147,7 @@ align-items: center;
   flex-direction: row;
   gap: 10px;
   align-items: center;
+  cursor: pointer;
 }
 
 #contact-us i{
@@ -158,6 +159,10 @@ align-items: center;
   flex-direction: row;
   gap: 20px;
   align-items: center;
+}
+
+#events{
+  cursor: pointer;
 }
 
 
@@ -682,6 +687,7 @@ color: rgb(181, 161, 145);
   align-items: center;
   justify-content: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 #music i{
