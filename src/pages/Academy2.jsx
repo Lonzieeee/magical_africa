@@ -248,11 +248,11 @@ const Academy2 = () => {
                   : 'Create Teacher Account'
               }
             </button>
-            
+
           </div>
 
           <div className='academy-or'>
-            <hr /><p>Or</p><hr />
+          <hr /><p>Or</p><hr />
           </div>
 
           <div className='academy-already'>

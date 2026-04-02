@@ -251,6 +251,7 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   margin-top: 1rem;
+  
 }
 
 .course-card {
@@ -569,9 +570,17 @@
   padding: 3rem 2rem;
 }
 
-/* ═══════════════════════════════
-   RESPONSIVE
-════════════════════════════════ */
+
+
+@media screen and (max-width: 1440px) {
+  .courses-grid {
+    grid-template-columns: repeat(auto-fill, 295px);
+    justify-content: center;
+    column-gap:6rem;
+  }
+}
+
+
 @media screen and (max-width: 1024px) {
   .courses-grid {
 /*

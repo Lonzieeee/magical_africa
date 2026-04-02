@@ -161,6 +161,9 @@ const handleLogout = async () => {
             <span>{t('nav.menu')}</span>
           </button>
 
+
+
+{/* 
           <div 
             className="lang-wrapper"
             onMouseEnter={() => setIsLangDropdownOpen(true)}
@@ -187,26 +190,15 @@ const handleLogout = async () => {
               ))}
             </div>
           </div>
+*/}
+
+
+
+
         </div>
 
 
-        {/* 
-
-        <div className="item2">
-         
-         <a href="" onClick={()=> navigate('/')}>Home</a>
-         <a href="" onClick={()=> navigate('/about')}>About</a>
-         <a href="" onClick={()=> navigate('/tribes')}>Tribes</a>
-        <a href="" onClick={()=> navigate('/academy-signIn')}>Academy</a>
-         <a href="" onClick={()=> {goToAcademy}}>Marketplace</a>
-     
-        
-        </div>
-
-        */}
-
-
-    
+      
 <div className="item2">
   <NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.home')}</NavLink>
   <NavLink to="/academy-page" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.academy')}</NavLink>
@@ -218,6 +210,11 @@ const handleLogout = async () => {
 
 
   <NavLink to="/market" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.marketplace')}</NavLink>
+  
+  <NavLink to="/blogs" className={({ isActive }) => isActive ? 'active-link' : ''}>
+    Blogs
+  </NavLink>
+
 </div>
 
 
@@ -225,8 +222,9 @@ const handleLogout = async () => {
 
         <div className="item3">
           <div className='events-icon'>
+             {/* 
             <div className="icon-with-tooltip">
-               {/* 
+              
               <a href="academy2" id='academy'>
                 
                 <i className="fa-solid fa-school"></i>
@@ -236,8 +234,11 @@ const handleLogout = async () => {
              
               <span className="icon-tooltip">Academy</span>
 
-              */}
+             
             </div>
+             */}
+
+            {/* 
 
             <div className="icon-with-tooltip">
               <a id='events' onClick={()=> navigate('/events')}>
@@ -245,10 +246,9 @@ const handleLogout = async () => {
                 <i className="fa-solid fa-masks-theater"></i>
                {t('nav.events')}
               </a>
-              {/*
-              <span className="icon-tooltip">Events</span>
-               */}
+             
             </div>
+
 
             <div className="icon-with-tooltip">
               <a  id='music' onClick={()=> navigate('/music')}>
@@ -257,10 +257,41 @@ const handleLogout = async () => {
                 {t('nav.music')}
                
               </a>
-              {/* 
-              <span className="icon-tooltip">Music</span>
-              */}
+             
             </div>
+
+            */}
+
+
+             <div 
+            className="lang-wrapper"
+            onMouseEnter={() => setIsLangDropdownOpen(true)}
+            onMouseLeave={() => setIsLangDropdownOpen(false)}
+          >
+            <button className="lang-btn">
+              <i className="fa-solid fa-globe"  style={{ color: "rgb(181, 161, 145)" }}></i>
+              <span>{currentLanguage.name}</span>
+              <i className="fa-solid fa-chevron-down lang-arrow"></i>
+            </button>
+
+            <div className={`lang-dropdown ${isLangDropdownOpen ? 'active' : ''}`}>
+              {languages.map((lang) => (
+                <button
+                  key={lang.code}
+                  className={`lang-option ${i18n.language === lang.code ? 'selected' : ''}`}
+                  onClick={() => handleLanguageChange(lang.code)}
+                >
+                  {lang.name}
+                  {i18n.language === lang.code && (
+                    <i className="fa-solid fa-check"></i>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+
+
           </div>
 
           {!user ? (
