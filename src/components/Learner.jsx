@@ -427,7 +427,7 @@ const Learner = () => {
     return () => document.removeEventListener('mousedown', handleOutsideClick)
   }, [])
 
-  const categories = ['Language', 'Culture', 'History', 'Artisan', 'Pottery', 'Woodwork']
+  const categories = ['Language', 'Culture', 'History', 'Artisan', 'Pottery', 'Woodwork', 'Cooking']
 
   const allCourses = useMemo(() => {
     const map = new Map()
