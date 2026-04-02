@@ -70,6 +70,196 @@
   color: #145a34;
 }
 
+.cc-course-insight-shell {
+  width: 100%;
+  margin: 2.2rem auto 0;
+  padding: 0 clamp(1rem, 4vw, 3rem);
+  display: grid;
+  gap: 16px;
+}
+
+.cc-spacious-section {
+  margin-top: 2rem;
+}
+
+.cc-insight-layout {
+  display: block;
+}
+
+.cc-insight-main,
+.cc-insight-side {
+  display: grid;
+  gap: 14px;
+}
+
+.cc-insight-side {
+  position: static;
+  top: auto;
+}
+
+.cc-outcomes-block {
+  border: 1px solid #d8e1d8;
+  background: #ffffff;
+  box-shadow: var(--cc-panel-shadow);
+  padding: 20px;
+  margin-bottom: 0;
+}
+
+.cc-about-copy {
+  font-size: 0.88rem;
+  color: #475a4d;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.cc-outcomes-block h2 {
+  font-size: 0.98rem;
+  color: #1f6f43;
+  margin-bottom: 8px;
+}
+
+.cc-outcomes-block ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 6px;
+}
+
+.cc-outcomes-grid-list {
+  list-style: none;
+  padding-left: 0;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.cc-outcomes-grid-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  border: 1px solid #e1e8e2;
+  background: linear-gradient(180deg, #ffffff 0%, #f9fcf8 100%);
+  padding: 12px;
+  min-height: 84px;
+}
+
+.cc-outcomes-grid-list li svg {
+  margin-top: 1px;
+  color: #1f6f43;
+  flex-shrink: 0;
+  font-size: 0.9rem;
+}
+
+.cc-outcomes-block li {
+  font-size: 0.82rem;
+  color: #3f5446;
+  line-height: 1.5;
+}
+
+.cc-outcomes-note {
+  margin-top: 10px;
+  font-size: 0.78rem;
+  color: #667065;
+}
+
+.cc-chip-wrap {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cc-chip-wrap-skills {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cc-insight-chip {
+  border: 1px solid #d4dbe5;
+  background-color: #e8edf5;
+  color: #24313b;
+  font-size: 0.84rem;
+  padding: 8px 11px;
+  border-radius: 999px;
+  line-height: 1.2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.cc-skills-block .cc-insight-chip {
+  width: 100%;
+  border-radius: 14px;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+.cc-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.cc-insight-horizontal {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cc-detail-card {
+  border: 1px solid #dde3dc;
+  background: #fdfefd;
+  padding: 12px;
+  display: grid;
+  align-content: start;
+  gap: 6px;
+  min-height: 152px;
+}
+
+.cc-detail-icon {
+  font-size: 1.1rem;
+  color: #1f6f43;
+}
+
+.cc-detail-card h4 {
+  font-size: 0.9rem;
+  color: #212f27;
+}
+
+.cc-detail-card p {
+  font-size: 0.8rem;
+  color: #607064;
+}
+
+.cc-certificate-download-btn {
+  border: 1px solid #1f6f43;
+  background-color: #1f6f43;
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 8px 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.cc-certificate-download-btn:hover {
+  background-color: #145a34;
+  border-color: #145a34;
+}
+
+.cc-certificate-download-btn.is-disabled,
+.cc-certificate-download-btn:disabled {
+  border-color: #b9c6b9;
+  background-color: #e8eee8;
+  color: #6f7d70;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .cc-page-nav {
   width: 100%;
   display: grid;
@@ -380,8 +570,8 @@
 /* ══ INCLUDES ══ */
 .cc-includes-section {
   width: 100%;
-  padding: 2rem clamp(1rem, 4vw, 3rem);
-  margin-top: 0.8rem;
+  padding: 2.3rem clamp(1rem, 4vw, 3rem);
+  margin-top: 0;
   border: 1px solid var(--cc-panel-border);
   background-color: #fff;
   box-shadow: var(--cc-panel-shadow);
@@ -400,8 +590,8 @@
 
 .cc-page-divider-head {
   border-bottom: 1px solid #e3e9e2;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
+  padding-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .cc-page-step {
@@ -419,12 +609,13 @@
 .cc-page-divider-head h2 {
   font-size: 1rem;
   color: #26352b;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
 }
 
 .cc-page-divider-head p {
   font-size: 0.78rem;
   color: #5f6c60;
+  line-height: 1.5;
 }
 
 .cc-flow-card {
@@ -518,9 +709,9 @@
 /* ══ COURSE CONTENT ══ */
 .cc-content-section {
   width: 100%;
-  padding: 1.1rem clamp(1rem, 4vw, 3rem) 3.2rem;
+  padding: 2rem clamp(1rem, 4vw, 3rem) 3.6rem;
   display: grid;
-  gap: 14px;
+  gap: 18px;
   border: 1px solid var(--cc-panel-border);
   background-color: #fff;
   box-shadow: var(--cc-panel-shadow);
@@ -920,12 +1111,12 @@ a.cc-lesson-preview:hover {
 /* for the notes upload notes */
 
 .cc-notes-section { 
-  padding: 1.4rem clamp(1rem, 4vw, 3rem);
+  padding: 2rem clamp(1rem, 4vw, 3rem);
   border: 1px solid var(--cc-panel-border);
   box-shadow: var(--cc-panel-shadow);
   background-color: #fff;
   width: 100%;
-  margin: 0 auto 1rem;
+  margin: 0 auto 3rem;
 
 
 }
@@ -1188,7 +1379,7 @@ text-decoration: none;
 
   .cc-includes-section {
     width: 100%;
-    padding: 1.4rem 2rem;
+    padding: 1.9rem 2rem;
   }
 
   .cc-flow-strip {
@@ -1207,9 +1398,18 @@ text-decoration: none;
     padding-right: 2rem;
   }
 
+  .cc-course-insight-shell {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .cc-insight-horizontal {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .cc-content-section {
     width: 100%;
-    padding: 2rem 2rem 4rem;
+    padding: 2.1rem 2rem 4rem;
   }
 
   .cc-quiz-wrap {
@@ -1239,7 +1439,7 @@ text-decoration: none;
   
 
   .cc-includes-section {
-    padding: 1.2rem 1.5rem;
+    padding: 1.55rem 1.5rem;
   }
 
   .cc-flow-strip {
@@ -1265,7 +1465,7 @@ text-decoration: none;
   }
 
   .cc-content-section {
-    padding: 1.5rem 1.5rem 3rem;
+    padding: 1.7rem 1.5rem 3rem;
   }
 
   .cc-learning-focus {
@@ -1273,6 +1473,27 @@ text-decoration: none;
     align-items: flex-start;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+
+  .cc-course-insight-shell {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .cc-outcomes-grid-list {
+    grid-template-columns: 1fr;
+  }
+
+  .cc-chip-wrap-skills {
+    grid-template-columns: 1fr;
+  }
+
+  .cc-insight-horizontal {
+    grid-template-columns: 1fr;
+  }
+
+  .cc-details-grid {
+    grid-template-columns: 1fr;
   }
 
   .cc-learning-sticky {
@@ -1374,8 +1595,7 @@ text-decoration: none;
   }
 
   .cc-notes-section {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding: 1.7rem 1.5rem;
   }
 
   .cc-content-header2 {
@@ -1406,7 +1626,7 @@ text-decoration: none;
   }
 
   .cc-includes-section {
-    padding: 1.5rem 1rem;
+    padding: 1.35rem 1rem;
   }
 
   .cc-flow-strip {
@@ -1422,10 +1642,15 @@ text-decoration: none;
   }
 
   .cc-content-section {
-    padding: 1.5rem 1rem 3rem;
+    padding: 1.45rem 1rem 3rem;
   }
 
   .cc-learning-focus {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .cc-course-insight-shell {
     padding-left: 1rem;
     padding-right: 1rem;
   }
