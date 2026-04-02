@@ -83,6 +83,39 @@
   font-size: 1rem;
 }
 
+.item2{
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+
+}
+.item2 a{
+  font-size: 0.875rem;
+  color: white;
+  text-decoration: none;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.item2 a::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: rgb(210, 123, 53);
+  transition: width 0.3s ease;
+}
+
+.item2 a:hover::after {
+  width: 100%;
+}
+
+.item2 a.active-link::after {
+  width: 100%;
+}
+
 .item3{
   display: flex;
   flex-direction: row;
@@ -114,6 +147,7 @@ align-items: center;
   flex-direction: row;
   gap: 10px;
   align-items: center;
+  cursor: pointer;
 }
 
 #contact-us i{
@@ -125,6 +159,10 @@ align-items: center;
   flex-direction: row;
   gap: 20px;
   align-items: center;
+}
+
+#events{
+  cursor: pointer;
 }
 
 
@@ -192,7 +230,7 @@ align-items: center;
 /* Change text colors when scrolled */
 .navbar.scrolled .menu,
 .navbar.scrolled .search,
-.navbar.scrolled .item2 h1,
+.navbar.scrolled .item2 a,
 .navbar.scrolled .item3 a,
 .navbar.scrolled .item3 i {
   color: black;
@@ -204,9 +242,9 @@ align-items: center;
 
 .navbar:hover .menu,
 .navbar:hover .search,
-.navbar:hover .item2 h1,
 .navbar:hover .item3 a ,
-.navbar:hover .item3 i
+.navbar:hover .item3 i,
+.navbar:hover .item2 a
 {
   color: black;
 }
@@ -615,6 +653,7 @@ align-items: center;
 .navbar.solid .item2 h1,
 .navbar.solid .item3 a,
 .navbar.solid .item3 i,
+.navbar.solid .item2 a,
 .navbar.solid .lang-btn {
   color: black;
 }
@@ -648,6 +687,7 @@ color: rgb(181, 161, 145);
   align-items: center;
   justify-content: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 #music i{
@@ -656,6 +696,15 @@ color: rgb(181, 161, 145);
 .title2{
     color: rgb(210, 123, 53);
   }
+
+
+  @media screen and (max-width:1024px) {
+    .item2{
+      display: none;
+    }
+  }
+
+
 /* Hide lang dropdown on mobile */
 @media screen and (max-width: 768px) {
   .lang-btn .fa-globe {
@@ -685,6 +734,9 @@ color: rgb(181, 161, 145);
   .hero-stuff{
    left:1rem ;
     padding-right: 1rem;
+  }
+      .hero-image{
+    right: 32px;
   }
 }
 
@@ -717,6 +769,10 @@ font-size: 1.5rem;
   .hero-box p{
     font-size: 0.875rem;
   }
+    .hero-image{
+    right: 16px;
+  }
+
 
 
 }
@@ -725,5 +781,8 @@ font-size: 1.5rem;
     .search-btn{
     padding-right: 3rem;
   }
+
+
+  
 }
 

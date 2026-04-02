@@ -254,3 +254,13 @@ padding-left: 0.5rem;
     flex-direction: column;
   }
 }
+
+@media screen and (max-width:390px) {
+
+
+.popular-course-div{
+  width: 100%;
+ overflow: hidden;
+}
+
+}

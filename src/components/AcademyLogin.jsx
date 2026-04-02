@@ -163,7 +163,7 @@ const AcademyLogin = () => {
       right: '12px',
       bottom: '10px',
       cursor: 'pointer',
-      color: '#888'
+      color: 'rgb(181, 161, 145)'
     }}
   />
 </div>
@@ -189,7 +189,7 @@ const AcademyLogin = () => {
           </div>
 
           <div className="signIn-register">
-            <p>Don't have an account? <a href="" onClick={() => navigate('/academy-signUp')}>Create Account</a></p>
+            <p>Don't have an account? <a onClick={() => navigate('/academy-signUp')}>Create Account</a></p>
           </div>
 
         </div>

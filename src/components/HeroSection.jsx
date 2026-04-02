@@ -8,39 +8,39 @@ import useAcademyNavigation from "../hooks/useAcademyNavigation";
 const heroSlides = [
   {
     image: '/images/Igbo2.jpg',
-    title: 'Learn Valuable Traditional Skills Online - Traditional skills reimagined for today',
+    title: 'The Real African Story',
    
     subtitle: 'Welcome To Magical Africa',
     name: '(Igbo)',
     flag: '/images/Nigeria-flag.png'
   },
   {
-    image: '/images/wood_carving.webp',
-     subtitle: 'Wood Carving',
-    title: 'Build hands-on carving skills from scratch',
+    image: '/images/photorealistic-portrait-african-woman.jpg',
+     subtitle: 'Learn African Languages',
+    title: 'Develop practical speaking skills from the very beginning',
    
     name: '(Swahili)',
     flag: '/images/Kenyan-flag.png'
   },
   {
     image: '/images/african-basketry.jpg',
-    subtitle: 'Basket Weaving',
-    title: 'Learn Basket Weaving Techniques',
+    subtitle: 'Learn African Culture & Skills',
+    title: 'Discover traditions while building hands-on creative skills',
     name: '(Maasai)',
     flag: '/images/Kenyan-flag.png'
   },
   
   {
-    image: '/images/african-instrument.avif',
-    subtitle: 'Instrument Making',
-    title: 'Master the Art of Instrument Making',
+    image: '/images/goods.jpg',
+    subtitle: 'Exclusive African Artifacts & Material Marketplace',
+    title: 'Shop rare cultural items and traditional craft materials',
     name: '(Igbo)',
     flag: '/images/Nigeria-flag.png'
   },
   {
-    image: '/images/african-pottery2.jpg',
-    subtitle: 'Pottery',
-    title: 'Create and shape ceramics from clay',
+    image: '/images/AI-woman.png',
+    subtitle: 'AI Language Preservation',
+    title: 'Using technology to safeguard Africa’s linguistic heritage',
     name: '(Zulu)',
     flag: '/images/South-African-flag.png'
   }

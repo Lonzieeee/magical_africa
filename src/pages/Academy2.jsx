@@ -17,6 +17,7 @@ const Academy2 = () => {
   const [subject, setSubject] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [age, setAge] = useState('')
   const [success, setSuccess] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
 
@@ -24,7 +25,7 @@ const Academy2 = () => {
 
   const handleCreate = async () => {
     // Validation
-    if (!firstName || !secondName || !email || !password) {
+    if (!firstName || !secondName || !email || !password || !age) {
       setError('Please fill in all fields.')
       return
     }
@@ -55,6 +56,7 @@ const Academy2 = () => {
         firstName,
         secondName,
         email,
+        age,
         role,
         subject: role === 'teacher' ? subject : null,
         createdAt: new Date().toISOString()
@@ -191,17 +193,18 @@ const Academy2 = () => {
             />
           </div>
 
-          {/* 
+          <div className='academy-info2'>
+     <label>Age</label>
+    <input
+    type="number"
+    min="10"
+    max="100"
+    value={age}
+    onChange={(e) => setAge(e.target.value)}
+  />
+</div>
 
-          <div className='academy-info3'>
-            <label>Password</label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          */}
+       
 
           <div className='academy-info3' style={{ position: 'relative' }}>
   <label>Password</label>
@@ -245,6 +248,7 @@ const Academy2 = () => {
                   : 'Create Teacher Account'
               }
             </button>
+            
           </div>
 
           <div className='academy-or'>
@@ -252,7 +256,7 @@ const Academy2 = () => {
           </div>
 
           <div className='academy-already'>
-            <p>Already have an account? <a href="" onClick={() => navigate('/academy-SignIn')}>Sign In</a></p>
+            <p>Already have an account? <a  onClick={() => navigate('/academy-SignIn')}>Sign In</a></p>
           </div>
 
         </div>

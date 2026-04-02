@@ -40,7 +40,8 @@ height: fit-content;
 }
 
 .academy-form{
-  width: 450px;
+ width: 100%;
+  max-width: 450px;
   margin-top: 4rem;
  padding: 1.5rem 1rem;
   height: fit-content;
@@ -102,6 +103,7 @@ height: fit-content;
   margin-top: 1rem;
   width: 100%;
   gap: 20px;
+ 
 }
 .academy-info1-a{
   display: flex;
@@ -122,6 +124,7 @@ padding-top: 0.3rem;
 padding-bottom: 0.3rem;
 border: 1px solid #e5e3e3;
 outline: none;
+width: 100%;
 }
 
 .academy-info1-a input:focus{
@@ -135,6 +138,7 @@ outline: none;
   flex-direction:column;
   gap: 5px;
   flex: 1;
+  width: 100%;
 }
 
 
@@ -155,6 +159,7 @@ padding-top: 0.3rem;
 padding-bottom: 0.3rem;
 border: 1px solid #e5e3e3;
 outline: none;
+width: 100%;
 }
 
 .academy-info1-b input:focus{
@@ -180,6 +185,7 @@ outline: none;
  padding: 0.3rem 0.5rem;
  border: 1px solid #e5e3e3;
  outline: none;
+ width: 100%;
 }
 
 .academy-info2 input:focus{
@@ -198,6 +204,7 @@ outline: none;
  padding: 0.3rem 0.5rem;
   border: 1px solid #e5e3e3;
   outline: none;
+  width: 100%;
 }
 
 .academy-info3 input:focus{
@@ -257,6 +264,7 @@ background-color: transparent;
 
 .academy-already a{
   color: rgb(181, 161, 145);
+  cursor: pointer;
 }
 
 .academy-already a:hover{
@@ -267,5 +275,6 @@ background-color: transparent;
 @media screen and (max-width:480px) {
   .academy-form{
     border: none;
+    
   }
 }

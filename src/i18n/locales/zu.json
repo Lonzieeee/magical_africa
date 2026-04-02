@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Imenyu",
     "events": "Izikhungo",
+    "academy": "Akademi",
+    "settings": "Izilungiselelo",
     "music": "Umculo",
     "language": "Ulimi",
     "signIn": "Ngena",
@@ -187,7 +189,7 @@
 "tribes": {
   "title": "Hlola Izizwe Zethu",
   "subtitle": "Uhambo olungezizwe ezahlukahlukene ze-Afrika namasiko angunaphakade",
-  "viewAll": "Buka Konke",
+  "viewAll": "Buka Imiphakathi",
   "oromo": {
     "name": "Oromo",
     "description": "Abakhe e-Ethiopia, abantu base-Oromo baphethe ifa lokuziqhenya lesiko, ubunye, nobunikazi besiko. Bayisizwe esikhulu kunazo zonke ezweni, benza cishe ingxenye yesithathu yabantu abangu-40 million."
@@ -684,10 +686,10 @@
       "title": "Indlela Yethu",
       "description": "Sihlanganisa amasiko, ubuchwepheshe, nemfundo ukuhlomisa imiphakathi nokulondoloza ifa laseAfrika.",
       "items": {
-        "communityOwnership": "Ubunikazi Bomphakathi",
-        "ethicalStewardship": "Ukuphatha Ngokuziphatha Kahle",
-        "sustainableImpact": "Umthelela Osimeme",
-        "localPanAfrican": "Wendawo ne-Pan-African"
+        "communityOwnership": " Funda Izilimi Zase-Afrika",
+        "ethicalStewardship": "Funda Amasiko Namakhono Ase-Afrika",
+        "sustainableImpact": "Imakethe Yezinto Zakudala Nezinto Zokwakha Zase-Afrika Ezikhethekile",
+        "localPanAfrican": "Ukulondolozwa Kwezilimi Nge-AI"
       }
     },
     "whatWeDo": {
@@ -771,7 +773,7 @@
       "description": "Sibambisana e-Afrika yonke ne"
     },
     "team": {
-      "title": "Hlangana Nethimba",
+      "title": "Amalungu Ethimba Lethu Abalulekile",
       "description": "Izingqondo ezinentshisekelo ngemuva kwe-Magical Africa",
       "members": {
         "gloria": {
@@ -781,7 +783,7 @@
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Umsunguli",
+          "role": "Usihlalo Webhodi",
           "bio": "Uchwepheshe wolimi lwesiKisii ogxile ekuvikeleni izinganekwane, amasiko omlomo, nolwazi lwesintu."
         },
         "joel": {
@@ -791,23 +793,23 @@
         },
          "Edewait": {
           "name": "Edewait Eric",
-          "role": "Teso",
+          "role": "Olaitoriani loo Maudhui",
           "bio": "Uchwepheshe wolimi lwesiTeso ogxile ekugcineni amagama, izaga, namasiko omlomo."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Kikuyu",
+          "role": "Unjiniyela Wesipiliyoni Somsebenzisi",
           "bio" : "Uchwepheshe wolimi lwesiKikuyu ogxile ezagweni, izinganekwane, nasekuqiniseni ubuqiniso bolimi."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Kalenjin",
+          "role" : "Unjiniyela Wokucubungula Ulimi Lwemvelo (NLP)",
           "bio" : "Uchwepheshe wolimi lwesiKalenjin ogxile ekuvikeleni izisho, izinganekwane, namagugu olimi."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Mhandisi wa Kujifunza Mashine",
           "bio": "Uchwepheshe wolimi lwesiLuo ogxile ekubhaleni ulimi, izindaba, nobuwena besintu."
         }
       }
@@ -882,7 +884,7 @@
   "weaving": "Izifundo zokuphothula",
   "cooking": "Izifundo zokupheka",
   "woodCarving": "Izifundo zokusika umuthi",
-  "viewMore": "Buka okwengeziwe"
+  "viewMore": "Vakashela I-Akademi"
 },
 
 
@@ -1158,8 +1160,84 @@
         "description": "Kusuka e-Amapiano kuye e-Afrobeats, izakhiwo zemisindo yase-Afrika zibumba kabusha isiko lamaklabhu emhlabeni wonke kanye nokwenziwa kwe-pop enkulu."
       }
     }
+  },
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Isikole se-Magical.Africa",
+      "titleStart": "Funda. Wakha. Thengisa",
+      "titleAccent": "Amakhono Akho Esiko",
+      "description": "Hlola umlando omuhle wase-Afrika ngezifundo zethu ze-inthanethi.",
+      "getStarted": "Qala Manje",
+      "browseCourses": "Bheka Izifundo"
+    },
+    "features": {
+      "languages": {
+        "title": "Funda Izilimi ZaseAfrika",
+        "subtitle": "Gqoka isiSwahili, isiYoruba, isiZulu nokuningi"
+      },
+      "arts": {
+        "title": "Thola Ubuciko Besiko",
+        "subtitle": "Umculo, Ukusina, Ubuciko nezinto Zomdabu"
+      },
+      "skills": {
+        "title": "Khulisa Amakhono Akho",
+        "subtitle": "Qala Ibhizinisi Lakho Lobukrelekrele"
+      }
+    },
+    "courses": {
+      "heading": "Izifundo Ezivelele",
+      "enrollNow": "Bhalisa Manje",
+      "items": {
+        "swahili": {
+          "title": "IsiSwahili Kubaqalayo",
+          "subtitle": "Qala Ukukhuluma IsiSwahili"
+        },
+        "drumming": {
+          "title": "Ukushaya Izigubhu ZaseAfrika",
+          "subtitle": "Imisindo Nezindlela"
+        },
+        "beadwork": {
+          "title": "Ukuhlobisa Ngamazhe Omdabu",
+          "subtitle": "Yenza Izinhlobonhlobo Ezinhle"
+        },
+        "cooking": {
+          "title": "Ukupheka Ukudla KwaseAfrika",
+          "subtitle": "Amaresiphi Amnandi AseAfrika"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Funda Izilimi ZaseAfrika",
+      "subtitle": "Khuluma njengomuntu wendawo! Gqoka izilimi zase-Afrika.",
+      "startLearning": "Qala Ukufunda Namuhla"
+    },
+    "community": {
+      "heading": "Joyina Umphakathi Wethu Wobukrelekrele",
+      "subtitle": "Xhumana Nabafundisi, Hlangana Nabafundi, Yabelana Ngesiko Lakho",
+      "items": {
+        "liveClasses": {
+          "title": "Izigcawu Ezibukhali nezifundo",
+          "subtitle": "Ukufunda Okushirikene"
+        },
+        "forums": {
+          "title": "Amaforamu Abafundi",
+          "subtitle": "Yabelana Uhlanganyele"
+        },
+        "mentorship": {
+          "title": "Ukuqeqeshwa Nokusekelwa",
+          "subtitle": "Ukuqondiswa Nokukhula"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Qala Uhambo Lwakho Namuhla!",
+      "joinNow": "Joyina Manje"
+    }
   }
-
-
-
 }
+
+
+

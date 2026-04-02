@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Enkitáábùà",
     "events": "Enkiama",
+    "academy": "ol aadet",
+    "settings": "Mipangilio",
     "music": "Mĩhĩrĩga",
     "language": "Enkutuk",
     "signIn": "Nídó",
@@ -186,7 +188,7 @@
 "tribes": {
   "title": "Eidim Iloshon Enatií",
   "subtitle": "Injore tené iloshon naápukunot e Afrika ó inkítùàátìn naápuò",
-  "viewAll": "Eitodolu Pooki",
+  "viewAll": "Tadamu Jamii",
   "oromo": {
     "name": "Oromo",
     "description": "Iltunganak le Oromo kulie Ethiopia, naákúàk enkíshón naatódòl e enkítùàátà, enkíyámà, ó enaitoi. Kéré ilosho apa kumok tené enkóp, naátúrù apa enkitálá e sídáì e iltunganak naátíí milioni 40."
@@ -613,10 +615,10 @@
       "title": "Enkoitoi Enye",
       "description": "Kinyorr enkanyit, teknoloji, nena esomasi neitobiru inkituaak nena kigil enkanyit oo Afrika.",
       "items": {
-        "communityOwnership": "Eiyieta Inkituaak",
-        "ethicalStewardship": "Eilikana Naitobiror",
-        "sustainableImpact": "Enaitoru Naitoru",
-        "localPanAfrican": "Enkop nena Pan-African"
+        "communityOwnership": "Jifunze Lugha za Afrika",
+        "ethicalStewardship": "Jifunze Utamaduni na Ujuzi wa Afrika",
+        "sustainableImpact": "Soko la Vifaa na Vitu vya Afrika vya Pekee",
+        "localPanAfrican": "Uhifadhi wa Lugha kwa AI"
       }
     },
     "whatWeDo": {
@@ -700,7 +702,7 @@
       "description": "Kinyorr te nkop oo Afrika na"
     },
     "team": {
-      "title": "Inyie Iltunganak",
+      "title": "Wanachama Muhimu wa Timu Yetu",
       "description": "Ilkuak naishoo te nyuma oo Magical Africa",
       "members": {
         "gloria": {
@@ -710,7 +712,7 @@
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Onaitumoki",
+          "role": "Olaitoriani loo Bodi",
           "bio": "Oloing’oni le Kisii oleng’oni ilomonok, enkop, nabo olomonok leloito le nkishon nabo teknolojia."
         },
         "joel": {
@@ -720,24 +722,24 @@
         },
          "Edewait": {
           "name": "Edewait Eric",
-          "role": "Teso",
+          "role": "Olaitoriani loo Maudhui",
           "bio": "Oloing’oni le Teso oleng’oni ilomonok enchorro, ngano, nabo olomonok leloito."
 
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Kikuyu",
+          "role": "Mhandisi wa Uzoefu wa Mtumiaji",
           "bio" : "Oloing’oni le Kikuyu oshi ilomonok ngano, thimo, nabo enkiguran olomonok."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Kalenjin",
+          "role" : "Mhandisi wa Usindikaji wa Lugha (NLP)",
           "bio" : "Oloing’oni le Kalenjin oshi ilomonok olomonok le nkishon, ngano nabo enkiguran."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Mhandisi wa Kujifunza Mashine",
           "bio": "Oloing’oni le Luo oleng’oni ilomonok ngano, enkiguran, nabo olomonok le nkishon."
         }
         
@@ -812,7 +814,7 @@
   "weaving": "Enkiama ye nkejek",
   "cooking": "Enkiama ye nkima",
   "woodCarving": "Enkiama ye olbul",
-  "viewMore": "Iyiook kake"
+  "viewMore": "Tadamu Akademi"
 },
 
 
@@ -1091,7 +1093,83 @@
         "description": "Taa Amapiano nabo Afrobeats, iltung'ana oo Afrika itipilikishu enkiama oo vilabu entim nabo pop."
       }
     }
+  },
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Enkiama e Magical.Africa",
+      "titleStart": "Aiyiolo. Amu. Alak",
+      "titleAccent": "Enkisampu Ino Enkitok",
+      "description": "Iyiolo entorosi e Afrika amu inkishu inko nabo ole internet.",
+      "getStarted": "Amu Nabo",
+      "browseCourses": "Iyiolo Inkishu"
+    },
+    "features": {
+      "languages": {
+        "title": "Aiyiolo Enkiama e Afrika",
+        "subtitle": "Iyiolo Kiswahili, Kiyoruba, Kizulu nabo ingii"
+      },
+      "arts": {
+        "title": "Iyiolo Enkisampu e Entorosi",
+        "subtitle": "Enkiama, Entasim, Enkibolosho nabo Enkisampu"
+      },
+      "skills": {
+        "title": "Kiyiolo Enkisampu Ino",
+        "subtitle": "Amu Enkiama Ino e Enkibolosho"
+      }
+    },
+    "courses": {
+      "heading": "Inkishu Inko Nabo",
+      "enrollNow": "Eandikish Nabo",
+      "items": {
+        "swahili": {
+          "title": "Kiswahili amu Ilonyek",
+          "subtitle": "Amu Aiyiolo Kiswahili"
+        },
+        "drumming": {
+          "title": "Engoma e Afrika",
+          "subtitle": "Enkidong nabo Enkibolosho"
+        },
+        "beadwork": {
+          "title": "Enkibolosho e Entorosi",
+          "subtitle": "Amu Enkidong e Naibor"
+        },
+        "cooking": {
+          "title": "Enkibolosho e Enkiama e Afrika",
+          "subtitle": "Enkidong e Meeta e Afrika"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Aiyiolo Enkiama e Afrika",
+      "subtitle": "Aiyiolo ta oltungani e nabo! Iyiolo enkiama e Afrika.",
+      "startLearning": "Amu Aiyiolo Nabo"
+    },
+    "community": {
+      "heading": "Ingir Enkiama Ghitore e Enkibolosho",
+      "subtitle": "Aiyiolo nabo Ilonyek, Ungana nabo Ilonyek, Encongori Enkisampu Ino",
+      "items": {
+        "liveClasses": {
+          "title": "Madarasa e Nabo nabo Warsha",
+          "subtitle": "Aiyiolo nabo Enkibolosho"
+        },
+        "forums": {
+          "title": "Majukwaa e Ilonyek",
+          "subtitle": "Encongori nabo Enshirikiano"
+        },
+        "mentorship": {
+          "title": "Enkiama nabo Enkiterishoo",
+          "subtitle": "Enkiongoreri nabo Enkibolosho"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Amu Enkidong Ino Nabo!",
+      "joinNow": "Ingir Nabo"
+    }
   }
-
-
 }
+
+

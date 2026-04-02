@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Menyu",
     "events": "Matukio",
+    "academy":"Akademi", 
+    "settings": "Mipangilio",
     "music": "Nyimbo",
     "language": "Rũthiomi",
     "signIn": "Ĩngĩra",
@@ -187,7 +189,7 @@
 "tribes": {
   "title": "Menya Mĩhĩrĩga Yĩtũ",
   "subtitle": "Rũgendo rũthiĩre mĩhĩrĩga ya Abirika ĩrĩa ĩhũũranĩte na mĩtũũrĩre ya tene",
-  "viewAll": "Ona Ciothe",
+  "viewAll": "Tara Jamii",
   "oromo": {
     "name": "Oromo",
     "description": "Andũ a Oromo kuuma Ethiopia, makũũa ũtaũo wa kũĩgĩria wa mĩtũũrĩre, ũmwe, na ũmenyekani wa mĩtũũrĩre. Nĩo mũhĩrĩga mũnene mũno, makĩũmba thĩka ĩmwe kũmĩĩna ĩtatũ ya andũ na andũ milioni 40."
@@ -613,10 +615,10 @@
       "title": "Njĩra Yitũ",
       "description": "Tũnyitanĩtie mĩtugo, tekinolojia, na ũhoti gũtega mĩrĩ na gũtũũra ũthamaki wa Afrika.",
       "items": {
-        "communityOwnership": "Ũnini wa Mĩrĩ",
-        "ethicalStewardship": "Gũteithĩria kwa Wega",
-        "sustainableImpact": "Gũteithĩria Kũgĩa",
-        "localPanAfrican": "Wa Gũkũ na Pan-African"
+        "communityOwnership": "Rũgũta Ndirĩ cia Afrika",
+        "ethicalStewardship": "Lĩngũta Mĩthĩĩko na Wĩa wa Āfrika",
+        "sustainableImpact": "Thoko ya Ithaka na Ibikoresho cia Afrika cia Mũno",
+        "localPanAfrican": "Gũkũrũkĩra Ndirĩ na AI"
       }
     },
     "whatWeDo": {
@@ -700,7 +702,7 @@
       "description": "Tũrũtagĩra wĩra bũrũri wa Afrika na"
     },
     "team": {
-      "title": "Menyera Kĩama",
+      "title": "Andũ a Mũno a Timu Yetu",
       "description": "Mĩĩrio ya ngoro inyuma ya Magical Africa",
       "members": {
         "gloria": {
@@ -710,7 +712,7 @@
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Mũtũmbũki",
+          "role": "Mũthĩnjĩri wa Bodi",
           "bio": "Mũthomi wa rũrĩmĩ rwa Kisii wĩra wake nĩ gũtũũra ngano cia kĩrĩra na ũmenyo wa gĩkũyũ."
         },
         "joel": {
@@ -720,24 +722,24 @@
         },
          "Edewait": {
           "name": "Edewait Eric",
-          "role": "Teso",
+          "role": "Mũnene wa Maudhui",
           "bio": "Mũthomi wa rũrĩmĩ rwa Teso ũrĩa wĩhũũgagia ciugo, thimo, na ngano cia tene."
 
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Kikuyu",
+          "role": "Mhandisi wa Uzoefu wa Mtumiaji",
           "bio" : "Mũthomi wa rũrĩmĩ rwa Gĩkũyũ ũrĩa wĩhũũgagia thimo, ngano, na ũrĩa rũrĩmĩ rũrĩ."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Kalenjin",
+          "role" : "Mhandisi wa Gũthondeka Ndirĩ cia Andũ (NLP)",
           "bio" : "Mũthomi wa rũrĩmĩ rwa Kalenjin wĩra wake nĩ gũtũũra mĩhĩrĩga na ngano cia kĩrĩra."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Mhandisi wa Kujifunza Mashine",
           "bio": "Mũthomi wa rũrĩmĩ rwa Luo ũkũteithia gũtũũra rũrĩmĩ, ngano, na ũndũ wa kĩrĩra."
         }
       }
@@ -813,7 +815,7 @@
   "weaving": "Masomo ma gũsuka",
   "cooking": "Masomo ma gũtũhia",
   "woodCarving": "Masomo ma gũkora mĩtĩ",
-  "viewMore": "Ona ingĩ"
+  "viewMore": "Temberera Akademi"
 },
 
 
@@ -1077,8 +1079,85 @@
         "description": "Kuuma Amapiano nginya Afrobeats, mĩhango ya midundo ya Aafrika ĩhindĩaga ũndũ wa vilabu dunia na utengenezaji wa pop."
       }
     }
+  },
+
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Chuo kia Magical.Africa",
+      "titleStart": "Ĩgua. Ĩaka. Gũrĩa",
+      "titleAccent": "Ũhoti Waku wa Mĩgambo",
+      "description": "Hũhũria ũtukũ wa Afrika na masomo maitũ ya intaneti.",
+      "getStarted": "Andĩka Sasa",
+      "browseCourses": "Ongerera Masomo"
+    },
+    "features": {
+      "languages": {
+        "title": "Ĩgua Thĩinĩ wa Gĩthomo kĩa Afrika",
+        "subtitle": "Ĩgua Kiswahili, Kiyoruba, Kizulu na ingĩ"
+      },
+      "arts": {
+        "title": "Hũhũria Ũtũũru wa Mĩgambo",
+        "subtitle": "Mũhĩmĩ, Mĩkara, Ũwĩkĩo na Mĩgambo"
+      },
+      "skills": {
+        "title": "Kũkũra Ũhoti Waku",
+        "subtitle": "Andĩkĩria Kĩama Giaku kĩa Ũbunifu"
+      }
+    },
+    "courses": {
+      "heading": "Masomo Mahĩu",
+      "enrollNow": "Ĩandĩkĩria Sasa",
+      "items": {
+        "swahili": {
+          "title": "Kiswahili kwa Andĩka",
+          "subtitle": "Andĩkĩria Gũthĩmĩra Kiswahili"
+        },
+        "drumming": {
+          "title": "Ngoma cia Afrika",
+          "subtitle": "Mĩdũndo na Njĩra"
+        },
+        "beadwork": {
+          "title": "Ũshonaji wa Mapambo ya Mĩgambo",
+          "subtitle": "Ĩka Mapambo Maarufu"
+        },
+        "cooking": {
+          "title": "Gũtũa Irio cia Afrika",
+          "subtitle": "Mapishi Maarufu ya Afrika"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Ĩgua Thĩinĩ wa Gĩthomo kĩa Afrika",
+      "subtitle": "Thĩmĩra ta mũndũ wa haha! Ĩgua thĩinĩ wa gĩthomo kĩa Afrika.",
+      "startLearning": "Andĩkĩria Gũĩgua Ũmũthĩ"
+    },
+    "community": {
+      "heading": "Ingĩra Kĩama Giitũ kĩa Ũbunifu",
+      "subtitle": "Wasiliana na Arutani, Ungana na Arutwo, Congora Mĩgambo Yaku",
+      "items": {
+        "liveClasses": {
+          "title": "Madarasa ya Ũhũ na Warsha",
+          "subtitle": "Gũĩgua na Ũshirikiano"
+        },
+        "forums": {
+          "title": "Majukwaa ya Arutwo",
+          "subtitle": "Congora na Ũshirikiane"
+        },
+        "mentorship": {
+          "title": "Ũrĩithio na Ũteithio",
+          "subtitle": "Ũongoreri na Gũkũra"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Andĩkĩria Njĩra Yaku Ũmũthĩ!",
+      "joinNow": "Ingĩra Sasa"
+    }
   }
-
-
-
 }
+
+
+

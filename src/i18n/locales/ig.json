@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Ndepụta",
     "events": "Emume",
+    "academy": "Akadẹmi",
+    "settings": "Ntọala",
     "music": "Egwu",
     "language": "Asụsụ",
     "signIn": "Banye",
@@ -188,7 +190,7 @@
 "tribes": {
   "title": "Nyochaa Ebo Anyị",
   "subtitle": "Njem site na ebo dị iche iche nke Afrika na omenala ebighị ebi",
-  "viewAll": "Lee Niile",
+  "viewAll": "Lelee Obodo",
   "oromo": {
     "name": "Oromo",
     "description": "Ndị Oromo si Ethiopia, na-eburu ihe nketa mpako nke omenala, ịdị n'otu, na njirimara omenala. Ha bụ otu ndị kachasị ukwuu n'obodo ahụ, na-eme ihe dị ka otu ụzọ n'ụzọ atọ nke ndị mmadụ nwere ihe dị ka nde mmadụ 40."
@@ -686,10 +688,10 @@
       "title": "Usoro Anyị",
       "description": "Anyị na-ejikọ omenala, teknụzụ, na agụmakwụkwọ iji nye ndị obodo ike ma chekwaa ihe nketa Afrịka.",
       "items": {
-        "communityOwnership": "Ịnwe Obodo",
-        "ethicalStewardship": "Nlekọta Omume Ọma",
-        "sustainableImpact": "Mmetụta Na-adịgide",
-        "localPanAfrican": "Mpaghara & Pan-African"
+        "communityOwnership": "Mụta Asụsụ Afrịka",
+        "ethicalStewardship": "Mụta Omenala na Nkà Afrịka",
+        "sustainableImpact": "Ahịa Ngwa Omenala na Ngwaọrụ Afrịka Pụrụ Iche",
+        "localPanAfrican": "Nchekwa Asụsụ Site na AI"
       }
     },
     "whatWeDo": {
@@ -773,7 +775,7 @@
       "description": "Anyị na-arụkọ ọrụ n'ofe Afrịka na"
     },
     "team": {
-      "title": "Zute Ndị Otu",
+      "title": "Ndị Isi Otu Anyị",
       "description": "Uche nwere mmasị n'azụ Magical Africa",
       "members": {
         "gloria": {
@@ -783,7 +785,7 @@
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Onye Ntọala",
+          "role": "Onye isi oche nke bọọdụ",
           "bio": "Ọkachamara n’asụsụ Kisii na-elekwasị anya n’ichekwaa akụkọ ọdịnala na omenala site na mmụta na teknụzụ."
         },
         "joel": {
@@ -793,23 +795,23 @@
         },
         "Edewait": {
           "name": "Edewait Eric",
-          "role": "Teso",
+          "role": "Onye isi ọdịnaya",
           "bio": "Ọkachamara n’asụsụ Teso na-elekwasị anya n’ichekwaa okwu, ilu, na omenala nna ochie."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Kikuyu",
+          "role": "Injinia Ahụmịhe Onye Ọrụ",
           "bio" : "Ọkachamara n’asụsụ Kikuyu nke na-elekwasị anya n’ilu, akụkọ ifo, na ezi asụsụ."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Kalenjin",
+          "role" : "Injinia Nhazi Asụsụ Mmadụ (NLP)",
           "bio" : "Ọkachamara n’asụsụ Kalenjin na-elekwasị anya n’ichekwaa asụsụ, akụkọ ọdịnala, na njirimara omenala."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Injinia Mmụta Igwe",
           "bio": "Ọkachamara n’asụsụ Luo na-akwado idekọ asụsụ, akụkọ, na njirimara omenala."
         }
         
@@ -886,7 +888,7 @@
   "weaving": "Usoro ịkọ akwa",
   "cooking": "Usoro isi nri",
   "woodCarving": "Usoro ịkọ osisi",
-  "viewMore": "Lee ọzọ"
+  "viewMore": "Gaa n’Ụlọ Akwụkwọ"
 },
 
 
@@ -1161,10 +1163,87 @@
         "description": "Site na Amapiano ruo Afrobeats, usoro ụda Afrika na-agbanwe omenala klọb ụwa na mmepụta pop buru ibu."
       }
     }
+  },
+
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Akwukwo nke Magical.Africa",
+      "titleStart": "Muta. Wuo. Ree",
+      "titleAccent": "Nka Gị nke Omenala",
+      "description": "Chọpụta ihe ọmụmụ dị ukwuu nke Africa site n'ihe ọmụmụ anyị n'ịntanetị.",
+      "getStarted": "Bido Ugbu a",
+      "browseCourses": "Lelee Ihe Ọmụmụ"
+    },
+    "features": {
+      "languages": {
+        "title": "Muta Asụsụ Africa",
+        "subtitle": "Muta Swahili, Yoruba, Zulu na ndị ọzọ"
+      },
+      "arts": {
+        "title": "Chọpụta Nka nke Omenala",
+        "subtitle": "Egwu, Egwuregwu, Ọrụ Aka na Omenala"
+      },
+      "skills": {
+        "title": "Kpalie Nka Gị",
+        "subtitle": "Malite Azụmaahịa Gị nke Ọrụ Aka"
+      }
+    },
+    "courses": {
+      "heading": "Ihe Ọmụmụ Pụtara Ìhè",
+      "enrollNow": "Debanye Aha Ugbu a",
+      "items": {
+        "swahili": {
+          "title": "Swahili maka Ndị Ọhụrụ",
+          "subtitle": "Bido Ikwu Swahili"
+        },
+        "drumming": {
+          "title": "Ikwa Igba Africa",
+          "subtitle": "Ụda na Usoro"
+        },
+        "beadwork": {
+          "title": "Ọrụ Aka Omenala",
+          "subtitle": "Mee Ihe Ịchọ Mma Dị Mma"
+        },
+        "cooking": {
+          "title": "Isi Nri Africa",
+          "subtitle": "Usoro Nri Dị Ụtọ nke Africa"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Muta Asụsụ Africa",
+      "subtitle": "Kwuo okwu dịka onye obodo! Muta asụsụ Africa.",
+      "startLearning": "Bido Ịmụta Taa"
+    },
+    "community": {
+      "heading": "Sonye n'Ọgbakọ Anyị nke Ọrụ Aka",
+      "subtitle": "Kpọtụrụ Ndị Nkuzi, Jikọọ na Ndị Ọmụmụ, Kekọrịta Omenala Gị",
+      "items": {
+        "liveClasses": {
+          "title": "Klaasị Dị Ndụ na Ọrụ Aka",
+          "subtitle": "Ọmụmụ nke Mmekọrịta"
+        },
+        "forums": {
+          "title": "Ebe Ndị Ọmụmụ",
+          "subtitle": "Kekọrịta ma Mekọọ"
+        },
+        "mentorship": {
+          "title": "Nduzi na Nkwado",
+          "subtitle": "Ọkọlọtọ na Uto"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Bido Njem Gị Taa!",
+      "joinNow": "Sonye Ugbu a"
+    }
   }
-
-
-
-
-
 }
+
+
+
+
+

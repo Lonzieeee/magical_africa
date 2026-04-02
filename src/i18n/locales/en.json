@@ -3,7 +3,9 @@
     "menu": "Menu",
     "events": "Events",
     "music": "Music",
+    "settings": "Settings",
     "language": "Language",
+    "academy": "Academy",
     "signIn": "Sign In",
     "logOut": "Log out",
     "currentlyIn": "Currently in",
@@ -187,7 +189,7 @@
 "tribes": {
   "title": "Explore Our Tribes",
   "subtitle": "Journey through Africa's diverse tribes and timeless traditions",
-  "viewAll": "View All",
+  "viewAll": "View Communities",
   "oromo": {
     "name": "Oromo",
     "description": "Rooted in Ethiopia, the Oromo people carry a proud legacy of tradition, unity, and cultural identity. They are the country's largest ethnic group, making up about one-third of the population with around 40 million people."
@@ -676,10 +678,10 @@
       "title": "Our Approach",
       "description": "We combine culture, technology, and education to empower communities and preserve African heritage.",
       "items": {
-        "communityOwnership": "Community Ownership",
-        "ethicalStewardship": "Ethical Stewardship",
-        "sustainableImpact": "Sustainable Impact",
-        "localPanAfrican": "Local & Pan-African"
+        "communityOwnership": "Learn African Languages",
+        "ethicalStewardship": "Learn African Culture & Skills",
+        "sustainableImpact": "Exclusive African Artifacts & Material Marketplace",
+        "localPanAfrican": "AI Language Preservation"
       }
     },
     "whatWeDo": {
@@ -763,7 +765,7 @@
       "description": "We collaborate across Africa with"
     },
     "team": {
-      "title": "The Development Team",
+      "title": "Our key Team Members",
       "description": "Preserving Culture, Language, and Identity Across Generations",
       "members": {
         "gloria": {
@@ -774,7 +776,7 @@
         },
         "steve": {
           "name": "steve Kombo",
-          "role": "Co-Founder",
+          "role": "Board Chair",
           "bio" : "Founder of Magical Africa, passionate about culture, community, and preserving African stories through digital spaces that connect people, languages, and heritage."
         },
         "joel": {
@@ -784,23 +786,23 @@
         },
           "Edewait": {
           "name": "Edewait Eric",
-          "role": "Linguistic Expert",
+          "role": "Head of Content",
           "bio": "Studies local and indigenous languages, records endangered words and stories, and ensures cultural meaning is preserved across the Magical Africa community."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Youth Cultural Fellow",
+          "role": "User Experience Engineer",
           "bio" : "Supports cultural storytelling, engages youth in heritage initiatives, and helps preserve and share community traditions across Magical Africa."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Community Language Translator",
+          "role" : "NLP Engineer",
           "bio" : "Translates content across local languages, ensures community voices are accurately represented, and helps preserve culture through clear and inclusive communication."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Language Bridge Coordinator",
+          "role": "Machine Learning Engineer",
           "bio": "Connects communities across languages, coordinates translations, and ensures cultural meaning is preserved so all voices are understood and included on Magical Africa."
         }
         
@@ -875,7 +877,7 @@
   "weaving": "Weaving courses",
   "cooking": "Cooking courses",
   "woodCarving": "Wood-carving courses",
-  "viewMore": "View more"
+  "viewMore": "Visit Academy"
 },
 
 
@@ -1152,9 +1154,87 @@
         "description": "From Amapiano to Afrobeats, African rhythm structures are reshaping global club culture and mainstream pop production."
       }
     }
-  }
+  },
 
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Magical.Africa Academy",
+      "titleStart": "Learn. Build. Market",
+      "titleAccent": "Your Cultural Skills",
+      "description": "Explore the rich heritage of Africa through our online courses.",
+      "getStarted": "Get Started",
+      "browseCourses": "Browse Courses"
+    },
+    "features": {
+      "languages": {
+        "title": "Learn African Languages",
+        "subtitle": "Master Swahili, Yoruba, Zulu & more"
+      },
+      "arts": {
+        "title": "Discover Cultural Arts",
+        "subtitle": "Music, Dance, Crafts & Traditions"
+      },
+      "skills": {
+        "title": "Grow Your Skills",
+        "subtitle": "Launch Your Creative Business"
+      }
+    },
+    "courses": {
+      "heading": "Featured Courses",
+      "enrollNow": "Enroll Now",
+      "items": {
+        "swahili": {
+          "title": "Swahili for Beginners",
+          "subtitle": "Start Speaking Swahili"
+        },
+        "drumming": {
+          "title": "African Drumming",
+          "subtitle": "Rhythms & Technique"
+        },
+        "beadwork": {
+          "title": "Traditional Beadwork",
+          "subtitle": "Create Stunning Accessories"
+        },
+        "cooking": {
+          "title": "African Cooking",
+          "subtitle": "Delicious African Recipes"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Learn African Languages",
+      "subtitle": "Speak like a local! Master the languages of Africa.",
+      "startLearning": "Start Learning Today"
+    },
+    "community": {
+      "heading": "Join Our Creative Community",
+      "subtitle": "Connect with Instructors, Network with Learners, Share Your Heritage",
+      "items": {
+        "liveClasses": {
+          "title": "Live Classes & Workshops",
+          "subtitle": "Interactive Learning"
+        },
+        "forums": {
+          "title": "Student Forums",
+          "subtitle": "Share & Collaborate"
+        },
+        "mentorship": {
+          "title": "Mentorship & Support",
+          "subtitle": "Guidance & Growth"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Start Your Journey Today!",
+      "joinNow": "Join Now"
+    }
+  }
 }
+
+
 
 
 

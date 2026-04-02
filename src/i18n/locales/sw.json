@@ -2,6 +2,8 @@
   "nav": {
     "menu": "Menyu",
     "events": "Matukio",
+    "academy": "Akademia",
+    "settings": "Mipangilio",
     "music": "Nyimbo",
     "language": "Lugha",
     "signIn": "Ingia",
@@ -185,7 +187,7 @@
 "tribes": {
   "title": "Chunguza Makabila Yetu",
   "subtitle": "Safari kupitia makabila mbalimbali ya Afrika na mila za milele",
-  "viewAll": "Tazama Zote",
+  "viewAll": "Tazama Jamii",
   "oromo": {
     "name": "Oromo",
     "description": "Wenye asili ya Ethiopia, watu wa Oromo wanabeba urithi wa kiburi wa mila, umoja, na utambulisho wa kitamaduni. Wao ni kabila kubwa zaidi nchini, wakiunda takriban theluthi moja ya idadi ya watu wenye watu milioni 40."
@@ -679,10 +681,10 @@
       "title": "Mbinu Yetu",
       "description": "Tunachanganya utamaduni, teknolojia, na elimu kuwawezesha jamii na kuhifadhi urithi wa Kiafrika.",
       "items": {
-        "communityOwnership": "Umiliki wa Jamii",
-        "ethicalStewardship": "Usimamizi wa Kimaadili",
-        "sustainableImpact": "Athari Endelevu",
-        "localPanAfrican": "Ya Ndani na ya Ki-Afrika"
+        "communityOwnership": " Jifunze Lugha za Kiafrika",
+        "ethicalStewardship": "Jifunze Utamaduni na Ujuzi wa Kiafrika",
+        "sustainableImpact": "Soko la Vitu vya Kale na Vifaa vya Kiafrika Pekee",
+        "localPanAfrican": "Uhifadhi wa Lugha kwa AI"
       }
     },
     "whatWeDo": {
@@ -766,7 +768,7 @@
       "description": "Tunashirikiana kote Afrika na"
     },
     "team": {
-      "title": "Kutana na Timu",
+      "title": "Wajumbe Wetu Muhimu wa Timu",
       "description": "Akili zenye shauku nyuma ya Magical Africa",
       "members": {
         "gloria": {
@@ -776,7 +778,7 @@
         },
         "steve": {
           "name": "Steve Kombo",
-          "role": "Mwanzilishi",
+          "role": "Mwenyekiti wa Bodi",
           "bio": "Mtaalamu wa lugha ya Kisii anayehifadhi simulizi za asili, mila za mdomo, na maarifa ya kitamaduni kupitia elimu na teknolojia."
         },
         "joel": {
@@ -786,23 +788,23 @@
         },
          "Edewait": {
           "name": "Edewait Eric",
-          "role": "Teso",
+          "role": "Mkuu wa Maudhui",
           "bio": "Mtaalamu wa lugha ya Teso anayehifadhi msamiati, methali, na mila za mdomo kwa vizazi vijavyo."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
-          "role": "Kikuyu",
+          "role": "Mhandisi wa Uzoefu wa Mtumiaji",
           "bio" : "Mtaalamu wa lugha ya Kikuyu anayebobea katika methali, ngano, na uhalisia wa lugha."
         },
         "ian": {
           "name": "Ian Cheruiyot",
-          "role" : "Kalenjin",
+          "role" : "Mtaalamu wa Lugha",
           "bio" : "Mtaalamu wa lugha ya Kalenjin anayelinda misemo ya kitamaduni, simulizi za jadi, na urithi wa lugha."
         },
         "collins": {
           "name": "Collins Omondi",
-          "role": "Luo",
+          "role": "Mhandisi wa Kujifunza Mashine",
           "bio": "Mtaalamu wa lugha ya Luo anayesaidia uhifadhi wa lugha, hadithi, na utambulisho wa kitamaduni."
         }
       }
@@ -876,7 +878,7 @@
   "weaving": "Kozi za uusukaji",
   "cooking": "Kozi za kupikia",
   "woodCarving": "Kozi za uchongaji wa mbao",
-  "viewMore": "Angalia zaidi"
+  "viewMore": "Tembelea Akademi"
 },
 
 
@@ -1152,7 +1154,83 @@
         "description": "Kutoka Amapiano hadi Afrobeats, miundo ya midundo ya Afrika inabadilisha utamaduni wa vilabu duniani na uzalishaji wa pop kuu."
       }
     }
+  },
+
+
+  
+  "academy": {
+    "hero": {
+      "eyebrow": "Chuo cha Magical.Africa",
+      "titleStart": "Jifunza. Jenga. Uza",
+      "titleAccent": "Ujuzi Wako wa Kitamaduni",
+      "description": "Gundua urithi tajiri wa Afrika kupitia kozi zetu za mtandaoni.",
+      "getStarted": "Anza Sasa",
+      "browseCourses": "Tazama Kozi"
+    },
+    "features": {
+      "languages": {
+        "title": "Jifunza Lugha za Kiafrika",
+        "subtitle": "Jifunza Kiswahili, Kiyoruba, Kizulu na zaidi"
+      },
+      "arts": {
+        "title": "Gundua Sanaa za Kitamaduni",
+        "subtitle": "Muziki, Ngoma, Ufundi na Mila"
+      },
+      "skills": {
+        "title": "Kua Ujuzi Wako",
+        "subtitle": "Anzisha Biashara Yako ya Ubunifu"
+      }
+    },
+    "courses": {
+      "heading": "Kozi Maarufu",
+      "enrollNow": "Jiandikishe Sasa",
+      "items": {
+        "swahili": {
+          "title": "Kiswahili kwa Wanaoanza",
+          "subtitle": "Anza Kuzungumza Kiswahili"
+        },
+        "drumming": {
+          "title": "Ngoma za Kiafrika",
+          "subtitle": "Midundo na Mbinu"
+        },
+        "beadwork": {
+          "title": "Ushonaji wa Mapambo ya Jadi",
+          "subtitle": "Tengeneza Mapambo ya Kupendeza"
+        },
+        "cooking": {
+          "title": "Kupika Vyakula vya Kiafrika",
+          "subtitle": "Mapishi Mazuri ya Kiafrika"
+        }
+      }
+    },
+    "languages": {
+      "heading": "Jifunza Lugha za Kiafrika",
+      "subtitle": "Zungumza kama mzawa! Jifunza lugha za Afrika.",
+      "startLearning": "Anza Kujifunza Leo"
+    },
+    "community": {
+      "heading": "Jiunge na Jamii Yetu ya Ubunifu",
+      "subtitle": "Wasiliana na Wakufunzi, Ungana na Wanafunzi, Shiriki Urithi Wako",
+      "items": {
+        "liveClasses": {
+          "title": "Madarasa ya Moja kwa Moja na Warsha",
+          "subtitle": "Kujifunza kwa Kushirikiana"
+        },
+        "forums": {
+          "title": "Majukwaa ya Wanafunzi",
+          "subtitle": "Shiriki na Ushirikiane"
+        },
+        "mentorship": {
+          "title": "Ushauri na Msaada",
+          "subtitle": "Mwongozo na Maendeleo"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Anza Safari Yako Leo!",
+      "joinNow": "Jiunge Sasa"
+    }
   }
-
-
 }
+
+
