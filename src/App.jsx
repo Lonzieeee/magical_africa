@@ -25,6 +25,7 @@ import TeacherDashboard from './components/TeacherDashboard';
 import ProtectedRoute from './components/ProtectedRoute'
 import Music from './pages/Music';
 import AcademyPage from './pages/AcademyPage';
+import Blogs from './pages/Blogs';
 
 function App() {
   return (
@@ -50,6 +51,9 @@ function App() {
           <Route path="/music" element={<Music />} />
         <Route path="/academy-page"element={<AcademyPage />}
          />
+         <Route path="/blogs" element={<Blogs />}
+         />
+
 
 
           {/* ── Teacher-only routes ── */}

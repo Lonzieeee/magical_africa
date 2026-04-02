@@ -63,6 +63,7 @@
   background-color: transparent;
   font-size: 0.875rem;
   color: white;
+  display: none;
 }
 .menu i{
   font-size: 1rem;
@@ -121,7 +122,7 @@
   flex-direction: row;
   gap: 25px;
   align-items: center;
-
+ 
 }
 .item3 a{
   text-decoration: none;
@@ -701,6 +702,9 @@ color: rgb(181, 161, 145);
   @media screen and (max-width:1024px) {
     .item2{
       display: none;
+    }
+    .menu{
+      display: flex;
     }
   }
 
