@@ -295,7 +295,7 @@ const toggleHeroVideo = () => {
     className="hero-video"
     src="/images/about-video.mp4"   // 👈 replace with your actual video path
     autoPlay
-    muted
+   
     loop
     playsInline
   />
