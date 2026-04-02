@@ -212,7 +212,7 @@ const handleLogout = async () => {
   <NavLink to="/market" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.marketplace')}</NavLink>
   
   <NavLink to="/blogs" className={({ isActive }) => isActive ? 'active-link' : ''}>
-    Blogs
+    Blog
   </NavLink>
 
 </div>

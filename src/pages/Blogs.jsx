@@ -22,6 +22,7 @@ import React, { useState } from 'react'
 import '../styles/blogs.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
 
 const featuredPost = {
@@ -108,6 +109,17 @@ const Blogs = () => {
 
   return (
     <>
+
+
+     <Helmet>
+            <title>Blog - Magical Africa</title>
+            <meta
+              name="description"
+              content="Read blogs about African languages, cultural traditions, history, travel destinations, art, and digital skills from Magical Africa Academy."
+            />
+            <meta property="og:title" content="Magical Africa Academy" />
+            <meta property="og:url" content="https://magical.africa/blogs" />
+          </Helmet>
      
 
       <div className="blogs-page">
