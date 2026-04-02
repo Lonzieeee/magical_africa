@@ -6,7 +6,8 @@ import {
   FaDownload,
   FaFileAlt,
   FaMobileAlt,
-  FaPlayCircle
+  FaPlayCircle,
+  FaCheckCircle
 } from 'react-icons/fa'
 import '../styles/courseContent.css'
 import CourseCard from '../components/Coursecard'
@@ -234,11 +235,14 @@ const CourseContent = ({
               <div className='cc-outcomes-block cc-skills-block'>
                 <h2>Skills you'll gain</h2>
                 {resolvedSkills.length > 0 ? (
-                  <div className='cc-chip-wrap cc-chip-wrap-skills'>
+                  <ul className='cc-skill-list'>
                     {resolvedSkills.map((skill, index) => (
-                      <span key={`${skill}-${index}`} className='cc-insight-chip'>{skill}</span>
+                      <li key={`${skill}-${index}`}>
+                        <FaCheckCircle className='cc-skill-icon' />
+                        <span>{skill}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 ) : (
                   <p className='cc-outcomes-note'>Tutor has not added course skills yet.</p>
                 )}
@@ -247,11 +251,14 @@ const CourseContent = ({
               <div className='cc-outcomes-block'>
                 <h2>Tools you'll learn</h2>
                 {resolvedTools.length > 0 ? (
-                  <div className='cc-chip-wrap'>
+                  <ul className='cc-skill-list'>
                     {resolvedTools.map((tool, index) => (
-                      <span key={`${tool}-${index}`} className='cc-insight-chip'>{tool}</span>
+                      <li key={`${tool}-${index}`}>
+                        <FaCheckCircle className='cc-skill-icon' />
+                        <span>{tool}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 ) : (
                   <p className='cc-outcomes-note'>Tutor has not added tools for this course yet.</p>
                 )}

@@ -195,6 +195,43 @@
   text-align: left;
 }
 
+.cc-skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 6px 0 0;
+  display: grid;
+  gap: 6px;
+}
+
+.cc-skill-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: #3f5446;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cc-skill-list li span {
+  display: block;
+  width: 100%;
+  line-height: 1.45;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.cc-skill-icon {
+  font-size: 0.9rem;
+  color: #1f6f43;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
 .cc-details-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -465,7 +502,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 11rem;
+  gap: clamp(2rem, 6vw, 11rem);
   align-items: center;
   padding: 3rem 2rem;
   padding-top: 8rem;
@@ -565,6 +602,18 @@
 .cc-hero-card {
   flex-shrink: 0;
   align-self: flex-start;
+  min-width: 340px;
+}
+
+@media screen and (max-width: 1280px) {
+  .cc-hero {
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .cc-hero-inner {
+    max-width: min(620px, 100%);
+  }
 }
 
 /* ══ INCLUDES ══ */

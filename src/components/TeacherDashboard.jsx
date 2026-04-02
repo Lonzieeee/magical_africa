@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react'
+import React, { useMemo, useState, useEffect, useRef } from 'react'
 import { FaBell, FaChevronLeft, FaStar } from 'react-icons/fa'
 import {
   Bar,
@@ -25,12 +25,17 @@ import {
   doc,
   onSnapshot,
   query,
+  setDoc,
   updateDoc,
   where
 } from 'firebase/firestore'
-import { onAuthStateChanged } from 'firebase/auth'
+import { deleteUser, EmailAuthProvider, onAuthStateChanged, reauthenticateWithCredential, signOut, updatePassword, updateProfile } from 'firebase/auth'
 import { useAuth } from '../context/AuthContext'
 import '../styles/teacher-dashboard.css'
+
+const getTeacherThemeKey = (uid) => `teacherDashboardTheme_${uid}`
+const getTeacherSettingsPrefsKey = (uid) => `teacherDashboardSettings_${uid}`
+const getTeacherProfilePhotoKey = (uid) => `teacherDashboardProfilePhoto_${uid}`
 
 const TeacherDashboard = () => {
   const navigate = useNavigate()
@@ -40,8 +45,10 @@ const TeacherDashboard = () => {
     teaching: true,
     learners: true,
     insights: false,
-    content: false
+    content: false,
+    account: false
   })
+  const [themeMode, setThemeMode] = useState('light')
   const [courses, setCourses] = useState([])
   const [enrollments, setEnrollments] = useState([])
   const [announcements, setAnnouncements] = useState([])
@@ -77,6 +84,22 @@ const TeacherDashboard = () => {
   const [certificateDownloadUrl, setCertificateDownloadUrl] = useState('')
   const [certificateFileName, setCertificateFileName] = useState('')
   const [reviewsSeenAt, setReviewsSeenAt] = useState('')
+  const [settingsPrefs, setSettingsPrefs] = useState({
+    darkMode: false,
+    biometricAuth: false,
+    notifications: true,
+    cloudSync: true
+  })
+  const [profileDraft, setProfileDraft] = useState({
+    firstName: '',
+    lastName: '',
+    photoURL: ''
+  })
+  const [profileSaving, setProfileSaving] = useState(false)
+  const [profileMessage, setProfileMessage] = useState('')
+  const [securityMessage, setSecurityMessage] = useState('')
+  const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '' })
+  const profilePhotoInputRef = useRef(null)
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, () => setAuthReady(true))
@@ -114,6 +137,66 @@ const TeacherDashboard = () => {
     const seenAt = localStorage.getItem(`teacherReviewsSeenAt_${uid}`) || ''
     setReviewsSeenAt(seenAt)
   }, [authReady])
+
+  useEffect(() => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    const stored = localStorage.getItem(getTeacherThemeKey(uid))
+    if (stored === 'dark' || stored === 'light') {
+      setThemeMode(stored)
+      return
+    }
+    setThemeMode('light')
+  }, [authReady])
+
+  useEffect(() => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    localStorage.setItem(getTeacherThemeKey(uid), themeMode)
+  }, [themeMode])
+
+  useEffect(() => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    const stored = localStorage.getItem(getTeacherSettingsPrefsKey(uid))
+    if (!stored) {
+      setSettingsPrefs((prev) => ({ ...prev, darkMode: themeMode === 'dark' }))
+      return
+    }
+
+    try {
+      const parsed = JSON.parse(stored)
+      const nextPrefs = {
+        darkMode: Boolean(parsed?.darkMode),
+        biometricAuth: Boolean(parsed?.biometricAuth),
+        notifications: parsed?.notifications !== false,
+        cloudSync: parsed?.cloudSync !== false
+      }
+      setSettingsPrefs(nextPrefs)
+      if ((nextPrefs.darkMode ? 'dark' : 'light') !== themeMode) {
+        setThemeMode(nextPrefs.darkMode ? 'dark' : 'light')
+      }
+    } catch {
+      setSettingsPrefs((prev) => ({ ...prev, darkMode: themeMode === 'dark' }))
+    }
+  }, [authReady])
+
+  useEffect(() => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    localStorage.setItem(getTeacherSettingsPrefsKey(uid), JSON.stringify(settingsPrefs))
+  }, [settingsPrefs])
+
+  useEffect(() => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    const localPhoto = localStorage.getItem(getTeacherProfilePhotoKey(uid)) || ''
+    setProfileDraft({
+      firstName: userData?.firstName || '',
+      lastName: userData?.lastName || userData?.secondName || '',
+      photoURL: localPhoto || userData?.photoURL || auth.currentUser?.photoURL || ''
+    })
+  }, [authReady, userData])
 
   useEffect(() => {
     if (courses.length === 0) {
@@ -260,9 +343,10 @@ const fetchDashboardData = async () => {
     }
 
     // Step 3 — fetch everything else in parallel
-    const [announcementSnapshot, reviewSnapshot, ...enrollmentSnapshots] = await Promise.allSettled([
+    const [announcementSnapshot, reviewSnapshot, learnerProgressSnapshot, ...enrollmentSnapshots] = await Promise.allSettled([
       getDocs(collection(db, 'announcements')),
       getDocs(collection(db, 'reviews')),
+      getDocs(collection(db, 'learnerProgress')),
       ...enrollmentQueries
     ])
 
@@ -276,8 +360,39 @@ const fetchDashboardData = async () => {
       }
     })
 
+    const learnerProgressDocs = learnerProgressSnapshot.status === 'fulfilled' ? learnerProgressSnapshot.value.docs : []
+    const completionFromProgress = new Map()
+
+    learnerProgressDocs.forEach((docItem) => {
+      const learnerId = docItem.id
+      const data = docItem.data() || {}
+      const courseProgress = data.courses || {}
+      Object.entries(courseProgress).forEach(([courseId, progress]) => {
+        const completion = Number(progress?.completion || 0)
+        if (!Number.isFinite(completion)) return
+        const key = `${learnerId}_${courseId}`
+        const previous = completionFromProgress.get(key) || 0
+        completionFromProgress.set(key, Math.max(previous, completion))
+      })
+    })
+
     const myEnrollments = Array.from(enrollmentMap.values())
       .filter(item => item.teacherId === currentTeacherId || myCourseIds.has(item.courseId))
+      .map((item) => {
+        const learnerId = item.learnerId || item.studentId || ''
+        const courseId = item.courseId || ''
+        const progressKey = `${learnerId}_${courseId}`
+        const progressCompletion = completionFromProgress.get(progressKey)
+        const enrollmentCompletion = Number(item.completion || 0)
+        const mergedCompletion = Number.isFinite(progressCompletion)
+          ? Math.max(enrollmentCompletion, progressCompletion)
+          : enrollmentCompletion
+
+        return {
+          ...item,
+          completion: Math.max(0, Math.min(100, Math.round(mergedCompletion)))
+        }
+      })
 
     const announcementDocs = announcementSnapshot.status === 'fulfilled' ? announcementSnapshot.value.docs : []
     const reviewDocs = reviewSnapshot.status === 'fulfilled' ? reviewSnapshot.value.docs : []
@@ -497,7 +612,7 @@ const fetchDashboardData = async () => {
 
     try {
       const parseListInput = (rawInput) => rawInput
-        .split(/\n|,/)
+        .split('\n')
         .map((line) => line.replace(/^[-*\u2022]\s*/, '').trim())
         .filter(Boolean)
 
@@ -986,6 +1101,154 @@ const fetchDashboardData = async () => {
     setMenuOpen((prev) => ({ ...prev, [menu]: !prev[menu] }))
   }
 
+  const toggleThemeMode = () => {
+    const nextMode = themeMode === 'dark' ? 'light' : 'dark'
+    setThemeMode(nextMode)
+    setSettingsPrefs((prev) => ({ ...prev, darkMode: nextMode === 'dark' }))
+  }
+
+  const handleProfilePhotoUpload = async (event) => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+
+    const selectedFile = event.target.files?.[0]
+    event.target.value = ''
+    if (!selectedFile) return
+
+    const maxBytes = 2 * 1024 * 1024
+    if (selectedFile.size > maxBytes) {
+      setProfileMessage('Please choose an image smaller than 2MB for local storage.')
+      return
+    }
+
+    try {
+      setProfileSaving(true)
+      const photoURL = await new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(String(reader.result || ''))
+        reader.onerror = () => reject(new Error('file-read-failed'))
+        reader.readAsDataURL(selectedFile)
+      })
+
+      localStorage.setItem(getTeacherProfilePhotoKey(uid), photoURL)
+      setProfileDraft((prev) => ({ ...prev, photoURL }))
+      setProfileMessage('Profile picture saved on this device.')
+    } catch {
+      setProfileMessage('Could not save profile picture locally. Please try again.')
+    } finally {
+      setProfileSaving(false)
+    }
+  }
+
+  const handleProfilePhotoDelete = () => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+
+    const confirmed = window.confirm('Remove your profile picture and keep initials avatar instead?')
+    if (!confirmed) return
+
+    localStorage.removeItem(getTeacherProfilePhotoKey(uid))
+    setProfileDraft((prev) => ({ ...prev, photoURL: '' }))
+    setProfileMessage('Profile picture removed.')
+  }
+
+  const handleProfileSave = async () => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+
+    const firstName = profileDraft.firstName.trim()
+    const lastName = profileDraft.lastName.trim()
+
+    if (!firstName) {
+      setProfileMessage('First name is required.')
+      return
+    }
+
+    try {
+      setProfileSaving(true)
+      const isLocalPhoto = String(profileDraft.photoURL || '').startsWith('data:')
+      const cloudSafePhoto = isLocalPhoto ? '' : (profileDraft.photoURL || '')
+
+      await setDoc(doc(db, 'users', uid), {
+        firstName,
+        lastName,
+        secondName: lastName,
+        photoURL: cloudSafePhoto,
+        updatedAt: new Date().toISOString()
+      }, { merge: true })
+
+      const displayName = `${firstName} ${lastName}`.trim()
+      await updateProfile(auth.currentUser, {
+        displayName,
+        photoURL: cloudSafePhoto
+      })
+
+      setProfileMessage('Profile updated successfully.')
+    } catch {
+      setProfileMessage('Could not save profile details right now.')
+    } finally {
+      setProfileSaving(false)
+    }
+  }
+
+  const handlePasswordUpdate = async () => {
+    if (!auth.currentUser) return
+
+    const providerId = auth.currentUser.providerData?.[0]?.providerId || ''
+    if (providerId !== 'password') {
+      setSecurityMessage('Password updates are only available for email/password accounts.')
+      return
+    }
+
+    if (!passwordForm.currentPassword || !passwordForm.newPassword) {
+      setSecurityMessage('Enter both current and new password.')
+      return
+    }
+
+    if (passwordForm.newPassword.length < 6) {
+      setSecurityMessage('New password should be at least 6 characters.')
+      return
+    }
+
+    try {
+      const credential = EmailAuthProvider.credential(auth.currentUser.email || '', passwordForm.currentPassword)
+      await reauthenticateWithCredential(auth.currentUser, credential)
+      await updatePassword(auth.currentUser, passwordForm.newPassword)
+      setPasswordForm({ currentPassword: '', newPassword: '' })
+      setSecurityMessage('Password updated successfully.')
+    } catch {
+      setSecurityMessage('Password update failed. Confirm your current password and try again.')
+    }
+  }
+
+  const handleLogoutClick = async () => {
+    const confirmed = window.confirm('Are you sure you want to log out?')
+    if (!confirmed) return
+
+    await signOut(auth)
+    navigate('/')
+  }
+
+  const handleDeleteAccount = async () => {
+    const uid = auth.currentUser?.uid
+    if (!uid || !auth.currentUser) return
+
+    const confirmed = window.confirm('Are you sure you want to delete your account permanently? This cannot be undone.')
+    if (!confirmed) return
+
+    const secondConfirmation = window.confirm('Final confirmation: delete your tutor account?')
+    if (!secondConfirmation) return
+
+    try {
+      await deleteDoc(doc(db, 'users', uid)).catch(() => null)
+      localStorage.removeItem(getTeacherProfilePhotoKey(uid))
+      await deleteUser(auth.currentUser)
+      navigate('/')
+    } catch {
+      setSecurityMessage('Delete failed. You may need to log in again before deleting your account.')
+    }
+  }
+
   const handleSaveDraftAndMove = async (nextStep) => {
     if (nextStep === 'curriculum') {
       await handleSaveAndGo('/curriculum')
@@ -1026,7 +1289,7 @@ const fetchDashboardData = async () => {
   ]
 
   return (
-    <div className='td-dashboard'>
+    <div className={`td-dashboard ${themeMode === 'dark' ? 'td-dashboard--dark' : ''}`}>
       <div className='td-layout'>
         <aside className='td-sidebar'>
           <button className='td-back-btn' onClick={() => navigate('/')}>
@@ -1105,12 +1368,35 @@ const fetchDashboardData = async () => {
                 </div>
               )}
             </div>
+
+            <div className='td-nav-group'>
+              <button
+                className={`td-nav-group-title ${menuOpen.account ? 'expanded' : ''}`}
+                onClick={() => toggleMenu('account')}
+                aria-expanded={menuOpen.account}
+              >
+                Account
+              </button>
+              {menuOpen.account && (
+                <div className='td-nav-submenu'>
+                  <button className={`td-nav-subitem ${activeSection === 'profile' ? 'active' : ''}`} onClick={() => setActiveSection('profile')}>Profile</button>
+                  <button className={`td-nav-subitem ${activeSection === 'settings' ? 'active' : ''}`} onClick={() => setActiveSection('settings')}>Settings</button>
+                </div>
+              )}
+            </div>
           </div>
         </aside>
 
         <main className='td-main'>
           {!loading && (
             <div className='td-top-alert-row'>
+              <button
+                className='td-theme-toggle'
+                type='button'
+                onClick={toggleThemeMode}
+              >
+                {themeMode === 'dark' ? 'Light Mode' : 'Dark Mode'}
+              </button>
               <button className='td-alert-bell' type='button' onClick={() => setActiveSection('reviews')}>
                 <FaBell aria-hidden='true' />
                 {unseenReviewsCount > 0 && <span>{unseenReviewsCount}</span>}
@@ -1359,7 +1645,7 @@ const fetchDashboardData = async () => {
                         placeholder={'At the end of this course, learners will be able to...\nDescribe a key concept\nApply a practical technique'}
                       />
 
-                      <label>Skills Learners Gain (one per line or comma separated)</label>
+                      <label>Skills Learners Gain (one per line)</label>
                       <textarea
                         value={courseSkillsInput}
                         onChange={(e) => setCourseSkillsInput(e.target.value)}
@@ -1367,7 +1653,7 @@ const fetchDashboardData = async () => {
                       />
                       {builderErrors.courseSkillsInput && <p className='td-field-error'>{builderErrors.courseSkillsInput}</p>}
 
-                      <label>Tools Learners Use (one per line or comma separated)</label>
+                      <label>Tools Learners Use (one per line)</label>
                       <textarea
                         value={courseToolsInput}
                         onChange={(e) => setCourseToolsInput(e.target.value)}
@@ -1993,6 +2279,186 @@ const fetchDashboardData = async () => {
               </div>
               <h1>Earnings</h1>
               <p className='td-empty-text'>Revenue and payouts can be enabled once monetization is activated.</p>
+            </section>
+          )}
+
+          {!loading && activeSection === 'profile' && (
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>PR</span>
+                  Profile
+                </span>
+                <p>Review your account identity and profile details used across your courses.</p>
+              </div>
+              <h1>Tutor Profile</h1>
+              {profileMessage && <p className='td-builder-message'>{profileMessage}</p>}
+              {securityMessage && <p className='td-builder-message is-error'>{securityMessage}</p>}
+
+              <div className='td-account-wrap'>
+                <div className='td-account-row'>
+                  <div className='td-account-avatar'>
+                    {profileDraft.photoURL
+                      ? <img src={profileDraft.photoURL} alt='Profile' />
+                      : <span>{`${(profileDraft.firstName || 'T').charAt(0)}${(profileDraft.lastName || '').charAt(0)}`.toUpperCase() || 'T'}</span>}
+                  </div>
+                  <div className='td-account-avatar-copy'>
+                    <h3>Profile picture</h3>
+                    <p>PNG, JPEG or WEBP under 2MB (saved on this device)</p>
+                  </div>
+                  <div className='td-account-avatar-actions'>
+                    <input
+                      ref={profilePhotoInputRef}
+                      type='file'
+                      accept='image/png,image/jpeg,image/webp'
+                      onChange={handleProfilePhotoUpload}
+                      hidden
+                    />
+                    <button type='button' onClick={() => profilePhotoInputRef.current?.click()} disabled={profileSaving}>
+                      Upload new picture
+                    </button>
+                    <button type='button' onClick={handleProfilePhotoDelete} disabled={profileSaving}>Delete</button>
+                  </div>
+                </div>
+
+                <div className='td-account-group'>
+                  <h3>Full name</h3>
+                  <div className='td-account-grid'>
+                    <label>
+                      <span>First name</span>
+                      <input
+                        type='text'
+                        value={profileDraft.firstName}
+                        onChange={(e) => setProfileDraft((prev) => ({ ...prev, firstName: e.target.value }))}
+                        placeholder='First name'
+                      />
+                    </label>
+                    <label>
+                      <span>Last name</span>
+                      <input
+                        type='text'
+                        value={profileDraft.lastName}
+                        onChange={(e) => setProfileDraft((prev) => ({ ...prev, lastName: e.target.value }))}
+                        placeholder='Last name'
+                      />
+                    </label>
+                  </div>
+                  <button type='button' className='td-account-save-btn' onClick={handleProfileSave} disabled={profileSaving}>
+                    Save profile
+                  </button>
+                </div>
+
+                <div className='td-account-group'>
+                  <h3>Contact email</h3>
+                  <p>Manage your account email used for communication and login.</p>
+                  <div className='td-account-email'>{auth.currentUser?.email || 'No email on file'}</div>
+                </div>
+
+                <div className='td-account-group'>
+                  <h3>Password</h3>
+                  <p>Modify your current password.</p>
+                  <div className='td-account-grid'>
+                    <label>
+                      <span>Current password</span>
+                      <input
+                        type='password'
+                        value={passwordForm.currentPassword}
+                        onChange={(e) => setPasswordForm((prev) => ({ ...prev, currentPassword: e.target.value }))}
+                        placeholder='Current password'
+                      />
+                    </label>
+                    <label>
+                      <span>New password</span>
+                      <input
+                        type='password'
+                        value={passwordForm.newPassword}
+                        onChange={(e) => setPasswordForm((prev) => ({ ...prev, newPassword: e.target.value }))}
+                        placeholder='New password'
+                      />
+                    </label>
+                  </div>
+                  <button type='button' className='td-account-save-btn' onClick={handlePasswordUpdate}>Update password</button>
+                </div>
+
+                <div className='td-account-group'>
+                  <h3>Account security</h3>
+                  <p>Manage your account security.</p>
+                  <div className='td-account-danger-zone'>
+                    <button type='button' className='td-security-btn' onClick={handleLogoutClick}>Logout</button>
+                    <button type='button' className='td-security-btn td-security-btn-danger' onClick={handleDeleteAccount}>Delete my account</button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {!loading && activeSection === 'settings' && (
+            <section className='td-panel td-view-stage'>
+              <div className='td-section-lead'>
+                <span className='td-section-badge'>
+                  <span className='td-badge-icon' aria-hidden='true'>ST</span>
+                  Settings
+                </span>
+                <p>Customize your dashboard experience for focus and readability.</p>
+              </div>
+              <h1>Dashboard Settings</h1>
+              <div className='td-settings-grid'>
+                <article className='td-settings-card'>
+                  <h3>Security</h3>
+                  <label className='td-setting-row'>
+                    <div>
+                      <strong>Biometric authentication</strong>
+                      <p>Allow this device to use biometrics for secure unlock on supported devices.</p>
+                    </div>
+                    <input
+                      type='checkbox'
+                      checked={settingsPrefs.biometricAuth}
+                      onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, biometricAuth: e.target.checked }))}
+                    />
+                  </label>
+                </article>
+
+                <article className='td-settings-card'>
+                  <h3>Sync & Notifications</h3>
+                  <label className='td-setting-row'>
+                    <div>
+                      <strong>Cloud sync</strong>
+                      <p>Sync dashboard settings and preferences across your signed-in sessions.</p>
+                    </div>
+                    <input
+                      type='checkbox'
+                      checked={settingsPrefs.cloudSync}
+                      onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, cloudSync: e.target.checked }))}
+                    />
+                  </label>
+                  <label className='td-setting-row'>
+                    <div>
+                      <strong>Notifications</strong>
+                      <p>Enable dashboard updates, review alerts, and student activity notifications.</p>
+                    </div>
+                    <input
+                      type='checkbox'
+                      checked={settingsPrefs.notifications}
+                      onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, notifications: e.target.checked }))}
+                    />
+                  </label>
+                </article>
+
+                <article className='td-settings-card'>
+                  <h3>Appearance</h3>
+                  <label className='td-setting-row'>
+                    <div>
+                      <strong>Dark mode</strong>
+                      <p>Switch tutor dashboard between light and dark mode.</p>
+                    </div>
+                    <input
+                      type='checkbox'
+                      checked={themeMode === 'dark'}
+                      onChange={toggleThemeMode}
+                    />
+                  </label>
+                </article>
+              </div>
             </section>
           )}
         </main>
