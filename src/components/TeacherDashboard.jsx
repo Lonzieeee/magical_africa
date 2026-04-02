@@ -36,6 +36,7 @@ import '../styles/teacher-dashboard.css'
 const getTeacherThemeKey = (uid) => `teacherDashboardTheme_${uid}`
 const getTeacherSettingsPrefsKey = (uid) => `teacherDashboardSettings_${uid}`
 const getTeacherProfilePhotoKey = (uid) => `teacherDashboardProfilePhoto_${uid}`
+const courseTypeOptions = ['Language', 'Culture', 'History', 'Artisan', 'Pottery', 'Woodwork', 'Cooking']
 
 const TeacherDashboard = () => {
   const navigate = useNavigate()
@@ -1584,7 +1585,12 @@ const fetchDashboardData = async () => {
                         </div>
                         <div>
                           <label>Course Type</label>
-                          <input value={courseType} onChange={(e) => setCourseType(e.target.value)} placeholder='e.g. Pottery' />
+                          <select value={courseType} onChange={(e) => setCourseType(e.target.value)}>
+                            <option value=''>Select course type</option>
+                            {courseTypeOptions.map((type) => (
+                              <option key={type} value={type}>{type}</option>
+                            ))}
+                          </select>
                         </div>
                       </div>
 
