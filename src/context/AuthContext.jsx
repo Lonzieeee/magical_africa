@@ -12,7 +12,7 @@ import {
   GoogleAuthProvider,
   signOut 
 } from 'firebase/auth';
-import { getFirestore, doc, setDoc, getDoc } from 'firebase/firestore';
+import { getFirestore, doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDiLg6P5650fOfcS8Wq5J3-x9qkgKFrc4Y",
@@ -43,14 +43,32 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let unsubscribeUserDoc = null
+
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      if (unsubscribeUserDoc) {
+        unsubscribeUserDoc()
+        unsubscribeUserDoc = null
+      }
+
       setUser(currentUser);
       
       if (currentUser) {
-        const userDoc = await getDoc(doc(db, "users", currentUser.uid));
+        const userDocRef = doc(db, "users", currentUser.uid)
+        const userDoc = await getDoc(userDocRef);
         if (userDoc.exists()) {
           setUserData(userDoc.data());
+        } else {
+          setUserData(null)
         }
+
+        unsubscribeUserDoc = onSnapshot(userDocRef, (snapshot) => {
+          if (snapshot.exists()) {
+            setUserData(snapshot.data())
+          } else {
+            setUserData(null)
+          }
+        })
       } else {
         setUserData(null);
       }
@@ -58,7 +76,10 @@ export const AuthProvider = ({ children }) => {
       setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      if (unsubscribeUserDoc) unsubscribeUserDoc()
+      unsubscribe();
+    }
   }, []);
 
   const login = async (email, password) => {
