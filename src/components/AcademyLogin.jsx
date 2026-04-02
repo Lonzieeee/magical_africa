@@ -16,6 +16,21 @@ const AcademyLogin = () => {
    const [showPassword, setShowPassword] = useState(false)
 
   const navigate = useNavigate()
+
+  const normalizeRole = (role) => {
+    const value = String(role || '').trim().toLowerCase()
+    if (!value) return ''
+    if (value.includes('teacher') || value.includes('tutor') || value.includes('educator')) return 'teacher'
+    if (value.includes('learner') || value.includes('student')) return 'learner'
+    return ''
+  }
+
+  const resolveLoginRole = (profile) => {
+    const normalized = normalizeRole(profile?.role)
+    if (normalized) return normalized
+    if (String(profile?.subject || '').trim()) return 'teacher'
+    return 'learner'
+  }
  
 
   const handleSubmit = async (e) => {
@@ -37,7 +52,8 @@ const AcademyLogin = () => {
         // 3. Show success message then redirect based on role
         setSuccess(true)
         setTimeout(() => {
-          if (userData.role === 'teacher') {
+          const role = resolveLoginRole(userData)
+          if (role === 'teacher') {
             navigate('/teacher-dashboard')
           } else {
             navigate('/learner')
@@ -47,7 +63,7 @@ const AcademyLogin = () => {
       } else {
         // User exists in Auth but not Firestore
         setSuccess(true)
-        setTimeout(() => navigate('/dashboard'), 2000)
+        setTimeout(() => navigate('/learner'), 2000)
       }
 
     } catch (err) {

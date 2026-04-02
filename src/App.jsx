@@ -77,6 +77,21 @@ function App() {
               <TeacherDashboard />
             </ProtectedRoute>
           } />
+          <Route path="/dashboard" element={
+            <ProtectedRoute allowedRole='teacher'>
+              <TeacherDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/tutor" element={
+            <ProtectedRoute allowedRole='teacher'>
+              <TeacherDashboard />
+            </ProtectedRoute>
+          } />
+          <Route path="/tutor-dashboard" element={
+            <ProtectedRoute allowedRole='teacher'>
+              <TeacherDashboard />
+            </ProtectedRoute>
+          } />
 
           {/* ── Learner-only routes ── */}
           <Route path="/learner" element={

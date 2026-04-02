@@ -4,6 +4,15 @@ import { useAuth } from '../context/AuthContext'
 
 const ProtectedRoute = ({ children, allowedRole }) => {
   const { user, userData, loading } = useAuth()
+  const normalizeRole = (role) => {
+    const value = String(role || '').trim().toLowerCase()
+    if (!value) return ''
+    if (value.includes('teacher') || value.includes('tutor') || value.includes('educator')) return 'teacher'
+    if (value.includes('learner') || value.includes('student')) return 'learner'
+    return ''
+  }
+  const currentRole = normalizeRole(userData?.role)
+  const expectedRole = normalizeRole(allowedRole)
 
   // Still loading auth — show nothing yet
   if (loading) return <div style={{ padding: '40px', textAlign: 'center' }}>Loading...</div>
@@ -11,10 +20,13 @@ const ProtectedRoute = ({ children, allowedRole }) => {
   // Not logged in — redirect to login
   if (!user) return <Navigate to='/academy-signIn' />
 
+  // If auth is valid but role is missing/legacy, avoid redirect loops.
+  if (expectedRole && !currentRole) return children
+
   // Logged in but wrong role — redirect to their correct page
-  if (allowedRole && userData?.role !== allowedRole) {
-    if (userData?.role === 'learner') return <Navigate to='/learner' />
-    if (userData?.role === 'teacher') return <Navigate to='/teacher-dashboard' />
+  if (expectedRole && currentRole !== expectedRole) {
+    if (currentRole === 'learner') return <Navigate to='/learner' />
+    if (currentRole === 'teacher') return <Navigate to='/teacher-dashboard' />
     return <Navigate to='/academy-signIn' />
   }
 
