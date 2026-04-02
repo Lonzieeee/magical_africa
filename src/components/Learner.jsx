@@ -1,10 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { FiActivity, FiBell, FiBookOpen, FiCheckCircle, FiChevronLeft, FiClock, FiLogOut, FiPlayCircle, FiSearch, FiShoppingBag, FiTrash2, FiUpload, FiX } from 'react-icons/fi'
 import '../styles/learner.css'
-import { auth, db, storage } from '../context/AuthContext'
+import { auth, db } from '../context/AuthContext'
 import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, setDoc, where } from 'firebase/firestore'
 import { deleteUser, EmailAuthProvider, reauthenticateWithCredential, updatePassword, updateProfile } from 'firebase/auth'
-import { deleteObject, getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
@@ -13,6 +12,7 @@ const getAnnouncementSeenKey = (uid) => `learnerAnnouncementSeenAt_${uid}`
 const getDisplayPrefsKey = (uid) => `learnerDisplayPrefs_${uid}`
 const getStorePrefsKey = (uid) => `learnerStorePrefs_${uid}`
 const getSettingsPrefsKey = (uid) => `learnerSettingsPrefs_${uid}`
+const getProfilePhotoKey = (uid) => `learnerProfilePhoto_${uid}`
 
 const toMs = (value) => {
   if (!value) return 0
@@ -727,12 +727,13 @@ const Learner = () => {
   }, [profileDraft.firstName, profileDraft.lastName, userData, getInitials])
 
   useEffect(() => {
+    const localPhoto = user?.uid ? (localStorage.getItem(getProfilePhotoKey(user.uid)) || '') : ''
     setProfileDraft({
       firstName: userData?.firstName || '',
       lastName: userData?.lastName || userData?.secondName || '',
-      photoURL: userData?.photoURL || user?.photoURL || ''
+      photoURL: localPhoto || userData?.photoURL || user?.photoURL || ''
     })
-  }, [userData, user?.photoURL])
+  }, [userData, user?.uid, user?.photoURL])
 
   const handleProfilePhotoUpload = async (event) => {
     if (!user?.uid) return
@@ -741,34 +742,28 @@ const Learner = () => {
     event.target.value = ''
     if (!selectedFile) return
 
-    const maxBytes = 15 * 1024 * 1024
+    const maxBytes = 2 * 1024 * 1024
     if (selectedFile.size > maxBytes) {
-      setProfileMessage('Please choose an image smaller than 15MB.')
+      setProfileMessage('Please choose an image smaller than 2MB for local storage.')
       return
     }
 
     try {
       setProfileSaving(true)
-      const photoRef = ref(storage, `profilePictures/${user.uid}/avatar`)
-      await uploadBytes(photoRef, selectedFile, { contentType: selectedFile.type || 'image/jpeg' })
-      const photoURL = await getDownloadURL(photoRef)
+      const photoURL = await new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = () => reject(new Error('file-read-failed'))
+        reader.readAsDataURL(selectedFile)
+      })
 
-      setProfileDraft((prev) => ({ ...prev, photoURL }))
-
-      await setDoc(doc(db, 'users', user.uid), {
-        photoURL,
-        updatedAt: new Date().toISOString()
-      }, { merge: true })
-
-      await updateProfile(auth.currentUser, { photoURL })
-      setProfileMessage('Profile picture updated successfully.')
+      const resolvedPhoto = String(photoURL || '')
+      localStorage.setItem(getProfilePhotoKey(user.uid), resolvedPhoto)
+      setProfileDraft((prev) => ({ ...prev, photoURL: resolvedPhoto }))
+      setProfileMessage('Profile picture saved on this device.')
     } catch (error) {
       console.log('Could not upload profile picture:', error)
-      if (String(error?.code || '').includes('storage/unauthorized')) {
-        setProfileMessage('Upload blocked by Firebase Storage rules. Allow authenticated write access to profilePictures/* and try again.')
-      } else {
-        setProfileMessage(`Could not update profile picture (${error?.code || 'unknown error'}). Please try again.`)
-      }
+      setProfileMessage('Could not save profile picture locally. Please try again.')
     } finally {
       setProfileSaving(false)
     }
@@ -782,15 +777,7 @@ const Learner = () => {
 
     try {
       setProfileSaving(true)
-      const storedFiles = [
-        ref(storage, `profilePictures/${user.uid}/avatar`),
-        ref(storage, `profilePictures/${user.uid}.jpg`),
-        ref(storage, `profilePictures/${user.uid}.jpeg`),
-        ref(storage, `profilePictures/${user.uid}.png`),
-        ref(storage, `profilePictures/${user.uid}.webp`)
-      ]
-
-      await Promise.all(storedFiles.map((fileRef) => deleteObject(fileRef).catch(() => null)))
+      localStorage.removeItem(getProfilePhotoKey(user.uid))
 
       await setDoc(doc(db, 'users', user.uid), {
         photoURL: '',
@@ -821,18 +808,21 @@ const Learner = () => {
 
     try {
       setProfileSaving(true)
+      const isLocalPhoto = String(profileDraft.photoURL || '').startsWith('data:')
+      const cloudSafePhoto = isLocalPhoto ? '' : (profileDraft.photoURL || '')
+
       await setDoc(doc(db, 'users', user.uid), {
         firstName,
         lastName,
         secondName: lastName,
-        photoURL: profileDraft.photoURL || '',
+        photoURL: cloudSafePhoto,
         updatedAt: new Date().toISOString()
       }, { merge: true })
 
       const displayName = `${firstName} ${lastName}`.trim()
       await updateProfile(auth.currentUser, {
         displayName,
-        photoURL: profileDraft.photoURL || ''
+        photoURL: cloudSafePhoto
       })
 
       setProfileMessage('Profile updated successfully.')
@@ -901,15 +891,7 @@ const Learner = () => {
         deleteDoc(doc(db, 'learnerProgress', user.uid)).catch(() => null)
       ])
 
-      const storedFiles = [
-        ref(storage, `profilePictures/${user.uid}/avatar`),
-        ref(storage, `profilePictures/${user.uid}.jpg`),
-        ref(storage, `profilePictures/${user.uid}.jpeg`),
-        ref(storage, `profilePictures/${user.uid}.png`),
-        ref(storage, `profilePictures/${user.uid}.webp`)
-      ]
-
-      await Promise.all(storedFiles.map((fileRef) => deleteObject(fileRef).catch(() => null)))
+      localStorage.removeItem(getProfilePhotoKey(user.uid))
       await deleteUser(auth.currentUser)
       navigate('/')
     } catch (error) {
@@ -987,6 +969,7 @@ const Learner = () => {
       .map((course) => ({
         id: course.id,
         title: course.title || 'Untitled Course',
+        teacherName: course.teacherName || course.tutorName || 'Tutor',
         completedAt: progressMap[course.id]?.updatedAt || progressMap[course.id]?.lastActiveAt || new Date().toISOString()
       }))
   }, [myCourses, progressMap])
@@ -1077,6 +1060,13 @@ const Learner = () => {
     }
 
   }
+
+  // Language Practice is temporarily disabled while the section is being redesigned.
+  useEffect(() => {
+    if (activeSection === 'language') {
+      setActiveSection('culture')
+    }
+  }, [activeSection])
 
   const markAllNotificationsRead = () => {
     if (!user?.uid) return
@@ -1282,7 +1272,7 @@ const Learner = () => {
     return learnerAnnouncements.filter((item) => toMs(item.createdAt) > seenTime).length
   }, [learnerAnnouncements, announcementSeenAt])
 
-  const handleDownloadCertificate = (courseTitle, completedAt) => {
+  const handleDownloadCertificate = (courseTitle, completedAt, tutorName) => {
     const learnerDisplayName = learnerName || 'Learner'
     const completionDate = (() => {
       const parsed = new Date(completedAt || new Date().toISOString())
@@ -1292,6 +1282,9 @@ const Learner = () => {
 
     const safeName = learnerDisplayName.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
     const safeCourse = (courseTitle || 'Course').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    const safeTutorName = (tutorName || 'Tutor').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    const safeAuthorityName = 'Kombo Steve'
+    const logoHref = `${window.location.origin}/images/magicaal-logo1-removebg-preview.png`
 
     const certificateSvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1130" viewBox="0 0 1600 1130">
@@ -1306,21 +1299,25 @@ const Learner = () => {
     </linearGradient>
   </defs>
   <rect width="1600" height="1130" fill="url(#bg)" />
-  <rect x="50" y="50" width="1500" height="1030" fill="none" stroke="#1f6f43" stroke-width="8" />
-  <rect x="80" y="80" width="1440" height="970" fill="none" stroke="#d4a24f" stroke-width="2" />
-  <circle cx="800" cy="170" r="42" fill="url(#badge)" />
-  <text x="800" y="180" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#ffffff">MA</text>
-  <text x="800" y="260" text-anchor="middle" font-family="Georgia, serif" font-size="66" fill="#1f6f43">Certificate of Completion</text>
-  <text x="800" y="342" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="30" fill="#4a4a4a">This certificate certifies that</text>
-  <text x="800" y="440" text-anchor="middle" font-family="Georgia, serif" font-size="76" fill="#a3070c">${safeName}</text>
-  <text x="800" y="518" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="30" fill="#4a4a4a">has successfully completed the course</text>
-  <text x="800" y="606" text-anchor="middle" font-family="Georgia, serif" font-size="56" fill="#1f6f43">${safeCourse}</text>
-  <text x="800" y="684" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="28" fill="#4a4a4a">Completion date: ${completionDate}</text>
-  <line x1="960" y1="846" x2="1320" y2="846" stroke="#1f6f43" stroke-width="2" />
-  <text x="1140" y="822" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="52" fill="#1f6f43">Magical Africa</text>
-  <text x="1140" y="884" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="21" fill="#4a4a4a">Authorized Signature</text>
-  <text x="1140" y="914" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="21" fill="#4a4a4a">Magical Africa Academy</text>
-  <text x="240" y="960" text-anchor="start" font-family="Poppins, Arial, sans-serif" font-size="19" fill="#667065">Certificate ID: MA-${Date.now()}</text>
+  <rect x="34" y="34" width="1532" height="1062" fill="none" stroke="#1f6f43" stroke-width="4" />
+  <rect x="58" y="58" width="1484" height="1014" fill="none" stroke="#d4a24f" stroke-width="2" />
+  <image href="${logoHref}" x="700" y="70" width="200" height="116" preserveAspectRatio="xMidYMid meet" />
+  <text x="800" y="242" text-anchor="middle" font-family="Georgia, serif" font-size="68" letter-spacing="6" fill="#1f6f43">CERTIFICATE</text>
+  <text x="800" y="292" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="25" letter-spacing="7" fill="#485047">OF COMPLETION</text>
+  <text x="800" y="354" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="28" fill="#5a6058">proudly presented to</text>
+  <line x1="430" y1="450" x2="1170" y2="450" stroke="#9a9f97" stroke-width="1.5" />
+  <text x="800" y="438" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="88" fill="#2f3f36">${safeName}</text>
+  <text x="800" y="520" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="30" fill="#4f564f">for successfully completing</text>
+  <text x="800" y="594" text-anchor="middle" font-family="Georgia, serif" font-size="54" fill="#a3070c">${safeCourse}</text>
+  <text x="800" y="650" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="25" fill="#596159">offered by ${safeTutorName}</text>
+  <text x="800" y="706" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="24" fill="#596159">Completion date: ${completionDate}</text>
+  <line x1="210" y1="894" x2="650" y2="894" stroke="#8b918a" stroke-width="1.8" />
+  <text x="430" y="872" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="54" fill="#1f6f43">${safeAuthorityName}</text>
+  <text x="430" y="938" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="21" fill="#555d55">Magical Africa Academy</text>
+  <line x1="950" y1="894" x2="1390" y2="894" stroke="#8b918a" stroke-width="1.8" />
+  <text x="1170" y="872" text-anchor="middle" font-family="Brush Script MT, Segoe Script, cursive" font-size="54" fill="#1f6f43">${safeTutorName}</text>
+  <text x="1170" y="938" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="21" fill="#555d55">Course Tutor</text>
+  <text x="130" y="1012" text-anchor="start" font-family="Poppins, Arial, sans-serif" font-size="19" fill="#667065">Certificate ID: MA-${Date.now()}</text>
 </svg>`
 
     const blob = new Blob([certificateSvg], { type: 'image/svg+xml;charset=utf-8' })
@@ -1440,9 +1437,6 @@ const Learner = () => {
                   </button>
                   <button className={`learner-nav-subitem ${activeSection === 'culture' ? 'active' : ''}`} onClick={() => openSection('culture')}>
                     Cultural Exploration Hub
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'language' ? 'active' : ''}`} onClick={() => openSection('language')}>
-                    Language Practice
                   </button>
                 </div>
               )}
@@ -2013,7 +2007,7 @@ const Learner = () => {
                   </div>
                   <div className='learner-account-avatar-copy'>
                     <h3>Profile picture</h3>
-                    <p>PNG, JPEG under 15MB</p>
+                    <p>PNG, JPEG or WEBP under 2MB (saved on this device)</p>
                   </div>
                   <div className='learner-account-avatar-actions'>
                     <input
@@ -2228,7 +2222,7 @@ const Learner = () => {
                       <button
                         className='learner-certificate-btn'
                         type='button'
-                        onClick={() => handleDownloadCertificate(course.title, course.completedAt)}
+                        onClick={() => handleDownloadCertificate(course.title, course.completedAt, course.teacherName)}
                       >
                         Download Certificate
                       </button>
@@ -2239,52 +2233,70 @@ const Learner = () => {
           )}
 
           {!loading && activeSection === 'culture' && (
-            <section className='learner-panel'>
+            <section className='learner-panel learner-panel--culture'>
               <h1>Cultural Exploration Hub</h1>
-              <div className='learner-feature-grid'>
-                <article>
-                  <h3>Featured Community of the Week</h3>
-                  <p>Maasai oral storytelling and age-set traditions.</p>
+              <div className='learner-culture-grid'>
+                <article className='learner-culture-card'>
+                  <img src='/images/maasai-land2.jpg' alt='Maasai community and landscape' className='learner-culture-card-image' />
+                  <div className='learner-culture-card-content'>
+                    <h3>Featured Community of the Week</h3>
+                    <p>Maasai oral storytelling and age-set traditions.</p>
+                  </div>
                 </article>
-                <article>
-                  <h3>Cultural Practices</h3>
-                  <p>Music, food, clothing, and ceremony spotlights from active courses.</p>
+
+                <article className='learner-culture-card'>
+                  <img src='/images/african-music.jpeg' alt='African cultural performance with music and dance' className='learner-culture-card-image' />
+                  <div className='learner-culture-card-content'>
+                    <h3>Cultural Practices</h3>
+                    <p>Music, food, clothing, and ceremony spotlights from active courses.</p>
+                  </div>
                 </article>
-                <article>
-                  <h3>Interactive Stories</h3>
-                  <p>Short story-based learning moments connected to your enrolled lessons.</p>
+
+                <article className='learner-culture-card'>
+                  <img src='/images/African-storytelling2.jpg' alt='African storytelling gathering' className='learner-culture-card-image' />
+                  <div className='learner-culture-card-content'>
+                    <h3>Interactive Stories</h3>
+                    <p>Short story-based learning moments connected to your enrolled lessons.</p>
+                  </div>
                 </article>
-                <article>
-                  <h3>Did You Know?</h3>
-                  <p>Did you know Swahili has words borrowed from Arabic, Persian, and Portuguese?</p>
+
+                <article className='learner-culture-card'>
+                  <img src='/images/african-pattern6.jpg' alt='African pattern and heritage artwork' className='learner-culture-card-image' />
+                  <div className='learner-culture-card-content'>
+                    <h3>Did You Know?</h3>
+                    <p>Did you know Swahili has words borrowed from Arabic, Persian, and Portuguese?</p>
+                  </div>
                 </article>
               </div>
             </section>
           )}
 
-          {!loading && activeSection === 'language' && (
-            <section className='learner-panel'>
-              <h1>Language Practice</h1>
-              <div className='learner-feature-grid'>
-                <article>
-                  <h3>Daily Phrases</h3>
-                  <p>Habari yako? • Asante sana • Karibu</p>
-                </article>
-                <article>
-                  <h3>Pronunciation Practice</h3>
-                  <p>Use lesson audio and tutor uploads to repeat and self-check.</p>
-                </article>
-                <article>
-                  <h3>Vocabulary Lists</h3>
-                  <p>Build your list from active courses and revise every day.</p>
-                </article>
-                <article>
-                  <h3>Mini Quizzes</h3>
-                  <p>Take topic quizzes from course content to reinforce retention.</p>
-                </article>
-              </div>
-            </section>
-          )}
+          {/*
+            Language Practice is temporarily hidden until the redesign is complete.
+            {!loading && activeSection === 'language' && (
+              <section className='learner-panel'>
+                <h1>Language Practice</h1>
+                <div className='learner-feature-grid'>
+                  <article>
+                    <h3>Daily Phrases</h3>
+                    <p>Habari yako? • Asante sana • Karibu</p>
+                  </article>
+                  <article>
+                    <h3>Pronunciation Practice</h3>
+                    <p>Use lesson audio and tutor uploads to repeat and self-check.</p>
+                  </article>
+                  <article>
+                    <h3>Vocabulary Lists</h3>
+                    <p>Build your list from active courses and revise every day.</p>
+                  </article>
+                  <article>
+                    <h3>Mini Quizzes</h3>
+                    <p>Take topic quizzes from course content to reinforce retention.</p>
+                  </article>
+                </div>
+              </section>
+            )}
+          */}
         </main>
       </div>
     </div>

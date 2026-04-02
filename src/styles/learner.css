@@ -1938,6 +1938,76 @@
   color: var(--ld-text-medium);
 }
 
+.learner-culture-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  width: 100%;
+  padding-inline: 0;
+}
+
+.learner-panel--culture {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.learner-panel--culture h1 {
+  padding-left: 18px;
+  padding-right: 18px;
+}
+
+.learner-culture-card {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  border: 1px solid var(--ld-border-soft);
+  overflow: hidden;
+  background-color: #0f1412;
+  box-shadow: 0 2px 8px rgba(17, 24, 39, 0.1);
+}
+
+.learner-culture-card-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.learner-culture-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 12, 9, 0.18) 0%, rgba(7, 12, 9, 0.78) 74%);
+}
+
+.learner-culture-card-content {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: end;
+  gap: 4px;
+  height: 100%;
+  padding: 10px;
+}
+
+.learner-culture-card-content h3 {
+  color: #f5f7f4;
+  font-size: 0.98rem;
+}
+
+.learner-culture-card-content p {
+  color: rgba(245, 247, 244, 0.9);
+  font-size: 0.86rem;
+  line-height: 1.35;
+}
+
+@media screen and (max-width: 1200px) {
+  .learner-culture-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .learner-settings-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2221,30 +2291,208 @@
 }
 
 .learner-dashboard--dark {
-  --ld-black: #f5f7fa;
-  --ld-white: #111722;
-  --ld-ink: #f5f7fa;
-  --ld-ink-soft: #c4d0e4;
-  --ld-text-muted: #afbad0;
-  --ld-text-medium: #c0cde4;
-  --ld-text-soft: #9ca9c2;
-  --ld-border-soft: rgba(127, 158, 201, 0.34);
-  --ld-border-strong: rgba(127, 158, 201, 0.5);
-  --ld-surface-muted: rgba(58, 120, 214, 0.28);
-  --ld-surface-soft: rgba(58, 120, 214, 0.16);
-  background: linear-gradient(180deg, #0f1520 0%, #121b2a 55%, #0f1520 100%);
+  --ld-red: #76adff;
+  --ld-red-deep: #5f95ec;
+  --ld-orange: #f6b36a;
+  --ld-sage: #8caad6;
+  --ld-black: #e8eef9;
+  --ld-white: #101824;
+  --ld-ink: #edf3ff;
+  --ld-ink-soft: #c6d4ea;
+  --ld-text-muted: #d2def2;
+  --ld-text-medium: #e0e9f8;
+  --ld-text-soft: #c6d4ea;
+  --ld-border-soft: rgba(140, 170, 214, 0.32);
+  --ld-border-strong: rgba(140, 170, 214, 0.55);
+  --ld-surface-muted: rgba(118, 173, 255, 0.2);
+  --ld-surface-soft: rgba(118, 173, 255, 0.12);
+  background:
+    radial-gradient(1000px 420px at 84% -16%, rgba(118, 173, 255, 0.2) 0%, rgba(118, 173, 255, 0) 72%),
+    radial-gradient(920px 360px at -8% 108%, rgba(246, 179, 106, 0.14) 0%, rgba(246, 179, 106, 0) 70%),
+    linear-gradient(180deg, #0a0f18 0%, #0e1622 55%, #0a0f18 100%);
 }
 
 .learner-dashboard--dark .learner-main {
-  background-color: rgba(8, 12, 18, 0.28);
+  background-color: rgba(5, 9, 15, 0.62);
 }
 
 .learner-dashboard--dark .learner-sidebar {
-  background-color: rgba(18, 27, 42, 0.75);
+  background-color: rgba(8, 13, 20, 0.88);
+  border-right-color: rgba(140, 170, 214, 0.34);
 }
 
 .learner-dashboard--dark .learner-store-image-placeholder {
   color: #c4d0e4;
+}
+
+.learner-dashboard--dark .learner-nav-group {
+  background-color: rgba(14, 22, 34, 0.82);
+  border-color: rgba(140, 170, 214, 0.36);
+}
+
+.learner-dashboard--dark .learner-nav-subitem:hover {
+  background-color: rgba(118, 173, 255, 0.16);
+}
+
+.learner-dashboard--dark .learner-nav-subitem.active {
+  background-color: rgba(118, 173, 255, 0.22);
+  color: #edf3ff;
+}
+
+.learner-dashboard--dark .learner-top-stat,
+.learner-dashboard--dark .learner-back-btn,
+.learner-dashboard--dark .learner-alert-bell {
+  background-color: rgba(118, 173, 255, 0.12);
+  border-color: rgba(140, 170, 214, 0.48);
+}
+
+.learner-dashboard--dark .learner-profile-dropdown {
+  background-color: #101824;
+  border-color: rgba(140, 170, 214, 0.45);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.45);
+}
+
+.learner-dashboard--dark .learner-profile-dropdown button {
+  background-color: rgba(118, 173, 255, 0.12);
+}
+
+.learner-dashboard--dark .learner-name-highlight,
+.learner-dashboard--dark .learner-course-state-pill,
+.learner-dashboard--dark .learner-inline-toast h3,
+.learner-dashboard--dark .learner-account-avatar {
+  color: #86e7b0;
+}
+
+.learner-dashboard--dark .learner-course-state-pill,
+.learner-dashboard--dark .learner-inline-toast,
+.learner-dashboard--dark .learner-account-avatar {
+  border-color: rgba(134, 231, 176, 0.42);
+  background-color: rgba(134, 231, 176, 0.12);
+}
+
+.learner-dashboard--dark .learner-panel,
+.learner-dashboard--dark .learner-store-card,
+.learner-dashboard--dark .learner-course-card,
+.learner-dashboard--dark .learner-metric-card,
+.learner-dashboard--dark .learner-notification-card,
+.learner-dashboard--dark .learner-settings-card,
+.learner-dashboard--dark .learner-account-group,
+.learner-dashboard--dark .learner-account-row {
+  background-color: rgba(16, 24, 36, 0.9);
+  border-color: rgba(140, 170, 214, 0.34);
+  box-shadow: 0 8px 24px rgba(2, 7, 14, 0.28);
+}
+
+.learner-dashboard--dark .learner-account-wrap {
+  background-color: rgba(16, 24, 36, 0.9);
+  border-color: rgba(140, 170, 214, 0.34);
+}
+
+.learner-dashboard--dark .learner-account-grid input,
+.learner-dashboard--dark .learner-account-email {
+  background-color: rgba(118, 173, 255, 0.08);
+  border-color: rgba(140, 170, 214, 0.44);
+  color: #edf3ff;
+}
+
+.learner-dashboard--dark .learner-account-grid input::placeholder {
+  color: #9db0cf;
+}
+
+.learner-dashboard--dark .learner-store-image-placeholder {
+  background-color: rgba(118, 173, 255, 0.1);
+  color: #d4dff1;
+}
+
+.learner-dashboard--dark .learner-store-search,
+.learner-dashboard--dark .learner-store-filter {
+  background-color: rgba(118, 173, 255, 0.08);
+  border-color: rgba(140, 170, 214, 0.46);
+}
+
+.learner-dashboard--dark .learner-store-search input,
+.learner-dashboard--dark .learner-store-filter select {
+  color: #edf3ff;
+}
+
+.learner-dashboard--dark .learner-store-search input::placeholder {
+  color: #b9c9e2;
+  opacity: 1;
+}
+
+.learner-dashboard--dark .learner-store-filter span {
+  color: #d4dff1;
+}
+
+.learner-dashboard--dark .learner-reset-filters-btn:disabled {
+  color: #9eb1cf;
+  border-color: rgba(140, 170, 214, 0.34);
+  background-color: rgba(118, 173, 255, 0.08);
+}
+
+.learner-dashboard--dark .learner-panel,
+.learner-dashboard--dark .learner-store-card,
+.learner-dashboard--dark .learner-course-card,
+.learner-dashboard--dark .learner-metric-card,
+.learner-dashboard--dark .learner-notification-card,
+.learner-dashboard--dark .learner-settings-card,
+.learner-dashboard--dark .learner-account-wrap,
+.learner-dashboard--dark .learner-account-group,
+.learner-dashboard--dark .learner-account-row {
+  color: #edf3ff;
+}
+
+.learner-dashboard--dark .learner-panel h1,
+.learner-dashboard--dark .learner-panel h2,
+.learner-dashboard--dark .learner-panel h3,
+.learner-dashboard--dark .learner-store-body h3,
+.learner-dashboard--dark .learner-course-card h3,
+.learner-dashboard--dark .learner-settings-card h3,
+.learner-dashboard--dark .learner-account-group h3,
+.learner-dashboard--dark .learner-profile-name {
+  color: #edf3ff;
+}
+
+.learner-dashboard--dark .learner-panel p,
+.learner-dashboard--dark .learner-panel small,
+.learner-dashboard--dark .learner-panel label,
+.learner-dashboard--dark .learner-panel span,
+.learner-dashboard--dark .learner-store-body > p,
+.learner-dashboard--dark .learner-course-card p,
+.learner-dashboard--dark .learner-notification-card p,
+.learner-dashboard--dark .learner-notification-card small,
+.learner-dashboard--dark .learner-profile-email,
+.learner-dashboard--dark .learner-account-avatar-copy p,
+.learner-dashboard--dark .learner-account-group p,
+.learner-dashboard--dark .learner-account-grid label span,
+.learner-dashboard--dark .learner-last-opened,
+.learner-dashboard--dark .learner-inprogress-note,
+.learner-dashboard--dark .learner-empty {
+  color: #d7e3f6;
+}
+
+.learner-dashboard--dark .learner-setting-row,
+.learner-dashboard--dark .learner-certificate-item,
+.learner-dashboard--dark .learner-notification-course,
+.learner-dashboard--dark .learner-store-badges button,
+.learner-dashboard--dark .learner-store-free-pill {
+  background-color: rgba(118, 173, 255, 0.12);
+  border-color: rgba(140, 170, 214, 0.42);
+}
+
+.learner-dashboard--dark .learner-account-save-btn,
+.learner-dashboard--dark .learner-certificate-btn,
+.learner-dashboard--dark .learner-store-badges button.active {
+  background-color: #5f95ec;
+  border-color: #5f95ec;
+  color: #f7fbff;
+}
+
+.learner-dashboard--dark .learner-account-save-btn:hover,
+.learner-dashboard--dark .learner-certificate-btn:hover,
+.learner-dashboard--dark .learner-store-badges button.active:hover {
+  background-color: #76adff;
+  border-color: #76adff;
 }
 
 @media screen and (max-width: 1024px) {
@@ -2386,6 +2634,10 @@
   }
 
   .learner-feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .learner-culture-grid {
     grid-template-columns: 1fr;
   }
 }
