@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import {
   FaCertificate,
   FaChevronLeft,
@@ -33,97 +33,20 @@ const CourseContent = ({
   previewOwned = false,
   previewActionLoading = false,
   onPreviewAction,
-  persistedTabState = null,
-  onPersistTabState
+  learningOutcomes = [],
+  courseSkills = [],
+  courseTools = [],
+  courseLanguage = 'English',
+  courseSubtitlesLabel = 'Video subtitles available',
+  courseUpdatedAtLabel = '',
+  certificateDownloadUrl = '',
+  certificateFileName = ''
 }) => {
   const [expanded, setExpanded] = useState({})
-  const [activeTab, setActiveTab] = useState('overview')
-  const [visitedTabs, setVisitedTabs] = useState({ overview: true })
 
   const notesRef = useRef(null)
-  const includesRef = useRef(null)
-  const flowRef = useRef(null)
   const contentSectionRef = useRef(null)
-  const lastSyncedTabStateRef = useRef('')
   const navigate = useNavigate()
-  const courseIdentity = String(courseId || title || 'default-course').trim().toLowerCase().replace(/\s+/g, '-')
-  const tabStateStorageKey = `ma-course-tab-state:${courseIdentity}`
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(tabStateStorageKey)
-      if (!stored) return
-      const parsed = JSON.parse(stored)
-      if (parsed?.activeTab) {
-        setActiveTab(parsed.activeTab)
-      }
-      if (parsed?.visitedTabs && typeof parsed.visitedTabs === 'object') {
-        setVisitedTabs((prev) => ({ ...prev, ...parsed.visitedTabs, overview: true }))
-      }
-    } catch {
-      setActiveTab('overview')
-      setVisitedTabs({ overview: true })
-    }
-  }, [tabStateStorageKey])
-
-  useEffect(() => {
-    if (!persistedTabState || typeof persistedTabState !== 'object') return
-
-    const allowedTabs = ['overview', 'workflow', 'content', 'notes']
-    const incomingTab = allowedTabs.includes(persistedTabState.activeTab)
-      ? persistedTabState.activeTab
-      : null
-    const incomingVisited = persistedTabState.visitedTabs && typeof persistedTabState.visitedTabs === 'object'
-      ? persistedTabState.visitedTabs
-      : null
-
-    if (!incomingTab && !incomingVisited) return
-
-    if (incomingTab) {
-      setActiveTab((prev) => (prev === incomingTab ? prev : incomingTab))
-    }
-
-    if (incomingVisited) {
-      setVisitedTabs((prev) => {
-        const next = { ...prev, ...incomingVisited, overview: true }
-        const prevSerialized = JSON.stringify(prev)
-        const nextSerialized = JSON.stringify(next)
-        return prevSerialized === nextSerialized ? prev : next
-      })
-    }
-
-    lastSyncedTabStateRef.current = JSON.stringify({
-      activeTab: incomingTab || activeTab,
-      visitedTabs: { ...visitedTabs, ...(incomingVisited || {}), overview: true }
-    })
-  }, [persistedTabState])
-
-  useEffect(() => {
-    try {
-      const stateToStore = JSON.stringify({
-        activeTab,
-        visitedTabs
-      })
-      localStorage.setItem(tabStateStorageKey, stateToStore)
-    } catch {
-      // Ignore storage write errors (private mode, quota, etc.)
-    }
-  }, [activeTab, visitedTabs, tabStateStorageKey])
-
-  useEffect(() => {
-    if (typeof onPersistTabState !== 'function') return
-
-    const payload = {
-      activeTab,
-      visitedTabs
-    }
-    const serialized = JSON.stringify(payload)
-
-    if (lastSyncedTabStateRef.current === serialized) return
-    lastSyncedTabStateRef.current = serialized
-
-    onPersistTabState(payload)
-  }, [activeTab, visitedTabs, onPersistTabState])
 
   const toggleTopic = (id) => {
     setExpanded(prev => ({ ...prev, [id]: !prev[id] }))
@@ -133,6 +56,29 @@ const CourseContent = ({
   const completionPercent = totalLessons > 0
     ? Math.round((completedLessonIds.length / totalLessons) * 100)
     : 0
+  const normalizedOutcomes = Array.isArray(learningOutcomes)
+    ? learningOutcomes
+        .map(item => String(item || '').trim())
+        .filter(Boolean)
+    : String(learningOutcomes || '')
+        .split('\n')
+        .map(item => item.trim())
+        .filter(Boolean)
+
+  const fallbackOutcomes = [
+    `Understand core ${courseType || 'course'} concepts and vocabulary.`,
+    'Apply what you learn through guided lessons and practice activities.',
+    'Finish with practical confidence to continue independently.'
+  ]
+  const resolvedOutcomes = normalizedOutcomes.length > 0 ? normalizedOutcomes : fallbackOutcomes
+  const resolvedSkills = Array.isArray(courseSkills)
+    ? courseSkills.map(item => String(item || '').trim()).filter(Boolean)
+    : []
+  const resolvedTools = Array.isArray(courseTools)
+    ? courseTools.map(item => String(item || '').trim()).filter(Boolean)
+    : []
+  const certificateReadyToDownload = Boolean(certificateDownloadUrl)
+  const certificateLocked = !isPreviewMode && completionPercent < 100
 
   const lessonSequence = topics.flatMap((topic, topicIndex) =>
     (topic.lessons || []).map((lesson, lessonIndex) => ({
@@ -148,13 +94,7 @@ const CourseContent = ({
     contentSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
-  const markTabVisited = (tabKey) => {
-    setVisitedTabs((prev) => ({ ...prev, [tabKey]: true }))
-  }
-
-  const jumpToSection = (tabKey, sectionRef) => {
-    setActiveTab(tabKey)
-    markTabVisited(tabKey)
+  const scrollToSection = (sectionRef) => {
     sectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
   }
 
@@ -167,19 +107,9 @@ const CourseContent = ({
 
   // Clicking "Course notes & articles" — reveal panel and scroll to it
   const handleNotesClick = () => {
-    setActiveTab('notes')
-    markTabVisited('notes')
     setTimeout(() => {
       notesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }, 100)
-  }
-
-  const contentTabCompleted = totalLessons > 0 && completedLessonIds.length >= totalLessons
-  const tabMeta = {
-    overview: { done: Boolean(visitedTabs.overview) },
-    workflow: { done: Boolean(visitedTabs.workflow) },
-    content: { done: contentTabCompleted },
-    notes: { done: Boolean(visitedTabs.notes) }
   }
 
   return (
@@ -271,32 +201,117 @@ const CourseContent = ({
         </div>
       )}
 
-      <div className='cc-page-nav'>
-        <button className={`cc-page-tab ${activeTab === 'overview' ? 'active' : ''} ${tabMeta.overview.done ? 'is-done' : ''}`} type='button' onClick={() => jumpToSection('overview', includesRef)}>
-          <span>Page 1: Overview</span>
-          {tabMeta.overview.done && <strong>✓</strong>}
-        </button>
-        <button className={`cc-page-tab ${activeTab === 'workflow' ? 'active' : ''} ${tabMeta.workflow.done ? 'is-done' : ''}`} type='button' onClick={() => jumpToSection('workflow', flowRef)}>
-          <span>Page 2: Workflow</span>
-          {tabMeta.workflow.done && <strong>✓</strong>}
-        </button>
-        <button className={`cc-page-tab ${activeTab === 'content' ? 'active' : ''} ${tabMeta.content.done ? 'is-done' : ''}`} type='button' onClick={() => jumpToSection('content', contentSectionRef)}>
-          <span>Page 3: Content</span>
-          {tabMeta.content.done && <strong>✓</strong>}
-        </button>
-        <button className={`cc-page-tab ${activeTab === 'notes' ? 'active' : ''} ${tabMeta.notes.done ? 'is-done' : ''}`} type='button' onClick={handleNotesClick}>
-          <span>Page 4: Notes</span>
-          {tabMeta.notes.done && <strong>✓</strong>}
-        </button>
-      </div>
+      <section className='cc-course-insight-shell'>
+        <div className='cc-page-divider-head'>
+          <h2>Course Overview</h2>
+          <p>Start here to see what this course is about, what you will use, and what you unlock when you finish.</p>
+        </div>
+
+        <div className='cc-insight-layout'>
+          <div className='cc-insight-main'>
+            <div className='cc-outcomes-block cc-about-block'>
+              <h2>About this course</h2>
+              <p className='cc-about-copy'>{description || 'Course description will appear here.'}</p>
+              <div className='cc-chip-wrap'>
+                <span className='cc-insight-chip'>{difficulty || 'Beginner'} level</span>
+                <span className='cc-insight-chip'>{topics.length} topic{topics.length !== 1 ? 's' : ''}</span>
+                <span className='cc-insight-chip'>{totalLessons} lesson{totalLessons !== 1 ? 's' : ''}</span>
+                <span className='cc-insight-chip'>{courseType || 'General'} track</span>
+              </div>
+            </div>
+
+            <div className='cc-outcomes-block'>
+              <h2>How to use this course</h2>
+              <p className='cc-outcomes-note'>Follow these three simple steps to move through the course without feeling lost.</p>
+              <div className='cc-flow-card cc-flow-card-actions'>
+                <button className='cc-flow-btn' onClick={() => scrollToSection(contentSectionRef)} type='button'>1. Learn with lessons</button>
+                <button className='cc-flow-btn cc-flow-btn-alt' onClick={handleNotesClick} type='button'>2. Read or download notes</button>
+                <button className='cc-flow-btn cc-flow-btn-alt' onClick={onQuizClick} type='button' disabled={!onQuizClick}>3. Take the quiz</button>
+              </div>
+            </div>
+
+            <div className='cc-insight-horizontal'>
+              <div className='cc-outcomes-block cc-skills-block'>
+                <h2>Skills you'll gain</h2>
+                {resolvedSkills.length > 0 ? (
+                  <div className='cc-chip-wrap cc-chip-wrap-skills'>
+                    {resolvedSkills.map((skill, index) => (
+                      <span key={`${skill}-${index}`} className='cc-insight-chip'>{skill}</span>
+                    ))}
+                  </div>
+                ) : (
+                  <p className='cc-outcomes-note'>Tutor has not added course skills yet.</p>
+                )}
+              </div>
+
+              <div className='cc-outcomes-block'>
+                <h2>Tools you'll learn</h2>
+                {resolvedTools.length > 0 ? (
+                  <div className='cc-chip-wrap'>
+                    {resolvedTools.map((tool, index) => (
+                      <span key={`${tool}-${index}`} className='cc-insight-chip'>{tool}</span>
+                    ))}
+                  </div>
+                ) : (
+                  <p className='cc-outcomes-note'>Tutor has not added tools for this course yet.</p>
+                )}
+              </div>
+
+              <div className='cc-outcomes-block'>
+                <h2>Details to know</h2>
+                <div className='cc-details-grid'>
+                  <article className='cc-detail-card'>
+                    <FaCertificate className='cc-detail-icon' />
+                    <h4>Downloadable certificate</h4>
+                    {certificateReadyToDownload ? (
+                      <a
+                        href={certificateDownloadUrl}
+                        download={certificateFileName || `${title || 'course'}-certificate`}
+                        className={`cc-certificate-download-btn ${certificateLocked ? 'is-disabled' : ''}`}
+                        onClick={(event) => {
+                          if (certificateLocked) event.preventDefault()
+                        }}
+                        aria-disabled={certificateLocked}
+                        target='_blank'
+                        rel='noreferrer'
+                      >
+                        <FaDownload /> Download Certificate
+                      </a>
+                    ) : (
+                      <button className='cc-certificate-download-btn is-disabled' type='button' disabled>
+                        <FaDownload /> Certificate Not Uploaded Yet
+                      </button>
+                    )}
+                  </article>
+
+                  <article className='cc-detail-card'>
+                    <FaMobileAlt className='cc-detail-icon' />
+                    <h4>Taught in {courseLanguage || 'English'}</h4>
+                    <p>{courseSubtitlesLabel || 'Video subtitles available'}</p>
+                  </article>
+
+                  <article className='cc-detail-card'>
+                    <FaClipboardList className='cc-detail-icon' />
+                    <h4>Recently updated</h4>
+                    <p>{courseUpdatedAtLabel || 'Tutor will post update timeline soon.'}</p>
+                  </article>
+                </div>
+                {!isPreviewMode && certificateLocked && (
+                  <p className='cc-outcomes-note'>
+                    Complete all lessons to unlock your certificate download ({completionPercent}% complete).
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ══ SECTION 2: What this course includes ══ */}
-      {activeTab === 'overview' && (
-      <div className='cc-includes-section cc-tab-panel' ref={includesRef}>
+      <div className='cc-includes-section cc-spacious-section'>
         <div className='cc-page-divider-head'>
-          <span className='cc-page-step'>Page 1</span>
-          <h2>Overview & Includes</h2>
-          <p>Start here to understand what you get in this course before moving into the learning flow.</p>
+          <h2>Course Includes</h2>
+          <p>Everything included in this course is listed here so learners can plan their journey clearly.</p>
         </div>
         <h2 className='cc-section-title'>This course includes:</h2>
         <div className='cc-includes-grid'>
@@ -330,50 +345,13 @@ const CourseContent = ({
             <span className='cc-include-icon'><FaFileAlt /></span>
             <span>Course notes &amp; articles</span>
           </div>
-
-          <div className='cc-include-item'>
-            <span className='cc-include-icon'><FaCertificate /></span>
-            <span>Certificate of completion</span>
-          </div>
-
         </div>
       </div>
-      )}
-
-      {activeTab === 'workflow' && (
-      <div className='cc-flow-strip cc-tab-panel' ref={flowRef}>
-        <div className='cc-page-divider-head'>
-          <span className='cc-page-step'>Page 2</span>
-          <h2>Learning Workflow</h2>
-          <p>Use these direct actions to move quickly through lessons, notes, and quiz checkpoints.</p>
-        </div>
-        <article className='cc-flow-card'>
-          <h3>{isPreviewMode ? 'Start Here' : 'Continue Here'}</h3>
-          <p>
-            {isPreviewMode
-              ? 'Scan section structure first, then open details or notes to evaluate the course quickly.'
-              : (nextLesson ? `Pick up directly from ${nextLesson.title} and keep your momentum.` : 'You are done with all current lessons. Revisit notes and quizzes anytime.')}
-          </p>
-        </article>
-        <article className='cc-flow-card cc-flow-card-actions'>
-          <button className='cc-flow-btn' onClick={() => jumpToSection('content', contentSectionRef)} type='button'>Go to Lessons</button>
-          <button className='cc-flow-btn cc-flow-btn-alt' onClick={handleNotesClick} type='button'>Open Notes</button>
-          <button className='cc-flow-btn cc-flow-btn-alt' onClick={onQuizClick} type='button' disabled={!onQuizClick}>Open Quiz</button>
-        </article>
-      </div>
-      )}
-
-     
-
-
-
       {/* ══ SECTION 3: Course content ══ */}
-      {activeTab === 'content' && (
-      <div className='cc-content-section cc-tab-panel' ref={contentSectionRef}>
+      <div className='cc-content-section cc-spacious-section' ref={contentSectionRef}>
         <div className='cc-page-divider-head'>
-          <span className='cc-page-step'>Page 3</span>
           <h2>Lessons & Sections</h2>
-          <p>Expand each section and complete lessons in sequence to keep progress moving.</p>
+          <p>Expanded lesson content with room to study comfortably and track progress across the full page.</p>
         </div>
 
         {!isPreviewMode && (
@@ -573,23 +551,17 @@ const CourseContent = ({
         </div>
 
       </div>
-      )}
-
-
-
- {/* NOTES PANEL — shown when "Course notes & articles" is clicked */}
-      {activeTab === 'notes' && (
-
       
-        <div className='cc-notes-section cc-tab-panel' ref={notesRef}>
+
+      {/* NOTES PANEL */}
+      <div className='cc-notes-section cc-spacious-section' ref={notesRef}>
           <div className='cc-page-divider-head'>
-            <span className='cc-page-step'>Page 4</span>
             <h2>Notes & Downloads</h2>
             <p>Access printable notes and reading materials for revision and offline study.</p>
           </div>
           <div className='cc-content-header2'>
             <h2 className='cc-section-title2'><FaFileAlt className='cc-inline-file-icon' /> Course Notes &amp; Articles</h2>
-            <button className='cc-expand-all' onClick={() => jumpToSection('content', contentSectionRef)}>Back to Content</button>
+            <button className='cc-expand-all' onClick={() => scrollToSection(contentSectionRef)}>Back to Content</button>
           </div>
 
           {allNotes.length === 0 ? (
@@ -621,8 +593,6 @@ const CourseContent = ({
           )}
         </div>
 
-
-      )}
 
 
 

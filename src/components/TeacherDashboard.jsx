@@ -68,6 +68,14 @@ const TeacherDashboard = () => {
   const [regularPrice, setRegularPrice] = useState('')
   const [salePrice, setSalePrice] = useState('')
   const [featuredImage, setFeaturedImage] = useState('')
+  const [learningOutcomesInput, setLearningOutcomesInput] = useState('')
+  const [courseSkillsInput, setCourseSkillsInput] = useState('')
+  const [courseToolsInput, setCourseToolsInput] = useState('')
+  const [courseLanguage, setCourseLanguage] = useState('English')
+  const [courseSubtitlesLabel, setCourseSubtitlesLabel] = useState('Video subtitles available')
+  const [courseUpdatedAtLabel, setCourseUpdatedAtLabel] = useState('')
+  const [certificateDownloadUrl, setCertificateDownloadUrl] = useState('')
+  const [certificateFileName, setCertificateFileName] = useState('')
   const [reviewsSeenAt, setReviewsSeenAt] = useState('')
 
   useEffect(() => {
@@ -330,6 +338,14 @@ const fetchDashboardData = async () => {
     setRegularPrice('')
     setSalePrice('')
     setFeaturedImage('')
+    setLearningOutcomesInput('')
+    setCourseSkillsInput('')
+    setCourseToolsInput('')
+    setCourseLanguage('English')
+    setCourseSubtitlesLabel('Video subtitles available')
+    setCourseUpdatedAtLabel('')
+    setCertificateDownloadUrl('')
+    setCertificateFileName('')
     setEditingCourseId('')
     setBuilderMode('create')
     setBuilderStep('basics')
@@ -347,6 +363,14 @@ const fetchDashboardData = async () => {
     setRegularPrice(course.regularPrice || '')
     setSalePrice(course.salePrice || '')
     setFeaturedImage(course.featuredImage || '')
+    setLearningOutcomesInput(Array.isArray(course.learningOutcomes) ? course.learningOutcomes.join('\n') : '')
+    setCourseSkillsInput(Array.isArray(course.courseSkills) ? course.courseSkills.join('\n') : '')
+    setCourseToolsInput(Array.isArray(course.courseTools) ? course.courseTools.join('\n') : '')
+    setCourseLanguage(course.courseLanguage || 'English')
+    setCourseSubtitlesLabel(course.courseSubtitlesLabel || 'Video subtitles available')
+    setCourseUpdatedAtLabel(course.courseUpdatedAtLabel || '')
+    setCertificateDownloadUrl(course.certificateDownloadUrl || '')
+    setCertificateFileName(course.certificateFileName || '')
     setEditingCourseId(course.id)
     setBuilderMode('edit')
     setBuilderMessage(`Editing ${course.title || 'course'}`)
@@ -410,6 +434,8 @@ const fetchDashboardData = async () => {
 
     const trimmedTitle = title.trim()
     const trimmedDescription = description.trim()
+    const trimmedSkills = courseSkillsInput.trim()
+    const trimmedTools = courseToolsInput.trim()
     const normalizedMaxStudents = String(maxStudents || '').trim()
     const normalizedRegularPrice = Number(regularPrice || 0)
     const normalizedSalePrice = Number(salePrice || 0)
@@ -420,6 +446,14 @@ const fetchDashboardData = async () => {
 
     if (trimmedDescription.length < 12) {
       nextErrors.description = 'Description should be at least 12 characters.'
+    }
+
+    if (!trimmedSkills) {
+      nextErrors.courseSkillsInput = 'Add at least one skill learners will gain.'
+    }
+
+    if (!trimmedTools) {
+      nextErrors.courseToolsInput = 'Add at least one tool learners will use.'
     }
 
     if (normalizedMaxStudents && normalizedMaxStudents.toLowerCase() !== 'unlimited') {
@@ -462,6 +496,22 @@ const fetchDashboardData = async () => {
     setBuilderMessage('')
 
     try {
+      const parseListInput = (rawInput) => rawInput
+        .split(/\n|,/)
+        .map((line) => line.replace(/^[-*\u2022]\s*/, '').trim())
+        .filter(Boolean)
+
+      const parsedOutcomes = learningOutcomesInput
+        .split('\n')
+        .map((line) => line.replace(/^[-*\u2022]\s*/, '').trim())
+        .filter(Boolean)
+      const parsedSkills = parseListInput(courseSkillsInput)
+      const parsedTools = parseListInput(courseToolsInput)
+
+      const now = new Date()
+      const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      const autoUpdatedLabel = `${monthNames[now.getMonth()]} ${now.getFullYear()}`
+
       const teacherName = userData
         ? `${userData.firstName || ''} ${userData.secondName || userData.lastName || ''}`.trim()
         : auth.currentUser.displayName || 'Tutor'
@@ -476,6 +526,14 @@ const fetchDashboardData = async () => {
         regularPrice: pricingModel === 'free' ? '0' : (regularPrice || '0'),
         salePrice: pricingModel === 'free' ? '0' : (salePrice || '0'),
         featuredImage: featuredImage || '',
+        learningOutcomes: parsedOutcomes,
+        courseSkills: parsedSkills,
+        courseTools: parsedTools,
+        courseLanguage: courseLanguage.trim() || 'English',
+        courseSubtitlesLabel: courseSubtitlesLabel.trim() || 'Video subtitles available',
+        courseUpdatedAtLabel: courseUpdatedAtLabel.trim() || autoUpdatedLabel,
+        certificateDownloadUrl: certificateDownloadUrl.trim(),
+        certificateFileName: certificateFileName.trim(),
         teacherName,
         teacherId: auth.currentUser.uid,
         updatedAt: new Date().toISOString()
@@ -1291,6 +1349,74 @@ const fetchDashboardData = async () => {
                         <div>
                           <label>Featured Image</label>
                           <input type='file' accept='image/*' onChange={handleImageUpload} />
+                        </div>
+                      </div>
+
+                      <label>Learning Outcomes (one per line)</label>
+                      <textarea
+                        value={learningOutcomesInput}
+                        onChange={(e) => setLearningOutcomesInput(e.target.value)}
+                        placeholder={'At the end of this course, learners will be able to...\nDescribe a key concept\nApply a practical technique'}
+                      />
+
+                      <label>Skills Learners Gain (one per line or comma separated)</label>
+                      <textarea
+                        value={courseSkillsInput}
+                        onChange={(e) => setCourseSkillsInput(e.target.value)}
+                        placeholder={'Data Analysis\nStorytelling\nPresentation Skills'}
+                      />
+                      {builderErrors.courseSkillsInput && <p className='td-field-error'>{builderErrors.courseSkillsInput}</p>}
+
+                      <label>Tools Learners Use (one per line or comma separated)</label>
+                      <textarea
+                        value={courseToolsInput}
+                        onChange={(e) => setCourseToolsInput(e.target.value)}
+                        placeholder={'Python\nSQL\nTableau'}
+                      />
+                      {builderErrors.courseToolsInput && <p className='td-field-error'>{builderErrors.courseToolsInput}</p>}
+
+                      <div className='td-builder-grid-two'>
+                        <div>
+                          <label>Course Language</label>
+                          <input
+                            value={courseLanguage}
+                            onChange={(e) => setCourseLanguage(e.target.value)}
+                            placeholder='English'
+                          />
+                        </div>
+                        <div>
+                          <label>Subtitle Label</label>
+                          <input
+                            value={courseSubtitlesLabel}
+                            onChange={(e) => setCourseSubtitlesLabel(e.target.value)}
+                            placeholder='Video subtitles available'
+                          />
+                        </div>
+                      </div>
+
+                      <label>Recently Updated Label (optional – auto-fills when you save)</label>
+                      <input
+                        value={courseUpdatedAtLabel}
+                        onChange={(e) => setCourseUpdatedAtLabel(e.target.value)}
+                        placeholder='January 2026'
+                      />
+
+                      <div className='td-builder-grid-two'>
+                        <div>
+                          <label>Certificate Download URL</label>
+                          <input
+                            value={certificateDownloadUrl}
+                            onChange={(e) => setCertificateDownloadUrl(e.target.value)}
+                            placeholder='https://... or Firebase file URL'
+                          />
+                        </div>
+                        <div>
+                          <label>Certificate File Name (optional)</label>
+                          <input
+                            value={certificateFileName}
+                            onChange={(e) => setCertificateFileName(e.target.value)}
+                            placeholder='my-course-certificate.pdf'
+                          />
                         </div>
                       </div>
 

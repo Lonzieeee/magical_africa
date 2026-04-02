@@ -542,6 +542,14 @@ const CourseContentPage = () => {
         previewOwned={previewOwned}
         previewActionLoading={previewActionLoading}
         onPreviewAction={handlePreviewAcquire}
+        learningOutcomes={course.learningOutcomes || []}
+        courseSkills={course.courseSkills || []}
+        courseTools={course.courseTools || []}
+        courseLanguage={course.courseLanguage || 'English'}
+        courseSubtitlesLabel={course.courseSubtitlesLabel || 'Video subtitles available'}
+        courseUpdatedAtLabel={course.courseUpdatedAtLabel || ''}
+        certificateDownloadUrl={course.certificateDownloadUrl || ''}
+        certificateFileName={course.certificateFileName || ''}
         persistedTabState={persistedTabState}
         onPersistTabState={handlePersistTabState}
       />
