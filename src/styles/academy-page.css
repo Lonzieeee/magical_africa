@@ -576,7 +576,7 @@
   .courses-grid {
     grid-template-columns: repeat(auto-fill, 295px);
     justify-content: center;
-    column-gap:48px;
+    column-gap:6rem;
   }
 }
 
