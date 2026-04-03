@@ -778,30 +778,52 @@ const fetchDashboardData = async () => {
   }
 
   const analytics = useMemo(() => {
+    const normalizeCompletion = (value) => {
+      const numeric = Number(value)
+      if (!Number.isFinite(numeric)) return 0
+      return Math.max(0, Math.min(100, numeric))
+    }
+
     const totalCourses = courses.length
     const published = courses.filter(course => course.status === 'Published').length
     const totalStudents = enrollments.length
 
+    const totalCompletion = enrollments.reduce((acc, item) => {
+      return acc + normalizeCompletion(item.completion)
+    }, 0)
+
+    const activeLearners = enrollments.reduce((acc, item) => {
+      return acc + (normalizeCompletion(item.completion) > 0 ? 1 : 0)
+    }, 0)
+
     const avgCompletion = totalStudents === 0
       ? 0
-      : Math.round(
-          enrollments.reduce((acc, item) => acc + (item.completion || 0), 0) / totalStudents
-        )
+      : Math.round(totalCompletion / totalStudents)
+
+    const activeRate = totalStudents === 0
+      ? 0
+      : Math.round((activeLearners / totalStudents) * 100)
 
     return {
       totalCourses,
       published,
       totalStudents,
       avgCompletion,
-      engagementRate: Math.min(100, avgCompletion + (published * 5))
+      engagementRate: Math.round((avgCompletion * 0.45) + (activeRate * 0.55))
     }
   }, [courses, enrollments])
 
   const coursePerformance = useMemo(() => {
+    const normalizeCompletion = (value) => {
+      const numeric = Number(value)
+      if (!Number.isFinite(numeric)) return 0
+      return Math.max(0, Math.min(100, numeric))
+    }
+
     return courses.map(course => {
       const courseEnrollments = enrollments.filter(item => item.courseId === course.id)
       const avgCompletion = courseEnrollments.length > 0
-        ? Math.round(courseEnrollments.reduce((acc, item) => acc + (item.completion || 0), 0) / courseEnrollments.length)
+        ? Math.round(courseEnrollments.reduce((acc, item) => acc + normalizeCompletion(item.completion), 0) / courseEnrollments.length)
         : 0
 
       return {
@@ -823,11 +845,98 @@ const fetchDashboardData = async () => {
     return chartCourses.map((item) => ({
       id: item.id,
       title: item.title,
-      shortTitle: (item.title || 'Course').slice(0, 18),
+      shortTitle: (item.title || 'Course').length > 14
+        ? `${(item.title || 'Course').slice(0, 14)}...`
+        : (item.title || 'Course'),
       learners: Number(item.learners || 0),
       completion: Number(item.avgCompletion || 0)
     }))
   }, [chartCourses])
+
+  const chartScale = useMemo(() => {
+    const maxLearners = chartData.reduce((max, item) => Math.max(max, Number(item.learners || 0)), 0)
+    const roundedCap = maxLearners <= 10
+      ? 10
+      : Math.ceil(maxLearners / 5) * 5
+
+    const rightAxisMax = maxLearners === 0
+      ? 10
+      : Math.max(10, roundedCap)
+
+    const barSize = chartData.length >= 6
+      ? 20
+      : chartData.length >= 4
+        ? 24
+        : 30
+
+    const lineType = chartData.length > 2 ? 'monotone' : 'linear'
+
+    return {
+      rightAxisDomain: [0, rightAxisMax],
+      barSize,
+      lineType
+    }
+  }, [chartData])
+
+  const renderPerformanceTooltip = ({ active, payload }) => {
+    if (!active || !Array.isArray(payload) || payload.length === 0) return null
+
+    const row = payload[0]?.payload || {}
+    const completionValue = Number(row.completion || 0)
+    const learnerValue = Number(row.learners || 0)
+
+    return (
+      <div
+        style={{
+          background: '#ffffff',
+          border: '1px solid #d6dfd2',
+          borderRadius: '10px',
+          padding: '10px 12px',
+          minWidth: '210px',
+          boxShadow: '0 8px 22px rgba(24, 39, 24, 0.12)',
+          lineHeight: 1.35
+        }}
+      >
+        <p style={{ margin: 0, fontSize: '12px', color: '#5f6b5f' }}>Course</p>
+        <p style={{ margin: '2px 0 8px 0', fontWeight: 700, color: '#1f2a1f', wordBreak: 'break-word' }}>
+          {row.title || 'Untitled Course'}
+        </p>
+        <p style={{ margin: '3px 0', color: '#d5731a', fontWeight: 600 }}>
+          Completion: {completionValue}%
+        </p>
+        <p style={{ margin: '3px 0', color: '#a3070c', fontWeight: 600 }}>
+          Learners: {learnerValue}
+        </p>
+      </div>
+    )
+  }
+
+  const renderCompletionPieTooltip = ({ active, payload }) => {
+    if (!active || !Array.isArray(payload) || payload.length === 0) return null
+
+    const row = payload[0]?.payload || {}
+    const name = row.name || 'Segment'
+    const learners = Number(row.value || 0)
+    const percent = Number(row.percent || 0)
+
+    return (
+      <div
+        style={{
+          background: '#ffffff',
+          border: '1px solid #d6dfd2',
+          borderRadius: '10px',
+          padding: '10px 12px',
+          minWidth: '185px',
+          boxShadow: '0 8px 22px rgba(24, 39, 24, 0.12)',
+          lineHeight: 1.35
+        }}
+      >
+        <p style={{ margin: 0, fontWeight: 700, color: '#1f2a1f' }}>{name}</p>
+        <p style={{ margin: '4px 0 2px 0', color: '#324132' }}>Learners: {learners}</p>
+        <p style={{ margin: 0, color: '#324132' }}>Share: {percent}%</p>
+      </div>
+    )
+  }
 
   const completionPie = useMemo(() => {
     const base = {
@@ -849,8 +958,14 @@ const fetchDashboardData = async () => {
       }
     }
 
+    const normalizeCompletion = (value) => {
+      const numeric = Number(value)
+      if (!Number.isFinite(numeric)) return 0
+      return Math.max(0, Math.min(100, numeric))
+    }
+
     const counts = enrollments.reduce((acc, item) => {
-      const completion = Number(item.completion || 0)
+      const completion = normalizeCompletion(item.completion)
       if (completion >= 100) {
         acc.completed += 1
       } else if (completion > 0) {
@@ -863,16 +978,26 @@ const fetchDashboardData = async () => {
 
     counts.total = enrollments.length
 
-    const percentages = {
-      completed: Math.round((counts.completed / counts.total) * 100),
-      inProgress: Math.round((counts.inProgress / counts.total) * 100)
+    const toPercent = (value) => {
+      if (counts.total === 0) return 0
+      return Number(((value / counts.total) * 100).toFixed(1))
     }
-    percentages.notStarted = Math.max(0, 100 - percentages.completed - percentages.inProgress)
+
+    const percentages = {
+      completed: toPercent(counts.completed),
+      inProgress: toPercent(counts.inProgress),
+      notStarted: toPercent(counts.notStarted)
+    }
+
+    const normalizedSum = Number((percentages.completed + percentages.inProgress + percentages.notStarted).toFixed(1))
+    if (normalizedSum !== 100 && counts.total > 0) {
+      percentages.notStarted = Number((percentages.notStarted + (100 - normalizedSum)).toFixed(1))
+    }
 
     const pieData = [
-      { name: 'Completed', value: percentages.completed, color: '#1f6f43' },
-      { name: 'In Progress', value: percentages.inProgress, color: '#d5731a' },
-      { name: 'Not Started', value: percentages.notStarted, color: '#9aa59a' }
+      { name: 'Completed', value: counts.completed, percent: percentages.completed, color: '#1f6f43' },
+      { name: 'In Progress', value: counts.inProgress, percent: percentages.inProgress, color: '#d5731a' },
+      { name: 'Not Started', value: counts.notStarted, percent: percentages.notStarted, color: '#9aa59a' }
     ]
 
     return {
@@ -1928,19 +2053,21 @@ const fetchDashboardData = async () => {
                       <ResponsiveContainer width='100%' height={320}>
                         <ComposedChart data={chartData} margin={{ top: 14, right: 20, left: 8, bottom: 16 }}>
                           <CartesianGrid strokeDasharray='3 3' stroke='rgba(145,165,133,0.24)' />
-                          <XAxis dataKey='shortTitle' tick={{ fontSize: 11 }} interval={0} angle={-14} textAnchor='end' height={46} />
-                          <YAxis yAxisId='left' domain={[0, 100]} tick={{ fontSize: 11 }} tickFormatter={(value) => `${value}%`} />
-                          <YAxis yAxisId='right' orientation='right' tick={{ fontSize: 11 }} allowDecimals={false} />
-                          <Tooltip
-                            formatter={(value, name) => {
-                              if (name === 'Completion %') return [`${value}%`, name]
-                              return [value, name]
-                            }}
-                            labelFormatter={(label) => `Course: ${label}`}
+                          <XAxis
+                            dataKey='shortTitle'
+                            tick={{ fontSize: 11 }}
+                            interval={chartData.length > 5 ? 1 : 0}
+                            minTickGap={14}
+                            angle={-24}
+                            textAnchor='end'
+                            height={64}
                           />
+                          <YAxis yAxisId='left' domain={[0, 100]} tick={{ fontSize: 11 }} tickFormatter={(value) => `${value}%`} />
+                          <YAxis yAxisId='right' orientation='right' tick={{ fontSize: 11 }} allowDecimals={false} domain={chartScale.rightAxisDomain} />
+                          <Tooltip content={renderPerformanceTooltip} wrapperStyle={{ outline: 'none' }} />
                           <Legend />
-                          <Bar yAxisId='left' dataKey='completion' name='Completion %' fill='#d5731a' radius={[3, 3, 0, 0]} barSize={24} />
-                          <Line yAxisId='right' type='monotone' dataKey='learners' name='Learners' stroke='#a3070c' strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
+                          <Bar yAxisId='left' dataKey='completion' name='Completion %' fill='#d5731a' radius={[3, 3, 0, 0]} barSize={chartScale.barSize} />
+                          <Line yAxisId='right' type={chartScale.lineType} dataKey='learners' name='Learners' stroke='#a3070c' strokeWidth={3} dot={{ r: 4 }} activeDot={{ r: 6 }} />
                         </ComposedChart>
                       </ResponsiveContainer>
                     </div>
@@ -1949,7 +2076,7 @@ const fetchDashboardData = async () => {
 
                 <article className='td-chart-card'>
                   <h3>Completion Distribution</h3>
-                  <p className='td-chart-subtitle'>Pie partitions are percentage-based and dynamically recalculated from enrollments.</p>
+                  <p className='td-chart-subtitle'>Pie slices are split by real learner counts, then shown as percentages.</p>
                   {completionPie.total === 0 ? (
                     <p className='td-empty-text'>Pie chart appears after your first enrollments.</p>
                   ) : (
@@ -1968,22 +2095,22 @@ const fetchDashboardData = async () => {
                               paddingAngle={2.4}
                               stroke='#ffffff'
                               strokeWidth={2.2}
-                              label={({ name, value }) => `${name} ${value}%`}
+                              label={({ name, payload }) => `${name} ${payload?.percent || 0}%`}
                             >
                               {completionPie.pieData.map((entry) => (
                                 <Cell key={entry.name} fill={entry.color} />
                               ))}
                             </Pie>
-                            <Tooltip formatter={(value) => [`${value}%`, 'Share']} />
+                            <Tooltip content={renderCompletionPieTooltip} wrapperStyle={{ outline: 'none' }} />
                           </PieChart>
                         </ResponsiveContainer>
                         <p className='td-pie-center-inline'>Total learners: {completionPie.total}</p>
                         <p className='td-pie-note'>Each slice is proportional to enrollment status share.</p>
                       </div>
                       <div className='td-pie-legend'>
-                        <p><span className='td-pie-dot is-completed' /> Completed: {completionPie.percentages.completed}%</p>
-                        <p><span className='td-pie-dot is-progress' /> In Progress: {completionPie.percentages.inProgress}%</p>
-                        <p><span className='td-pie-dot is-not-started' /> Not Started: {completionPie.percentages.notStarted}%</p>
+                        <p><span className='td-pie-dot is-completed' /> Completed: {completionPie.completed} learners ({completionPie.percentages.completed}%)</p>
+                        <p><span className='td-pie-dot is-progress' /> In Progress: {completionPie.inProgress} learners ({completionPie.percentages.inProgress}%)</p>
+                        <p><span className='td-pie-dot is-not-started' /> Not Started: {completionPie.notStarted} learners ({completionPie.percentages.notStarted}%)</p>
                       </div>
                     </div>
                   )}
