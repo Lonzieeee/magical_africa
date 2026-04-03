@@ -116,6 +116,7 @@
   "about": "Maka",
   "language": "Asụsụ",
   "marketplace": "Ahịa",
+  "blog": "Blogu",
   "academy": "Akadẹmi",
   "events": "Emume",
   "music": "Egwu"
@@ -781,12 +782,12 @@
         "gloria": {
           "name": "Gloria Machoka",
           "role": "Onye Ntọala Ibe",
-          "bio": "Ọkachamara n’asụsụ Kisii na-elekwasị anya n’akụkọ ifo, asụsụ nna ochie, na imezi ntorobịa."
+          "bio": "Gloria guzobere Magical Africa n’echiche ịchekwa asụsụ Afrịka, ịkọwa omenala, na inye ndị ntorobịa ike site n’ịmụ ihe, imepụta ihe, na obodo."
         },
         "steve": {
           "name": "Steve Kombo",
           "role": "Onye isi oche nke bọọdụ",
-          "bio": "Ọkachamara n’asụsụ Kisii na-elekwasị anya n’ichekwaa akụkọ ọdịnala na omenala site na mmụta na teknụzụ."
+          "bio": "O nwere nnukwu mmasị n’ịduzi ebumnuche ịchekwa akụkọ Afrịka na iwulite oghere dijitalụ na-ejikọta ndị mmadụ, asụsụ, na ihe nketa."
         },
         "joel": {
           "name": "Joel Makori",
@@ -796,23 +797,23 @@
         "Edewait": {
           "name": "Edewait Eric",
           "role": "Onye isi ọdịnaya",
-          "bio": "Ọkachamara n’asụsụ Teso na-elekwasị anya n’ichekwaa okwu, ilu, na omenala nna ochie."
+          "bio": "O na-eduga mmepe ọdịnaya site n’ịmụ asụsụ ndị obodo, idekọ okwu na akụkọ ndị na-apụ n’anya, na ịchekwa ihe pụtara omenala n’ime obodo Magical Africa."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
           "role": "Injinia Ahụmịhe Onye Ọrụ",
-          "bio" : "Ọkachamara n’asụsụ Kikuyu nke na-elekwasị anya n’ilu, akụkọ ifo, na ezi asụsụ."
+          "bio" : "Ọ na-emepụta ahụmịhe onye ọrụ dị mfe ma na-adọrọ mmasị nke na-eme ka ịmụ asụsụ Afrịka na ịchọpụta omenala dị mfe, dịrịrị onye ọ bụla, ma na-atọ ụtọ."
         },
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "Injinia Nhazi Asụsụ Mmadụ (NLP)",
-          "bio" : "Ọkachamara n’asụsụ Kalenjin na-elekwasị anya n’ichekwaa asụsụ, akụkọ ọdịnala, na njirimara omenala."
+          "bio" : "Ọ na-ewu teknụzụ asụsụ nke na-enyere aka ichekwa na nhazi asụsụ Afrịka, na-agbanwe data asụsụ ka ọ bụrụ ngwá ọrụ na-akwado ịmụ, ịtụgharị asụsụ, na ịchekwa omenala."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Injinia Mmụta Igwe",
-          "bio": "Ọkachamara n’asụsụ Luo na-akwado idekọ asụsụ, akụkọ, na njirimara omenala."
+          "bio": "Ọ na-ewu usoro amamihe nke na-akwado ịmụ nke onye ọ bụla, aro, na atụmatụ AI n’elu ikpo okwu Magical Africa."
         }
         
 

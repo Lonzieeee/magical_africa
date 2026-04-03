@@ -115,6 +115,7 @@
   "about": "Ũhoro",
   "language": "Rũthiomi",
   "marketplace": "Ndũka",
+  "blog": "Blogi",
   "academy": "Akademi",
   "events": "Matukio",
   "music": "Nyimbo"
@@ -708,12 +709,12 @@
         "gloria": {
           "name": "Gloria Machoka",
           "role": "Mũtũmbũki Mwitũ",
-          "bio": "Mũthomi wa rũrĩmĩ rwa Kisii ũrĩa wĩhũũgagia ngano, mĩhĩrĩga, na kũheana ũhoro wa arũme a matukũ."
+          "bio": "Gloria niathondekire Magical Africa na wendo wa kũrũgamĩra ndirĩ cia Afrika, gũthathaiya mĩtugo, na kũheana ũhoti kũrĩ anake nĩ ũhoro wa kũrũgũta, ũbunifu, na jamii."
         },
         "steve": {
           "name": "Steve Kombo",
           "role": "Mũthĩnjĩri wa Bodi",
-          "bio": "Mũthomi wa rũrĩmĩ rwa Kisii wĩra wake nĩ gũtũũra ngano cia kĩrĩra na ũmenyo wa gĩkũyũ."
+          "bio": "Arĩ na wendo wa gũtongoria wĩra wa kũrũgamĩra ng’ano cia Afrika na gũtũma marĩa ma dijitali marĩa maahingĩra andũ, ndirĩ, na mĩhaka ya ithe."
         },
         "joel": {
           "name": "Joel Makori",
@@ -723,24 +724,24 @@
          "Edewait": {
           "name": "Edewait Eric",
           "role": "Mũnene wa Maudhui",
-          "bio": "Mũthomi wa rũrĩmĩ rwa Teso ũrĩa wĩhũũgagia ciugo, thimo, na ngano cia tene."
+          "bio": "Arĩ na wendo wa gũtongoria kũhĩtũma maudhui na kũrĩhĩa ndirĩ cia ndirimi cia kĩnyũmba, gũthondeka maũndo na ng’ano cia kwĩhia, na kũrĩhĩa wendo wa mĩtugo na mĩhĩrĩga cia ithe cia Magical Africa."
 
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
           "role": "Mhandisi wa Uzoefu wa Mtumiaji",
-          "bio" : "Mũthomi wa rũrĩmĩ rwa Gĩkũyũ ũrĩa wĩhũũgagia thimo, ngano, na ũrĩa rũrĩmĩ rũrĩ."
+          "bio" : "Arĩ na wendo wa gũtũma ũhoro wa mũno wa mũtumiaji, wakuheana kũrũgũta ndirĩ cia Afrika na gũthondeka mĩtugo, kũrĩa mũno, kũhũrũkana, na wendo wa gũtirĩa wendo."
         },
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "Mhandisi wa Gũthondeka Ndirĩ cia Andũ (NLP)",
-          "bio" : "Mũthomi wa rũrĩmĩ rwa Kalenjin wĩra wake nĩ gũtũũra mĩhĩrĩga na ngano cia kĩrĩra."
+          "bio" : "Arĩ na wendo wa gũtũma teknolojia ya ndirĩ ya gũcung’a na gũthondeka ndirĩ cia Afrika, na kũrũgũta data cia ndirĩ kuwa ibikoresho biwene bigũtũma kũrũgũta, gucokia, na kũrĩhĩa mĩtugo ya ithe."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Mhandisi wa Kujifunza Mashine",
-          "bio": "Mũthomi wa rũrĩmĩ rwa Luo ũkũteithia gũtũũra rũrĩmĩ, ngano, na ũndũ wa kĩrĩra."
+          "bio": "Arĩ na wendo wa gũtũma mifumo ya mũno ya kũhĩtũma kũrũgũta kwa wendo wa mũno, mapendekezo, na vipengele vya AI kũrĩ jukwaa la Magical Africa."
         }
       }
     },

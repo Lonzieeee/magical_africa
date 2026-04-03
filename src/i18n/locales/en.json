@@ -115,6 +115,7 @@
   "about": "About",
   "language": "Language",
   "marketplace": "Marketplace",
+  "blog": "Blog",
   "academy": "Academy",
   "events": "Events",
   "music": "Music"
@@ -771,13 +772,13 @@
         "gloria": {
           "name": "Gloria Machoka",
           "role": "Founder",
-          "bio": "Youth Community Lead at Magical Africa, passionate about amplifying youth voices, nurturing community connections, and engaging young people in culture, storytelling, and shared identity."
+          "bio": "Gloria founded Magical Africa with a vision to preserve African languages, celebrate culture, and empower youth through learning, creativity, and community."
           
         },
         "steve": {
           "name": "steve Kombo",
           "role": "Board Chair",
-          "bio" : "Founder of Magical Africa, passionate about culture, community, and preserving African stories through digital spaces that connect people, languages, and heritage."
+          "bio" : "Passionate about guiding the mission to preserve African stories and build digital spaces that connect people, languages, and heritage."
         },
         "joel": {
           "name": "Joel Makori",
@@ -787,23 +788,23 @@
           "Edewait": {
           "name": "Edewait Eric",
           "role": "Head of Content",
-          "bio": "Studies local and indigenous languages, records endangered words and stories, and ensures cultural meaning is preserved across the Magical Africa community."
+          "bio": "Leads content development by researching indigenous languages, documenting endangered words and stories, and safeguarding cultural meaning across the Magical Africa community."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
           "role": "User Experience Engineer",
-          "bio" : "Supports cultural storytelling, engages youth in heritage initiatives, and helps preserve and share community traditions across Magical Africa."
+          "bio" : "Designs intuitive and engaging user experiences that make learning African languages and exploring culture simple, accessible, and enjoyable."
         },
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "NLP Engineer",
-          "bio" : "Translates content across local languages, ensures community voices are accurately represented, and helps preserve culture through clear and inclusive communication."
+          "bio" : "Builds language technology that helps preserve and process African languages, turning linguistic data into tools that support learning, translation, and cultural preservation."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Machine Learning Engineer",
-          "bio": "Connects communities across languages, coordinates translations, and ensures cultural meaning is preserved so all voices are understood and included on Magical Africa."
+          "bio": "Builds intelligent systems that power personalized learning, recommendations, and AI-driven features across the Magical Africa platform."
         }
         
       }

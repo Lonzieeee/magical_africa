@@ -115,6 +115,7 @@
   "about": "Mayelana",
   "language": "Ulimi",
   "marketplace": "Imakethe",
+  "blog": "Ibhulogi",
   "academy":"Akademi",
   "events": "Izikhungo",
   "music": "Umculo"
@@ -779,12 +780,12 @@
         "gloria": {
           "name": "Gloria Machoka",
           "role": "Umsunguli Ohlanganyela",
-          "bio": "Uchwepheshe wolimi lwesiKisii ogxile ekugcineni izisho, izindaba, nokunika intsha amandla edijithali."
+          "bio": "UGloria wasungula iMagical Africa ngenhloso yokulondoloza izilimi zase-Afrika, ukugubha amasiko, nokunika amandla entsheni ngokufunda, ubuciko, nomphakathi."
         },
         "steve": {
           "name": "Steve Kombo",
           "role": "Usihlalo Webhodi",
-          "bio": "Uchwepheshe wolimi lwesiKisii ogxile ekuvikeleni izinganekwane, amasiko omlomo, nolwazi lwesintu."
+          "bio": "Unothando lokuhola umgomo wokulondoloza izindaba zase-Afrika nokwakha izikhala zedijithali ezixhumanisa abantu, izilimi, namagugu."
         },
         "joel": {
           "name": "Joel Makori",
@@ -794,23 +795,23 @@
          "Edewait": {
           "name": "Edewait Eric",
           "role": "Olaitoriani loo Maudhui",
-          "bio": "Uchwepheshe wolimi lwesiTeso ogxile ekugcineni amagama, izaga, namasiko omlomo."
+          "bio": "Uhola ukuthuthukiswa kokuqukethwe ngokucwaninga izilimi zendabuko, ukuqopha amagama nezindaba ezisengozini, nokuvikela incazelo yesiko kuwo wonke umphakathi weMagical Africa."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
           "role": "Unjiniyela Wesipiliyoni Somsebenzisi",
-          "bio" : "Uchwepheshe wolimi lwesiKikuyu ogxile ezagweni, izinganekwane, nasekuqiniseni ubuqiniso bolimi."
+          "bio" : "Udizayina isipiliyoni somsebenzisi esicacile nesijabulisayo esenza ukufunda izilimi zase-Afrika nokuhlola amasiko kube lula, kufinyeleleka, futhi kujabulise."
         },
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "Unjiniyela Wokucubungula Ulimi Lwemvelo (NLP)",
-          "bio" : "Uchwepheshe wolimi lwesiKalenjin ogxile ekuvikeleni izisho, izinganekwane, namagugu olimi."
+          "bio" : "Ukwakha ubuchwepheshe bezilimi obusiza ukulondoloza nokucubungula izilimi zase-Afrika, uguqula idatha yezilimi ibe amathuluzi asekela ukufunda, ukuhumusha, nokulondoloza isiko."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Mhandisi wa Kujifunza Mashine",
-          "bio": "Uchwepheshe wolimi lwesiLuo ogxile ekubhaleni ulimi, izindaba, nobuwena besintu."
+          "bio": "Ukwakha izinhlelo ezihlakaniphile ezisekela ukufunda ngokwezifiso, izincomo, nezici ezisebenzisa i-AI kuwo wonke amapulatifomu eMagical Africa."
         }
       }
     },

@@ -81,12 +81,18 @@ const SideMenu = ({ isOpen, onClose }) => {
             {t('sideMenu.about')} <i className="fa-solid fa-chevron-right"></i>
           </li>
 
-          <li onClick={handleAcademyNavigation}>
+          <li onClick={()=> handleNavigation('/academy-page')}>
             {t('sideMenu.academy')} <i className="fa-solid fa-chevron-right"></i>
           </li>
 
           <li onClick={() => handleNavigation('/market')}>
             {t('sideMenu.marketplace')} <i className="fa-solid fa-chevron-right"></i>
+          </li>
+
+          <li onClick={()=> handleNavigation('/blogs')}>
+           {t('sideMenu.blog')} 
+          <i className="fa-solid fa-chevron-right"></i>
+
           </li>
 
           <li onClick={() => handleNavigation('/events')}>

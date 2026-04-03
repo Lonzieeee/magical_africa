@@ -115,6 +115,7 @@
   "about": "Ũhoro",
   "language": "Lũthĩmo",
   "marketplace": "Ndũka",
+  "blog": "Blogi",
   "academy": "Akademi",
   "events": "Matukio",
   "music": "Nyimbo"
@@ -712,12 +713,12 @@
         "gloria": {
           "name": "Gloria Machoka",
           "role": "Mwanzilisi Mwekeki",
-          "bio": "Mũthomi wa lugha ya Kisii ũkũhũũgagia ngano, mĩtũkĩ, na kũthũkũmĩsya andũ aasa kĩndũ kĩa dijithali."
+          "bio": "Gloria niwanzisye Magical Africa na wendo wa kulinda ndũimi sya Āfrika, kusembasya mĩthĩĩko, na kwĩvya andũ aana kwa kwĩsomesya, wĩa, na jamii."
         },
         "steve": {
           "name": "Steve Kombo",
           "role": "Mwenyekiti wa Bodi",
-          "bio": "Mũthomi wa lugha ya Kisii ũkũtũũra ngano, mĩtũkĩ ya mũromo, na ũmenyo wa kĩkũlũ."
+          "bio": "E na wendo wa kuongoza wendo wa kulinda nthano sya Āfrika na kwaka maeneo ma kidijitali matũmanganasya andũ, ndũimi, na wĩtĩkio wa kĩvathani."
         },
         "joel": {
           "name": "Joel Makori",
@@ -727,24 +728,24 @@
          "Edewait": {
           "name": "Edewait Eric",
           "role": "Mũnene wa Maudhui",
-          "bio": "Mũthomi wa lugha ya Teso ũkũhũũgagia ciugo, thimo, na mĩtũkĩ ya mũromo."
+          "bio": "E na wendo wa kuongoza wĩa wa maudhui kwa kusoma ndũimi za kienyeji, kuandika maneno na nthano zinazokosa, na kulinda maana ya mĩthĩĩko katika jamii ya Magical Africa."
 
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
           "role": "Mhandisi wa Uzoefu wa Mtumiaji",
-          "bio" : "Mũthomi wa lugha ya Kikuyu ũkũhũũgagia thimo, ngano, na ũtũũnũ wa lugha."
+          "bio" : "E na wendo wa kuongoza uzoefu wa mtumiaji wa kuvutia na rahisi kutumia unaofanya kujifunza ndũimi za Āfrika na kuchunguza mĩthĩĩko kuwa rahisi, inapatikana kwa wote, na ya kufurahisha."
         },
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "Mhandisi wa Usindikaji wa Ndũimi (NLP)",
-          "bio" : "Mũthomi wa lugha ya Kalenjin ũkũtũũra mĩtũkĩ, ngano, na urithi wa lugha."
+          "bio" : "E na wendo wa kuunda teknolojia ya ndũimi inayosaidia kulinda na kusindika ndũimi za Āfrika, akigeuza data za ndũimi kuwa zana zinazounga mkono kujifunza, kutafsiri, na kulinda mĩthĩĩko."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Mhandisi wa Kujifunza Mashine",
-          "bio": "Mũthomi wa lugha ya Luo ũkũteithia kũandĩka lugha, ngano, na ũtũũnũ wa andũ."
+          "bio": "E na wendo wa kuunda mifumo ya akili inayosaidia kujifunza kibinafsi, mapendekezo, na vipengele vya AI kwenye jukwaa la Magical Africa."
         }
       }
     },

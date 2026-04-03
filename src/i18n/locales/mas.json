@@ -114,6 +114,7 @@
   "about": "Tenebo",
   "language": "Enkutuk",
   "marketplace": "Enkáng'",
+  "blog": "Blogi",
   "academy": "ol aadet",
   "events": "Enkiama",
   "music": "Mĩhĩrĩga"
@@ -708,12 +709,12 @@
         "gloria": {
           "name": "Gloria Machoka",
           "role": "Onaitumoki Pamoja",
-          "bio": "Oloing’oni le Kisii oshi ilomonok ngano, olomonok le nkishon, nabo enkop a nkerai."
+          "bio": "Gloria naa Magical Africa ninye enkipankata naata ilugha le Afrika, naata enkishui, naa ilasotua iltung’ana ilayiok intae ilomon, enkirukoto, naa enkutuk."
         },
         "steve": {
           "name": "Steve Kombo",
           "role": "Olaitoriani loo Bodi",
-          "bio": "Oloing’oni le Kisii oleng’oni ilomonok, enkop, nabo olomonok leloito le nkishon nabo teknolojia."
+          "bio": "Enkanyit sidai naata enkishui naa ilomon le Afrika, naa aata enkutuk o digital naitunganak iltung’ana, ilugha, naa olkuak."
         },
         "joel": {
           "name": "Joel Makori",
@@ -723,7 +724,7 @@
          "Edewait": {
           "name": "Edewait Eric",
           "role": "Olaitoriani loo Maudhui",
-          "bio": "Oloing’oni le Teso oleng’oni ilomonok enchorro, ngano, nabo olomonok leloito."
+          "bio": "Enkanyit sidai naata enkutuk o enkishui olkikore, naata enkishui olugha le Afrika, naa enkishui olamon naa enkirukoto enkishuini, enkishui iltunganak e enkirukoto, naa enkishui olkikore."
 
         },
 
@@ -735,12 +736,12 @@
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "Mhandisi wa Usindikaji wa Lugha (NLP)",
-          "bio" : "Oloing’oni le Kalenjin oshi ilomonok olomonok le nkishon, ngano nabo enkiguran."
+          "bio" : "Enkanyit sidai naata enkutuk o enkishui le ilugha, naata enkishui olugha le Afrika, naa naatolok olkikore o enkishui oleng enkisui naa enkidong’ enkishui, enkishuini, naa enkishui olkikore."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Mhandisi wa Kujifunza Mashine",
-          "bio": "Oloing’oni le Luo oleng’oni ilomonok ngano, enkiguran, nabo olomonok le nkishon."
+          "bio": "Enkanyit sidai naata enkutuk o enkishui oleng enkisui, naata enkishui olamon o enkisui, naa naatolok olkikore o AI enkutuk o Magical Africa."
         }
         
       }
