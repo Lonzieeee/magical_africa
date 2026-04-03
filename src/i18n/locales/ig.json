@@ -1241,8 +1241,85 @@
       "heading": "Bido Njem Gị Taa!",
       "joinNow": "Sonye Ugbu a"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Blọgụ",
+      "tagline": "Chọpụta Akụkọ, Ọmụmụ, na Omenala"
+    },
+    "featured": {
+      "category": "Ihe Ọmụmụ nke Omenala",
+      "title": "Nka nke Ikọ Akụkọ nke Africa",
+      "date": "Febrụwarị 10, 2024",
+      "excerpt": "Chọpụta omenala dị ukwuu nke ikọ akụkọ n'ọnụ na ọrụ ya n'ịmepụta njirimara, akụkọ ihe mere eme, na obodo n'ofe kọntinent Africa.",
+      "readMore": "Gụọ Karịa"
+    },
+    "latest": {
+      "heading": "Akụkọ Ọhụrụ",
+      "posts": {
+        "beadwork": {
+          "title": "Ịmepụta Ịchọ Mma nke Ọjị",
+          "subtitle": "Ịmepụta Ịchọ Mma Dị Mma Nke Emekọ Site na Ihe Ọmụmụ Africa"
+        },
+        "maasai": {
+          "title": "Ịchọpụta Omenala Maasai",
+          "subtitle": "N'ime Omenala nke Ndị Maasai"
+        },
+        "fashion": {
+          "title": "Ụdị Uwe Africa nke Oge a",
+          "subtitle": "Ụdị Ọhụrụ nwere Ntụpọ Omenala"
+        },
+        "masks": {
+          "title": "Akụkọ Ihe Mere Eme nke Ihu Iyi Africa",
+          "subtitle": "Ikpughe Ihe Ọzịza nke Nka Ebo"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Ịmụta Swahili: Ndụmọdụ na Usoro",
+          "date": "Machị 5, 2024",
+          "subtitle": "Ịmụta Asụsụ n'Ụzọ Dị Vui ma Dị Mfe"
+        },
+        "cuisine": {
+          "title": "Nri Omenala Africa Iji Nwaa",
+          "date": "Febrụwarị 25, 2024",
+          "subtitle": "Ọ Dị Ụtọ nke Nri Ozizi Africa"
+        }
+      },
+      "categories": {
+        "heading": "Ụdị",
+        "items": {
+          "language": "Asụsụ na Ọmụmụ",
+          "heritage": "Ihe Ọmụmụ nke Omenala",
+          "crafts": "Ọrụ Aka na Nka",
+          "food": "Nri na Usoro Isi Nri",
+          "travel": "Njem na Omenala"
+        }
+      },
+      "popular": {
+        "heading": "Akụkọ Pụtara Ìhè",
+        "posts": {
+          "zulu": "Okwu Zulu 10 Dị Mkpa",
+          "drumming": "Ikwa Igba n'Egwu Africa",
+          "festivals": "Ememe nke Ọdịda Anyanwụ Africa"
+        }
+      },
+      "newsletter": {
+        "heading": "Debanye Aha na Akwụkwọ Ozi Anyị",
+        "subtitle": "Nọrọ n'oge maka akụkọ ọhụrụ na ndụmọdụ!",
+        "placeholder": "Adreesị email gị",
+        "button": "Debanye Aha",
+        "success": "🎉 Daalụ maka ịdebanye aha!"
+      }
+    }
   }
 }
+
 
 
 

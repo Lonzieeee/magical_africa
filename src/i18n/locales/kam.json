@@ -1169,8 +1169,85 @@
       "heading": "Anza Nzĩa Yaku Ũmũnthĩ!",
       "joinNow": "Ĩngĩa Sasa"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Blogu",
+      "tagline": "Tũmia Ngewa, Ũũi, na Mĩtĩlĩlo"
+    },
+    "featured": {
+      "category": "Mĩtĩlĩlo wa Kĩla Siku",
+      "title": "Ũtĩa wa Kũsemea Ngewa sya Afrika",
+      "date": "Mwai wa Keli 10, 2024",
+      "excerpt": "Tũmia mĩtĩlĩlo mĩnene ya kũsemea ngewa na ũhĩtĩkĩo wayo kũĩka ũtambulisho, mbano, na ũkundi kwa nzĩa yonthe ya Afrika.",
+      "readMore": "Soma Ingi"
+    },
+    "latest": {
+      "heading": "Makala ya Hĩhĩ",
+      "posts": {
+        "beadwork": {
+          "title": "Kũĩka Mapambo ma Shanga",
+          "subtitle": "Kũunda Mapambo Mazũ Kũndĩiwa ni Mĩtĩlĩlo wa Afrika"
+        },
+        "maasai": {
+          "title": "Kũtalia Mĩtĩlĩlo wa Maasai",
+          "subtitle": "Nthĩnĩ wa Mĩtĩlĩlo ya Andu a Maasai"
+        },
+        "fashion": {
+          "title": "Mĩvaa ya Afrika ya Hĩhĩ",
+          "subtitle": "Mĩvaa ya Ũseo na Mguso wa Mĩtĩlĩlo"
+        },
+        "masks": {
+          "title": "Mbano wa Barakoa sya Afrika",
+          "subtitle": "Kũfichua Sĩrĩ sya Ũtĩa wa Makabila"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Kũndĩia Kiswahili: Mbinu na Ũhĩtĩkĩo",
+          "date": "Mwai wa Katatũ 5, 2024",
+          "subtitle": "Kũndĩia Mũthĩ kwa Ũseo na Ũkuũ"
+        },
+        "cuisine": {
+          "title": "Vyakula vya Jadi vya Afrika vya Kũũla",
+          "date": "Mwai wa Keli 25, 2024",
+          "subtitle": "Ladha ya Vyakula vya Kweli vya Afrika"
+        }
+      },
+      "categories": {
+        "heading": "Makundi",
+        "items": {
+          "language": "Mĩthĩ na Kũndĩia",
+          "heritage": "Mĩtĩlĩlo wa Kĩla Siku",
+          "crafts": "Ũwĩkĩo na Ũtĩa",
+          "food": "Ĩkia na Mapishi",
+          "travel": "Ũsafiri na Mĩtĩlĩlo"
+        }
+      },
+      "popular": {
+        "heading": "Makala Maarufu",
+        "posts": {
+          "zulu": "Maneno 10 Muhimu ya Kizulu",
+          "drumming": "Kũpiga Ngoma kwa Mũthĩa wa Afrika",
+          "festivals": "Sherehe sya Afrika Magharibi"
+        }
+      },
+      "newsletter": {
+        "heading": "Ĩandĩkĩsya kwa Jarida Lĩtũ",
+        "subtitle": "Pata habari sya hĩhĩ na mbinu!",
+        "placeholder": "Anwani yaku ya barua pepe",
+        "button": "Ĩandĩkĩsya",
+        "success": "🎉 Twĩ na ũshukrani kwa kũĩandĩkĩsya!"
+      }
+    }
   }
 }
+
 
 
 

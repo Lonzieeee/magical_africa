@@ -1157,8 +1157,85 @@
       "heading": "Andĩkĩria Njĩra Yaku Ũmũthĩ!",
       "joinNow": "Ingĩra Sasa"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Blogu",
+      "tagline": "Hũhũria Ngano, Ũũi, na Mĩgambo"
+    },
+    "featured": {
+      "category": "Ũtukũ wa Mĩgambo",
+      "title": "Ũtũũru wa Gũcooka Ngano cia Afrika",
+      "date": "Mweri wa Kerĩ 10, 2024",
+      "excerpt": "Hũhũria mĩgambo ya gũcooka ngano na ũndũrĩro wayo kũĩka ũtambulisho, mbano, na ũkundi kwa nzĩa yonthe ya Afrika.",
+      "readMore": "Soma Ingĩ"
+    },
+    "latest": {
+      "heading": "Makala ya Ũhũ",
+      "posts": {
+        "beadwork": {
+          "title": "Kũĩka Mapambo ma Shanga",
+          "subtitle": "Kũunda Mapambo Maarufu Kũndĩiwa ni Ũtukũ wa Afrika"
+        },
+        "maasai": {
+          "title": "Gũhũhũria Mĩgambo ya Maasai",
+          "subtitle": "Nthĩnĩ wa Mĩgambo ya Andu a Maasai"
+        },
+        "fashion": {
+          "title": "Mĩvaa ya Afrika ya Ũhũ",
+          "subtitle": "Mĩvaa ya Ũseo na Mguso wa Mĩgambo"
+        },
+        "masks": {
+          "title": "Mbano wa Barakoa cia Afrika",
+          "subtitle": "Kũfichua Sĩrĩ cia Ũtũũru wa Makabila"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Gũĩgua Kiswahili: Mbinu na Ũhĩtĩkĩo",
+          "date": "Mweri wa Gatatũ 5, 2024",
+          "subtitle": "Gũĩgua Gĩthomo kwa Ũseo na Ũkuũ"
+        },
+        "cuisine": {
+          "title": "Irio cia Jadi cia Afrika cia Gũũla",
+          "date": "Mweri wa Kerĩ 25, 2024",
+          "subtitle": "Rĩũa rwa Irio cia Kweli cia Afrika"
+        }
+      },
+      "categories": {
+        "heading": "Makundi",
+        "items": {
+          "language": "Gĩthomo na Kũĩgua",
+          "heritage": "Ũtukũ wa Mĩgambo",
+          "crafts": "Ũwĩkĩo na Ũtũũru",
+          "food": "Irio na Mapishi",
+          "travel": "Ũsafiri na Mĩgambo"
+        }
+      },
+      "popular": {
+        "heading": "Makala Mahĩu",
+        "posts": {
+          "zulu": "Magetha 10 Muhimu ya Kizulu",
+          "drumming": "Gũkĩa Ngoma kwa Mũhĩmĩ wa Afrika",
+          "festivals": "Sherehe cia Afrika Magharibi"
+        }
+      },
+      "newsletter": {
+        "heading": "Ĩandĩkĩria Jarida Rĩitũ",
+        "subtitle": "Hũhũria habari cia ũhũ na mbinu!",
+        "placeholder": "Anwani yaku ya barua pepe",
+        "button": "Ĩandĩkĩria",
+        "success": "🎉 Twĩ na ũshukrani kwa kũĩandĩkĩria!"
+      }
+    }
   }
 }
+
 
 
 

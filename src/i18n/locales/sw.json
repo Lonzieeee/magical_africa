@@ -1231,7 +1231,84 @@
       "heading": "Anza Safari Yako Leo!",
       "joinNow": "Jiunge Sasa"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Blogu",
+      "tagline": "Gundua Hadithi, Maarifa, na Utamaduni"
+    },
+    "featured": {
+      "category": "Urithi wa Kitamaduni",
+      "title": "Sanaa ya Kusimulia Hadithi za Kiafrika",
+      "date": "Februari 10, 2024",
+      "excerpt": "Gundua mila tajiri ya kusimulia hadithi kwa mdomo na jukumu lake katika kuunda utambulisho, historia, na jamii katika bara la Afrika.",
+      "readMore": "Soma Zaidi"
+    },
+    "latest": {
+      "heading": "Makala ya Hivi Karibuni",
+      "posts": {
+        "beadwork": {
+          "title": "Kutengeneza Mapambo ya Shanga",
+          "subtitle": "Kuunda Mapambo Mazuri Yaliyohamasishwa na Urithi wa Kiafrika"
+        },
+        "maasai": {
+          "title": "Kuchunguza Utamaduni wa Maasai",
+          "subtitle": "Ndani ya Mila za Watu wa Maasai"
+        },
+        "fashion": {
+          "title": "Mitindo ya Mavazi ya Kiafrika",
+          "subtitle": "Mitindo ya Kisasa yenye Mguso wa Kitamaduni"
+        },
+        "masks": {
+          "title": "Historia ya Barakoa za Kiafrika",
+          "subtitle": "Kufichua Siri za Sanaa ya Makabila"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Kujifunza Kiswahili: Vidokezo na Mbinu",
+          "date": "Machi 5, 2024",
+          "subtitle": "Kujifunza Lugha kwa Furaha na Urahisi"
+        },
+        "cuisine": {
+          "title": "Vyakula vya Jadi vya Kiafrika vya Kujaribu",
+          "date": "Februari 25, 2024",
+          "subtitle": "Ladha ya Vyakula Halisi vya Kiafrika"
+        }
+      },
+      "categories": {
+        "heading": "Makundi",
+        "items": {
+          "language": "Lugha na Kujifunza",
+          "heritage": "Urithi wa Kitamaduni",
+          "crafts": "Ufundi na Sanaa",
+          "food": "Chakula na Mapishi",
+          "travel": "Usafiri na Mila"
+        }
+      },
+      "popular": {
+        "heading": "Makala Maarufu",
+        "posts": {
+          "zulu": "Maneno 10 Muhimu ya Kizulu",
+          "drumming": "Kupiga Ngoma katika Muziki wa Kiafrika",
+          "festivals": "Sherehe za Afrika Magharibi"
+        }
+      },
+      "newsletter": {
+        "heading": "Jiandikishe kwa Jarida Letu",
+        "subtitle": "Pata habari za hivi karibuni na vidokezo!",
+        "placeholder": "Anwani yako ya barua pepe",
+        "button": "Jiandikishe",
+        "success": "🎉 Asante kwa kujiandikisha!"
+      }
+    }
   }
 }
+
 
 

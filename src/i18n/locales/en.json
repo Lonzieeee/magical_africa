@@ -1232,8 +1232,87 @@
       "heading": "Start Your Journey Today!",
       "joinNow": "Join Now"
     }
+  },
+
+
+
+  
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Blog",
+      "tagline": "Explore Stories, Insights, and Culture"
+    },
+    "featured": {
+      "category": "Cultural Heritage",
+      "title": "The Art of African Storytelling",
+      "date": "February 10, 2024",
+      "excerpt": "Discover the rich tradition of oral storytelling and its role in shaping identity, history, and community across the African continent.",
+      "readMore": "Read More"
+    },
+    "latest": {
+      "heading": "Latest Posts",
+      "posts": {
+        "beadwork": {
+          "title": "Crafting Beaded Jewelry",
+          "subtitle": "Creating Beautiful Beadwork Inspired by African Heritage"
+        },
+        "maasai": {
+          "title": "Exploring the Maasai Culture",
+          "subtitle": "Inside the Traditions of the Maasai People"
+        },
+        "fashion": {
+          "title": "African Fashion Trends",
+          "subtitle": "Modern Styles with a Cultural Twist"
+        },
+        "masks": {
+          "title": "The History of African Masks",
+          "subtitle": "Unveiling the Mystique of Tribal Art"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Learning Swahili: Tips & Tricks",
+          "date": "March 5, 2024",
+          "subtitle": "Language Learning Made Fun and Easy"
+        },
+        "cuisine": {
+          "title": "Traditional African Cuisine to Try",
+          "date": "February 25, 2024",
+          "subtitle": "A Taste of Authentic African Dishes"
+        }
+      },
+      "categories": {
+        "heading": "Categories",
+        "items": {
+          "language": "Language & Learning",
+          "heritage": "Cultural Heritage",
+          "crafts": "Crafts & Art",
+          "food": "Food & Cuisine",
+          "travel": "Travel & Traditions"
+        }
+      },
+      "popular": {
+        "heading": "Popular Posts",
+        "posts": {
+          "zulu": "10 Essential Zulu Phrases",
+          "drumming": "Drumming in African Music",
+          "festivals": "The Festivals of West Africa"
+        }
+      },
+      "newsletter": {
+        "heading": "Subscribe to Our Newsletter",
+        "subtitle": "Stay updated with the latest stories and tips!",
+        "placeholder": "Your email address",
+        "button": "Subscribe",
+        "success": "🎉 Thank you for subscribing!"
+      }
+    }
   }
 }
+
 
 
 

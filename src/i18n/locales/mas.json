@@ -1170,7 +1170,84 @@
       "heading": "Amu Enkidong Ino Nabo!",
       "joinNow": "Ingir Nabo"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Blogu",
+      "tagline": "Iyiolo Enkishoroto, Enkiama, nabo Enkisampu"
+    },
+    "featured": {
+      "category": "Enkisampu e Entorosi",
+      "title": "Enkibolosho e Aiyiolo Enkishoroto e Afrika",
+      "date": "Olapa e Are 10, 2024",
+      "excerpt": "Iyiolo enkisampu e aiyiolo enkishoroto nabo enkidong aie enkibolosho e oltungani, mbano, nabo enkiama kwa nzĩa yonthe ya Afrika.",
+      "readMore": "Aiyiolo Ingii"
+    },
+    "latest": {
+      "heading": "Enkishoroto e Nabo",
+      "posts": {
+        "beadwork": {
+          "title": "Amu Enkidong e Shanga",
+          "subtitle": "Amu Enkidong e Naibor Kũndĩiwa ni Enkisampu e Afrika"
+        },
+        "maasai": {
+          "title": "Iyiolo Enkisampu e Maasai",
+          "subtitle": "Nthĩnĩ wa Enkisampu e Ilchamus e Maasai"
+        },
+        "fashion": {
+          "title": "Enkibolosho e Afrika e Nabo",
+          "subtitle": "Enkibolosho e Ũseo nabo Mguso wa Enkisampu"
+        },
+        "masks": {
+          "title": "Enkidong e Barakoa e Afrika",
+          "subtitle": "Iyiolo Enkiama e Ũtĩa wa Ilchamus"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Aiyiolo Kiswahili: Enkiama nabo Enkibolosho",
+          "date": "Olapa e Uni 5, 2024",
+          "subtitle": "Aiyiolo Enkiama kwa Enkidong nabo Enkiterishoo"
+        },
+        "cuisine": {
+          "title": "Enkiama e Entorosi e Afrika e Nabo",
+          "date": "Olapa e Are 25, 2024",
+          "subtitle": "Enkidong e Enkiama e Kweli e Afrika"
+        }
+      },
+      "categories": {
+        "heading": "Ilchamus",
+        "items": {
+          "language": "Enkiama nabo Aiyiolo",
+          "heritage": "Enkisampu e Entorosi",
+          "crafts": "Enkibolosho nabo Ũtĩa",
+          "food": "Enkiama nabo Mapishi",
+          "travel": "Enkidong nabo Enkisampu"
+        }
+      },
+      "popular": {
+        "heading": "Enkishoroto e Nabo",
+        "posts": {
+          "zulu": "Enkiama 10 e Kizulu",
+          "drumming": "Enkidong e Ngoma kwa Enkiama e Afrika",
+          "festivals": "Sherehe e Afrika Magharibi"
+        }
+      },
+      "newsletter": {
+        "heading": "Eandikish Jarida Lĩtũ",
+        "subtitle": "Pata enkiama e nabo nabo enkibolosho!",
+        "placeholder": "Anwani ino e barua pepe",
+        "button": "Eandikish",
+        "success": "🎉 Ashe nabo kwa eandikish!"
+      }
+    }
   }
 }
+
 
 

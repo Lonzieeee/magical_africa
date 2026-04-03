@@ -1237,8 +1237,85 @@
       "heading": "Qala Uhambo Lwakho Namuhla!",
       "joinNow": "Joyina Manje"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Ibhulogi",
+      "tagline": "Hlola Izindaba, Ulwazi, Namasiko"
+    },
+    "featured": {
+      "category": "Ilifa Lamasiko",
+      "title": "Ubuciko Bokuxoxa Izindaba ZaseAfrika",
+      "date": "Februwari 10, 2024",
+      "excerpt": "Thola amasiko anamandla okuxoxa izindaba ngomlomo nawo umsebenzi wawo ekwakheni ubunikazi, umlando, nomphakathi kulo lonke izwekazi laseAfrika.",
+      "readMore": "Funda Kabanzi"
+    },
+    "latest": {
+      "heading": "Izindaba Zakamuva",
+      "posts": {
+        "beadwork": {
+          "title": "Ukwenza Umhlobiso Wamazhe",
+          "subtitle": "Ukwenza Umhlobiso Omuhle Okhuthazwa Ilifa LaseAfrika"
+        },
+        "maasai": {
+          "title": "Ukuhlola Amasiko AakwaMaasai",
+          "subtitle": "Ngaphakathi Kwamasiko Abantu BakwaMaasai"
+        },
+        "fashion": {
+          "title": "Izindlela Zokugqoka ZaseAfrika",
+          "subtitle": "Izindlela Zanamuhla Ezinamasiko"
+        },
+        "masks": {
+          "title": "Umlando Wezithombe ZaseAfrika",
+          "subtitle": "Ukuveza Imfihlakalo Yobuciko Besizwe"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Ukufunda IsiSwahili: Amathiphu Namaqhinga",
+          "date": "Mashi 5, 2024",
+          "subtitle": "Ukufunda Ulimi Ngokujabulisayo Nangokushesha"
+        },
+        "cuisine": {
+          "title": "Ukudla Komdabu KwaseAfrika Okuzolingwa",
+          "date": "Februwari 25, 2024",
+          "subtitle": "Ukunambitha Ukudla Kwangempela KwaseAfrika"
+        }
+      },
+      "categories": {
+        "heading": "Izigaba",
+        "items": {
+          "language": "Ulimi Nokufunda",
+          "heritage": "Ilifa Lamasiko",
+          "crafts": "Ubuciko Nezinto Ezenziwe Ngesandla",
+          "food": "Ukudla Nezindlela Zokupheka",
+          "travel": "Uhambo Namasiko"
+        }
+      },
+      "popular": {
+        "heading": "Izindaba Ezivelele",
+        "posts": {
+          "zulu": "Amagama Ayi-10 AseIsiZulu Abalulekile",
+          "drumming": "Ukushaya Izigubhu Emculweni WaseAfrika",
+          "festivals": "Imikhosi YaseNtshonalanga Afrika"
+        }
+      },
+      "newsletter": {
+        "heading": "Bhalisela Inyuzileta Yethu",
+        "subtitle": "Hlala uzwa ngezindaba zakamuva namathiphu!",
+        "placeholder": "Ikheli lakho le-imeyili",
+        "button": "Bhalisa",
+        "success": "🎉 Siyabonga ngokubhalisa!"
+      }
+    }
   }
 }
+
 
 
 
