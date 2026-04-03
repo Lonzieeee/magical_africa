@@ -12,6 +12,7 @@ import {
 import '../styles/courseContent.css'
 import CourseCard from '../components/Coursecard'
 import { useNavigate } from 'react-router-dom'
+import { downloadCourseCertificate } from '../utils/certificate'
 
 const CourseContent = ({
   topics = [],
@@ -41,7 +42,8 @@ const CourseContent = ({
   courseSubtitlesLabel = 'Video subtitles available',
   courseUpdatedAtLabel = '',
   certificateDownloadUrl = '',
-  certificateFileName = ''
+  certificateFileName = '',
+  learnerName = ''
 }) => {
   const [expanded, setExpanded] = useState({})
 
@@ -80,6 +82,19 @@ const CourseContent = ({
     : []
   const certificateReadyToDownload = Boolean(certificateDownloadUrl)
   const certificateLocked = !isPreviewMode && completionPercent < 100
+  const certificateFallbackReady = !certificateReadyToDownload && !isPreviewMode && completionPercent >= 100
+
+  const handleDownloadCompletionCertificate = () => {
+    const learnerDisplayName = learnerName || 'Learner'
+    const completionDate = new Date().toLocaleDateString()
+
+    downloadCourseCertificate({
+      learnerName: learnerDisplayName,
+      courseTitle: title || 'Course',
+      completedAt: completionDate,
+      tutorName: teacherName || 'Tutor'
+    })
+  }
 
   const lessonSequence = topics.flatMap((topic, topicIndex) =>
     (topic.lessons || []).map((lesson, lessonIndex) => ({
@@ -284,9 +299,13 @@ const CourseContent = ({
                       >
                         <FaDownload /> Download Certificate
                       </a>
+                    ) : certificateFallbackReady ? (
+                      <button className='cc-certificate-download-btn' type='button' onClick={handleDownloadCompletionCertificate}>
+                        <FaDownload /> Download Certificate
+                      </button>
                     ) : (
                       <button className='cc-certificate-download-btn is-disabled' type='button' disabled>
-                        <FaDownload /> Certificate Not Uploaded Yet
+                        <FaDownload /> Certificate available upon completion of course
                       </button>
                     )}
                   </article>
