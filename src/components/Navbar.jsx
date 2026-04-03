@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
-import { db } from '../context/AuthContext';
-import { doc, getDoc } from 'firebase/firestore';
 import SideMenu from './SideMenu';
 import AuthModal from './AuthModal';
 import useAcademyNavigation from "../hooks/useAcademyNavigation";
@@ -27,25 +25,11 @@ const Navbar = ({ solid }) => {
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [logoutMessage, setLogoutMessage] = useState(false);
   const goToAcademy = useAcademyNavigation();
+  const handleAcademyNavigation = goToAcademy;
   
   const { user, userData, logout, getInitials, getFullName } = useAuth();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-
-  const normalizeRole = (role) => {
-    const value = String(role || '').trim().toLowerCase();
-    if (!value) return '';
-    if (value.includes('teacher') || value.includes('tutor') || value.includes('educator')) return 'teacher';
-    if (value.includes('learner') || value.includes('student')) return 'learner';
-    return '';
-  };
-
-  const resolveProfileRole = (profile) => {
-    const normalized = normalizeRole(profile?.role);
-    if (normalized) return normalized;
-    if (String(profile?.subject || '').trim()) return 'teacher';
-    return '';
-  };
 
   const currentLanguage = languages.find(l => l.code === i18n.language) || languages[0];
 
@@ -63,33 +47,6 @@ const Navbar = ({ solid }) => {
     localStorage.setItem('language', langCode);
     setIsLangDropdownOpen(false);
   };
-
-    const handleAcademyNavigation = async () => {
-      if (!user) {
-        navigate('/academy-signIn');
-        return;
-      }
-
-      let resolvedRole = resolveProfileRole(userData);
-
-      if (!resolvedRole && user?.uid) {
-        try {
-          const snapshot = await getDoc(doc(db, 'users', user.uid));
-          if (snapshot.exists()) {
-            resolvedRole = resolveProfileRole(snapshot.data());
-          }
-        } catch {
-          resolvedRole = '';
-        }
-      }
-
-      if (resolvedRole === 'teacher') {
-        navigate('/teacher-dashboard');
-        return;
-      }
-
-      navigate('/learner');
-    };
 
   {/* 
   const handleLogout = async () => {
