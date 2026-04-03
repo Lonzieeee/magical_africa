@@ -298,6 +298,11 @@ const CourseContentPage = () => {
 
   if (!course) return null
 
+  const learnerDisplayName = `${userData?.firstName || ''} ${userData?.lastName || userData?.secondName || ''}`.trim()
+    || user?.displayName
+    || user?.email?.split('@')[0]
+    || 'Learner'
+
   const topicsWithQuiz = course.topics?.filter(t => t.quiz && t.quiz.length > 0) || []
 
   // Toggle quiz visibility and scroll to it when opening
@@ -550,6 +555,7 @@ const CourseContentPage = () => {
         courseUpdatedAtLabel={course.courseUpdatedAtLabel || ''}
         certificateDownloadUrl={course.certificateDownloadUrl || ''}
         certificateFileName={course.certificateFileName || ''}
+        learnerName={learnerDisplayName}
         persistedTabState={persistedTabState}
         onPersistTabState={handlePersistTabState}
       />

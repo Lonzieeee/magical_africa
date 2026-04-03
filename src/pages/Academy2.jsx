@@ -70,7 +70,7 @@ const Academy2 = () => {
         if (role === 'teacher') {
           navigate('/teacher-dashboard')
         } else {
-          navigate('/academy') // 👈 change to your learner page
+          navigate('/learner')
         }
       }, 2000)
 
@@ -256,7 +256,7 @@ const Academy2 = () => {
           </div>
 
           <div className='academy-already'>
-            <p>Already have an account? <a  onClick={() => navigate('/academy-SignIn')}>Sign In</a></p>
+            <p>Already have an account? <a  onClick={() => navigate('/academy-signIn')}>Sign In</a></p>
           </div>
 
         </div>

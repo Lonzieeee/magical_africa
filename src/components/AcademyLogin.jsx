@@ -4,7 +4,7 @@ import '../styles/academy-login.css'
 import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 import SmallFooter from './SmallFooter'
 
 const AcademyLogin = () => {
@@ -48,11 +48,19 @@ const AcademyLogin = () => {
 
       if (userDoc.exists()) {
         const userData = userDoc.data()
+        const role = resolveLoginRole(userData)
+
+        // Keep a canonical role in Firestore so future sign-ins route consistently.
+        if (normalizeRole(userData?.role) !== role) {
+          await setDoc(doc(db, 'users', user.uid), {
+            role,
+            updatedAt: new Date().toISOString()
+          }, { merge: true })
+        }
 
         // 3. Show success message then redirect based on role
         setSuccess(true)
         setTimeout(() => {
-          const role = resolveLoginRole(userData)
           if (role === 'teacher') {
             navigate('/teacher-dashboard')
           } else {
