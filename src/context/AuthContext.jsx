@@ -37,7 +37,7 @@ const firebaseConfig = {
   appId: "1:1080318233292:web:6f9071b061e3d6ea139069"
 };
 
-*/
+
 
 
 const firebaseConfig = {
@@ -47,6 +47,18 @@ const firebaseConfig = {
   storageBucket: "magicalafrica3.firebasestorage.app",
   messagingSenderId: "943918113486",
   appId: "1:943918113486:web:fade750f9b2e4d9107269f"
+};
+*/
+
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBeoF3S6T10L7bpCDRJDoY3FnRtM8htPYU",
+  authDomain: "magicalafrica4.firebaseapp.com",
+  projectId: "magicalafrica4",
+  storageBucket: "magicalafrica4.firebasestorage.app",
+  messagingSenderId: "714238762756",
+  appId: "1:714238762756:web:c99eea60c5293592e5ba51"
 };
 
 
