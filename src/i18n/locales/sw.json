@@ -114,6 +114,7 @@
   "about": "Kuhusu",
   "language": "Lugha",
   "marketplace": "Soko",
+  "blog": "Blogu",
   "academy": "Akademia",
   "events": "Matukio",
   "music": "Nyimbo"
@@ -773,13 +774,13 @@
       "members": {
         "gloria": {
           "name": "Gloria Machoka",
-          "role": "Mwanzilishi Mwenza",
-          "bio"  : "Mtaalamu wa lugha ya Kisii anayejitolea kuhifadhi misemo ya asili, hadithi, na kuwawezesha vijana kidijitali."
+          "role": "Mwanzilishi",
+          "bio"  : "Gloria alianzisha Magical Africa kwa maono ya kuhifadhi lugha za Kiafrika, kusherehekea utamaduni, na kuwawezesha vijana kupitia kujifunza, ubunifu, na jamii."
         },
         "steve": {
           "name": "Steve Kombo",
           "role": "Mwenyekiti wa Bodi",
-          "bio": "Mtaalamu wa lugha ya Kisii anayehifadhi simulizi za asili, mila za mdomo, na maarifa ya kitamaduni kupitia elimu na teknolojia."
+          "bio": "Ana shauku ya kuongoza dhamira ya kuhifadhi hadithi za Kiafrika na kujenga majukwaa ya kidijitali yanayounganisha watu, lugha, na urithi."
         },
         "joel": {
           "name": "Joel Makori",
@@ -789,23 +790,23 @@
          "Edewait": {
           "name": "Edewait Eric",
           "role": "Mkuu wa Maudhui",
-          "bio": "Mtaalamu wa lugha ya Teso anayehifadhi msamiati, methali, na mila za mdomo kwa vizazi vijavyo."
+          "bio": "Anaongoza ukuzaji wa maudhui kwa kufanya utafiti wa lugha za asili, kurekodi maneno na hadithi zinazokosa, na kuhifadhi maana za kitamaduni katika jamii ya Magical Africa."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
           "role": "Mhandisi wa Uzoefu wa Mtumiaji",
-          "bio" : "Mtaalamu wa lugha ya Kikuyu anayebobea katika methali, ngano, na uhalisia wa lugha."
+          "bio" : "Anapanga uzoefu wa mtumiaji wa kuvutia na rahisi kutumia unaofanya kujifunza lugha za Kiafrika na kuchunguza utamaduni kuwa rahisi, unaopatikana kwa wote, na wa kufurahisha."
         },
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "Mtaalamu wa Lugha",
-          "bio" : "Mtaalamu wa lugha ya Kalenjin anayelinda misemo ya kitamaduni, simulizi za jadi, na urithi wa lugha."
+          "bio" : "Anatengeneza teknolojia ya lugha inayosaidia kuhifadhi na kusindika lugha za Kiafrika, akigeuza data za lugha kuwa zana zinazounga mkono kujifunza, tafsiri, na uhifadhi wa tamaduni."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Mhandisi wa Kujifunza Mashine",
-          "bio": "Mtaalamu wa lugha ya Luo anayesaidia uhifadhi wa lugha, hadithi, na utambulisho wa kitamaduni."
+          "bio": "Anatengeneza mifumo ya akili inayochangia kujifunza kibinafsi, mapendekezo, na vipengele vinavyotumia AI kwenye jukwaa la Magical Africa."
         }
       }
     },
@@ -1230,7 +1231,84 @@
       "heading": "Anza Safari Yako Leo!",
       "joinNow": "Jiunge Sasa"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Blogu",
+      "tagline": "Gundua Hadithi, Maarifa, na Utamaduni"
+    },
+    "featured": {
+      "category": "Urithi wa Kitamaduni",
+      "title": "Sanaa ya Kusimulia Hadithi za Kiafrika",
+      "date": "Februari 10, 2024",
+      "excerpt": "Gundua mila tajiri ya kusimulia hadithi kwa mdomo na jukumu lake katika kuunda utambulisho, historia, na jamii katika bara la Afrika.",
+      "readMore": "Soma Zaidi"
+    },
+    "latest": {
+      "heading": "Makala ya Hivi Karibuni",
+      "posts": {
+        "beadwork": {
+          "title": "Kutengeneza Mapambo ya Shanga",
+          "subtitle": "Kuunda Mapambo Mazuri Yaliyohamasishwa na Urithi wa Kiafrika"
+        },
+        "maasai": {
+          "title": "Kuchunguza Utamaduni wa Maasai",
+          "subtitle": "Ndani ya Mila za Watu wa Maasai"
+        },
+        "fashion": {
+          "title": "Mitindo ya Mavazi ya Kiafrika",
+          "subtitle": "Mitindo ya Kisasa yenye Mguso wa Kitamaduni"
+        },
+        "masks": {
+          "title": "Historia ya Barakoa za Kiafrika",
+          "subtitle": "Kufichua Siri za Sanaa ya Makabila"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Kujifunza Kiswahili: Vidokezo na Mbinu",
+          "date": "Machi 5, 2024",
+          "subtitle": "Kujifunza Lugha kwa Furaha na Urahisi"
+        },
+        "cuisine": {
+          "title": "Vyakula vya Jadi vya Kiafrika vya Kujaribu",
+          "date": "Februari 25, 2024",
+          "subtitle": "Ladha ya Vyakula Halisi vya Kiafrika"
+        }
+      },
+      "categories": {
+        "heading": "Makundi",
+        "items": {
+          "language": "Lugha na Kujifunza",
+          "heritage": "Urithi wa Kitamaduni",
+          "crafts": "Ufundi na Sanaa",
+          "food": "Chakula na Mapishi",
+          "travel": "Usafiri na Mila"
+        }
+      },
+      "popular": {
+        "heading": "Makala Maarufu",
+        "posts": {
+          "zulu": "Maneno 10 Muhimu ya Kizulu",
+          "drumming": "Kupiga Ngoma katika Muziki wa Kiafrika",
+          "festivals": "Sherehe za Afrika Magharibi"
+        }
+      },
+      "newsletter": {
+        "heading": "Jiandikishe kwa Jarida Letu",
+        "subtitle": "Pata habari za hivi karibuni na vidokezo!",
+        "placeholder": "Anwani yako ya barua pepe",
+        "button": "Jiandikishe",
+        "success": "🎉 Asante kwa kujiandikisha!"
+      }
+    }
   }
 }
+
 
 

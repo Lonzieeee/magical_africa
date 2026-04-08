@@ -208,7 +208,7 @@ useEffect(() => {
     { 
       name: t('about.team.members.Edewait.name'), 
       role: t('about.team.members.Edewait.role'), 
-      image: '/images/Edwait.jpeg',
+      image: '/images/kikiPhoto.jpg',
       bio: t('about.team.members.Edewait.bio'),
     },
     { 

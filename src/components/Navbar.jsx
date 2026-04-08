@@ -199,7 +199,7 @@ const handleLogout = async () => {
   <NavLink to="/market" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.marketplace')}</NavLink>
   
   <NavLink to="/blogs" className={({ isActive }) => isActive ? 'active-link' : ''}>
-    Blog
+   {t('sideMenu.blog')}
   </NavLink>
 
 </div>
@@ -291,21 +291,51 @@ const handleLogout = async () => {
             </>
           ) : (
             <>
+{/* 
+           
               <span className="Account-icon" style={{ display: 'flex' }}>
                 {userData?.photoURL
                   ? <img src={userData.photoURL} alt="Account avatar" className="account-avatar-image account-avatar-image-small" />
                   : getInitials()}
               </span>
-              
+               */} 
+
+             
+
+             <span className="Account-icon" style={{ display: 'flex' }}>
+  {userData?.photoURL
+    ? <img src={userData.photoURL} alt="Account avatar" className="account-avatar-image account-avatar-image-small" />
+    : (getInitials() || user?.displayName?.split(' ').map(n => n.charAt(0)).join('').toUpperCase() || '?')}
+</span>
+    
+   
+
+   
+           
               <div className="account-dropdown">
                 <p className="currently-in">{t('nav.currentlyIn')}</p>
                 
                 <div className="account-item active">
+
+
+
+
+
+{/*
                   <div className="account-avatar">
                     {userData?.photoURL
                       ? <img src={userData.photoURL} alt="Account avatar" className="account-avatar-image" />
                       : getInitials()}
                   </div>
+ */}
+
+ <div className="account-avatar">
+  {userData?.photoURL
+    ? <img src={userData.photoURL} alt="Account avatar" className="account-avatar-image" />
+    : (getInitials() || user?.displayName?.split(' ').map(n => n.charAt(0)).join('').toUpperCase() || '?')}
+</div>
+
+
                   <div className="account-details">
                     <h4>{getFullName()}</h4>
                     <p className="account-type">{t('nav.personal')}</p>

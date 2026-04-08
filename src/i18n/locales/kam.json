@@ -115,6 +115,7 @@
   "about": "Ũhoro",
   "language": "Lũthĩmo",
   "marketplace": "Ndũka",
+  "blog": "Blogi",
   "academy": "Akademi",
   "events": "Matukio",
   "music": "Nyimbo"
@@ -712,12 +713,12 @@
         "gloria": {
           "name": "Gloria Machoka",
           "role": "Mwanzilisi Mwekeki",
-          "bio": "Mũthomi wa lugha ya Kisii ũkũhũũgagia ngano, mĩtũkĩ, na kũthũkũmĩsya andũ aasa kĩndũ kĩa dijithali."
+          "bio": "Gloria niwanzisye Magical Africa na wendo wa kulinda ndũimi sya Āfrika, kusembasya mĩthĩĩko, na kwĩvya andũ aana kwa kwĩsomesya, wĩa, na jamii."
         },
         "steve": {
           "name": "Steve Kombo",
           "role": "Mwenyekiti wa Bodi",
-          "bio": "Mũthomi wa lugha ya Kisii ũkũtũũra ngano, mĩtũkĩ ya mũromo, na ũmenyo wa kĩkũlũ."
+          "bio": "E na wendo wa kuongoza wendo wa kulinda nthano sya Āfrika na kwaka maeneo ma kidijitali matũmanganasya andũ, ndũimi, na wĩtĩkio wa kĩvathani."
         },
         "joel": {
           "name": "Joel Makori",
@@ -727,24 +728,24 @@
          "Edewait": {
           "name": "Edewait Eric",
           "role": "Mũnene wa Maudhui",
-          "bio": "Mũthomi wa lugha ya Teso ũkũhũũgagia ciugo, thimo, na mĩtũkĩ ya mũromo."
+          "bio": "E na wendo wa kuongoza wĩa wa maudhui kwa kusoma ndũimi za kienyeji, kuandika maneno na nthano zinazokosa, na kulinda maana ya mĩthĩĩko katika jamii ya Magical Africa."
 
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
           "role": "Mhandisi wa Uzoefu wa Mtumiaji",
-          "bio" : "Mũthomi wa lugha ya Kikuyu ũkũhũũgagia thimo, ngano, na ũtũũnũ wa lugha."
+          "bio" : "E na wendo wa kuongoza uzoefu wa mtumiaji wa kuvutia na rahisi kutumia unaofanya kujifunza ndũimi za Āfrika na kuchunguza mĩthĩĩko kuwa rahisi, inapatikana kwa wote, na ya kufurahisha."
         },
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "Mhandisi wa Usindikaji wa Ndũimi (NLP)",
-          "bio" : "Mũthomi wa lugha ya Kalenjin ũkũtũũra mĩtũkĩ, ngano, na urithi wa lugha."
+          "bio" : "E na wendo wa kuunda teknolojia ya ndũimi inayosaidia kulinda na kusindika ndũimi za Āfrika, akigeuza data za ndũimi kuwa zana zinazounga mkono kujifunza, kutafsiri, na kulinda mĩthĩĩko."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Mhandisi wa Kujifunza Mashine",
-          "bio": "Mũthomi wa lugha ya Luo ũkũteithia kũandĩka lugha, ngano, na ũtũũnũ wa andũ."
+          "bio": "E na wendo wa kuunda mifumo ya akili inayosaidia kujifunza kibinafsi, mapendekezo, na vipengele vya AI kwenye jukwaa la Magical Africa."
         }
       }
     },
@@ -1168,8 +1169,85 @@
       "heading": "Anza Nzĩa Yaku Ũmũnthĩ!",
       "joinNow": "Ĩngĩa Sasa"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Blogu",
+      "tagline": "Tũmia Ngewa, Ũũi, na Mĩtĩlĩlo"
+    },
+    "featured": {
+      "category": "Mĩtĩlĩlo wa Kĩla Siku",
+      "title": "Ũtĩa wa Kũsemea Ngewa sya Afrika",
+      "date": "Mwai wa Keli 10, 2024",
+      "excerpt": "Tũmia mĩtĩlĩlo mĩnene ya kũsemea ngewa na ũhĩtĩkĩo wayo kũĩka ũtambulisho, mbano, na ũkundi kwa nzĩa yonthe ya Afrika.",
+      "readMore": "Soma Ingi"
+    },
+    "latest": {
+      "heading": "Makala ya Hĩhĩ",
+      "posts": {
+        "beadwork": {
+          "title": "Kũĩka Mapambo ma Shanga",
+          "subtitle": "Kũunda Mapambo Mazũ Kũndĩiwa ni Mĩtĩlĩlo wa Afrika"
+        },
+        "maasai": {
+          "title": "Kũtalia Mĩtĩlĩlo wa Maasai",
+          "subtitle": "Nthĩnĩ wa Mĩtĩlĩlo ya Andu a Maasai"
+        },
+        "fashion": {
+          "title": "Mĩvaa ya Afrika ya Hĩhĩ",
+          "subtitle": "Mĩvaa ya Ũseo na Mguso wa Mĩtĩlĩlo"
+        },
+        "masks": {
+          "title": "Mbano wa Barakoa sya Afrika",
+          "subtitle": "Kũfichua Sĩrĩ sya Ũtĩa wa Makabila"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Kũndĩia Kiswahili: Mbinu na Ũhĩtĩkĩo",
+          "date": "Mwai wa Katatũ 5, 2024",
+          "subtitle": "Kũndĩia Mũthĩ kwa Ũseo na Ũkuũ"
+        },
+        "cuisine": {
+          "title": "Vyakula vya Jadi vya Afrika vya Kũũla",
+          "date": "Mwai wa Keli 25, 2024",
+          "subtitle": "Ladha ya Vyakula vya Kweli vya Afrika"
+        }
+      },
+      "categories": {
+        "heading": "Makundi",
+        "items": {
+          "language": "Mĩthĩ na Kũndĩia",
+          "heritage": "Mĩtĩlĩlo wa Kĩla Siku",
+          "crafts": "Ũwĩkĩo na Ũtĩa",
+          "food": "Ĩkia na Mapishi",
+          "travel": "Ũsafiri na Mĩtĩlĩlo"
+        }
+      },
+      "popular": {
+        "heading": "Makala Maarufu",
+        "posts": {
+          "zulu": "Maneno 10 Muhimu ya Kizulu",
+          "drumming": "Kũpiga Ngoma kwa Mũthĩa wa Afrika",
+          "festivals": "Sherehe sya Afrika Magharibi"
+        }
+      },
+      "newsletter": {
+        "heading": "Ĩandĩkĩsya kwa Jarida Lĩtũ",
+        "subtitle": "Pata habari sya hĩhĩ na mbinu!",
+        "placeholder": "Anwani yaku ya barua pepe",
+        "button": "Ĩandĩkĩsya",
+        "success": "🎉 Twĩ na ũshukrani kwa kũĩandĩkĩsya!"
+      }
+    }
   }
 }
+
 
 
 

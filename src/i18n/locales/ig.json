@@ -116,6 +116,7 @@
   "about": "Maka",
   "language": "Asụsụ",
   "marketplace": "Ahịa",
+  "blog": "Blogu",
   "academy": "Akadẹmi",
   "events": "Emume",
   "music": "Egwu"
@@ -781,12 +782,12 @@
         "gloria": {
           "name": "Gloria Machoka",
           "role": "Onye Ntọala Ibe",
-          "bio": "Ọkachamara n’asụsụ Kisii na-elekwasị anya n’akụkọ ifo, asụsụ nna ochie, na imezi ntorobịa."
+          "bio": "Gloria guzobere Magical Africa n’echiche ịchekwa asụsụ Afrịka, ịkọwa omenala, na inye ndị ntorobịa ike site n’ịmụ ihe, imepụta ihe, na obodo."
         },
         "steve": {
           "name": "Steve Kombo",
           "role": "Onye isi oche nke bọọdụ",
-          "bio": "Ọkachamara n’asụsụ Kisii na-elekwasị anya n’ichekwaa akụkọ ọdịnala na omenala site na mmụta na teknụzụ."
+          "bio": "O nwere nnukwu mmasị n’ịduzi ebumnuche ịchekwa akụkọ Afrịka na iwulite oghere dijitalụ na-ejikọta ndị mmadụ, asụsụ, na ihe nketa."
         },
         "joel": {
           "name": "Joel Makori",
@@ -796,23 +797,23 @@
         "Edewait": {
           "name": "Edewait Eric",
           "role": "Onye isi ọdịnaya",
-          "bio": "Ọkachamara n’asụsụ Teso na-elekwasị anya n’ichekwaa okwu, ilu, na omenala nna ochie."
+          "bio": "O na-eduga mmepe ọdịnaya site n’ịmụ asụsụ ndị obodo, idekọ okwu na akụkọ ndị na-apụ n’anya, na ịchekwa ihe pụtara omenala n’ime obodo Magical Africa."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
           "role": "Injinia Ahụmịhe Onye Ọrụ",
-          "bio" : "Ọkachamara n’asụsụ Kikuyu nke na-elekwasị anya n’ilu, akụkọ ifo, na ezi asụsụ."
+          "bio" : "Ọ na-emepụta ahụmịhe onye ọrụ dị mfe ma na-adọrọ mmasị nke na-eme ka ịmụ asụsụ Afrịka na ịchọpụta omenala dị mfe, dịrịrị onye ọ bụla, ma na-atọ ụtọ."
         },
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "Injinia Nhazi Asụsụ Mmadụ (NLP)",
-          "bio" : "Ọkachamara n’asụsụ Kalenjin na-elekwasị anya n’ichekwaa asụsụ, akụkọ ọdịnala, na njirimara omenala."
+          "bio" : "Ọ na-ewu teknụzụ asụsụ nke na-enyere aka ichekwa na nhazi asụsụ Afrịka, na-agbanwe data asụsụ ka ọ bụrụ ngwá ọrụ na-akwado ịmụ, ịtụgharị asụsụ, na ịchekwa omenala."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Injinia Mmụta Igwe",
-          "bio": "Ọkachamara n’asụsụ Luo na-akwado idekọ asụsụ, akụkọ, na njirimara omenala."
+          "bio": "Ọ na-ewu usoro amamihe nke na-akwado ịmụ nke onye ọ bụla, aro, na atụmatụ AI n’elu ikpo okwu Magical Africa."
         }
         
 
@@ -1240,8 +1241,85 @@
       "heading": "Bido Njem Gị Taa!",
       "joinNow": "Sonye Ugbu a"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Blọgụ",
+      "tagline": "Chọpụta Akụkọ, Ọmụmụ, na Omenala"
+    },
+    "featured": {
+      "category": "Ihe Ọmụmụ nke Omenala",
+      "title": "Nka nke Ikọ Akụkọ nke Africa",
+      "date": "Febrụwarị 10, 2024",
+      "excerpt": "Chọpụta omenala dị ukwuu nke ikọ akụkọ n'ọnụ na ọrụ ya n'ịmepụta njirimara, akụkọ ihe mere eme, na obodo n'ofe kọntinent Africa.",
+      "readMore": "Gụọ Karịa"
+    },
+    "latest": {
+      "heading": "Akụkọ Ọhụrụ",
+      "posts": {
+        "beadwork": {
+          "title": "Ịmepụta Ịchọ Mma nke Ọjị",
+          "subtitle": "Ịmepụta Ịchọ Mma Dị Mma Nke Emekọ Site na Ihe Ọmụmụ Africa"
+        },
+        "maasai": {
+          "title": "Ịchọpụta Omenala Maasai",
+          "subtitle": "N'ime Omenala nke Ndị Maasai"
+        },
+        "fashion": {
+          "title": "Ụdị Uwe Africa nke Oge a",
+          "subtitle": "Ụdị Ọhụrụ nwere Ntụpọ Omenala"
+        },
+        "masks": {
+          "title": "Akụkọ Ihe Mere Eme nke Ihu Iyi Africa",
+          "subtitle": "Ikpughe Ihe Ọzịza nke Nka Ebo"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Ịmụta Swahili: Ndụmọdụ na Usoro",
+          "date": "Machị 5, 2024",
+          "subtitle": "Ịmụta Asụsụ n'Ụzọ Dị Vui ma Dị Mfe"
+        },
+        "cuisine": {
+          "title": "Nri Omenala Africa Iji Nwaa",
+          "date": "Febrụwarị 25, 2024",
+          "subtitle": "Ọ Dị Ụtọ nke Nri Ozizi Africa"
+        }
+      },
+      "categories": {
+        "heading": "Ụdị",
+        "items": {
+          "language": "Asụsụ na Ọmụmụ",
+          "heritage": "Ihe Ọmụmụ nke Omenala",
+          "crafts": "Ọrụ Aka na Nka",
+          "food": "Nri na Usoro Isi Nri",
+          "travel": "Njem na Omenala"
+        }
+      },
+      "popular": {
+        "heading": "Akụkọ Pụtara Ìhè",
+        "posts": {
+          "zulu": "Okwu Zulu 10 Dị Mkpa",
+          "drumming": "Ikwa Igba n'Egwu Africa",
+          "festivals": "Ememe nke Ọdịda Anyanwụ Africa"
+        }
+      },
+      "newsletter": {
+        "heading": "Debanye Aha na Akwụkwọ Ozi Anyị",
+        "subtitle": "Nọrọ n'oge maka akụkọ ọhụrụ na ndụmọdụ!",
+        "placeholder": "Adreesị email gị",
+        "button": "Debanye Aha",
+        "success": "🎉 Daalụ maka ịdebanye aha!"
+      }
+    }
   }
 }
+
 
 
 

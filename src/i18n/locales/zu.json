@@ -115,6 +115,7 @@
   "about": "Mayelana",
   "language": "Ulimi",
   "marketplace": "Imakethe",
+  "blog": "Ibhulogi",
   "academy":"Akademi",
   "events": "Izikhungo",
   "music": "Umculo"
@@ -779,12 +780,12 @@
         "gloria": {
           "name": "Gloria Machoka",
           "role": "Umsunguli Ohlanganyela",
-          "bio": "Uchwepheshe wolimi lwesiKisii ogxile ekugcineni izisho, izindaba, nokunika intsha amandla edijithali."
+          "bio": "UGloria wasungula iMagical Africa ngenhloso yokulondoloza izilimi zase-Afrika, ukugubha amasiko, nokunika amandla entsheni ngokufunda, ubuciko, nomphakathi."
         },
         "steve": {
           "name": "Steve Kombo",
           "role": "Usihlalo Webhodi",
-          "bio": "Uchwepheshe wolimi lwesiKisii ogxile ekuvikeleni izinganekwane, amasiko omlomo, nolwazi lwesintu."
+          "bio": "Unothando lokuhola umgomo wokulondoloza izindaba zase-Afrika nokwakha izikhala zedijithali ezixhumanisa abantu, izilimi, namagugu."
         },
         "joel": {
           "name": "Joel Makori",
@@ -794,23 +795,23 @@
          "Edewait": {
           "name": "Edewait Eric",
           "role": "Olaitoriani loo Maudhui",
-          "bio": "Uchwepheshe wolimi lwesiTeso ogxile ekugcineni amagama, izaga, namasiko omlomo."
+          "bio": "Uhola ukuthuthukiswa kokuqukethwe ngokucwaninga izilimi zendabuko, ukuqopha amagama nezindaba ezisengozini, nokuvikela incazelo yesiko kuwo wonke umphakathi weMagical Africa."
         },
 
         "lorna": {
           "name": "Lorna Wanderi",
           "role": "Unjiniyela Wesipiliyoni Somsebenzisi",
-          "bio" : "Uchwepheshe wolimi lwesiKikuyu ogxile ezagweni, izinganekwane, nasekuqiniseni ubuqiniso bolimi."
+          "bio" : "Udizayina isipiliyoni somsebenzisi esicacile nesijabulisayo esenza ukufunda izilimi zase-Afrika nokuhlola amasiko kube lula, kufinyeleleka, futhi kujabulise."
         },
         "ian": {
           "name": "Ian Cheruiyot",
           "role" : "Unjiniyela Wokucubungula Ulimi Lwemvelo (NLP)",
-          "bio" : "Uchwepheshe wolimi lwesiKalenjin ogxile ekuvikeleni izisho, izinganekwane, namagugu olimi."
+          "bio" : "Ukwakha ubuchwepheshe bezilimi obusiza ukulondoloza nokucubungula izilimi zase-Afrika, uguqula idatha yezilimi ibe amathuluzi asekela ukufunda, ukuhumusha, nokulondoloza isiko."
         },
         "collins": {
           "name": "Collins Omondi",
           "role": "Mhandisi wa Kujifunza Mashine",
-          "bio": "Uchwepheshe wolimi lwesiLuo ogxile ekubhaleni ulimi, izindaba, nobuwena besintu."
+          "bio": "Ukwakha izinhlelo ezihlakaniphile ezisekela ukufunda ngokwezifiso, izincomo, nezici ezisebenzisa i-AI kuwo wonke amapulatifomu eMagical Africa."
         }
       }
     },
@@ -1236,8 +1237,85 @@
       "heading": "Qala Uhambo Lwakho Namuhla!",
       "joinNow": "Joyina Manje"
     }
+  },
+
+
+  "blogs": {
+    "header": {
+      "titleStart": "Magical.Africa",
+      "titleAccent": "Ibhulogi",
+      "tagline": "Hlola Izindaba, Ulwazi, Namasiko"
+    },
+    "featured": {
+      "category": "Ilifa Lamasiko",
+      "title": "Ubuciko Bokuxoxa Izindaba ZaseAfrika",
+      "date": "Februwari 10, 2024",
+      "excerpt": "Thola amasiko anamandla okuxoxa izindaba ngomlomo nawo umsebenzi wawo ekwakheni ubunikazi, umlando, nomphakathi kulo lonke izwekazi laseAfrika.",
+      "readMore": "Funda Kabanzi"
+    },
+    "latest": {
+      "heading": "Izindaba Zakamuva",
+      "posts": {
+        "beadwork": {
+          "title": "Ukwenza Umhlobiso Wamazhe",
+          "subtitle": "Ukwenza Umhlobiso Omuhle Okhuthazwa Ilifa LaseAfrika"
+        },
+        "maasai": {
+          "title": "Ukuhlola Amasiko AakwaMaasai",
+          "subtitle": "Ngaphakathi Kwamasiko Abantu BakwaMaasai"
+        },
+        "fashion": {
+          "title": "Izindlela Zokugqoka ZaseAfrika",
+          "subtitle": "Izindlela Zanamuhla Ezinamasiko"
+        },
+        "masks": {
+          "title": "Umlando Wezithombe ZaseAfrika",
+          "subtitle": "Ukuveza Imfihlakalo Yobuciko Besizwe"
+        }
+      }
+    },
+    "sidebar": {
+      "recent": {
+        "swahili": {
+          "title": "Ukufunda IsiSwahili: Amathiphu Namaqhinga",
+          "date": "Mashi 5, 2024",
+          "subtitle": "Ukufunda Ulimi Ngokujabulisayo Nangokushesha"
+        },
+        "cuisine": {
+          "title": "Ukudla Komdabu KwaseAfrika Okuzolingwa",
+          "date": "Februwari 25, 2024",
+          "subtitle": "Ukunambitha Ukudla Kwangempela KwaseAfrika"
+        }
+      },
+      "categories": {
+        "heading": "Izigaba",
+        "items": {
+          "language": "Ulimi Nokufunda",
+          "heritage": "Ilifa Lamasiko",
+          "crafts": "Ubuciko Nezinto Ezenziwe Ngesandla",
+          "food": "Ukudla Nezindlela Zokupheka",
+          "travel": "Uhambo Namasiko"
+        }
+      },
+      "popular": {
+        "heading": "Izindaba Ezivelele",
+        "posts": {
+          "zulu": "Amagama Ayi-10 AseIsiZulu Abalulekile",
+          "drumming": "Ukushaya Izigubhu Emculweni WaseAfrika",
+          "festivals": "Imikhosi YaseNtshonalanga Afrika"
+        }
+      },
+      "newsletter": {
+        "heading": "Bhalisela Inyuzileta Yethu",
+        "subtitle": "Hlala uzwa ngezindaba zakamuva namathiphu!",
+        "placeholder": "Ikheli lakho le-imeyili",
+        "button": "Bhalisa",
+        "success": "🎉 Siyabonga ngokubhalisa!"
+      }
+    }
   }
 }
+
 
 
 

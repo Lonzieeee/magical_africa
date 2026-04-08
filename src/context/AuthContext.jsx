@@ -14,6 +14,8 @@ import {
 } from 'firebase/auth';
 import { getFirestore, doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore';
 
+/*
+
 const firebaseConfig = {
   apiKey: "AIzaSyDiLg6P5650fOfcS8Wq5J3-x9qkgKFrc4Y",
   authDomain: "magicalafrica-e7287.firebaseapp.com",
@@ -22,6 +24,20 @@ const firebaseConfig = {
   messagingSenderId: "941072590474",
   appId: "1:941072590474:web:8b7683d28111c850676f73"
 };
+
+*/
+
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBzFOh8x4TL_EYLQLmlZSFL_X9RZbkpSbY",
+  authDomain: "magicalafrica2-7df93.firebaseapp.com",
+  projectId: "magicalafrica2-7df93",
+  storageBucket: "magicalafrica2-7df93.firebasestorage.app",
+  messagingSenderId: "1080318233292",
+  appId: "1:1080318233292:web:6f9071b061e3d6ea139069"
+};
+
+
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);        // ✅ added export
