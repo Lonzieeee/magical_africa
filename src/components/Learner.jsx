@@ -72,18 +72,11 @@ const Learner = () => {
   const [activeSection, setActiveSection] = useState('store')
   const [storeView, setStoreView] = useState('all')
   const [courseView, setCourseView] = useState('all')
-  const [menuOpen, setMenuOpen] = useState({
-    learning: true
-  })
+  const [menuOpen, setMenuOpen] = useState({ learning: true })
   const [courses, setCourses] = useState([])
   const [progressMap, setProgressMap] = useState({})
-  const [achievements, setAchievements] = useState({
-    certificates: 0,
-    badges: [],
-    milestones: []
-  })
+  const [achievements, setAchievements] = useState({ certificates: 0, badges: [], milestones: [] })
   const [announcements, setAnnouncements] = useState([])
-
   const [loading, setLoading] = useState(true)
   const [courseSearchTerm, setCourseSearchTerm] = useState('')
   const [storeSortBy, setStoreSortBy] = useState('newest')
@@ -95,29 +88,12 @@ const Learner = () => {
   const [announcementSeenAt, setAnnouncementSeenAt] = useState('')
   const [profileMenuOpen, setProfileMenuOpen] = useState(false)
   const [quickResumeClosed, setQuickResumeClosed] = useState(false)
-  const [displayPrefs, setDisplayPrefs] = useState({
-    compactCards: false,
-    reduceMotion: false
-  })
-  const [settingsPrefs, setSettingsPrefs] = useState({
-    darkMode: false,
-    biometricAuth: false,
-    notifications: true,
-    cloudSync: true
-  })
+  const [displayPrefs, setDisplayPrefs] = useState({ compactCards: false, reduceMotion: false })
+  const [settingsPrefs, setSettingsPrefs] = useState({ darkMode: false, biometricAuth: false, notifications: true, cloudSync: true })
   const [myArtProducts, setMyArtProducts] = useState([])
   const [productSearchTerm, setProductSearchTerm] = useState('')
-  const [productDraft, setProductDraft] = useState({
-    name: '',
-    code: '',
-    description: '',
-    active: true
-  })
-  const [profileDraft, setProfileDraft] = useState({
-    firstName: '',
-    lastName: '',
-    photoURL: ''
-  })
+  const [productDraft, setProductDraft] = useState({ name: '', code: '', description: '', active: true })
+  const [profileDraft, setProfileDraft] = useState({ firstName: '', lastName: '', photoURL: '' })
   const [profileSaving, setProfileSaving] = useState(false)
   const [profileMessage, setProfileMessage] = useState('')
   const [securityMessage, setSecurityMessage] = useState('')
@@ -130,10 +106,7 @@ const Learner = () => {
     if (!user?.uid) return
     localStorage.setItem(
       getLocalProgressKey(user.uid),
-      JSON.stringify({
-        courses: nextProgressMap,
-        updatedAt: new Date().toISOString()
-      })
+      JSON.stringify({ courses: nextProgressMap, updatedAt: new Date().toISOString() })
     )
   }
 
@@ -150,15 +123,15 @@ const Learner = () => {
         }
 
         const [courseSnapshotResult, progressDocResult, announcementSnapshotResult, enrollmentSnapshotResult] = await Promise.allSettled([
-          getDocs(collection(db, 'courses')),
+          // FIX: was fetching ALL courses — now scoped to Published only
+          getDocs(query(collection(db, 'courses'), where('status', '==', 'Published'))),
           getDoc(doc(db, 'learnerProgress', user.uid)),
           getDocs(collection(db, 'announcements')),
           getDocs(query(collection(db, 'enrollments'), where('learnerId', '==', user.uid)))
         ])
 
         const teacherCourseList = courseSnapshotResult.status === 'fulfilled'
-          ? courseSnapshotResult.value.docs
-              .map(courseDoc => ({ id: courseDoc.id, ...courseDoc.data() }))
+          ? courseSnapshotResult.value.docs.map(courseDoc => ({ id: courseDoc.id, ...courseDoc.data() }))
           : []
 
         setCourses(teacherCourseList)
@@ -186,10 +159,7 @@ const Learner = () => {
           return acc
         }, {})
 
-        const mergedCourses = {
-          ...savedCourses,
-          ...enrollmentCourses
-        }
+        const mergedCourses = { ...savedCourses, ...enrollmentCourses }
 
         const localBackupRaw = localStorage.getItem(getLocalProgressKey(user.uid))
         let localBackupCourses = {}
@@ -205,11 +175,7 @@ const Learner = () => {
         const mergedWithLocal = mergeCourseMaps(mergedCourses, localBackupCourses)
 
         setProgressMap(mergedWithLocal)
-        setAchievements(savedProgressData.achievements || {
-          certificates: 0,
-          badges: [],
-          milestones: []
-        })
+        setAchievements(savedProgressData.achievements || { certificates: 0, badges: [], milestones: [] })
         persistLocalProgressMap(mergedWithLocal)
 
         const mergedSnapshot = JSON.stringify(mergedWithLocal)
@@ -224,11 +190,7 @@ const Learner = () => {
         if (!(progressDocResult.status === 'fulfilled' && progressDocResult.value.exists())) {
           await setDoc(doc(db, 'learnerProgress', user.uid), {
             courses: mergedWithLocal,
-            achievements: {
-              certificates: 0,
-              badges: [],
-              milestones: []
-            },
+            achievements: { certificates: 0, badges: [], milestones: [] },
             updatedAt: new Date().toISOString()
           }, { merge: true })
         }
@@ -259,31 +221,19 @@ const Learner = () => {
         const announcementList = snapshot.docs
           .map((announcementDoc) => ({ id: announcementDoc.id, ...announcementDoc.data() }))
           .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
-
         setAnnouncements(announcementList)
       },
-      (error) => {
-        console.log('Announcement listener error:', error)
-      }
+      (error) => { console.log('Announcement listener error:', error) }
     )
 
     const enrollmentUnsubscribe = onSnapshot(
       query(collection(db, 'enrollments'), where('learnerId', '==', user.uid)),
       (snapshot) => {
         const docs = snapshot.docs.map((item) => item.data())
-        const nextCourseIds = docs
-          .map((item) => item.courseId)
-          .filter(Boolean)
-        const nextTeacherIds = docs
-          .map((item) => item.teacherId)
-          .filter(Boolean)
-
-        setLiveEnrollmentCourseIds(nextCourseIds)
-        setLiveEnrollmentTeacherIds(nextTeacherIds)
+        setLiveEnrollmentCourseIds(docs.map((item) => item.courseId).filter(Boolean))
+        setLiveEnrollmentTeacherIds(docs.map((item) => item.teacherId).filter(Boolean))
       },
-      (error) => {
-        console.log('Enrollment listener error:', error)
-      }
+      (error) => { console.log('Enrollment listener error:', error) }
     )
 
     return () => {
@@ -300,16 +250,11 @@ const Learner = () => {
 
   useEffect(() => {
     if (!user?.uid) return
-
     const stored = localStorage.getItem(getDisplayPrefsKey(user.uid))
     if (!stored) return
-
     try {
       const parsed = JSON.parse(stored)
-      setDisplayPrefs({
-        compactCards: Boolean(parsed?.compactCards),
-        reduceMotion: Boolean(parsed?.reduceMotion)
-      })
+      setDisplayPrefs({ compactCards: Boolean(parsed?.compactCards), reduceMotion: Boolean(parsed?.reduceMotion) })
     } catch (error) {
       localStorage.removeItem(getDisplayPrefsKey(user.uid))
     }
@@ -326,39 +271,25 @@ const Learner = () => {
 
     if (cloudPrefs.displayPrefs) {
       setDisplayPrefs((prev) => ({
-        compactCards: typeof cloudPrefs.displayPrefs.compactCards === 'boolean'
-          ? cloudPrefs.displayPrefs.compactCards
-          : prev.compactCards,
-        reduceMotion: typeof cloudPrefs.displayPrefs.reduceMotion === 'boolean'
-          ? cloudPrefs.displayPrefs.reduceMotion
-          : prev.reduceMotion
+        compactCards: typeof cloudPrefs.displayPrefs.compactCards === 'boolean' ? cloudPrefs.displayPrefs.compactCards : prev.compactCards,
+        reduceMotion: typeof cloudPrefs.displayPrefs.reduceMotion === 'boolean' ? cloudPrefs.displayPrefs.reduceMotion : prev.reduceMotion
       }))
     }
 
     if (cloudPrefs.settingsPrefs) {
       setSettingsPrefs((prev) => ({
-        darkMode: typeof cloudPrefs.settingsPrefs.darkMode === 'boolean'
-          ? cloudPrefs.settingsPrefs.darkMode
-          : prev.darkMode,
-        biometricAuth: typeof cloudPrefs.settingsPrefs.biometricAuth === 'boolean'
-          ? cloudPrefs.settingsPrefs.biometricAuth
-          : prev.biometricAuth,
-        notifications: typeof cloudPrefs.settingsPrefs.notifications === 'boolean'
-          ? cloudPrefs.settingsPrefs.notifications
-          : prev.notifications,
-        cloudSync: typeof cloudPrefs.settingsPrefs.cloudSync === 'boolean'
-          ? cloudPrefs.settingsPrefs.cloudSync
-          : prev.cloudSync
+        darkMode: typeof cloudPrefs.settingsPrefs.darkMode === 'boolean' ? cloudPrefs.settingsPrefs.darkMode : prev.darkMode,
+        biometricAuth: typeof cloudPrefs.settingsPrefs.biometricAuth === 'boolean' ? cloudPrefs.settingsPrefs.biometricAuth : prev.biometricAuth,
+        notifications: typeof cloudPrefs.settingsPrefs.notifications === 'boolean' ? cloudPrefs.settingsPrefs.notifications : prev.notifications,
+        cloudSync: typeof cloudPrefs.settingsPrefs.cloudSync === 'boolean' ? cloudPrefs.settingsPrefs.cloudSync : prev.cloudSync
       }))
     }
   }, [userData?.preferences])
 
   useEffect(() => {
     if (!user?.uid) return
-
     const stored = localStorage.getItem(getSettingsPrefsKey(user.uid))
     if (!stored) return
-
     try {
       const parsed = JSON.parse(stored)
       setSettingsPrefs({
@@ -401,10 +332,8 @@ const Learner = () => {
 
   useEffect(() => {
     if (!user?.uid) return
-
     const stored = localStorage.getItem(getStorePrefsKey(user.uid))
     if (!stored) return
-
     try {
       const parsed = JSON.parse(stored)
       setCourseSearchTerm(String(parsed?.courseSearchTerm || ''))
@@ -417,22 +346,14 @@ const Learner = () => {
 
   useEffect(() => {
     if (!user?.uid) return
-
-    localStorage.setItem(getStorePrefsKey(user.uid), JSON.stringify({
-      courseSearchTerm,
-      activeFilter,
-      storeSortBy
-    }))
+    localStorage.setItem(getStorePrefsKey(user.uid), JSON.stringify({ courseSearchTerm, activeFilter, storeSortBy }))
   }, [courseSearchTerm, activeFilter, storeSortBy, user?.uid])
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (!profileMenuRef.current) return
-      if (!profileMenuRef.current.contains(event.target)) {
-        setProfileMenuOpen(false)
-      }
+      if (!profileMenuRef.current.contains(event.target)) setProfileMenuOpen(false)
     }
-
     document.addEventListener('mousedown', handleOutsideClick)
     return () => document.removeEventListener('mousedown', handleOutsideClick)
   }, [])
@@ -442,9 +363,7 @@ const Learner = () => {
   const allCourses = useMemo(() => {
     const map = new Map()
 
-    courses.forEach((course) => {
-      map.set(course.id, course)
-    })
+    courses.forEach((course) => { map.set(course.id, course) })
 
     Object.entries(progressMap).forEach(([courseId, progress]) => {
       if (map.has(courseId)) {
@@ -476,26 +395,19 @@ const Learner = () => {
   }, [courses, progressMap])
 
   const filteredCourses = useMemo(() => {
-    const query = courseSearchTerm.trim().toLowerCase()
+    const q = courseSearchTerm.trim().toLowerCase()
 
     return allCourses.filter((course) => {
       const categoryMatch = !activeFilter ||
         course.courseType?.trim().toLowerCase() === activeFilter.trim().toLowerCase()
 
       if (!categoryMatch) return false
-      if (!query) return true
+      if (!q) return true
 
-      const haystack = [
-        course.title,
-        course.description,
-        course.courseType,
-        course.teacherName
-      ]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase()
+      const haystack = [course.title, course.description, course.courseType, course.teacherName]
+        .filter(Boolean).join(' ').toLowerCase()
 
-      return haystack.includes(query)
+      return haystack.includes(q)
     })
   }, [activeFilter, allCourses, courseSearchTerm])
 
@@ -509,9 +421,7 @@ const Learner = () => {
     return ids
   }, [progressMap])
 
-  const ownedCourses = useMemo(() => {
-    return allCourses.filter(course => ownedCourseIds.has(course.id))
-  }, [allCourses, ownedCourseIds])
+  const ownedCourses = useMemo(() => allCourses.filter(course => ownedCourseIds.has(course.id)), [allCourses, ownedCourseIds])
 
   const purchasedCourses = useMemo(() => {
     return ownedCourses.filter((course) => {
@@ -542,17 +452,10 @@ const Learner = () => {
     })
   }, [progressMap, startedCourses])
 
-  const suggestedCourses = useMemo(() => {
-    return filteredCourses.filter(course => {
-      return isCoursePublished(course)
-    })
-  }, [filteredCourses])
+  const suggestedCourses = useMemo(() => filteredCourses.filter(isCoursePublished), [filteredCourses])
 
   const freeStoreCourses = useMemo(() => {
-    return filteredCourses.filter((course) => {
-      if (!isCoursePublished(course)) return false
-      return getCoursePrice(course) === 0
-    })
+    return filteredCourses.filter((course) => isCoursePublished(course) && getCoursePrice(course) === 0)
   }, [filteredCourses])
 
   const publishedNowWindowDays = 30
@@ -560,11 +463,8 @@ const Learner = () => {
   const publishedNowCourses = useMemo(() => {
     const now = Date.now()
     const windowMs = publishedNowWindowDays * 24 * 60 * 60 * 1000
-
     return filteredCourses.filter((course) => {
-      const isPublished = isCoursePublished(course)
-      if (!isPublished) return false
-
+      if (!isCoursePublished(course)) return false
       const publishedAt = getPublishedTimestamp(course)
       if (!publishedAt) return false
       return now - publishedAt <= windowMs
@@ -572,15 +472,9 @@ const Learner = () => {
   }, [filteredCourses])
 
   const suggestedCoursesForView = useMemo(() => {
-    if (storeView === 'free') {
-      return freeStoreCourses
-    }
-    if (storeView === 'paid') {
-      return suggestedCourses.filter(course => getCoursePrice(course) > 0)
-    }
-    if (storeView === 'published') {
-      return publishedNowCourses
-    }
+    if (storeView === 'free') return freeStoreCourses
+    if (storeView === 'paid') return suggestedCourses.filter(course => getCoursePrice(course) > 0)
+    if (storeView === 'published') return publishedNowCourses
     return suggestedCourses
   }, [storeView, suggestedCourses, publishedNowCourses, freeStoreCourses])
 
@@ -590,60 +484,26 @@ const Learner = () => {
 
   const sortedSuggestedCoursesForView = useMemo(() => {
     const list = [...suggestedCoursesForView]
-
-    if (storeSortBy === 'price-low') {
-      return list.sort((a, b) => getCoursePrice(a) - getCoursePrice(b))
-    }
-
-    if (storeSortBy === 'price-high') {
-      return list.sort((a, b) => getCoursePrice(b) - getCoursePrice(a))
-    }
-
+    if (storeSortBy === 'price-low') return list.sort((a, b) => getCoursePrice(a) - getCoursePrice(b))
+    if (storeSortBy === 'price-high') return list.sort((a, b) => getCoursePrice(b) - getCoursePrice(a))
     if (storeSortBy === 'popular') {
       return list.sort((a, b) => {
-        const bPopularity = Number(b.enrollmentCount || b.totalStudents || b.students || 0)
-        const aPopularity = Number(a.enrollmentCount || a.totalStudents || a.students || 0)
-        return bPopularity - aPopularity
+        const bPop = Number(b.enrollmentCount || b.totalStudents || b.students || 0)
+        const aPop = Number(a.enrollmentCount || a.totalStudents || a.students || 0)
+        return bPop - aPop
       })
     }
-
     return list.sort((a, b) => getPublishedTimestamp(b) - getPublishedTimestamp(a))
   }, [suggestedCoursesForView, storeSortBy])
 
-  const publishedStoreCourses = useMemo(() => {
-    return filteredCourses.filter(course => {
-      return isCoursePublished(course)
-    }).length
-  }, [filteredCourses])
+  const publishedStoreCourses = useMemo(() => filteredCourses.filter(isCoursePublished).length, [filteredCourses])
+  const totalFreeStoreCourses = useMemo(() => freeStoreCourses.length, [freeStoreCourses])
+  const publishedFreeStoreCourses = useMemo(() => freeStoreCourses.length, [freeStoreCourses])
+  const totalPaidStoreCourses = useMemo(() => filteredCourses.filter(course => getCoursePrice(course) > 0).length, [filteredCourses])
+  const publishedPaidStoreCourses = useMemo(() => filteredCourses.filter(course => getCoursePrice(course) > 0 && isCoursePublished(course)).length, [filteredCourses])
 
-  const totalFreeStoreCourses = useMemo(() => {
-    return freeStoreCourses.length
-  }, [freeStoreCourses])
-
-  const publishedFreeStoreCourses = useMemo(() => {
-    return freeStoreCourses.length
-  }, [freeStoreCourses])
-
-  const totalPaidStoreCourses = useMemo(() => {
-    return filteredCourses.filter(course => {
-      return getCoursePrice(course) > 0
-    }).length
-  }, [filteredCourses])
-
-  const publishedPaidStoreCourses = useMemo(() => {
-    return filteredCourses.filter(course => {
-      if (getCoursePrice(course) === 0) return false
-      return isCoursePublished(course)
-    }).length
-  }, [filteredCourses])
-
-  const myTeacherIds = useMemo(() => {
-    return new Set(ownedCourses.map(course => course.teacherId).filter(Boolean))
-  }, [ownedCourses])
-
-  const myEnrolledCourseIds = useMemo(() => {
-    return new Set(ownedCourses.map(course => course.id).filter(Boolean))
-  }, [ownedCourses])
+  const myTeacherIds = useMemo(() => new Set(ownedCourses.map(course => course.teacherId).filter(Boolean)), [ownedCourses])
+  const myEnrolledCourseIds = useMemo(() => new Set(ownedCourses.map(course => course.id).filter(Boolean)), [ownedCourses])
 
   const teacherNameById = useMemo(() => {
     const map = {}
@@ -666,10 +526,7 @@ const Learner = () => {
     return announcements
       .filter((item) => {
         const belongsToMyTutor = item.teacherId ? effectiveTeacherIds.has(item.teacherId) : false
-        if (item.courseId) {
-          return effectiveCourseIds.has(item.courseId)
-        }
-
+        if (item.courseId) return effectiveCourseIds.has(item.courseId)
         return belongsToMyTutor
       })
       .slice(0, 20)
@@ -679,27 +536,13 @@ const Learner = () => {
     const now = Date.now()
     const dayMs = 24 * 60 * 60 * 1000
     const weekMs = 7 * dayMs
-
-    const groups = {
-      today: [],
-      week: [],
-      older: []
-    }
+    const groups = { today: [], week: [], older: [] }
 
     learnerAnnouncements.forEach((item) => {
       const createdAt = toMs(item.createdAt)
       const age = now - createdAt
-
-      if (createdAt && age <= dayMs) {
-        groups.today.push(item)
-        return
-      }
-
-      if (createdAt && age <= weekMs) {
-        groups.week.push(item)
-        return
-      }
-
+      if (createdAt && age <= dayMs) { groups.today.push(item); return }
+      if (createdAt && age <= weekMs) { groups.week.push(item); return }
       groups.older.push(item)
     })
 
@@ -709,14 +552,7 @@ const Learner = () => {
   const summary = useMemo(() => {
     const values = ownedCourses.map(course => progressMap[course.id] || {})
 
-    if (values.length === 0) {
-      return {
-        completion: 0,
-        lessonsCompleted: 0,
-        streak: 0,
-        timeSpentMinutes: 0
-      }
-    }
+    if (values.length === 0) return { completion: 0, lessonsCompleted: 0, streak: 0, timeSpentMinutes: 0 }
 
     const completion = Math.round(
       values.reduce((acc, item) => acc + (item.completion || 0), 0) / values.length
@@ -731,15 +567,11 @@ const Learner = () => {
   }, [ownedCourses, progressMap])
 
   const filteredMyArtProducts = useMemo(() => {
-    const query = productSearchTerm.trim().toLowerCase()
-    if (!query) return myArtProducts
-
+    const q = productSearchTerm.trim().toLowerCase()
+    if (!q) return myArtProducts
     return myArtProducts.filter((product) => {
-      const haystack = [product.name, product.code, product.description]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase()
-      return haystack.includes(query)
+      const haystack = [product.name, product.code, product.description].filter(Boolean).join(' ').toLowerCase()
+      return haystack.includes(q)
     })
   }, [myArtProducts, productSearchTerm])
 
@@ -770,7 +602,6 @@ const Learner = () => {
 
   const handleProfilePhotoUpload = async (event) => {
     if (!user?.uid) return
-
     const selectedFile = event.target.files?.[0]
     event.target.value = ''
     if (!selectedFile) return
@@ -804,19 +635,13 @@ const Learner = () => {
 
   const handleProfilePhotoDelete = async () => {
     if (!user?.uid) return
-
     const confirmed = window.confirm('Remove your profile picture and keep initials avatar instead?')
     if (!confirmed) return
 
     try {
       setProfileSaving(true)
       localStorage.removeItem(getProfilePhotoKey(user.uid))
-
-      await setDoc(doc(db, 'users', user.uid), {
-        photoURL: '',
-        updatedAt: new Date().toISOString()
-      }, { merge: true })
-
+      await setDoc(doc(db, 'users', user.uid), { photoURL: '', updatedAt: new Date().toISOString() }, { merge: true })
       await updateProfile(auth.currentUser, { photoURL: '' })
       setProfileDraft((prev) => ({ ...prev, photoURL: '' }))
       setProfileMessage('Profile picture removed.')
@@ -830,14 +655,10 @@ const Learner = () => {
 
   const handleProfileSave = async () => {
     if (!user?.uid) return
-
     const firstName = profileDraft.firstName.trim()
     const lastName = profileDraft.lastName.trim()
 
-    if (!firstName) {
-      setProfileMessage('First name is required.')
-      return
-    }
+    if (!firstName) { setProfileMessage('First name is required.'); return }
 
     try {
       setProfileSaving(true)
@@ -845,19 +666,12 @@ const Learner = () => {
       const cloudSafePhoto = isLocalPhoto ? '' : (profileDraft.photoURL || '')
 
       await setDoc(doc(db, 'users', user.uid), {
-        firstName,
-        lastName,
-        secondName: lastName,
-        photoURL: cloudSafePhoto,
-        updatedAt: new Date().toISOString()
+        firstName, lastName, secondName: lastName,
+        photoURL: cloudSafePhoto, updatedAt: new Date().toISOString()
       }, { merge: true })
 
       const displayName = `${firstName} ${lastName}`.trim()
-      await updateProfile(auth.currentUser, {
-        displayName,
-        photoURL: cloudSafePhoto
-      })
-
+      await updateProfile(auth.currentUser, { displayName, photoURL: cloudSafePhoto })
       setProfileMessage('Profile updated successfully.')
     } catch (error) {
       console.log('Could not save profile:', error)
@@ -869,22 +683,10 @@ const Learner = () => {
 
   const handlePasswordUpdate = async () => {
     if (!auth.currentUser) return
-
     const providerId = auth.currentUser.providerData?.[0]?.providerId || ''
-    if (providerId !== 'password') {
-      setSecurityMessage('Password updates are only available for email/password accounts.')
-      return
-    }
-
-    if (!passwordForm.currentPassword || !passwordForm.newPassword) {
-      setSecurityMessage('Enter both current and new password.')
-      return
-    }
-
-    if (passwordForm.newPassword.length < 6) {
-      setSecurityMessage('New password should be at least 6 characters.')
-      return
-    }
+    if (providerId !== 'password') { setSecurityMessage('Password updates are only available for email/password accounts.'); return }
+    if (!passwordForm.currentPassword || !passwordForm.newPassword) { setSecurityMessage('Enter both current and new password.'); return }
+    if (passwordForm.newPassword.length < 6) { setSecurityMessage('New password should be at least 6 characters.'); return }
 
     try {
       const credential = EmailAuthProvider.credential(auth.currentUser.email || '', passwordForm.currentPassword)
@@ -901,29 +703,24 @@ const Learner = () => {
   const handleLogoutClick = async () => {
     const confirmed = window.confirm('Are you sure you want to log out?')
     if (!confirmed) return
-
     await logout()
     navigate('/')
   }
 
   const handleDeleteAccount = async () => {
     if (!user?.uid || !auth.currentUser) return
-
     const confirmed = window.confirm('Are you sure you want to delete your account permanently? This cannot be undone.')
     if (!confirmed) return
-
     const secondConfirmation = window.confirm('Final confirmation: delete your account and all learner data from Firebase?')
     if (!secondConfirmation) return
 
     try {
       const enrollmentSnapshot = await getDocs(query(collection(db, 'enrollments'), where('learnerId', '==', user.uid)))
       await Promise.all(enrollmentSnapshot.docs.map((item) => deleteDoc(doc(db, 'enrollments', item.id))))
-
       await Promise.all([
         deleteDoc(doc(db, 'users', user.uid)).catch(() => null),
         deleteDoc(doc(db, 'learnerProgress', user.uid)).catch(() => null)
       ])
-
       localStorage.removeItem(getProfilePhotoKey(user.uid))
       await deleteUser(auth.currentUser)
       navigate('/')
@@ -934,23 +731,12 @@ const Learner = () => {
   }
 
   const updateBiometricPreference = async (enabled) => {
-    if (!enabled) {
-      setSettingsPrefs((prev) => ({ ...prev, biometricAuth: false }))
-      return
-    }
+    if (!enabled) { setSettingsPrefs((prev) => ({ ...prev, biometricAuth: false })); return }
 
     try {
-      if (!window.PublicKeyCredential) {
-        setSecurityMessage('Biometric authentication is not supported on this device/browser.')
-        return
-      }
-
+      if (!window.PublicKeyCredential) { setSecurityMessage('Biometric authentication is not supported on this device/browser.'); return }
       const isPlatformAuthenticatorAvailable = await window.PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable()
-      if (!isPlatformAuthenticatorAvailable) {
-        setSecurityMessage('Biometric authentication is unavailable on this device.')
-        return
-      }
-
+      if (!isPlatformAuthenticatorAvailable) { setSecurityMessage('Biometric authentication is unavailable on this device.'); return }
       setSettingsPrefs((prev) => ({ ...prev, biometricAuth: true }))
       setSecurityMessage('Biometric preference enabled. You can use it when secure unlock flow is configured.')
     } catch (error) {
@@ -959,21 +745,14 @@ const Learner = () => {
   }
 
   const myCoursesForView = useMemo(() => {
-    if (courseView === 'in-progress') {
-      return continueLearningCourses
-    }
-    if (courseView === 'completed') {
-      return completedLearningCourses
-    }
+    if (courseView === 'in-progress') return continueLearningCourses
+    if (courseView === 'completed') return completedLearningCourses
     return purchasedCourses
   }, [completedLearningCourses, continueLearningCourses, courseView, purchasedCourses])
 
   const quickResumeCourses = useMemo(() => {
     return continueLearningCourses
-      .filter((course) => {
-        const completion = progressMap[course.id]?.completion || 0
-        return completion < 100
-      })
+      .filter((course) => (progressMap[course.id]?.completion || 0) < 100)
       .slice(0, 3)
   }, [continueLearningCourses, progressMap])
 
@@ -995,25 +774,9 @@ const Learner = () => {
   }, [completedLearningCourses, progressMap])
 
   const courseViewMeta = useMemo(() => {
-    if (courseView === 'in-progress') {
-      return {
-        title: 'Continue Learning',
-        subtitle: 'Pick up from where you left off and protect your streak.',
-        emptyText: 'No in-progress courses yet. Start a course from Purchased Courses to continue learning here.'
-      }
-    }
-    if (courseView === 'completed') {
-      return {
-        title: 'Completed Courses',
-        subtitle: 'Only finished courses appear here.',
-        emptyText: 'No completed courses yet. Finish a course to unlock it here.'
-      }
-    }
-    return {
-      title: 'Purchased Courses',
-      subtitle: 'Your purchased and enrolled courses.',
-      emptyText: 'You have not added or bought any course yet.'
-    }
+    if (courseView === 'in-progress') return { title: 'Continue Learning', subtitle: 'Pick up from where you left off and protect your streak.', emptyText: 'No in-progress courses yet. Start a course from Purchased Courses to continue learning here.' }
+    if (courseView === 'completed') return { title: 'Completed Courses', subtitle: 'Only finished courses appear here.', emptyText: 'No completed courses yet. Finish a course to unlock it here.' }
+    return { title: 'Purchased Courses', subtitle: 'Your purchased and enrolled courses.', emptyText: 'You have not added or bought any course yet.' }
   }, [courseView])
 
   useEffect(() => {
@@ -1024,66 +787,36 @@ const Learner = () => {
     const derivedBadges = []
     const derivedMilestones = []
 
-    if (hasStartedAnyCourse) {
-      derivedMilestones.push('First Course Started')
-    }
-
-    if (completedCourseCount >= 1) {
-      derivedBadges.push('Course Finisher')
-      derivedMilestones.push('First Course Completed')
-    }
-    if (completedCourseCount >= 3) {
-      derivedBadges.push('Consistent Graduate')
-      derivedMilestones.push('Three Courses Completed')
-    }
+    if (hasStartedAnyCourse) derivedMilestones.push('First Course Started')
+    if (completedCourseCount >= 1) { derivedBadges.push('Course Finisher'); derivedMilestones.push('First Course Completed') }
+    if (completedCourseCount >= 3) { derivedBadges.push('Consistent Graduate'); derivedMilestones.push('Three Courses Completed') }
 
     const mergedBadges = Array.from(new Set([...(achievements.badges || []), ...derivedBadges]))
     const mergedMilestones = Array.from(new Set([...(achievements.milestones || []), ...derivedMilestones]))
 
-    const nextAchievements = {
-      certificates: completedCourseCount,
-      badges: mergedBadges,
-      milestones: mergedMilestones
-    }
+    const nextAchievements = { certificates: completedCourseCount, badges: mergedBadges, milestones: mergedMilestones }
 
     const isSame = JSON.stringify(nextAchievements) === JSON.stringify(achievements)
     if (isSame) return
 
     setAchievements(nextAchievements)
-
-    setDoc(doc(db, 'learnerProgress', user.uid), {
-      achievements: nextAchievements,
-      updatedAt: new Date().toISOString()
-    }, { merge: true }).catch((error) => {
+    setDoc(doc(db, 'learnerProgress', user.uid), { achievements: nextAchievements, updatedAt: new Date().toISOString() }, { merge: true }).catch((error) => {
       console.log('Could not sync achievements to cloud:', error)
     })
   }, [progressMap, user?.uid])
 
-  const handleFilter = (type) => {
-    setActiveFilter(prev => (prev === type ? null : type))
-  }
-
   const openSection = (section, options = {}) => {
     setActiveSection(section)
-    if (options.storeView) {
-      setStoreView(options.storeView)
-    }
-    if (options.courseView) {
-      setCourseView(options.courseView)
-    }
-
+    if (options.storeView) setStoreView(options.storeView)
+    if (options.courseView) setCourseView(options.courseView)
   }
 
-  // Language Practice is temporarily disabled while the section is being redesigned.
   useEffect(() => {
-    if (activeSection === 'language') {
-      setActiveSection('store')
-    }
+    if (activeSection === 'language') setActiveSection('store')
   }, [activeSection])
 
   const markAllNotificationsRead = () => {
     if (!user?.uid) return
-
     const now = new Date().toISOString()
     setAnnouncementSeenAt(now)
     localStorage.setItem(getAnnouncementSeenKey(user.uid), now)
@@ -1102,28 +835,23 @@ const Learner = () => {
 
   function getPublishedTimestamp(course) {
     const candidates = [course.publishedAt, course.updatedAt, course.createdAt]
-
     for (const value of candidates) {
       if (!value) continue
-
       if (typeof value === 'string' || typeof value === 'number') {
         const parsed = new Date(value).getTime()
         if (!Number.isNaN(parsed) && parsed > 0) return parsed
       }
-
       if (value && typeof value === 'object') {
         if (typeof value.toDate === 'function') {
           const parsed = value.toDate().getTime()
           if (!Number.isNaN(parsed) && parsed > 0) return parsed
         }
-
         if (typeof value.seconds === 'number') {
           const parsed = value.seconds * 1000
           if (!Number.isNaN(parsed) && parsed > 0) return parsed
         }
       }
     }
-
     return 0
   }
 
@@ -1133,7 +861,6 @@ const Learner = () => {
 
     const price = getCoursePrice(course)
     const courseProgress = progressMap[course.id] || {}
-
     const resolvedTeacherId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
     const resolvedTeacherName = course.teacherName || course.tutorName || course.authorName || 'Tutor'
 
@@ -1152,19 +879,12 @@ const Learner = () => {
       teacherName: resolvedTeacherName
     }
 
-    const nextProgressMap = {
-      ...progressMap,
-      [course.id]: updatedCourseProgress
-    }
-
+    const nextProgressMap = { ...progressMap, [course.id]: updatedCourseProgress }
     setProgressMap(nextProgressMap)
     persistLocalProgressMap(nextProgressMap)
 
     try {
-      await setDoc(doc(db, 'learnerProgress', user.uid), {
-        courses: nextProgressMap,
-        updatedAt: new Date().toISOString()
-      }, { merge: true })
+      await setDoc(doc(db, 'learnerProgress', user.uid), { courses: nextProgressMap, updatedAt: new Date().toISOString() }, { merge: true })
 
       await setDoc(doc(db, 'enrollments', `${user.uid}_${course.id}`), {
         learnerId: user.uid,
@@ -1181,27 +901,14 @@ const Learner = () => {
         updatedAt: new Date().toISOString()
       }, { merge: true })
 
-      setActionToast(
-        price > 0
-          ? {
-              tone: 'success',
-              title: 'Purchase successful',
-              message: `${course.title || 'Course'} is now in your library. You can continue from the store anytime.`
-            }
-          : {
-              tone: 'success',
-              title: 'Course added',
-              message: `${course.title || 'Course'} is now in your courses and still visible in the store.`
-            }
+      setActionToast(price > 0
+        ? { tone: 'success', title: 'Purchase successful', message: `${course.title || 'Course'} is now in your library. You can continue from the store anytime.` }
+        : { tone: 'success', title: 'Course added', message: `${course.title || 'Course'} is now in your courses and still visible in the store.` }
       )
       setTimeout(() => setActionToast(null), 2600)
     } catch (error) {
       console.log('Could not sync enrollment to cloud, keeping local backup:', error)
-      setActionToast({
-        tone: 'warning',
-        title: 'Saved offline',
-        message: `${course.title || 'Course'} was saved locally and will sync when the connection stabilizes.`
-      })
+      setActionToast({ tone: 'warning', title: 'Saved offline', message: `${course.title || 'Course'} was saved locally and will sync when the connection stabilizes.` })
       setTimeout(() => setActionToast(null), 3200)
     } finally {
       setAcquiringCourseId('')
@@ -1217,23 +924,13 @@ const Learner = () => {
 
       const nextProgressMap = {
         ...progressMap,
-        [courseId]: {
-          ...existingCourse,
-          started: true,
-          lastActiveAt: nowIso,
-          updatedAt: nowIso,
-          streak: nextStreak
-        }
+        [courseId]: { ...existingCourse, started: true, lastActiveAt: nowIso, updatedAt: nowIso, streak: nextStreak }
       }
 
       setProgressMap(nextProgressMap)
       persistLocalProgressMap(nextProgressMap)
 
-      setDoc(doc(db, 'learnerProgress', user.uid), {
-        courses: nextProgressMap,
-        lastActiveCourseId: courseId,
-        updatedAt: nowIso
-      }, { merge: true }).catch((error) => {
+      setDoc(doc(db, 'learnerProgress', user.uid), { courses: nextProgressMap, lastActiveCourseId: courseId, updatedAt: nowIso }, { merge: true }).catch((error) => {
         console.log('Could not sync resume progress immediately:', error)
       })
     }
@@ -1246,7 +943,6 @@ const Learner = () => {
 
   const buildCourseLessonSequence = (course) => {
     if (!course?.topics || !Array.isArray(course.topics)) return []
-
     return course.topics.flatMap((topic, topicIndex) =>
       (topic.lessons || []).map((lesson, lessonIndex) => ({
         id: String(lesson.id || `${topic.id || `topic-${topicIndex}`}-${lessonIndex}`),
@@ -1258,10 +954,8 @@ const Learner = () => {
   const getNextLessonLabel = (course, progress) => {
     const lessons = buildCourseLessonSequence(course)
     if (lessons.length === 0) return 'Next lesson available inside course content.'
-
     const completedIds = new Set((progress.completedLessonIds || []).map(String))
     const nextLesson = lessons.find((lesson) => !completedIds.has(lesson.id))
-
     if (!nextLesson) return 'All lessons completed. Great job!'
     return `Continue from: ${nextLesson.title}`
   }
@@ -1269,7 +963,6 @@ const Learner = () => {
   const formatLastOpened = (progress) => {
     const dateValue = progress.lastActiveAt || progress.updatedAt || progress.purchasedAt
     if (!dateValue) return 'Last opened: not yet'
-
     const parsed = new Date(dateValue)
     if (Number.isNaN(parsed.getTime())) return 'Last opened: not yet'
     return `Last opened: ${parsed.toLocaleString()}`
@@ -1288,50 +981,27 @@ const Learner = () => {
       if (Number.isNaN(parsed.getTime())) return new Date().toLocaleDateString()
       return parsed.toLocaleDateString()
     })()
-
-    downloadCourseCertificate({
-      learnerName: learnerDisplayName,
-      courseTitle,
-      completedAt: completionDate,
-      tutorName
-    })
+    downloadCourseCertificate({ learnerName: learnerDisplayName, courseTitle, completedAt: completionDate, tutorName })
   }
 
   const handleCreateProduct = (event) => {
     event.preventDefault()
-
     const name = productDraft.name.trim()
     const description = productDraft.description.trim()
     const normalizedCode = productDraft.code.trim().toUpperCase()
 
     if (!name) {
-      setActionToast({
-        tone: 'warning',
-        title: 'Product name required',
-        message: 'Enter a product name before saving.'
-      })
+      setActionToast({ tone: 'warning', title: 'Product name required', message: 'Enter a product name before saving.' })
       return
     }
 
     const generatedCode = normalizedCode || `PRD-${String(myArtProducts.length + 1).padStart(3, '0')}`
-
-    const nextProduct = {
-      id: `product-${Date.now()}`,
-      name,
-      code: generatedCode,
-      description,
-      active: Boolean(productDraft.active),
-      createdAt: new Date().toISOString()
-    }
+    const nextProduct = { id: `product-${Date.now()}`, name, code: generatedCode, description, active: Boolean(productDraft.active), createdAt: new Date().toISOString() }
 
     setMyArtProducts((prev) => [nextProduct, ...prev])
     setProductDraft({ name: '', code: '', description: '', active: true })
     setActiveSection('my-art')
-    setActionToast({
-      tone: 'success',
-      title: 'Product added',
-      message: `${name} is now listed in Products.`
-    })
+    setActionToast({ tone: 'success', title: 'Product added', message: `${name} is now listed in Products.` })
   }
 
   return (
@@ -1350,89 +1020,35 @@ const Learner = () => {
 
           <div className='learner-nav-groups'>
             <div className='learner-nav-group'>
-              <button
-                className={`learner-nav-group-title ${activeSection === 'store' ? 'active' : ''}`}
-                onClick={() => openSection('store', { storeView: 'all' })}
-              >
-                All Courses
-              </button>
+              <button className={`learner-nav-group-title ${activeSection === 'store' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'all' })}>All Courses</button>
             </div>
-
             <div className='learner-nav-group'>
-              <button
-                className={`learner-nav-group-title ${activeSection === 'my-art' ? 'active' : ''}`}
-                onClick={() => openSection('my-art')}
-              >
-                My Art
-              </button>
+              <button className={`learner-nav-group-title ${activeSection === 'my-art' ? 'active' : ''}`} onClick={() => openSection('my-art')}>My Art</button>
             </div>
-
             <div className='learner-nav-group'>
-              <button
-                className={`learner-nav-group-title learner-nav-group-title--dropdown ${menuOpen.learning ? 'expanded' : ''}`}
-                onClick={() => toggleMenu('learning')}
-                aria-expanded={menuOpen.learning}
-              >
-                My Learning
-              </button>
+              <button className={`learner-nav-group-title learner-nav-group-title--dropdown ${menuOpen.learning ? 'expanded' : ''}`} onClick={() => toggleMenu('learning')} aria-expanded={menuOpen.learning}>My Learning</button>
               {menuOpen.learning && (
                 <div className='learner-nav-submenu'>
-                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'all' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'all' })}>
-                    Purchased Courses
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'in-progress' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'in-progress' })}>
-                    Continue Learning
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'completed' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'completed' })}>
-                    Completed Courses
-                  </button>
+                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'all' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'all' })}>Purchased Courses</button>
+                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'in-progress' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'in-progress' })}>Continue Learning</button>
+                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'completed' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'completed' })}>Completed Courses</button>
                 </div>
               )}
             </div>
-
             <div className='learner-nav-group'>
-              <button
-                className={`learner-nav-group-title ${activeSection === 'progress' ? 'active' : ''}`}
-                onClick={() => openSection('progress')}
-              >
-                Progress Overview
-              </button>
+              <button className={`learner-nav-group-title ${activeSection === 'progress' ? 'active' : ''}`} onClick={() => openSection('progress')}>Progress Overview</button>
             </div>
-
             <div className='learner-nav-group'>
-              <button
-                className={`learner-nav-group-title ${activeSection === 'achievements' ? 'active' : ''}`}
-                onClick={() => openSection('achievements')}
-              >
-                Certifications & Achievements
-              </button>
+              <button className={`learner-nav-group-title ${activeSection === 'achievements' ? 'active' : ''}`} onClick={() => openSection('achievements')}>Certifications & Achievements</button>
             </div>
-
             <div className='learner-nav-group'>
-              <button
-                className={`learner-nav-group-title ${activeSection === 'notifications' ? 'active' : ''}`}
-                onClick={() => openSection('notifications')}
-              >
-                Notifications
-              </button>
+              <button className={`learner-nav-group-title ${activeSection === 'notifications' ? 'active' : ''}`} onClick={() => openSection('notifications')}>Notifications</button>
             </div>
-
             <div className='learner-nav-group'>
-              <button
-                className={`learner-nav-group-title ${activeSection === 'profile' ? 'active' : ''}`}
-                onClick={() => openSection('profile')}
-              >
-                Profile
-              </button>
+              <button className={`learner-nav-group-title ${activeSection === 'profile' ? 'active' : ''}`} onClick={() => openSection('profile')}>Profile</button>
             </div>
-
             <div className='learner-nav-group'>
-              <button
-                className={`learner-nav-group-title ${activeSection === 'settings' ? 'active' : ''}`}
-                onClick={() => openSection('settings')}
-              >
-                Settings
-              </button>
+              <button className={`learner-nav-group-title ${activeSection === 'settings' ? 'active' : ''}`} onClick={() => openSection('settings')}>Settings</button>
             </div>
           </div>
         </aside>
@@ -1450,30 +1066,21 @@ const Learner = () => {
                     <FiBell aria-hidden='true' />
                     {unseenAnnouncementsCount > 0 && <span>{unseenAnnouncementsCount}</span>}
                   </button>
-
                   <div className='learner-profile-menu' ref={profileMenuRef}>
-                    <button
-                      className='Account-icon learner-profile-trigger'
-                      type='button'
-                      onClick={() => setProfileMenuOpen((prev) => !prev)}
-                      aria-expanded={profileMenuOpen}
-                    >
+                    <button className='Account-icon learner-profile-trigger' type='button' onClick={() => setProfileMenuOpen((prev) => !prev)} aria-expanded={profileMenuOpen}>
                       {profileDraft.photoURL
                         ? <img src={profileDraft.photoURL} alt='Profile avatar' className='learner-avatar-thumb' />
                         : <span className='learner-avatar-fallback'>{avatarInitials || 'L'}</span>}
                     </button>
-
                     {profileMenuOpen && (
                       <div className='learner-profile-dropdown'>
                         <p className='learner-profile-name'>{learnerName}</p>
                         <p className='learner-profile-email'>{user?.email || 'No email on file'}</p>
                         <button type='button' onClick={() => { openSection('profile'); setProfileMenuOpen(false) }}>
-                          <strong>Profile</strong>
-                          <small>View your account details</small>
+                          <strong>Profile</strong><small>View your account details</small>
                         </button>
                         <button type='button' onClick={() => { openSection('settings'); setProfileMenuOpen(false) }}>
-                          <strong>Settings</strong>
-                          <small>Security, sync, notifications, and appearance</small>
+                          <strong>Settings</strong><small>Security, sync, notifications, and appearance</small>
                         </button>
                       </div>
                     )}
@@ -1498,7 +1105,6 @@ const Learner = () => {
                     </g>
                   </svg>
                 </div>
-
                 <svg className='learner-coffee__steam' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
                   <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
                     <path className='learner-coffee__steam-part learner-coffee__steam-part--a' d='M13.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
@@ -1506,7 +1112,6 @@ const Learner = () => {
                     <path className='learner-coffee__steam-part learner-coffee__steam-part--c' d='M40.434,50.999c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
                   </g>
                 </svg>
-
                 <svg className='learner-coffee__steam learner-coffee__steam--right' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
                   <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
                     <path className='learner-coffee__steam-part learner-coffee__steam-part--d' d='M19.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
@@ -1521,12 +1126,7 @@ const Learner = () => {
             <section className='learner-panel learner-quick-resume'>
               <div className='learner-quick-resume-head'>
                 <h1><FiPlayCircle /> Quick Resume</h1>
-                <button
-                  type='button'
-                  className='learner-quick-resume-close'
-                  onClick={() => setQuickResumeClosed(true)}
-                  aria-label='Close quick resume'
-                >
+                <button type='button' className='learner-quick-resume-close' onClick={() => setQuickResumeClosed(true)} aria-label='Close quick resume'>
                   <FiX aria-hidden='true' />
                 </button>
               </div>
@@ -1534,7 +1134,6 @@ const Learner = () => {
                 {quickResumeCourses.map((course) => {
                   const progress = progressMap[course.id] || {}
                   const completion = progress.completion || 0
-
                   return (
                     <article key={course.id} className='learner-quick-resume-card'>
                       <h3>{course.title || 'Untitled Course'}</h3>
@@ -1545,9 +1144,7 @@ const Learner = () => {
                           <div style={{ width: `${completion}%` }} />
                         </div>
                       </div>
-                      <button className='learner-resume-btn' type='button' onClick={() => handleResumeCourse(course.id)}>
-                        Continue
-                      </button>
+                      <button className='learner-resume-btn' type='button' onClick={() => handleResumeCourse(course.id)}>Continue</button>
                     </article>
                   )
                 })}
@@ -1560,11 +1157,7 @@ const Learner = () => {
               {storeView !== 'free' && <h1><FiShoppingBag /> All Courses</h1>}
               {storeView === 'all' ? (
                 <div className='learner-store-badges'>
-                  <button
-                    className='active'
-                  >
-                    {publishedStoreCourses} Published
-                  </button>
+                  <button className='active'>{publishedStoreCourses} Published</button>
                 </div>
               ) : storeView === 'free' ? (
                 <div className='learner-store-free-stats'>
@@ -1593,53 +1186,25 @@ const Learner = () => {
               <div className='learner-store-controls'>
                 <label className='learner-store-search' htmlFor='learner-store-search'>
                   <FiSearch aria-hidden='true' />
-                  <input
-                    id='learner-store-search'
-                    type='text'
-                    value={courseSearchTerm}
-                    onChange={(e) => setCourseSearchTerm(e.target.value)}
-                    placeholder='Search by course title, tutor, or keyword'
-                  />
+                  <input id='learner-store-search' type='text' value={courseSearchTerm} onChange={(e) => setCourseSearchTerm(e.target.value)} placeholder='Search by course title, tutor, or keyword' />
                 </label>
-
                 <label className='learner-store-filter' htmlFor='learner-store-filter'>
                   <span>Filter by</span>
-                  <select
-                    id='learner-store-filter'
-                    value={activeFilter || ''}
-                    onChange={(e) => setActiveFilter(e.target.value || null)}
-                  >
+                  <select id='learner-store-filter' value={activeFilter || ''} onChange={(e) => setActiveFilter(e.target.value || null)}>
                     <option value=''>All categories</option>
-                    {categories.map((cat) => (
-                      <option key={cat} value={cat}>{cat}</option>
-                    ))}
+                    {categories.map((cat) => (<option key={cat} value={cat}>{cat}</option>))}
                   </select>
                 </label>
-
                 <label className='learner-store-filter' htmlFor='learner-store-sort'>
                   <span>Sort by</span>
-                  <select
-                    id='learner-store-sort'
-                    value={storeSortBy}
-                    onChange={(e) => setStoreSortBy(e.target.value)}
-                  >
+                  <select id='learner-store-sort' value={storeSortBy} onChange={(e) => setStoreSortBy(e.target.value)}>
                     <option value='newest'>Newest</option>
                     <option value='popular'>Most Popular</option>
                     <option value='price-low'>Price: Low to High</option>
                     <option value='price-high'>Price: High to Low</option>
                   </select>
                 </label>
-
-                <button
-                  className='learner-reset-filters-btn'
-                  type='button'
-                  disabled={!hasActiveStoreFilters}
-                  onClick={() => {
-                    setCourseSearchTerm('')
-                    setActiveFilter(null)
-                    setStoreSortBy('newest')
-                  }}
-                >
+                <button className='learner-reset-filters-btn' type='button' disabled={!hasActiveStoreFilters} onClick={() => { setCourseSearchTerm(''); setActiveFilter(null); setStoreSortBy('newest') }}>
                   Reset Filters
                 </button>
               </div>
@@ -1654,175 +1219,102 @@ const Learner = () => {
                 </div>
               )}
 
-              <div
-                className='learner-store-view-stage'
-                key={`store-${storeView}-${activeFilter || 'all'}-published`}
-              >
+              <div className='learner-store-view-stage' key={`store-${storeView}-${activeFilter || 'all'}-published`}>
                 {storeView === 'free' && (
                   <div className='learner-free-strip'>
                     <h2>Free Learning Picks</h2>
-                    <p>
-                      {sortedSuggestedCoursesForView.length > 0
-                        ? `${sortedSuggestedCoursesForView.length} free course${sortedSuggestedCoursesForView.length > 1 ? 's' : ''} ready for you right now.`
-                        : 'No free courses are available right now.'}
-                    </p>
+                    <p>{sortedSuggestedCoursesForView.length > 0 ? `${sortedSuggestedCoursesForView.length} free course${sortedSuggestedCoursesForView.length > 1 ? 's' : ''} ready for you right now.` : 'No free courses are available right now.'}</p>
                   </div>
                 )}
-
                 {storeView === 'paid' && (
                   <div className='learner-free-strip'>
                     <h2>Premium Learning Picks</h2>
-                    <p>
-                      {sortedSuggestedCoursesForView.length > 0
-                        ? `${sortedSuggestedCoursesForView.length} premium course${sortedSuggestedCoursesForView.length > 1 ? 's' : ''} available with deeper guided content.`
-                        : 'No premium courses are available in this filter yet.'}
-                    </p>
+                    <p>{sortedSuggestedCoursesForView.length > 0 ? `${sortedSuggestedCoursesForView.length} premium course${sortedSuggestedCoursesForView.length > 1 ? 's' : ''} available with deeper guided content.` : 'No premium courses are available in this filter yet.'}</p>
                   </div>
                 )}
-
                 {storeView === 'published' && (
                   <div className='learner-free-strip'>
                     <h2>Published Now</h2>
-                    <p>
-                      {sortedSuggestedCoursesForView.length > 0
-                        ? `${sortedSuggestedCoursesForView.length} course${sortedSuggestedCoursesForView.length > 1 ? 's' : ''} published in the last ${publishedNowWindowDays} days.`
-                        : `No newly published courses in the last ${publishedNowWindowDays} days for this filter.`}
-                    </p>
+                    <p>{sortedSuggestedCoursesForView.length > 0 ? `${sortedSuggestedCoursesForView.length} course${sortedSuggestedCoursesForView.length > 1 ? 's' : ''} published in the last ${publishedNowWindowDays} days.` : `No newly published courses in the last ${publishedNowWindowDays} days for this filter.`}</p>
                   </div>
                 )}
 
                 {sortedSuggestedCoursesForView.length === 0 && (
-                  storeView === 'free'
-                    ? (
-                      <div className='learner-free-empty'>
-                        <div className='scor' aria-hidden='true'>
-                          <div className='scor-head'>
-                            <div className='scor-face'>
-                              <div className='scor-eye scor-eye-left' />
-                              <div className='scor-eye scor-eye-right' />
-                              <div className='scor-face-lower'>
-                                <div className='scor-nose' />
-                                <div className='scor-mouth'>
-                                  <div className='scor-mouth-outer' />
-                                  <div className='scor-mouth-inner' />
-                                </div>
-                                <div className='scor-mouth-line' />
-                              </div>
-                              <div className='scor-blush scor-blush-left' />
-                              <div className='scor-blush scor-blush-right' />
-                            </div>
-                            <div className='scor-face-fluff scor-face-fluff-left' />
-                            <div className='scor-face-fluff scor-face-fluff-right' />
-                            <div className='scor-ear scor-ear-left' />
-                            <div className='scor-ear-right-wrap'>
-                              <div className='scor-ear scor-ear-right' />
-                              <div className='scor-ear-right-fluff' />
-                            </div>
+                  storeView === 'free' ? (
+                    <div className='learner-free-empty'>
+                      <div className='scor' aria-hidden='true'>
+                        <div className='scor-head'>
+                          <div className='scor-face'>
+                            <div className='scor-eye scor-eye-left' /><div className='scor-eye scor-eye-right' />
+                            <div className='scor-face-lower'><div className='scor-nose' /><div className='scor-mouth'><div className='scor-mouth-outer' /><div className='scor-mouth-inner' /></div><div className='scor-mouth-line' /></div>
+                            <div className='scor-blush scor-blush-left' /><div className='scor-blush scor-blush-right' />
                           </div>
-                          <div className='scor-body'>
-                            <div className='scor-tail' />
-                            <div className='scor-torso' />
-                            <div className='scor-neck' />
-                            <div className='scor-arm scor-arm-left' />
-                            <div className='scor-arm scor-arm-right' />
-                            <div className='scor-leg scor-leg-left'>
-                              <div className='scor-leg-foot'>
-                                <div className='scor-leg-foot-pad' />
-                              </div>
-                            </div>
-                            <div className='scor-leg scor-leg-right'>
-                              <div className='scor-leg-foot'>
-                                <div className='scor-leg-foot-pad' />
-                              </div>
-                            </div>
-                          </div>
+                          <div className='scor-face-fluff scor-face-fluff-left' /><div className='scor-face-fluff scor-face-fluff-right' />
+                          <div className='scor-ear scor-ear-left' />
+                          <div className='scor-ear-right-wrap'><div className='scor-ear scor-ear-right' /><div className='scor-ear-right-fluff' /></div>
                         </div>
-
-                        <p className='learner-free-empty-title'>No free courses available right now</p>
-                        <p className='learner-free-empty-text'>New free classes drop often. In the meantime, explore premium options curated for your learning journey.</p>
-                        <button
-                          className='learner-free-empty-btn'
-                          onClick={() => openSection('store', { storeView: 'paid' })}
-                        >
-                          Check Paid Courses
-                        </button>
+                        <div className='scor-body'>
+                          <div className='scor-tail' /><div className='scor-torso' /><div className='scor-neck' />
+                          <div className='scor-arm scor-arm-left' /><div className='scor-arm scor-arm-right' />
+                          <div className='scor-leg scor-leg-left'><div className='scor-leg-foot'><div className='scor-leg-foot-pad' /></div></div>
+                          <div className='scor-leg scor-leg-right'><div className='scor-leg-foot'><div className='scor-leg-foot-pad' /></div></div>
+                        </div>
                       </div>
-                      )
-                    : storeView === 'paid'
-                      ? <p className='learner-empty'>No premium courses match this filter yet.</p>
-                      : storeView === 'published'
-                        ? <p className='learner-empty'>No newly published courses in the selected category yet.</p>
-                        : <p className='learner-empty'>No available courses to buy right now.</p>
+                      <p className='learner-free-empty-title'>No free courses available right now</p>
+                      <p className='learner-free-empty-text'>New free classes drop often. In the meantime, explore premium options curated for your learning journey.</p>
+                      <button className='learner-free-empty-btn' onClick={() => openSection('store', { storeView: 'paid' })}>Check Paid Courses</button>
+                    </div>
+                  ) : storeView === 'paid' ? (
+                    <p className='learner-empty'>No premium courses match this filter yet.</p>
+                  ) : storeView === 'published' ? (
+                    <p className='learner-empty'>No newly published courses in the selected category yet.</p>
+                  ) : (
+                    <p className='learner-empty'>No available courses to buy right now.</p>
+                  )
                 )}
 
                 <div className='learner-store-grid'>
                   {sortedSuggestedCoursesForView.map(course => {
-                  const price = getCoursePrice(course)
-                  const isPaid = price > 0
-                  const courseProgress = progressMap[course.id] || {}
-                  const isOwned = Boolean(courseProgress.addedToLibrary || courseProgress.paid)
-                  const isCompleted = (courseProgress.completion || 0) >= 100
-                  const hasStarted = Boolean(courseProgress.started || (courseProgress.completion || 0) > 0)
-                  const isAcquiring = acquiringCourseId === course.id
+                    const price = getCoursePrice(course)
+                    const isPaid = price > 0
+                    const courseProgress = progressMap[course.id] || {}
+                    const isOwned = Boolean(courseProgress.addedToLibrary || courseProgress.paid)
+                    const isCompleted = (courseProgress.completion || 0) >= 100
+                    const hasStarted = Boolean(courseProgress.started || (courseProgress.completion || 0) > 0)
+                    const isAcquiring = acquiringCourseId === course.id
 
-                  return (
-                    <article key={course.id} className='learner-store-card'>
-                      <div className='learner-store-image'>
-                        {course.featuredImage
-                          ? <img src={course.featuredImage} alt={course.title || 'Course image'} />
-                          : <div className='learner-store-image-placeholder'>No Image</div>}
-                      </div>
-
-                      <div className='learner-store-body'>
-                        <h3>{course.title || 'Untitled Course'}</h3>
-                        {isOwned && (
-                          <span className='learner-course-state-pill'>
-                            {isCompleted ? 'Completed' : hasStarted ? 'In Progress' : 'Already Purchased'}
-                          </span>
-                        )}
-                        {isOwned && hasStarted && !isCompleted && (
-                          <span className='learner-continue-pill'>Continue where you left off</span>
-                        )}
-                        <p>{course.description || 'No description yet.'}</p>
-                        <div className='learner-course-meta'>
-                          <span>{course.courseType || 'General'}</span>
-                          <span>{isPaid ? `Price: $${price}` : 'Free Course'}</span>
-                          <span>Offered by {course.teacherName || 'Tutor'}</span>
+                    return (
+                      <article key={course.id} className='learner-store-card'>
+                        <div className='learner-store-image'>
+                          {course.featuredImage
+                            ? <img src={course.featuredImage} alt={course.title || 'Course image'} />
+                            : <div className='learner-store-image-placeholder'>No Image</div>}
                         </div>
-
-                        <div className='learner-suggested-actions'>
-                          <button
-                            className='learner-details-btn'
-                            onClick={() => handleViewCourseDetails(course.id)}
-                          >
-                            View Details
-                          </button>
-                          <button
-                            className='learner-buy-btn'
-                            disabled={isAcquiring}
-                            onClick={() => {
+                        <div className='learner-store-body'>
+                          <h3>{course.title || 'Untitled Course'}</h3>
+                          {isOwned && <span className='learner-course-state-pill'>{isCompleted ? 'Completed' : hasStarted ? 'In Progress' : 'Already Purchased'}</span>}
+                          {isOwned && hasStarted && !isCompleted && <span className='learner-continue-pill'>Continue where you left off</span>}
+                          <p>{course.description || 'No description yet.'}</p>
+                          <div className='learner-course-meta'>
+                            <span>{course.courseType || 'General'}</span>
+                            <span>{isPaid ? `Price: $${price}` : 'Free Course'}</span>
+                            <span>Offered by {course.teacherName || 'Tutor'}</span>
+                          </div>
+                          <div className='learner-suggested-actions'>
+                            <button className='learner-details-btn' onClick={() => handleViewCourseDetails(course.id)}>View Details</button>
+                            <button className='learner-buy-btn' disabled={isAcquiring} onClick={() => {
                               if (isOwned) {
-                                if (isCompleted) {
-                                  handleViewCourseDetails(course.id)
-                                  return
-                                }
-                                handleResumeCourse(course.id)
-                                return
+                                if (isCompleted) { handleViewCourseDetails(course.id); return }
+                                handleResumeCourse(course.id); return
                               }
-
                               handleAcquireCourse(course)
-                            }}
-                          >
-                            {isOwned
-                              ? (isCompleted ? 'View Course' : hasStarted ? 'Continue Course' : 'Start Course')
-                              : isAcquiring
-                                ? 'Processing...'
-                                : (isPaid ? `Buy Course ($${price})` : 'Add Course')}
-                          </button>
+                            }}>
+                              {isOwned ? (isCompleted ? 'View Course' : hasStarted ? 'Continue Course' : 'Start Course') : isAcquiring ? 'Processing...' : (isPaid ? `Buy Course ($${price})` : 'Add Course')}
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </article>
-                  )
+                      </article>
+                    )
                   })}
                 </div>
               </div>
@@ -1833,22 +1325,10 @@ const Learner = () => {
             <section className='learner-panel'>
               <h1>Progress Overview</h1>
               <div className='learner-metrics-grid'>
-                <article className='learner-metric-card'>
-                  <h3><FiBookOpen /> Course Completion</h3>
-                  <p>{summary.completion}%</p>
-                </article>
-                <article className='learner-metric-card'>
-                  <h3><FiCheckCircle /> Lessons Completed</h3>
-                  <p>{summary.lessonsCompleted}</p>
-                </article>
-                <article className='learner-metric-card'>
-                  <h3><FiActivity /> Streak</h3>
-                  <p>{summary.streak} days</p>
-                </article>
-                <article className='learner-metric-card'>
-                  <h3><FiClock /> Time Spent Learning</h3>
-                  <p>{summary.timeSpentMinutes} mins</p>
-                </article>
+                <article className='learner-metric-card'><h3><FiBookOpen /> Course Completion</h3><p>{summary.completion}%</p></article>
+                <article className='learner-metric-card'><h3><FiCheckCircle /> Lessons Completed</h3><p>{summary.lessonsCompleted}</p></article>
+                <article className='learner-metric-card'><h3><FiActivity /> Streak</h3><p>{summary.streak} days</p></article>
+                <article className='learner-metric-card'><h3><FiClock /> Time Spent Learning</h3><p>{summary.timeSpentMinutes} mins</p></article>
               </div>
             </section>
           )}
@@ -1857,20 +1337,12 @@ const Learner = () => {
             <section className='learner-panel'>
               <h1>{courseViewMeta.title}</h1>
               <p className='learner-courses-intro'>{courseViewMeta.subtitle}</p>
-
-              {myCoursesForView.length === 0 && (
-                <p className='learner-empty'>{courseViewMeta.emptyText}</p>
-              )}
-
+              {myCoursesForView.length === 0 && <p className='learner-empty'>{courseViewMeta.emptyText}</p>}
               <div className='learner-store-grid'>
                 {myCoursesForView.map(course => {
                   const progress = progressMap[course.id] || {}
                   const completion = progress.completion || 0
-                  const hasStarted = Boolean(
-                    progress.started ||
-                    completion > 0 ||
-                    (progress.completedLessonIds || []).length > 0
-                  )
+                  const hasStarted = Boolean(progress.started || completion > 0 || (progress.completedLessonIds || []).length > 0)
                   const nextLessonLabel = getNextLessonLabel(course, progress)
                   const lastOpenedLabel = formatLastOpened(progress)
                   const isCompleted = completion >= 100
@@ -1878,11 +1350,8 @@ const Learner = () => {
                   return (
                     <article key={course.id} className={`learner-store-card learner-mycourse-card learner-mycourse-${courseView}`}>
                       <div className='learner-store-image'>
-                        {course.featuredImage
-                          ? <img src={course.featuredImage} alt={course.title || 'Course image'} />
-                          : <div className='learner-store-image-placeholder'>No Image</div>}
+                        {course.featuredImage ? <img src={course.featuredImage} alt={course.title || 'Course image'} /> : <div className='learner-store-image-placeholder'>No Image</div>}
                       </div>
-
                       <div className='learner-store-body'>
                         <div>
                           <h3>{course.title || 'Untitled Course'}</h3>
@@ -1893,27 +1362,18 @@ const Learner = () => {
                             <span>{progress.paid ? 'Paid' : 'Free'}</span>
                             <span>{completion >= 100 ? 'Completed successfully' : progress.started ? 'In Progress' : 'Purchased'}</span>
                           </div>
-                          {courseView === 'in-progress' && (
-                            <p className='learner-inprogress-note'>
-                              Lessons in progress: {progress.lessonsCompleted || 0} • Completion: {completion}%
-                            </p>
-                          )}
+                          {courseView === 'in-progress' && <p className='learner-inprogress-note'>Lessons in progress: {progress.lessonsCompleted || 0} • Completion: {completion}%</p>}
                         </div>
-
                         <div className='learner-progress-row'>
                           <p>Progress: {completion}%</p>
                           <div className={`learner-progress-bar ${completion > 0 && completion < 100 ? 'in-progress' : ''}`}>
                             <div style={{ width: `${completion}%` }} />
                           </div>
                         </div>
-
                         <p className='learner-last-opened'>{lastOpenedLabel}</p>
                         <p className='learner-next-lesson'>{nextLessonLabel}</p>
-
                         {(courseView === 'completed' || isCompleted) ? null : (
-                          <button className='learner-resume-btn' onClick={() => handleResumeCourse(course.id)}>
-                            {hasStarted ? 'Resume' : 'Start Course'}
-                          </button>
+                          <button className='learner-resume-btn' onClick={() => handleResumeCourse(course.id)}>{hasStarted ? 'Resume' : 'Start Course'}</button>
                         )}
                       </div>
                     </article>
@@ -1934,7 +1394,6 @@ const Learner = () => {
                     <span aria-live='polite'>{unseenAnnouncementsCount} unread</span>
                     <button type='button' onClick={markAllNotificationsRead}>Mark all as read</button>
                   </div>
-
                   <div className='learner-notification-list'>
                     {[
                       { id: 'today', label: 'Today', items: notificationGroups.today },
@@ -1942,24 +1401,14 @@ const Learner = () => {
                       { id: 'older', label: 'Older', items: notificationGroups.older }
                     ].map((group) => {
                       if (group.items.length === 0) return null
-
                       return (
                         <div key={group.id} className='learner-notification-group'>
                           <h3>{group.label}</h3>
                           {group.items.map((item) => {
                             const isUnread = toMs(item.createdAt) > toMs(announcementSeenAt)
-
                             return (
-                              <article
-                                key={item.id}
-                                className={`learner-notification-card ${isUnread ? 'unread' : ''}`}
-                                tabIndex={0}
-                                aria-label={`${teacherNameById[item.teacherId] || 'Tutor Announcement'} update for ${item.courseTitle || 'general update'}`}
-                              >
-                                <h3>
-                                  {teacherNameById[item.teacherId] || 'Tutor Announcement'}
-                                  {isUnread && <span className='learner-unread-dot'>New</span>}
-                                </h3>
+                              <article key={item.id} className={`learner-notification-card ${isUnread ? 'unread' : ''}`} tabIndex={0} aria-label={`${teacherNameById[item.teacherId] || 'Tutor Announcement'} update for ${item.courseTitle || 'general update'}`}>
+                                <h3>{teacherNameById[item.teacherId] || 'Tutor Announcement'}{isUnread && <span className='learner-unread-dot'>New</span>}</h3>
                                 <span className='learner-notification-course'>{item.courseTitle || 'General update'}</span>
                                 <p>{item.message || 'No message content.'}</p>
                                 <small>{item.createdAt ? new Date(item.createdAt).toLocaleString() : 'Just now'}</small>
@@ -1985,49 +1434,30 @@ const Learner = () => {
                 </div>
                 <div className='learner-art-actions'>
                   <button type='button' className='learner-art-add-btn' onClick={() => setActiveSection('my-art-add')}>
-                    <FiPlus aria-hidden='true' />
-                    Add product
+                    <FiPlus aria-hidden='true' />Add product
                   </button>
                 </div>
               </div>
-
               <div className='learner-art-table-wrap'>
                 <div className='learner-art-toolbar'>
                   <label className='learner-art-search'>
-                    <input
-                      type='text'
-                      value={productSearchTerm}
-                      onChange={(event) => setProductSearchTerm(event.target.value)}
-                      placeholder='select products'
-                    />
+                    <input type='text' value={productSearchTerm} onChange={(event) => setProductSearchTerm(event.target.value)} placeholder='select products' />
                     <FiSearch aria-hidden='true' />
                   </label>
-                  <button type='button' className='learner-art-gear' aria-label='Products settings'>
-                    <FiSettings aria-hidden='true' />
-                  </button>
+                  <button type='button' className='learner-art-gear' aria-label='Products settings'><FiSettings aria-hidden='true' /></button>
                 </div>
-
                 <div className='learner-art-table'>
                   <div className='learner-art-row learner-art-row--head'>
-                    <span>Name</span>
-                    <span>Code</span>
-                    <span>Description</span>
-                    <span>Active</span>
-                    <span>Actions</span>
+                    <span>Name</span><span>Code</span><span>Description</span><span>Active</span><span>Actions</span>
                   </div>
-
                   {filteredMyArtProducts.length === 0 ? (
-                    <div className='learner-art-empty'>
-                      <p>No data</p>
-                    </div>
+                    <div className='learner-art-empty'><p>No data</p></div>
                   ) : (
                     filteredMyArtProducts.map((product) => (
                       <div key={product.id} className='learner-art-row'>
-                        <span>{product.name}</span>
-                        <span>{product.code}</span>
+                        <span>{product.name}</span><span>{product.code}</span>
                         <span>{product.description || 'No description'}</span>
-                        <span>{product.active ? 'Yes' : 'No'}</span>
-                        <span>View</span>
+                        <span>{product.active ? 'Yes' : 'No'}</span><span>View</span>
                       </div>
                     ))
                   )}
@@ -2040,45 +1470,14 @@ const Learner = () => {
             <section className='learner-panel learner-art-panel learner-art-create-panel'>
               <div className='learner-art-create-head'>
                 <h1>Add Product</h1>
-                <button type='button' className='learner-art-back-btn' onClick={() => setActiveSection('my-art')}>
-                  Back to Products
-                </button>
+                <button type='button' className='learner-art-back-btn' onClick={() => setActiveSection('my-art')}>Back to Products</button>
               </div>
-
               <form className='learner-art-form learner-art-form-page' onSubmit={handleCreateProduct}>
-                <label>
-                  <span>Product name</span>
-                  <input
-                    type='text'
-                    value={productDraft.name}
-                    onChange={(event) => setProductDraft((prev) => ({ ...prev, name: event.target.value }))}
-                    placeholder='e.g. Handwoven Basket'
-                  />
-                </label>
-                <label>
-                  <span>Code</span>
-                  <input
-                    type='text'
-                    value={productDraft.code}
-                    onChange={(event) => setProductDraft((prev) => ({ ...prev, code: event.target.value }))}
-                    placeholder='e.g. BK-001 (optional)'
-                  />
-                </label>
-                <label className='learner-art-form-wide'>
-                  <span>Description</span>
-                  <textarea
-                    rows='4'
-                    value={productDraft.description}
-                    onChange={(event) => setProductDraft((prev) => ({ ...prev, description: event.target.value }))}
-                    placeholder='Short product description'
-                  />
-                </label>
+                <label><span>Product name</span><input type='text' value={productDraft.name} onChange={(event) => setProductDraft((prev) => ({ ...prev, name: event.target.value }))} placeholder='e.g. Handwoven Basket' /></label>
+                <label><span>Code</span><input type='text' value={productDraft.code} onChange={(event) => setProductDraft((prev) => ({ ...prev, code: event.target.value }))} placeholder='e.g. BK-001 (optional)' /></label>
+                <label className='learner-art-form-wide'><span>Description</span><textarea rows='4' value={productDraft.description} onChange={(event) => setProductDraft((prev) => ({ ...prev, description: event.target.value }))} placeholder='Short product description' /></label>
                 <label className='learner-art-active-toggle'>
-                  <input
-                    type='checkbox'
-                    checked={productDraft.active}
-                    onChange={(event) => setProductDraft((prev) => ({ ...prev, active: event.target.checked }))}
-                  />
+                  <input type='checkbox' checked={productDraft.active} onChange={(event) => setProductDraft((prev) => ({ ...prev, active: event.target.checked }))} />
                   <span>Active product</span>
                 </label>
                 <button type='submit' className='learner-art-save-btn'>Save product</button>
@@ -2089,32 +1488,21 @@ const Learner = () => {
           {!loading && activeSection === 'profile' && (
             <section className='learner-panel'>
               <h1>Profile</h1>
-
               {profileMessage && <p className='learner-profile-message'>{profileMessage}</p>}
               {securityMessage && <p className='learner-profile-message learner-profile-message-warning'>{securityMessage}</p>}
 
               <div className='learner-account-wrap'>
                 <div className='learner-account-row'>
                   <div className='learner-account-avatar'>
-                    {profileDraft.photoURL
-                      ? <img src={profileDraft.photoURL} alt='Profile' />
-                      : <span>{avatarInitials || 'L'}</span>}
+                    {profileDraft.photoURL ? <img src={profileDraft.photoURL} alt='Profile' /> : <span>{avatarInitials || 'L'}</span>}
                   </div>
                   <div className='learner-account-avatar-copy'>
                     <h3>Profile picture</h3>
                     <p>PNG, JPEG or WEBP under 2MB (saved on this device)</p>
                   </div>
                   <div className='learner-account-avatar-actions'>
-                    <input
-                      ref={profilePhotoInputRef}
-                      type='file'
-                      accept='image/png,image/jpeg,image/webp'
-                      onChange={handleProfilePhotoUpload}
-                      hidden
-                    />
-                    <button type='button' onClick={() => profilePhotoInputRef.current?.click()} disabled={profileSaving}>
-                      <FiUpload aria-hidden='true' /> Upload new picture
-                    </button>
+                    <input ref={profilePhotoInputRef} type='file' accept='image/png,image/jpeg,image/webp' onChange={handleProfilePhotoUpload} hidden />
+                    <button type='button' onClick={() => profilePhotoInputRef.current?.click()} disabled={profileSaving}><FiUpload aria-hidden='true' /> Upload new picture</button>
                     <button type='button' onClick={handleProfilePhotoDelete} disabled={profileSaving}>Delete</button>
                   </div>
                 </div>
@@ -2122,28 +1510,10 @@ const Learner = () => {
                 <div className='learner-account-group'>
                   <h3>Full name</h3>
                   <div className='learner-account-grid'>
-                    <label>
-                      <span>First name</span>
-                      <input
-                        type='text'
-                        value={profileDraft.firstName}
-                        onChange={(e) => setProfileDraft((prev) => ({ ...prev, firstName: e.target.value }))}
-                        placeholder='First name'
-                      />
-                    </label>
-                    <label>
-                      <span>Last name</span>
-                      <input
-                        type='text'
-                        value={profileDraft.lastName}
-                        onChange={(e) => setProfileDraft((prev) => ({ ...prev, lastName: e.target.value }))}
-                        placeholder='Last name'
-                      />
-                    </label>
+                    <label><span>First name</span><input type='text' value={profileDraft.firstName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, firstName: e.target.value }))} placeholder='First name' /></label>
+                    <label><span>Last name</span><input type='text' value={profileDraft.lastName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, lastName: e.target.value }))} placeholder='Last name' /></label>
                   </div>
-                  <button type='button' className='learner-account-save-btn' onClick={handleProfileSave} disabled={profileSaving}>
-                    Save profile
-                  </button>
+                  <button type='button' className='learner-account-save-btn' onClick={handleProfileSave} disabled={profileSaving}>Save profile</button>
                 </div>
 
                 <div className='learner-account-group'>
@@ -2156,24 +1526,8 @@ const Learner = () => {
                   <h3>Password</h3>
                   <p>Modify your current password.</p>
                   <div className='learner-account-grid'>
-                    <label>
-                      <span>Current password</span>
-                      <input
-                        type='password'
-                        value={passwordForm.currentPassword}
-                        onChange={(e) => setPasswordForm((prev) => ({ ...prev, currentPassword: e.target.value }))}
-                        placeholder='Current password'
-                      />
-                    </label>
-                    <label>
-                      <span>New password</span>
-                      <input
-                        type='password'
-                        value={passwordForm.newPassword}
-                        onChange={(e) => setPasswordForm((prev) => ({ ...prev, newPassword: e.target.value }))}
-                        placeholder='New password'
-                      />
-                    </label>
+                    <label><span>Current password</span><input type='password' value={passwordForm.currentPassword} onChange={(e) => setPasswordForm((prev) => ({ ...prev, currentPassword: e.target.value }))} placeholder='Current password' /></label>
+                    <label><span>New password</span><input type='password' value={passwordForm.newPassword} onChange={(e) => setPasswordForm((prev) => ({ ...prev, newPassword: e.target.value }))} placeholder='New password' /></label>
                   </div>
                   <button type='button' className='learner-account-save-btn' onClick={handlePasswordUpdate}>Update password</button>
                 </div>
@@ -2182,12 +1536,8 @@ const Learner = () => {
                   <h3>Account security</h3>
                   <p>Manage your account security.</p>
                   <div className='learner-account-danger-zone'>
-                    <button type='button' className='learner-security-btn' onClick={handleLogoutClick}>
-                      <FiLogOut aria-hidden='true' /> Logout
-                    </button>
-                    <button type='button' className='learner-security-btn learner-security-btn-danger' onClick={handleDeleteAccount}>
-                      <FiTrash2 aria-hidden='true' /> Delete my account
-                    </button>
+                    <button type='button' className='learner-security-btn' onClick={handleLogoutClick}><FiLogOut aria-hidden='true' /> Logout</button>
+                    <button type='button' className='learner-security-btn learner-security-btn-danger' onClick={handleDeleteAccount}><FiTrash2 aria-hidden='true' /> Delete my account</button>
                   </div>
                 </div>
               </div>
@@ -2201,84 +1551,37 @@ const Learner = () => {
                 <article className='learner-settings-card'>
                   <h3>Security</h3>
                   <label className='learner-setting-row'>
-                    <div>
-                      <strong>Biometric authentication</strong>
-                      <p>Allow this device to use biometrics for secure unlock on supported mobile devices.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={settingsPrefs.biometricAuth}
-                      onChange={(e) => updateBiometricPreference(e.target.checked)}
-                    />
+                    <div><strong>Biometric authentication</strong><p>Allow this device to use biometrics for secure unlock on supported mobile devices.</p></div>
+                    <input type='checkbox' checked={settingsPrefs.biometricAuth} onChange={(e) => updateBiometricPreference(e.target.checked)} />
                   </label>
                 </article>
-
                 <article className='learner-settings-card'>
                   <h3>Notifications</h3>
                   <label className='learner-setting-row'>
-                    <div>
-                      <strong>Notifications</strong>
-                      <p>Receive course updates and account alerts.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={settingsPrefs.notifications}
-                      onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, notifications: e.target.checked }))}
-                    />
+                    <div><strong>Notifications</strong><p>Receive course updates and account alerts.</p></div>
+                    <input type='checkbox' checked={settingsPrefs.notifications} onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, notifications: e.target.checked }))} />
                   </label>
                 </article>
-
                 <article className='learner-settings-card'>
                   <h3>Sync</h3>
                   <label className='learner-setting-row'>
-                    <div>
-                      <strong>Cloud sync</strong>
-                      <p>Sync your dashboard data across all devices.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={settingsPrefs.cloudSync}
-                      onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, cloudSync: e.target.checked }))}
-                    />
+                    <div><strong>Cloud sync</strong><p>Sync your dashboard data across all devices.</p></div>
+                    <input type='checkbox' checked={settingsPrefs.cloudSync} onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, cloudSync: e.target.checked }))} />
                   </label>
                 </article>
-
                 <article className='learner-settings-card'>
                   <h3>Appearance</h3>
                   <label className='learner-setting-row'>
-                    <div>
-                      <strong>Dark mode</strong>
-                      <p>Switch learner dashboard between light and dark mode.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={settingsPrefs.darkMode}
-                      onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, darkMode: e.target.checked }))}
-                    />
+                    <div><strong>Dark mode</strong><p>Switch learner dashboard between light and dark mode.</p></div>
+                    <input type='checkbox' checked={settingsPrefs.darkMode} onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, darkMode: e.target.checked }))} />
                   </label>
-
                   <label className='learner-setting-row'>
-                    <div>
-                      <strong>Compact cards</strong>
-                      <p>Reduce card height to show more content on screen.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={displayPrefs.compactCards}
-                      onChange={(e) => setDisplayPrefs((prev) => ({ ...prev, compactCards: e.target.checked }))}
-                    />
+                    <div><strong>Compact cards</strong><p>Reduce card height to show more content on screen.</p></div>
+                    <input type='checkbox' checked={displayPrefs.compactCards} onChange={(e) => setDisplayPrefs((prev) => ({ ...prev, compactCards: e.target.checked }))} />
                   </label>
-
                   <label className='learner-setting-row'>
-                    <div>
-                      <strong>Reduce motion</strong>
-                      <p>Minimize dashboard animations and transitions.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={displayPrefs.reduceMotion}
-                      onChange={(e) => setDisplayPrefs((prev) => ({ ...prev, reduceMotion: e.target.checked }))}
-                    />
+                    <div><strong>Reduce motion</strong><p>Minimize dashboard animations and transitions.</p></div>
+                    <input type='checkbox' checked={displayPrefs.reduceMotion} onChange={(e) => setDisplayPrefs((prev) => ({ ...prev, reduceMotion: e.target.checked }))} />
                   </label>
                 </article>
               </div>
@@ -2289,25 +1592,13 @@ const Learner = () => {
             <section className='learner-panel'>
               <h1>Certifications & Achievements</h1>
               <div className='learner-metrics-grid'>
-                <article className='learner-metric-card'>
-                  <h3>Certificates Earned</h3>
-                  <p>{achievements.certificates || 0}</p>
-                </article>
-                <article className='learner-metric-card'>
-                  <h3>Badges</h3>
-                  <p>{(achievements.badges || []).length}</p>
-                </article>
-                <article className='learner-metric-card'>
-                  <h3>Milestones</h3>
-                  <p>{(achievements.milestones || []).length}</p>
-                </article>
+                <article className='learner-metric-card'><h3>Certificates Earned</h3><p>{achievements.certificates || 0}</p></article>
+                <article className='learner-metric-card'><h3>Badges</h3><p>{(achievements.badges || []).length}</p></article>
+                <article className='learner-metric-card'><h3>Milestones</h3><p>{(achievements.milestones || []).length}</p></article>
               </div>
               <div className='learner-tag-list'>
-                {(achievements.badges || []).map(badge => (
-                  <span key={badge}>{badge}</span>
-                ))}
+                {(achievements.badges || []).map(badge => (<span key={badge}>{badge}</span>))}
               </div>
-
               <div className='learner-certificate-grid'>
                 {completedCourseTitles.length === 0
                   ? <span className='learner-certificate-empty'>No certificates yet. Complete a full course to unlock certificates.</span>
@@ -2315,12 +1606,7 @@ const Learner = () => {
                     <article key={course.id} className='learner-certificate-item'>
                       <div className='learner-certificate-preview'>
                         <img
-                          src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(buildCourseCertificateSvg({
-                            learnerName,
-                            courseTitle: course.title,
-                            completedAt: new Date(course.completedAt).toLocaleDateString(),
-                            tutorName: course.teacherName || 'Tutor'
-                          }))}`}
+                          src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(buildCourseCertificateSvg({ learnerName, courseTitle: course.title, completedAt: new Date(course.completedAt).toLocaleDateString(), tutorName: course.teacherName || 'Tutor' }))}`}
                           alt={`${course.title} certificate preview`}
                         />
                       </div>
@@ -2329,11 +1615,7 @@ const Learner = () => {
                         <p>Instructor: {course.teacherName || 'Tutor'}</p>
                         <p>Completed: {new Date(course.completedAt).toLocaleDateString()}</p>
                       </div>
-                      <button
-                        className='learner-certificate-btn'
-                        type='button'
-                        onClick={() => handleDownloadCertificate(course.title, course.completedAt, course.teacherName)}
-                      >
+                      <button className='learner-certificate-btn' type='button' onClick={() => handleDownloadCertificate(course.title, course.completedAt, course.teacherName)}>
                         Download Certificate
                       </button>
                     </article>
@@ -2341,33 +1623,6 @@ const Learner = () => {
               </div>
             </section>
           )}
-
-          {/*
-            Language Practice is temporarily hidden until the redesign is complete.
-            {!loading && activeSection === 'language' && (
-              <section className='learner-panel'>
-                <h1>Language Practice</h1>
-                <div className='learner-feature-grid'>
-                  <article>
-                    <h3>Daily Phrases</h3>
-                    <p>Habari yako? • Asante sana • Karibu</p>
-                  </article>
-                  <article>
-                    <h3>Pronunciation Practice</h3>
-                    <p>Use lesson audio and tutor uploads to repeat and self-check.</p>
-                  </article>
-                  <article>
-                    <h3>Vocabulary Lists</h3>
-                    <p>Build your list from active courses and revise every day.</p>
-                  </article>
-                  <article>
-                    <h3>Mini Quizzes</h3>
-                    <p>Take topic quizzes from course content to reinforce retention.</p>
-                  </article>
-                </div>
-              </section>
-            )}
-          */}
         </main>
       </div>
     </div>

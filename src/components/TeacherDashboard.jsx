@@ -215,9 +215,7 @@ const TeacherDashboard = () => {
     }
   }, [courses, announcementCourseId, reviewCourseFilter])
 
-
-
-{/* 
+  // ─── UPDATED fetchDashboardData — scoped queries, no full-collection reads ──
   const fetchDashboardData = async () => {
     try {
       const currentTeacherId = auth.currentUser?.uid
@@ -230,196 +228,116 @@ const TeacherDashboard = () => {
         return
       }
 
-      const resolveCourseTeacherId = (course) => (
-        course.teacherId ||
-        course.tutorId ||
-        course.createdBy ||
-        course.authorId ||
-        ''
+      // FIX: was fetching ALL courses — now scoped to this teacher only
+      const coursesSnapshot = await getDocs(
+        query(
+          collection(db, 'courses'),
+          where('teacherId', '==', currentTeacherId)
+        )
       )
 
-      const resolveReviewTeacherId = (review) => (
-        review.teacherId ||
-        review.tutorId ||
-        review.createdBy ||
-        review.authorId ||
-        ''
+      const myCourses = coursesSnapshot.docs
+        .map(d => ({ id: d.id, ...d.data() }))
+        .sort((a, b) => {
+          const aTime = new Date(a.createdAt || a.updatedAt || 0).getTime()
+          const bTime = new Date(b.createdAt || b.updatedAt || 0).getTime()
+          return bTime - aTime
+        })
+
+      setCourses(myCourses)
+      const myCourseIds = new Set(myCourses.map(course => course.id))
+
+      // Enrollment query by teacherId
+      const enrollmentQueryByTeacher = getDocs(
+        query(collection(db, 'enrollments'), where('teacherId', '==', currentTeacherId))
       )
 
-      const [coursesSnapshot, enrollmentSnapshot, announcementSnapshot, reviewSnapshot] = await Promise.allSettled([
-        getDocs(collection(db, 'courses')),
-        getDocs(query(collection(db, 'enrollments'), where('teacherId', '==', currentTeacherId))),
-        getDocs(collection(db, 'announcements')),
-        getDocs(collection(db, 'reviews'))
+      // Optional second query for enrollments missing teacherId (capped at 10 for Firestore 'in' limit)
+      const courseIdList = myCourses.map(c => c.id).filter(Boolean).slice(0, 10)
+      const enrollmentQueryByCourse = courseIdList.length > 0
+        ? getDocs(query(collection(db, 'enrollments'), where('courseId', 'in', courseIdList)))
+        : Promise.resolve(null)
+
+      // FIX: was fetching ALL announcements — now scoped to this teacher only
+      const announcementsQuery = getDocs(
+        query(collection(db, 'announcements'), where('teacherId', '==', currentTeacherId))
+      )
+
+      // FIX: was fetching ALL reviews — now scoped to this teacher only
+      const reviewsQuery = getDocs(
+        query(collection(db, 'reviews'), where('teacherId', '==', currentTeacherId))
+      )
+
+      // FIX: removed learnerProgress full-collection fetch entirely —
+      // completion already lives on enrollment docs written by learner dashboard
+
+      const [
+        enrollmentByTeacherResult,
+        enrollmentByCourseResult,
+        announcementResult,
+        reviewResult
+      ] = await Promise.allSettled([
+        enrollmentQueryByTeacher,
+        enrollmentQueryByCourse,
+        announcementsQuery,
+        reviewsQuery
       ])
 
-      const myCourses = coursesSnapshot.status === 'fulfilled'
-        ? coursesSnapshot.value.docs
-            .map(d => ({ id: d.id, ...d.data() }))
-            .filter((course) => resolveCourseTeacherId(course) === currentTeacherId)
-            .sort((a, b) => {
-              const aTime = new Date(a.createdAt || a.updatedAt || 0).getTime()
-              const bTime = new Date(b.createdAt || b.updatedAt || 0).getTime()
-              return bTime - aTime
-            })
-        : []
-      setCourses(myCourses)
+      // Merge and deduplicate enrollments
+      const enrollmentMap = new Map()
 
-      const myCourseIds = new Set(myCourses.map(course => course.id))
-      const enrollmentDocs = enrollmentSnapshot.status === 'fulfilled' ? enrollmentSnapshot.value.docs : []
-      const announcementDocs = announcementSnapshot.status === 'fulfilled' ? announcementSnapshot.value.docs : []
-      const reviewDocs = reviewSnapshot.status === 'fulfilled' ? reviewSnapshot.value.docs : []
+      if (enrollmentByTeacherResult.status === 'fulfilled') {
+        enrollmentByTeacherResult.value.docs.forEach(d => {
+          enrollmentMap.set(d.id, { id: d.id, ...d.data() })
+        })
+      }
 
-      const myEnrollments = enrollmentDocs
-        .map(d => ({ id: d.id, ...d.data() }))
+      if (
+        enrollmentByCourseResult.status === 'fulfilled' &&
+        enrollmentByCourseResult.value !== null
+      ) {
+        enrollmentByCourseResult.value.docs.forEach(d => {
+          if (!enrollmentMap.has(d.id)) {
+            enrollmentMap.set(d.id, { id: d.id, ...d.data() })
+          }
+        })
+      }
+
+      const myEnrollments = Array.from(enrollmentMap.values())
         .filter(item => item.teacherId === currentTeacherId || myCourseIds.has(item.courseId))
+        .map(item => ({
+          ...item,
+          completion: Math.max(0, Math.min(100, Math.round(Number(item.completion || 0))))
+        }))
+
+      const announcementDocs = announcementResult.status === 'fulfilled'
+        ? announcementResult.value.docs
+        : []
 
       const teacherAnnouncements = announcementDocs
         .map(d => ({ id: d.id, ...d.data() }))
-        .filter(item => item.teacherId === currentTeacherId)
         .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
+
+      const reviewDocs = reviewResult.status === 'fulfilled'
+        ? reviewResult.value.docs
+        : []
 
       const myReviews = reviewDocs
         .map(d => ({ id: d.id, ...d.data() }))
-        .filter(item => resolveReviewTeacherId(item) === currentTeacherId || myCourseIds.has(item.courseId))
-        .sort((a, b) => (b.updatedAt || b.createdAt || '').localeCompare(a.updatedAt || a.createdAt || ''))
+        .sort((a, b) =>
+          (b.updatedAt || b.createdAt || '').localeCompare(a.updatedAt || a.createdAt || '')
+        )
 
       setEnrollments(myEnrollments)
       setAnnouncements(teacherAnnouncements)
       setReviews(myReviews)
+
     } catch (err) {
       console.log('Error fetching dashboard data:', err)
     } finally {
       setLoading(false)
     }
   }
-    */}
-
-
-
-const fetchDashboardData = async () => {
-  try {
-    const currentTeacherId = auth.currentUser?.uid
-    if (!currentTeacherId) {
-      setCourses([])
-      setEnrollments([])
-      setAnnouncements([])
-      setReviews([])
-      setLoading(false)
-      return
-    }
-
-    const resolveCourseTeacherId = (course) => (
-      course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
-    )
-
-    const resolveReviewTeacherId = (review) => (
-      review.teacherId || review.tutorId || review.createdBy || review.authorId || ''
-    )
-
-    // Step 1 — fetch courses first so we have courseIds
-    const coursesSnapshot = await getDocs(collection(db, 'courses'))
-    const myCourses = coursesSnapshot.docs
-      .map(d => ({ id: d.id, ...d.data() }))
-      .filter(course => resolveCourseTeacherId(course) === currentTeacherId)
-      .sort((a, b) => {
-        const aTime = new Date(a.createdAt || a.updatedAt || 0).getTime()
-        const bTime = new Date(b.createdAt || b.updatedAt || 0).getTime()
-        return bTime - aTime
-      })
-
-    setCourses(myCourses)
-    const myCourseIds = new Set(myCourses.map(course => course.id))
-
-    // Step 2 — build enrollment queries (two queries, merged)
-    const enrollmentQueries = [
-      getDocs(query(collection(db, 'enrollments'), where('teacherId', '==', currentTeacherId)))
-    ]
-
-    const courseIdList = myCourses.map(c => c.id).filter(Boolean).slice(0, 10)
-    if (courseIdList.length > 0) {
-      enrollmentQueries.push(
-        getDocs(query(collection(db, 'enrollments'), where('courseId', 'in', courseIdList)))
-      )
-    }
-
-    // Step 3 — fetch everything else in parallel
-    const [announcementSnapshot, reviewSnapshot, learnerProgressSnapshot, ...enrollmentSnapshots] = await Promise.allSettled([
-      getDocs(collection(db, 'announcements')),
-      getDocs(collection(db, 'reviews')),
-      getDocs(collection(db, 'learnerProgress')),
-      ...enrollmentQueries
-    ])
-
-    // Step 4 — merge and deduplicate enrollments
-    const enrollmentMap = new Map()
-    enrollmentSnapshots.forEach(result => {
-      if (result.status === 'fulfilled') {
-        result.value.docs.forEach(d => {
-          enrollmentMap.set(d.id, { id: d.id, ...d.data() })
-        })
-      }
-    })
-
-    const learnerProgressDocs = learnerProgressSnapshot.status === 'fulfilled' ? learnerProgressSnapshot.value.docs : []
-    const completionFromProgress = new Map()
-
-    learnerProgressDocs.forEach((docItem) => {
-      const learnerId = docItem.id
-      const data = docItem.data() || {}
-      const courseProgress = data.courses || {}
-      Object.entries(courseProgress).forEach(([courseId, progress]) => {
-        const completion = Number(progress?.completion || 0)
-        if (!Number.isFinite(completion)) return
-        const key = `${learnerId}_${courseId}`
-        const previous = completionFromProgress.get(key) || 0
-        completionFromProgress.set(key, Math.max(previous, completion))
-      })
-    })
-
-    const myEnrollments = Array.from(enrollmentMap.values())
-      .filter(item => item.teacherId === currentTeacherId || myCourseIds.has(item.courseId))
-      .map((item) => {
-        const learnerId = item.learnerId || item.studentId || ''
-        const courseId = item.courseId || ''
-        const progressKey = `${learnerId}_${courseId}`
-        const progressCompletion = completionFromProgress.get(progressKey)
-        const enrollmentCompletion = Number(item.completion || 0)
-        const mergedCompletion = Number.isFinite(progressCompletion)
-          ? Math.max(enrollmentCompletion, progressCompletion)
-          : enrollmentCompletion
-
-        return {
-          ...item,
-          completion: Math.max(0, Math.min(100, Math.round(mergedCompletion)))
-        }
-      })
-
-    const announcementDocs = announcementSnapshot.status === 'fulfilled' ? announcementSnapshot.value.docs : []
-    const reviewDocs = reviewSnapshot.status === 'fulfilled' ? reviewSnapshot.value.docs : []
-
-    const teacherAnnouncements = announcementDocs
-      .map(d => ({ id: d.id, ...d.data() }))
-      .filter(item => item.teacherId === currentTeacherId)
-      .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
-
-    const myReviews = reviewDocs
-      .map(d => ({ id: d.id, ...d.data() }))
-      .filter(item => resolveReviewTeacherId(item) === currentTeacherId || myCourseIds.has(item.courseId))
-      .sort((a, b) => (b.updatedAt || b.createdAt || '').localeCompare(a.updatedAt || a.createdAt || ''))
-
-    setEnrollments(myEnrollments)
-    setAnnouncements(teacherAnnouncements)
-    setReviews(myReviews)
-
-  } catch (err) {
-    console.log('Error fetching dashboard data:', err)
-  } finally {
-    setLoading(false)
-  }
-}
-
-
 
   const markReviewsSeen = () => {
     const uid = auth.currentUser?.uid
@@ -752,25 +670,13 @@ const fetchDashboardData = async () => {
       const errorCode = err?.code || ''
 
       if (errorCode === 'permission-denied') {
-        setAnnouncementStatus({
-          type: 'error',
-          text: 'Firebase permission denied. Check Firestore rules for announcements write access.'
-        })
+        setAnnouncementStatus({ type: 'error', text: 'Firebase permission denied. Check Firestore rules for announcements write access.' })
       } else if (errorCode === 'unauthenticated') {
-        setAnnouncementStatus({
-          type: 'error',
-          text: 'Firebase reports unauthenticated session. Sign in again and retry.'
-        })
+        setAnnouncementStatus({ type: 'error', text: 'Firebase reports unauthenticated session. Sign in again and retry.' })
       } else if (errorCode === 'unavailable') {
-        setAnnouncementStatus({
-          type: 'error',
-          text: 'Firestore service unavailable right now. Check network and retry in a moment.'
-        })
+        setAnnouncementStatus({ type: 'error', text: 'Firestore service unavailable right now. Check network and retry in a moment.' })
       } else {
-        setAnnouncementStatus({
-          type: 'error',
-          text: 'Check your internet connection.'
-        })
+        setAnnouncementStatus({ type: 'error', text: 'Check your internet connection.' })
       }
     } finally {
       setAnnouncementPosting(false)
@@ -886,27 +792,11 @@ const fetchDashboardData = async () => {
     const learnerValue = Number(row.learners || 0)
 
     return (
-      <div
-        style={{
-          background: '#ffffff',
-          border: '1px solid #d6dfd2',
-          borderRadius: '10px',
-          padding: '10px 12px',
-          minWidth: '210px',
-          boxShadow: '0 8px 22px rgba(24, 39, 24, 0.12)',
-          lineHeight: 1.35
-        }}
-      >
+      <div style={{ background: '#ffffff', border: '1px solid #d6dfd2', borderRadius: '10px', padding: '10px 12px', minWidth: '210px', boxShadow: '0 8px 22px rgba(24, 39, 24, 0.12)', lineHeight: 1.35 }}>
         <p style={{ margin: 0, fontSize: '12px', color: '#5f6b5f' }}>Course</p>
-        <p style={{ margin: '2px 0 8px 0', fontWeight: 700, color: '#1f2a1f', wordBreak: 'break-word' }}>
-          {row.title || 'Untitled Course'}
-        </p>
-        <p style={{ margin: '3px 0', color: '#d5731a', fontWeight: 600 }}>
-          Completion: {completionValue}%
-        </p>
-        <p style={{ margin: '3px 0', color: '#a3070c', fontWeight: 600 }}>
-          Learners: {learnerValue}
-        </p>
+        <p style={{ margin: '2px 0 8px 0', fontWeight: 700, color: '#1f2a1f', wordBreak: 'break-word' }}>{row.title || 'Untitled Course'}</p>
+        <p style={{ margin: '3px 0', color: '#d5731a', fontWeight: 600 }}>Completion: {completionValue}%</p>
+        <p style={{ margin: '3px 0', color: '#a3070c', fontWeight: 600 }}>Learners: {learnerValue}</p>
       </div>
     )
   }
@@ -920,17 +810,7 @@ const fetchDashboardData = async () => {
     const percent = Number(row.percent || 0)
 
     return (
-      <div
-        style={{
-          background: '#ffffff',
-          border: '1px solid #d6dfd2',
-          borderRadius: '10px',
-          padding: '10px 12px',
-          minWidth: '185px',
-          boxShadow: '0 8px 22px rgba(24, 39, 24, 0.12)',
-          lineHeight: 1.35
-        }}
-      >
+      <div style={{ background: '#ffffff', border: '1px solid #d6dfd2', borderRadius: '10px', padding: '10px 12px', minWidth: '185px', boxShadow: '0 8px 22px rgba(24, 39, 24, 0.12)', lineHeight: 1.35 }}>
         <p style={{ margin: 0, fontWeight: 700, color: '#1f2a1f' }}>{name}</p>
         <p style={{ margin: '4px 0 2px 0', color: '#324132' }}>Learners: {learners}</p>
         <p style={{ margin: 0, color: '#324132' }}>Share: {percent}%</p>
@@ -939,23 +819,10 @@ const fetchDashboardData = async () => {
   }
 
   const completionPie = useMemo(() => {
-    const base = {
-      completed: 0,
-      inProgress: 0,
-      notStarted: 0,
-      total: 0
-    }
+    const base = { completed: 0, inProgress: 0, notStarted: 0, total: 0 }
 
     if (enrollments.length === 0) {
-      return {
-        ...base,
-        percentages: {
-          completed: 0,
-          inProgress: 0,
-          notStarted: 0
-        },
-        pieData: []
-      }
+      return { ...base, percentages: { completed: 0, inProgress: 0, notStarted: 0 }, pieData: [] }
     }
 
     const normalizeCompletion = (value) => {
@@ -966,13 +833,9 @@ const fetchDashboardData = async () => {
 
     const counts = enrollments.reduce((acc, item) => {
       const completion = normalizeCompletion(item.completion)
-      if (completion >= 100) {
-        acc.completed += 1
-      } else if (completion > 0) {
-        acc.inProgress += 1
-      } else {
-        acc.notStarted += 1
-      }
+      if (completion >= 100) { acc.completed += 1 }
+      else if (completion > 0) { acc.inProgress += 1 }
+      else { acc.notStarted += 1 }
       return acc
     }, { ...base })
 
@@ -1000,15 +863,7 @@ const fetchDashboardData = async () => {
       { name: 'Not Started', value: counts.notStarted, percent: percentages.notStarted, color: '#9aa59a' }
     ]
 
-    return {
-      ...counts,
-      percentages: {
-        completed: percentages.completed,
-        inProgress: percentages.inProgress,
-        notStarted: percentages.notStarted
-      },
-      pieData
-    }
+    return { ...counts, percentages, pieData }
   }, [enrollments])
 
   const reviewSummary = useMemo(() => {
@@ -1016,11 +871,7 @@ const fetchDashboardData = async () => {
     const averageRating = totalReviews === 0
       ? 0
       : (reviews.reduce((acc, review) => acc + (review.rating || 0), 0) / totalReviews)
-
-    return {
-      totalReviews,
-      averageRating: Number(averageRating.toFixed(1))
-    }
+    return { totalReviews, averageRating: Number(averageRating.toFixed(1)) }
   }, [reviews])
 
   const activeBuilderCourse = useMemo(() => {
@@ -1038,11 +889,7 @@ const fetchDashboardData = async () => {
     const averageRating = totalReviews === 0
       ? 0
       : (filteredReviews.reduce((acc, review) => acc + (review.rating || 0), 0) / totalReviews)
-
-    return {
-      totalReviews,
-      averageRating: Number(averageRating.toFixed(1))
-    }
+    return { totalReviews, averageRating: Number(averageRating.toFixed(1)) }
   }, [filteredReviews])
 
   const enrollmentByLearnerCourse = useMemo(() => {
@@ -1060,22 +907,9 @@ const fetchDashboardData = async () => {
     return filteredReviews.map((review) => {
       const key = `${review.learnerId || ''}_${review.courseId || ''}`
       const enrollmentCompletion = enrollmentByLearnerCourse[key]
-      const completion = Number(
-        review.completionPercent ??
-        enrollmentCompletion ??
-        review.completion ??
-        0
-      )
-
-      const completionLabel = completion >= 100
-        ? 'Completed successfully'
-        : `${completion}% complete`
-
-      return {
-        ...review,
-        completion,
-        completionLabel
-      }
+      const completion = Number(review.completionPercent ?? enrollmentCompletion ?? review.completion ?? 0)
+      const completionLabel = completion >= 100 ? 'Completed successfully' : `${completion}% complete`
+      return { ...review, completion, completionLabel }
     })
   }, [filteredReviews, enrollmentByLearnerCourse])
 
@@ -1083,7 +917,6 @@ const fetchDashboardData = async () => {
     if (!reviewsSeenAt) return reviews.length
     const seenTs = new Date(reviewsSeenAt).getTime()
     if (Number.isNaN(seenTs)) return reviews.length
-
     return reviews.filter((review) => {
       const ts = new Date(review.updatedAt || review.createdAt || 0).getTime()
       return !Number.isNaN(ts) && ts > seenTs
@@ -1117,25 +950,15 @@ const fetchDashboardData = async () => {
   }, [enrollments])
 
   const quizInsights = useMemo(() => {
-    const defaultSettings = {
-      passMark: 70,
-      attemptsAllowed: 3,
-      feedbackMode: 'after-submit'
-    }
+    const defaultSettings = { passMark: 70, attemptsAllowed: 3, feedbackMode: 'after-submit' }
 
     const courseRows = courses.map((course) => {
       const topics = Array.isArray(course.topics) ? course.topics : []
-
-      let quizTopics = 0
-      let totalQuestions = 0
-      let configuredTopics = 0
-      let customRuleTopics = 0
+      let quizTopics = 0, totalQuestions = 0, configuredTopics = 0, customRuleTopics = 0
 
       topics.forEach((topic) => {
         const questions = Array.isArray(topic.quiz) ? topic.quiz.length : 0
-        const hasQuiz = questions > 0
-        if (!hasQuiz) return
-
+        if (!questions) return
         quizTopics += 1
         totalQuestions += questions
 
@@ -1149,9 +972,7 @@ const fetchDashboardData = async () => {
         const randomizeQuestions = Boolean(settings?.randomizeQuestions)
         const feedbackMode = settings?.feedbackMode ?? defaultSettings.feedbackMode
 
-        const hasCustomRules =
-          timeLimit !== '' ||
-          randomizeQuestions ||
+        const hasCustomRules = timeLimit !== '' || randomizeQuestions ||
           passMark !== defaultSettings.passMark ||
           attemptsAllowed !== defaultSettings.attemptsAllowed ||
           feedbackMode !== defaultSettings.feedbackMode
@@ -1159,15 +980,7 @@ const fetchDashboardData = async () => {
         if (hasCustomRules) customRuleTopics += 1
       })
 
-      return {
-        id: course.id,
-        title: course.title || 'Untitled Course',
-        topicCount: topics.length,
-        quizTopics,
-        totalQuestions,
-        configuredTopics,
-        customRuleTopics
-      }
+      return { id: course.id, title: course.title || 'Untitled Course', topicCount: topics.length, quizTopics, totalQuestions, configuredTopics, customRuleTopics }
     })
 
     const totals = courseRows.reduce((acc, row) => ({
@@ -1176,23 +989,11 @@ const fetchDashboardData = async () => {
       totalQuestions: acc.totalQuestions + row.totalQuestions,
       configuredTopics: acc.configuredTopics + row.configuredTopics,
       customRuleTopics: acc.customRuleTopics + row.customRuleTopics
-    }), {
-      coursesWithQuizzes: 0,
-      quizTopics: 0,
-      totalQuestions: 0,
-      configuredTopics: 0,
-      customRuleTopics: 0
-    })
+    }), { coursesWithQuizzes: 0, quizTopics: 0, totalQuestions: 0, configuredTopics: 0, customRuleTopics: 0 })
 
-    const topCourseRows = [...courseRows]
-      .filter((row) => row.quizTopics > 0)
-      .sort((a, b) => b.totalQuestions - a.totalQuestions)
+    const topCourseRows = [...courseRows].filter((row) => row.quizTopics > 0).sort((a, b) => b.totalQuestions - a.totalQuestions)
 
-    return {
-      ...totals,
-      courseRows,
-      topCourseRows
-    }
+    return { ...totals, courseRows, topCourseRows }
   }, [courses])
 
   const openQuizBuilderFromQuizzes = (courseId) => {
@@ -1201,7 +1002,6 @@ const fetchDashboardData = async () => {
       navigate('/lesson', { state: { courseId } })
       return
     }
-
     navigate('/lesson')
   }
 
@@ -1296,19 +1096,12 @@ const fetchDashboardData = async () => {
       const cloudSafePhoto = isLocalPhoto ? '' : (profileDraft.photoURL || '')
 
       await setDoc(doc(db, 'users', uid), {
-        firstName,
-        lastName,
-        secondName: lastName,
-        photoURL: cloudSafePhoto,
-        updatedAt: new Date().toISOString()
+        firstName, lastName, secondName: lastName,
+        photoURL: cloudSafePhoto, updatedAt: new Date().toISOString()
       }, { merge: true })
 
       const displayName = `${firstName} ${lastName}`.trim()
-      await updateProfile(auth.currentUser, {
-        displayName,
-        photoURL: cloudSafePhoto
-      })
-
+      await updateProfile(auth.currentUser, { displayName, photoURL: cloudSafePhoto })
       setProfileMessage('Profile updated successfully.')
     } catch {
       setProfileMessage('Could not save profile details right now.')
@@ -1350,7 +1143,6 @@ const fetchDashboardData = async () => {
   const handleLogoutClick = async () => {
     const confirmed = window.confirm('Are you sure you want to log out?')
     if (!confirmed) return
-
     await signOut(auth)
     navigate('/')
   }
@@ -1380,7 +1172,6 @@ const fetchDashboardData = async () => {
       await handleSaveAndGo('/curriculum')
       return
     }
-
     const courseId = await saveCourse()
     if (!courseId) return
     setBuilderStep(nextStep)
@@ -1391,12 +1182,10 @@ const fetchDashboardData = async () => {
       setBuilderStep(nextStep)
       return
     }
-
     if (!editingCourseId) {
       setBuilderMessage('Save your draft in Basics first to unlock the next step.')
       return
     }
-
     setBuilderStep(nextStep)
   }
 
@@ -1430,13 +1219,7 @@ const fetchDashboardData = async () => {
 
           <div className='td-nav-groups'>
             <div className='td-nav-group'>
-              <button
-                className={`td-nav-group-title ${menuOpen.teaching ? 'expanded' : ''}`}
-                onClick={() => toggleMenu('teaching')}
-                aria-expanded={menuOpen.teaching}
-              >
-                Teaching Hub
-              </button>
+              <button className={`td-nav-group-title ${menuOpen.teaching ? 'expanded' : ''}`} onClick={() => toggleMenu('teaching')} aria-expanded={menuOpen.teaching}>Teaching Hub</button>
               {menuOpen.teaching && (
                 <div className='td-nav-submenu'>
                   <button className={`td-nav-subitem ${activeSection === 'courses' ? 'active' : ''}`} onClick={() => setActiveSection('courses')}>Courses</button>
@@ -1447,13 +1230,7 @@ const fetchDashboardData = async () => {
             </div>
 
             <div className='td-nav-group'>
-              <button
-                className={`td-nav-group-title ${menuOpen.learners ? 'expanded' : ''}`}
-                onClick={() => toggleMenu('learners')}
-                aria-expanded={menuOpen.learners}
-              >
-                Learners
-              </button>
+              <button className={`td-nav-group-title ${menuOpen.learners ? 'expanded' : ''}`} onClick={() => toggleMenu('learners')} aria-expanded={menuOpen.learners}>Learners</button>
               {menuOpen.learners && (
                 <div className='td-nav-submenu'>
                   <button className={`td-nav-subitem ${activeSection === 'students' ? 'active' : ''}`} onClick={() => setActiveSection('students')}>Students</button>
@@ -1464,13 +1241,7 @@ const fetchDashboardData = async () => {
             </div>
 
             <div className='td-nav-group'>
-              <button
-                className={`td-nav-group-title ${menuOpen.insights ? 'expanded' : ''}`}
-                onClick={() => toggleMenu('insights')}
-                aria-expanded={menuOpen.insights}
-              >
-                Insights
-              </button>
+              <button className={`td-nav-group-title ${menuOpen.insights ? 'expanded' : ''}`} onClick={() => toggleMenu('insights')} aria-expanded={menuOpen.insights}>Insights</button>
               {menuOpen.insights && (
                 <div className='td-nav-submenu'>
                   <button className={`td-nav-subitem ${activeSection === 'analytics' ? 'active' : ''}`} onClick={() => setActiveSection('analytics')}>Analytics</button>
@@ -1480,13 +1251,7 @@ const fetchDashboardData = async () => {
             </div>
 
             <div className='td-nav-group'>
-              <button
-                className={`td-nav-group-title ${menuOpen.content ? 'expanded' : ''}`}
-                onClick={() => toggleMenu('content')}
-                aria-expanded={menuOpen.content}
-              >
-                Cultural & Language
-              </button>
+              <button className={`td-nav-group-title ${menuOpen.content ? 'expanded' : ''}`} onClick={() => toggleMenu('content')} aria-expanded={menuOpen.content}>Cultural & Language</button>
               {menuOpen.content && (
                 <div className='td-nav-submenu'>
                   <button className={`td-nav-subitem ${activeSection === 'culture' ? 'active' : ''}`} onClick={() => setActiveSection('culture')}>Cultural Content</button>
@@ -1496,13 +1261,7 @@ const fetchDashboardData = async () => {
             </div>
 
             <div className='td-nav-group'>
-              <button
-                className={`td-nav-group-title ${menuOpen.account ? 'expanded' : ''}`}
-                onClick={() => toggleMenu('account')}
-                aria-expanded={menuOpen.account}
-              >
-                Account
-              </button>
+              <button className={`td-nav-group-title ${menuOpen.account ? 'expanded' : ''}`} onClick={() => toggleMenu('account')} aria-expanded={menuOpen.account}>Account</button>
               {menuOpen.account && (
                 <div className='td-nav-submenu'>
                   <button className={`td-nav-subitem ${activeSection === 'profile' ? 'active' : ''}`} onClick={() => setActiveSection('profile')}>Profile</button>
@@ -1516,11 +1275,7 @@ const fetchDashboardData = async () => {
         <main className='td-main'>
           {!loading && (
             <div className='td-top-alert-row'>
-              <button
-                className='td-theme-toggle'
-                type='button'
-                onClick={toggleThemeMode}
-              >
+              <button className='td-theme-toggle' type='button' onClick={toggleThemeMode}>
                 {themeMode === 'dark' ? 'Light Mode' : 'Dark Mode'}
               </button>
               <button className='td-alert-bell' type='button' onClick={() => setActiveSection('reviews')}>
@@ -1545,7 +1300,6 @@ const fetchDashboardData = async () => {
                     </g>
                   </svg>
                 </div>
-
                 <svg className='td-coffee__steam' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
                   <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
                     <path className='td-coffee__steam-part td-coffee__steam-part--a' d='M13.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
@@ -1553,7 +1307,6 @@ const fetchDashboardData = async () => {
                     <path className='td-coffee__steam-part td-coffee__steam-part--c' d='M40.434,50.999c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
                   </g>
                 </svg>
-
                 <svg className='td-coffee__steam td-coffee__steam--right' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
                   <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
                     <path className='td-coffee__steam-part td-coffee__steam-part--d' d='M19.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
@@ -1567,20 +1320,12 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'courses' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>TH</span>
-                  Teaching Hub
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>TH</span>Teaching Hub</span>
                 <p>Manage your active catalog, publish updates, and keep course quality consistent.</p>
               </div>
               <div className='td-header'>
-                <h1>
-                  Courses
-                  <span className='td-published-badge'>{analytics.published} Published</span>
-                </h1>
-                <button className='td-create-btn' onClick={handleCreateNew}>
-                  + Create Course
-                </button>
+                <h1>Courses<span className='td-published-badge'>{analytics.published} Published</span></h1>
+                <button className='td-create-btn' onClick={handleCreateNew}>+ Create Course</button>
               </div>
 
               {courses.length === 0 && (
@@ -1594,33 +1339,25 @@ const fetchDashboardData = async () => {
                 {courses.map(course => (
                   <article key={course.id} className='td-course-card'>
                     <div className='td-course-cover'>
-                      <span className={`td-course-status-chip ${(course.status || 'Draft') === 'Published' ? 'is-published' : 'is-draft'}`}>
-                        {course.status || 'Draft'}
-                      </span>
+                      <span className={`td-course-status-chip ${(course.status || 'Draft') === 'Published' ? 'is-published' : 'is-draft'}`}>{course.status || 'Draft'}</span>
                       {course.featuredImage
                         ? <img src={course.featuredImage} alt={course.title || 'Course cover'} />
                         : <div className='td-course-cover-placeholder'>No Cover</div>}
                     </div>
-
                     <div className='td-course-content'>
                       <div className='td-course-info'>
                         <h3>{course.title || 'Untitled Course'}</h3>
                         <p>{course.description?.slice(0, 120) || 'No description yet.'}</p>
                         <div className='td-course-tags'>
                           <span className='td-tag-difficulty'>{course.difficulty || 'Beginner'}</span>
-                          <span className='td-tag-price'>
-                            {course.pricingModel === 'free' ? 'Free' : `$${course.salePrice || course.regularPrice || '0'}`}
-                          </span>
+                          <span className='td-tag-price'>{course.pricingModel === 'free' ? 'Free' : `$${course.salePrice || course.regularPrice || '0'}`}</span>
                           <span className='td-tag-topics'>{course.topics?.length || 0} modules</span>
                           <span className='td-tag-status'>{course.status || 'Draft'}</span>
                         </div>
                       </div>
-
                       <div className='td-course-actions'>
                         <button className='td-edit-btn' onClick={() => handleEdit(course)}>Edit</button>
-                        <button className='td-status-btn' onClick={() => handleToggleStatus(course)}>
-                          {course.status === 'Published' ? 'Move to Draft' : 'Publish'}
-                        </button>
+                        <button className='td-status-btn' onClick={() => handleToggleStatus(course)}>{course.status === 'Published' ? 'Move to Draft' : 'Publish'}</button>
                         <button className='td-delete-btn' onClick={() => handleDelete(course.id)}>Delete</button>
                       </div>
                     </div>
@@ -1633,10 +1370,7 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'builder' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>CS</span>
-                  Creation Studio
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>CS</span>Creation Studio</span>
                 <p>Design modules, pricing, and media in one flow before opening classic builders.</p>
               </div>
               <h1>Course Builder</h1>
@@ -1647,45 +1381,21 @@ const fetchDashboardData = async () => {
                   <p className='td-builder-help'>Follow the guided flow: save draft, structure curriculum, then publish.</p>
 
                   <div className='td-builder-stepper' role='tablist' aria-label='Course builder steps'>
-                    <button
-                      className={`td-builder-step ${builderStep === 'basics' ? 'is-active' : ''} ${basicsCompleted ? 'is-complete' : ''}`}
-                      onClick={() => handleBuilderStepChange('basics')}
-                      role='tab'
-                      aria-selected={builderStep === 'basics'}
-                      type='button'
-                    >
-                      <span className='td-builder-step-index'>{basicsCompleted ? '✓' : '1'}</span>
-                      <span>Basics</span>
+                    <button className={`td-builder-step ${builderStep === 'basics' ? 'is-active' : ''} ${basicsCompleted ? 'is-complete' : ''}`} onClick={() => handleBuilderStepChange('basics')} role='tab' aria-selected={builderStep === 'basics'} type='button'>
+                      <span className='td-builder-step-index'>{basicsCompleted ? '✓' : '1'}</span><span>Basics</span>
                     </button>
-                    <button
-                      className={`td-builder-step ${builderStep === 'curriculum' ? 'is-active' : ''} ${curriculumCompleted ? 'is-complete' : ''} ${canAccessAdvancedBuilderSteps ? '' : 'is-locked'}`}
-                      onClick={() => handleBuilderStepChange('curriculum')}
-                      role='tab'
-                      aria-selected={builderStep === 'curriculum'}
-                      type='button'
-                      disabled={!canAccessAdvancedBuilderSteps}
-                    >
-                      <span className='td-builder-step-index'>{curriculumCompleted ? '✓' : '2'}</span>
-                      <span>Curriculum</span>
+                    <button className={`td-builder-step ${builderStep === 'curriculum' ? 'is-active' : ''} ${curriculumCompleted ? 'is-complete' : ''} ${canAccessAdvancedBuilderSteps ? '' : 'is-locked'}`} onClick={() => handleBuilderStepChange('curriculum')} role='tab' aria-selected={builderStep === 'curriculum'} type='button' disabled={!canAccessAdvancedBuilderSteps}>
+                      <span className='td-builder-step-index'>{curriculumCompleted ? '✓' : '2'}</span><span>Curriculum</span>
                     </button>
-                    <button
-                      className={`td-builder-step ${builderStep === 'publish' ? 'is-active' : ''} ${publishCompleted ? 'is-complete' : ''} ${canAccessAdvancedBuilderSteps ? '' : 'is-locked'}`}
-                      onClick={() => handleBuilderStepChange('publish')}
-                      role='tab'
-                      aria-selected={builderStep === 'publish'}
-                      type='button'
-                      disabled={!canAccessAdvancedBuilderSteps}
-                    >
-                      <span className='td-builder-step-index'>{publishCompleted ? '✓' : '3'}</span>
-                      <span>Publish</span>
+                    <button className={`td-builder-step ${builderStep === 'publish' ? 'is-active' : ''} ${publishCompleted ? 'is-complete' : ''} ${canAccessAdvancedBuilderSteps ? '' : 'is-locked'}`} onClick={() => handleBuilderStepChange('publish')} role='tab' aria-selected={builderStep === 'publish'} type='button' disabled={!canAccessAdvancedBuilderSteps}>
+                      <span className='td-builder-step-index'>{publishCompleted ? '✓' : '3'}</span><span>Publish</span>
                     </button>
                   </div>
 
                   <div className='td-builder-milestones'>
                     {builderMilestones.map((milestone) => (
                       <span key={milestone.label} className={`td-builder-milestone ${milestone.done ? 'is-done' : ''}`}>
-                        <span aria-hidden='true'>{milestone.done ? '✓' : '•'}</span>
-                        {milestone.label}
+                        <span aria-hidden='true'>{milestone.done ? '✓' : '•'}</span>{milestone.label}
                       </span>
                     ))}
                   </div>
@@ -1712,9 +1422,7 @@ const fetchDashboardData = async () => {
                           <label>Course Type</label>
                           <select value={courseType} onChange={(e) => setCourseType(e.target.value)}>
                             <option value=''>Select course type</option>
-                            {courseTypeOptions.map((type) => (
-                              <option key={type} value={type}>{type}</option>
-                            ))}
+                            {courseTypeOptions.map((type) => (<option key={type} value={type}>{type}</option>))}
                           </select>
                         </div>
                       </div>
@@ -1739,28 +1447,18 @@ const fetchDashboardData = async () => {
                         <div className='td-builder-grid-two'>
                           <div>
                             <label>Regular Price ($)</label>
-                            <input
-                              value={regularPrice}
-                              onChange={(e) => setRegularPrice(e.target.value)}
-                              placeholder='64.99'
-                            />
+                            <input value={regularPrice} onChange={(e) => setRegularPrice(e.target.value)} placeholder='64.99' />
                             {builderErrors.regularPrice && <p className='td-field-error'>{builderErrors.regularPrice}</p>}
                           </div>
                           <div>
                             <label>Sale Price ($)</label>
-                            <input
-                              value={salePrice}
-                              onChange={(e) => setSalePrice(e.target.value)}
-                              placeholder='11.99'
-                            />
+                            <input value={salePrice} onChange={(e) => setSalePrice(e.target.value)} placeholder='11.99' />
                             {builderErrors.salePrice && <p className='td-field-error'>{builderErrors.salePrice}</p>}
                           </div>
                         </div>
                       )}
 
-                      {pricingModel === 'free' && (
-                        <p className='td-builder-note'>This course is free. Price fields are disabled.</p>
-                      )}
+                      {pricingModel === 'free' && <p className='td-builder-note'>This course is free. Price fields are disabled.</p>}
 
                       <div className='td-builder-grid-two'>
                         <div>
@@ -1770,70 +1468,38 @@ const fetchDashboardData = async () => {
                       </div>
 
                       <label>Learning Outcomes (one per line)</label>
-                      <textarea
-                        value={learningOutcomesInput}
-                        onChange={(e) => setLearningOutcomesInput(e.target.value)}
-                        placeholder={'At the end of this course, learners will be able to...\nDescribe a key concept\nApply a practical technique'}
-                      />
+                      <textarea value={learningOutcomesInput} onChange={(e) => setLearningOutcomesInput(e.target.value)} placeholder={'At the end of this course, learners will be able to...\nDescribe a key concept\nApply a practical technique'} />
 
                       <label>Skills Learners Gain (one per line)</label>
-                      <textarea
-                        value={courseSkillsInput}
-                        onChange={(e) => setCourseSkillsInput(e.target.value)}
-                        placeholder={'Data Analysis\nStorytelling\nPresentation Skills'}
-                      />
+                      <textarea value={courseSkillsInput} onChange={(e) => setCourseSkillsInput(e.target.value)} placeholder={'Data Analysis\nStorytelling\nPresentation Skills'} />
                       {builderErrors.courseSkillsInput && <p className='td-field-error'>{builderErrors.courseSkillsInput}</p>}
 
                       <label>Tools Learners Use (one per line)</label>
-                      <textarea
-                        value={courseToolsInput}
-                        onChange={(e) => setCourseToolsInput(e.target.value)}
-                        placeholder={'Python\nSQL\nTableau'}
-                      />
+                      <textarea value={courseToolsInput} onChange={(e) => setCourseToolsInput(e.target.value)} placeholder={'Python\nSQL\nTableau'} />
                       {builderErrors.courseToolsInput && <p className='td-field-error'>{builderErrors.courseToolsInput}</p>}
 
                       <div className='td-builder-grid-two'>
                         <div>
                           <label>Course Language</label>
-                          <input
-                            value={courseLanguage}
-                            onChange={(e) => setCourseLanguage(e.target.value)}
-                            placeholder='English'
-                          />
+                          <input value={courseLanguage} onChange={(e) => setCourseLanguage(e.target.value)} placeholder='English' />
                         </div>
                         <div>
                           <label>Subtitle Label</label>
-                          <input
-                            value={courseSubtitlesLabel}
-                            onChange={(e) => setCourseSubtitlesLabel(e.target.value)}
-                            placeholder='Video subtitles available'
-                          />
+                          <input value={courseSubtitlesLabel} onChange={(e) => setCourseSubtitlesLabel(e.target.value)} placeholder='Video subtitles available' />
                         </div>
                       </div>
 
                       <label>Recently Updated Label (optional – auto-fills when you save)</label>
-                      <input
-                        value={courseUpdatedAtLabel}
-                        onChange={(e) => setCourseUpdatedAtLabel(e.target.value)}
-                        placeholder='January 2026'
-                      />
+                      <input value={courseUpdatedAtLabel} onChange={(e) => setCourseUpdatedAtLabel(e.target.value)} placeholder='January 2026' />
 
                       <div className='td-builder-grid-two'>
                         <div>
                           <label>Certificate Download URL</label>
-                          <input
-                            value={certificateDownloadUrl}
-                            onChange={(e) => setCertificateDownloadUrl(e.target.value)}
-                            placeholder='https://... or Firebase file URL'
-                          />
+                          <input value={certificateDownloadUrl} onChange={(e) => setCertificateDownloadUrl(e.target.value)} placeholder='https://... or Firebase file URL' />
                         </div>
                         <div>
                           <label>Certificate File Name (optional)</label>
-                          <input
-                            value={certificateFileName}
-                            onChange={(e) => setCertificateFileName(e.target.value)}
-                            placeholder='my-course-certificate.pdf'
-                          />
+                          <input value={certificateFileName} onChange={(e) => setCertificateFileName(e.target.value)} placeholder='my-course-certificate.pdf' />
                         </div>
                       </div>
 
@@ -1844,12 +1510,8 @@ const fetchDashboardData = async () => {
                       )}
 
                       <div className='td-builder-actions td-builder-actions--main'>
-                        <button className='td-create-btn td-builder-btn-primary' onClick={saveCourse} disabled={builderSaving} type='button'>
-                          {builderSaving ? 'Saving...' : 'Save Draft'}
-                        </button>
-                        <button className='td-status-btn td-builder-btn-secondary' onClick={() => handleSaveDraftAndMove('curriculum')} disabled={builderSaving} type='button'>
-                          Save and Continue
-                        </button>
+                        <button className='td-create-btn td-builder-btn-primary' onClick={saveCourse} disabled={builderSaving} type='button'>{builderSaving ? 'Saving...' : 'Save Draft'}</button>
+                        <button className='td-status-btn td-builder-btn-secondary' onClick={() => handleSaveDraftAndMove('curriculum')} disabled={builderSaving} type='button'>Save and Continue</button>
                       </div>
                     </div>
                   )}
@@ -1858,12 +1520,8 @@ const fetchDashboardData = async () => {
                     <div className='td-builder-step-panel'>
                       <p className='td-empty-text'>Curriculum opens as a dedicated builder screen for a seamless editing experience.</p>
                       <div className='td-builder-actions td-builder-actions--main'>
-                        <button className='td-create-btn td-builder-btn-secondary' onClick={() => handleBuilderStepChange('basics')} type='button'>
-                          Back to Basics
-                        </button>
-                        <button className='td-status-btn td-builder-btn-primary' onClick={() => handleBuilderStepChange('publish')} type='button'>
-                          Continue to Publish
-                        </button>
+                        <button className='td-create-btn td-builder-btn-secondary' onClick={() => handleBuilderStepChange('basics')} type='button'>Back to Basics</button>
+                        <button className='td-status-btn td-builder-btn-primary' onClick={() => handleBuilderStepChange('publish')} type='button'>Continue to Publish</button>
                       </div>
                     </div>
                   )}
@@ -1899,20 +1557,11 @@ const fetchDashboardData = async () => {
                         </div>
                       )}
 
-                      {pricingModel === 'free' && (
-                        <p className='td-builder-note'>This course is free. Price fields are disabled.</p>
-                      )}
+                      {pricingModel === 'free' && <p className='td-builder-note'>This course is free. Price fields are disabled.</p>}
 
                       <div className='td-builder-actions td-builder-actions--main'>
-                        <button className='td-create-btn td-builder-btn-primary' onClick={saveCourse} disabled={builderSaving} type='button'>
-                          {builderSaving ? 'Saving...' : 'Save Publishing Details'}
-                        </button>
-                        <button
-                          className='td-status-btn td-builder-btn-secondary'
-                          onClick={() => activeBuilderCourse && handleToggleStatus(activeBuilderCourse)}
-                          disabled={!activeBuilderCourse}
-                          type='button'
-                        >
+                        <button className='td-create-btn td-builder-btn-primary' onClick={saveCourse} disabled={builderSaving} type='button'>{builderSaving ? 'Saving...' : 'Save Publishing Details'}</button>
+                        <button className='td-status-btn td-builder-btn-secondary' onClick={() => activeBuilderCourse && handleToggleStatus(activeBuilderCourse)} disabled={!activeBuilderCourse} type='button'>
                           {(activeBuilderCourse?.status || 'Draft') === 'Published' ? 'Move to Draft' : 'Publish Course'}
                         </button>
                       </div>
@@ -1920,18 +1569,10 @@ const fetchDashboardData = async () => {
                       <details className='td-builder-more'>
                         <summary>More options</summary>
                         <div className='td-builder-actions td-builder-actions--secondary'>
-                          <button className='td-status-btn td-classic-action' onClick={openClassicCoursePage} disabled={builderSaving} type='button'>
-                            Open Classic Course Page
-                          </button>
-                          <button className='td-edit-btn td-classic-action' onClick={openClassicCurriculum} disabled={builderSaving} type='button'>
-                            Open Classic Curriculum
-                          </button>
-                          <button className='td-edit-btn td-classic-action' onClick={openClassicLessonBuilder} disabled={builderSaving} type='button'>
-                            Open Classic Lesson Builder
-                          </button>
-                          <button className='td-delete-btn' onClick={() => setActiveSection('courses')} type='button'>
-                            Back to My Courses
-                          </button>
+                          <button className='td-status-btn td-classic-action' onClick={openClassicCoursePage} disabled={builderSaving} type='button'>Open Classic Course Page</button>
+                          <button className='td-edit-btn td-classic-action' onClick={openClassicCurriculum} disabled={builderSaving} type='button'>Open Classic Curriculum</button>
+                          <button className='td-edit-btn td-classic-action' onClick={openClassicLessonBuilder} disabled={builderSaving} type='button'>Open Classic Lesson Builder</button>
+                          <button className='td-delete-btn' onClick={() => setActiveSection('courses')} type='button'>Back to My Courses</button>
                         </div>
                       </details>
                     </div>
@@ -1944,10 +1585,7 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'students' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>LP</span>
-                  Learner Pulse
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>LP</span>Learner Pulse</span>
                 <p>Track learner activity, completion momentum, and who may need additional support.</p>
               </div>
               <h1>Students</h1>
@@ -1958,13 +1596,7 @@ const fetchDashboardData = async () => {
                   <table className='td-table'>
                     <thead>
                       <tr>
-                        <th>Student</th>
-                        <th>Email</th>
-                        <th>Course</th>
-                        <th>Payment</th>
-                        <th>Completion %</th>
-                        <th>Enrolled</th>
-                        <th>Last Active</th>
+                        <th>Student</th><th>Email</th><th>Course</th><th>Payment</th><th>Completion %</th><th>Enrolled</th><th>Last Active</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1989,54 +1621,29 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'analytics' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>IN</span>
-                  Insights
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>IN</span>Insights</span>
                 <p>Understand completion trends, engagement health, and top-performing course experiences.</p>
               </div>
               <h1>Analytics & Insights</h1>
               <div className='td-stat-grid'>
-                <article>
-                  <h3>Total Courses</h3>
-                  <p>{analytics.totalCourses}</p>
-                </article>
-                <article>
-                  <h3>Published</h3>
-                  <p>{analytics.published}</p>
-                </article>
-                <article>
-                  <h3>Students</h3>
-                  <p>{analytics.totalStudents}</p>
-                </article>
-                <article>
-                  <h3>Avg Completion</h3>
-                  <p>{analytics.avgCompletion}%</p>
-                </article>
+                <article><h3>Total Courses</h3><p>{analytics.totalCourses}</p></article>
+                <article><h3>Published</h3><p>{analytics.published}</p></article>
+                <article><h3>Students</h3><p>{analytics.totalStudents}</p></article>
+                <article><h3>Avg Completion</h3><p>{analytics.avgCompletion}%</p></article>
               </div>
               <div className='td-engagement'>
                 <p>Student Engagement</p>
-                <div>
-                  <span style={{ width: `${analytics.engagementRate}%` }} />
-                </div>
+                <div><span style={{ width: `${analytics.engagementRate}%` }} /></div>
                 <strong>{analytics.engagementRate}%</strong>
               </div>
 
               <div className='td-performance-list'>
                 <h2>Course Performance</h2>
-                {coursePerformance.length === 0 && (
-                  <p className='td-empty-text'>Create courses to see analytics here.</p>
-                )}
-
+                {coursePerformance.length === 0 && <p className='td-empty-text'>Create courses to see analytics here.</p>}
                 {coursePerformance.map(item => (
                   <article key={item.id} className='td-performance-item'>
-                    <div className='td-performance-head'>
-                      <h3>{item.title}</h3>
-                      <span>{item.learners} learners</span>
-                    </div>
-                    <div className='td-performance-bar'>
-                      <span style={{ width: `${item.avgCompletion}%` }} />
-                    </div>
+                    <div className='td-performance-head'><h3>{item.title}</h3><span>{item.learners} learners</span></div>
+                    <div className='td-performance-bar'><span style={{ width: `${item.avgCompletion}%` }} /></div>
                     <p>{item.avgCompletion}% average completion</p>
                   </article>
                 ))}
@@ -2053,15 +1660,7 @@ const fetchDashboardData = async () => {
                       <ResponsiveContainer width='100%' height={320}>
                         <ComposedChart data={chartData} margin={{ top: 14, right: 20, left: 8, bottom: 16 }}>
                           <CartesianGrid strokeDasharray='3 3' stroke='rgba(145,165,133,0.24)' />
-                          <XAxis
-                            dataKey='shortTitle'
-                            tick={{ fontSize: 11 }}
-                            interval={chartData.length > 5 ? 1 : 0}
-                            minTickGap={14}
-                            angle={-24}
-                            textAnchor='end'
-                            height={64}
-                          />
+                          <XAxis dataKey='shortTitle' tick={{ fontSize: 11 }} interval={chartData.length > 5 ? 1 : 0} minTickGap={14} angle={-24} textAnchor='end' height={64} />
                           <YAxis yAxisId='left' domain={[0, 100]} tick={{ fontSize: 11 }} tickFormatter={(value) => `${value}%`} />
                           <YAxis yAxisId='right' orientation='right' tick={{ fontSize: 11 }} allowDecimals={false} domain={chartScale.rightAxisDomain} />
                           <Tooltip content={renderPerformanceTooltip} wrapperStyle={{ outline: 'none' }} />
@@ -2084,22 +1683,8 @@ const fetchDashboardData = async () => {
                       <div className='td-pie-chart-wrap'>
                         <ResponsiveContainer width='100%' height={260}>
                           <PieChart>
-                            <Pie
-                              data={completionPie.pieData}
-                              dataKey='value'
-                              nameKey='name'
-                              cx='50%'
-                              cy='50%'
-                              innerRadius={54}
-                              outerRadius={96}
-                              paddingAngle={2.4}
-                              stroke='#ffffff'
-                              strokeWidth={2.2}
-                              label={({ name, payload }) => `${name} ${payload?.percent || 0}%`}
-                            >
-                              {completionPie.pieData.map((entry) => (
-                                <Cell key={entry.name} fill={entry.color} />
-                              ))}
+                            <Pie data={completionPie.pieData} dataKey='value' nameKey='name' cx='50%' cy='50%' innerRadius={54} outerRadius={96} paddingAngle={2.4} stroke='#ffffff' strokeWidth={2.2} label={({ name, payload }) => `${name} ${payload?.percent || 0}%`}>
+                              {completionPie.pieData.map((entry) => (<Cell key={entry.name} fill={entry.color} />))}
                             </Pie>
                             <Tooltip content={renderCompletionPieTooltip} wrapperStyle={{ outline: 'none' }} />
                           </PieChart>
@@ -2122,30 +1707,15 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'quizzes' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>AL</span>
-                  Assessment Lab
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>AL</span>Assessment Lab</span>
                 <p>Build formative checks and improve learning outcomes with structured quiz feedback loops.</p>
               </div>
               <h1>Quizzes & Assessments</h1>
               <div className='td-stat-grid td-quiz-stat-grid'>
-                <article>
-                  <h3>Courses with Quizzes</h3>
-                  <p>{quizInsights.coursesWithQuizzes}</p>
-                </article>
-                <article>
-                  <h3>Quiz-Ready Topics</h3>
-                  <p>{quizInsights.quizTopics}</p>
-                </article>
-                <article>
-                  <h3>Total Questions</h3>
-                  <p>{quizInsights.totalQuestions}</p>
-                </article>
-                <article>
-                  <h3>Custom Assessment Rules</h3>
-                  <p>{quizInsights.customRuleTopics}</p>
-                </article>
+                <article><h3>Courses with Quizzes</h3><p>{quizInsights.coursesWithQuizzes}</p></article>
+                <article><h3>Quiz-Ready Topics</h3><p>{quizInsights.quizTopics}</p></article>
+                <article><h3>Total Questions</h3><p>{quizInsights.totalQuestions}</p></article>
+                <article><h3>Custom Assessment Rules</h3><p>{quizInsights.customRuleTopics}</p></article>
               </div>
 
               <div className='td-quick-grid'>
@@ -2168,22 +1738,12 @@ const fetchDashboardData = async () => {
 
               <div className='td-performance-list td-quiz-course-status'>
                 <h2>Course Quiz Status</h2>
-
-                {quizInsights.courseRows.length === 0 && (
-                  <p className='td-empty-text'>No courses found yet. Create a course first, then build quizzes.</p>
-                )}
-
+                {quizInsights.courseRows.length === 0 && <p className='td-empty-text'>No courses found yet. Create a course first, then build quizzes.</p>}
                 {quizInsights.courseRows.length > 0 && (
                   <div className='td-table-wrap'>
                     <table className='td-table'>
                       <thead>
-                        <tr>
-                          <th>Course</th>
-                          <th>Quiz Topics</th>
-                          <th>Total Questions</th>
-                          <th>Settings Applied</th>
-                          <th>Action</th>
-                        </tr>
+                        <tr><th>Course</th><th>Quiz Topics</th><th>Total Questions</th><th>Settings Applied</th><th>Action</th></tr>
                       </thead>
                       <tbody>
                         {quizInsights.courseRows.map((row) => (
@@ -2192,15 +1752,7 @@ const fetchDashboardData = async () => {
                             <td>{row.quizTopics}/{row.topicCount}</td>
                             <td>{row.totalQuestions}</td>
                             <td>{row.configuredTopics}/{row.quizTopics || 0}</td>
-                            <td>
-                              <button
-                                className='td-status-btn td-quiz-inline-btn'
-                                onClick={() => openQuizBuilderFromQuizzes(row.id)}
-                                type='button'
-                              >
-                                Open
-                              </button>
-                            </td>
+                            <td><button className='td-status-btn td-quiz-inline-btn' onClick={() => openQuizBuilderFromQuizzes(row.id)} type='button'>Open</button></td>
                           </tr>
                         ))}
                       </tbody>
@@ -2214,22 +1766,13 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'culture' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>CA</span>
-                  Cultural Archive
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>CA</span>Cultural Archive</span>
                 <p>Preserve local stories and practices with lessons that center authenticity and context.</p>
               </div>
               <h1>Cultural Content</h1>
               <div className='td-quick-grid'>
-                <article>
-                  <h3>Cultural Stories</h3>
-                  <p>Create stories and traditions content that preserves local knowledge.</p>
-                </article>
-                <article>
-                  <h3>Community Highlights</h3>
-                  <p>Feature tribes and practices through lessons and media-rich modules.</p>
-                </article>
+                <article><h3>Cultural Stories</h3><p>Create stories and traditions content that preserves local knowledge.</p></article>
+                <article><h3>Community Highlights</h3><p>Feature tribes and practices through lessons and media-rich modules.</p></article>
               </div>
             </section>
           )}
@@ -2237,22 +1780,13 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'language' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>LS</span>
-                  Language Studio
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>LS</span>Language Studio</span>
                 <p>Blend vocabulary, pronunciation, and daily-use phrases for practical language confidence.</p>
               </div>
               <h1>Language Tools</h1>
               <div className='td-quick-grid'>
-                <article>
-                  <h3>Pronunciation Audio</h3>
-                  <p>Attach language audio files in lesson content to improve speaking confidence.</p>
-                </article>
-                <article>
-                  <h3>Vocabulary & Daily Phrases</h3>
-                  <p>Provide bite-sized vocabulary and daily phrase practice within each module.</p>
-                </article>
+                <article><h3>Pronunciation Audio</h3><p>Attach language audio files in lesson content to improve speaking confidence.</p></article>
+                <article><h3>Vocabulary & Daily Phrases</h3><p>Provide bite-sized vocabulary and daily phrase practice within each module.</p></article>
               </div>
             </section>
           )}
@@ -2260,62 +1794,32 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'messages' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>CD</span>
-                  Communication Desk
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>CD</span>Communication Desk</span>
                 <p>Keep learners aligned through timely announcements, reminders, and learning nudges.</p>
               </div>
               <h1>Messages & Announcements</h1>
               {announcementStatus.text && (
-                <p className={`td-builder-message ${announcementStatus.type === 'error' ? 'is-error' : ''}`}>
-                  {announcementStatus.text}
-                </p>
+                <p className={`td-builder-message ${announcementStatus.type === 'error' ? 'is-error' : ''}`}>{announcementStatus.text}</p>
               )}
               <div className='td-message-controls'>
                 <label htmlFor='announcement-course'>Target Course</label>
-                <select
-                  id='announcement-course'
-                  value={announcementCourseId}
-                  onChange={(e) => {
-                    setAnnouncementCourseId(e.target.value)
-                    if (announcementStatus.text) setAnnouncementStatus({ type: '', text: '' })
-                  }}
-                >
+                <select id='announcement-course' value={announcementCourseId} onChange={(e) => { setAnnouncementCourseId(e.target.value); if (announcementStatus.text) setAnnouncementStatus({ type: '', text: '' }) }}>
                   <option value=''>Select a course</option>
-                  {courses.map((course) => (
-                    <option key={course.id} value={course.id}>
-                      {course.title || 'Untitled Course'}
-                    </option>
-                  ))}
+                  {courses.map((course) => (<option key={course.id} value={course.id}>{course.title || 'Untitled Course'}</option>))}
                 </select>
               </div>
 
               <div className='td-message-box'>
-                <textarea
-                  value={announcementText}
-                  onChange={(e) => {
-                    setAnnouncementText(e.target.value)
-                    if (announcementStatus.text) setAnnouncementStatus({ type: '', text: '' })
-                  }}
-                  placeholder='Write an update to learners in this selected course...'
-                />
-                <button
-                  onClick={handlePostAnnouncement}
-                  disabled={announcementPosting || (courses.length > 0 && !announcementCourseId)}
-                >
+                <textarea value={announcementText} onChange={(e) => { setAnnouncementText(e.target.value); if (announcementStatus.text) setAnnouncementStatus({ type: '', text: '' }) }} placeholder='Write an update to learners in this selected course...' />
+                <button onClick={handlePostAnnouncement} disabled={announcementPosting || (courses.length > 0 && !announcementCourseId)}>
                   {announcementPosting ? 'Posting...' : 'Post Announcement'}
                 </button>
               </div>
 
-              {courses.length > 0 && !announcementCourseId && (
-                <p className='td-empty-text'>Choose a course first so this message reaches the right learners.</p>
-              )}
+              {courses.length > 0 && !announcementCourseId && <p className='td-empty-text'>Choose a course first so this message reaches the right learners.</p>}
 
               <div className='td-announcement-list'>
-                {announcements.length === 0 && (
-                  <p className='td-empty-text'>No announcements posted yet.</p>
-                )}
+                {announcements.length === 0 && <p className='td-empty-text'>No announcements posted yet.</p>}
                 {announcements.map(item => (
                   <article key={item.id}>
                     <h3>{item.courseTitle || 'General Announcement'}</h3>
@@ -2330,49 +1834,26 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'reviews' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>FR</span>
-                  Feedback Radar
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>FR</span>Feedback Radar</span>
                 <p>Read learner sentiment quickly and use ratings to prioritize your next improvements.</p>
               </div>
               <h1>Reviews & Feedback</h1>
               <div className='td-review-controls'>
                 <label htmlFor='review-course-filter'>Filter by course</label>
                 <div className='td-review-controls-row'>
-                  <select
-                    id='review-course-filter'
-                    value={reviewCourseFilter}
-                    onChange={(e) => setReviewCourseFilter(e.target.value)}
-                  >
+                  <select id='review-course-filter' value={reviewCourseFilter} onChange={(e) => setReviewCourseFilter(e.target.value)}>
                     <option value=''>All courses</option>
-                    {courses.map((course) => (
-                      <option key={course.id} value={course.id}>
-                        {course.title || 'Untitled Course'}
-                      </option>
-                    ))}
+                    {courses.map((course) => (<option key={course.id} value={course.id}>{course.title || 'Untitled Course'}</option>))}
                   </select>
-                  <button
-                    className='td-review-clear-btn'
-                    type='button'
-                    onClick={() => setReviewCourseFilter('')}
-                    disabled={!reviewCourseFilter}
-                  >
-                    Clear filter
-                  </button>
+                  <button className='td-review-clear-btn' type='button' onClick={() => setReviewCourseFilter('')} disabled={!reviewCourseFilter}>Clear filter</button>
                 </div>
               </div>
 
               <div className='td-review-summary'>
-                <article>
-                  <h3>Average Rating</h3>
-                  <p>{filteredReviewSummary.averageRating}/5</p>
-                </article>
-                <article>
-                  <h3>Total Reviews</h3>
-                  <p>{filteredReviewSummary.totalReviews}</p>
-                </article>
+                <article><h3>Average Rating</h3><p>{filteredReviewSummary.averageRating}/5</p></article>
+                <article><h3>Total Reviews</h3><p>{filteredReviewSummary.totalReviews}</p></article>
               </div>
+
               {reviewRows.length === 0 ? (
                 <p className='td-empty-text'>No reviews yet. Learner reviews will appear here.</p>
               ) : (
@@ -2385,14 +1866,10 @@ const fetchDashboardData = async () => {
                       </div>
                       <p className='td-review-completion'>{review.completionLabel}</p>
                       <div className='td-review-rating'>
-                        {[1, 2, 3, 4, 5].map(star => (
-                          <FaStar key={star} className={star <= (review.rating || 0) ? 'active' : ''} />
-                        ))}
+                        {[1, 2, 3, 4, 5].map(star => (<FaStar key={star} className={star <= (review.rating || 0) ? 'active' : ''} />))}
                       </div>
                       <p>{review.comment || 'No comment provided.'}</p>
-                      {review.improvementSuggestion && (
-                        <p className='td-review-improve'>What can we improve: {review.improvementSuggestion}</p>
-                      )}
+                      {review.improvementSuggestion && <p className='td-review-improve'>What can we improve: {review.improvementSuggestion}</p>}
                       <small>{review.createdAt ? new Date(review.createdAt).toLocaleString() : ''}</small>
                     </article>
                   ))}
@@ -2404,10 +1881,7 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'earnings' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>MO</span>
-                  Monetization
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>MO</span>Monetization</span>
                 <p>Track payout readiness and prepare your premium catalog for sustainable revenue.</p>
               </div>
               <h1>Earnings</h1>
@@ -2418,10 +1892,7 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'profile' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>PR</span>
-                  Profile
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>PR</span>Profile</span>
                 <p>Review your account identity and profile details used across your courses.</p>
               </div>
               <h1>Tutor Profile</h1>
@@ -2440,16 +1911,8 @@ const fetchDashboardData = async () => {
                     <p>PNG, JPEG or WEBP under 2MB (saved on this device)</p>
                   </div>
                   <div className='td-account-avatar-actions'>
-                    <input
-                      ref={profilePhotoInputRef}
-                      type='file'
-                      accept='image/png,image/jpeg,image/webp'
-                      onChange={handleProfilePhotoUpload}
-                      hidden
-                    />
-                    <button type='button' onClick={() => profilePhotoInputRef.current?.click()} disabled={profileSaving}>
-                      Upload new picture
-                    </button>
+                    <input ref={profilePhotoInputRef} type='file' accept='image/png,image/jpeg,image/webp' onChange={handleProfilePhotoUpload} hidden />
+                    <button type='button' onClick={() => profilePhotoInputRef.current?.click()} disabled={profileSaving}>Upload new picture</button>
                     <button type='button' onClick={handleProfilePhotoDelete} disabled={profileSaving}>Delete</button>
                   </div>
                 </div>
@@ -2457,28 +1920,10 @@ const fetchDashboardData = async () => {
                 <div className='td-account-group'>
                   <h3>Full name</h3>
                   <div className='td-account-grid'>
-                    <label>
-                      <span>First name</span>
-                      <input
-                        type='text'
-                        value={profileDraft.firstName}
-                        onChange={(e) => setProfileDraft((prev) => ({ ...prev, firstName: e.target.value }))}
-                        placeholder='First name'
-                      />
-                    </label>
-                    <label>
-                      <span>Last name</span>
-                      <input
-                        type='text'
-                        value={profileDraft.lastName}
-                        onChange={(e) => setProfileDraft((prev) => ({ ...prev, lastName: e.target.value }))}
-                        placeholder='Last name'
-                      />
-                    </label>
+                    <label><span>First name</span><input type='text' value={profileDraft.firstName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, firstName: e.target.value }))} placeholder='First name' /></label>
+                    <label><span>Last name</span><input type='text' value={profileDraft.lastName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, lastName: e.target.value }))} placeholder='Last name' /></label>
                   </div>
-                  <button type='button' className='td-account-save-btn' onClick={handleProfileSave} disabled={profileSaving}>
-                    Save profile
-                  </button>
+                  <button type='button' className='td-account-save-btn' onClick={handleProfileSave} disabled={profileSaving}>Save profile</button>
                 </div>
 
                 <div className='td-account-group'>
@@ -2491,24 +1936,8 @@ const fetchDashboardData = async () => {
                   <h3>Password</h3>
                   <p>Modify your current password.</p>
                   <div className='td-account-grid'>
-                    <label>
-                      <span>Current password</span>
-                      <input
-                        type='password'
-                        value={passwordForm.currentPassword}
-                        onChange={(e) => setPasswordForm((prev) => ({ ...prev, currentPassword: e.target.value }))}
-                        placeholder='Current password'
-                      />
-                    </label>
-                    <label>
-                      <span>New password</span>
-                      <input
-                        type='password'
-                        value={passwordForm.newPassword}
-                        onChange={(e) => setPasswordForm((prev) => ({ ...prev, newPassword: e.target.value }))}
-                        placeholder='New password'
-                      />
-                    </label>
+                    <label><span>Current password</span><input type='password' value={passwordForm.currentPassword} onChange={(e) => setPasswordForm((prev) => ({ ...prev, currentPassword: e.target.value }))} placeholder='Current password' /></label>
+                    <label><span>New password</span><input type='password' value={passwordForm.newPassword} onChange={(e) => setPasswordForm((prev) => ({ ...prev, newPassword: e.target.value }))} placeholder='New password' /></label>
                   </div>
                   <button type='button' className='td-account-save-btn' onClick={handlePasswordUpdate}>Update password</button>
                 </div>
@@ -2528,10 +1957,7 @@ const fetchDashboardData = async () => {
           {!loading && activeSection === 'settings' && (
             <section className='td-panel td-view-stage'>
               <div className='td-section-lead'>
-                <span className='td-section-badge'>
-                  <span className='td-badge-icon' aria-hidden='true'>ST</span>
-                  Settings
-                </span>
+                <span className='td-section-badge'><span className='td-badge-icon' aria-hidden='true'>ST</span>Settings</span>
                 <p>Customize your dashboard experience for focus and readability.</p>
               </div>
               <h1>Dashboard Settings</h1>
@@ -2539,56 +1965,28 @@ const fetchDashboardData = async () => {
                 <article className='td-settings-card'>
                   <h3>Security</h3>
                   <label className='td-setting-row'>
-                    <div>
-                      <strong>Biometric authentication</strong>
-                      <p>Allow this device to use biometrics for secure unlock on supported devices.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={settingsPrefs.biometricAuth}
-                      onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, biometricAuth: e.target.checked }))}
-                    />
+                    <div><strong>Biometric authentication</strong><p>Allow this device to use biometrics for secure unlock on supported devices.</p></div>
+                    <input type='checkbox' checked={settingsPrefs.biometricAuth} onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, biometricAuth: e.target.checked }))} />
                   </label>
                 </article>
 
                 <article className='td-settings-card'>
                   <h3>Sync & Notifications</h3>
                   <label className='td-setting-row'>
-                    <div>
-                      <strong>Cloud sync</strong>
-                      <p>Sync dashboard settings and preferences across your signed-in sessions.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={settingsPrefs.cloudSync}
-                      onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, cloudSync: e.target.checked }))}
-                    />
+                    <div><strong>Cloud sync</strong><p>Sync dashboard settings and preferences across your signed-in sessions.</p></div>
+                    <input type='checkbox' checked={settingsPrefs.cloudSync} onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, cloudSync: e.target.checked }))} />
                   </label>
                   <label className='td-setting-row'>
-                    <div>
-                      <strong>Notifications</strong>
-                      <p>Enable dashboard updates, review alerts, and student activity notifications.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={settingsPrefs.notifications}
-                      onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, notifications: e.target.checked }))}
-                    />
+                    <div><strong>Notifications</strong><p>Enable dashboard updates, review alerts, and student activity notifications.</p></div>
+                    <input type='checkbox' checked={settingsPrefs.notifications} onChange={(e) => setSettingsPrefs((prev) => ({ ...prev, notifications: e.target.checked }))} />
                   </label>
                 </article>
 
                 <article className='td-settings-card'>
                   <h3>Appearance</h3>
                   <label className='td-setting-row'>
-                    <div>
-                      <strong>Dark mode</strong>
-                      <p>Switch tutor dashboard between light and dark mode.</p>
-                    </div>
-                    <input
-                      type='checkbox'
-                      checked={themeMode === 'dark'}
-                      onChange={toggleThemeMode}
-                    />
+                    <div><strong>Dark mode</strong><p>Switch tutor dashboard between light and dark mode.</p></div>
+                    <input type='checkbox' checked={themeMode === 'dark'} onChange={toggleThemeMode} />
                   </label>
                 </article>
               </div>
