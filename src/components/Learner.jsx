@@ -169,11 +169,20 @@ const Learner = () => {
   const [profileMessage, setProfileMessage] = useState('')
   const [securityMessage, setSecurityMessage] = useState('')
   const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '' })
+  const [myArtSyncError, setMyArtSyncError] = useState('')
   const profileMenuRef = useRef(null)
   const profilePhotoInputRef = useRef(null)
   const productIconInputRef = useRef(null)
   const productPhotoInputRef = useRef(null)
   const previousCloudSyncRef = useRef(true)
+
+  const learnerName = useMemo(() => {
+    const fullName = getFullName ? getFullName() : ''
+    if (fullName && fullName.trim()) return fullName.trim()
+    if (userData?.firstName) return userData.firstName
+    if (user?.displayName) return user.displayName
+    return user?.email?.split('@')[0] || 'Learner'
+  }, [getFullName, userData, user])
 
   const persistLocalProgressMap = (nextProgressMap) => {
     if (!user?.uid) return
@@ -450,10 +459,12 @@ const Learner = () => {
         ...doc.data()
       }))
       setMyArtProducts(products)
+      setMyArtSyncError('')
       // Cache in localStorage
       localStorage.setItem(getMyArtProductsKey(user.uid), JSON.stringify(products))
     }, (error) => {
       console.error('Error loading products from Firestore:', error)
+      setMyArtSyncError('Could not sync products from Firebase right now. Showing local data where available.')
       // Fall back to localStorage if Firestore fails
       const cached = localStorage.getItem(getMyArtProductsKey(user.uid))
       if (cached) {
@@ -488,6 +499,7 @@ const Learner = () => {
         }
       } catch (error) {
         console.error('Error saving products to Firestore:', error)
+        setMyArtSyncError('Could not save latest product updates to Firebase. Your changes may still be local.')
       }
     }, 1000) // Debounce by 1 second
 
@@ -736,14 +748,6 @@ const Learner = () => {
     const autoCode = getAutoProductCode(productDraft.name)
     setProductDraft((prev) => (prev.code === autoCode ? prev : { ...prev, code: autoCode }))
   }, [productCodeManuallyEdited, productDraft.name, myArtProducts.length, editingProductId])
-
-  const learnerName = useMemo(() => {
-    const fullName = getFullName ? getFullName() : ''
-    if (fullName && fullName.trim()) return fullName.trim()
-    if (userData?.firstName) return userData.firstName
-    if (user?.displayName) return user.displayName
-    return user?.email?.split('@')[0] || 'Learner'
-  }, [getFullName, userData, user])
 
   const avatarInitials = useMemo(() => {
     const first = (profileDraft.firstName || userData?.firstName || '').trim()
@@ -1481,6 +1485,11 @@ const Learner = () => {
         </aside>
 
         <main className='learner-main'>
+          {!loading && myArtSyncError && (
+            <div className='learner-panel' role='status' aria-live='polite' style={{ borderColor: 'rgba(179, 38, 30, 0.35)', backgroundColor: 'rgba(179, 38, 30, 0.08)', marginBottom: 12 }}>
+              <p style={{ margin: 0, color: '#9b1b1b', fontWeight: 700 }}>{myArtSyncError}</p>
+            </div>
+          )}
           {!loading && (
             <div className='learner-greeting'>
               <div className='learner-greeting-top'>
