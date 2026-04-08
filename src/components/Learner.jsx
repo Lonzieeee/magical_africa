@@ -4,7 +4,7 @@ import '../styles/learner.css'
 import { auth, db } from '../context/AuthContext'
 import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, setDoc, where } from 'firebase/firestore'
 import { deleteUser, EmailAuthProvider, reauthenticateWithCredential, updatePassword, updateProfile } from 'firebase/auth'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { buildCourseCertificateSvg, downloadCourseCertificate } from '../utils/certificate'
 
@@ -129,6 +129,7 @@ const buildPublicMarketProduct = (product, sellerId, sellerName) => ({
 
 const Learner = () => {
   const navigate = useNavigate()
+  const location = useLocation()
   const { user, userData, getFullName, getInitials, logout } = useAuth()
 
   const [activeSection, setActiveSection] = useState('store')
@@ -981,6 +982,26 @@ const Learner = () => {
   useEffect(() => {
     if (activeSection === 'language') setActiveSection('store')
   }, [activeSection])
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const requestedSection = String(params.get('section') || '').trim().toLowerCase()
+    const requestedView = String(params.get('view') || '').trim().toLowerCase()
+    if (!requestedSection) return
+
+    const allowedSections = new Set(['store', 'courses', 'progress', 'achievements', 'my-art', 'notifications', 'profile', 'settings'])
+    if (!allowedSections.has(requestedSection)) return
+
+    setActiveSection(requestedSection)
+
+    if (requestedSection === 'courses' && ['all', 'in-progress', 'completed'].includes(requestedView)) {
+      setCourseView(requestedView)
+    }
+
+    if (requestedSection === 'store' && ['all', 'free', 'paid', 'published'].includes(requestedView)) {
+      setStoreView(requestedView)
+    }
+  }, [location.search])
 
   const markAllNotificationsRead = () => {
     if (!user?.uid) return
