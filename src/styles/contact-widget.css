@@ -1,8 +1,13 @@
-/* ══════════════════════════════════════
-   contact-widget.css
-══════════════════════════════════════ */
 
-/* ── Floating trigger button ── */
+
+/* ── Backdrop ── */
+.cw-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 998;
+}
+
 .cw-trigger {
   position: fixed;
   bottom: 28px;
@@ -10,32 +15,33 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: #ffffff;
-  border: 1.5px solid #e5e3e3;
-  color: #3d3d3d;
-  font-size: 1.3rem;
+  background: #3b1f0e;
+  border: 2px solid rgb(210, 123, 58);
+  color: rgb(210, 123, 58);
+  font-size: 1.4rem;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   z-index: 1000;
-  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, background 0.2s ease;
+  box-shadow: 0 4px 20px rgba(59, 31, 14, 0.35);
 }
 
 .cw-trigger:hover {
   transform: scale(1.08);
-  background: #f7f5f2;
+  background: #3b1f0e;
+  color: #fff;
 }
 
 .cw-trigger--open {
-  background: #f7f5f2;
+  background: rgb(210, 123, 58);
+  color: #fff;
 }
 
 .cw-trigger-symbol {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   line-height: 1;
-  color: #D85A30;
 }
 
 /* ── Modal ── */
@@ -43,10 +49,10 @@
   position: fixed;
   bottom: 96px;
   right: 28px;
-  width: 300px;
+  width: 320px;
   background: #ffffff;
   border: 0.5px solid #e5e3e3;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 40px rgba(59, 31, 14, 0.18);
   z-index: 999;
   opacity: 0;
   visibility: hidden;
@@ -62,16 +68,15 @@
   transform: translateY(0) scale(1);
 }
 
-/* ── Modal Header — matches academy dropdown header ── */
+/* ── Modal Header ── */
 .cw-modal-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 16px 10px;
-  border-bottom: 0.5px solid #f0ede8;
+  padding: 16px 18px;
+  background: #3b1f0e;
   position: sticky;
   top: 0;
-  background: #ffffff;
   z-index: 2;
 }
 
@@ -82,31 +87,31 @@
 }
 
 .cw-logo {
-  width: 30px;
-  height: 30px;
+  width: 36px;
+  height: 36px;
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .cw-modal-header h3 {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #3d3d3d;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
   margin: 0;
   line-height: 1.3;
-  letter-spacing: 0.02em;
 }
 
 .cw-modal-header p {
-  font-size: 0.7rem;
-  color: #b5a195;
+  font-size: 0.72rem;
+  color: rgb(181, 161, 145);
   margin: 0;
 }
 
 .cw-close-btn {
   background: transparent;
   border: none;
-  color: #b5a195;
-  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.85rem;
   cursor: pointer;
   padding: 4px 6px;
   line-height: 1;
@@ -114,7 +119,7 @@
 }
 
 .cw-close-btn:hover {
-  color: #3d3d3d;
+  color: #ffffff;
 }
 
 /* ── Modal Body ── */
@@ -123,15 +128,15 @@
 }
 
 .cw-section {
-  padding: 14px 16px;
+  padding: 14px 18px;
 }
 
 .cw-section-label {
   font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #b5a195;
+  color: rgb(181, 161, 145);
   margin-bottom: 10px;
 }
 
@@ -139,17 +144,17 @@
 .cw-contact-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 7px 8px;
+  gap: 12px;
+  padding: 9px 10px;
   border-radius: 6px;
   text-decoration: none;
   transition: background 0.15s;
-  margin-bottom: 2px;
+  margin-bottom: 4px;
   cursor: pointer;
 }
 
 .cw-contact-row:hover {
-  background: #f7f5f2;
+  background: rgb(242, 239, 235);
 }
 
 .cw-contact-row--static {
@@ -161,10 +166,10 @@
 }
 
 .cw-contact-icon {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: #FAEEDA;
+  background: rgba(210, 123, 58, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,22 +177,22 @@
 }
 
 .cw-contact-icon i {
-  font-size: 0.8rem;
-  color: #854F0B;
+  font-size: 0.85rem;
+  color: rgb(210, 123, 58);
 }
 
 .cw-contact-type {
   display: block;
-  font-size: 0.68rem;
-  color: #b5a195;
+  font-size: 0.7rem;
+  color: rgb(181, 161, 145);
   line-height: 1.2;
 }
 
 .cw-contact-value {
   display: block;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  color: #3d3d3d;
+  color: #3b1f0e;
   line-height: 1.3;
 }
 
@@ -195,7 +200,33 @@
 .cw-divider {
   height: 0.5px;
   background: #f0ede8;
-  margin: 0 16px;
+  margin: 0 18px;
+}
+
+/* ── Quick Links Grid ── */
+.cw-links-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.cw-link {
+  background: rgb(242, 239, 235);
+  border: none;
+  padding: 8px 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #3b1f0e;
+  cursor: pointer;
+  text-align: left;
+  border-radius: 4px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.cw-link:hover {
+  background: rgb(210, 123, 58);
+  color: #ffffff;
 }
 
 /* ── Socials ── */
@@ -205,29 +236,28 @@
 }
 
 .cw-social-btn {
-  width: 32px;
-  height: 32px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  background: #f7f5f2;
+  background: rgb(242, 239, 235);
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  transition: background 0.15s;
+  transition: background 0.15s, color 0.15s;
 }
 
 .cw-social-btn i {
-  font-size: 0.8rem;
-  color: #3d3d3d;
-  transition: color 0.15s;
+  font-size: 0.85rem;
+  color: #3b1f0e;
 }
 
 .cw-social-btn:hover {
-  background: #FAEEDA;
+  background: #3b1f0e;
 }
 
 .cw-social-btn:hover i {
-  color: #854F0B;
+  color: rgb(210, 123, 58);
 }
 
 /* ── Mobile ── */

@@ -82,9 +82,9 @@ const CourseContent = ({
   const [activeTab, setActiveTab] = useState('overview')
   const [sidebarExpanded, setSidebarExpanded] = useState({})
   const [sidebarOpen, setSidebarOpen] = useState(true)
-  const [activeVideo, setActiveVideo] = useState(null) // { url, title, lessonId }
+  const [activeVideo, setActiveVideo] = useState(null) 
 
-  // Mirror completedLessonIds prop locally so UI updates instantly
+ 
   const [localCompletedIds, setLocalCompletedIds] = useState(completedLessonIds || [])
   useEffect(() => {
     setLocalCompletedIds(completedLessonIds || [])
@@ -152,7 +152,7 @@ const CourseContent = ({
     }
   }
 
-  // Updates local state instantly AND calls parent for Firestore save
+ 
   const handleToggle = (lessonId, meta) => {
     if (!onToggleLessonComplete) return
     const action = meta?.action || 'complete'

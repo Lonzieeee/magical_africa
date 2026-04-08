@@ -47,7 +47,7 @@ const Blogs = () => {
   return (
     <>
       <Helmet>
-        <title>Blog - Magical Africa</title>
+        <title>Blog | Magical Africa</title>
         <meta
           name="description"
           content="Read blogs about African languages, cultural traditions, history, travel destinations, art, and digital skills from Magical Africa Academy."

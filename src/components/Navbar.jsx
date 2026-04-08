@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
 import SideMenu from './SideMenu';
 import AuthModal from './AuthModal';
+import AcademyDropdown from './AcademyDropdown';
+import MarketDropdown from './MarketDropdown';
 import useAcademyNavigation from "../hooks/useAcademyNavigation";
 import '../styles/navbar.css';
 import '../styles/hero-stuff.css';
@@ -26,7 +28,7 @@ const Navbar = ({ solid }) => {
   const [logoutMessage, setLogoutMessage] = useState(false);
   const goToAcademy = useAcademyNavigation();
   const handleAcademyNavigation = goToAcademy;
-  
+
   const { user, userData, logout, getInitials, getFullName } = useAuth();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
@@ -37,7 +39,6 @@ const Navbar = ({ solid }) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -48,87 +49,52 @@ const Navbar = ({ solid }) => {
     setIsLangDropdownOpen(false);
   };
 
-  {/* 
   const handleLogout = async () => {
     try {
-      await logout();
-      alert('Logged out successfully!');
+      setLogoutMessage(true);
+      setTimeout(async () => {
+        await logout();
+        setLogoutMessage(false);
+      }, 1000);
     } catch (error) {
       console.error('Error logging out:', error);
     }
   };
-  */}
-
-  {/* 
-
- const handleLogout = async () => {
-  try {
-    
-    setLogoutMessage(true);
-
-  
-    setTimeout(async () => {
-      await logout();
-    }, 1000);
-
- 
-    setTimeout(() => {
-      setLogoutMessage(false);
-    }, 3000);
-
-  } catch (error) {
-    console.error('Error logging out:', error);
-  }
-};
-*/}
-
-
-const handleLogout = async () => {
-  try {
-    setLogoutMessage(true);
-
-    setTimeout(async () => {
-      await logout(); // navigation happens here
-      setLogoutMessage(false); // hide immediately after logout
-    }, 1000);
-
-  } catch (error) {
-    console.error('Error logging out:', error);
-  }
-};
 
   return (
     <>
-
-      <div className={`menu-overlay ${isSideMenuOpen ? 'active' : ''}`} 
-           onClick={() => setIsSideMenuOpen(false)} />
-      
-      <SideMenu 
-        isOpen={isSideMenuOpen} 
-        onClose={() => setIsSideMenuOpen(false)} 
+      <div
+        className={`menu-overlay ${isSideMenuOpen ? 'active' : ''}`}
+        onClick={() => setIsSideMenuOpen(false)}
       />
 
-{/* This is for the logout message */}
-      {logoutMessage && (
-  <div style={{
-    position: 'fixed',
-    top: '90px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    zIndex: '9999',
-    backgroundColor: '#d4edda',
-    color: '#155724',
-    border: '1px solid #c3e6cb',
-    borderRadius: '8px',
-    padding: '12px 20px',
-    fontWeight: '500',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-  }}>
-    Logged out successfully! Redirecting...
-  </div>
-)}
+      <SideMenu
+        isOpen={isSideMenuOpen}
+        onClose={() => setIsSideMenuOpen(false)}
+      />
 
-      <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${solid ? 'solid' : ''}`} >
+      {logoutMessage && (
+        <div style={{
+          position: 'fixed',
+          top: '90px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: '9999',
+          backgroundColor: '#d4edda',
+          color: '#155724',
+          border: '1px solid #c3e6cb',
+          borderRadius: '8px',
+          padding: '12px 20px',
+          fontWeight: '500',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+        }}>
+          Logged out successfully! Redirecting...
+        </div>
+      )}
+
+      <nav className={`navbar ${isScrolled ? 'scrolled' : ''} ${solid ? 'solid' : ''}`}>
+
+        {/* ── ITEM 1: Logo + Hamburger ── */}
         <div className="item1">
           <div className='magical-logo' onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
             <img
@@ -147,195 +113,80 @@ const handleLogout = async () => {
             <i className="fa-solid fa-bars"></i>
             <span>{t('nav.menu')}</span>
           </button>
-
-
-
-{/* 
-          <div 
-            className="lang-wrapper"
-            onMouseEnter={() => setIsLangDropdownOpen(true)}
-            onMouseLeave={() => setIsLangDropdownOpen(false)}
-          >
-            <button className="lang-btn">
-              <i className="fa-solid fa-globe"></i>
-              <span>{currentLanguage.name}</span>
-              <i className="fa-solid fa-chevron-down lang-arrow"></i>
-            </button>
-
-            <div className={`lang-dropdown ${isLangDropdownOpen ? 'active' : ''}`}>
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  className={`lang-option ${i18n.language === lang.code ? 'selected' : ''}`}
-                  onClick={() => handleLanguageChange(lang.code)}
-                >
-                  {lang.name}
-                  {i18n.language === lang.code && (
-                    <i className="fa-solid fa-check"></i>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-*/}
-
-
-
-
         </div>
 
+        {/* ── ITEM 2: Nav Links ── */}
+        <div className="item2">
+          <NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            {t('sideMenu.home')}
+          </NavLink>
 
-      
-<div className="item2">
-  <NavLink to="/" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.home')}</NavLink>
-  <NavLink to="/academy-page" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.academy')}</NavLink>
-  <NavLink to="/about" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.about')}</NavLink>
+          <AcademyDropdown />
 
-{/* 
-  <NavLink to="/tribes" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.tribes')}</NavLink>
-*/}
+          <NavLink to="/about" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            {t('sideMenu.about')}
+          </NavLink>
 
+          <MarketDropdown />
 
-  <NavLink to="/market" className={({ isActive }) => isActive ? 'active-link' : ''}>{t('sideMenu.marketplace')}</NavLink>
-  
-  <NavLink to="/blogs" className={({ isActive }) => isActive ? 'active-link' : ''}>
-   {t('sideMenu.blog')}
-  </NavLink>
+          <NavLink to="/blogs" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            {t('sideMenu.blog')}
+          </NavLink>
+        </div>
 
-</div>
-
-
-
-
+        {/* ── ITEM 3: Language + Auth ── */}
         <div className="item3">
           <div className='events-icon'>
-             {/* 
-            <div className="icon-with-tooltip">
-              
-              <a href="academy2" id='academy'>
-                
-                <i className="fa-solid fa-school"></i>
-                
-                Academy
-              </a>
-             
-              <span className="icon-tooltip">Academy</span>
+            <div
+              className="lang-wrapper"
+              onMouseEnter={() => setIsLangDropdownOpen(true)}
+              onMouseLeave={() => setIsLangDropdownOpen(false)}
+            >
+              <button className="lang-btn">
+                <i className="fa-solid fa-globe" style={{ color: "rgb(181, 161, 145)" }}></i>
+                <span>{currentLanguage.name}</span>
+                <i className="fa-solid fa-chevron-down lang-arrow"></i>
+              </button>
 
-             
+              <div className={`lang-dropdown ${isLangDropdownOpen ? 'active' : ''}`}>
+                {languages.map((lang) => (
+                  <button
+                    key={lang.code}
+                    className={`lang-option ${i18n.language === lang.code ? 'selected' : ''}`}
+                    onClick={() => handleLanguageChange(lang.code)}
+                  >
+                    {lang.name}
+                    {i18n.language === lang.code && (
+                      <i className="fa-solid fa-check"></i>
+                    )}
+                  </button>
+                ))}
+              </div>
             </div>
-             */}
-
-            {/* 
-
-            <div className="icon-with-tooltip">
-              <a id='events' onClick={()=> navigate('/events')}>
-               
-                <i className="fa-solid fa-masks-theater"></i>
-               {t('nav.events')}
-              </a>
-             
-            </div>
-
-
-            <div className="icon-with-tooltip">
-              <a  id='music' onClick={()=> navigate('/music')}>
-                 <i className="fa-solid fa-music"></i>
-              
-                {t('nav.music')}
-               
-              </a>
-             
-            </div>
-
-            */}
-
-
-             <div 
-            className="lang-wrapper"
-            onMouseEnter={() => setIsLangDropdownOpen(true)}
-            onMouseLeave={() => setIsLangDropdownOpen(false)}
-          >
-            <button className="lang-btn">
-              <i className="fa-solid fa-globe"  style={{ color: "rgb(181, 161, 145)" }}></i>
-              <span>{currentLanguage.name}</span>
-              <i className="fa-solid fa-chevron-down lang-arrow"></i>
-            </button>
-
-            <div className={`lang-dropdown ${isLangDropdownOpen ? 'active' : ''}`}>
-              {languages.map((lang) => (
-                <button
-                  key={lang.code}
-                  className={`lang-option ${i18n.language === lang.code ? 'selected' : ''}`}
-                  onClick={() => handleLanguageChange(lang.code)}
-                >
-                  {lang.name}
-                  {i18n.language === lang.code && (
-                    <i className="fa-solid fa-check"></i>
-                  )}
-                </button>
-              ))}
-            </div>
-          </div>
-
-
-
           </div>
 
           {!user ? (
-            <>
-              <a  id="contact-us" onClick={()=> navigate('/academy-signUp')}>
-               
-                <i className="fa-regular fa-user" id="user-icon"></i>
-                 {t('nav.signIn')}
-              </a>
-            </>
+            <a id="contact-us" onClick={() => navigate('/academy-signUp')}>
+              <i className="fa-regular fa-user" id="user-icon"></i>
+              {t('nav.signIn')}
+            </a>
           ) : (
             <>
-{/* 
-           
               <span className="Account-icon" style={{ display: 'flex' }}>
                 {userData?.photoURL
                   ? <img src={userData.photoURL} alt="Account avatar" className="account-avatar-image account-avatar-image-small" />
-                  : getInitials()}
+                  : (getInitials() || user?.displayName?.split(' ').map(n => n.charAt(0)).join('').toUpperCase() || '?')}
               </span>
-               */} 
 
-             
-
-             <span className="Account-icon" style={{ display: 'flex' }}>
-  {userData?.photoURL
-    ? <img src={userData.photoURL} alt="Account avatar" className="account-avatar-image account-avatar-image-small" />
-    : (getInitials() || user?.displayName?.split(' ').map(n => n.charAt(0)).join('').toUpperCase() || '?')}
-</span>
-    
-   
-
-   
-           
               <div className="account-dropdown">
                 <p className="currently-in">{t('nav.currentlyIn')}</p>
-                
+
                 <div className="account-item active">
-
-
-
-
-
-{/*
                   <div className="account-avatar">
                     {userData?.photoURL
                       ? <img src={userData.photoURL} alt="Account avatar" className="account-avatar-image" />
-                      : getInitials()}
+                      : (getInitials() || user?.displayName?.split(' ').map(n => n.charAt(0)).join('').toUpperCase() || '?')}
                   </div>
- */}
-
- <div className="account-avatar">
-  {userData?.photoURL
-    ? <img src={userData.photoURL} alt="Account avatar" className="account-avatar-image" />
-    : (getInitials() || user?.displayName?.split(' ').map(n => n.charAt(0)).join('').toUpperCase() || '?')}
-</div>
-
-
                   <div className="account-details">
                     <h4>{getFullName()}</h4>
                     <p className="account-type">{t('nav.personal')}</p>
@@ -343,26 +194,15 @@ const handleLogout = async () => {
                   </div>
                   <i className="fa-solid fa-check"></i>
                 </div>
-                {/* 
-                <div className="dropdown-section-title">{t('nav.yourAccounts')}</div>
-                */}
-                
+
                 <div className="dropdown-option" onClick={handleAcademyNavigation}>
                   <span>{t('nav.academy')}</span>
                 </div>
 
-                 <div className="dropdown-option">
+                <div className="dropdown-option">
                   <span>{t('nav.settings')}</span>
                 </div>
 
-
-
-
-
-
-
-
-                
                 <div className="dropdown-option logout-option" onClick={handleLogout}>
                   <span>{t('nav.logOut')}</span>
                 </div>
@@ -372,9 +212,9 @@ const handleLogout = async () => {
         </div>
       </nav>
 
-      <AuthModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)} 
+      <AuthModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
       />
     </>
   );

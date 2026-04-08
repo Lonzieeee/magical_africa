@@ -1,5 +1,3 @@
-
-
 import { useState, useRef, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -35,6 +33,7 @@ const communityIcons = {
 const AcademyPage = () => {
   const { t } = useTranslation();
   const [activeLanguage, setActiveLanguage] = useState('Swahili');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const featuresRef  = useRef(null);
   const coursesRef   = useRef(null);
@@ -70,13 +69,20 @@ const AcademyPage = () => {
   useReveal(communityRef, '.community-card',    'community-card',    'comm-visible');
 
   const scrollToCourses = () => {
-  coursesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-};
+    coursesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      scrollToCourses();
+    }
+  };
 
   return (
     <>
       <Helmet>
-        <title>Academy - Magical Africa</title>
+        <title>Academy | Magical Africa</title>
         <meta
           name="description"
           content="Learn African languages, cultural arts, and creative skills through Magical Africa Academy — your gateway to pan-African knowledge."
@@ -98,6 +104,19 @@ const AcademyPage = () => {
             <span>{t('academy.hero.titleAccent')}</span>
           </h1>
           <p className="academy-hero-sub">{t('academy.hero.description')}</p>
+
+          {/* ── SEARCH BAR ── */}
+          <form className="academy-hero-search" onSubmit={handleSearch}>
+            <i className="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search courses, languages, skills..."
+            />
+            <button type="submit">Search</button>
+          </form>
+
           <div className="academy-hero-btns">
             <button className="acad-btn-primary" onClick={goToAcademy}>
               {t('academy.hero.getStarted')}

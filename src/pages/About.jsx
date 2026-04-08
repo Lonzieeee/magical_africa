@@ -260,7 +260,7 @@ const toggleHeroVideo = () => {
 
 
 <Helmet>
-  <title>About - Magical Africa</title>
+  <title>About | Magical Africa</title>
   <meta name="description" content="Learn about Magical Africa — a pan-African platform dedicated to preserving and celebrating African languages, culture, knowledge and heritage." />
   <meta name="keywords" content="About Magical Africa, African platform, African heritage, pan-African, African culture preservation" />
   <meta property="og:title" content="About Magical Africa — Our Story & Mission" />

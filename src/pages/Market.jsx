@@ -528,7 +528,7 @@ useEffect(() => {
   return (
     <>
       <Helmet>
-        <title>Marketplace - Magical Africa</title>
+        <title>Marketplace | Magical Africa</title>
         <meta name="description" content="Shop authentic African products from artisans and creators across the continent. Discover handcrafted goods, traditional crafts, clothing, jewelry and more." />
         <meta name="keywords" content="African marketplace, buy African products, authentic African crafts, African artisans, handmade African goods, African jewelry, African clothing" />
         <meta property="og:title" content="African Marketplace — Buy Authentic African Products" />

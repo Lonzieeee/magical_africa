@@ -26,6 +26,7 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Music from './pages/Music';
 import AcademyPage from './pages/AcademyPage';
 import Blogs from './pages/Blogs';
+import ContactWidget from './components/ContactWidget';
 
 function App() {
   return (
@@ -106,6 +107,9 @@ function App() {
           } />
 
         </Routes>
+
+
+          <ContactWidget /> 
       </Router>
     </AuthProvider>
   );
