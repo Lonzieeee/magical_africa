@@ -1,12 +1,12 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { FiActivity, FiBell, FiBookOpen, FiCheckCircle, FiChevronLeft, FiClock, FiLogOut, FiPlayCircle, FiSearch, FiShoppingBag, FiTrash2, FiUpload, FiX } from 'react-icons/fi'
+import { FiActivity, FiBell, FiBookOpen, FiCheckCircle, FiChevronLeft, FiClock, FiLogOut, FiPlayCircle, FiPlus, FiSearch, FiSettings, FiShoppingBag, FiTrash2, FiUpload, FiX } from 'react-icons/fi'
 import '../styles/learner.css'
 import { auth, db } from '../context/AuthContext'
 import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, setDoc, where } from 'firebase/firestore'
 import { deleteUser, EmailAuthProvider, reauthenticateWithCredential, updatePassword, updateProfile } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { downloadCourseCertificate } from '../utils/certificate'
+import { buildCourseCertificateSvg, downloadCourseCertificate } from '../utils/certificate'
 
 const getLocalProgressKey = (uid) => `learnerProgressBackup_${uid}`
 const getAnnouncementSeenKey = (uid) => `learnerAnnouncementSeenAt_${uid}`
@@ -104,6 +104,14 @@ const Learner = () => {
     biometricAuth: false,
     notifications: true,
     cloudSync: true
+  })
+  const [myArtProducts, setMyArtProducts] = useState([])
+  const [productSearchTerm, setProductSearchTerm] = useState('')
+  const [productDraft, setProductDraft] = useState({
+    name: '',
+    code: '',
+    description: '',
+    active: true
   })
   const [profileDraft, setProfileDraft] = useState({
     firstName: '',
@@ -722,6 +730,19 @@ const Learner = () => {
     }
   }, [ownedCourses, progressMap])
 
+  const filteredMyArtProducts = useMemo(() => {
+    const query = productSearchTerm.trim().toLowerCase()
+    if (!query) return myArtProducts
+
+    return myArtProducts.filter((product) => {
+      const haystack = [product.name, product.code, product.description]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase()
+      return haystack.includes(query)
+    })
+  }, [myArtProducts, productSearchTerm])
+
   const learnerName = useMemo(() => {
     const fullName = getFullName ? getFullName() : ''
     if (fullName && fullName.trim()) return fullName.trim()
@@ -1276,6 +1297,43 @@ const Learner = () => {
     })
   }
 
+  const handleCreateProduct = (event) => {
+    event.preventDefault()
+
+    const name = productDraft.name.trim()
+    const description = productDraft.description.trim()
+    const normalizedCode = productDraft.code.trim().toUpperCase()
+
+    if (!name) {
+      setActionToast({
+        tone: 'warning',
+        title: 'Product name required',
+        message: 'Enter a product name before saving.'
+      })
+      return
+    }
+
+    const generatedCode = normalizedCode || `PRD-${String(myArtProducts.length + 1).padStart(3, '0')}`
+
+    const nextProduct = {
+      id: `product-${Date.now()}`,
+      name,
+      code: generatedCode,
+      description,
+      active: Boolean(productDraft.active),
+      createdAt: new Date().toISOString()
+    }
+
+    setMyArtProducts((prev) => [nextProduct, ...prev])
+    setProductDraft({ name: '', code: '', description: '', active: true })
+    setActiveSection('my-art')
+    setActionToast({
+      tone: 'success',
+      title: 'Product added',
+      message: `${name} is now listed in Products.`
+    })
+  }
+
   return (
     <div className={`learner-dashboard ${displayPrefs.compactCards ? 'learner-dashboard--compact' : ''} ${displayPrefs.reduceMotion ? 'learner-dashboard--reduced-motion' : ''} ${settingsPrefs.darkMode ? 'learner-dashboard--dark' : ''}`}>
       <div className='learner-shell'>
@@ -1297,6 +1355,15 @@ const Learner = () => {
                 onClick={() => openSection('store', { storeView: 'all' })}
               >
                 All Courses
+              </button>
+            </div>
+
+            <div className='learner-nav-group'>
+              <button
+                className={`learner-nav-group-title ${activeSection === 'my-art' ? 'active' : ''}`}
+                onClick={() => openSection('my-art')}
+              >
+                My Art
               </button>
             </div>
 
@@ -1355,7 +1422,7 @@ const Learner = () => {
                 className={`learner-nav-group-title ${activeSection === 'profile' ? 'active' : ''}`}
                 onClick={() => openSection('profile')}
               >
-                Profile & Settings
+                Profile
               </button>
             </div>
 
@@ -1908,6 +1975,117 @@ const Learner = () => {
             </section>
           )}
 
+          {!loading && activeSection === 'my-art' && (
+            <section className='learner-panel learner-art-panel'>
+              <h1>Products</h1>
+              <div className='learner-art-head'>
+                <div>
+                  <h2>Manage your products listing</h2>
+                  <p>{myArtProducts.length} product{myArtProducts.length === 1 ? '' : 's'} listed</p>
+                </div>
+                <div className='learner-art-actions'>
+                  <button type='button' className='learner-art-add-btn' onClick={() => setActiveSection('my-art-add')}>
+                    <FiPlus aria-hidden='true' />
+                    Add product
+                  </button>
+                </div>
+              </div>
+
+              <div className='learner-art-table-wrap'>
+                <div className='learner-art-toolbar'>
+                  <label className='learner-art-search'>
+                    <input
+                      type='text'
+                      value={productSearchTerm}
+                      onChange={(event) => setProductSearchTerm(event.target.value)}
+                      placeholder='select products'
+                    />
+                    <FiSearch aria-hidden='true' />
+                  </label>
+                  <button type='button' className='learner-art-gear' aria-label='Products settings'>
+                    <FiSettings aria-hidden='true' />
+                  </button>
+                </div>
+
+                <div className='learner-art-table'>
+                  <div className='learner-art-row learner-art-row--head'>
+                    <span>Name</span>
+                    <span>Code</span>
+                    <span>Description</span>
+                    <span>Active</span>
+                    <span>Actions</span>
+                  </div>
+
+                  {filteredMyArtProducts.length === 0 ? (
+                    <div className='learner-art-empty'>
+                      <p>No data</p>
+                    </div>
+                  ) : (
+                    filteredMyArtProducts.map((product) => (
+                      <div key={product.id} className='learner-art-row'>
+                        <span>{product.name}</span>
+                        <span>{product.code}</span>
+                        <span>{product.description || 'No description'}</span>
+                        <span>{product.active ? 'Yes' : 'No'}</span>
+                        <span>View</span>
+                      </div>
+                    ))
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {!loading && activeSection === 'my-art-add' && (
+            <section className='learner-panel learner-art-panel learner-art-create-panel'>
+              <div className='learner-art-create-head'>
+                <h1>Add Product</h1>
+                <button type='button' className='learner-art-back-btn' onClick={() => setActiveSection('my-art')}>
+                  Back to Products
+                </button>
+              </div>
+
+              <form className='learner-art-form learner-art-form-page' onSubmit={handleCreateProduct}>
+                <label>
+                  <span>Product name</span>
+                  <input
+                    type='text'
+                    value={productDraft.name}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, name: event.target.value }))}
+                    placeholder='e.g. Handwoven Basket'
+                  />
+                </label>
+                <label>
+                  <span>Code</span>
+                  <input
+                    type='text'
+                    value={productDraft.code}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, code: event.target.value }))}
+                    placeholder='e.g. BK-001 (optional)'
+                  />
+                </label>
+                <label className='learner-art-form-wide'>
+                  <span>Description</span>
+                  <textarea
+                    rows='4'
+                    value={productDraft.description}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, description: event.target.value }))}
+                    placeholder='Short product description'
+                  />
+                </label>
+                <label className='learner-art-active-toggle'>
+                  <input
+                    type='checkbox'
+                    checked={productDraft.active}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, active: event.target.checked }))}
+                  />
+                  <span>Active product</span>
+                </label>
+                <button type='submit' className='learner-art-save-btn'>Save product</button>
+              </form>
+            </section>
+          )}
+
           {!loading && activeSection === 'profile' && (
             <section className='learner-panel'>
               <h1>Profile</h1>
@@ -2130,12 +2308,27 @@ const Learner = () => {
                 ))}
               </div>
 
-              <div className='learner-tag-list'>
+              <div className='learner-certificate-grid'>
                 {completedCourseTitles.length === 0
-                  ? <span>No certificates yet. Complete a full course to unlock certificates.</span>
+                  ? <span className='learner-certificate-empty'>No certificates yet. Complete a full course to unlock certificates.</span>
                   : completedCourses.map((course) => (
-                    <span key={course.id} className='learner-certificate-item'>
-                      <strong>Certificate:</strong> {course.title}
+                    <article key={course.id} className='learner-certificate-item'>
+                      <div className='learner-certificate-preview'>
+                        <img
+                          src={`data:image/svg+xml;charset=utf-8,${encodeURIComponent(buildCourseCertificateSvg({
+                            learnerName,
+                            courseTitle: course.title,
+                            completedAt: new Date(course.completedAt).toLocaleDateString(),
+                            tutorName: course.teacherName || 'Tutor'
+                          }))}`}
+                          alt={`${course.title} certificate preview`}
+                        />
+                      </div>
+                      <div className='learner-certificate-meta'>
+                        <h3>{course.title}</h3>
+                        <p>Instructor: {course.teacherName || 'Tutor'}</p>
+                        <p>Completed: {new Date(course.completedAt).toLocaleDateString()}</p>
+                      </div>
                       <button
                         className='learner-certificate-btn'
                         type='button'
@@ -2143,7 +2336,7 @@ const Learner = () => {
                       >
                         Download Certificate
                       </button>
-                    </span>
+                    </article>
                   ))}
               </div>
             </section>
