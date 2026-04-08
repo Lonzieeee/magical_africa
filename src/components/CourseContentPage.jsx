@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { db } from '../context/AuthContext'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
@@ -8,7 +8,6 @@ import Navbar from '../components/Navbar'
 import { useAuth } from '../context/AuthContext'
 import { FaCheckCircle, FaUndoAlt } from 'react-icons/fa'
 import { MdQuiz } from 'react-icons/md'
-import { FaStar } from 'react-icons/fa'
 
 const CourseContentPage = () => {
   const location = useLocation()
@@ -34,21 +33,15 @@ const CourseContentPage = () => {
   const [previewActionLoading, setPreviewActionLoading] = useState(false)
   const [persistedTabState, setPersistedTabState] = useState(null)
 
-  // Ref to scroll to quiz section
   const quizRef = useRef(null)
   const sessionStartedAtRef = useRef(Date.now())
   const resumeToastShownRef = useRef(false)
 
   useEffect(() => {
     if (!fromResume || resumeToastShownRef.current) return
-
     resumeToastShownRef.current = true
     setToast({ type: 'info', message: 'Opening your course. Welcome back!' })
-
-    const timeout = setTimeout(() => {
-      setToast(null)
-    }, 1800)
-
+    const timeout = setTimeout(() => setToast(null), 1800)
     return () => clearTimeout(timeout)
   }, [fromResume])
 
@@ -67,18 +60,13 @@ const CourseContentPage = () => {
 
   const upsertCourseProgress = async (buildUpdate) => {
     if (!user || !courseId || !course) return
-
     const progressRef = doc(db, 'learnerProgress', user.uid)
     const snapshot = await getDoc(progressRef)
     const progressData = snapshot.exists() ? snapshot.data() : {}
     const courseProgress = progressData.courses?.[courseId] || {}
     const nextCourseProgress = buildUpdate(courseProgress)
-
     await setDoc(progressRef, {
-      courses: {
-        ...(progressData.courses || {}),
-        [courseId]: nextCourseProgress
-      },
+      courses: { ...(progressData.courses || {}), [courseId]: nextCourseProgress },
       updatedAt: new Date().toISOString()
     }, { merge: true })
   }
@@ -124,28 +112,21 @@ const CourseContentPage = () => {
   useEffect(() => {
     const initializeProgress = async () => {
       if (isPreviewMode || !user || !courseId || !course) return
-
       const totalLessons = (course.topics || []).reduce((acc, topic) => acc + (topic.lessons?.length || 0), 0)
       const today = toDateKey()
 
       await upsertCourseProgress((existing) => {
         const resolvedTeacherId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
         const resolvedTeacherName = course.teacherName || course.tutorName || course.authorName || 'Tutor'
-
         let streak = existing.streak || 0
         const previousDate = existing.lastActiveDate || ''
         const savedCompletedLessonIds = existing.completedLessonIds || []
 
         if (previousDate !== today) {
-          if (isYesterday(previousDate, today)) {
-            streak = Math.max(1, streak + 1)
-          } else {
-            streak = 1
-          }
+          streak = isYesterday(previousDate, today) ? Math.max(1, streak + 1) : 1
         }
 
         setCompletedLessonIds(savedCompletedLessonIds)
-
         const lessonsCompleted = savedCompletedLessonIds.length || existing.lessonsCompleted || 0
         const quizPercent = existing.lastQuizPercent || 0
         const completion = computeCompletionFromState(totalLessons, lessonsCompleted, quizPercent)
@@ -185,7 +166,6 @@ const CourseContentPage = () => {
         updatedAt: new Date().toISOString()
       }, { merge: true })
     }
-
     initializeProgress()
   }, [user, userData, courseId, course, isPreviewMode])
 
@@ -194,14 +174,12 @@ const CourseContentPage = () => {
       const persistTimeSpent = async () => {
         if (isPreviewMode || !user || !courseId || !course) return
         const minutesSpent = Math.max(1, Math.round((Date.now() - sessionStartedAtRef.current) / (1000 * 60)))
-
         await upsertCourseProgress((existing) => ({
           ...existing,
           timeSpentMinutes: (existing.timeSpentMinutes || 0) + minutesSpent,
           lastActiveAt: new Date().toISOString()
         }))
       }
-
       persistTimeSpent()
     }
   }, [user, courseId, course, isPreviewMode])
@@ -218,75 +196,46 @@ const CourseContentPage = () => {
         setReviewSubmitted(true)
       }
     }
-
     loadExistingReview()
   }, [user, courseId, isPreviewMode])
 
   useEffect(() => {
     const checkPreviewOwnership = async () => {
       if (!isPreviewMode || !user || !courseId) return
-
       try {
         const progressDoc = await getDoc(doc(db, 'learnerProgress', user.uid))
-        if (!progressDoc.exists()) {
-          setPreviewOwned(false)
-          return
-        }
-
+        if (!progressDoc.exists()) { setPreviewOwned(false); return }
         const savedCourse = progressDoc.data()?.courses?.[courseId] || {}
-        const alreadyOwned = Boolean(
-          savedCourse.addedToLibrary ||
-          savedCourse.paid ||
-          savedCourse.started ||
-          (savedCourse.completion || 0) > 0
-        )
-
-        setPreviewOwned(alreadyOwned)
-      } catch (error) {
-        console.log('Error checking preview ownership:', error)
-        setPreviewOwned(false)
-      }
+        setPreviewOwned(Boolean(
+          savedCourse.addedToLibrary || savedCourse.paid ||
+          savedCourse.started || (savedCourse.completion || 0) > 0
+        ))
+      } catch { setPreviewOwned(false) }
     }
-
     checkPreviewOwnership()
   }, [isPreviewMode, user, courseId])
 
   useEffect(() => {
     const loadPersistedTabState = async () => {
       if (!user || !courseId) return
-
       try {
         const progressDoc = await getDoc(doc(db, 'learnerProgress', user.uid))
-        if (!progressDoc.exists()) {
-          setPersistedTabState(null)
-          return
-        }
-
-        const savedTabState = progressDoc.data()?.courses?.[courseId]?.tabState || null
-        setPersistedTabState(savedTabState)
-      } catch (error) {
-        console.log('Error loading persisted tab state:', error)
-      }
+        if (!progressDoc.exists()) { setPersistedTabState(null); return }
+        setPersistedTabState(progressDoc.data()?.courses?.[courseId]?.tabState || null)
+      } catch { /* ignore */ }
     }
-
     loadPersistedTabState()
   }, [user, courseId])
 
   const handlePersistTabState = async (tabState) => {
     if (!user || !courseId || !course || isPreviewMode) return
     if (!tabState || typeof tabState !== 'object') return
-
     setPersistedTabState(tabState)
-
     try {
       await upsertCourseProgress((existing) => ({
-        ...existing,
-        tabState,
-        lastActiveAt: new Date().toISOString()
+        ...existing, tabState, lastActiveAt: new Date().toISOString()
       }))
-    } catch (error) {
-      console.log('Error persisting tab state:', error)
-    }
+    } catch { /* ignore */ }
   }
 
   if (loading) return (
@@ -305,7 +254,6 @@ const CourseContentPage = () => {
 
   const topicsWithQuiz = course.topics?.filter(t => t.quiz && t.quiz.length > 0) || []
 
-  // Toggle quiz visibility and scroll to it when opening
   const handleQuizClick = () => {
     setShowQuiz(prev => {
       const next = !prev
@@ -321,23 +269,20 @@ const CourseContentPage = () => {
   const handleQuizResult = async ({ score, total }) => {
     if (isPreviewMode) return
     if (!user || !courseId || !course) return
-
     const lessonCount = (course.topics || []).reduce((acc, topic) => acc + (topic.lessons?.length || 0), 0)
     const quizPercent = total > 0 ? Math.round((score / total) * 100) : 0
     const completion = computeCompletionFromState(lessonCount, completedLessonIds.length, quizPercent)
     setCourseCompletionPercent(completion)
 
-    await upsertCourseProgress((existing) => {
-      return {
-        ...existing,
-        lessonsCompleted: completedLessonIds.length,
-        completion,
-        status: completion >= 100 ? 'Completed' : 'In Progress',
-        lastQuizPercent: quizPercent,
-        lastQuizScore: `${score}/${total}`,
-        lastActiveAt: new Date().toISOString()
-      }
-    })
+    await upsertCourseProgress((existing) => ({
+      ...existing,
+      lessonsCompleted: completedLessonIds.length,
+      completion,
+      status: completion >= 100 ? 'Completed' : 'In Progress',
+      lastQuizPercent: quizPercent,
+      lastQuizScore: `${score}/${total}`,
+      lastActiveAt: new Date().toISOString()
+    }))
 
     await setDoc(doc(db, 'enrollments', `${user.uid}_${courseId}`), {
       completion,
@@ -390,9 +335,8 @@ const CourseContentPage = () => {
     } else if (meta.source === 'manual') {
       setToast({ type: 'success', message: 'Lesson marked as complete.' })
     } else {
-      setToast({ type: 'success', message: 'Lesson auto-marked complete from activity.' })
+      setToast({ type: 'success', message: 'Lesson auto-marked complete.' })
     }
-
     setTimeout(() => setToast(null), 2200)
   }
 
@@ -483,10 +427,7 @@ const CourseContentPage = () => {
       }
 
       await setDoc(progressRef, {
-        courses: {
-          ...(progressData.courses || {}),
-          [courseId]: nextCourseProgress
-        },
+        courses: { ...(progressData.courses || {}), [courseId]: nextCourseProgress },
         updatedAt: new Date().toISOString()
       }, { merge: true })
 
@@ -558,12 +499,21 @@ const CourseContentPage = () => {
         learnerName={learnerDisplayName}
         persistedTabState={persistedTabState}
         onPersistTabState={handlePersistTabState}
+        reviewRating={reviewRating}
+        reviewComment={reviewComment}
+        reviewImprovement={reviewImprovement}
+        reviewSubmitted={reviewSubmitted}
+        reviewSaving={reviewSaving}
+        onReviewRatingChange={setReviewRating}
+        onReviewCommentChange={setReviewComment}
+        onReviewImprovementChange={setReviewImprovement}
+        onReviewSubmit={handleSubmitReview}
+        courseCompletionPercent={courseCompletionPercent}
       />
 
-      {/* Quiz section — ref attached so we can scroll to it */}
+      {/* Quiz section — scrolled to when quiz tab clicked */}
       {showQuiz && !isPreviewMode && (
         <div ref={quizRef} className='cc-quiz-wrap'>
-
           {topicsWithQuiz.length === 0 ? (
             <div className='cc-quiz-empty'>
               <MdQuiz className='cc-quiz-empty-icon' /> No quizzes available for this course yet.
@@ -572,9 +522,7 @@ const CourseContentPage = () => {
             <>
               {topicsWithQuiz.length > 1 && (
                 <div className='cc-quiz-topic-switch'>
-                  <p className='cc-quiz-topic-label'>
-                    Select topic quiz:
-                  </p>
+                  <p className='cc-quiz-topic-label'>Select topic quiz:</p>
                   {topicsWithQuiz.map(t => (
                     <button
                       key={t.id}
@@ -586,7 +534,6 @@ const CourseContentPage = () => {
                   ))}
                 </div>
               )}
-
               {selectedTopic && (
                 <Quiz
                   quiz={selectedTopic.quiz}
@@ -596,66 +543,7 @@ const CourseContentPage = () => {
               )}
             </>
           )}
-
         </div>
-      )}
-
-      {!isPreviewMode && courseCompletionPercent < 100 && (
-        <div className='cc-review-gate-note'>
-          Complete 100% of this course to unlock reviews. Current progress: {courseCompletionPercent}%.
-        </div>
-      )}
-
-      {!isPreviewMode && (
-      <div className='cc-review-section'>
-        <h2>Rate This Course</h2>
-        <p className='cc-review-help'>Share your experience after completing the full course.</p>
-        {reviewSubmitted && (
-          <p className='cc-review-submitted-note'>
-            Your review has been submitted. Editing is now locked for this course.
-          </p>
-        )}
-        <form onSubmit={handleSubmitReview} className='cc-review-form'>
-          <div className='cc-review-stars'>
-            {[1, 2, 3, 4, 5].map(star => (
-              <button
-                type='button'
-                key={star}
-                className={`cc-star-btn ${star <= reviewRating ? 'active' : ''}`}
-                onClick={() => setReviewRating(star)}
-                disabled={reviewSubmitted || courseCompletionPercent < 100}
-              >
-                <FaStar />
-              </button>
-            ))}
-          </div>
-
-          <textarea
-            value={reviewComment}
-            onChange={(e) => setReviewComment(e.target.value)}
-            placeholder='Share your learning experience...'
-            rows={4}
-            disabled={reviewSubmitted || courseCompletionPercent < 100}
-          />
-
-          {reviewRating > 0 && reviewRating < 3 && (
-            <>
-              <label className='cc-review-improve-label'>What can we improve?</label>
-              <textarea
-                value={reviewImprovement}
-                onChange={(e) => setReviewImprovement(e.target.value)}
-                placeholder='Tell us where this course can be improved.'
-                rows={3}
-                disabled={reviewSubmitted || courseCompletionPercent < 100}
-              />
-            </>
-          )}
-
-          <button type='submit' disabled={reviewSaving || reviewRating < 1 || reviewSubmitted || courseCompletionPercent < 100 || (reviewRating < 3 && !reviewImprovement.trim())}>
-            {reviewSubmitted ? 'Review Submitted' : reviewSaving ? 'Saving...' : 'Submit Review'}
-          </button>
-        </form>
-      </div>
       )}
     </>
   )
