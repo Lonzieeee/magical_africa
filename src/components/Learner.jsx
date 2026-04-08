@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { FiActivity, FiBell, FiBookOpen, FiCheckCircle, FiChevronLeft, FiClock, FiLogOut, FiPlayCircle, FiPlus, FiSearch, FiSettings, FiShoppingBag, FiTrash2, FiUpload, FiX } from 'react-icons/fi'
+import { FiActivity, FiBell, FiBookOpen, FiCheckCircle, FiChevronLeft, FiClock, FiEdit2, FiEye, FiLogOut, FiPlayCircle, FiPlus, FiSearch, FiShoppingBag, FiTrash2, FiUpload, FiX } from 'react-icons/fi'
 import '../styles/learner.css'
 import { auth, db } from '../context/AuthContext'
 import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, setDoc, where } from 'firebase/firestore'
@@ -14,6 +14,7 @@ const getDisplayPrefsKey = (uid) => `learnerDisplayPrefs_${uid}`
 const getStorePrefsKey = (uid) => `learnerStorePrefs_${uid}`
 const getSettingsPrefsKey = (uid) => `learnerSettingsPrefs_${uid}`
 const getProfilePhotoKey = (uid) => `learnerProfilePhoto_${uid}`
+const getMyArtProductsKey = (uid) => `learnerMyArtProducts_${uid}`
 
 const toMs = (value) => {
   if (!value) return 0
@@ -65,6 +66,48 @@ const calculateStreak = (previousDate, currentStreak = 0) => {
   return 1
 }
 
+const formatUsd = (value) => {
+  const amount = Number(value || 0)
+  return new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    maximumFractionDigits: 2
+  }).format(Number.isFinite(amount) ? amount : 0)
+}
+
+const truncateWords = (value, maxWords = 22) => {
+  const text = String(value || '').trim()
+  if (!text) return 'No description yet.'
+  const words = text.split(/\s+/)
+  if (words.length <= maxWords) return text
+  return `${words.slice(0, maxWords).join(' ')}...`
+}
+
+const createEmptyProductDraft = () => ({
+  name: '',
+  alias: '',
+  code: '',
+  quantity: '',
+  metaTags: '',
+  iconName: '',
+  inStock: true,
+  showOnWebsite: true,
+  productionCost: '',
+  wholesalePrice: '',
+  sellingPrice: '',
+  onOffer: false,
+  offerPrice: '',
+  taxInclusive: true,
+  shippingOrigin: '',
+  shippingMethod: 'standard',
+  shippingCost: '',
+  deliveryWindowKenya: '',
+  deliveryWindowInternational: '',
+  photoURL: '',
+  description: '',
+  active: true
+})
+
 const Learner = () => {
   const navigate = useNavigate()
   const { user, userData, getFullName, getInitials, logout } = useAuth()
@@ -91,26 +134,13 @@ const Learner = () => {
   const [displayPrefs, setDisplayPrefs] = useState({ compactCards: false, reduceMotion: false })
   const [settingsPrefs, setSettingsPrefs] = useState({ darkMode: false, biometricAuth: false, notifications: true, cloudSync: true })
   const [myArtProducts, setMyArtProducts] = useState([])
+  const [editingProductId, setEditingProductId] = useState('')
+  const [viewingProduct, setViewingProduct] = useState(null)
+  const [deletingProduct, setDeletingProduct] = useState(null)
+  const [productCodeManuallyEdited, setProductCodeManuallyEdited] = useState(false)
   const [productSearchTerm, setProductSearchTerm] = useState('')
   const [productFormStep, setProductFormStep] = useState(1)
-  const [productDraft, setProductDraft] = useState({
-    name: '',
-    alias: '',
-    code: '',
-    quantity: '',
-    metaTags: '',
-    iconName: '',
-    inStock: true,
-    showOnWebsite: true,
-    productionCost: '',
-    wholesalePrice: '',
-    sellingPrice: '',
-    onOffer: false,
-    offerPrice: '',
-    taxInclusive: true,
-    description: '',
-    active: true
-  })
+  const [productDraft, setProductDraft] = useState(createEmptyProductDraft)
   const [profileDraft, setProfileDraft] = useState({
     firstName: '',
     lastName: '',
@@ -122,6 +152,8 @@ const Learner = () => {
   const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '' })
   const profileMenuRef = useRef(null)
   const profilePhotoInputRef = useRef(null)
+  const productIconInputRef = useRef(null)
+  const productPhotoInputRef = useRef(null)
   const previousCloudSyncRef = useRef(true)
 
   const persistLocalProgressMap = (nextProgressMap) => {
@@ -371,6 +403,76 @@ const Learner = () => {
     localStorage.setItem(getStorePrefsKey(user.uid), JSON.stringify({ courseSearchTerm, activeFilter, storeSortBy }))
   }, [courseSearchTerm, activeFilter, storeSortBy, user?.uid])
 
+  // Load products from Firestore (realtime) with localStorage fallback
+  useEffect(() => {
+    if (!user?.uid) {
+      setMyArtProducts([])
+      return
+    }
+
+    // First check localStorage cache for faster initial load
+    const cached = localStorage.getItem(getMyArtProductsKey(user.uid))
+    if (cached) {
+      try {
+        const parsed = JSON.parse(cached)
+        if (Array.isArray(parsed)) {
+          setMyArtProducts(parsed)
+        }
+      } catch (e) {
+        localStorage.removeItem(getMyArtProductsKey(user.uid))
+      }
+    }
+
+    // Subscribe to Firestore for real-time product updates
+    const productsRef = collection(db, 'users', user.uid, 'products')
+    const unsubscribe = onSnapshot(productsRef, (snapshot) => {
+      const products = snapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }))
+      setMyArtProducts(products)
+      // Cache in localStorage
+      localStorage.setItem(getMyArtProductsKey(user.uid), JSON.stringify(products))
+    }, (error) => {
+      console.error('Error loading products from Firestore:', error)
+      // Fall back to localStorage if Firestore fails
+      const cached = localStorage.getItem(getMyArtProductsKey(user.uid))
+      if (cached) {
+        try {
+          const parsed = JSON.parse(cached)
+          if (Array.isArray(parsed)) {
+            setMyArtProducts(parsed)
+          }
+        } catch (e) {
+          setMyArtProducts([])
+        }
+      }
+    })
+
+    return unsubscribe
+  }, [user?.uid])
+
+  // Save each product change to Firestore
+  useEffect(() => {
+    if (!user?.uid || !myArtProducts.length) return
+    
+    // Debounce saves to avoid excessive writes
+    const saveTimer = setTimeout(async () => {
+      try {
+        for (const product of myArtProducts) {
+          const productRef = doc(db, 'users', user.uid, 'products', product.id)
+          // Remove the id field when saving to Firestore (it's the doc ID)
+          const { id, ...productData } = product
+          await setDoc(productRef, productData, { merge: true })
+        }
+      } catch (error) {
+        console.error('Error saving products to Firestore:', error)
+      }
+    }, 1000) // Debounce by 1 second
+
+    return () => clearTimeout(saveTimer)
+  }, [myArtProducts, user?.uid])
+
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (!profileMenuRef.current) return
@@ -597,6 +699,23 @@ const Learner = () => {
     })
   }, [myArtProducts, productSearchTerm])
 
+  const getAutoProductCode = (nameValue = '') => {
+    const normalizedName = String(nameValue || '')
+      .toUpperCase()
+      .replace(/[^A-Z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '')
+      .slice(0, 10)
+    const base = normalizedName || 'PRD'
+    const sequence = String(myArtProducts.length + (editingProductId ? 0 : 1)).padStart(3, '0')
+    return `${base}-${sequence}`
+  }
+
+  useEffect(() => {
+    if (productCodeManuallyEdited) return
+    const autoCode = getAutoProductCode(productDraft.name)
+    setProductDraft((prev) => (prev.code === autoCode ? prev : { ...prev, code: autoCode }))
+  }, [productCodeManuallyEdited, productDraft.name, myArtProducts.length, editingProductId])
+
   const learnerName = useMemo(() => {
     const fullName = getFullName ? getFullName() : ''
     if (fullName && fullName.trim()) return fullName.trim()
@@ -681,6 +800,7 @@ const Learner = () => {
     const lastName = profileDraft.lastName.trim()
 
     if (!firstName) { setProfileMessage('First name is required.'); return }
+    if (!lastName) { setProfileMessage('Last name is required.'); return }
 
     try {
       setProfileSaving(true)
@@ -707,7 +827,7 @@ const Learner = () => {
     if (!auth.currentUser) return
     const providerId = auth.currentUser.providerData?.[0]?.providerId || ''
     if (providerId !== 'password') { setSecurityMessage('Password updates are only available for email/password accounts.'); return }
-    if (!passwordForm.currentPassword || !passwordForm.newPassword) { setSecurityMessage('Enter both current and new password.'); return }
+    if (!passwordForm.currentPassword || !passwordForm.newPassword) { setSecurityMessage('Current password and new password are required.'); return }
     if (passwordForm.newPassword.length < 6) { setSecurityMessage('New password should be at least 6 characters.'); return }
 
     try {
@@ -1006,23 +1126,111 @@ const Learner = () => {
     downloadCourseCertificate({ learnerName: learnerDisplayName, courseTitle, completedAt: completionDate, tutorName })
   }
 
-  const handleCreateProduct = (event) => {
-    event.preventDefault()
+  const startCreateProduct = () => {
+    setEditingProductId('')
+    setProductCodeManuallyEdited(false)
+    setProductFormStep(1)
+    setProductDraft(createEmptyProductDraft())
+    setActiveSection('my-art-add')
+  }
 
-    if (productFormStep === 1) {
-      const name = productDraft.name.trim()
-      if (!name) {
-        setActionToast({
-          tone: 'warning',
-          title: 'Product name required',
-          message: 'Enter a product name before continuing.'
-        })
-        return
-      }
+  const handleProductIconUpload = async (event) => {
+    const selectedFile = event.target.files?.[0]
+    event.target.value = ''
+    if (!selectedFile) return
 
-      setProductFormStep(2)
+    const maxBytes = 2 * 1024 * 1024
+    if (selectedFile.size > maxBytes) {
+      setActionToast({ tone: 'warning', title: 'Icon too large', message: 'Please choose an icon image under 2MB.' })
       return
     }
+
+    try {
+      const iconDataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = () => reject(new Error('icon-read-failed'))
+        reader.readAsDataURL(selectedFile)
+      })
+      setProductDraft((prev) => ({ ...prev, iconName: String(iconDataUrl || '') }))
+    } catch (error) {
+      console.log('Could not read icon image:', error)
+      setActionToast({ tone: 'warning', title: 'Upload failed', message: 'Could not upload icon. Please try again.' })
+    }
+  }
+
+  const handleProductPhotoUpload = async (event) => {
+    const selectedFile = event.target.files?.[0]
+    event.target.value = ''
+    if (!selectedFile) return
+
+    const maxBytes = 4 * 1024 * 1024
+    if (selectedFile.size > maxBytes) {
+      setActionToast({ tone: 'warning', title: 'Photo too large', message: 'Please choose a photo under 4MB.' })
+      return
+    }
+
+    try {
+      const photoDataUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = () => reject(new Error('photo-read-failed'))
+        reader.readAsDataURL(selectedFile)
+      })
+      setProductDraft((prev) => ({ ...prev, photoURL: String(photoDataUrl || '') }))
+    } catch (error) {
+      console.log('Could not read product photo:', error)
+      setActionToast({ tone: 'warning', title: 'Upload failed', message: 'Could not upload product photo. Please try again.' })
+    }
+  }
+
+  const handleViewProduct = (product) => {
+    setViewingProduct(product)
+  }
+
+  const handleEditProduct = (product) => {
+    setEditingProductId(product.id)
+    setProductCodeManuallyEdited(true)
+    setProductFormStep(1)
+    setProductDraft({
+      ...createEmptyProductDraft(),
+      ...product,
+      quantity: String(product.quantity || ''),
+      productionCost: String(product.productionCost || ''),
+      wholesalePrice: String(product.wholesalePrice || ''),
+      sellingPrice: String(product.sellingPrice || ''),
+      offerPrice: String(product.offerPrice || ''),
+      shippingCost: String(product.shippingCost || ''),
+      deliveryWindowKenya: product.deliveryWindowKenya || product.deliveryWindow || '',
+      deliveryWindowInternational: product.deliveryWindowInternational || '',
+      metaTags: Array.isArray(product.metaTags) ? product.metaTags.join(', ') : (product.metaTags || '')
+    })
+    setActiveSection('my-art-add')
+  }
+
+  const handleDeleteProduct = async () => {
+    if (!deletingProduct) return
+    const product = deletingProduct
+    setMyArtProducts((prev) => prev.filter((item) => item.id !== product.id))
+    
+    // Delete from Firestore
+    if (user?.uid) {
+      try {
+        const productRef = doc(db, 'users', user.uid, 'products', product.id)
+        await deleteDoc(productRef)
+      } catch (error) {
+        console.error('Error deleting product from Firestore:', error)
+        setActionToast({ tone: 'warning', title: 'Delete warning', message: 'Product removed locally but failed to sync. Please try again.' })
+        return
+      }
+    }
+    
+    setDeletingProduct(null)
+    setActionToast({ tone: 'success', title: 'Product deleted', message: `${product.name || 'Product'} was removed.` })
+  }
+
+  const handleCreateProduct = (event) => {
+    event.preventDefault()
 
     const name = productDraft.name.trim()
     const alias = productDraft.alias.trim()
@@ -1032,11 +1240,104 @@ const Learner = () => {
     const wholesalePrice = Number(productDraft.wholesalePrice || 0)
     const sellingPrice = Number(productDraft.sellingPrice || 0)
     const offerPrice = Number(productDraft.offerPrice || 0)
+    const shippingCost = Number(productDraft.shippingCost || 0)
     const metaTags = productDraft.metaTags
       .split(',')
       .map((item) => item.trim())
       .filter(Boolean)
     const normalizedCode = productDraft.code.trim().toUpperCase()
+
+    if (productFormStep === 1) {
+      if (!name) {
+        setActionToast({
+          tone: 'warning',
+          title: 'Product name required',
+          message: 'Enter a product name before continuing.'
+        })
+        return
+      }
+
+      if (!normalizedCode) {
+        setActionToast({
+          tone: 'warning',
+          title: 'Product code required',
+          message: 'Enter a product code before continuing.'
+        })
+        return
+      }
+
+      if (!description) {
+        setActionToast({
+          tone: 'warning',
+          title: 'Description required',
+          message: 'Add a short product description before continuing.'
+        })
+        return
+      }
+
+      setProductFormStep(2)
+      return
+    }
+
+    if (productFormStep === 2) {
+      if (!Number.isFinite(sellingPrice) || sellingPrice <= 0) {
+        setActionToast({
+          tone: 'warning',
+          title: 'Selling price required',
+          message: 'Enter a valid selling price before continuing.'
+        })
+        return
+      }
+
+      if (productDraft.onOffer && offerPrice > 0 && offerPrice >= sellingPrice) {
+        setActionToast({
+          tone: 'warning',
+          title: 'Offer price is too high',
+          message: 'Offer price should be lower than the selling price.'
+        })
+        return
+      }
+
+      setProductFormStep(3)
+      return
+    }
+
+    if (productFormStep === 3) {
+      if (!productDraft.shippingOrigin.trim()) {
+        setActionToast({
+          tone: 'warning',
+          title: 'Shipping origin required',
+          message: 'Provide shipping origin before continuing.'
+        })
+        return
+      }
+
+      if (!productDraft.deliveryWindowKenya.trim() || !productDraft.deliveryWindowInternational.trim()) {
+        setActionToast({
+          tone: 'warning',
+          title: 'Delivery window required',
+          message: 'Provide delivery timelines for Kenya and International before continuing.'
+        })
+        return
+      }
+
+      setProductFormStep(4)
+      return
+    }
+
+    if (productFormStep === 4) {
+      if (!productDraft.photoURL.trim()) {
+        setActionToast({
+          tone: 'warning',
+          title: 'Product photo required',
+          message: 'Add a product photo URL before continuing.'
+        })
+        return
+      }
+
+      setProductFormStep(5)
+      return
+    }
 
     if (!name) {
       setActionToast({ tone: 'warning', title: 'Product name required', message: 'Enter a product name before saving.' })
@@ -1044,9 +1345,10 @@ const Learner = () => {
     }
 
     const generatedCode = normalizedCode || `PRD-${String(myArtProducts.length + 1).padStart(3, '0')}`
+    const resolvedProductId = editingProductId || `product-${Date.now()}`
 
     const nextProduct = {
-      id: `product-${Date.now()}`,
+      id: resolvedProductId,
       name,
       alias,
       code: generatedCode,
@@ -1061,33 +1363,42 @@ const Learner = () => {
       onOffer: Boolean(productDraft.onOffer),
       offerPrice: Number.isFinite(offerPrice) ? offerPrice : 0,
       taxInclusive: Boolean(productDraft.taxInclusive),
+      shippingOrigin: productDraft.shippingOrigin.trim(),
+      shippingMethod: productDraft.shippingMethod,
+      shippingCost: Number.isFinite(shippingCost) ? shippingCost : 0,
+      deliveryWindowKenya: productDraft.deliveryWindowKenya.trim(),
+      deliveryWindowInternational: productDraft.deliveryWindowInternational.trim(),
+      deliveryWindow: productDraft.deliveryWindowKenya.trim(),
+      photoURL: productDraft.photoURL.trim(),
       description,
       active: Boolean(productDraft.active),
       createdAt: new Date().toISOString()
     }
 
-    setMyArtProducts((prev) => [nextProduct, ...prev])
-    setProductDraft({
-      name: '',
-      alias: '',
-      code: '',
-      quantity: '',
-      metaTags: '',
-      iconName: '',
-      inStock: true,
-      showOnWebsite: true,
-      productionCost: '',
-      wholesalePrice: '',
-      sellingPrice: '',
-      onOffer: false,
-      offerPrice: '',
-      taxInclusive: true,
-      description: '',
-      active: true
+    setMyArtProducts((prev) => {
+      if (!editingProductId) return [nextProduct, ...prev]
+      return prev.map((item) => (item.id === editingProductId ? nextProduct : item))
     })
+    
+    // Immediately save to Firestore to prevent data loss
+    if (user?.uid) {
+      const productRef = doc(db, 'users', user.uid, 'products', nextProduct.id)
+      const { id, ...productData } = nextProduct
+      setDoc(productRef, productData, { merge: true }).catch((error) => {
+        console.error('Error saving product to Firestore:', error)
+      })
+    }
+    
+    setEditingProductId('')
+    setProductCodeManuallyEdited(false)
+    setProductDraft(createEmptyProductDraft())
     setProductFormStep(1)
     setActiveSection('my-art')
-    setActionToast({ tone: 'success', title: 'Product added', message: `${name} is now listed in Products.` })
+    setActionToast(
+      editingProductId
+        ? { tone: 'success', title: 'Product updated', message: `${name} was updated successfully.` }
+        : { tone: 'success', title: 'Product added', message: `${name} is now listed in Products.` }
+    )
   }
 
   return (
@@ -1109,13 +1420,10 @@ const Learner = () => {
               <button className={`learner-nav-group-title ${activeSection === 'store' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'all' })}>All Courses</button>
             </div>
             <div className='learner-nav-group'>
-              <button className={`learner-nav-group-title ${activeSection === 'my-art' ? 'active' : ''}`} onClick={() => openSection('my-art')}>My Art</button>
-            </div>
-            <div className='learner-nav-group'>
               <button className={`learner-nav-group-title learner-nav-group-title--dropdown ${menuOpen.learning ? 'expanded' : ''}`} onClick={() => toggleMenu('learning')} aria-expanded={menuOpen.learning}>My Learning</button>
               {menuOpen.learning && (
                 <div className='learner-nav-submenu'>
-                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'all' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'all' })}>Purchased Courses</button>
+                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'all' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'all' })}>My Courses</button>
                   <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'in-progress' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'in-progress' })}>Continue Learning</button>
                   <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'completed' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'completed' })}>Completed Courses</button>
                 </div>
@@ -1126,6 +1434,9 @@ const Learner = () => {
             </div>
             <div className='learner-nav-group'>
               <button className={`learner-nav-group-title ${activeSection === 'achievements' ? 'active' : ''}`} onClick={() => openSection('achievements')}>Certifications & Achievements</button>
+            </div>
+            <div className='learner-nav-group'>
+              <button className={`learner-nav-group-title ${activeSection === 'my-art' || activeSection === 'my-art-add' ? 'active' : ''}`} onClick={() => openSection('my-art')}>My Art</button>
             </div>
             <div className='learner-nav-group'>
               <button className={`learner-nav-group-title ${activeSection === 'notifications' ? 'active' : ''}`} onClick={() => openSection('notifications')}>Notifications</button>
@@ -1147,7 +1458,9 @@ const Learner = () => {
                   <h3>Welcome, <span className='learner-name-highlight'>{learnerName}</span></h3>
                 </div>
                 <div className='learner-top-actions'>
-                  <span className='learner-top-stat'>{purchasedCourses.length} course{purchasedCourses.length === 1 ? '' : 's'} in your library</span>
+                  <button className='learner-top-stat' type='button' onClick={() => openSection('courses', { courseView: 'all' })}>
+                    {purchasedCourses.length} course{purchasedCourses.length === 1 ? '' : 's'} in your library
+                  </button>
                   <button className='learner-alert-bell' type='button' onClick={() => openSection('notifications')}>
                     <FiBell aria-hidden='true' />
                     {unseenAnnouncementsCount > 0 && <span>{unseenAnnouncementsCount}</span>}
@@ -1380,7 +1693,7 @@ const Learner = () => {
                           <h3>{course.title || 'Untitled Course'}</h3>
                           {isOwned && <span className='learner-course-state-pill'>{isCompleted ? 'Completed' : hasStarted ? 'In Progress' : 'Already Purchased'}</span>}
                           {isOwned && hasStarted && !isCompleted && <span className='learner-continue-pill'>Continue where you left off</span>}
-                          <p>{course.description || 'No description yet.'}</p>
+                          <p>{truncateWords(course.description, 20)}</p>
                           <div className='learner-course-meta'>
                             <span>{course.courseType || 'General'}</span>
                             <span>{isPaid ? `Price: $${price}` : 'Free Course'}</span>
@@ -1442,7 +1755,7 @@ const Learner = () => {
                         <div>
                           <h3>{course.title || 'Untitled Course'}</h3>
                           {isCompleted && <span className='learner-completed-badge'>Completed</span>}
-                          <p>{course.description || 'No description yet.'}</p>
+                          <p>{truncateWords(course.description, 20)}</p>
                           <div className='learner-course-meta'>
                             <span>{course.courseType || 'General'}</span>
                             <span>{progress.paid ? 'Paid' : 'Free'}</span>
@@ -1519,7 +1832,7 @@ const Learner = () => {
                   <p>{myArtProducts.length} product{myArtProducts.length === 1 ? '' : 's'} listed</p>
                 </div>
                 <div className='learner-art-actions'>
-                  <button type='button' className='learner-art-add-btn' onClick={() => setActiveSection('my-art-add')}>
+                  <button type='button' className='learner-art-add-btn' onClick={startCreateProduct}>
                     <FiPlus aria-hidden='true' />Add product
                   </button>
                 </div>
@@ -1530,20 +1843,33 @@ const Learner = () => {
                     <input type='text' value={productSearchTerm} onChange={(event) => setProductSearchTerm(event.target.value)} placeholder='select products' />
                     <FiSearch aria-hidden='true' />
                   </label>
-                  <button type='button' className='learner-art-gear' aria-label='Products settings'><FiSettings aria-hidden='true' /></button>
                 </div>
                 <div className='learner-art-table'>
                   <div className='learner-art-row learner-art-row--head'>
-                    <span>Name</span><span>Code</span><span>Description</span><span>Active</span><span>Actions</span>
+                    <span>Product</span><span>Code</span><span>Qty</span><span>In Stock</span><span>On Website</span><span>Active</span><span>Actions</span>
                   </div>
                   {filteredMyArtProducts.length === 0 ? (
                     <div className='learner-art-empty'><p>No data</p></div>
                   ) : (
-                    filteredMyArtProducts.map((product) => (
+                    filteredMyArtProducts.map((product, index) => (
                       <div key={product.id} className='learner-art-row'>
-                        <span>{product.name}</span><span>{product.code}</span>
-                        <span>{product.description || 'No description'}</span>
-                        <span>{product.active ? 'Yes' : 'No'}</span><span>View</span>
+                        <span className='learner-art-product-cell'>
+                          <span>{index + 1}.</span>
+                          {product.iconName
+                            ? <img src={product.iconName} alt={`${product.name || 'Product'} icon`} className='learner-art-product-icon' />
+                            : <span className='learner-art-product-icon learner-art-product-icon--placeholder'>•</span>}
+                          <span>{product.name}</span>
+                        </span>
+                        <span>{product.code}</span>
+                        <span>{product.quantity || 0}</span>
+                        <span className='learner-art-status-check'>{product.inStock ? '✓' : '—'}</span>
+                        <span className='learner-art-status-check'>{product.showOnWebsite ? '✓' : '—'}</span>
+                        <span className='learner-art-status-check'>{product.active ? '✓' : '—'}</span>
+                        <span className='learner-art-actions-cell'>
+                          <button type='button' className='learner-art-action-icon' onClick={() => handleViewProduct(product)} aria-label={`View ${product.name || 'product'}`}><FiEye aria-hidden='true' /></button>
+                          <button type='button' className='learner-art-action-icon' onClick={() => handleEditProduct(product)} aria-label={`Edit ${product.name || 'product'}`}><FiEdit2 aria-hidden='true' /></button>
+                          <button type='button' className='learner-art-action-icon learner-art-action-icon--danger' onClick={() => setDeletingProduct(product)} aria-label={`Delete ${product.name || 'product'}`}><FiTrash2 aria-hidden='true' /></button>
+                        </span>
                       </div>
                     ))
                   )}
@@ -1555,28 +1881,34 @@ const Learner = () => {
           {!loading && activeSection === 'my-art-add' && (
             <section className='learner-panel learner-art-panel learner-art-create-panel'>
               <div className='learner-art-create-head'>
-                <h1>Add Product</h1>
-                <button type='button' className='learner-art-back-btn' onClick={() => setActiveSection('my-art')}>Back to Products</button>
+                <h1>{editingProductId ? 'Edit Product' : 'Add Product'}</h1>
+                <div className='learner-art-create-head-actions'>
+                  <button type='button' className='learner-art-back-btn' onClick={() => { setEditingProductId(''); setProductCodeManuallyEdited(false); setProductDraft(createEmptyProductDraft()); setProductFormStep(1); setActiveSection('my-art') }}>Back to Products</button>
+                  <button type='button' className='learner-art-close-btn' onClick={() => { setEditingProductId(''); setProductCodeManuallyEdited(false); setProductDraft(createEmptyProductDraft()); setProductFormStep(1); setActiveSection('my-art') }} aria-label='Close product wizard'>
+                    <FiX aria-hidden='true' />
+                  </button>
+                </div>
               </div>
 
               <div className='learner-art-stepper'>
-                <span className={productFormStep === 1 ? 'active' : 'done'}>1 Product Information</span>
-                <span className={productFormStep === 2 ? 'active' : ''}>2 Pricing Information</span>
-                <span>3 Shipping Information</span>
-                <span>4 Product Photo</span>
-                <span>5 Complete</span>
+                <span className={productFormStep === 1 ? 'active' : productFormStep > 1 ? 'done' : ''}>1 Product Information</span>
+                <span className={productFormStep === 2 ? 'active' : productFormStep > 2 ? 'done' : ''}>2 Pricing Information</span>
+                <span className={productFormStep === 3 ? 'active' : productFormStep > 3 ? 'done' : ''}>3 Shipping Information</span>
+                <span className={productFormStep === 4 ? 'active' : productFormStep > 4 ? 'done' : ''}>4 Product Photo</span>
+                <span className={productFormStep === 5 ? 'active' : ''}>5 Complete</span>
               </div>
 
               <form className='learner-art-form learner-art-form-page' onSubmit={handleCreateProduct}>
                 {productFormStep === 1 && (
                   <>
                 <label>
-                  <span>Name</span>
+                  <span>Name <em className='learner-required'>*</em></span>
                   <input
                     type='text'
                     value={productDraft.name}
                     onChange={(event) => setProductDraft((prev) => ({ ...prev, name: event.target.value }))}
                     placeholder='e.g. Handwoven Basket'
+                    required
                   />
                 </label>
 
@@ -1591,24 +1923,39 @@ const Learner = () => {
                 </label>
 
                 <label>
-                  <span>Code</span>
+                  <span>Code <em className='learner-required'>*</em></span>
                   <input
                     type='text'
                     value={productDraft.code}
-                    onChange={(event) => setProductDraft((prev) => ({ ...prev, code: event.target.value }))}
-                    placeholder='e.g. BK-001 (optional)'
+                    onChange={(event) => {
+                      const nextValue = event.target.value
+                      setProductCodeManuallyEdited(Boolean(nextValue.trim()))
+                      setProductDraft((prev) => ({ ...prev, code: nextValue }))
+                    }}
+                    placeholder='Auto-generated (editable)'
+                    required
                   />
                 </label>
 
                 <label>
-                  <span>Icon</span>
+                  <span>Icon URL</span>
                   <input
-                    type='text'
+                    type='url'
                     value={productDraft.iconName}
                     onChange={(event) => setProductDraft((prev) => ({ ...prev, iconName: event.target.value }))}
-                    placeholder='Icon name or URL'
+                    placeholder='https://example.com/product-icon.png'
                   />
                 </label>
+
+                <div className='learner-art-icon-upload'>
+                  <input ref={productIconInputRef} type='file' accept='image/png,image/jpeg,image/webp,image/svg+xml' onChange={handleProductIconUpload} hidden />
+                  <button type='button' className='learner-art-back-btn' onClick={() => productIconInputRef.current?.click()}>
+                    <FiUpload aria-hidden='true' /> Upload Icon
+                  </button>
+                  {productDraft.iconName
+                    ? <img src={productDraft.iconName} alt='Product icon preview' className='learner-art-icon-preview' />
+                    : <span className='learner-art-icon-hint'>No icon selected yet.</span>}
+                </div>
 
                 <label className='learner-art-active-toggle'>
                   <input
@@ -1650,12 +1997,13 @@ const Learner = () => {
                 </label>
 
                 <label className='learner-art-form-wide'>
-                  <span>Description</span>
+                  <span>Description <em className='learner-required'>*</em></span>
                   <textarea
                     rows='4'
                     value={productDraft.description}
                     onChange={(event) => setProductDraft((prev) => ({ ...prev, description: event.target.value }))}
                     placeholder='Short product description'
+                    required
                   />
                 </label>
                 <label className='learner-art-active-toggle'>
@@ -1664,7 +2012,7 @@ const Learner = () => {
                 </label>
 
                 <div className='learner-art-form-actions'>
-                  <button type='submit' className='learner-art-save-btn'>Save product</button>
+                  <button type='submit' className='learner-art-save-btn'>Next</button>
                 </div>
                   </>
                 )}
@@ -1672,38 +2020,38 @@ const Learner = () => {
                 {productFormStep === 2 && (
                   <>
                     <label>
-                      <span>Production Cost</span>
+                      <span>Production Cost (USD)</span>
                       <input
                         type='number'
                         min='0'
                         step='0.01'
                         value={productDraft.productionCost}
                         onChange={(event) => setProductDraft((prev) => ({ ...prev, productionCost: event.target.value }))}
-                        placeholder='Enter cost'
+                        placeholder='Enter cost in USD'
                       />
                     </label>
 
                     <label>
-                      <span>Wholesale Price</span>
+                      <span>Wholesale Price (USD)</span>
                       <input
                         type='number'
                         min='0'
                         step='0.01'
                         value={productDraft.wholesalePrice}
                         onChange={(event) => setProductDraft((prev) => ({ ...prev, wholesalePrice: event.target.value }))}
-                        placeholder='Enter wholesale price'
+                        placeholder='Enter wholesale price in USD'
                       />
                     </label>
 
                     <label>
-                      <span>Selling Price</span>
+                      <span>Selling Price (USD) <em className='learner-required'>*</em></span>
                       <input
                         type='number'
                         min='0'
                         step='0.01'
                         value={productDraft.sellingPrice}
                         onChange={(event) => setProductDraft((prev) => ({ ...prev, sellingPrice: event.target.value }))}
-                        placeholder='Enter selling price'
+                        placeholder='Enter selling price in USD'
                         required
                       />
                     </label>
@@ -1718,14 +2066,14 @@ const Learner = () => {
                     </label>
 
                     <label>
-                      <span>Offer Price</span>
+                      <span>Offer Price (USD)</span>
                       <input
                         type='number'
                         min='0'
                         step='0.01'
                         value={productDraft.offerPrice}
                         onChange={(event) => setProductDraft((prev) => ({ ...prev, offerPrice: event.target.value }))}
-                        placeholder='Enter offer price'
+                        placeholder='Enter offer price in USD'
                       />
                     </label>
 
@@ -1747,6 +2095,132 @@ const Learner = () => {
                         Previous
                       </button>
                       <button type='submit' className='learner-art-save-btn'>Next</button>
+                    </div>
+                  </>
+                )}
+
+                {productFormStep === 3 && (
+                  <>
+                    <label>
+                      <span>Shipping Origin <em className='learner-required'>*</em></span>
+                      <input
+                        type='text'
+                        value={productDraft.shippingOrigin}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, shippingOrigin: event.target.value }))}
+                        placeholder='e.g. Nairobi, Kenya'
+                        required
+                      />
+                    </label>
+
+                    <label>
+                      <span>Shipping Method</span>
+                      <select
+                        value={productDraft.shippingMethod}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, shippingMethod: event.target.value }))}
+                      >
+                        <option value='standard'>Standard</option>
+                        <option value='express'>Express</option>
+                        <option value='pickup'>Pickup</option>
+                      </select>
+                    </label>
+
+                    <label>
+                      <span>Shipping Cost</span>
+                      <input
+                        type='number'
+                        min='0'
+                        step='0.01'
+                        value={productDraft.shippingCost}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, shippingCost: event.target.value }))}
+                        placeholder='Enter shipping cost'
+                      />
+                    </label>
+
+                    <label>
+                      <span>Delivery Window (Kenya) <em className='learner-required'>*</em></span>
+                      <input
+                        type='text'
+                        value={productDraft.deliveryWindowKenya}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, deliveryWindowKenya: event.target.value }))}
+                        placeholder='e.g. 2-3 business days'
+                        required
+                      />
+                    </label>
+
+                    <label>
+                      <span>Delivery Window (International) <em className='learner-required'>*</em></span>
+                      <input
+                        type='text'
+                        value={productDraft.deliveryWindowInternational}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, deliveryWindowInternational: event.target.value }))}
+                        placeholder='e.g. 7-14 business days'
+                        required
+                      />
+                    </label>
+
+                    <div className='learner-art-form-actions learner-art-form-actions--between'>
+                      <button type='button' className='learner-art-back-btn' onClick={() => setProductFormStep(2)}>Previous</button>
+                      <button type='submit' className='learner-art-save-btn'>Next</button>
+                    </div>
+                  </>
+                )}
+
+                {productFormStep === 4 && (
+                  <>
+                    <label className='learner-art-form-wide'>
+                      <span>Product Photo URL <em className='learner-required'>*</em></span>
+                      <input
+                        type='url'
+                        value={productDraft.photoURL}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, photoURL: event.target.value }))}
+                        placeholder='https://example.com/product-photo.jpg'
+                        required
+                      />
+                    </label>
+
+                    <div className='learner-art-icon-upload'>
+                      <input
+                        ref={productPhotoInputRef}
+                        type='file'
+                        accept='image/png,image/jpeg,image/webp,image/avif'
+                        onChange={handleProductPhotoUpload}
+                        hidden
+                      />
+                      <button type='button' className='learner-art-back-btn' onClick={() => productPhotoInputRef.current?.click()}>
+                        <FiUpload aria-hidden='true' /> Upload Photo
+                      </button>
+                      <span className='learner-art-icon-hint'>You can paste a URL or upload from your device.</span>
+                    </div>
+
+                    <div className='learner-art-form-wide learner-art-photo-preview'>
+                      {productDraft.photoURL
+                        ? <img src={productDraft.photoURL} alt={productDraft.name || 'Product preview'} />
+                        : <div className='learner-art-photo-placeholder'>Paste a photo URL to preview product image.</div>}
+                    </div>
+
+                    <div className='learner-art-form-actions learner-art-form-actions--between'>
+                      <button type='button' className='learner-art-back-btn' onClick={() => setProductFormStep(3)}>Previous</button>
+                      <button type='submit' className='learner-art-save-btn'>Next</button>
+                    </div>
+                  </>
+                )}
+
+                {productFormStep === 5 && (
+                  <>
+                    <div className='learner-art-form-wide learner-art-summary'>
+                      <h3>Review Product Details</h3>
+                      <p><strong>Name:</strong> {productDraft.name || 'Not provided'}</p>
+                      <p><strong>Code:</strong> {productDraft.code.trim().toUpperCase() || `PRD-${String(myArtProducts.length + 1).padStart(3, '0')}`}</p>
+                      <p><strong>Selling Price (USD):</strong> {formatUsd(productDraft.sellingPrice)}</p>
+                      <p><strong>Shipping:</strong> {productDraft.shippingMethod}</p>
+                      <p><strong>Delivery (Kenya):</strong> {productDraft.deliveryWindowKenya || 'Not provided'}</p>
+                      <p><strong>Delivery (International):</strong> {productDraft.deliveryWindowInternational || 'Not provided'}</p>
+                      <p><strong>Status:</strong> {productDraft.active ? 'Active' : 'Inactive'}</p>
+                    </div>
+
+                    <div className='learner-art-form-actions learner-art-form-actions--between'>
+                      <button type='button' className='learner-art-back-btn' onClick={() => setProductFormStep(4)}>Previous</button>
+                      <button type='submit' className='learner-art-save-btn'>Save Product</button>
                     </div>
                   </>
                 )}
@@ -1779,8 +2253,8 @@ const Learner = () => {
                 <div className='learner-account-group'>
                   <h3>Full name</h3>
                   <div className='learner-account-grid'>
-                    <label><span>First name</span><input type='text' value={profileDraft.firstName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, firstName: e.target.value }))} placeholder='First name' /></label>
-                    <label><span>Last name</span><input type='text' value={profileDraft.lastName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, lastName: e.target.value }))} placeholder='Last name' /></label>
+                    <label><span>First name <em className='learner-required'>*</em></span><input type='text' value={profileDraft.firstName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, firstName: e.target.value }))} placeholder='First name' required /></label>
+                    <label><span>Last name <em className='learner-required'>*</em></span><input type='text' value={profileDraft.lastName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, lastName: e.target.value }))} placeholder='Last name' required /></label>
                   </div>
                   <button type='button' className='learner-account-save-btn' onClick={handleProfileSave} disabled={profileSaving}>Save profile</button>
                 </div>
@@ -1795,8 +2269,8 @@ const Learner = () => {
                   <h3>Password</h3>
                   <p>Modify your current password.</p>
                   <div className='learner-account-grid'>
-                    <label><span>Current password</span><input type='password' value={passwordForm.currentPassword} onChange={(e) => setPasswordForm((prev) => ({ ...prev, currentPassword: e.target.value }))} placeholder='Current password' /></label>
-                    <label><span>New password</span><input type='password' value={passwordForm.newPassword} onChange={(e) => setPasswordForm((prev) => ({ ...prev, newPassword: e.target.value }))} placeholder='New password' /></label>
+                    <label><span>Current password <em className='learner-required'>*</em></span><input type='password' value={passwordForm.currentPassword} onChange={(e) => setPasswordForm((prev) => ({ ...prev, currentPassword: e.target.value }))} placeholder='Current password' required /></label>
+                    <label><span>New password <em className='learner-required'>*</em></span><input type='password' value={passwordForm.newPassword} onChange={(e) => setPasswordForm((prev) => ({ ...prev, newPassword: e.target.value }))} placeholder='New password' required /></label>
                   </div>
                   <button type='button' className='learner-account-save-btn' onClick={handlePasswordUpdate}>Update password</button>
                 </div>
@@ -1891,6 +2365,49 @@ const Learner = () => {
                   ))}
               </div>
             </section>
+          )}
+
+          {viewingProduct && (
+            <div className='learner-art-dialog-overlay' role='dialog' aria-modal='true' aria-label='Product details'>
+              <article className='learner-art-dialog'>
+                <header>
+                  <h3>{viewingProduct.name || 'Product Details'}</h3>
+                </header>
+                <div className='learner-art-dialog-body'>
+                  {viewingProduct.photoURL && (
+                    <img src={viewingProduct.photoURL} alt={viewingProduct.name || 'Product'} className='learner-art-dialog-image' />
+                  )}
+                  <p><strong>Code:</strong> {viewingProduct.code || 'N/A'}</p>
+                  <p><strong>Quantity:</strong> {viewingProduct.quantity || 0}</p>
+                  <p><strong>Selling Price (USD):</strong> {formatUsd(viewingProduct.sellingPrice)}</p>
+                  <p><strong>Shipping Origin:</strong> {viewingProduct.shippingOrigin || 'N/A'}</p>
+                  <p><strong>Delivery (Kenya):</strong> {viewingProduct.deliveryWindowKenya || viewingProduct.deliveryWindow || 'N/A'}</p>
+                  <p><strong>Delivery (International):</strong> {viewingProduct.deliveryWindowInternational || 'N/A'}</p>
+                  <p><strong>Description:</strong> {viewingProduct.description || 'No description'}</p>
+                </div>
+                <footer className='learner-art-dialog-actions'>
+                  <button type='button' className='learner-art-back-btn' onClick={() => setViewingProduct(null)}>Close</button>
+                </footer>
+              </article>
+            </div>
+          )}
+
+          {deletingProduct && (
+            <div className='learner-art-dialog-overlay' role='dialog' aria-modal='true' aria-label='Delete product confirmation'>
+              <article className='learner-art-dialog learner-art-dialog--danger'>
+                <header>
+                  <h3>Delete Product</h3>
+                </header>
+                <div className='learner-art-dialog-body'>
+                  <p>Are you sure you want to delete <strong>{deletingProduct.name || 'this product'}</strong>?</p>
+                  <p>This action cannot be undone.</p>
+                </div>
+                <footer className='learner-art-dialog-actions'>
+                  <button type='button' className='learner-art-back-btn' onClick={() => setDeletingProduct(null)}>Cancel</button>
+                  <button type='button' className='learner-art-save-btn learner-art-save-btn--danger' onClick={handleDeleteProduct}>Delete</button>
+                </footer>
+              </article>
+            </div>
           )}
         </main>
       </div>
