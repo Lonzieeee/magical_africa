@@ -90,29 +90,40 @@ export const AuthProvider = ({ children }) => {
         unsubscribeUserDoc = null
       }
 
-      setUser(currentUser);
-      
-      if (currentUser) {
-        const userDocRef = doc(db, "users", currentUser.uid)
-        const userDoc = await getDoc(userDocRef);
-        if (userDoc.exists()) {
-          setUserData(userDoc.data());
-        } else {
-          setUserData(null)
-        }
+      try {
+        setUser(currentUser);
 
-        unsubscribeUserDoc = onSnapshot(userDocRef, (snapshot) => {
-          if (snapshot.exists()) {
-            setUserData(snapshot.data())
+        if (currentUser) {
+          const userDocRef = doc(db, "users", currentUser.uid)
+          const userDoc = await getDoc(userDocRef);
+          if (userDoc.exists()) {
+            setUserData(userDoc.data());
           } else {
             setUserData(null)
           }
-        })
-      } else {
-        setUserData(null);
+
+          unsubscribeUserDoc = onSnapshot(
+            userDocRef,
+            (snapshot) => {
+              if (snapshot.exists()) {
+                setUserData(snapshot.data())
+              } else {
+                setUserData(null)
+              }
+            },
+            (error) => {
+              console.log('User profile listener error:', error)
+            }
+          )
+        } else {
+          setUserData(null);
+        }
+      } catch (error) {
+        console.log('Auth context failed to load user profile:', error)
+        setUserData(null)
+      } finally {
+        setLoading(false);
       }
-      
-      setLoading(false);
     });
 
     return () => {

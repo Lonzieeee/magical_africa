@@ -447,6 +447,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/Navbar';
 import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
+import { collection, onSnapshot } from 'firebase/firestore'
+import { db } from '../context/AuthContext'
 import '../styles/market.css'
 import '../styles/auctions.css'
 import '../styles/shop.css'
@@ -460,6 +462,7 @@ import '../styles/best-sellers.css'
 
 const Market = () => {
   const { t } = useTranslation();
+  const [communityBestSellers, setCommunityBestSellers] = useState([])
 
   const marketHeroImages = [
     '/images/side-view-people-garage-sale2.jpg',
@@ -497,6 +500,66 @@ useEffect(() => {
 
   const [activeCategory, setActiveCategory] = useState('jewellery');
   const auctionRef = useRef(null);
+
+  useEffect(() => {
+    const marketProductsRef = collection(db, 'marketProducts')
+    const unsubscribe = onSnapshot(marketProductsRef, (snapshot) => {
+      const products = snapshot.docs
+        .map((productDoc) => ({ id: productDoc.id, ...productDoc.data() }))
+        .filter((product) => product.showOnWebsite && product.active)
+        .sort((a, b) => {
+          const aTime = new Date(a.updatedAt || a.createdAt || 0).getTime()
+          const bTime = new Date(b.updatedAt || b.createdAt || 0).getTime()
+          return bTime - aTime
+        })
+        .slice(0, 4)
+
+      setCommunityBestSellers(products)
+    }, (error) => {
+      console.error('Failed to load marketplace products:', error)
+      setCommunityBestSellers([])
+    })
+
+    return unsubscribe
+  }, [])
+
+  const fallbackBestSellers = [
+    {
+      id: 'default-1',
+      imageUrl: '/images/pottery2-image2.png',
+      name: t('market.bestSellers.item1.name'),
+      price: 45
+    },
+    {
+      id: 'default-2',
+      imageUrl: '/images/pottery3-image3.png',
+      name: t('market.bestSellers.item2.name'),
+      price: 76
+    },
+    {
+      id: 'default-3',
+      imageUrl: '/images/pottery4-image5.png',
+      name: t('market.bestSellers.item3.name'),
+      price: 25
+    },
+    {
+      id: 'default-4',
+      imageUrl: '/images/pottery5-image6.png',
+      name: t('market.bestSellers.item4.name'),
+      price: 30
+    }
+  ]
+
+  const bestSellerItems = communityBestSellers.length ? communityBestSellers : fallbackBestSellers
+
+  const formatMarketPrice = (value) => {
+    const amount = Number(value || 0)
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0
+    }).format(Number.isFinite(amount) ? amount : 0)
+  }
 
   useEffect(() => {
     const boxes = document.querySelectorAll('.Auction-box1');
@@ -577,50 +640,18 @@ useEffect(() => {
         <p>{t('market.bestSellers.subtitle')}</p>
 
         <div className='best-seller-wrapper'>
-
-          <div className='best-seller1 sel1'>
-            <img src="/images/pottery2-image2.png" alt="" />
-            <div className='best-seller1-content'>
-              <p>{t('market.bestSellers.item1.name')}</p>
-              <button>{t('market.bestSellers.addToCart')}</button>
+          {bestSellerItems.map((item, index) => (
+            <div key={item.id || index} className={`best-seller1 sel${(index % 4) + 1}`}>
+              <img src={item.imageUrl || '/images/pottery2-image2.png'} alt={item.name || 'Marketplace product'} />
+              <div className='best-seller1-content'>
+                <p>{item.name || 'Untitled Product'}</p>
+                <button>{t('market.bestSellers.addToCart')}</button>
+              </div>
+              <div className='seller-price'>
+                <p>{t('market.bestSellers.price')} : {formatMarketPrice(item.price)}</p>
+              </div>
             </div>
-            <div className='seller-price'>
-              <p>{t('market.bestSellers.price')} : $45</p>
-            </div>
-          </div>
-
-          <div className='best-seller1 sel2'>
-            <img src="/images/pottery3-image3.png" alt="" />
-            <div className='best-seller1-content'>
-              <p>{t('market.bestSellers.item2.name')}</p>
-              <button>{t('market.bestSellers.addToCart')}</button>
-            </div>
-            <div className='seller-price'>
-              <p>{t('market.bestSellers.price')} : $76</p>
-            </div>
-          </div>
-
-          <div className='best-seller1 sel3'>
-            <img src="/images/pottery4-image5.png" alt="" />
-            <div className='best-seller1-content'>
-              <p>{t('market.bestSellers.item3.name')}</p>
-              <button>{t('market.bestSellers.addToCart')}</button>
-            </div>
-            <div className='seller-price'>
-              <p>{t('market.bestSellers.price')} : $25</p>
-            </div>
-          </div>
-
-          <div className='best-seller1 sel4'>
-            <img src="/images/pottery5-image6.png" alt="" />
-            <div className='best-seller1-content'>
-              <p>{t('market.bestSellers.item4.name')}</p>
-              <button>{t('market.bestSellers.addToCart')}</button>
-            </div>
-            <div className='seller-price'>
-              <p>{t('market.bestSellers.price')} : $30</p>
-            </div>
-          </div>
+          ))}
 
         </div>
       </div>
