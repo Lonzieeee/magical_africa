@@ -483,31 +483,31 @@
 
 .learner-nav-groups {
   display: grid;
-  gap: 10px;
+  gap: 6px;
 }
 
 .learner-nav-group {
-  border: 1px solid rgba(145, 165, 133, 0.45);
-  background-color: rgba(255, 255, 255, 0.5);
-  padding: 6px;
+  border: none;
+  background-color: transparent;
+  padding: 0;
 }
 
 .learner-nav-group-title {
   width: 100%;
-  border: none;
+  border: 1px solid transparent;
   background: transparent;
   display: flex;
   align-items: center;
   justify-content: space-between;
   text-align: left;
-  padding: 8px 8px;
+  padding: 10px 10px;
   color: var(--ld-black);
-  font-size: 0.92rem;
-  font-weight: 800;
+  font-size: 0.88rem;
+  font-weight: 700;
   letter-spacing: 0.2px;
 }
 
-.learner-nav-group-title::after {
+.learner-nav-group-title--dropdown::after {
   content: '\25BE';
   font-size: 0.76rem;
   color: var(--ld-red);
@@ -515,11 +515,18 @@
   transition: transform 0.2s ease;
 }
 
-.learner-nav-group-title.expanded::after {
+.learner-nav-group-title--dropdown.expanded::after {
   transform: rotate(0deg);
 }
 
 .learner-nav-group-title:hover {
+  background-color: rgba(66, 133, 244, 0.08);
+  color: var(--ld-red);
+}
+
+.learner-nav-group-title.active {
+  border-color: rgba(66, 133, 244, 0.25);
+  background-color: rgba(66, 133, 244, 0.12);
   color: var(--ld-red);
 }
 

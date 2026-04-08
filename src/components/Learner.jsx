@@ -73,10 +73,7 @@ const Learner = () => {
   const [storeView, setStoreView] = useState('all')
   const [courseView, setCourseView] = useState('all')
   const [menuOpen, setMenuOpen] = useState({
-    discover: true,
-    learning: true,
-    growth: false,
-    community: false
+    learning: true
   })
   const [courses, setCourses] = useState([])
   const [progressMap, setProgressMap] = useState({})
@@ -130,6 +127,10 @@ const Learner = () => {
         updatedAt: new Date().toISOString()
       })
     )
+  }
+
+  const toggleMenu = (menu) => {
+    setMenuOpen((prev) => ({ ...prev, [menu]: !prev[menu] }))
   }
 
   useEffect(() => {
@@ -504,24 +505,34 @@ const Learner = () => {
     return allCourses.filter(course => ownedCourseIds.has(course.id))
   }, [allCourses, ownedCourseIds])
 
-  const myCourses = useMemo(() => {
-    const toTimestamp = (value) => {
-      if (!value) return 0
-      const parsed = new Date(value).getTime()
-      return Number.isNaN(parsed) ? 0 : parsed
-    }
-
-    const getActivityTime = (course) => {
+  const purchasedCourses = useMemo(() => {
+    return ownedCourses.filter((course) => {
       const progress = progressMap[course.id] || {}
-      return Math.max(
-        toTimestamp(progress.lastActiveAt),
-        toTimestamp(progress.updatedAt),
-        toTimestamp(progress.purchasedAt)
-      )
-    }
-
-    return [...ownedCourses].sort((a, b) => getActivityTime(b) - getActivityTime(a))
+      return Boolean(progress.addedToLibrary || progress.paid)
+    })
   }, [ownedCourses, progressMap])
+
+  const startedCourses = useMemo(() => {
+    return ownedCourses.filter((course) => {
+      const progress = progressMap[course.id] || {}
+      const completion = progress.completion || 0
+      return Boolean(progress.started || completion > 0)
+    })
+  }, [ownedCourses, progressMap])
+
+  const continueLearningCourses = useMemo(() => {
+    return startedCourses.filter((course) => {
+      const completion = progressMap[course.id]?.completion || 0
+      return completion > 0 && completion < 100
+    })
+  }, [progressMap, startedCourses])
+
+  const completedLearningCourses = useMemo(() => {
+    return startedCourses.filter((course) => {
+      const completion = progressMap[course.id]?.completion || 0
+      return completion >= 100
+    })
+  }, [progressMap, startedCourses])
 
   const suggestedCourses = useMemo(() => {
     return filteredCourses.filter(course => {
@@ -928,44 +939,31 @@ const Learner = () => {
 
   const myCoursesForView = useMemo(() => {
     if (courseView === 'in-progress') {
-      return myCourses.filter((course) => {
-        const completion = progressMap[course.id]?.completion || 0
-        return completion > 0 && completion < 100
-      })
-    }
-    if (courseView === 'ready') {
-      return myCourses.filter((course) => {
-        const progress = progressMap[course.id] || {}
-        const completion = progress.completion || 0
-        return completion === 0 && !progress.started
-      })
+      return continueLearningCourses
     }
     if (courseView === 'completed') {
-      return myCourses.filter((course) => {
-        const completion = progressMap[course.id]?.completion || 0
-        return completion >= 100
-      })
+      return completedLearningCourses
     }
-    return myCourses
-  }, [courseView, myCourses, progressMap])
+    return purchasedCourses
+  }, [completedLearningCourses, continueLearningCourses, courseView, purchasedCourses])
 
   const quickResumeCourses = useMemo(() => {
-    return myCourses
+    return continueLearningCourses
       .filter((course) => {
         const completion = progressMap[course.id]?.completion || 0
         return completion < 100
       })
       .slice(0, 3)
-  }, [myCourses, progressMap])
+  }, [continueLearningCourses, progressMap])
 
   const completedCourseTitles = useMemo(() => {
-    return myCourses
+    return completedLearningCourses
       .filter((course) => (progressMap[course.id]?.completion || 0) >= 100)
       .map((course) => course.title || 'Untitled Course')
-  }, [myCourses, progressMap])
+  }, [completedLearningCourses, progressMap])
 
   const completedCourses = useMemo(() => {
-    return myCourses
+    return completedLearningCourses
       .filter((course) => (progressMap[course.id]?.completion || 0) >= 100)
       .map((course) => ({
         id: course.id,
@@ -973,33 +971,26 @@ const Learner = () => {
         teacherName: course.teacherName || course.tutorName || 'Tutor',
         completedAt: progressMap[course.id]?.updatedAt || progressMap[course.id]?.lastActiveAt || new Date().toISOString()
       }))
-  }, [myCourses, progressMap])
+  }, [completedLearningCourses, progressMap])
 
   const courseViewMeta = useMemo(() => {
     if (courseView === 'in-progress') {
       return {
         title: 'Continue Learning',
         subtitle: 'Pick up from where you left off and protect your streak.',
-        emptyText: 'No in-progress courses yet. Start a course from My Courses to continue learning here.'
-      }
-    }
-    if (courseView === 'ready') {
-      return {
-        title: 'Ready To Start',
-        subtitle: 'These are enrolled courses you have not started yet.',
-        emptyText: 'Nothing is waiting to start right now. Add a new course from the store.'
+        emptyText: 'No in-progress courses yet. Start a course from Purchased Courses to continue learning here.'
       }
     }
     if (courseView === 'completed') {
       return {
         title: 'Completed Courses',
-        subtitle: 'Finished courses stay here for revision and certificate tracking.',
+        subtitle: 'Only finished courses appear here.',
         emptyText: 'No completed courses yet. Finish a course to unlock it here.'
       }
     }
     return {
-      title: 'My Courses',
-      subtitle: 'Your full personal library of enrolled and purchased courses.',
+      title: 'Purchased Courses',
+      subtitle: 'Your purchased and enrolled courses.',
       emptyText: 'You have not added or bought any course yet.'
     }
   }, [courseView])
@@ -1065,7 +1056,7 @@ const Learner = () => {
   // Language Practice is temporarily disabled while the section is being redesigned.
   useEffect(() => {
     if (activeSection === 'language') {
-      setActiveSection('culture')
+      setActiveSection('store')
     }
   }, [activeSection])
 
@@ -1075,10 +1066,6 @@ const Learner = () => {
     const now = new Date().toISOString()
     setAnnouncementSeenAt(now)
     localStorage.setItem(getAnnouncementSeenKey(user.uid), now)
-  }
-
-  const toggleMenu = (menu) => {
-    setMenuOpen((prev) => ({ ...prev, [menu]: !prev[menu] }))
   }
 
   function getCoursePrice(course) {
@@ -1306,33 +1293,16 @@ const Learner = () => {
           <div className='learner-nav-groups'>
             <div className='learner-nav-group'>
               <button
-                className={`learner-nav-group-title ${menuOpen.discover ? 'expanded' : ''}`}
-                onClick={() => toggleMenu('discover')}
-                aria-expanded={menuOpen.discover}
+                className={`learner-nav-group-title ${activeSection === 'store' ? 'active' : ''}`}
+                onClick={() => openSection('store', { storeView: 'all' })}
               >
-                Discover
+                All Courses
               </button>
-              {menuOpen.discover && (
-                <div className='learner-nav-submenu'>
-                  <button className={`learner-nav-subitem ${activeSection === 'store' && storeView === 'all' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'all' })}>
-                    Course Store
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'store' && storeView === 'free' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'free' })}>
-                    Free Courses
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'store' && storeView === 'paid' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'paid' })}>
-                    Premium Courses
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'store' && storeView === 'published' ? 'active' : ''}`} onClick={() => openSection('store', { storeView: 'published' })}>
-                    Published Now
-                  </button>
-                </div>
-              )}
             </div>
 
             <div className='learner-nav-group'>
               <button
-                className={`learner-nav-group-title ${menuOpen.learning ? 'expanded' : ''}`}
+                className={`learner-nav-group-title learner-nav-group-title--dropdown ${menuOpen.learning ? 'expanded' : ''}`}
                 onClick={() => toggleMenu('learning')}
                 aria-expanded={menuOpen.learning}
               >
@@ -1341,13 +1311,10 @@ const Learner = () => {
               {menuOpen.learning && (
                 <div className='learner-nav-submenu'>
                   <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'all' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'all' })}>
-                    My Courses
+                    Purchased Courses
                   </button>
                   <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'in-progress' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'in-progress' })}>
                     Continue Learning
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'ready' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'ready' })}>
-                    Ready To Start
                   </button>
                   <button className={`learner-nav-subitem ${activeSection === 'courses' && courseView === 'completed' ? 'active' : ''}`} onClick={() => openSection('courses', { courseView: 'completed' })}>
                     Completed Courses
@@ -1358,48 +1325,47 @@ const Learner = () => {
 
             <div className='learner-nav-group'>
               <button
-                className={`learner-nav-group-title ${menuOpen.growth ? 'expanded' : ''}`}
-                onClick={() => toggleMenu('growth')}
-                aria-expanded={menuOpen.growth}
+                className={`learner-nav-group-title ${activeSection === 'progress' ? 'active' : ''}`}
+                onClick={() => openSection('progress')}
               >
-                Growth
+                Progress Overview
               </button>
-              {menuOpen.growth && (
-                <div className='learner-nav-submenu'>
-                  <button className={`learner-nav-subitem ${activeSection === 'progress' ? 'active' : ''}`} onClick={() => openSection('progress')}>
-                    Progress Overview
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'achievements' ? 'active' : ''}`} onClick={() => openSection('achievements')}>
-                    Certifications & Achievements
-                  </button>
-                </div>
-              )}
             </div>
 
             <div className='learner-nav-group'>
               <button
-                className={`learner-nav-group-title ${menuOpen.community ? 'expanded' : ''}`}
-                onClick={() => toggleMenu('community')}
-                aria-expanded={menuOpen.community}
+                className={`learner-nav-group-title ${activeSection === 'achievements' ? 'active' : ''}`}
+                onClick={() => openSection('achievements')}
               >
-                Community & Practice
+                Certifications & Achievements
               </button>
-              {menuOpen.community && (
-                <div className='learner-nav-submenu'>
-                  <button className={`learner-nav-subitem ${activeSection === 'notifications' ? 'active' : ''}`} onClick={() => openSection('notifications')}>
-                    Notifications
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'profile' ? 'active' : ''}`} onClick={() => openSection('profile')}>
-                    Profile & Settings
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'settings' ? 'active' : ''}`} onClick={() => openSection('settings')}>
-                    Settings
-                  </button>
-                  <button className={`learner-nav-subitem ${activeSection === 'culture' ? 'active' : ''}`} onClick={() => openSection('culture')}>
-                    Cultural Exploration Hub
-                  </button>
-                </div>
-              )}
+            </div>
+
+            <div className='learner-nav-group'>
+              <button
+                className={`learner-nav-group-title ${activeSection === 'notifications' ? 'active' : ''}`}
+                onClick={() => openSection('notifications')}
+              >
+                Notifications
+              </button>
+            </div>
+
+            <div className='learner-nav-group'>
+              <button
+                className={`learner-nav-group-title ${activeSection === 'profile' ? 'active' : ''}`}
+                onClick={() => openSection('profile')}
+              >
+                Profile & Settings
+              </button>
+            </div>
+
+            <div className='learner-nav-group'>
+              <button
+                className={`learner-nav-group-title ${activeSection === 'settings' ? 'active' : ''}`}
+                onClick={() => openSection('settings')}
+              >
+                Settings
+              </button>
             </div>
           </div>
         </aside>
@@ -1412,7 +1378,7 @@ const Learner = () => {
                   <h3>Welcome, <span className='learner-name-highlight'>{learnerName}</span></h3>
                 </div>
                 <div className='learner-top-actions'>
-                  <span className='learner-top-stat'>{myCourses.length} course{myCourses.length === 1 ? '' : 's'} in your library</span>
+                  <span className='learner-top-stat'>{purchasedCourses.length} course{purchasedCourses.length === 1 ? '' : 's'} in your library</span>
                   <button className='learner-alert-bell' type='button' onClick={() => openSection('notifications')}>
                     <FiBell aria-hidden='true' />
                     {unseenAnnouncementsCount > 0 && <span>{unseenAnnouncementsCount}</span>}
@@ -1524,7 +1490,7 @@ const Learner = () => {
 
           {!loading && activeSection === 'store' && (
             <section className={`learner-panel learner-panel--store ${storeView === 'free' ? 'learner-panel--store-free' : ''}`}>
-              {storeView !== 'free' && <h1><FiShoppingBag /> Course Store</h1>}
+              {storeView !== 'free' && <h1><FiShoppingBag /> All Courses</h1>}
               {storeView === 'all' ? (
                 <div className='learner-store-badges'>
                   <button
@@ -1781,7 +1747,7 @@ const Learner = () => {
                             }}
                           >
                             {isOwned
-                              ? (isCompleted ? 'Review Course' : hasStarted ? 'Continue Course' : 'Start Course')
+                              ? (isCompleted ? 'View Course' : hasStarted ? 'Continue Course' : 'Start Course')
                               : isAcquiring
                                 ? 'Processing...'
                                 : (isPaid ? `Buy Course ($${price})` : 'Add Course')}
@@ -1858,16 +1824,11 @@ const Learner = () => {
                           <div className='learner-course-meta'>
                             <span>{course.courseType || 'General'}</span>
                             <span>{progress.paid ? 'Paid' : 'Free'}</span>
-                            <span>{completion >= 100 ? 'Completed successfully' : progress.started ? 'In Progress' : 'Ready to Start'}</span>
+                            <span>{completion >= 100 ? 'Completed successfully' : progress.started ? 'In Progress' : 'Purchased'}</span>
                           </div>
                           {courseView === 'in-progress' && (
                             <p className='learner-inprogress-note'>
                               Lessons in progress: {progress.lessonsCompleted || 0} • Completion: {completion}%
-                            </p>
-                          )}
-                          {courseView === 'ready' && (
-                            <p className='learner-inprogress-note'>
-                              Not started yet. Progress: 0%.
                             </p>
                           )}
                         </div>
@@ -1882,11 +1843,7 @@ const Learner = () => {
                         <p className='learner-last-opened'>{lastOpenedLabel}</p>
                         <p className='learner-next-lesson'>{nextLessonLabel}</p>
 
-                        {(courseView === 'completed' || isCompleted) ? (
-                          <button className='learner-resume-btn learner-resume-btn-secondary' onClick={() => handleViewCourseDetails(course.id)}>
-                            Review Course
-                          </button>
-                        ) : (
+                        {(courseView === 'completed' || isCompleted) ? null : (
                           <button className='learner-resume-btn' onClick={() => handleResumeCourse(course.id)}>
                             {hasStarted ? 'Resume' : 'Start Course'}
                           </button>
@@ -2188,45 +2145,6 @@ const Learner = () => {
                       </button>
                     </span>
                   ))}
-              </div>
-            </section>
-          )}
-
-          {!loading && activeSection === 'culture' && (
-            <section className='learner-panel learner-panel--culture'>
-              <h1>Cultural Exploration Hub</h1>
-              <div className='learner-culture-grid'>
-                <article className='learner-culture-card'>
-                  <img src='/images/maasai-land2.jpg' alt='Maasai community and landscape' className='learner-culture-card-image' />
-                  <div className='learner-culture-card-content'>
-                    <h3>Featured Community of the Week</h3>
-                    <p>Maasai oral storytelling and age-set traditions.</p>
-                  </div>
-                </article>
-
-                <article className='learner-culture-card'>
-                  <img src='/images/african-music.jpeg' alt='African cultural performance with music and dance' className='learner-culture-card-image' />
-                  <div className='learner-culture-card-content'>
-                    <h3>Cultural Practices</h3>
-                    <p>Music, food, clothing, and ceremony spotlights from active courses.</p>
-                  </div>
-                </article>
-
-                <article className='learner-culture-card'>
-                  <img src='/images/African-storytelling2.jpg' alt='African storytelling gathering' className='learner-culture-card-image' />
-                  <div className='learner-culture-card-content'>
-                    <h3>Interactive Stories</h3>
-                    <p>Short story-based learning moments connected to your enrolled lessons.</p>
-                  </div>
-                </article>
-
-                <article className='learner-culture-card'>
-                  <img src='/images/african-pattern6.jpg' alt='African pattern and heritage artwork' className='learner-culture-card-image' />
-                  <div className='learner-culture-card-content'>
-                    <h3>Did You Know?</h3>
-                    <p>Did you know Swahili has words borrowed from Arabic, Persian, and Portuguese?</p>
-                  </div>
-                </article>
               </div>
             </section>
           )}
