@@ -107,9 +107,22 @@ const Learner = () => {
   })
   const [myArtProducts, setMyArtProducts] = useState([])
   const [productSearchTerm, setProductSearchTerm] = useState('')
+  const [productFormStep, setProductFormStep] = useState(1)
   const [productDraft, setProductDraft] = useState({
     name: '',
+    alias: '',
     code: '',
+    quantity: '',
+    metaTags: '',
+    iconName: '',
+    inStock: true,
+    showOnWebsite: true,
+    productionCost: '',
+    wholesalePrice: '',
+    sellingPrice: '',
+    onOffer: false,
+    offerPrice: '',
+    taxInclusive: true,
     description: '',
     active: true
   })
@@ -1300,8 +1313,33 @@ const Learner = () => {
   const handleCreateProduct = (event) => {
     event.preventDefault()
 
+    if (productFormStep === 1) {
+      const name = productDraft.name.trim()
+      if (!name) {
+        setActionToast({
+          tone: 'warning',
+          title: 'Product name required',
+          message: 'Enter a product name before continuing.'
+        })
+        return
+      }
+
+      setProductFormStep(2)
+      return
+    }
+
     const name = productDraft.name.trim()
+    const alias = productDraft.alias.trim()
     const description = productDraft.description.trim()
+    const quantity = Number(productDraft.quantity || 0)
+    const productionCost = Number(productDraft.productionCost || 0)
+    const wholesalePrice = Number(productDraft.wholesalePrice || 0)
+    const sellingPrice = Number(productDraft.sellingPrice || 0)
+    const offerPrice = Number(productDraft.offerPrice || 0)
+    const metaTags = productDraft.metaTags
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean)
     const normalizedCode = productDraft.code.trim().toUpperCase()
 
     if (!name) {
@@ -1318,14 +1356,44 @@ const Learner = () => {
     const nextProduct = {
       id: `product-${Date.now()}`,
       name,
+      alias,
       code: generatedCode,
+      quantity: Number.isFinite(quantity) ? quantity : 0,
+      metaTags,
+      iconName: productDraft.iconName,
+      inStock: Boolean(productDraft.inStock),
+      showOnWebsite: Boolean(productDraft.showOnWebsite),
+      productionCost: Number.isFinite(productionCost) ? productionCost : 0,
+      wholesalePrice: Number.isFinite(wholesalePrice) ? wholesalePrice : 0,
+      sellingPrice: Number.isFinite(sellingPrice) ? sellingPrice : 0,
+      onOffer: Boolean(productDraft.onOffer),
+      offerPrice: Number.isFinite(offerPrice) ? offerPrice : 0,
+      taxInclusive: Boolean(productDraft.taxInclusive),
       description,
       active: Boolean(productDraft.active),
       createdAt: new Date().toISOString()
     }
 
     setMyArtProducts((prev) => [nextProduct, ...prev])
-    setProductDraft({ name: '', code: '', description: '', active: true })
+    setProductDraft({
+      name: '',
+      alias: '',
+      code: '',
+      quantity: '',
+      metaTags: '',
+      iconName: '',
+      inStock: true,
+      showOnWebsite: true,
+      productionCost: '',
+      wholesalePrice: '',
+      sellingPrice: '',
+      onOffer: false,
+      offerPrice: '',
+      taxInclusive: true,
+      description: '',
+      active: true
+    })
+    setProductFormStep(1)
     setActiveSection('my-art')
     setActionToast({
       tone: 'success',
@@ -2045,9 +2113,19 @@ const Learner = () => {
                 </button>
               </div>
 
+              <div className='learner-art-stepper'>
+                <span className={productFormStep === 1 ? 'active' : 'done'}>1 Product Information</span>
+                <span className={productFormStep === 2 ? 'active' : ''}>2 Pricing Information</span>
+                <span>3 Shipping Information</span>
+                <span>4 Product Photo</span>
+                <span>5 Complete</span>
+              </div>
+
               <form className='learner-art-form learner-art-form-page' onSubmit={handleCreateProduct}>
+                {productFormStep === 1 && (
+                  <>
                 <label>
-                  <span>Product name</span>
+                  <span>Name</span>
                   <input
                     type='text'
                     value={productDraft.name}
@@ -2055,6 +2133,17 @@ const Learner = () => {
                     placeholder='e.g. Handwoven Basket'
                   />
                 </label>
+
+                <label>
+                  <span>Alias</span>
+                  <input
+                    type='text'
+                    value={productDraft.alias}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, alias: event.target.value }))}
+                    placeholder='Enter product alias'
+                  />
+                </label>
+
                 <label>
                   <span>Code</span>
                   <input
@@ -2064,6 +2153,56 @@ const Learner = () => {
                     placeholder='e.g. BK-001 (optional)'
                   />
                 </label>
+
+                <label>
+                  <span>Icon</span>
+                  <input
+                    type='text'
+                    value={productDraft.iconName}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, iconName: event.target.value }))}
+                    placeholder='Icon name or URL'
+                  />
+                </label>
+
+                <label className='learner-art-active-toggle'>
+                  <input
+                    type='checkbox'
+                    checked={productDraft.inStock}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, inStock: event.target.checked }))}
+                  />
+                  <span>Is product in stock?</span>
+                </label>
+
+                <label className='learner-art-active-toggle'>
+                  <input
+                    type='checkbox'
+                    checked={productDraft.showOnWebsite}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, showOnWebsite: event.target.checked }))}
+                  />
+                  <span>Show product on client website?</span>
+                </label>
+
+                <label>
+                  <span>Quantity</span>
+                  <input
+                    type='number'
+                    min='0'
+                    value={productDraft.quantity}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, quantity: event.target.value }))}
+                    placeholder='Enter product quantity'
+                  />
+                </label>
+
+                <label>
+                  <span>Meta Tags</span>
+                  <input
+                    type='text'
+                    value={productDraft.metaTags}
+                    onChange={(event) => setProductDraft((prev) => ({ ...prev, metaTags: event.target.value }))}
+                    placeholder='comma separated tags'
+                  />
+                </label>
+
                 <label className='learner-art-form-wide'>
                   <span>Description</span>
                   <textarea
@@ -2081,7 +2220,94 @@ const Learner = () => {
                   />
                   <span>Active product</span>
                 </label>
-                <button type='submit' className='learner-art-save-btn'>Save product</button>
+
+                <div className='learner-art-form-actions'>
+                  <button type='submit' className='learner-art-save-btn'>Save product</button>
+                </div>
+                  </>
+                )}
+
+                {productFormStep === 2 && (
+                  <>
+                    <label>
+                      <span>Production Cost</span>
+                      <input
+                        type='number'
+                        min='0'
+                        step='0.01'
+                        value={productDraft.productionCost}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, productionCost: event.target.value }))}
+                        placeholder='Enter cost'
+                      />
+                    </label>
+
+                    <label>
+                      <span>Wholesale Price</span>
+                      <input
+                        type='number'
+                        min='0'
+                        step='0.01'
+                        value={productDraft.wholesalePrice}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, wholesalePrice: event.target.value }))}
+                        placeholder='Enter wholesale price'
+                      />
+                    </label>
+
+                    <label>
+                      <span>Selling Price</span>
+                      <input
+                        type='number'
+                        min='0'
+                        step='0.01'
+                        value={productDraft.sellingPrice}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, sellingPrice: event.target.value }))}
+                        placeholder='Enter selling price'
+                        required
+                      />
+                    </label>
+
+                    <label className='learner-art-active-toggle'>
+                      <input
+                        type='checkbox'
+                        checked={productDraft.onOffer}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, onOffer: event.target.checked }))}
+                      />
+                      <span>Is the product on offer?</span>
+                    </label>
+
+                    <label>
+                      <span>Offer Price</span>
+                      <input
+                        type='number'
+                        min='0'
+                        step='0.01'
+                        value={productDraft.offerPrice}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, offerPrice: event.target.value }))}
+                        placeholder='Enter offer price'
+                      />
+                    </label>
+
+                    <label className='learner-art-active-toggle'>
+                      <input
+                        type='checkbox'
+                        checked={productDraft.taxInclusive}
+                        onChange={(event) => setProductDraft((prev) => ({ ...prev, taxInclusive: event.target.checked }))}
+                      />
+                      <span>Is the product price inclusive of tax?</span>
+                    </label>
+
+                    <div className='learner-art-form-actions learner-art-form-actions--between'>
+                      <button
+                        type='button'
+                        className='learner-art-back-btn'
+                        onClick={() => setProductFormStep(1)}
+                      >
+                        Previous
+                      </button>
+                      <button type='submit' className='learner-art-save-btn'>Next</button>
+                    </div>
+                  </>
+                )}
               </form>
             </section>
           )}
