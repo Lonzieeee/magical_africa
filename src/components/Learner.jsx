@@ -15,6 +15,7 @@ const getStorePrefsKey = (uid) => `learnerStorePrefs_${uid}`
 const getSettingsPrefsKey = (uid) => `learnerSettingsPrefs_${uid}`
 const getProfilePhotoKey = (uid) => `learnerProfilePhoto_${uid}`
 const getMyArtProductsKey = (uid) => `learnerMyArtProducts_${uid}`
+const getMarketProductDocId = (uid, productId) => `market_${uid}_${productId}`
 
 const toMs = (value) => {
   if (!value) return 0
@@ -106,6 +107,24 @@ const createEmptyProductDraft = () => ({
   photoURL: '',
   description: '',
   active: true
+})
+
+const buildPublicMarketProduct = (product, sellerId, sellerName) => ({
+  sourceProductId: product.id,
+  sellerId,
+  sellerName,
+  name: product.name,
+  description: product.description,
+  price: Number(product.onOffer && product.offerPrice > 0 ? product.offerPrice : product.sellingPrice) || 0,
+  imageUrl: product.photoURL || product.iconName || '',
+  inStock: Boolean(product.inStock),
+  showOnWebsite: Boolean(product.showOnWebsite),
+  active: Boolean(product.active),
+  code: product.code || '',
+  shippingOrigin: product.shippingOrigin || '',
+  tags: Array.isArray(product.metaTags) ? product.metaTags : [],
+  createdAt: product.createdAt || new Date().toISOString(),
+  updatedAt: new Date().toISOString()
 })
 
 const Learner = () => {
@@ -461,9 +480,11 @@ const Learner = () => {
       try {
         for (const product of myArtProducts) {
           const productRef = doc(db, 'users', user.uid, 'products', product.id)
+          const marketProductRef = doc(db, 'marketProducts', getMarketProductDocId(user.uid, product.id))
           // Remove the id field when saving to Firestore (it's the doc ID)
           const { id, ...productData } = product
           await setDoc(productRef, productData, { merge: true })
+          await setDoc(marketProductRef, buildPublicMarketProduct(product, user.uid, learnerName), { merge: true })
         }
       } catch (error) {
         console.error('Error saving products to Firestore:', error)
@@ -471,7 +492,7 @@ const Learner = () => {
     }, 1000) // Debounce by 1 second
 
     return () => clearTimeout(saveTimer)
-  }, [myArtProducts, user?.uid])
+  }, [myArtProducts, user?.uid, learnerName])
 
   useEffect(() => {
     const handleOutsideClick = (event) => {
@@ -1217,7 +1238,9 @@ const Learner = () => {
     if (user?.uid) {
       try {
         const productRef = doc(db, 'users', user.uid, 'products', product.id)
+        const marketProductRef = doc(db, 'marketProducts', getMarketProductDocId(user.uid, product.id))
         await deleteDoc(productRef)
+        await deleteDoc(marketProductRef)
       } catch (error) {
         console.error('Error deleting product from Firestore:', error)
         setActionToast({ tone: 'warning', title: 'Delete warning', message: 'Product removed locally but failed to sync. Please try again.' })
@@ -1372,7 +1395,10 @@ const Learner = () => {
       photoURL: productDraft.photoURL.trim(),
       description,
       active: Boolean(productDraft.active),
-      createdAt: new Date().toISOString()
+      sellerId: user?.uid || '',
+      sellerName: learnerName,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString()
     }
 
     setMyArtProducts((prev) => {
@@ -1383,9 +1409,13 @@ const Learner = () => {
     // Immediately save to Firestore to prevent data loss
     if (user?.uid) {
       const productRef = doc(db, 'users', user.uid, 'products', nextProduct.id)
+      const marketProductRef = doc(db, 'marketProducts', getMarketProductDocId(user.uid, nextProduct.id))
       const { id, ...productData } = nextProduct
       setDoc(productRef, productData, { merge: true }).catch((error) => {
         console.error('Error saving product to Firestore:', error)
+      })
+      setDoc(marketProductRef, buildPublicMarketProduct(nextProduct, user.uid, learnerName), { merge: true }).catch((error) => {
+        console.error('Error publishing product to marketplace:', error)
       })
     }
     
