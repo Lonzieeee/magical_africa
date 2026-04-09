@@ -241,7 +241,17 @@ const CourseContentPage = () => {
   if (loading) return (
     <>
       <Navbar solid />
-      <div style={{ textAlign: 'center', padding: '60px', fontSize: '18px' }}>Loading course...</div>
+      <div className='course-loading-wrap'>
+        <div className='course-loading-text' role='status' aria-live='polite' aria-label='Loading course content'>
+          <span>L</span>
+          <span>O</span>
+          <span>A</span>
+          <span>D</span>
+          <span>I</span>
+          <span>N</span>
+          <span>G</span>
+        </div>
+      </div>
     </>
   )
 
@@ -269,6 +279,7 @@ const CourseContentPage = () => {
   const handleQuizResult = async ({ score, total }) => {
     if (isPreviewMode) return
     if (!user || !courseId || !course) return
+
     const lessonCount = (course.topics || []).reduce((acc, topic) => acc + (topic.lessons?.length || 0), 0)
     const quizPercent = total > 0 ? Math.round((score / total) * 100) : 0
     const completion = computeCompletionFromState(lessonCount, completedLessonIds.length, quizPercent)

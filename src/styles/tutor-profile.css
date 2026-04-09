@@ -555,7 +555,7 @@
 .tutor-loading-text > span:nth-child(7) { animation-delay: 1.8s; }
 
 @keyframes tutor-loading-flip {
-  35% { transform: rotateX(360deg); }
+  0% { transform: rotateX(0deg); }
   100% { transform: rotateX(360deg); }
 }
 
