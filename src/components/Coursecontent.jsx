@@ -6,9 +6,7 @@ import {
   FaClipboardList,
   FaDownload,
   FaFileAlt,
-  FaMobileAlt,
   FaPlayCircle,
-  FaCheckCircle,
   FaChevronDown,
   FaLock
 } from 'react-icons/fa'
@@ -80,7 +78,7 @@ const CourseContent = ({
   courseCompletionPercent = 0,
   onViewTutorProfile
 }) => {
-  const [activeTab, setActiveTab] = useState('overview')
+    const [activeTab, setActiveTab] = useState('overview')
   const [sidebarExpanded, setSidebarExpanded] = useState({})
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [activeVideo, setActiveVideo] = useState(null) 
@@ -95,21 +93,6 @@ const CourseContent = ({
   const completionPercent = totalLessons > 0
     ? Math.round((localCompletedIds.length / totalLessons) * 100)
     : 0
-
-  const normalizedOutcomes = Array.isArray(learningOutcomes)
-    ? learningOutcomes.map(item => String(item || '').trim()).filter(Boolean)
-    : String(learningOutcomes || '').split('\n').map(item => item.trim()).filter(Boolean)
-
-  const fallbackOutcomes = [
-    `Understand core ${courseType || 'course'} concepts and vocabulary.`,
-    'Apply what you learn through guided lessons and practice activities.',
-    'Finish with practical confidence to continue independently.'
-  ]
-  const resolvedOutcomes = normalizedOutcomes.length > 0 ? normalizedOutcomes : fallbackOutcomes
-  const resolvedSkills = Array.isArray(courseSkills)
-    ? courseSkills.map(item => String(item || '').trim()).filter(Boolean) : []
-  const resolvedTools = Array.isArray(courseTools)
-    ? courseTools.map(item => String(item || '').trim()).filter(Boolean) : []
 
   const certificateReadyToDownload = Boolean(certificateDownloadUrl)
   const certificateLocked = completionPercent < 100
@@ -142,6 +125,17 @@ const CourseContent = ({
   )
 
   const topicsWithQuiz = topics.filter(t => t.quiz && t.quiz.length > 0)
+
+  const normalizeList = (value) => {
+    if (!Array.isArray(value)) return []
+    return value
+      .map((item) => String(item || '').trim())
+      .filter(Boolean)
+  }
+
+  const normalizedOutcomes = normalizeList(learningOutcomes)
+  const normalizedSkills = normalizeList(courseSkills)
+  const normalizedTools = normalizeList(courseTools)
 
   const toggleSidebarTopic = (id) => {
     setSidebarExpanded(prev => ({ ...prev, [id]: !prev[id] }))
@@ -293,62 +287,48 @@ const CourseContent = ({
           </div>
 
           <div className='cc-tab-content'>
-
             {/* OVERVIEW */}
             {activeTab === 'overview' && (
               <div className='cc-tab-panel'>
                 <h2>About this course</h2>
                 <p className='cc-about-copy'>{description || 'No description available.'}</p>
-                <div className='cc-overview-chips'>
-                  <span>{difficulty || 'Beginner'} level</span>
-                  <span>{topics.length} topics</span>
-                  <span>{totalLessons} lessons</span>
-                  <span>{courseType || 'General'}</span>
-                </div>
-                {resolvedOutcomes.length > 0 && (
-                  <div className='cc-section-block'>
-                    <h3>What you'll learn</h3>
-                    <ul className='cc-outcomes-list'>
-                      {resolvedOutcomes.map((item, i) => (
-                        <li key={i}>
-                          <FaCheckCircle className='cc-check-icon' />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+
+                {(normalizedOutcomes.length > 0 || normalizedSkills.length > 0 || normalizedTools.length > 0) && (
+                  <div className='cc-overview-meta'>
+                    {normalizedOutcomes.length > 0 && (
+                      <section className='cc-overview-card'>
+                        <h3>Learning Outcomes</h3>
+                        <ul>
+                          {normalizedOutcomes.map((outcome, idx) => (
+                            <li key={`outcome-${idx}`}>{outcome}</li>
+                          ))}
+                        </ul>
+                      </section>
+                    )}
+
+                    {normalizedSkills.length > 0 && (
+                      <section className='cc-overview-card'>
+                        <h3>Skills Learners Gain</h3>
+                        <ul>
+                          {normalizedSkills.map((skill, idx) => (
+                            <li key={`skill-${idx}`}>{skill}</li>
+                          ))}
+                        </ul>
+                      </section>
+                    )}
+
+                    {normalizedTools.length > 0 && (
+                      <section className='cc-overview-card'>
+                        <h3>Tools Learners Use</h3>
+                        <ul>
+                          {normalizedTools.map((tool, idx) => (
+                            <li key={`tool-${idx}`}>{tool}</li>
+                          ))}
+                        </ul>
+                      </section>
+                    )}
                   </div>
                 )}
-                {resolvedSkills.length > 0 && (
-                  <div className='cc-section-block'>
-                    <h3>Skills you'll gain</h3>
-                    <ul className='cc-tag-list'>
-                      {resolvedSkills.map((skill, i) => (
-                        <li key={i} className='cc-tag-item'>
-                          <FaCheckCircle className='cc-tag-icon' />
-                          <span>{skill}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {resolvedTools.length > 0 && (
-                  <div className='cc-section-block'>
-                    <h3>Tools you'll use</h3>
-                    <ul className='cc-tag-list'>
-                      {resolvedTools.map((tool, i) => (
-                        <li key={i} className='cc-tag-item'>
-                          <FaCheckCircle className='cc-tag-icon' />
-                          <span>{tool}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                <div className='cc-details-row'>
-                  <div className='cc-detail-pill'><FaMobileAlt /> Taught in {courseLanguage || 'English'}</div>
-                  <div className='cc-detail-pill'><FaFileAlt /> {courseSubtitlesLabel}</div>
-                  {courseUpdatedAtLabel && <div className='cc-detail-pill'>Updated {courseUpdatedAtLabel}</div>}
-                </div>
               </div>
             )}
 
@@ -534,8 +514,9 @@ const CourseContent = ({
                         disabled={
                           reviewSaving ||
                           reviewRating < 1 ||
+                          !String(reviewComment || '').trim() ||
                           reviewSubmitted ||
-                          (reviewRating < 3 && !reviewImprovement.trim())
+                          (reviewRating < 3 && !String(reviewImprovement || '').trim())
                         }
                       >
                         {reviewSubmitted ? 'Review Submitted' : reviewSaving ? 'Saving...' : 'Submit Review'}

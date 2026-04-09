@@ -41,7 +41,7 @@ function App() {
           <Route path="/tribes" element={<Tribes />} />
           <Route path="/maasai" element={<Maasai />} />
           <Route path="/academy" element={<Academy />} />
-          <Route path="/register" element={<Language2 />} />
+          <Route path="/register" element={<Language2 />} />animation onan
           <Route path="/welcome" element={<Language3 />} />
           <Route path="/welcome-learningReason" element={<Language4 />} />
           <Route path="/welcome-languageKnowledge" element={<Language5 />} />
@@ -110,6 +110,11 @@ function App() {
             </ProtectedRoute>
           } />
           <Route path="/course-content" element={
+            <ProtectedRoute allowedRole='learner'>
+              <CourseContentPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/course/:courseId/:courseSlug?" element={
             <ProtectedRoute allowedRole='learner'>
               <CourseContentPage />
             </ProtectedRoute>

@@ -7,6 +7,7 @@ import { deleteUser, EmailAuthProvider, reauthenticateWithCredential, updatePass
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { buildCourseCertificateSvg, downloadCourseCertificate } from '../utils/certificate'
+import { buildCoursePath } from '../utils/courseRoute'
 
 const getLocalProgressKey = (uid) => `learnerProgressBackup_${uid}`
 const getAnnouncementSeenKey = (uid) => `learnerAnnouncementSeenAt_${uid}`
@@ -940,11 +941,13 @@ const Learner = () => {
         console.log('Could not sync resume progress immediately:', error)
       })
     }
-    navigate('/course-content', { state: { courseId, fromResume: true } })
+    const targetCourse = courses.find((item) => item.id === courseId)
+    navigate(buildCoursePath(courseId, targetCourse?.title || '', { fromResume: true }), { state: { courseId, fromResume: true } })
   }
 
   const handleViewCourseDetails = (courseId) => {
-    navigate('/course-content', { state: { courseId, preview: true } })
+    const targetCourse = courses.find((item) => item.id === courseId)
+    navigate(buildCoursePath(courseId, targetCourse?.title || '', { preview: true }), { state: { courseId, preview: true } })
   }
 
   const buildCourseLessonSequence = (course) => {
