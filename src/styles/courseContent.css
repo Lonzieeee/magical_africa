@@ -783,9 +783,7 @@
   border-color: var(--cc-brand);
 }
 
-/* ════════════════════════
-   SIDEBAR
-════════════════════════ */
+/*  SIDEBAR */
 .cc-player-sidebar {
   position: sticky;
   top: var(--cc-navbar-height);
