@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { db } from '../context/AuthContext'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
@@ -33,6 +33,13 @@ const CourseContentPage = () => {
   const [previewActionLoading, setPreviewActionLoading] = useState(false)
   const [persistedTabState, setPersistedTabState] = useState(null)
 
+  // ── CACHE: holds the full learnerProgress doc in memory for the session ──
+  // This means we NEVER read learnerProgress more than once per page load
+  const progressCacheRef = useRef(null)
+
+  // ── CACHE: holds quizPercent so lesson toggles never need a Firestore read ──
+  const quizPercentRef = useRef(0)
+
   const quizRef = useRef(null)
   const sessionStartedAtRef = useRef(Date.now())
   const resumeToastShownRef = useRef(false)
@@ -58,19 +65,6 @@ const CourseContentPage = () => {
     return diff === 1
   }
 
-  const upsertCourseProgress = async (buildUpdate) => {
-    if (!user || !courseId || !course) return
-    const progressRef = doc(db, 'learnerProgress', user.uid)
-    const snapshot = await getDoc(progressRef)
-    const progressData = snapshot.exists() ? snapshot.data() : {}
-    const courseProgress = progressData.courses?.[courseId] || {}
-    const nextCourseProgress = buildUpdate(courseProgress)
-    await setDoc(progressRef, {
-      courses: { ...(progressData.courses || {}), [courseId]: nextCourseProgress },
-      updatedAt: new Date().toISOString()
-    }, { merge: true })
-  }
-
   const computeCompletionFromState = (lessonCount, completedIdsLength, quizPercent = 0) => {
     const lessonCompletion = lessonCount > 0
       ? Math.min(100, Math.round((completedIdsLength / lessonCount) * 100))
@@ -87,6 +81,21 @@ const CourseContentPage = () => {
     return sale > 0 ? sale : regular
   }
 
+  // ── WRITE ONLY — uses the in-memory cache, never reads Firestore again ──
+  const writeProgress = async (nextCourseProgress) => {
+    if (!user || !courseId) return
+    const progressRef = doc(db, 'learnerProgress', user.uid)
+    const cached = progressCacheRef.current || {}
+    const nextData = {
+      courses: { ...(cached.courses || {}), [courseId]: nextCourseProgress },
+      updatedAt: new Date().toISOString()
+    }
+    // Update the in-memory cache so the next writeProgress call is also accurate
+    progressCacheRef.current = nextData
+    await setDoc(progressRef, nextData, { merge: true })
+  }
+
+  // ── FETCH COURSE — 1 read ──
   useEffect(() => {
     const fetchCourse = async () => {
       if (!courseId) { navigate('/learner'); return }
@@ -109,50 +118,84 @@ const CourseContentPage = () => {
     fetchCourse()
   }, [courseId, navigate])
 
+  // ── SINGLE READ on mount: covers progress + review + preview + tab state ──
+  // Previously this was 4 separate reads. Now it is 2 reads total (progress + review).
   useEffect(() => {
-    const initializeProgress = async () => {
-      if (isPreviewMode || !user || !courseId || !course) return
+    const initializeAll = async () => {
+      if (!user || !courseId || !course) return
+
+      // ── READ 1: learnerProgress (only read in entire session) ──
+      const progressRef = doc(db, 'learnerProgress', user.uid)
+      const snapshot = await getDoc(progressRef)
+      const progressData = snapshot.exists() ? snapshot.data() : {}
+      progressCacheRef.current = progressData
+
+      const courseProgress = progressData.courses?.[courseId] || {}
+      const savedCompletedIds = courseProgress.completedLessonIds || []
+      const quizPercent = courseProgress.lastQuizPercent || 0
+      quizPercentRef.current = quizPercent
+
+      // Hydrate tab state and preview ownership from the same read
+      setPersistedTabState(courseProgress.tabState || null)
+      setPreviewOwned(Boolean(
+        courseProgress.addedToLibrary || courseProgress.paid ||
+        courseProgress.started || (courseProgress.completion || 0) > 0
+      ))
+
+      // ── READ 2: review (separate collection, still needed) ──
+      if (!isPreviewMode) {
+        const reviewDoc = await getDoc(doc(db, 'reviews', `${user.uid}_${courseId}`))
+        if (reviewDoc.exists()) {
+          const reviewData = reviewDoc.data()
+          setReviewRating(reviewData.rating || 0)
+          setReviewComment(reviewData.comment || '')
+          setReviewImprovement(reviewData.improvementSuggestion || '')
+          setReviewSubmitted(true)
+        }
+      }
+
+      // If preview mode — no writes needed, stop here
+      if (isPreviewMode) return
+
+      // ── Initialize progress state ──
       const totalLessons = (course.topics || []).reduce((acc, topic) => acc + (topic.lessons?.length || 0), 0)
       const today = toDateKey()
+      const previousDate = courseProgress.lastActiveDate || ''
+      let streak = courseProgress.streak || 0
+      if (previousDate !== today) {
+        streak = isYesterday(previousDate, today) ? Math.max(1, streak + 1) : 1
+      }
 
-      await upsertCourseProgress((existing) => {
-        const resolvedTeacherId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
-        const resolvedTeacherName = course.teacherName || course.tutorName || course.authorName || 'Tutor'
-        let streak = existing.streak || 0
-        const previousDate = existing.lastActiveDate || ''
-        const savedCompletedLessonIds = existing.completedLessonIds || []
-
-        if (previousDate !== today) {
-          streak = isYesterday(previousDate, today) ? Math.max(1, streak + 1) : 1
-        }
-
-        setCompletedLessonIds(savedCompletedLessonIds)
-        const lessonsCompleted = savedCompletedLessonIds.length || existing.lessonsCompleted || 0
-        const quizPercent = existing.lastQuizPercent || 0
-        const completion = computeCompletionFromState(totalLessons, lessonsCompleted, quizPercent)
-        setCourseCompletionPercent(completion)
-
-        return {
-          ...existing,
-          started: true,
-          status: completion >= 100 ? 'Completed' : 'In Progress',
-          totalLessons,
-          lessonsCompleted,
-          completedLessonIds: savedCompletedLessonIds,
-          completion,
-          lastQuizPercent: quizPercent,
-          streak,
-          lastActiveDate: today,
-          lastActiveAt: new Date().toISOString(),
-          courseTitle: course.title || 'Course',
-          teacherId: resolvedTeacherId,
-          teacherName: resolvedTeacherName
-        }
-      })
+      setCompletedLessonIds(savedCompletedIds)
+      const lessonsCompleted = savedCompletedIds.length || courseProgress.lessonsCompleted || 0
+      const completion = computeCompletionFromState(totalLessons, lessonsCompleted, quizPercent)
+      setCourseCompletionPercent(completion)
 
       const resolvedTeacherId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
+      const resolvedTeacherName = course.teacherName || course.tutorName || course.authorName || 'Tutor'
       const resolvedLearnerName = `${userData?.firstName || ''} ${userData?.lastName || userData?.secondName || ''}`.trim() || user.email || 'Learner'
 
+      const nextCourseProgress = {
+        ...courseProgress,
+        started: true,
+        status: completion >= 100 ? 'Completed' : 'In Progress',
+        totalLessons,
+        lessonsCompleted,
+        completedLessonIds: savedCompletedIds,
+        completion,
+        lastQuizPercent: quizPercent,
+        streak,
+        lastActiveDate: today,
+        lastActiveAt: new Date().toISOString(),
+        courseTitle: course.title || 'Course',
+        teacherId: resolvedTeacherId,
+        teacherName: resolvedTeacherName
+      }
+
+      // WRITE — uses cache, no read
+      await writeProgress(nextCourseProgress)
+
+      // WRITE — enrollment upsert
       await setDoc(doc(db, 'enrollments', `${user.uid}_${courseId}`), {
         learnerId: user.uid,
         teacherId: resolvedTeacherId,
@@ -160,83 +203,33 @@ const CourseContentPage = () => {
         studentEmail: user.email || '',
         courseId,
         courseTitle: course.title || 'Course',
-        completion: totalLessons > 0 ? Math.round((completedLessonIds.length / totalLessons) * 100) : 0,
-        enrolledAt: new Date().toISOString(),
+        completion: totalLessons > 0 ? Math.round((savedCompletedIds.length / totalLessons) * 100) : 0,
+        enrolledAt: courseProgress.enrolledAt || new Date().toISOString(),
         lastActiveAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }, { merge: true })
     }
-    initializeProgress()
+
+    initializeAll()
   }, [user, userData, courseId, course, isPreviewMode])
 
+  // ── CLEANUP: persist time spent on unmount (write only) ──
   useEffect(() => {
     return () => {
       const persistTimeSpent = async () => {
         if (isPreviewMode || !user || !courseId || !course) return
         const minutesSpent = Math.max(1, Math.round((Date.now() - sessionStartedAtRef.current) / (1000 * 60)))
-        await upsertCourseProgress((existing) => ({
+        const cached = progressCacheRef.current
+        const existing = cached?.courses?.[courseId] || {}
+        await writeProgress({
           ...existing,
           timeSpentMinutes: (existing.timeSpentMinutes || 0) + minutesSpent,
           lastActiveAt: new Date().toISOString()
-        }))
+        })
       }
       persistTimeSpent()
     }
   }, [user, courseId, course, isPreviewMode])
-
-  useEffect(() => {
-    const loadExistingReview = async () => {
-      if (isPreviewMode || !user || !courseId) return
-      const reviewDoc = await getDoc(doc(db, 'reviews', `${user.uid}_${courseId}`))
-      if (reviewDoc.exists()) {
-        const reviewData = reviewDoc.data()
-        setReviewRating(reviewData.rating || 0)
-        setReviewComment(reviewData.comment || '')
-        setReviewImprovement(reviewData.improvementSuggestion || '')
-        setReviewSubmitted(true)
-      }
-    }
-    loadExistingReview()
-  }, [user, courseId, isPreviewMode])
-
-  useEffect(() => {
-    const checkPreviewOwnership = async () => {
-      if (!isPreviewMode || !user || !courseId) return
-      try {
-        const progressDoc = await getDoc(doc(db, 'learnerProgress', user.uid))
-        if (!progressDoc.exists()) { setPreviewOwned(false); return }
-        const savedCourse = progressDoc.data()?.courses?.[courseId] || {}
-        setPreviewOwned(Boolean(
-          savedCourse.addedToLibrary || savedCourse.paid ||
-          savedCourse.started || (savedCourse.completion || 0) > 0
-        ))
-      } catch { setPreviewOwned(false) }
-    }
-    checkPreviewOwnership()
-  }, [isPreviewMode, user, courseId])
-
-  useEffect(() => {
-    const loadPersistedTabState = async () => {
-      if (!user || !courseId) return
-      try {
-        const progressDoc = await getDoc(doc(db, 'learnerProgress', user.uid))
-        if (!progressDoc.exists()) { setPersistedTabState(null); return }
-        setPersistedTabState(progressDoc.data()?.courses?.[courseId]?.tabState || null)
-      } catch { /* ignore */ }
-    }
-    loadPersistedTabState()
-  }, [user, courseId])
-
-  const handlePersistTabState = async (tabState) => {
-    if (!user || !courseId || !course || isPreviewMode) return
-    if (!tabState || typeof tabState !== 'object') return
-    setPersistedTabState(tabState)
-    try {
-      await upsertCourseProgress((existing) => ({
-        ...existing, tabState, lastActiveAt: new Date().toISOString()
-      }))
-    } catch { /* ignore */ }
-  }
 
   if (loading) return (
     <>
@@ -267,14 +260,16 @@ const CourseContentPage = () => {
   }
 
   const handleQuizResult = async ({ score, total }) => {
-    if (isPreviewMode) return
-    if (!user || !courseId || !course) return
+    if (isPreviewMode || !user || !courseId || !course) return
     const lessonCount = (course.topics || []).reduce((acc, topic) => acc + (topic.lessons?.length || 0), 0)
     const quizPercent = total > 0 ? Math.round((score / total) * 100) : 0
+    quizPercentRef.current = quizPercent
     const completion = computeCompletionFromState(lessonCount, completedLessonIds.length, quizPercent)
     setCourseCompletionPercent(completion)
 
-    await upsertCourseProgress((existing) => ({
+    const cached = progressCacheRef.current
+    const existing = cached?.courses?.[courseId] || {}
+    await writeProgress({
       ...existing,
       lessonsCompleted: completedLessonIds.length,
       completion,
@@ -282,7 +277,7 @@ const CourseContentPage = () => {
       lastQuizPercent: quizPercent,
       lastQuizScore: `${score}/${total}`,
       lastActiveAt: new Date().toISOString()
-    }))
+    })
 
     await setDoc(doc(db, 'enrollments', `${user.uid}_${courseId}`), {
       completion,
@@ -291,9 +286,9 @@ const CourseContentPage = () => {
     }, { merge: true })
   }
 
+  // ── LESSON TOGGLE: 0 reads, uses cached quizPercent from ref ──
   const handleToggleLessonComplete = async (lessonId, meta = {}) => {
-    if (isPreviewMode) return
-    if (!user || !courseId || !course) return
+    if (isPreviewMode || !user || !courseId || !course) return
 
     const isCompleted = completedLessonIds.includes(lessonId)
     const action = meta.action || (isCompleted ? 'undo' : 'complete')
@@ -308,21 +303,22 @@ const CourseContentPage = () => {
 
     setCompletedLessonIds(nextCompletedIds)
 
-    const progressRef = doc(db, 'learnerProgress', user.uid)
-    const snapshot = await getDoc(progressRef)
-    const existingProgress = snapshot.exists() ? snapshot.data().courses?.[courseId] || {} : {}
-    const quizPercent = existingProgress.lastQuizPercent || 0
+    // No Firestore read — quizPercent is already cached in the ref
+    const quizPercent = quizPercentRef.current
     const nextCompletion = computeCompletionFromState(lessonCount, nextCompletedIds.length, quizPercent)
     setCourseCompletionPercent(nextCompletion)
 
-    await upsertCourseProgress((existing) => ({
+    const cached = progressCacheRef.current
+    const existing = cached?.courses?.[courseId] || {}
+
+    await writeProgress({
       ...existing,
       completedLessonIds: nextCompletedIds,
       lessonsCompleted: nextCompletedIds.length,
       completion: nextCompletion,
       status: nextCompletion >= 100 ? 'Completed' : 'In Progress',
       lastActiveAt: new Date().toISOString()
-    }))
+    })
 
     await setDoc(doc(db, 'enrollments', `${user.uid}_${courseId}`), {
       completion: nextCompletion,
@@ -342,8 +338,7 @@ const CourseContentPage = () => {
 
   const handleSubmitReview = async (e) => {
     e.preventDefault()
-    if (isPreviewMode) return
-    if (!user || !courseId || !course || reviewRating < 1) return
+    if (isPreviewMode || !user || !courseId || !course || reviewRating < 1) return
     if (courseCompletionPercent < 100 || reviewSubmitted) return
 
     const shouldCollectImprovement = reviewRating > 0 && reviewRating < 3
@@ -385,6 +380,17 @@ const CourseContentPage = () => {
     }
   }
 
+  const handlePersistTabState = async (tabState) => {
+    if (!user || !courseId || !course || isPreviewMode) return
+    if (!tabState || typeof tabState !== 'object') return
+    setPersistedTabState(tabState)
+    try {
+      const cached = progressCacheRef.current
+      const existing = cached?.courses?.[courseId] || {}
+      await writeProgress({ ...existing, tabState, lastActiveAt: new Date().toISOString() })
+    } catch { /* ignore */ }
+  }
+
   const handlePreviewAcquire = async () => {
     if (!course || !courseId || previewActionLoading) return
     if (!user) {
@@ -405,9 +411,14 @@ const CourseContentPage = () => {
     const resolvedLearnerName = `${userData?.firstName || ''} ${userData?.lastName || userData?.secondName || ''}`.trim() || user.email || 'Learner'
 
     try {
-      const progressRef = doc(db, 'learnerProgress', user.uid)
-      const progressSnapshot = await getDoc(progressRef)
-      const progressData = progressSnapshot.exists() ? progressSnapshot.data() : {}
+      // Use cache if available, otherwise one read
+      let progressData = progressCacheRef.current
+      if (!progressData) {
+        const progressSnapshot = await getDoc(doc(db, 'learnerProgress', user.uid))
+        progressData = progressSnapshot.exists() ? progressSnapshot.data() : {}
+        progressCacheRef.current = progressData
+      }
+
       const existingCourse = progressData.courses?.[courseId] || {}
 
       const nextCourseProgress = {
@@ -426,10 +437,7 @@ const CourseContentPage = () => {
         teacherName: resolvedTeacherName
       }
 
-      await setDoc(progressRef, {
-        courses: { ...(progressData.courses || {}), [courseId]: nextCourseProgress },
-        updatedAt: new Date().toISOString()
-      }, { merge: true })
+      await writeProgress(nextCourseProgress)
 
       await setDoc(doc(db, 'enrollments', `${user.uid}_${courseId}`), {
         learnerId: user.uid,
@@ -465,13 +473,8 @@ const CourseContentPage = () => {
       setTimeout(() => setToast(null), 2200)
       return
     }
-
     navigate(`/tutor/${resolvedTutorId}`, {
-      state: {
-        courseId,
-        courseTitle: course.title || 'Course',
-        tutorName: resolvedTutorName
-      }
+      state: { courseId, courseTitle: course.title || 'Course', tutorName: resolvedTutorName }
     })
   }
 
@@ -531,7 +534,6 @@ const CourseContentPage = () => {
         onViewTutorProfile={handleViewTutorProfile}
       />
 
-      {/* Quiz section — scrolled to when quiz tab clicked */}
       {showQuiz && !isPreviewMode && (
         <div ref={quizRef} className='cc-quiz-wrap'>
           {topicsWithQuiz.length === 0 ? (

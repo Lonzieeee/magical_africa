@@ -1,8 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getStorage } from 'firebase/storage'
-
-
 import { 
   getAuth, 
   onAuthStateChanged, 
@@ -14,66 +12,35 @@ import {
 } from 'firebase/auth';
 import { getFirestore, doc, onSnapshot, setDoc, getDoc } from 'firebase/firestore';
 
-/*
-
+{/*
 const firebaseConfig = {
-  apiKey: "AIzaSyDiLg6P5650fOfcS8Wq5J3-x9qkgKFrc4Y",
-  authDomain: "magicalafrica-e7287.firebaseapp.com",
-  projectId: "magicalafrica-e7287",
-  storageBucket: "magicalafrica-e7287.firebasestorage.app",
-  messagingSenderId: "941072590474",
-  appId: "1:941072590474:web:8b7683d28111c850676f73"
+  apiKey: "AIzaSyB2hbVH3VO0d8iVW1aI30cS2mZ2B-RtsjI",
+  authDomain: "magical-africa.firebaseapp.com",
+  projectId: "magical-africa",
+  storageBucket: "magical-africa.firebasestorage.app",
+  messagingSenderId: "558663634344",
+  appId: "1:558663634344:web:beb8bb91f23fb19b80e19d",
+  measurementId: "G-QQVLZH6BW6"
 };
+ */}
 
 
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBzFOh8x4TL_EYLQLmlZSFL_X9RZbkpSbY",
-  authDomain: "magicalafrica2-7df93.firebaseapp.com",
-  projectId: "magicalafrica2-7df93",
-  storageBucket: "magicalafrica2-7df93.firebasestorage.app",
-  messagingSenderId: "1080318233292",
-  appId: "1:1080318233292:web:6f9071b061e3d6ea139069"
+ const firebaseConfig = {
+  apiKey: "AIzaSyCqbsYKijJzA97DT4G1t9VxzVG_1P0mK7U",
+  authDomain: "magical-africa2.firebaseapp.com",
+  projectId: "magical-africa2",
+  storageBucket: "magical-africa2.firebasestorage.app",
+  messagingSenderId: "652021159840",
+  appId: "1:652021159840:web:a303a36a7c83ba5d84f6c5"
 };
-
-
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyAsLzEIcsuF6Aoou861ee4TDNJCi0F5hRI",
-  authDomain: "magicalafrica3.firebaseapp.com",
-  projectId: "magicalafrica3",
-  storageBucket: "magicalafrica3.firebasestorage.app",
-  messagingSenderId: "943918113486",
-  appId: "1:943918113486:web:fade750f9b2e4d9107269f"
-};
-*/
-
-
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBeoF3S6T10L7bpCDRJDoY3FnRtM8htPYU",
-  authDomain: "magicalafrica4.firebaseapp.com",
-  projectId: "magicalafrica4",
-  storageBucket: "magicalafrica4.firebasestorage.app",
-  messagingSenderId: "714238762756",
-  appId: "1:714238762756:web:c99eea60c5293592e5ba51"
-};
-
 
 const app = initializeApp(firebaseConfig);
-export const auth = getAuth(app);        // ✅ added export
-export const db = getFirestore(app);     // ✅ added export
-export const storage = getStorage(app)   // same Firebase app instance
-/*
-const auth = getAuth(app);
-const db = getFirestore(app);
-*/
+export const auth = getAuth(app);
+export const db = getFirestore(app);
+export const storage = getStorage(app)
+
 const googleProvider = new GoogleAuthProvider();
-
 const AuthContext = createContext();
-
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
@@ -84,51 +51,46 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     let unsubscribeUserDoc = null
 
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      // Clean up previous listener if user switched accounts
       if (unsubscribeUserDoc) {
         unsubscribeUserDoc()
         unsubscribeUserDoc = null
       }
 
-      try {
-        setUser(currentUser);
+      setUser(currentUser)
 
-        if (currentUser) {
-          const userDocRef = doc(db, "users", currentUser.uid)
-          const userDoc = await getDoc(userDocRef);
-          if (userDoc.exists()) {
-            setUserData(userDoc.data());
-          } else {
-            setUserData(null)
-          }
+      if (currentUser) {
+        const userDocRef = doc(db, 'users', currentUser.uid)
 
-          unsubscribeUserDoc = onSnapshot(
-            userDocRef,
-            (snapshot) => {
-              if (snapshot.exists()) {
-                setUserData(snapshot.data())
-              } else {
-                setUserData(null)
-              }
-            },
-            (error) => {
-              console.log('User profile listener error:', error)
+        // FIX: removed getDoc — onSnapshot fires immediately on connect
+        // so we get the data in one read instead of two
+        unsubscribeUserDoc = onSnapshot(
+          userDocRef,
+          (snapshot) => {
+            if (snapshot.exists()) {
+              setUserData(snapshot.data())
+            } else {
+              setUserData(null)
             }
-          )
-        } else {
-          setUserData(null);
-        }
-      } catch (error) {
-        console.log('Auth context failed to load user profile:', error)
+            // Only set loading false after we have the user data
+            setLoading(false)
+          },
+          (error) => {
+            console.log('User profile listener error:', error)
+            setUserData(null)
+            setLoading(false)
+          }
+        )
+      } else {
         setUserData(null)
-      } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    });
+    })
 
     return () => {
       if (unsubscribeUserDoc) unsubscribeUserDoc()
-      unsubscribe();
+      unsubscribe()
     }
   }, []);
 
@@ -139,36 +101,30 @@ export const AuthProvider = ({ children }) => {
   const register = async (email, password, additionalData) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-
-    await setDoc(doc(db, "users", user.uid), {
+    await setDoc(doc(db, 'users', user.uid), {
       ...additionalData,
       email: email,
-      authProvider: "email",
+      authProvider: 'email',
       createdAt: new Date().toISOString()
     });
-
     return userCredential;
   };
 
   const loginWithGoogle = async () => {
     const result = await signInWithPopup(auth, googleProvider);
     const user = result.user;
-
-    const userDoc = await getDoc(doc(db, "users", user.uid));
-    
+    const userDoc = await getDoc(doc(db, 'users', user.uid));
     if (!userDoc.exists()) {
       const names = user.displayName ? user.displayName.split(' ') : ['', ''];
-      
-      await setDoc(doc(db, "users", user.uid), {
-        firstName: names[0] || "",
-        lastName: names.slice(1).join(' ') || "",
+      await setDoc(doc(db, 'users', user.uid), {
+        firstName: names[0] || '',
+        lastName: names.slice(1).join(' ') || '',
         email: user.email,
-        photoURL: user.photoURL || "",
-        authProvider: "google",
+        photoURL: user.photoURL || '',
+        authProvider: 'google',
         createdAt: new Date().toISOString()
       });
     }
-
     return result;
   };
 
@@ -178,22 +134,22 @@ export const AuthProvider = ({ children }) => {
 
   const getInitials = () => {
     if (userData) {
-      const firstName = userData.firstName || "";
-      const lastName = userData.lastName || userData.secondName || "";
+      const firstName = userData.firstName || '';
+      const lastName = userData.lastName || userData.secondName || '';
       return (firstName.charAt(0) + lastName.charAt(0)).toUpperCase();
     }
     if (user?.displayName) {
       const names = user.displayName.split(' ');
       return names.map(n => n.charAt(0)).join('').toUpperCase().slice(0, 2);
     }
-    return "";
+    return '';
   };
 
   const getFullName = () => {
     if (userData) {
-      return `${userData.firstName || ""} ${userData.lastName || userData.secondName || ""}`.trim();
+      return `${userData.firstName || ''} ${userData.lastName || userData.secondName || ''}`.trim();
     }
-    return user?.displayName || "";
+    return user?.displayName || '';
   };
 
   const value = {

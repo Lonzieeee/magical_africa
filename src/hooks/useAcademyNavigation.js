@@ -1,7 +1,5 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
-import { db } from "../context/AuthContext";
-import { doc, getDoc } from 'firebase/firestore';
 
 const useAcademyNavigation = () => {
   const navigate = useNavigate();
@@ -22,24 +20,15 @@ const useAcademyNavigation = () => {
     return '';
   };
 
-  const goToAcademy = async () => {
+  const goToAcademy = () => {
+    // FIX: removed getDoc — userData is already loaded in AuthContext
+    // No Firestore read needed here at all
     if (!user) {
-      navigate("/academy-signUp"); // not logged in → signup page
+      navigate("/academy-signUp");
       return;
     }
 
-    let resolvedRole = resolveProfileRole(userData);
-
-    if (!resolvedRole && user?.uid) {
-      try {
-        const snapshot = await getDoc(doc(db, 'users', user.uid));
-        if (snapshot.exists()) {
-          resolvedRole = resolveProfileRole(snapshot.data());
-        }
-      } catch {
-        resolvedRole = '';
-      }
-    }
+    const resolvedRole = resolveProfileRole(userData);
 
     if (resolvedRole === 'teacher') {
       navigate('/teacher-dashboard');

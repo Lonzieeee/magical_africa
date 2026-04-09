@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { collection, doc, getDoc, getDocs, query, where } from 'firebase/firestore'
 import { FiAlertCircle, FiArrowLeft, FiBookOpen, FiClock, FiMessageSquare, FiPlayCircle, FiStar, FiUserCheck } from 'react-icons/fi'
@@ -20,10 +20,7 @@ const toTimestamp = (value) => {
 const toTextList = (value) => {
   if (Array.isArray(value)) return value.map((item) => String(item || '').trim()).filter(Boolean)
   if (typeof value === 'string') {
-    return value
-      .split(',')
-      .map((item) => item.trim())
-      .filter(Boolean)
+    return value.split(',').map((item) => item.trim()).filter(Boolean)
   }
   return []
 }
@@ -56,10 +53,23 @@ const TutorProfilePage = () => {
   const [learnersTaught, setLearnersTaught] = useState(0)
   const [reloadCount, setReloadCount] = useState(0)
 
+  // ── CACHE: store fetched data per tutorId so navigating back costs 0 reads ──
+  const cachedDataRef = useRef(null)
+
   useEffect(() => {
     const loadTutorData = async () => {
       if (!tutorId) {
         navigate(isTeacherPreview ? '/teacher-dashboard' : '/learner')
+        return
+      }
+
+      // ── If we already fetched this tutor and it's not a manual reload, use cache ──
+      if (cachedDataRef.current?.id === tutorId && reloadCount === 0) {
+        setTutorProfile(cachedDataRef.current.tutorProfile)
+        setCourses(cachedDataRef.current.courses)
+        setReviews(cachedDataRef.current.reviews)
+        setLearnersTaught(cachedDataRef.current.learnersTaught)
+        setLoading(false)
         return
       }
 
@@ -84,8 +94,8 @@ const TutorProfilePage = () => {
 
         const fetchedCourses = coursesResult.status === 'fulfilled'
           ? coursesResult.value.docs
-          .map((courseDoc) => ({ id: courseDoc.id, ...courseDoc.data() }))
-          .sort((a, b) => toTimestamp(b.publishedAt || b.updatedAt || b.createdAt) - toTimestamp(a.publishedAt || a.updatedAt || a.createdAt))
+              .map((courseDoc) => ({ id: courseDoc.id, ...courseDoc.data() }))
+              .sort((a, b) => toTimestamp(b.publishedAt || b.updatedAt || b.createdAt) - toTimestamp(a.publishedAt || a.updatedAt || a.createdAt))
           : []
 
         const publishedCourses = fetchedCourses.filter((course) => String(course.status || '').toLowerCase() === 'published')
@@ -93,20 +103,18 @@ const TutorProfilePage = () => {
 
         const fetchedReviews = reviewsResult.status === 'fulfilled'
           ? reviewsResult.value.docs
-          .map((reviewDoc) => ({ id: reviewDoc.id, ...reviewDoc.data() }))
-          .sort((a, b) => toTimestamp(b.createdAt) - toTimestamp(a.createdAt))
+              .map((reviewDoc) => ({ id: reviewDoc.id, ...reviewDoc.data() }))
+              .sort((a, b) => toTimestamp(b.createdAt) - toTimestamp(a.createdAt))
           : []
 
-        const uniqueLearners = new Set((enrollmentsResult.status === 'fulfilled'
-          ? enrollmentsResult.value.docs
-          : [])
+        const uniqueLearners = new Set(
+          (enrollmentsResult.status === 'fulfilled' ? enrollmentsResult.value.docs : [])
             .map((item) => item.data()?.learnerId)
             .filter(Boolean)
         )
 
         const fallbackCourse = displayCourses[0] || fetchedCourses[0] || {}
         const tutorProfileData = tutorDocData?.tutorProfile || {}
-
         const firstName = tutorDocData?.firstName || ''
         const lastName = tutorDocData?.lastName || tutorDocData?.secondName || ''
         const fallbackName = [firstName, lastName].join(' ').trim()
@@ -114,10 +122,11 @@ const TutorProfilePage = () => {
 
         if (!fallbackName && !fallbackTutorName && displayCourses.length === 0) {
           setError('This tutor has not set up a public profile yet.')
+          setLoading(false)
           return
         }
 
-        setTutorProfile({
+        const nextProfile = {
           id: tutorId,
           name: tutorProfileData.displayName || tutorDocData?.displayName || fallbackName || fallbackCourse.teacherName || fallbackTutorName || 'Tutor',
           headline: tutorProfileData.headline || `${fallbackCourse.courseType || 'Culture'} Tutor`,
@@ -134,8 +143,18 @@ const TutorProfilePage = () => {
           timezone: tutorProfileData.timezone || 'Africa/Nairobi',
           availabilityText: tutorProfileData.availabilityText || 'Weekday evenings and Saturday mornings',
           responseTimeLabel: tutorProfileData.responseTimeLabel || 'Usually responds within 12 hours'
-        })
+        }
 
+        // ── Save to cache so back-navigation costs 0 reads ──
+        cachedDataRef.current = {
+          id: tutorId,
+          tutorProfile: nextProfile,
+          courses: displayCourses,
+          reviews: fetchedReviews,
+          learnersTaught: uniqueLearners.size
+        }
+
+        setTutorProfile(nextProfile)
         setCourses(displayCourses)
         setReviews(fetchedReviews)
         setLearnersTaught(uniqueLearners.size)
@@ -185,13 +204,7 @@ const TutorProfilePage = () => {
       <div className='tutor-profile-page tutor-profile-page--loading'>
         <div className='tutor-profile-loader tutor-profile-loader--loading'>
           <div className='tutor-loading-text' role='status' aria-live='polite' aria-label='Loading tutor profile'>
-            <span>L</span>
-            <span>O</span>
-            <span>A</span>
-            <span>D</span>
-            <span>I</span>
-            <span>N</span>
-            <span>G</span>
+            <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
           </div>
         </div>
       </div>
@@ -208,9 +221,7 @@ const TutorProfilePage = () => {
           <h2>Profile Unavailable</h2>
           <p>{error || 'Tutor profile not found.'}</p>
           <div className='tutor-profile-empty-actions'>
-            <button type='button' onClick={() => setReloadCount((prev) => prev + 1)}>
-              Try again
-            </button>
+            <button type='button' onClick={() => setReloadCount((prev) => prev + 1)}>Try again</button>
             <button type='button' onClick={() => navigate(isTeacherPreview ? '/teacher-dashboard' : '/learner')}>
               Back to {isTeacherPreview ? 'tutor dashboard' : 'learner dashboard'}
             </button>
@@ -349,7 +360,6 @@ const TutorProfilePage = () => {
                 <h3><FaQuoteLeft /> Learner Reviews</h3>
                 <span>{reviews.length} total</span>
               </div>
-
               {highlightedReviews.length === 0 ? (
                 <p className='tutor-review-empty'>No detailed reviews yet. This tutor is building a learner community.</p>
               ) : (
