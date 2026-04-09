@@ -124,6 +124,12 @@ const TeacherDashboard = () => {
 
   useEffect(() => {
     if (!authReady) return
+    if (activeSection !== 'reviews') return
+    fetchDashboardData()
+  }, [authReady, activeSection])
+
+  useEffect(() => {
+    if (!authReady) return
     const currentTeacherId = auth.currentUser?.uid
     if (!currentTeacherId) return
 
@@ -275,6 +281,14 @@ const TeacherDashboard = () => {
 
       setCourses(myCourses)
       const myCourseIds = new Set(myCourses.map(course => course.id))
+      const myCourseIdList = myCourses.map((course) => course.id).filter(Boolean)
+      const chunkBy = (items, size) => {
+        const chunks = []
+        for (let i = 0; i < items.length; i += size) {
+          chunks.push(items.slice(i, i + size))
+        }
+        return chunks
+      }
 
       // Enrollment query by teacherId
       const enrollmentQueryByTeacher = getDocs(
@@ -293,9 +307,20 @@ const TeacherDashboard = () => {
       )
 
       // FIX: was fetching ALL reviews — now scoped to this teacher only
-      const reviewsQuery = getDocs(
+      const reviewsQueryByTeacher = getDocs(
         query(collection(db, 'reviews'), where('teacherId', '==', currentTeacherId))
       )
+
+      // Also fetch reviews by my course IDs for backward compatibility with older review docs
+      // that may not have teacherId set.
+      const reviewCourseChunks = chunkBy(myCourseIdList, 10)
+      const reviewsQueryByCourse = reviewCourseChunks.length > 0
+        ? Promise.all(
+          reviewCourseChunks.map((chunk) =>
+            getDocs(query(collection(db, 'reviews'), where('courseId', 'in', chunk)))
+          )
+        )
+        : Promise.resolve([])
 
       // FIX: removed learnerProgress full-collection fetch entirely —
       // completion already lives on enrollment docs written by learner dashboard
@@ -304,12 +329,14 @@ const TeacherDashboard = () => {
         enrollmentByTeacherResult,
         enrollmentByCourseResult,
         announcementResult,
-        reviewResult
+        reviewByTeacherResult,
+        reviewByCourseResult
       ] = await Promise.allSettled([
         enrollmentQueryByTeacher,
         enrollmentQueryByCourse,
         announcementsQuery,
-        reviewsQuery
+        reviewsQueryByTeacher,
+        reviewsQueryByCourse
       ])
 
       // Merge and deduplicate enrollments
@@ -347,19 +374,50 @@ const TeacherDashboard = () => {
         .map(d => ({ id: d.id, ...d.data() }))
         .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
 
-      const reviewDocs = reviewResult.status === 'fulfilled'
-        ? reviewResult.value.docs
-        : []
+      const reviewMap = new Map()
 
-      const myReviews = reviewDocs
-        .map(d => ({ id: d.id, ...d.data() }))
+      if (reviewByTeacherResult.status === 'fulfilled') {
+        reviewByTeacherResult.value.docs.forEach((d) => {
+          reviewMap.set(d.id, { id: d.id, ...d.data() })
+        })
+      }
+
+      if (reviewByCourseResult.status === 'fulfilled') {
+        reviewByCourseResult.value.forEach((snapshot) => {
+          snapshot.docs.forEach((d) => {
+            if (!reviewMap.has(d.id)) {
+              reviewMap.set(d.id, { id: d.id, ...d.data() })
+            }
+          })
+        })
+      }
+
+      const myReviews = Array.from(reviewMap.values())
+        .filter((review) => review.teacherId === currentTeacherId || myCourseIds.has(review.courseId))
         .sort((a, b) =>
           (b.updatedAt || b.createdAt || '').localeCompare(a.updatedAt || a.createdAt || '')
         )
 
+      // Fallback for legacy/malformed review docs that might not match scoped queries.
+      // This runs only when scoped reads returned nothing.
+      let resolvedReviews = myReviews
+      if (resolvedReviews.length === 0 && myCourseIds.size > 0) {
+        try {
+          const allReviewsSnapshot = await getDocs(collection(db, 'reviews'))
+          resolvedReviews = allReviewsSnapshot.docs
+            .map((d) => ({ id: d.id, ...d.data() }))
+            .filter((review) => review.teacherId === currentTeacherId || myCourseIds.has(review.courseId))
+            .sort((a, b) =>
+              (b.updatedAt || b.createdAt || '').localeCompare(a.updatedAt || a.createdAt || '')
+            )
+        } catch (fallbackError) {
+          console.log('Fallback reviews fetch failed:', fallbackError)
+        }
+      }
+
       setEnrollments(myEnrollments)
       setAnnouncements(teacherAnnouncements)
-      setReviews(myReviews)
+      setReviews(resolvedReviews)
 
     } catch (err) {
       console.log('Error fetching dashboard data:', err)

@@ -308,8 +308,19 @@
   padding: 2rem 1.5rem;
   color: var(--cc-text-main);
   flex: 1;
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+.cc-tab-panel {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
 }
 
 .cc-tab-panel h2 {
@@ -317,13 +328,6 @@
   font-weight: 700;
   color: var(--cc-text-main);
   margin-bottom: 8px;
-}
-
-.cc-tab-panel h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--cc-text-main);
-  margin-bottom: 10px;
 }
 
 .cc-tab-sub {
@@ -336,100 +340,66 @@
   font-size: 0.88rem;
   color: #3d4142;
   line-height: 1.7;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
 }
 
-.cc-overview-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 1.6rem;
+.cc-overview-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
 }
 
-.cc-overview-chips span {
-  border: 1px solid #d6dde0;
-  background-color: #f2f4f5;
-  color: #3d4142;
-  font-size: 0.78rem;
-  padding: 5px 10px;
-  border-radius: 4px;
+.cc-overview-card {
+  border: 1px solid #dbe7df;
+  background: linear-gradient(145deg, #fbfdfb 0%, #f4f9f5 100%);
+  padding: 14px;
+  text-align: left;
 }
 
-/* ── Section blocks for skills/tools/outcomes ── */
-.cc-section-block {
-  margin-bottom: 1.6rem;
+.cc-overview-card h3 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  color: #1f3f2b;
+  font-weight: 700;
 }
 
-/* Outcomes — single column to prevent scrambling */
-.cc-outcomes-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+.cc-overview-card ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  list-style: disc outside;
+  text-align: left;
 }
 
-.cc-outcomes-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 0.83rem;
-  color: #3d4142;
-  line-height: 1.5;
-  padding: 6px 10px;
-  border: 1px solid #e8eee9;
-  background-color: #f8fcf9;
-}
-
-.cc-check-icon {
-  color: var(--cc-brand);
-  flex-shrink: 0;
-  margin-top: 3px;
-  font-size: 0.82rem;
-}
-
-/* Skills & Tools — clean vertical list, no scramble */
-.cc-tag-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.cc-tag-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.85rem;
-  color: #3d4142;
-  padding: 8px 12px;
-  border: 1px solid #e5ebe6;
-  background-color: #f8fcf9;
-}
-
-.cc-tag-icon {
-  color: var(--cc-brand);
-  flex-shrink: 0;
+.cc-overview-card li {
   font-size: 0.8rem;
+  line-height: 1.45;
+  color: #3e4a41;
+  text-align: left;
+  margin-bottom: 5px;
 }
 
-.cc-details-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 1.2rem;
+.cc-tab-panel .cc-overview-card ul,
+.cc-tab-panel .cc-overview-card ul li {
+  text-align: left !important;
 }
 
-.cc-detail-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid var(--cc-border-light);
-  background-color: #f7f9f7;
-  color: #3d4142;
-  font-size: 0.78rem;
-  padding: 6px 10px;
+.cc-tab-panel .cc-overview-card ul {
+  list-style: disc outside !important;
+  padding-left: 1.15rem !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.cc-tab-panel .cc-overview-card ul li {
+  display: list-item !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  float: none !important;
+}
+
+.cc-overview-card li:last-child {
+  margin-bottom: 0;
 }
 
 /* ── Notes ── */
@@ -1092,6 +1062,14 @@
 
   .cc-tabs-bar { padding: 0 1rem; }
   .cc-tab-content { padding: 1.5rem 1rem; }
+
+  .cc-overview-meta {
+    grid-template-columns: 1fr;
+  }
+
+  .cc-overview-stack {
+    gap: 1.1rem;
+  }
 }
 
 @media screen and (max-width: 480px) {

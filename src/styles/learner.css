@@ -1141,11 +1141,12 @@
   animation: learner-loading-flip 2.6s infinite linear;
   transform-origin: 0 70%;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
   color: var(--ld-red);
 }
 
 .learner-loading-text > span:nth-child(even) {
-  color: var(--ld-black);
+  color: #1f6fe5;
 }
 
 .learner-dashboard--dark .learner-loading-text > span:nth-child(even) {
@@ -1160,8 +1161,11 @@
 .learner-loading-text > span:nth-child(7) { animation-delay: 1.8s; }
 
 @keyframes learner-loading-flip {
-  35% { transform: rotateX(360deg); }
-  100% { transform: rotateX(360deg); }
+  0% { transform: perspective(700px) rotateX(0deg); }
+  25% { transform: perspective(700px) rotateX(90deg); }
+  50% { transform: perspective(700px) rotateX(180deg); }
+  75% { transform: perspective(700px) rotateX(270deg); }
+  100% { transform: perspective(700px) rotateX(360deg); }
 }
 
 .learner-coffee {
