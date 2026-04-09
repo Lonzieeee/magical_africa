@@ -335,6 +335,19 @@
   font-size: 0.84rem;
 }
 
+.td-account-grid textarea {
+  border: 1px solid var(--td-border-strong);
+  min-height: 88px;
+  padding: 8px 10px;
+  font-size: 0.84rem;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.td-account-grid--single {
+  grid-template-columns: 1fr;
+}
+
 .td-account-email {
   border: 1px solid var(--td-border-soft);
   background-color: var(--td-surface-soft);
@@ -525,7 +538,18 @@
   color: #edf3ff;
 }
 
+.td-dashboard--dark .td-account-grid textarea {
+  background-color: rgba(118, 173, 255, 0.08);
+  border-color: rgba(140, 170, 214, 0.42);
+  color: #edf3ff;
+}
+
 .td-dashboard--dark .td-account-grid input::placeholder {
+  color: #9fb1cf;
+  opacity: 1;
+}
+
+.td-dashboard--dark .td-account-grid textarea::placeholder {
   color: #9fb1cf;
   opacity: 1;
 }
@@ -539,6 +563,43 @@
   min-height: calc(100vh - 120px);
   display: grid;
   place-items: center;
+}
+
+.td-loading-text {
+  perspective: 700px;
+  display: inline-flex;
+  gap: 2px;
+}
+
+.td-loading-text > span {
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  display: inline-block;
+  animation: td-loading-flip 2.6s infinite linear;
+  transform-origin: 0 70%;
+  transform-style: preserve-3d;
+  color: var(--td-red);
+}
+
+.td-loading-text > span:nth-child(even) {
+  color: var(--td-black);
+}
+
+.td-dashboard--dark .td-loading-text > span:nth-child(even) {
+  color: #edf3ff;
+}
+
+.td-loading-text > span:nth-child(2) { animation-delay: 0.3s; }
+.td-loading-text > span:nth-child(3) { animation-delay: 0.6s; }
+.td-loading-text > span:nth-child(4) { animation-delay: 0.9s; }
+.td-loading-text > span:nth-child(5) { animation-delay: 1.2s; }
+.td-loading-text > span:nth-child(6) { animation-delay: 1.5s; }
+.td-loading-text > span:nth-child(7) { animation-delay: 1.8s; }
+
+@keyframes td-loading-flip {
+  35% { transform: rotateX(360deg); }
+  100% { transform: rotateX(360deg); }
 }
 
 .td-coffee {
@@ -875,6 +936,10 @@
   .td-coffee__cup-part,
   .td-coffee__cup-handle,
   .td-coffee__steam-part {
+    animation: none;
+  }
+
+  .td-loading-text > span {
     animation: none;
   }
 
