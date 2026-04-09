@@ -50,16 +50,18 @@
   position: absolute;
   top: calc(100% + 15px);
   right: 0;
-  width: 360px;
+  width: 370px;
   background-color: white;
- 
+  border: 1px solid #ece7e2;
+  border-radius: 18px;
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.1), 0 8px 24px rgba(0, 0, 0, 0.15);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-10px);
   transition: all 0.3s ease;
   z-index: 1002;
-  padding: 1rem 0;
+  padding: 0.85rem 0;
+  overflow: hidden;
 }
 
 
@@ -72,10 +74,12 @@
 
 
 .currently-in {
-  padding: 0 1rem 0.5rem 1rem;
+  padding: 0 1.1rem 0.5rem 1.1rem;
   font-size: 0.75rem;
-  color: #767676;
-  font-weight: 500;
+  color: #786b5f;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
   margin: 0;
 }
 
@@ -83,16 +87,17 @@
 .account-item {
   display: flex;
   align-items: center;
-  padding: 0.75rem 1rem;
+  padding: 0.85rem 1.1rem;
   gap: 10px;
   position: relative;
   margin-bottom: 0.5rem;
 }
 
 .account-item.active {
-  background-color: #efefef;
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
+  background: linear-gradient(90deg, rgba(213, 115, 26, 0.1), rgba(213, 115, 26, 0.02));
+  margin-left: 0.45rem;
+  margin-right: 0.45rem;
+  border-radius: 12px;
 
 }
 
@@ -140,25 +145,35 @@
 }
 
 .account-item i {
-  color: #111;
-  font-size: 1rem;
+  color: #c46f24;
+  font-size: 0.95rem;
 }
 
 /* Dropdown Options */
 .dropdown-option {
-  padding: 0.875rem 1rem;
+  padding: 0.78rem 1.1rem;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .dropdown-option:hover {
-  background-color: #efefef;
+  background-color: #f8f4ef;
 }
 
 .dropdown-option span {
-  font-size: 1rem;
-  color: #111;
-  font-weight: 400;
+  font-size: 0.95rem;
+  color: #1f1f1f;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.dropdown-option span i {
+  color: #9a8b7c;
+  font-size: 0.9rem;
+  width: 16px;
+  text-align: center;
 }
 
 /* Section Title */
@@ -171,7 +186,14 @@
 
 /* Logout Option */
 .logout-option {
-  margin-top: 0.5rem;
+  margin-top: 0.4rem;
+  border-top: 1px solid #f0ece7;
+  padding-top: 0.9rem;
+}
+
+.logout-option span,
+.logout-option span i {
+  color: #c04d2f;
 }
 
 /* Arrow pointing to account icon 

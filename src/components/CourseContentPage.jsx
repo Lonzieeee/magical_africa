@@ -456,6 +456,25 @@ const CourseContentPage = () => {
     }
   }
 
+  const handleViewTutorProfile = () => {
+    if (!course) return
+    const resolvedTutorId = course.teacherId || course.tutorId || course.createdBy || course.authorId || ''
+    const resolvedTutorName = course.teacherName || course.tutorName || course.authorName || 'Tutor'
+    if (!resolvedTutorId) {
+      setToast({ type: 'info', message: 'Tutor profile is not available for this course yet.' })
+      setTimeout(() => setToast(null), 2200)
+      return
+    }
+
+    navigate(`/tutor/${resolvedTutorId}`, {
+      state: {
+        courseId,
+        courseTitle: course.title || 'Course',
+        tutorName: resolvedTutorName
+      }
+    })
+  }
+
   return (
     <>
       <Navbar solid />
@@ -509,6 +528,7 @@ const CourseContentPage = () => {
         onReviewImprovementChange={setReviewImprovement}
         onReviewSubmit={handleSubmitReview}
         courseCompletionPercent={courseCompletionPercent}
+        onViewTutorProfile={handleViewTutorProfile}
       />
 
       {/* Quiz section — scrolled to when quiz tab clicked */}

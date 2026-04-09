@@ -1127,6 +1127,43 @@
   place-items: center;
 }
 
+.learner-loading-text {
+  perspective: 700px;
+  display: inline-flex;
+  gap: 2px;
+}
+
+.learner-loading-text > span {
+  font-size: clamp(2rem, 8vw, 5rem);
+  font-weight: 800;
+  line-height: 1;
+  display: inline-block;
+  animation: learner-loading-flip 2.6s infinite linear;
+  transform-origin: 0 70%;
+  transform-style: preserve-3d;
+  color: var(--ld-red);
+}
+
+.learner-loading-text > span:nth-child(even) {
+  color: var(--ld-black);
+}
+
+.learner-dashboard--dark .learner-loading-text > span:nth-child(even) {
+  color: var(--ld-white);
+}
+
+.learner-loading-text > span:nth-child(2) { animation-delay: 0.3s; }
+.learner-loading-text > span:nth-child(3) { animation-delay: 0.6s; }
+.learner-loading-text > span:nth-child(4) { animation-delay: 0.9s; }
+.learner-loading-text > span:nth-child(5) { animation-delay: 1.2s; }
+.learner-loading-text > span:nth-child(6) { animation-delay: 1.5s; }
+.learner-loading-text > span:nth-child(7) { animation-delay: 1.8s; }
+
+@keyframes learner-loading-flip {
+  35% { transform: rotateX(360deg); }
+  100% { transform: rotateX(360deg); }
+}
+
 .learner-coffee {
   color: var(--ld-black);
   font-size: 0.6em;
@@ -1158,6 +1195,10 @@
   animation-timing-function: cubic-bezier(0.9, 0, 0.1, 1);
 }
 
+
+  .learner-loading-text > span {
+    animation: none;
+  }
 .learner-coffee__cup {
   animation-name: learner-coffee-cup;
   position: relative;
@@ -2233,6 +2274,26 @@
   padding: 2px 8px;
 }
 
+.learner-tutor-link {
+  margin-left: 6px;
+  border: none;
+  background: transparent;
+  color: var(--ld-red-deep);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.learner-tutor-link:hover {
+  color: var(--ld-red);
+}
+
+.learner-tutor-link-inline {
+  margin: 6px 0 0;
+  padding: 0;
+}
+
 .learner-progress-row p {
   font-size: 0.8rem;
   color: var(--ld-text-muted);
@@ -2316,6 +2377,12 @@
   border-color: var(--ld-border-strong);
   color: var(--ld-text-soft);
   cursor: not-allowed;
+}
+
+.learner-mycourse-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
 }
 
 .learner-notification-list {
@@ -3455,6 +3522,10 @@
 
   .learner-suggested-actions button {
     width: 100%;
+  }
+
+  .learner-mycourse-actions {
+    grid-template-columns: 1fr;
   }
 
   .scor {

@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
+import { db } from '../context/AuthContext';
+import { doc, getDoc } from 'firebase/firestore';
 import SideMenu from './SideMenu';
 import AuthModal from './AuthModal';
 import AcademyDropdown from './AcademyDropdown';
 import MarketDropdown from './MarketDropdown';
-import useAcademyNavigation from "../hooks/useAcademyNavigation";
 import '../styles/navbar.css';
 import '../styles/hero-stuff.css';
 
@@ -26,14 +27,28 @@ const Navbar = ({ solid }) => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isLangDropdownOpen, setIsLangDropdownOpen] = useState(false);
   const [logoutMessage, setLogoutMessage] = useState(false);
-  const goToAcademy = useAcademyNavigation();
-  const handleAcademyNavigation = goToAcademy;
+  const [accountRole, setAccountRole] = useState('');
 
   const { user, userData, logout, getInitials, getFullName } = useAuth();
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
 
   const currentLanguage = languages.find(l => l.code === i18n.language) || languages[0];
+
+  const normalizeRole = (role) => {
+    const value = String(role || '').trim().toLowerCase();
+    if (!value) return '';
+    if (value.includes('teacher') || value.includes('tutor') || value.includes('educator')) return 'teacher';
+    if (value.includes('learner') || value.includes('student')) return 'learner';
+    return '';
+  };
+
+  const resolveProfileRole = (profile) => {
+    const normalized = normalizeRole(profile?.role);
+    if (normalized) return normalized;
+    if (String(profile?.subject || '').trim()) return 'teacher';
+    return '';
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,6 +57,38 @@ const Navbar = ({ solid }) => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    let active = true;
+
+    const resolveRole = async () => {
+      if (!user) {
+        if (active) setAccountRole('');
+        return;
+      }
+
+      let resolvedRole = resolveProfileRole(userData);
+
+      if (!resolvedRole && user?.uid) {
+        try {
+          const snapshot = await getDoc(doc(db, 'users', user.uid));
+          if (snapshot.exists()) {
+            resolvedRole = resolveProfileRole(snapshot.data());
+          }
+        } catch {
+          resolvedRole = '';
+        }
+      }
+
+      if (active) setAccountRole(resolvedRole);
+    };
+
+    resolveRole();
+
+    return () => {
+      active = false;
+    };
+  }, [user, userData]);
 
   const handleLanguageChange = (langCode) => {
     i18n.changeLanguage(langCode);
@@ -59,6 +106,45 @@ const Navbar = ({ solid }) => {
     } catch (error) {
       console.error('Error logging out:', error);
     }
+  };
+
+  const handleMyLearning = () => {
+    navigate('/learner?section=courses&view=all');
+  };
+
+  const handleMyCertificates = () => {
+    navigate('/learner?section=achievements');
+  };
+
+  const handleMyArts = () => {
+    navigate('/learner?section=my-art');
+  };
+
+  const handleTeachOnMagical = async () => {
+    if (!user) {
+      navigate('/academy-signIn');
+      return;
+    }
+
+    let resolvedRole = resolveProfileRole(userData);
+
+    if (!resolvedRole && user?.uid) {
+      try {
+        const snapshot = await getDoc(doc(db, 'users', user.uid));
+        if (snapshot.exists()) {
+          resolvedRole = resolveProfileRole(snapshot.data());
+        }
+      } catch {
+        resolvedRole = '';
+      }
+    }
+
+    if (resolvedRole === 'teacher') {
+      navigate('/teacher-dashboard');
+      return;
+    }
+
+    navigate('/academy-page');
   };
 
   return (
@@ -195,16 +281,34 @@ const Navbar = ({ solid }) => {
                   <i className="fa-solid fa-check"></i>
                 </div>
 
-                <div className="dropdown-option" onClick={handleAcademyNavigation}>
-                  <span>{t('nav.academy')}</span>
-                </div>
+                {accountRole !== 'teacher' && (
+                  <>
+                    <div className="dropdown-option" onClick={handleMyLearning}>
+                      <span><i className="fa-solid fa-graduation-cap"></i>My Learning</span>
+                    </div>
+
+                    <div className="dropdown-option" onClick={handleMyCertificates}>
+                      <span><i className="fa-solid fa-certificate"></i>My Certificates</span>
+                    </div>
+
+                    <div className="dropdown-option" onClick={handleMyArts}>
+                      <span><i className="fa-solid fa-palette"></i>My Arts</span>
+                    </div>
+                  </>
+                )}
+
+                {accountRole === 'teacher' && (
+                  <div className="dropdown-option" onClick={handleTeachOnMagical}>
+                    <span><i className="fa-solid fa-chalkboard-user"></i>Teach on Magical</span>
+                  </div>
+                )}
 
                 <div className="dropdown-option">
-                  <span>{t('nav.settings')}</span>
+                  <span><i className="fa-regular fa-credit-card"></i>Billings</span>
                 </div>
 
                 <div className="dropdown-option logout-option" onClick={handleLogout}>
-                  <span>{t('nav.logOut')}</span>
+                  <span><i className="fa-solid fa-arrow-right-from-bracket"></i>{t('nav.logOut')}</span>
                 </div>
               </div>
             </>
