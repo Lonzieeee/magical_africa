@@ -58,7 +58,7 @@ function App() {
         
          />
 
-         <Route path="/technology" elements=
+         <Route path="/technology" element=
          {<Technology />}
          
          />

@@ -17,6 +17,7 @@
   font-size: 1.5rem;
   font-weight: 400;
   text-align: center;
+  
 }
 
 .our-impact p{
@@ -79,13 +80,14 @@
 .magical-achievements{
   display: flex;
   flex-direction: column;
-  padding-top: 2rem;
- 
+  padding-top: 4rem;
+  padding-bottom: 5rem;
 }
 .magical-achievements h1{
   font-size: 1.5rem;
   text-align: center;
   font-weight: 400;
+  padding-bottom: 4rem;
 }
 .achievements{
   padding-top: 2rem;
@@ -179,6 +181,8 @@
  
   padding-top: 4rem;
   padding-bottom: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 
@@ -197,6 +201,11 @@
   }
 .impact-div h1{
  align-self: center;
+}
+
+.magical-achievements{
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 

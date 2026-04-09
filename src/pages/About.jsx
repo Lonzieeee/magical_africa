@@ -8,6 +8,7 @@ import '../styles/about-page.css';
 import '../styles/impact.css';
 import '../styles/team.css';
 import '../styles/AI.css';
+import AccordionPrinciples from '../components/AccordianPrinciples';
 
 
 
@@ -431,6 +432,7 @@ const toggleHeroVideo = () => {
       <section className="magical-achievements">
         <h1>{t('about.principles.title')}</h1>
 
+{/* 
         <div className="achievements">
           {principles.map((principle, index) => (
             <div className="achievement1" key={index}>
@@ -438,7 +440,16 @@ const toggleHeroVideo = () => {
             </div>
           ))}
         </div>
+
+
+*/}
+
+ <AccordionPrinciples />
+
       </section>
+
+
+     
 
       {/* AI Section */}
       <div className='AI-section' style={{ backgroundImage: `url('/images/drums2-latest.jpg')` }}>
