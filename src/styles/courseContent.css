@@ -308,8 +308,19 @@
   padding: 2rem 1.5rem;
   color: var(--cc-text-main);
   flex: 1;
+  width: 100%;
+  min-width: 0;
   max-width: 100%;
   overflow-x: hidden;
+}
+
+.cc-tab-panel {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
 }
 
 .cc-tab-panel h2 {
@@ -317,13 +328,6 @@
   font-weight: 700;
   color: var(--cc-text-main);
   margin-bottom: 8px;
-}
-
-.cc-tab-panel h3 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--cc-text-main);
-  margin-bottom: 10px;
 }
 
 .cc-tab-sub {
@@ -336,100 +340,7 @@
   font-size: 0.88rem;
   color: #3d4142;
   line-height: 1.7;
-  margin-bottom: 1rem;
-}
-
-.cc-overview-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 1.6rem;
-}
-
-.cc-overview-chips span {
-  border: 1px solid #d6dde0;
-  background-color: #f2f4f5;
-  color: #3d4142;
-  font-size: 0.78rem;
-  padding: 5px 10px;
-  border-radius: 4px;
-}
-
-/* ── Section blocks for skills/tools/outcomes ── */
-.cc-section-block {
-  margin-bottom: 1.6rem;
-}
-
-/* Outcomes — single column to prevent scrambling */
-.cc-outcomes-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.cc-outcomes-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 0.83rem;
-  color: #3d4142;
-  line-height: 1.5;
-  padding: 6px 10px;
-  border: 1px solid #e8eee9;
-  background-color: #f8fcf9;
-}
-
-.cc-check-icon {
-  color: var(--cc-brand);
-  flex-shrink: 0;
-  margin-top: 3px;
-  font-size: 0.82rem;
-}
-
-/* Skills & Tools — clean vertical list, no scramble */
-.cc-tag-list {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.cc-tag-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.85rem;
-  color: #3d4142;
-  padding: 8px 12px;
-  border: 1px solid #e5ebe6;
-  background-color: #f8fcf9;
-}
-
-.cc-tag-icon {
-  color: var(--cc-brand);
-  flex-shrink: 0;
-  font-size: 0.8rem;
-}
-
-.cc-details-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 1.2rem;
-}
-
-.cc-detail-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid var(--cc-border-light);
-  background-color: #f7f9f7;
-  color: #3d4142;
-  font-size: 0.78rem;
-  padding: 6px 10px;
+  margin-bottom: 0;
 }
 
 /* ── Notes ── */
@@ -1094,6 +1005,10 @@
 
   .cc-tabs-bar { padding: 0 1rem; }
   .cc-tab-content { padding: 1.5rem 1rem; }
+
+  .cc-overview-stack {
+    gap: 1.1rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
