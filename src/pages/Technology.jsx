@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import useAcademyNavigation from "../hooks/useAcademyNavigation";
 import '../styles/technology.css'
 
 const aiFeatures = [
@@ -84,6 +85,7 @@ const Technology = () => {
   const cardRefs = useRef([])
   const pillarsRef = useRef(null)
   const [pillarsVisible, setPillarsVisible] = useState(false)
+  const goToAcademy = useAcademyNavigation();
 
   useEffect(() => {
     document.title = 'Technology | Magical Africa'
@@ -294,7 +296,7 @@ const Technology = () => {
             <a href='/academy-page' className='tech-cta-btn tech-cta-btn--primary'>
               Explore the Academy
             </a>
-            <a href='/academy-signUp' className='tech-cta-btn tech-cta-btn--secondary'>
+            <a className='tech-cta-btn tech-cta-btn--secondary' onClick={goToAcademy}>
               Get Started Free
             </a>
           </div>
