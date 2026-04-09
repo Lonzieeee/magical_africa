@@ -184,13 +184,13 @@ useEffect(() => {
      { 
       name: t('about.team.members.gloria.name'), 
       role: t('about.team.members.gloria.role'), 
-      image: '/images/Gloria(1).jpeg',
+      image: '/images/nyatichi2.jpeg',
       bio: t('about.team.members.gloria.bio'),
     },
        { 
       name: t('about.team.members.lorna.name'), 
       role: t('about.team.members.lorna.role'), 
-      image: '/images/Joel-Makori.jpeg',
+      image: '/images/lorna.jpeg',
       bio: t('about.team.members.lorna.bio'),
     },
     { 
@@ -215,7 +215,7 @@ useEffect(() => {
     { 
       name: t('about.team.members.ian.name'), 
       role: t('about.team.members.ian.role'), 
-      image: '/images/Gloria(1).jpeg',
+      image: '/images/cheru.jpeg',
       bio: t('about.team.members.ian.bio'),
     },
  
@@ -268,6 +268,7 @@ const toggleHeroVideo = () => {
   <meta property="og:description" content="A pan-African platform dedicated to preserving and celebrating African languages, culture and heritage." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://magical.africa/about" />
+   <meta property="og:image" content="https://magical.africa/images/about-video.mp4" />
 </Helmet>
 
 

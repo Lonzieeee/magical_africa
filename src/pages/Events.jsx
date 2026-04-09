@@ -30,14 +30,15 @@ const Events = () => {
   return (
     <>
       <Helmet>
-        <title>Events | Magical Africa</title>
-        <meta name="description" content="Discover and attend authentic African cultural events happening across the continent and around the world. Celebrate African music, art, food, dance and traditions." />
-        <meta name="keywords" content="African events, African cultural events, African festivals, African music events, African art events, African dance, celebrate Africa" />
-        <meta property="og:title" content="African Cultural Events — Discover & Celebrate Africa" />
-        <meta property="og:description" content="Discover authentic African cultural events happening across the continent and around the world." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://yourwebsite.com/events" />
-      </Helmet>
+  <title>Events | Magical Africa</title>
+  <meta name="description" content="Discover and attend authentic African cultural events happening across the continent and around the world. Celebrate African music, art, food, dance and traditions." />
+  <meta name="keywords" content="African events, African cultural events, African festivals, African music events, African art events, African dance, celebrate Africa" />
+  <meta property="og:title" content="African Cultural Events — Discover & Celebrate Africa" />
+  <meta property="og:description" content="Discover authentic African cultural events happening across the continent and around the world." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://magical.africa/events" />
+  <meta property="og:image" content="https://magical.africa/images/drums2-latest.jpg" />
+</Helmet>
 
       {/* Hero */}
       <div className='events-hero'>

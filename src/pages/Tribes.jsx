@@ -68,6 +68,7 @@ const Tribes = () => {
   <meta property="og:description" content="Explore the rich diversity of African tribes and communities. Learn about their traditions, cultures and way of life." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://magical.africa/tribes" />
+   <meta property="og:image" content="https://magical.africa/images/maasai-women2.jpg" />
 </Helmet>
 
 

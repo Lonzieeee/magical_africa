@@ -87,9 +87,7 @@ const Technology = () => {
   const [pillarsVisible, setPillarsVisible] = useState(false)
   const goToAcademy = useAcademyNavigation();
 
-  useEffect(() => {
-    document.title = 'Technology | Magical Africa'
-  }, [])
+
 
   useEffect(() => {
     const observers = []
@@ -123,6 +121,17 @@ const Technology = () => {
   return (
     <>
 
+
+<Helmet>
+  <title>Technology | Magical Africa</title>
+  <meta name="description" content="Discover how Magical Africa uses proprietary AI to preserve 2,000+ African languages, digitize oral heritage, and deliver personalized cultural learning at scale." />
+  <meta name="keywords" content="Magical Africa technology, African AI, African language AI, African language preservation, speech recognition Africa" />
+  <meta property="og:title" content="Magical Africa — AI Technology for African Heritage" />
+  <meta property="og:description" content="Proprietary AI models built specifically for African linguistic complexity and cultural depth — preserving 2,000+ languages ignored by mainstream platforms." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://magical.africa/technology" />
+  <meta property="og:image" content="https://magical.africa/images/AI-woman.png" />
+</Helmet>
 
 
       <Navbar />

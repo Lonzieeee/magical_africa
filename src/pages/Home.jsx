@@ -35,6 +35,7 @@ const Home = () => {
         <meta property="og:description" content="Discover the real African story — explore African cultures, languages, crafts, tribes, marketplace and academy." />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://magical.africa" />
+         <meta property="og:image" content="https://magical.africa/images/Igbo2.jpg" />
       </Helmet>
 
 

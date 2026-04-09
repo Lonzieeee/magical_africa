@@ -47,15 +47,15 @@ const Blogs = () => {
   return (
     <>
       <Helmet>
-        <title>Blog | Magical Africa</title>
-        <meta
-          name="description"
-          content="Read blogs about African languages, cultural traditions, history, travel destinations, art, and digital skills from Magical Africa Academy."
-        />
-        <meta property="og:title" content="Magical Africa Academy" />
-        <meta property="og:url" content="https://magical.africa/blogs" />
-      </Helmet>
-
+  <title>Blog | Magical Africa</title>
+  <meta name="description" content="Read blogs about African languages, cultural traditions, history, travel destinations, art, and digital skills from Magical Africa Academy." />
+  <meta name="keywords" content="Magical Africa blog, African culture blog, African languages, African history, African travel, African art" />
+  <meta property="og:title" content="Magical Africa Blog" />
+  <meta property="og:description" content="Read blogs about African languages, cultural traditions, history, travel destinations, art, and digital skills from Magical Africa." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://magical.africa/blogs" />
+  <meta property="og:image" content="https://magical.africa/images/african-basketry.jpg" />
+</Helmet>
       <div className="blogs-page">
 
         <Navbar />
