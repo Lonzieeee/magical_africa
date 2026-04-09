@@ -132,6 +132,12 @@ const Navbar = ({ solid }) => {
           <NavLink to="/blogs" className={({ isActive }) => isActive ? 'active-link' : ''}>
             {t('sideMenu.blog')}
           </NavLink>
+
+         <NavLink to="/technology" className={({ isActive }) => isActive ? 'active-link' : ''}>
+            Technology
+          </NavLink>
+
+
         </div>
 
         {/* ── ITEM 3: Language + Auth ── */}

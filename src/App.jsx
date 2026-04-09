@@ -27,6 +27,7 @@ import Music from './pages/Music';
 import AcademyPage from './pages/AcademyPage';
 import Blogs from './pages/Blogs';
 import ContactWidget from './components/ContactWidget';
+import Technology from './pages/Technology';
 
 function App() {
   return (
@@ -53,7 +54,14 @@ function App() {
         <Route path="/academy-page"element={<AcademyPage />}
          />
          <Route path="/blogs" element={<Blogs />}
+        
          />
+
+         <Route path="/technology" elements=
+         {<Technology />}
+         
+         />
+
 
 
 
