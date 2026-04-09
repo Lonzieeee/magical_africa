@@ -112,7 +112,7 @@ const AcademyDropdown = () => {
    {t('sideMenu.academy')}
   </NavLink>
         <DropdownPanel
-          header='Explore the Academy'
+          header='Learn Our Courses'
           columns={academyData}
           footerLink='Browse all courses'
           footerTag='New courses weekly'
