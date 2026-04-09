@@ -540,6 +540,7 @@
   animation: tutor-loading-flip 2.6s infinite linear;
   transform-origin: 0 70%;
   transform-style: preserve-3d;
+  backface-visibility: hidden;
   color: var(--tp-accent);
 }
 
@@ -555,8 +556,11 @@
 .tutor-loading-text > span:nth-child(7) { animation-delay: 1.8s; }
 
 @keyframes tutor-loading-flip {
-  0% { transform: rotateX(0deg); }
-  100% { transform: rotateX(360deg); }
+  0% { transform: perspective(700px) rotateX(0deg); }
+  25% { transform: perspective(700px) rotateX(90deg); }
+  50% { transform: perspective(700px) rotateX(180deg); }
+  75% { transform: perspective(700px) rotateX(270deg); }
+  100% { transform: perspective(700px) rotateX(360deg); }
 }
 
 .tutor-profile-empty-card {
