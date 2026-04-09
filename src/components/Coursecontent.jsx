@@ -54,6 +54,9 @@ const CourseContent = ({
   previewOwned = false,
   previewActionLoading = false,
   onPreviewAction,
+  learningOutcomes = [],
+  courseSkills = [],
+  courseTools = [],
   courseLanguage = 'English',
   courseSubtitlesLabel = 'Video subtitles available',
   courseUpdatedAtLabel = '',
@@ -122,6 +125,17 @@ const CourseContent = ({
   )
 
   const topicsWithQuiz = topics.filter(t => t.quiz && t.quiz.length > 0)
+
+  const normalizeList = (value) => {
+    if (!Array.isArray(value)) return []
+    return value
+      .map((item) => String(item || '').trim())
+      .filter(Boolean)
+  }
+
+  const normalizedOutcomes = normalizeList(learningOutcomes)
+  const normalizedSkills = normalizeList(courseSkills)
+  const normalizedTools = normalizeList(courseTools)
 
   const toggleSidebarTopic = (id) => {
     setSidebarExpanded(prev => ({ ...prev, [id]: !prev[id] }))
@@ -278,6 +292,43 @@ const CourseContent = ({
               <div className='cc-tab-panel'>
                 <h2>About this course</h2>
                 <p className='cc-about-copy'>{description || 'No description available.'}</p>
+
+                {(normalizedOutcomes.length > 0 || normalizedSkills.length > 0 || normalizedTools.length > 0) && (
+                  <div className='cc-overview-meta'>
+                    {normalizedOutcomes.length > 0 && (
+                      <section className='cc-overview-card'>
+                        <h3>Learning Outcomes</h3>
+                        <ul>
+                          {normalizedOutcomes.map((outcome, idx) => (
+                            <li key={`outcome-${idx}`}>{outcome}</li>
+                          ))}
+                        </ul>
+                      </section>
+                    )}
+
+                    {normalizedSkills.length > 0 && (
+                      <section className='cc-overview-card'>
+                        <h3>Skills Learners Gain</h3>
+                        <ul>
+                          {normalizedSkills.map((skill, idx) => (
+                            <li key={`skill-${idx}`}>{skill}</li>
+                          ))}
+                        </ul>
+                      </section>
+                    )}
+
+                    {normalizedTools.length > 0 && (
+                      <section className='cc-overview-card'>
+                        <h3>Tools Learners Use</h3>
+                        <ul>
+                          {normalizedTools.map((tool, idx) => (
+                            <li key={`tool-${idx}`}>{tool}</li>
+                          ))}
+                        </ul>
+                      </section>
+                    )}
+                  </div>
+                )}
               </div>
             )}
 
@@ -463,8 +514,9 @@ const CourseContent = ({
                         disabled={
                           reviewSaving ||
                           reviewRating < 1 ||
+                          !String(reviewComment || '').trim() ||
                           reviewSubmitted ||
-                          (reviewRating < 3 && !reviewImprovement.trim())
+                          (reviewRating < 3 && !String(reviewImprovement || '').trim())
                         }
                       >
                         {reviewSubmitted ? 'Review Submitted' : reviewSaving ? 'Saving...' : 'Submit Review'}

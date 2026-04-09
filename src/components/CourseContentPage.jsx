@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { db } from '../context/AuthContext'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import CourseContent from '../components/Coursecontent'
@@ -9,14 +9,17 @@ import '../styles/coursecontent-page.css'
 import { useAuth } from '../context/AuthContext'
 import { FaCheckCircle, FaUndoAlt } from 'react-icons/fa'
 import { MdQuiz } from 'react-icons/md'
+import { buildCoursePath, slugifyCourseTitle } from '../utils/courseRoute'
 
 const CourseContentPage = () => {
   const location = useLocation()
   const navigate = useNavigate()
+  const { courseId: routeCourseId, courseSlug: routeCourseSlug } = useParams()
+  const [searchParams] = useSearchParams()
   const { user, userData } = useAuth()
-  const courseId = location.state?.courseId
-  const isPreviewMode = Boolean(location.state?.preview)
-  const fromResume = Boolean(location.state?.fromResume)
+  const courseId = location.state?.courseId || routeCourseId || ''
+  const isPreviewMode = Boolean(location.state?.preview) || searchParams.get('preview') === '1'
+  const fromResume = Boolean(location.state?.fromResume) || searchParams.get('resume') === '1'
 
   const [course, setCourse] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -111,6 +114,20 @@ const CourseContentPage = () => {
   }, [courseId, navigate])
 
   useEffect(() => {
+    if (!course?.id) return
+
+    const expectedSlug = slugifyCourseTitle(course.title || 'course')
+    const shouldCanonicalize = !routeCourseId || routeCourseId !== course.id || routeCourseSlug !== expectedSlug || location.pathname === '/course-content'
+
+    if (!shouldCanonicalize) return
+
+    navigate(buildCoursePath(course.id, course.title, { preview: isPreviewMode, fromResume }), {
+      replace: true,
+      state: location.state
+    })
+  }, [course, routeCourseId, routeCourseSlug, location.pathname, isPreviewMode, fromResume, navigate, location.state])
+
+  useEffect(() => {
     const initializeProgress = async () => {
       if (isPreviewMode || !user || !courseId || !course) return
       const totalLessons = (course.topics || []).reduce((acc, topic) => acc + (topic.lessons?.length || 0), 0)
@@ -192,8 +209,8 @@ const CourseContentPage = () => {
       if (reviewDoc.exists()) {
         const reviewData = reviewDoc.data()
         setReviewRating(reviewData.rating || 0)
-        setReviewComment(reviewData.comment || '')
-        setReviewImprovement(reviewData.improvementSuggestion || '')
+        setReviewComment(String(reviewData.comment || ''))
+        setReviewImprovement(String(reviewData.improvementSuggestion || ''))
         setReviewSubmitted(true)
       }
     }
@@ -358,8 +375,15 @@ const CourseContentPage = () => {
     if (!user || !courseId || !course || reviewRating < 1) return
     if (courseCompletionPercent < 100 || reviewSubmitted) return
 
+    const trimmedComment = String(reviewComment || '').trim()
+    if (!trimmedComment) {
+      setToast({ type: 'info', message: 'Please add a short comment before submitting your review.' })
+      setTimeout(() => setToast(null), 2400)
+      return
+    }
+
     const shouldCollectImprovement = reviewRating > 0 && reviewRating < 3
-    if (shouldCollectImprovement && !reviewImprovement.trim()) {
+    if (shouldCollectImprovement && !String(reviewImprovement || '').trim()) {
       setToast({ type: 'info', message: 'Please tell us what we can improve before submitting.' })
       setTimeout(() => setToast(null), 2400)
       return
@@ -379,8 +403,8 @@ const CourseContentPage = () => {
         courseTitle: course.title || 'Course',
         completionPercent: courseCompletionPercent,
         rating: reviewRating,
-        comment: reviewComment,
-        improvementSuggestion: shouldCollectImprovement ? reviewImprovement.trim() : '',
+        comment: trimmedComment,
+        improvementSuggestion: shouldCollectImprovement ? String(reviewImprovement || '').trim() : '',
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
       }, { merge: true })
@@ -406,7 +430,7 @@ const CourseContentPage = () => {
     }
 
     if (previewOwned) {
-      navigate('/course-content', { state: { courseId, fromResume: true } })
+      navigate(buildCoursePath(courseId, course?.title || '', { fromResume: true }), { state: { courseId, fromResume: true } })
       return
     }
 
@@ -458,7 +482,7 @@ const CourseContentPage = () => {
         updatedAt: new Date().toISOString()
       }, { merge: true })
 
-      navigate('/course-content', { state: { courseId, fromResume: true } })
+      navigate(buildCoursePath(courseId, course?.title || '', { fromResume: true }), { state: { courseId, fromResume: true } })
     } catch (error) {
       console.log('Failed to acquire course from preview:', error)
       setToast({ type: 'info', message: 'Could not add this course right now. Please try again.' })

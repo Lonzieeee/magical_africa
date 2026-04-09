@@ -5,6 +5,7 @@ import { FiAlertCircle, FiArrowLeft, FiBookOpen, FiClock, FiMessageSquare, FiPla
 import { FaChalkboardTeacher, FaGlobeAfrica, FaLanguage, FaListUl, FaQuoteLeft, FaRegCalendarAlt, FaUserGraduate } from 'react-icons/fa'
 import { db } from '../context/AuthContext'
 import { useAuth } from '../context/AuthContext'
+import { buildCoursePath } from '../utils/courseRoute'
 import '../styles/tutor-profile.css'
 
 const toTimestamp = (value) => {
@@ -169,12 +170,12 @@ const TutorProfilePage = () => {
 
   const handleBookTutor = () => {
     if (selectedCourse?.id) {
-      navigate('/course-content', { state: { courseId: selectedCourse.id, fromResume: true } })
+      navigate(buildCoursePath(selectedCourse.id, selectedCourse.title || '', { fromResume: true }), { state: { courseId: selectedCourse.id, fromResume: true } })
       return
     }
     const firstCourse = courses[0]
     if (firstCourse?.id) {
-      navigate('/course-content', { state: { courseId: firstCourse.id, preview: true } })
+      navigate(buildCoursePath(firstCourse.id, firstCourse.title || '', { preview: true }), { state: { courseId: firstCourse.id, preview: true } })
       return
     }
     navigate('/learner')
@@ -184,14 +185,9 @@ const TutorProfilePage = () => {
     return (
       <div className='tutor-profile-page tutor-profile-page--loading'>
         <div className='tutor-profile-loader tutor-profile-loader--loading'>
-          <div className='tutor-loading-text' role='status' aria-live='polite' aria-label='Loading tutor profile'>
-            <span>L</span>
-            <span>O</span>
-            <span>A</span>
-            <span>D</span>
-            <span>I</span>
-            <span>N</span>
-            <span>G</span>
+          <div className='tutor-loading-wrap' role='status' aria-live='polite' aria-label='Loading tutor profile'>
+            <span className='tutor-loading-spinner' aria-hidden='true' />
+            <p>Loading tutor profile...</p>
           </div>
         </div>
       </div>
@@ -231,7 +227,10 @@ const TutorProfilePage = () => {
             <button
               type='button'
               className='tutor-back-btn tutor-back-btn--ghost'
-              onClick={() => navigate('/course-content', { state: { courseId: selectedCourseId, preview: true } })}
+              onClick={() => {
+                const targetCourse = courses.find((course) => course.id === selectedCourseId)
+                navigate(buildCoursePath(selectedCourseId, targetCourse?.title || '', { preview: true }), { state: { courseId: selectedCourseId, preview: true } })
+              }}
             >
               <FiBookOpen /> Back to Course
             </button>
@@ -333,7 +332,7 @@ const TutorProfilePage = () => {
                           <span>{coursePrice > 0 ? `$${coursePrice}` : 'Free'}</span>
                         </div>
                         <div className='tutor-course-actions'>
-                          <button type='button' disabled={isTeacherPreview} onClick={() => navigate('/course-content', { state: { courseId: course.id, preview: true } })}>
+                          <button type='button' disabled={isTeacherPreview} onClick={() => navigate(buildCoursePath(course.id, course.title || '', { preview: true }), { state: { courseId: course.id, preview: true } })}>
                             {isTeacherPreview ? 'Learner Action' : 'View Course'}
                           </button>
                         </div>

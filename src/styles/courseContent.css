@@ -343,6 +343,65 @@
   margin-bottom: 0;
 }
 
+.cc-overview-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.cc-overview-card {
+  border: 1px solid #dbe7df;
+  background: linear-gradient(145deg, #fbfdfb 0%, #f4f9f5 100%);
+  padding: 14px;
+  text-align: left;
+}
+
+.cc-overview-card h3 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  color: #1f3f2b;
+  font-weight: 700;
+}
+
+.cc-overview-card ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  list-style: disc outside;
+  text-align: left;
+}
+
+.cc-overview-card li {
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #3e4a41;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+.cc-tab-panel .cc-overview-card ul,
+.cc-tab-panel .cc-overview-card ul li {
+  text-align: left !important;
+}
+
+.cc-tab-panel .cc-overview-card ul {
+  list-style: disc outside !important;
+  padding-left: 1.15rem !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.cc-tab-panel .cc-overview-card ul li {
+  display: list-item !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  float: none !important;
+}
+
+.cc-overview-card li:last-child {
+  margin-bottom: 0;
+}
+
 /* ── Notes ── */
 .cc-notes-list {
   display: flex;
@@ -1005,6 +1064,10 @@
 
   .cc-tabs-bar { padding: 0 1rem; }
   .cc-tab-content { padding: 1.5rem 1rem; }
+
+  .cc-overview-meta {
+    grid-template-columns: 1fr;
+  }
 
   .cc-overview-stack {
     gap: 1.1rem;

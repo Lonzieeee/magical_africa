@@ -114,6 +114,11 @@ function App() {
               <CourseContentPage />
             </ProtectedRoute>
           } />
+          <Route path="/course/:courseId/:courseSlug?" element={
+            <ProtectedRoute allowedRole='learner'>
+              <CourseContentPage />
+            </ProtectedRoute>
+          } />
           <Route path="/tutor/:tutorId" element={
             <ProtectedRoute allowedRole='learner'>
               <TutorProfilePage />
