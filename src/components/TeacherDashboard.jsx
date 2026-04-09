@@ -96,6 +96,16 @@ const TeacherDashboard = () => {
     lastName: '',
     photoURL: ''
   })
+  const [tutorProfileDraft, setTutorProfileDraft] = useState({
+    headline: '',
+    bio: '',
+    teachingStyle: '',
+    languages: '',
+    expertiseTags: '',
+    timezone: 'Africa/Nairobi',
+    availabilityText: '',
+    responseTimeLabel: ''
+  })
   const [profileSaving, setProfileSaving] = useState(false)
   const [profileMessage, setProfileMessage] = useState('')
   const [securityMessage, setSecurityMessage] = useState('')
@@ -196,6 +206,25 @@ const TeacherDashboard = () => {
       firstName: userData?.firstName || '',
       lastName: userData?.lastName || userData?.secondName || '',
       photoURL: localPhoto || userData?.photoURL || auth.currentUser?.photoURL || ''
+    })
+
+    const tp = userData?.tutorProfile || {}
+    const draftLanguages = Array.isArray(tp.languages)
+      ? tp.languages.join(', ')
+      : String(tp.languages || '')
+    const draftExpertise = Array.isArray(tp.expertiseTags)
+      ? tp.expertiseTags.join(', ')
+      : String(tp.expertiseTags || '')
+
+    setTutorProfileDraft({
+      headline: String(tp.headline || ''),
+      bio: String(tp.bio || ''),
+      teachingStyle: String(tp.teachingStyle || ''),
+      languages: draftLanguages,
+      expertiseTags: draftExpertise,
+      timezone: String(tp.timezone || 'Africa/Nairobi'),
+      availabilityText: String(tp.availabilityText || ''),
+      responseTimeLabel: String(tp.responseTimeLabel || '')
     })
   }, [authReady, userData])
 
@@ -1084,6 +1113,17 @@ const TeacherDashboard = () => {
 
     const firstName = profileDraft.firstName.trim()
     const lastName = profileDraft.lastName.trim()
+    const publicDisplayName = `${firstName} ${lastName}`.trim()
+
+    const languages = tutorProfileDraft.languages
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean)
+
+    const expertiseTags = tutorProfileDraft.expertiseTags
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean)
 
     if (!firstName) {
       setProfileMessage('First name is required.')
@@ -1097,17 +1137,37 @@ const TeacherDashboard = () => {
 
       await setDoc(doc(db, 'users', uid), {
         firstName, lastName, secondName: lastName,
-        photoURL: cloudSafePhoto, updatedAt: new Date().toISOString()
+        photoURL: cloudSafePhoto,
+        tutorProfile: {
+          displayName: publicDisplayName,
+          headline: tutorProfileDraft.headline.trim(),
+          bio: tutorProfileDraft.bio.trim(),
+          teachingStyle: tutorProfileDraft.teachingStyle.trim(),
+          languages,
+          expertiseTags,
+          timezone: tutorProfileDraft.timezone.trim() || 'Africa/Nairobi',
+          availabilityText: tutorProfileDraft.availabilityText.trim(),
+          responseTimeLabel: tutorProfileDraft.responseTimeLabel.trim(),
+          photoUrl: cloudSafePhoto,
+          updatedAt: new Date().toISOString()
+        },
+        updatedAt: new Date().toISOString()
       }, { merge: true })
 
       const displayName = `${firstName} ${lastName}`.trim()
       await updateProfile(auth.currentUser, { displayName, photoURL: cloudSafePhoto })
-      setProfileMessage('Profile updated successfully.')
+      setProfileMessage('Profile and public tutor page details updated successfully.')
     } catch {
       setProfileMessage('Could not save profile details right now.')
     } finally {
       setProfileSaving(false)
     }
+  }
+
+  const handlePreviewTutorPage = () => {
+    const uid = auth.currentUser?.uid
+    if (!uid) return
+    navigate(`/tutor-preview/${uid}`, { state: { previewFrom: 'teacher' } })
   }
 
   const handlePasswordUpdate = async () => {
@@ -1287,32 +1347,14 @@ const TeacherDashboard = () => {
 
           {loading && (
             <div className='td-loading-wrap'>
-              <div className='td-coffee' role='img' aria-label='Coffee cup spinning and stretching from side to side'>
-                <div className='td-coffee__cup'>
-                  <div className='td-coffee__cup-part td-coffee__cup-part--a' />
-                  <div className='td-coffee__cup-part td-coffee__cup-part--b' />
-                  <div className='td-coffee__cup-part td-coffee__cup-part--c' />
-                  <div className='td-coffee__cup-part td-coffee__cup-part--d' />
-                  <div className='td-coffee__cup-part td-coffee__cup-part--e' />
-                  <svg className='td-coffee__cup-part td-coffee__cup-part--f' width='96' height='60' viewBox='0 0 96 60' aria-hidden='true'>
-                    <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
-                      <path className='td-coffee__cup-handle' d='M64,4.413s6.64-2.913,11-2.913c11.739,0,19.5,10.759,19.5,22.497,0,23.475-45,22.497-45,22.497' />
-                    </g>
-                  </svg>
-                </div>
-                <svg className='td-coffee__steam' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
-                  <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
-                    <path className='td-coffee__steam-part td-coffee__steam-part--a' d='M13.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
-                    <path className='td-coffee__steam-part td-coffee__steam-part--b' d='M27.844,54s-5.652-10.174-4.522-16.957,6.869-11.564,9.043-18.087c2.261-6.783-4.522-16.957-4.522-16.957' />
-                    <path className='td-coffee__steam-part td-coffee__steam-part--c' d='M40.434,50.999c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
-                  </g>
-                </svg>
-                <svg className='td-coffee__steam td-coffee__steam--right' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
-                  <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
-                    <path className='td-coffee__steam-part td-coffee__steam-part--d' d='M19.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
-                    <path className='td-coffee__steam-part td-coffee__steam-part--e' d='M34.434,44c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
-                  </g>
-                </svg>
+              <div className='td-loading-text' role='status' aria-live='polite' aria-label='Loading tutor dashboard'>
+                <span>L</span>
+                <span>O</span>
+                <span>A</span>
+                <span>D</span>
+                <span>I</span>
+                <span>N</span>
+                <span>G</span>
               </div>
             </div>
           )}
@@ -1923,7 +1965,93 @@ const TeacherDashboard = () => {
                     <label><span>First name</span><input type='text' value={profileDraft.firstName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, firstName: e.target.value }))} placeholder='First name' /></label>
                     <label><span>Last name</span><input type='text' value={profileDraft.lastName} onChange={(e) => setProfileDraft((prev) => ({ ...prev, lastName: e.target.value }))} placeholder='Last name' /></label>
                   </div>
-                  <button type='button' className='td-account-save-btn' onClick={handleProfileSave} disabled={profileSaving}>Save profile</button>
+                </div>
+
+                <div className='td-account-group'>
+                  <h3>Public Tutor Page Details</h3>
+                  <p>These details are shown on the learner-facing tutor profile page.</p>
+                  <div className='td-account-grid'>
+                    <label>
+                      <span>Headline</span>
+                      <input
+                        type='text'
+                        value={tutorProfileDraft.headline}
+                        onChange={(e) => setTutorProfileDraft((prev) => ({ ...prev, headline: e.target.value }))}
+                        placeholder='Swahili Tutor | Culture & Conversation'
+                      />
+                    </label>
+                    <label>
+                      <span>Timezone</span>
+                      <input
+                        type='text'
+                        value={tutorProfileDraft.timezone}
+                        onChange={(e) => setTutorProfileDraft((prev) => ({ ...prev, timezone: e.target.value }))}
+                        placeholder='Africa/Nairobi'
+                      />
+                    </label>
+                    <label>
+                      <span>Languages (comma separated)</span>
+                      <input
+                        type='text'
+                        value={tutorProfileDraft.languages}
+                        onChange={(e) => setTutorProfileDraft((prev) => ({ ...prev, languages: e.target.value }))}
+                        placeholder='English, Swahili'
+                      />
+                    </label>
+                    <label>
+                      <span>Expertise tags (comma separated)</span>
+                      <input
+                        type='text'
+                        value={tutorProfileDraft.expertiseTags}
+                        onChange={(e) => setTutorProfileDraft((prev) => ({ ...prev, expertiseTags: e.target.value }))}
+                        placeholder='Conversation, Culture, Grammar'
+                      />
+                    </label>
+                    <label>
+                      <span>Availability summary</span>
+                      <input
+                        type='text'
+                        value={tutorProfileDraft.availabilityText}
+                        onChange={(e) => setTutorProfileDraft((prev) => ({ ...prev, availabilityText: e.target.value }))}
+                        placeholder='Weekday evenings and Saturday mornings'
+                      />
+                    </label>
+                    <label>
+                      <span>Response time label</span>
+                      <input
+                        type='text'
+                        value={tutorProfileDraft.responseTimeLabel}
+                        onChange={(e) => setTutorProfileDraft((prev) => ({ ...prev, responseTimeLabel: e.target.value }))}
+                        placeholder='Usually responds within 12 hours'
+                      />
+                    </label>
+                  </div>
+
+                  <div className='td-account-grid td-account-grid--single'>
+                    <label>
+                      <span>Bio</span>
+                      <textarea
+                        value={tutorProfileDraft.bio}
+                        onChange={(e) => setTutorProfileDraft((prev) => ({ ...prev, bio: e.target.value }))}
+                        placeholder='Tell learners how you teach, your background, and what outcomes they should expect.'
+                        rows={4}
+                      />
+                    </label>
+                    <label>
+                      <span>Teaching style</span>
+                      <textarea
+                        value={tutorProfileDraft.teachingStyle}
+                        onChange={(e) => setTutorProfileDraft((prev) => ({ ...prev, teachingStyle: e.target.value }))}
+                        placeholder='Interactive, example-driven, and learner-paced sessions with practical assignments.'
+                        rows={3}
+                      />
+                    </label>
+                  </div>
+
+                  <div className='td-account-danger-zone'>
+                    <button type='button' className='td-account-save-btn' onClick={handleProfileSave} disabled={profileSaving}>Save profile</button>
+                    <button type='button' className='td-account-save-btn' onClick={handlePreviewTutorPage}>Preview learner view</button>
+                  </div>
                 </div>
 
                 <div className='td-account-group'>

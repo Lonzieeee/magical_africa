@@ -22,6 +22,7 @@ import Lesson from './components/Lesson';
 import Learner from './components/Learner';
 import CourseContentPage from './components/CourseContentPage';
 import TeacherDashboard from './components/TeacherDashboard';
+import TutorProfilePage from './components/TutorProfilePage';
 import ProtectedRoute from './components/ProtectedRoute'
 import Music from './pages/Music';
 import AcademyPage from './pages/AcademyPage';
@@ -111,6 +112,16 @@ function App() {
           <Route path="/course-content" element={
             <ProtectedRoute allowedRole='learner'>
               <CourseContentPage />
+            </ProtectedRoute>
+          } />
+          <Route path="/tutor/:tutorId" element={
+            <ProtectedRoute allowedRole='learner'>
+              <TutorProfilePage />
+            </ProtectedRoute>
+          } />
+          <Route path="/tutor-preview/:tutorId" element={
+            <ProtectedRoute allowedRole='teacher'>
+              <TutorProfilePage />
             </ProtectedRoute>
           } />
 

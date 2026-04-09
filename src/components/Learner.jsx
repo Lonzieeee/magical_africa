@@ -1129,6 +1129,29 @@ const Learner = () => {
     navigate('/course-content', { state: { courseId, preview: true } })
   }
 
+  const handleViewTutorProfile = (course) => {
+    const resolvedTutorId = course?.teacherId || course?.tutorId || course?.createdBy || course?.authorId || ''
+    const resolvedTutorName = course?.teacherName || course?.tutorName || course?.authorName || 'Tutor'
+
+    if (!resolvedTutorId) {
+      setActionToast({
+        tone: 'warning',
+        title: 'Tutor profile unavailable',
+        message: `We could not find profile details for ${resolvedTutorName}.`
+      })
+      setTimeout(() => setActionToast(null), 2400)
+      return
+    }
+
+    navigate(`/tutor/${resolvedTutorId}`, {
+      state: {
+        courseId: course?.id || '',
+        courseTitle: course?.title || 'Course',
+        tutorName: resolvedTutorName
+      }
+    })
+  }
+
   const buildCourseLessonSequence = (course) => {
     if (!course?.topics || !Array.isArray(course.topics)) return []
     return course.topics.flatMap((topic, topicIndex) =>
@@ -1551,32 +1574,14 @@ const Learner = () => {
 
           {loading && (
             <div className='learner-loading-wrap'>
-              <div className='learner-coffee' role='img' aria-label='Coffee cup spinning and stretching from side to side'>
-                <div className='learner-coffee__cup'>
-                  <div className='learner-coffee__cup-part learner-coffee__cup-part--a' />
-                  <div className='learner-coffee__cup-part learner-coffee__cup-part--b' />
-                  <div className='learner-coffee__cup-part learner-coffee__cup-part--c' />
-                  <div className='learner-coffee__cup-part learner-coffee__cup-part--d' />
-                  <div className='learner-coffee__cup-part learner-coffee__cup-part--e' />
-                  <svg className='learner-coffee__cup-part learner-coffee__cup-part--f' width='96' height='60' viewBox='0 0 96 60' aria-hidden='true'>
-                    <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
-                      <path className='learner-coffee__cup-handle' d='M64,4.413s6.64-2.913,11-2.913c11.739,0,19.5,10.759,19.5,22.497,0,23.475-45,22.497-45,22.497' />
-                    </g>
-                  </svg>
-                </div>
-                <svg className='learner-coffee__steam' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
-                  <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
-                    <path className='learner-coffee__steam-part learner-coffee__steam-part--a' d='M13.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
-                    <path className='learner-coffee__steam-part learner-coffee__steam-part--b' d='M27.844,54s-5.652-10.174-4.522-16.957,6.869-11.564,9.043-18.087c2.261-6.783-4.522-16.957-4.522-16.957' />
-                    <path className='learner-coffee__steam-part learner-coffee__steam-part--c' d='M40.434,50.999c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
-                  </g>
-                </svg>
-                <svg className='learner-coffee__steam learner-coffee__steam--right' width='56' height='56' viewBox='0 0 56 56' aria-hidden='true'>
-                  <g fill='none' stroke='currentColor' strokeWidth='3' strokeLinecap='round'>
-                    <path className='learner-coffee__steam-part learner-coffee__steam-part--d' d='M19.845,54s-5.62-10.115-4.496-16.859,6.83-11.497,8.992-17.983c1.037-3.11,.161-6.937-1.083-10.158' />
-                    <path className='learner-coffee__steam-part learner-coffee__steam-part--e' d='M34.434,44c-1.577-3.486-3.818-9.462-3.071-13.944,1.121-6.723,6.809-11.462,8.964-17.928,1.033-3.1,.161-6.916-1.08-10.127' />
-                  </g>
-                </svg>
+              <div className='learner-loading-text' role='status' aria-live='polite' aria-label='Loading learner dashboard'>
+                <span>L</span>
+                <span>O</span>
+                <span>A</span>
+                <span>D</span>
+                <span>I</span>
+                <span>N</span>
+                <span>G</span>
               </div>
             </div>
           )}
@@ -1757,7 +1762,16 @@ const Learner = () => {
                           <div className='learner-course-meta'>
                             <span>{course.courseType || 'General'}</span>
                             <span>{isPaid ? `Price: $${price}` : 'Free Course'}</span>
-                            <span>Offered by {course.teacherName || 'Tutor'}</span>
+                            <span>
+                              Offered by
+                              <button
+                                type='button'
+                                className='learner-tutor-link'
+                                onClick={() => handleViewTutorProfile(course)}
+                              >
+                                {course.teacherName || 'Tutor'}
+                              </button>
+                            </span>
                           </div>
                           <div className='learner-suggested-actions'>
                             <button className='learner-details-btn' onClick={() => handleViewCourseDetails(course.id)}>View Details</button>
@@ -1822,6 +1836,13 @@ const Learner = () => {
                             <span>{completion >= 100 ? 'Completed successfully' : progress.started ? 'In Progress' : 'Purchased'}</span>
                           </div>
                           {courseView === 'in-progress' && <p className='learner-inprogress-note'>Lessons in progress: {progress.lessonsCompleted || 0} • Completion: {completion}%</p>}
+                          <button
+                            type='button'
+                            className='learner-tutor-link learner-tutor-link-inline'
+                            onClick={() => handleViewTutorProfile(course)}
+                          >
+                            View Tutor Profile: {course.teacherName || 'Tutor'}
+                          </button>
                         </div>
                         <div className='learner-progress-row'>
                           <p>Progress: {completion}%</p>
@@ -1831,9 +1852,18 @@ const Learner = () => {
                         </div>
                         <p className='learner-last-opened'>{lastOpenedLabel}</p>
                         <p className='learner-next-lesson'>{nextLessonLabel}</p>
-                        {(courseView === 'completed' || isCompleted) ? null : (
-                          <button className='learner-resume-btn' onClick={() => handleResumeCourse(course.id)}>{hasStarted ? 'Resume' : 'Start Course'}</button>
-                        )}
+                        <div className='learner-mycourse-actions'>
+                          <button
+                            type='button'
+                            className='learner-resume-btn learner-resume-btn-secondary'
+                            onClick={() => handleViewTutorProfile(course)}
+                          >
+                            Tutor Profile
+                          </button>
+                          {(courseView === 'completed' || isCompleted) ? null : (
+                            <button className='learner-resume-btn' onClick={() => handleResumeCourse(course.id)}>{hasStarted ? 'Resume' : 'Start Course'}</button>
+                          )}
+                        </div>
                       </div>
                     </article>
                   )

@@ -77,7 +77,8 @@ const CourseContent = ({
   onReviewCommentChange,
   onReviewImprovementChange,
   onReviewSubmit,
-  courseCompletionPercent = 0
+  courseCompletionPercent = 0,
+  onViewTutorProfile
 }) => {
   const [activeTab, setActiveTab] = useState('overview')
   const [sidebarExpanded, setSidebarExpanded] = useState({})
@@ -557,6 +558,11 @@ const CourseContent = ({
             </button>
             <div className='cc-sidebar-course-title'>{title || 'Course'}</div>
             {teacherName && <div className='cc-sidebar-course-teacher'>by {teacherName}</div>}
+            {teacherName && onViewTutorProfile && (
+              <button className='cc-sidebar-back-btn cc-sidebar-tutor-btn' type='button' onClick={onViewTutorProfile}>
+                View Tutor Profile
+              </button>
+            )}
             <div className='cc-sidebar-course-progress'>
               <div className='cc-sidebar-progress-row'>
                 <span>{completionPercent}% complete</span>
