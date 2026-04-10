@@ -1,8 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
-import { db } from '../context/AuthContext';
-import { doc, getDoc } from 'firebase/firestore';
+import { buildLearnerDashboardPath, buildTeacherDashboardPath } from '../utils/dashboardRoute';
 
 const SideMenu = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
@@ -33,23 +32,12 @@ const SideMenu = ({ isOpen, onClose }) => {
     if (!user) {
       navigate('/academy-signIn');
     } else {
-      let resolvedRole = resolveProfileRole(userData);
-
-      if (!resolvedRole && user?.uid) {
-        try {
-          const snapshot = await getDoc(doc(db, 'users', user.uid));
-          if (snapshot.exists()) {
-            resolvedRole = resolveProfileRole(snapshot.data());
-          }
-        } catch {
-          resolvedRole = '';
-        }
-      }
+      const resolvedRole = resolveProfileRole(userData);
 
       if (resolvedRole === 'teacher') {
-        navigate('/teacher-dashboard');
+        navigate(buildTeacherDashboardPath('courses'));
       } else {
-        navigate('/learner');
+        navigate(buildLearnerDashboardPath('store'));
       }
     }
     onClose();

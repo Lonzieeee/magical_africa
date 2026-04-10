@@ -527,6 +527,12 @@
   gap: 0;
 }
 
+.learner-mobile-topbar,
+.learner-sidebar-overlay,
+.learner-sidebar-mobile-head {
+  display: none;
+}
+
 .learner-sidebar {
   background-color: rgba(145, 165, 133, 0.2);
   border-right: 1px solid rgba(145, 165, 133, 0.45);
@@ -539,6 +545,10 @@
   overflow-y: auto;
   position: sticky;
   top: 0;
+}
+
+.learner-main {
+  min-width: 0;
 }
 
 .learner-sidebar h2 {
@@ -2931,6 +2941,32 @@
   border-right-color: rgba(140, 170, 214, 0.34);
 }
 
+.learner-dashboard--dark .learner-mobile-topbar {
+  background: rgba(9, 17, 27, 0.92);
+  border-bottom-color: rgba(140, 170, 214, 0.24);
+}
+
+.learner-dashboard--dark .learner-mobile-menu-btn,
+.learner-dashboard--dark .learner-sidebar-close {
+  background: rgba(118, 173, 255, 0.08);
+  border-color: rgba(140, 170, 214, 0.36);
+  color: #edf3ff;
+}
+
+.learner-dashboard--dark .learner-mobile-menu-btn span {
+  background: #edf3ff;
+}
+
+.learner-dashboard--dark .learner-mobile-topbar-copy strong,
+.learner-dashboard--dark .learner-sidebar-mobile-copy strong {
+  color: #edf3ff;
+}
+
+.learner-dashboard--dark .learner-mobile-topbar-copy span,
+.learner-dashboard--dark .learner-sidebar-mobile-copy span {
+  color: #c9d7eb;
+}
+
 .learner-dashboard--dark .learner-store-image-placeholder {
   color: #c4d0e4;
 }
@@ -3378,6 +3414,63 @@
 }
 
 @media screen and (max-width: 1024px) {
+  .learner-mobile-topbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    backdrop-filter: blur(14px);
+    background: rgba(248, 251, 247, 0.92);
+    border-bottom: 1px solid rgba(58, 120, 214, 0.16);
+  }
+
+  .learner-mobile-menu-btn {
+    width: 44px;
+    height: 44px;
+    border: 1px solid var(--ld-border-strong);
+    background: rgba(255, 255, 255, 0.88);
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .learner-mobile-menu-btn span {
+    width: 18px;
+    height: 2px;
+    background: var(--ld-black);
+    border-radius: 999px;
+  }
+
+  .learner-mobile-topbar-copy {
+    display: grid;
+    gap: 2px;
+  }
+
+  .learner-mobile-topbar-copy strong {
+    color: var(--ld-black);
+    font-size: 0.95rem;
+  }
+
+  .learner-mobile-topbar-copy span {
+    color: var(--ld-text-medium);
+    font-size: 0.76rem;
+  }
+
+  .learner-sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    border: none;
+    background: rgba(7, 12, 19, 0.46);
+    z-index: 44;
+  }
+
   .learner-toast {
     margin: 0 0 14px;
   }
@@ -3387,10 +3480,57 @@
   }
 
   .learner-sidebar {
-    position: static;
-    height: auto;
-    min-height: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: min(86vw, 320px);
+    height: 100vh;
+    min-height: 100vh;
     gap: 12px;
+    z-index: 45;
+    background-color: #f8fbf7;
+    border-right: 1px solid rgba(58, 120, 214, 0.22);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+    transform: translateX(-100%);
+    transition: transform 0.24s ease;
+  }
+
+  .learner-sidebar--open {
+    transform: translateX(0);
+  }
+
+  .learner-sidebar-mobile-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--ld-border-soft);
+  }
+
+  .learner-sidebar-mobile-copy {
+    display: grid;
+    gap: 2px;
+  }
+
+  .learner-sidebar-mobile-copy strong {
+    color: var(--ld-black);
+    font-size: 0.92rem;
+  }
+
+  .learner-sidebar-mobile-copy span {
+    color: var(--ld-text-medium);
+    font-size: 0.75rem;
+  }
+
+  .learner-sidebar-close {
+    border: 1px solid var(--ld-border-soft);
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--ld-black);
+    padding: 8px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
   }
 
   .learner-nav-groups {
@@ -3410,6 +3550,7 @@
   .learner-top-actions {
     width: 100%;
     justify-content: flex-end;
+    flex-wrap: wrap;
   }
 
   .learner-catchy-message {
@@ -3445,6 +3586,14 @@
 @media screen and (max-width: 768px) {
   .learner-main {
     padding: 16px;
+  }
+
+  .learner-top-actions {
+    justify-content: stretch;
+  }
+
+  .learner-top-stat {
+    width: 100%;
   }
 
   .learner-art-head {
