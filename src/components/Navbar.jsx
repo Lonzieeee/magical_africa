@@ -10,6 +10,7 @@ import AcademyDropdown from './AcademyDropdown';
 import MarketDropdown from './MarketDropdown';
 import '../styles/navbar.css';
 import '../styles/hero-stuff.css';
+import { buildLearnerDashboardPath, buildTeacherDashboardPath } from '../utils/dashboardRoute';
 
 const languages = [
   { code: 'en', name: 'English' },
@@ -59,35 +60,11 @@ const Navbar = ({ solid }) => {
   }, []);
 
   useEffect(() => {
-    let active = true;
-
-    const resolveRole = async () => {
-      if (!user) {
-        if (active) setAccountRole('');
-        return;
-      }
-
-      let resolvedRole = resolveProfileRole(userData);
-
-      if (!resolvedRole && user?.uid) {
-        try {
-          const snapshot = await getDoc(doc(db, 'users', user.uid));
-          if (snapshot.exists()) {
-            resolvedRole = resolveProfileRole(snapshot.data());
-          }
-        } catch {
-          resolvedRole = '';
-        }
-      }
-
-      if (active) setAccountRole(resolvedRole);
-    };
-
-    resolveRole();
-
-    return () => {
-      active = false;
-    };
+    if (!user) {
+      setAccountRole('');
+      return;
+    }
+    setAccountRole(resolveProfileRole(userData));
   }, [user, userData]);
 
   const handleLanguageChange = (langCode) => {
@@ -109,15 +86,15 @@ const Navbar = ({ solid }) => {
   };
 
   const handleMyLearning = () => {
-    navigate('/learner?section=courses&view=all');
+    navigate(buildLearnerDashboardPath('courses', 'all'));
   };
 
   const handleMyCertificates = () => {
-    navigate('/learner?section=achievements');
+    navigate(buildLearnerDashboardPath('achievements'));
   };
 
   const handleMyArts = () => {
-    navigate('/learner?section=my-art');
+    navigate(buildLearnerDashboardPath('my-art'));
   };
 
   const handleTeachOnMagical = async () => {
@@ -140,7 +117,7 @@ const Navbar = ({ solid }) => {
     }
 
     if (resolvedRole === 'teacher') {
-      navigate('/teacher-dashboard');
+      navigate(buildTeacherDashboardPath('courses'));
       return;
     }
 

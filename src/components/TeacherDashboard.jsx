@@ -15,7 +15,7 @@ import {
   XAxis,
   YAxis
 } from 'recharts'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import {
   addDoc,
@@ -29,9 +29,10 @@ import {
   updateDoc,
   where
 } from 'firebase/firestore'
-import { deleteUser, EmailAuthProvider, onAuthStateChanged, reauthenticateWithCredential, signOut, updatePassword, updateProfile } from 'firebase/auth'
+import { deleteUser, EmailAuthProvider, reauthenticateWithCredential, signOut, updatePassword, updateProfile } from 'firebase/auth'
 import { useAuth } from '../context/AuthContext'
 import '../styles/teacher-dashboard.css'
+import { buildTeacherDashboardPath, normalizeTeacherSection } from '../utils/dashboardRoute'
 
 const getTeacherThemeKey = (uid) => `teacherDashboardTheme_${uid}`
 const getTeacherSettingsPrefsKey = (uid) => `teacherDashboardSettings_${uid}`
@@ -40,7 +41,9 @@ const courseTypeOptions = ['Language', 'Culture', 'History', 'Artisan', 'Pottery
 
 const TeacherDashboard = () => {
   const navigate = useNavigate()
-  const { userData } = useAuth()
+  const location = useLocation()
+  const { section: routeSection } = useParams()
+  const { user, userData } = useAuth()
   const [activeSection, setActiveSection] = useState('courses')
   const [menuOpen, setMenuOpen] = useState({
     teaching: true,
@@ -49,6 +52,7 @@ const TeacherDashboard = () => {
     content: false,
     account: false
   })
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [themeMode, setThemeMode] = useState('light')
   const [courses, setCourses] = useState([])
   const [enrollments, setEnrollments] = useState([])
@@ -60,7 +64,6 @@ const TeacherDashboard = () => {
   const [announcementPosting, setAnnouncementPosting] = useState(false)
   const [reviewCourseFilter, setReviewCourseFilter] = useState('')
   const [loading, setLoading] = useState(true)
-  const [authReady, setAuthReady] = useState(false)
   const [builderMode, setBuilderMode] = useState('create')
   const [editingCourseId, setEditingCourseId] = useState('')
   const [builderSaving, setBuilderSaving] = useState(false)
@@ -111,27 +114,31 @@ const TeacherDashboard = () => {
   const [securityMessage, setSecurityMessage] = useState('')
   const [passwordForm, setPasswordForm] = useState({ currentPassword: '', newPassword: '' })
   const profilePhotoInputRef = useRef(null)
+  const teacherAnnouncementsLoadedRef = useRef(false)
+  const teacherReviewsLoadedRef = useRef(false)
+  const shouldTrackEnrollments = ['students', 'analytics', 'reviews'].includes(activeSection)
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, () => setAuthReady(true))
-    return () => unsubscribe()
-  }, [])
+    const requestedSection = normalizeTeacherSection(routeSection || 'courses')
+    setActiveSection((prev) => (prev === requestedSection ? prev : requestedSection))
+  }, [routeSection])
 
   useEffect(() => {
-    if (!authReady) return
+    const desiredPath = buildTeacherDashboardPath(activeSection)
+    const currentSection = normalizeTeacherSection(routeSection || 'courses')
+    const isCanonicalTeacherPath = location.pathname === desiredPath && currentSection === activeSection
+    if (isCanonicalTeacherPath) return
+    navigate(desiredPath, { replace: true })
+  }, [activeSection, routeSection, location.pathname, navigate])
+
+  useEffect(() => {
+    if (!user?.uid) return
     fetchDashboardData()
-  }, [authReady])
+  }, [user?.uid])
 
   useEffect(() => {
-    if (!authReady) return
-    if (activeSection !== 'reviews') return
-    fetchDashboardData()
-  }, [authReady, activeSection])
-
-  useEffect(() => {
-    if (!authReady) return
-    const currentTeacherId = auth.currentUser?.uid
-    if (!currentTeacherId) return
+    const currentTeacherId = user?.uid
+    if (!currentTeacherId || !shouldTrackEnrollments) return
 
     const enrollmentQuery = query(collection(db, 'enrollments'), where('teacherId', '==', currentTeacherId))
     const unsubscribe = onSnapshot(
@@ -145,18 +152,27 @@ const TeacherDashboard = () => {
       }
     )
 
-    return () => unsubscribe()
-  }, [authReady])
+    return () => {
+      unsubscribe()
+    }
+  }, [shouldTrackEnrollments, user?.uid])
 
   useEffect(() => {
-    const uid = auth.currentUser?.uid
+    teacherAnnouncementsLoadedRef.current = false
+    teacherReviewsLoadedRef.current = false
+    setAnnouncements([])
+    setReviews([])
+  }, [user?.uid])
+
+  useEffect(() => {
+    const uid = user?.uid
     if (!uid) return
     const seenAt = localStorage.getItem(`teacherReviewsSeenAt_${uid}`) || ''
     setReviewsSeenAt(seenAt)
-  }, [authReady])
+  }, [user?.uid])
 
   useEffect(() => {
-    const uid = auth.currentUser?.uid
+    const uid = user?.uid
     if (!uid) return
     const stored = localStorage.getItem(getTeacherThemeKey(uid))
     if (stored === 'dark' || stored === 'light') {
@@ -164,20 +180,22 @@ const TeacherDashboard = () => {
       return
     }
     setThemeMode('light')
-  }, [authReady])
+  }, [user?.uid])
 
   useEffect(() => {
-    const uid = auth.currentUser?.uid
+    const uid = user?.uid
     if (!uid) return
     localStorage.setItem(getTeacherThemeKey(uid), themeMode)
-  }, [themeMode])
+  }, [themeMode, user?.uid])
 
   useEffect(() => {
-    const uid = auth.currentUser?.uid
+    const uid = user?.uid
     if (!uid) return
+    const storedTheme = localStorage.getItem(getTeacherThemeKey(uid))
+    const resolvedTheme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : 'light'
     const stored = localStorage.getItem(getTeacherSettingsPrefsKey(uid))
     if (!stored) {
-      setSettingsPrefs((prev) => ({ ...prev, darkMode: themeMode === 'dark' }))
+      setSettingsPrefs((prev) => ({ ...prev, darkMode: resolvedTheme === 'dark' }))
       return
     }
 
@@ -190,19 +208,39 @@ const TeacherDashboard = () => {
         cloudSync: parsed?.cloudSync !== false
       }
       setSettingsPrefs(nextPrefs)
-      if ((nextPrefs.darkMode ? 'dark' : 'light') !== themeMode) {
+      if ((nextPrefs.darkMode ? 'dark' : 'light') !== resolvedTheme) {
         setThemeMode(nextPrefs.darkMode ? 'dark' : 'light')
       }
     } catch {
-      setSettingsPrefs((prev) => ({ ...prev, darkMode: themeMode === 'dark' }))
+      setSettingsPrefs((prev) => ({ ...prev, darkMode: resolvedTheme === 'dark' }))
     }
-  }, [authReady])
+  }, [user?.uid])
 
   useEffect(() => {
-    const uid = auth.currentUser?.uid
+    const uid = user?.uid
     if (!uid) return
     localStorage.setItem(getTeacherSettingsPrefsKey(uid), JSON.stringify(settingsPrefs))
-  }, [settingsPrefs])
+  }, [settingsPrefs, user?.uid])
+
+  useEffect(() => {
+    document.body.style.overflow = sidebarOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [sidebarOpen])
+
+  useEffect(() => {
+    if (!sidebarOpen) return undefined
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') setSidebarOpen(false)
+    }
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [sidebarOpen])
+
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [activeSection])
 
   useEffect(() => {
     const uid = auth.currentUser?.uid
@@ -232,7 +270,7 @@ const TeacherDashboard = () => {
       availabilityText: String(tp.availabilityText || ''),
       responseTimeLabel: String(tp.responseTimeLabel || '')
     })
-  }, [authReady, userData])
+  }, [user?.uid, userData])
 
   useEffect(() => {
     if (courses.length === 0) {
@@ -253,7 +291,7 @@ const TeacherDashboard = () => {
   // ─── UPDATED fetchDashboardData — scoped queries, no full-collection reads ──
   const fetchDashboardData = async () => {
     try {
-      const currentTeacherId = auth.currentUser?.uid
+      const currentTeacherId = user?.uid
       if (!currentTeacherId) {
         setCourses([])
         setEnrollments([])
@@ -280,8 +318,37 @@ const TeacherDashboard = () => {
         })
 
       setCourses(myCourses)
-      const myCourseIds = new Set(myCourses.map(course => course.id))
-      const myCourseIdList = myCourses.map((course) => course.id).filter(Boolean)
+
+    } catch (err) {
+      console.log('Error fetching dashboard data:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const fetchTeacherAnnouncements = async () => {
+    const currentTeacherId = user?.uid
+    if (!currentTeacherId) return
+    try {
+      const announcementSnapshot = await getDocs(
+        query(collection(db, 'announcements'), where('teacherId', '==', currentTeacherId))
+      )
+      const teacherAnnouncements = announcementSnapshot.docs
+        .map((d) => ({ id: d.id, ...d.data() }))
+        .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
+      setAnnouncements(teacherAnnouncements)
+      teacherAnnouncementsLoadedRef.current = true
+    } catch (err) {
+      console.log('Error fetching teacher announcements:', err)
+    }
+  }
+
+  const fetchTeacherReviews = async () => {
+    const currentTeacherId = user?.uid
+    if (!currentTeacherId) return
+    try {
+      const myCourseIds = new Set(courses.map((course) => course.id))
+      const myCourseIdList = courses.map((course) => course.id).filter(Boolean)
       const chunkBy = (items, size) => {
         const chunks = []
         for (let i = 0; i < items.length; i += size) {
@@ -290,29 +357,10 @@ const TeacherDashboard = () => {
         return chunks
       }
 
-      // Enrollment query by teacherId
-      const enrollmentQueryByTeacher = getDocs(
-        query(collection(db, 'enrollments'), where('teacherId', '==', currentTeacherId))
-      )
-
-      // Optional second query for enrollments missing teacherId (capped at 10 for Firestore 'in' limit)
-      const courseIdList = myCourses.map(c => c.id).filter(Boolean).slice(0, 10)
-      const enrollmentQueryByCourse = courseIdList.length > 0
-        ? getDocs(query(collection(db, 'enrollments'), where('courseId', 'in', courseIdList)))
-        : Promise.resolve(null)
-
-      // FIX: was fetching ALL announcements — now scoped to this teacher only
-      const announcementsQuery = getDocs(
-        query(collection(db, 'announcements'), where('teacherId', '==', currentTeacherId))
-      )
-
-      // FIX: was fetching ALL reviews — now scoped to this teacher only
       const reviewsQueryByTeacher = getDocs(
         query(collection(db, 'reviews'), where('teacherId', '==', currentTeacherId))
       )
 
-      // Also fetch reviews by my course IDs for backward compatibility with older review docs
-      // that may not have teacherId set.
       const reviewCourseChunks = chunkBy(myCourseIdList, 10)
       const reviewsQueryByCourse = reviewCourseChunks.length > 0
         ? Promise.all(
@@ -322,57 +370,10 @@ const TeacherDashboard = () => {
         )
         : Promise.resolve([])
 
-      // FIX: removed learnerProgress full-collection fetch entirely —
-      // completion already lives on enrollment docs written by learner dashboard
-
-      const [
-        enrollmentByTeacherResult,
-        enrollmentByCourseResult,
-        announcementResult,
-        reviewByTeacherResult,
-        reviewByCourseResult
-      ] = await Promise.allSettled([
-        enrollmentQueryByTeacher,
-        enrollmentQueryByCourse,
-        announcementsQuery,
+      const [reviewByTeacherResult, reviewByCourseResult] = await Promise.allSettled([
         reviewsQueryByTeacher,
         reviewsQueryByCourse
       ])
-
-      // Merge and deduplicate enrollments
-      const enrollmentMap = new Map()
-
-      if (enrollmentByTeacherResult.status === 'fulfilled') {
-        enrollmentByTeacherResult.value.docs.forEach(d => {
-          enrollmentMap.set(d.id, { id: d.id, ...d.data() })
-        })
-      }
-
-      if (
-        enrollmentByCourseResult.status === 'fulfilled' &&
-        enrollmentByCourseResult.value !== null
-      ) {
-        enrollmentByCourseResult.value.docs.forEach(d => {
-          if (!enrollmentMap.has(d.id)) {
-            enrollmentMap.set(d.id, { id: d.id, ...d.data() })
-          }
-        })
-      }
-
-      const myEnrollments = Array.from(enrollmentMap.values())
-        .filter(item => item.teacherId === currentTeacherId || myCourseIds.has(item.courseId))
-        .map(item => ({
-          ...item,
-          completion: Math.max(0, Math.min(100, Math.round(Number(item.completion || 0))))
-        }))
-
-      const announcementDocs = announcementResult.status === 'fulfilled'
-        ? announcementResult.value.docs
-        : []
-
-      const teacherAnnouncements = announcementDocs
-        .map(d => ({ id: d.id, ...d.data() }))
-        .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''))
 
       const reviewMap = new Map()
 
@@ -398,33 +399,22 @@ const TeacherDashboard = () => {
           (b.updatedAt || b.createdAt || '').localeCompare(a.updatedAt || a.createdAt || '')
         )
 
-      // Fallback for legacy/malformed review docs that might not match scoped queries.
-      // This runs only when scoped reads returned nothing.
-      let resolvedReviews = myReviews
-      if (resolvedReviews.length === 0 && myCourseIds.size > 0) {
-        try {
-          const allReviewsSnapshot = await getDocs(collection(db, 'reviews'))
-          resolvedReviews = allReviewsSnapshot.docs
-            .map((d) => ({ id: d.id, ...d.data() }))
-            .filter((review) => review.teacherId === currentTeacherId || myCourseIds.has(review.courseId))
-            .sort((a, b) =>
-              (b.updatedAt || b.createdAt || '').localeCompare(a.updatedAt || a.createdAt || '')
-            )
-        } catch (fallbackError) {
-          console.log('Fallback reviews fetch failed:', fallbackError)
-        }
-      }
-
-      setEnrollments(myEnrollments)
-      setAnnouncements(teacherAnnouncements)
-      setReviews(resolvedReviews)
-
+      setReviews(myReviews)
+      teacherReviewsLoadedRef.current = true
     } catch (err) {
-      console.log('Error fetching dashboard data:', err)
-    } finally {
-      setLoading(false)
+      console.log('Error fetching teacher reviews:', err)
     }
   }
+
+  useEffect(() => {
+    if (activeSection !== 'messages' || teacherAnnouncementsLoadedRef.current) return
+    fetchTeacherAnnouncements()
+  }, [activeSection, user?.uid])
+
+  useEffect(() => {
+    if (activeSection !== 'reviews' || teacherReviewsLoadedRef.current) return
+    fetchTeacherReviews()
+  }, [activeSection, user?.uid, courses])
 
   const markReviewsSeen = () => {
     const uid = auth.currentUser?.uid
@@ -1114,6 +1104,11 @@ const TeacherDashboard = () => {
     setMenuOpen((prev) => ({ ...prev, [menu]: !prev[menu] }))
   }
 
+  const openTeacherSection = (section) => {
+    setActiveSection(section)
+    setSidebarOpen(false)
+  }
+
   const toggleThemeMode = () => {
     const nextMode = themeMode === 'dark' ? 'light' : 'dark'
     setThemeMode(nextMode)
@@ -1323,8 +1318,27 @@ const TeacherDashboard = () => {
 
   return (
     <div className={`td-dashboard ${themeMode === 'dark' ? 'td-dashboard--dark' : ''}`}>
+      <div className='td-mobile-topbar'>
+        <button type='button' className='td-mobile-menu-btn' onClick={() => setSidebarOpen(true)} aria-label='Open tutor navigation' aria-expanded={sidebarOpen}>
+          <span />
+          <span />
+          <span />
+        </button>
+        <div className='td-mobile-topbar-copy'>
+          <strong>Tutor Dashboard</strong>
+          <span>{userData?.firstName || user?.email || 'Teaching workspace'}</span>
+        </div>
+      </div>
+      {sidebarOpen && <button type='button' className='td-sidebar-overlay' aria-label='Close tutor navigation' onClick={() => setSidebarOpen(false)} />}
       <div className='td-layout'>
-        <aside className='td-sidebar'>
+        <aside className={`td-sidebar ${sidebarOpen ? 'td-sidebar--open' : ''}`}>
+          <div className='td-sidebar-mobile-head'>
+            <div className='td-sidebar-mobile-copy'>
+              <strong>Navigate</strong>
+              <span>Switch dashboard sections</span>
+            </div>
+            <button type='button' className='td-sidebar-close' onClick={() => setSidebarOpen(false)}>Close</button>
+          </div>
           <button className='td-back-btn' onClick={() => navigate('/')}>
             <FaChevronLeft aria-hidden='true' />
             <span>Back to Website</span>
@@ -1340,9 +1354,9 @@ const TeacherDashboard = () => {
               <button className={`td-nav-group-title ${menuOpen.teaching ? 'expanded' : ''}`} onClick={() => toggleMenu('teaching')} aria-expanded={menuOpen.teaching}>Teaching Hub</button>
               {menuOpen.teaching && (
                 <div className='td-nav-submenu'>
-                  <button className={`td-nav-subitem ${activeSection === 'courses' ? 'active' : ''}`} onClick={() => setActiveSection('courses')}>Courses</button>
-                  <button className={`td-nav-subitem ${activeSection === 'builder' ? 'active' : ''}`} onClick={() => setActiveSection('builder')}>Course Builder</button>
-                  <button className={`td-nav-subitem ${activeSection === 'quizzes' ? 'active' : ''}`} onClick={() => setActiveSection('quizzes')}>Quizzes & Assessments</button>
+                  <button className={`td-nav-subitem ${activeSection === 'courses' ? 'active' : ''}`} onClick={() => openTeacherSection('courses')}>Courses</button>
+                  <button className={`td-nav-subitem ${activeSection === 'builder' ? 'active' : ''}`} onClick={() => openTeacherSection('builder')}>Course Builder</button>
+                  <button className={`td-nav-subitem ${activeSection === 'quizzes' ? 'active' : ''}`} onClick={() => openTeacherSection('quizzes')}>Quizzes & Assessments</button>
                 </div>
               )}
             </div>
@@ -1351,9 +1365,9 @@ const TeacherDashboard = () => {
               <button className={`td-nav-group-title ${menuOpen.learners ? 'expanded' : ''}`} onClick={() => toggleMenu('learners')} aria-expanded={menuOpen.learners}>Learners</button>
               {menuOpen.learners && (
                 <div className='td-nav-submenu'>
-                  <button className={`td-nav-subitem ${activeSection === 'students' ? 'active' : ''}`} onClick={() => setActiveSection('students')}>Students</button>
-                  <button className={`td-nav-subitem ${activeSection === 'messages' ? 'active' : ''}`} onClick={() => setActiveSection('messages')}>Messages</button>
-                  <button className={`td-nav-subitem ${activeSection === 'reviews' ? 'active' : ''}`} onClick={() => setActiveSection('reviews')}>Reviews</button>
+                  <button className={`td-nav-subitem ${activeSection === 'students' ? 'active' : ''}`} onClick={() => openTeacherSection('students')}>Students</button>
+                  <button className={`td-nav-subitem ${activeSection === 'messages' ? 'active' : ''}`} onClick={() => openTeacherSection('messages')}>Messages</button>
+                  <button className={`td-nav-subitem ${activeSection === 'reviews' ? 'active' : ''}`} onClick={() => openTeacherSection('reviews')}>Reviews</button>
                 </div>
               )}
             </div>
@@ -1362,8 +1376,8 @@ const TeacherDashboard = () => {
               <button className={`td-nav-group-title ${menuOpen.insights ? 'expanded' : ''}`} onClick={() => toggleMenu('insights')} aria-expanded={menuOpen.insights}>Insights</button>
               {menuOpen.insights && (
                 <div className='td-nav-submenu'>
-                  <button className={`td-nav-subitem ${activeSection === 'analytics' ? 'active' : ''}`} onClick={() => setActiveSection('analytics')}>Analytics</button>
-                  <button className={`td-nav-subitem ${activeSection === 'earnings' ? 'active' : ''}`} onClick={() => setActiveSection('earnings')}>Earnings</button>
+                  <button className={`td-nav-subitem ${activeSection === 'analytics' ? 'active' : ''}`} onClick={() => openTeacherSection('analytics')}>Analytics</button>
+                  <button className={`td-nav-subitem ${activeSection === 'earnings' ? 'active' : ''}`} onClick={() => openTeacherSection('earnings')}>Earnings</button>
                 </div>
               )}
             </div>
@@ -1372,8 +1386,8 @@ const TeacherDashboard = () => {
               <button className={`td-nav-group-title ${menuOpen.content ? 'expanded' : ''}`} onClick={() => toggleMenu('content')} aria-expanded={menuOpen.content}>Cultural & Language</button>
               {menuOpen.content && (
                 <div className='td-nav-submenu'>
-                  <button className={`td-nav-subitem ${activeSection === 'culture' ? 'active' : ''}`} onClick={() => setActiveSection('culture')}>Cultural Content</button>
-                  <button className={`td-nav-subitem ${activeSection === 'language' ? 'active' : ''}`} onClick={() => setActiveSection('language')}>Language Tools</button>
+                  <button className={`td-nav-subitem ${activeSection === 'culture' ? 'active' : ''}`} onClick={() => openTeacherSection('culture')}>Cultural Content</button>
+                  <button className={`td-nav-subitem ${activeSection === 'language' ? 'active' : ''}`} onClick={() => openTeacherSection('language')}>Language Tools</button>
                 </div>
               )}
             </div>
@@ -1382,8 +1396,8 @@ const TeacherDashboard = () => {
               <button className={`td-nav-group-title ${menuOpen.account ? 'expanded' : ''}`} onClick={() => toggleMenu('account')} aria-expanded={menuOpen.account}>Account</button>
               {menuOpen.account && (
                 <div className='td-nav-submenu'>
-                  <button className={`td-nav-subitem ${activeSection === 'profile' ? 'active' : ''}`} onClick={() => setActiveSection('profile')}>Profile</button>
-                  <button className={`td-nav-subitem ${activeSection === 'settings' ? 'active' : ''}`} onClick={() => setActiveSection('settings')}>Settings</button>
+                  <button className={`td-nav-subitem ${activeSection === 'profile' ? 'active' : ''}`} onClick={() => openTeacherSection('profile')}>Profile</button>
+                  <button className={`td-nav-subitem ${activeSection === 'settings' ? 'active' : ''}`} onClick={() => openTeacherSection('settings')}>Settings</button>
                 </div>
               )}
             </div>
@@ -1396,7 +1410,7 @@ const TeacherDashboard = () => {
               <button className='td-theme-toggle' type='button' onClick={toggleThemeMode}>
                 {themeMode === 'dark' ? 'Light Mode' : 'Dark Mode'}
               </button>
-              <button className='td-alert-bell' type='button' onClick={() => setActiveSection('reviews')}>
+              <button className='td-alert-bell' type='button' onClick={() => openTeacherSection('reviews')}>
                 <FaBell aria-hidden='true' />
                 {unseenReviewsCount > 0 && <span>{unseenReviewsCount}</span>}
               </button>
@@ -1404,8 +1418,8 @@ const TeacherDashboard = () => {
           )}
 
           {loading && (
-            <div className='td-loading-wrap'>
-              <div className='td-loading-text' role='status' aria-live='polite' aria-label='Loading tutor dashboard'>
+            <div className='app-loading-wrap'>
+              <div className='app-loading-text' role='status' aria-live='polite' aria-label='Loading tutor dashboard'>
                 <span>L</span>
                 <span>O</span>
                 <span>A</span>

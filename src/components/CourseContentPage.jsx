@@ -42,6 +42,7 @@ const CourseContentPage = () => {
   // ── CACHE: holds the full learnerProgress doc in memory for the session ──
   // This means we NEVER read learnerProgress more than once per page load
   const progressCacheRef = useRef(null)
+  const initializedCourseKeyRef = useRef('')
 
   // ── CACHE: holds quizPercent so lesson toggles never need a Firestore read ──
   const quizPercentRef = useRef(0)
@@ -144,6 +145,9 @@ const CourseContentPage = () => {
   useEffect(() => {
     const initializeAll = async () => {
       if (!user || !courseId || !course) return
+      const initializeKey = `${user.uid}:${courseId}:${isPreviewMode ? 'preview' : 'full'}`
+      if (initializedCourseKeyRef.current === initializeKey) return
+      initializedCourseKeyRef.current = initializeKey
 
       // ── READ 1: learnerProgress (only read in entire session) ──
       const progressRef = doc(db, 'learnerProgress', user.uid)
@@ -232,7 +236,7 @@ const CourseContentPage = () => {
     }
 
     initializeAll()
-  }, [user, userData, courseId, course, isPreviewMode])
+  }, [user, courseId, course, isPreviewMode])
 
   // ── CLEANUP: persist time spent on unmount (write only) ──
   useEffect(() => {
@@ -255,8 +259,8 @@ const CourseContentPage = () => {
   if (loading) return (
     <>
       <Navbar solid />
-      <div className='course-loading-wrap'>
-        <div className='course-loading-text' role='status' aria-live='polite' aria-label='Loading course content'>
+      <div className='app-loading-wrap app-loading-wrap--navbar'>
+        <div className='app-loading-text' role='status' aria-live='polite' aria-label='Loading course content'>
           <span>L</span>
           <span>O</span>
           <span>A</span>

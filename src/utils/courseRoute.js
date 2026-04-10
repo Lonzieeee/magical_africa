@@ -10,7 +10,7 @@ export const slugifyCourseTitle = (title = '') => {
 }
 
 export const buildCoursePath = (courseId, title = '', options = {}) => {
-  if (!courseId) return '/course-content'
+  if (!courseId) return '/learner/course'
 
   const slug = slugifyCourseTitle(title)
   const params = new URLSearchParams()
@@ -19,5 +19,5 @@ export const buildCoursePath = (courseId, title = '', options = {}) => {
   if (options.fromResume) params.set('resume', '1')
 
   const query = params.toString()
-  return `/course/${encodeURIComponent(courseId)}/${slug}${query ? `?${query}` : ''}`
+  return `/learner/course/${encodeURIComponent(courseId)}/${slug}${query ? `?${query}` : ''}`
 }

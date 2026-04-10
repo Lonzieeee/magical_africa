@@ -5,8 +5,10 @@ import { FiAlertCircle, FiArrowLeft, FiBookOpen, FiClock, FiMessageSquare, FiPla
 import { FaChalkboardTeacher, FaGlobeAfrica, FaLanguage, FaListUl, FaQuoteLeft, FaRegCalendarAlt, FaUserGraduate } from 'react-icons/fa'
 import { db } from '../context/AuthContext'
 import { useAuth } from '../context/AuthContext'
+import Navbar from './Navbar'
 import { buildCoursePath } from '../utils/courseRoute'
 import '../styles/tutor-profile.css'
+import '../styles/coursecontent-page.css'
 
 const toTimestamp = (value) => {
   if (!value) return 0
@@ -206,13 +208,20 @@ const TutorProfilePage = () => {
 
   if (loading) {
     return (
-      <div className='tutor-profile-page tutor-profile-page--loading'>
-        <div className='tutor-profile-loader tutor-profile-loader--loading'>
-          <div className='tutor-loading-text' role='status' aria-live='polite' aria-label='Loading tutor profile'>
-            <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
+      <>
+        <Navbar solid />
+        <div className='app-loading-wrap app-loading-wrap--navbar'>
+          <div className='app-loading-text' role='status' aria-live='polite' aria-label='Loading tutor profile'>
+            <span>L</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>I</span>
+            <span>N</span>
+            <span>G</span>
           </div>
         </div>
-      </div>
+      </>
     )
   }
 
