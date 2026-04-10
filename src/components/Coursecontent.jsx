@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import {
   FaCertificate,
+  FaCheckCircle,
   FaChevronLeft,
   FaChevronRight,
   FaClipboardList,
@@ -18,10 +19,13 @@ const getYouTubeEmbedUrl = (url) => {
   try {
     const u = new URL(url)
     if (u.hostname === 'youtu.be') {
-      return `https://www.youtube.com/embed/${u.pathname.slice(1)}`
+      return `https://www.youtube-nocookie.com/embed/${u.pathname.slice(1)}`
     }
     if (u.hostname.includes('youtube.com') && u.searchParams.get('v')) {
-      return `https://www.youtube.com/embed/${u.searchParams.get('v')}`
+      return `https://www.youtube-nocookie.com/embed/${u.searchParams.get('v')}`
+    }
+    if (url.includes('youtube.com/embed/')) {
+      return url.replace('https://www.youtube.com/embed/', 'https://www.youtube-nocookie.com/embed/')
     }
     if (url.includes('embed') || url.includes('vimeo')) return url
   } catch { /* not a valid URL */ }
@@ -194,9 +198,11 @@ const CourseContent = ({
               />
             ) : embedUrl ? (
               <iframe
-                src={`${embedUrl}?autoplay=1`}
+                src={`${embedUrl}${embedUrl.includes('?') ? '&' : '?'}rel=0&modestbranding=1`}
                 title={activeVideo.title}
                 className='cc-video-iframe'
+                loading='lazy'
+                referrerPolicy='strict-origin-when-cross-origin'
                 allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture'
                 allowFullScreen
               />

@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
+import SmallFooter from './SmallFooter'
+import { buildLearnerDashboardPath, buildTeacherDashboardPath } from '../utils/dashboardRoute'
 import Footer from './Footer'
 
 const AcademyLogin = () => {
@@ -62,16 +64,16 @@ const AcademyLogin = () => {
         setSuccess(true)
         setTimeout(() => {
           if (role === 'teacher') {
-            navigate('/teacher-dashboard')
+            navigate(buildTeacherDashboardPath('courses'))
           } else {
-            navigate('/learner')
+            navigate(buildLearnerDashboardPath('store'))
           }
         }, 2000)
 
       } else {
         // User exists in Auth but not Firestore
         setSuccess(true)
-        setTimeout(() => navigate('/learner'), 2000)
+        setTimeout(() => navigate(buildLearnerDashboardPath('store')), 2000)
       }
 
     } catch (err) {

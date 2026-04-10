@@ -5,8 +5,12 @@ import { FiAlertCircle, FiArrowLeft, FiBookOpen, FiClock, FiMessageSquare, FiPla
 import { FaChalkboardTeacher, FaGlobeAfrica, FaLanguage, FaListUl, FaQuoteLeft, FaRegCalendarAlt, FaUserGraduate } from 'react-icons/fa'
 import { db } from '../context/AuthContext'
 import { useAuth } from '../context/AuthContext'
+import Navbar from './Navbar'
 import { buildCoursePath } from '../utils/courseRoute'
 import '../styles/tutor-profile.css'
+import '../styles/coursecontent-page.css'
+
+const getTeacherProfilePhotoKey = (uid) => `teacherDashboardProfilePhoto_${uid}`
 
 const toTimestamp = (value) => {
   if (!value) return 0
@@ -30,7 +34,7 @@ const TutorProfilePage = () => {
   const navigate = useNavigate()
   const { tutorId } = useParams()
   const location = useLocation()
-  const { userData } = useAuth()
+  const { user, userData } = useAuth()
 
   const normalizeRole = (role) => {
     const value = String(role || '').trim().toLowerCase()
@@ -115,6 +119,10 @@ const TutorProfilePage = () => {
         )
 
         const fallbackCourse = displayCourses[0] || fetchedCourses[0] || {}
+        const courseProfileData = displayCourses.find((course) => course.teacherProfileSnapshot)?.teacherProfileSnapshot
+          || fetchedCourses.find((course) => course.teacherProfileSnapshot)?.teacherProfileSnapshot
+          || fallbackCourse.teacherProfileSnapshot
+          || {}
         const tutorProfileData = tutorDocData?.tutorProfile || {}
         const firstName = tutorDocData?.firstName || ''
         const lastName = tutorDocData?.lastName || tutorDocData?.secondName || ''
@@ -127,23 +135,31 @@ const TutorProfilePage = () => {
           return
         }
 
+        const localPreviewPhoto = isTeacherPreview && user?.uid === tutorId
+          ? (localStorage.getItem(getTeacherProfilePhotoKey(tutorId)) || '')
+          : ''
+
         const nextProfile = {
           id: tutorId,
-          name: tutorProfileData.displayName || tutorDocData?.displayName || fallbackName || fallbackCourse.teacherName || fallbackTutorName || 'Tutor',
-          headline: tutorProfileData.headline || `${fallbackCourse.courseType || 'Culture'} Tutor`,
-          photoUrl: tutorProfileData.photoUrl || tutorDocData?.photoURL || fallbackCourse.featuredImage || '',
-          coverImageUrl: tutorProfileData.coverImageUrl || fallbackCourse.featuredImage || '',
-          bio: tutorProfileData.bio || tutorDocData?.bio || 'I guide learners through practical, culturally rooted lessons with clear outcomes and supportive feedback.',
-          teachingStyle: tutorProfileData.teachingStyle || 'Interactive, example-driven, and learner-paced sessions with practical assignments.',
+          name: tutorProfileData.displayName || courseProfileData.displayName || tutorDocData?.displayName || fallbackName || fallbackCourse.teacherName || fallbackTutorName || 'Tutor',
+          headline: tutorProfileData.headline || courseProfileData.headline || `${fallbackCourse.courseType || 'Culture'} Tutor`,
+          photoUrl: localPreviewPhoto || tutorProfileData.photoUrl || courseProfileData.photoUrl || tutorDocData?.photoURL || fallbackCourse.featuredImage || '',
+          coverImageUrl: tutorProfileData.coverImageUrl || courseProfileData.coverImageUrl || fallbackCourse.featuredImage || '',
+          bio: tutorProfileData.bio || courseProfileData.bio || tutorDocData?.bio || 'I guide learners through practical, culturally rooted lessons with clear outcomes and supportive feedback.',
+          teachingStyle: tutorProfileData.teachingStyle || courseProfileData.teachingStyle || 'Interactive, example-driven, and learner-paced sessions with practical assignments.',
           languages: toTextList(tutorProfileData.languages).length > 0
             ? toTextList(tutorProfileData.languages)
+            : toTextList(courseProfileData.languages).length > 0
+              ? toTextList(courseProfileData.languages)
             : ['English', 'Swahili'],
           expertiseTags: toTextList(tutorProfileData.expertiseTags).length > 0
             ? toTextList(tutorProfileData.expertiseTags)
+            : toTextList(courseProfileData.expertiseTags).length > 0
+              ? toTextList(courseProfileData.expertiseTags)
             : Array.from(new Set(displayCourses.map((course) => course.courseType).filter(Boolean))).slice(0, 6),
-          timezone: tutorProfileData.timezone || 'Africa/Nairobi',
-          availabilityText: tutorProfileData.availabilityText || 'Weekday evenings and Saturday mornings',
-          responseTimeLabel: tutorProfileData.responseTimeLabel || 'Usually responds within 12 hours'
+          timezone: tutorProfileData.timezone || courseProfileData.timezone || 'Africa/Nairobi',
+          availabilityText: tutorProfileData.availabilityText || courseProfileData.availabilityText || 'Weekday evenings and Saturday mornings',
+          responseTimeLabel: tutorProfileData.responseTimeLabel || courseProfileData.responseTimeLabel || 'Usually responds within 12 hours'
         }
 
         // ── Save to cache so back-navigation costs 0 reads ──
@@ -168,7 +184,7 @@ const TutorProfilePage = () => {
     }
 
     loadTutorData()
-  }, [tutorId, navigate, location.state?.tutorName, isTeacherPreview, reloadCount])
+  }, [tutorId, navigate, location.state?.tutorName, isTeacherPreview, reloadCount, user?.uid])
 
   const selectedCourse = useMemo(() => {
     if (!selectedCourseId) return null
@@ -206,13 +222,20 @@ const TutorProfilePage = () => {
 
   if (loading) {
     return (
-      <div className='tutor-profile-page tutor-profile-page--loading'>
-        <div className='tutor-profile-loader tutor-profile-loader--loading'>
-          <div className='tutor-loading-text' role='status' aria-live='polite' aria-label='Loading tutor profile'>
-            <span>L</span><span>O</span><span>A</span><span>D</span><span>I</span><span>N</span><span>G</span>
+      <>
+        <Navbar solid />
+        <div className='app-loading-wrap app-loading-wrap--navbar'>
+          <div className='app-loading-text' role='status' aria-live='polite' aria-label='Loading tutor profile'>
+            <span>L</span>
+            <span>O</span>
+            <span>A</span>
+            <span>D</span>
+            <span>I</span>
+            <span>N</span>
+            <span>G</span>
           </div>
         </div>
-      </div>
+      </>
     )
   }
 

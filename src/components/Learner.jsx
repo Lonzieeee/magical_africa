@@ -4,10 +4,11 @@ import '../styles/learner.css'
 import { auth, db } from '../context/AuthContext'
 import { collection, deleteDoc, doc, getDoc, getDocs, onSnapshot, query, setDoc, where } from 'firebase/firestore'
 import { deleteUser, EmailAuthProvider, reauthenticateWithCredential, updatePassword, updateProfile } from 'firebase/auth'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { buildCourseCertificateSvg, downloadCourseCertificate } from '../utils/certificate'
 import { buildCoursePath } from '../utils/courseRoute'
+import { buildLearnerDashboardPath, normalizeLearnerSection, normalizeLearnerView } from '../utils/dashboardRoute'
 
 const getLocalProgressKey = (uid) => `learnerProgressBackup_${uid}`
 const getAnnouncementSeenKey = (uid) => `learnerAnnouncementSeenAt_${uid}`
@@ -82,9 +83,24 @@ const buildPublicMarketProduct = (product, sellerId, sellerName) => ({
   createdAt: product.createdAt || new Date().toISOString(), updatedAt: new Date().toISOString()
 })
 
+const normalizeDisplayPrefs = (prefs = {}) => ({
+  compactCards: Boolean(prefs?.compactCards),
+  reduceMotion: Boolean(prefs?.reduceMotion)
+})
+
+const normalizeSettingsPrefs = (prefs = {}) => ({
+  darkMode: Boolean(prefs?.darkMode),
+  biometricAuth: Boolean(prefs?.biometricAuth),
+  notifications: prefs?.notifications !== false,
+  cloudSync: prefs?.cloudSync !== false
+})
+
+const arePrefsEqual = (a = {}, b = {}) => JSON.stringify(a) === JSON.stringify(b)
+
 const Learner = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const { section: routeSection, view: routeView } = useParams()
   const { user, userData, getFullName, getInitials, logout } = useAuth()
 
   const [activeSection, setActiveSection] = useState('store')
@@ -101,10 +117,12 @@ const Learner = () => {
   const [activeFilter, setActiveFilter] = useState(null)
   const [actionToast, setActionToast] = useState(null)
   const [acquiringCourseId, setAcquiringCourseId] = useState('')
+  const [liveEnrollments, setLiveEnrollments] = useState([])
   const [liveEnrollmentCourseIds, setLiveEnrollmentCourseIds] = useState([])
   const [liveEnrollmentTeacherIds, setLiveEnrollmentTeacherIds] = useState([])
   const [announcementSeenAt, setAnnouncementSeenAt] = useState('')
   const [profileMenuOpen, setProfileMenuOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const [quickResumeClosed, setQuickResumeClosed] = useState(false)
   const [displayPrefs, setDisplayPrefs] = useState({ compactCards: false, reduceMotion: false })
   const [settingsPrefs, setSettingsPrefs] = useState({ darkMode: false, biometricAuth: false, notifications: true, cloudSync: true })
@@ -127,6 +145,8 @@ const Learner = () => {
   const productIconInputRef = useRef(null)
   const productPhotoInputRef = useRef(null)
   const previousCloudSyncRef = useRef(true)
+  const learnerPrefsHydratedRef = useRef(false)
+  const lastSyncedLearnerPrefsRef = useRef('')
 
   const learnerName = useMemo(() => {
     const fullName = getFullName ? getFullName() : ''
@@ -149,10 +169,9 @@ const Learner = () => {
       try {
         if (!user) { setLoading(false); return }
 
-        const [courseSnapshotResult, progressDocResult, enrollmentSnapshotResult] = await Promise.allSettled([
+        const [courseSnapshotResult, progressDocResult] = await Promise.allSettled([
           getDocs(query(collection(db, 'courses'), where('status', '==', 'Published'))),
-          getDoc(doc(db, 'learnerProgress', user.uid)),
-          getDocs(query(collection(db, 'enrollments'), where('learnerId', '==', user.uid)))
+          getDoc(doc(db, 'learnerProgress', user.uid))
         ])
 
         const teacherCourseList = courseSnapshotResult.status === 'fulfilled'
@@ -163,24 +182,6 @@ const Learner = () => {
           ? progressDocResult.value.data() : {}
         const savedCourses = savedProgressData.courses || {}
 
-        const enrollmentDocs = enrollmentSnapshotResult.status === 'fulfilled'
-          ? enrollmentSnapshotResult.value.docs.map(item => item.data()) : []
-
-        const enrollmentCourses = enrollmentDocs.reduce((acc, enrollment) => {
-          if (!enrollment.courseId) return acc
-          acc[enrollment.courseId] = {
-            ...(savedCourses[enrollment.courseId] || {}),
-            addedToLibrary: true, paid: Boolean(enrollment.paid),
-            completion: enrollment.completion || savedCourses[enrollment.courseId]?.completion || 0,
-            courseTitle: enrollment.courseTitle || savedCourses[enrollment.courseId]?.courseTitle || 'Course',
-            teacherId: enrollment.teacherId || savedCourses[enrollment.courseId]?.teacherId || '',
-            status: savedCourses[enrollment.courseId]?.status || 'Not Started'
-          }
-          return acc
-        }, {})
-
-        const mergedCourses = { ...savedCourses, ...enrollmentCourses }
-
         const localBackupRaw = localStorage.getItem(getLocalProgressKey(user.uid))
         let localBackupCourses = {}
         if (localBackupRaw) {
@@ -188,12 +189,12 @@ const Learner = () => {
           catch { localStorage.removeItem(getLocalProgressKey(user.uid)) }
         }
 
-        const mergedWithLocal = mergeCourseMaps(mergedCourses, localBackupCourses)
+        const mergedWithLocal = mergeCourseMaps(savedCourses, localBackupCourses)
         setProgressMap(mergedWithLocal)
         setAchievements(savedProgressData.achievements || { certificates: 0, badges: [], milestones: [] })
         persistLocalProgressMap(mergedWithLocal)
 
-        if (JSON.stringify(mergedWithLocal) !== JSON.stringify(mergedCourses)) {
+        if (JSON.stringify(mergedWithLocal) !== JSON.stringify(savedCourses)) {
           await setDoc(doc(db, 'learnerProgress', user.uid), { courses: mergedWithLocal, updatedAt: new Date().toISOString() }, { merge: true })
         }
 
@@ -201,16 +202,6 @@ const Learner = () => {
           await setDoc(doc(db, 'learnerProgress', user.uid), { courses: mergedWithLocal, achievements: { certificates: 0, badges: [], milestones: [] }, updatedAt: new Date().toISOString() }, { merge: true })
         }
 
-        // FIX: only fetch announcements from enrolled teachers
-        const enrolledTeacherIds = enrollmentSnapshotResult.status === 'fulfilled'
-          ? [...new Set(enrollmentSnapshotResult.value.docs.map(d => d.data().teacherId).filter(Boolean))] : []
-
-        if (enrolledTeacherIds.length > 0) {
-          try {
-            const announcementSnap = await getDocs(query(collection(db, 'announcements'), where('teacherId', 'in', enrolledTeacherIds.slice(0, 10))))
-            setAnnouncements(announcementSnap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || '')))
-          } catch (err) { console.log('Could not load announcements:', err) }
-        }
       } catch (err) { console.log('Error fetching learner dashboard:', err) }
       finally { setLoading(false) }
     }
@@ -223,18 +214,79 @@ const Learner = () => {
     const enrollmentUnsubscribe = onSnapshot(
       query(collection(db, 'enrollments'), where('learnerId', '==', user.uid)),
       (snapshot) => {
-        const docs = snapshot.docs.map((item) => item.data())
+        const docs = snapshot.docs.map((item) => ({ id: item.id, ...item.data() }))
+        setLiveEnrollments(docs)
         setLiveEnrollmentCourseIds(docs.map((item) => item.courseId).filter(Boolean))
         setLiveEnrollmentTeacherIds(docs.map((item) => item.teacherId).filter(Boolean))
       },
       (error) => { console.log('Enrollment listener error:', error) }
     )
-    return () => enrollmentUnsubscribe()
+    return () => {
+      enrollmentUnsubscribe()
+    }
   }, [user?.uid])
+
+  useEffect(() => {
+    if (!user?.uid || liveEnrollments.length === 0) return
+
+    const enrollmentCourses = liveEnrollments.reduce((acc, enrollment) => {
+      if (!enrollment.courseId) return acc
+      acc[enrollment.courseId] = {
+        addedToLibrary: true,
+        paid: Boolean(enrollment.paid),
+        completion: enrollment.completion || 0,
+        courseTitle: enrollment.courseTitle || 'Course',
+        teacherId: enrollment.teacherId || '',
+        status: 'Not Started'
+      }
+      return acc
+    }, {})
+
+    setProgressMap((prev) => {
+      const mergedProgress = Object.entries(enrollmentCourses).reduce((acc, [courseId, enrollmentProgress]) => {
+        acc[courseId] = {
+          ...(prev[courseId] || {}),
+          ...enrollmentProgress,
+          completion: enrollmentProgress.completion || prev[courseId]?.completion || 0,
+          status: prev[courseId]?.status || enrollmentProgress.status
+        }
+        return acc
+      }, { ...prev })
+
+      if (JSON.stringify(mergedProgress) === JSON.stringify(prev)) return prev
+      persistLocalProgressMap(mergedProgress)
+      setDoc(doc(db, 'learnerProgress', user.uid), { courses: mergedProgress, updatedAt: new Date().toISOString() }, { merge: true }).catch((error) => {
+        console.log('Could not sync enrollment progress:', error)
+      })
+      return mergedProgress
+    })
+  }, [liveEnrollments, user?.uid])
+
+  useEffect(() => {
+    if (liveEnrollmentTeacherIds.length === 0) {
+      setAnnouncements([])
+      return
+    }
+
+    const fetchAnnouncements = async () => {
+      try {
+        const announcementSnap = await getDocs(query(collection(db, 'announcements'), where('teacherId', 'in', [...new Set(liveEnrollmentTeacherIds)].slice(0, 10))))
+        setAnnouncements(announcementSnap.docs.map(d => ({ id: d.id, ...d.data() })).sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || '')))
+      } catch (err) {
+        console.log('Could not load announcements:', err)
+      }
+    }
+
+    fetchAnnouncements()
+  }, [liveEnrollmentTeacherIds])
 
   // ── PRODUCTS: load from Firestore with localStorage fallback ──
   useEffect(() => {
+    const isMyArtSectionActive = activeSection === 'my-art' || activeSection === 'my-art-add'
     if (!user?.uid) { setMyArtProducts([]); return }
+    if (!isMyArtSectionActive) {
+      return
+    }
     const cached = localStorage.getItem(getMyArtProductsKey(user.uid))
     if (cached) {
       try { const parsed = JSON.parse(cached); if (Array.isArray(parsed)) setMyArtProducts(parsed) }
@@ -252,28 +304,10 @@ const Learner = () => {
       const cached = localStorage.getItem(getMyArtProductsKey(user.uid))
       if (cached) { try { const parsed = JSON.parse(cached); if (Array.isArray(parsed)) setMyArtProducts(parsed) } catch { setMyArtProducts([]) } }
     })
-    return unsubscribe
-  }, [user?.uid])
-
-  // ── PRODUCTS: debounced save to Firestore ──
-  useEffect(() => {
-    if (!user?.uid || !myArtProducts.length) return
-    const saveTimer = setTimeout(async () => {
-      try {
-        for (const product of myArtProducts) {
-          const productRef = doc(db, 'users', user.uid, 'products', product.id)
-          const marketProductRef = doc(db, 'marketProducts', getMarketProductDocId(user.uid, product.id))
-          const { id, ...productData } = product
-          await setDoc(productRef, productData, { merge: true })
-          await setDoc(marketProductRef, buildPublicMarketProduct(product, user.uid, learnerName), { merge: true })
-        }
-      } catch (error) {
-        console.error('Error saving products to Firestore:', error)
-        setMyArtSyncError('Could not save latest product updates to Firebase.')
-      }
-    }, 1000)
-    return () => clearTimeout(saveTimer)
-  }, [myArtProducts, user?.uid, learnerName])
+    return () => {
+      unsubscribe()
+    }
+  }, [activeSection, user?.uid])
 
   // ── PREFS & SETTINGS ──
   useEffect(() => {
@@ -295,8 +329,18 @@ const Learner = () => {
   useEffect(() => {
     const cloudPrefs = userData?.preferences?.learnerDashboard
     if (!cloudPrefs) return
-    if (cloudPrefs.displayPrefs) setDisplayPrefs((prev) => ({ compactCards: typeof cloudPrefs.displayPrefs.compactCards === 'boolean' ? cloudPrefs.displayPrefs.compactCards : prev.compactCards, reduceMotion: typeof cloudPrefs.displayPrefs.reduceMotion === 'boolean' ? cloudPrefs.displayPrefs.reduceMotion : prev.reduceMotion }))
-    if (cloudPrefs.settingsPrefs) setSettingsPrefs((prev) => ({ darkMode: typeof cloudPrefs.settingsPrefs.darkMode === 'boolean' ? cloudPrefs.settingsPrefs.darkMode : prev.darkMode, biometricAuth: typeof cloudPrefs.settingsPrefs.biometricAuth === 'boolean' ? cloudPrefs.settingsPrefs.biometricAuth : prev.biometricAuth, notifications: typeof cloudPrefs.settingsPrefs.notifications === 'boolean' ? cloudPrefs.settingsPrefs.notifications : prev.notifications, cloudSync: typeof cloudPrefs.settingsPrefs.cloudSync === 'boolean' ? cloudPrefs.settingsPrefs.cloudSync : prev.cloudSync }))
+    if (cloudPrefs.displayPrefs) {
+      const nextDisplayPrefs = normalizeDisplayPrefs(cloudPrefs.displayPrefs)
+      setDisplayPrefs((prev) => arePrefsEqual(prev, nextDisplayPrefs) ? prev : nextDisplayPrefs)
+    }
+    if (cloudPrefs.settingsPrefs) {
+      const nextSettingsPrefs = normalizeSettingsPrefs(cloudPrefs.settingsPrefs)
+      setSettingsPrefs((prev) => arePrefsEqual(prev, nextSettingsPrefs) ? prev : nextSettingsPrefs)
+    }
+    lastSyncedLearnerPrefsRef.current = JSON.stringify({
+      displayPrefs: normalizeDisplayPrefs(cloudPrefs.displayPrefs),
+      settingsPrefs: normalizeSettingsPrefs(cloudPrefs.settingsPrefs)
+    })
   }, [userData?.preferences])
 
   useEffect(() => {
@@ -310,12 +354,38 @@ const Learner = () => {
   useEffect(() => { if (!user?.uid) return; localStorage.setItem(getSettingsPrefsKey(user.uid), JSON.stringify(settingsPrefs)) }, [settingsPrefs, user?.uid])
 
   useEffect(() => {
+    learnerPrefsHydratedRef.current = false
+    lastSyncedLearnerPrefsRef.current = ''
+  }, [user?.uid])
+
+  useEffect(() => {
     if (!user?.uid) return
     const turnedOffCloudSync = previousCloudSyncRef.current && !settingsPrefs.cloudSync
     const shouldSyncToCloud = settingsPrefs.cloudSync || turnedOffCloudSync
+    const syncPayload = {
+      displayPrefs: normalizeDisplayPrefs(displayPrefs),
+      settingsPrefs: normalizeSettingsPrefs(settingsPrefs)
+    }
+    const serializedPayload = JSON.stringify(syncPayload)
+    if (!learnerPrefsHydratedRef.current) {
+      learnerPrefsHydratedRef.current = true
+      previousCloudSyncRef.current = settingsPrefs.cloudSync
+      return
+    }
     previousCloudSyncRef.current = settingsPrefs.cloudSync
+    if (!lastSyncedLearnerPrefsRef.current) {
+      lastSyncedLearnerPrefsRef.current = serializedPayload
+      return
+    }
     if (!shouldSyncToCloud) return
-    setDoc(doc(db, 'users', user.uid), { preferences: { learnerDashboard: { displayPrefs, settingsPrefs, updatedAt: new Date().toISOString() } } }, { merge: true }).catch((error) => { console.log('Could not sync learner settings to cloud:', error) })
+    if (lastSyncedLearnerPrefsRef.current === serializedPayload) {
+      return
+    }
+    lastSyncedLearnerPrefsRef.current = serializedPayload
+    setDoc(doc(db, 'users', user.uid), { preferences: { learnerDashboard: { ...syncPayload, updatedAt: new Date().toISOString() } } }, { merge: true }).catch((error) => {
+      lastSyncedLearnerPrefsRef.current = ''
+      console.log('Could not sync learner settings to cloud:', error)
+    })
   }, [displayPrefs, settingsPrefs, user?.uid])
 
   useEffect(() => {
@@ -334,18 +404,65 @@ const Learner = () => {
     return () => document.removeEventListener('mousedown', handleOutsideClick)
   }, [])
 
+  useEffect(() => {
+    document.body.style.overflow = sidebarOpen ? 'hidden' : ''
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [sidebarOpen])
+
+  useEffect(() => {
+    if (!sidebarOpen) return undefined
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') setSidebarOpen(false)
+    }
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [sidebarOpen])
+
+  useEffect(() => {
+    setSidebarOpen(false)
+  }, [activeSection])
+
   // ── URL SECTION PARAMS ──
   useEffect(() => {
     const params = new URLSearchParams(location.search)
-    const requestedSection = String(params.get('section') || '').trim().toLowerCase()
-    const requestedView = String(params.get('view') || '').trim().toLowerCase()
-    if (!requestedSection) return
-    const allowedSections = new Set(['store', 'courses', 'progress', 'achievements', 'my-art', 'notifications', 'profile', 'settings'])
-    if (!allowedSections.has(requestedSection)) return
-    setActiveSection(requestedSection)
-    if (requestedSection === 'courses' && ['all', 'in-progress', 'completed'].includes(requestedView)) setCourseView(requestedView)
-    if (requestedSection === 'store' && ['all', 'free', 'paid', 'published'].includes(requestedView)) setStoreView(requestedView)
-  }, [location.search])
+    const fallbackSection = String(params.get('section') || '').trim().toLowerCase()
+    const fallbackView = String(params.get('view') || '').trim().toLowerCase()
+    const requestedSection = normalizeLearnerSection(routeSection || fallbackSection || 'store')
+    const requestedView = normalizeLearnerView(requestedSection, routeView || fallbackView)
+
+    setActiveSection((prev) => (prev === requestedSection ? prev : requestedSection))
+    if (requestedSection === 'courses') {
+      setCourseView((prev) => (prev === requestedView ? prev : requestedView))
+    }
+    if (requestedSection === 'store') {
+      setStoreView((prev) => (prev === requestedView ? prev : requestedView))
+    }
+  }, [location.search, routeSection, routeView])
+
+  useEffect(() => {
+    const desiredPath = buildLearnerDashboardPath(
+      activeSection,
+      activeSection === 'courses' ? courseView : activeSection === 'store' ? storeView : ''
+    )
+    const params = new URLSearchParams(location.search)
+    const fallbackSection = String(params.get('section') || '').trim().toLowerCase()
+    const fallbackView = String(params.get('view') || '').trim().toLowerCase()
+    const currentSection = normalizeLearnerSection(routeSection || fallbackSection || 'store')
+    const currentView = normalizeLearnerView(currentSection, routeView || fallbackView)
+    const expectedView = activeSection === 'courses' ? courseView : activeSection === 'store' ? storeView : ''
+    const routeStateSynced = currentSection === activeSection && currentView === expectedView
+    const isCanonicalLearnerPath =
+      location.pathname === desiredPath &&
+      !location.search &&
+      currentSection === activeSection &&
+      currentView === expectedView
+
+    if (!routeStateSynced) return
+    if (isCanonicalLearnerPath) return
+    navigate(desiredPath, { replace: true })
+  }, [activeSection, courseView, storeView, routeSection, routeView, location.pathname, location.search, navigate])
 
   const categories = ['Language', 'Culture', 'History', 'Artisan', 'Pottery', 'Woodwork', 'Cooking']
 
@@ -504,7 +621,12 @@ const Learner = () => {
     setDoc(doc(db, 'learnerProgress', user.uid), { achievements: nextAchievements, updatedAt: new Date().toISOString() }, { merge: true }).catch((error) => { console.log('Could not sync achievements to cloud:', error) })
   }, [progressMap, user?.uid])
 
-  const openSection = (section, options = {}) => { setActiveSection(section); if (options.storeView) setStoreView(options.storeView); if (options.courseView) setCourseView(options.courseView) }
+  const openSection = (section, options = {}) => {
+    setActiveSection(section)
+    if (options.storeView) setStoreView(options.storeView)
+    if (options.courseView) setCourseView(options.courseView)
+    setSidebarOpen(false)
+  }
   useEffect(() => { if (activeSection === 'language') setActiveSection('store') }, [activeSection])
 
   const markAllNotificationsRead = () => { if (!user?.uid) return; const now = new Date().toISOString(); setAnnouncementSeenAt(now); localStorage.setItem(getAnnouncementSeenKey(user.uid), now) }
@@ -762,8 +884,27 @@ const Learner = () => {
 
   return (
     <div className={`learner-dashboard ${displayPrefs.compactCards ? 'learner-dashboard--compact' : ''} ${displayPrefs.reduceMotion ? 'learner-dashboard--reduced-motion' : ''} ${settingsPrefs.darkMode ? 'learner-dashboard--dark' : ''}`}>
+      <div className='learner-mobile-topbar'>
+        <button type='button' className='learner-mobile-menu-btn' onClick={() => setSidebarOpen(true)} aria-label='Open learner navigation' aria-expanded={sidebarOpen}>
+          <span />
+          <span />
+          <span />
+        </button>
+        <div className='learner-mobile-topbar-copy'>
+          <strong>Learner Dashboard</strong>
+          <span>{learnerName}</span>
+        </div>
+      </div>
+      {sidebarOpen && <button type='button' className='learner-sidebar-overlay' aria-label='Close learner navigation' onClick={() => setSidebarOpen(false)} />}
       <div className='learner-shell'>
-        <aside className='learner-sidebar'>
+        <aside className={`learner-sidebar ${sidebarOpen ? 'learner-sidebar--open' : ''}`}>
+          <div className='learner-sidebar-mobile-head'>
+            <div className='learner-sidebar-mobile-copy'>
+              <strong>Navigate</strong>
+              <span>Switch dashboard sections</span>
+            </div>
+            <button type='button' className='learner-sidebar-close' onClick={() => setSidebarOpen(false)}>Close</button>
+          </div>
           <button className='learner-back-btn' onClick={() => navigate('/')}>
             <FiChevronLeft aria-hidden='true' /><span>Back to Website</span>
           </button>

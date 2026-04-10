@@ -33,7 +33,7 @@ import Technology from './pages/Technology';
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <Routes>
           {/* ── Public routes — anyone can access ── */}
           <Route path="/" element={<Home />} />
@@ -87,6 +87,11 @@ function App() {
               <TeacherDashboard />
             </ProtectedRoute>
           } />
+          <Route path="/teacher-dashboard/:section" element={
+            <ProtectedRoute allowedRole='teacher'>
+              <TeacherDashboard />
+            </ProtectedRoute>
+          } />
           <Route path="/dashboard" element={
             <ProtectedRoute allowedRole='teacher'>
               <TeacherDashboard />
@@ -107,6 +112,16 @@ function App() {
           <Route path="/learner" element={
             <ProtectedRoute allowedRole='learner'>
               <Learner />
+            </ProtectedRoute>
+          } />
+          <Route path="/learner/:section/:view?" element={
+            <ProtectedRoute allowedRole='learner'>
+              <Learner />
+            </ProtectedRoute>
+          } />
+          <Route path="/learner/course/:courseId/:courseSlug?" element={
+            <ProtectedRoute allowedRole='learner'>
+              <CourseContentPage />
             </ProtectedRoute>
           } />
           <Route path="/course-content" element={
