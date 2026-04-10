@@ -1311,8 +1311,176 @@
         "success": "🎉 Thank you for subscribing!"
       }
     }
+  },
+
+  
+  "technology": {
+    "helmet": {
+      "title": "Technology | Magical Africa",
+      "description": "Discover how Magical Africa uses proprietary AI to preserve 2,000+ African languages, digitize oral heritage, and deliver personalized cultural learning at scale.",
+      "keywords": "Magical Africa technology, African AI, African language AI, African language preservation, speech recognition Africa",
+      "ogTitle": "Magical Africa — AI Technology for African Heritage",
+      "ogDescription": "Proprietary AI models built specifically for African linguistic complexity and cultural depth — preserving 2,000+ languages ignored by mainstream platforms."
+    },
+    "hero": {
+      "eyebrow": "AI Technology",
+      "title1": "Built for Africa,",
+      "title2": "Powered by AI",
+      "subtitle": "Proprietary models built specifically for African linguistic complexity, cultural depth, and the preservation of 2,000+ languages — ignored by mainstream AI for too long.",
+      "stat1Value": "2,000+",
+      "stat1Label": "African Languages",
+      "stat2Value": "<1%",
+      "stat2Label": "Digital Representation",
+      "stat3Value": "140M+",
+      "stat3Label": "Diaspora Users"
+    },
+    "intro": {
+      "title": "The Problem We're Solving",
+      "description": "African languages represent less than 1% of all digital content. As elders pass on, centuries of oral wisdom disappear with them. Magical Africa uses AI to reverse this — digitizing, preserving, and teaching African heritage at scale.",
+      "quote": "Preserving the wisdom of the elders for the children of tomorrow."
+    },
+    "features": {
+      "sectionTitle": "Our AI Capabilities",
+      "sectionSubtitle": "Six core AI systems working together to preserve and teach African heritage.",
+      "items": {
+        "speech": {
+          "tag": "Recognition",
+          "title": "Speech Recognition",
+          "description": "Specialized AI models trained on tonal African languages and dialects — languages often ignored by mainstream platforms like Google and OpenAI. Our models understand the tonal nuances that make each language unique.",
+          "stat": "2,000+",
+          "statLabel": "African languages in scope"
+        },
+        "transcription": {
+          "tag": "Digitization",
+          "title": "Oral Transcription",
+          "description": "Automated digitization of oral storytelling — converting spoken heritage from elders into searchable, archivable, and shareable text. Centuries of wisdom, preserved before it is lost forever.",
+          "stat": "100%",
+          "statLabel": "Automated pipeline"
+        },
+        "indexing": {
+          "tag": "Organization",
+          "title": "Cultural Indexing",
+          "description": "Semantic AI that organizes proverbs, historical narratives, and cultural knowledge by community, region, and era — making African heritage discoverable in a way never before possible.",
+          "stat": "54",
+          "statLabel": "African countries covered"
+        },
+        "recommendations": {
+          "tag": "Personalization",
+          "title": "Smart Recommendations",
+          "description": "AI-driven learning paths that match every user with the most relevant cultural stories, language lessons, and native speakers — adapting in real time to their progress and interests.",
+          "stat": "10M+",
+          "statLabel": "Target active users by Year 3"
+        },
+        "regeneration": {
+          "tag": "Creation",
+          "title": "Content Regeneration",
+          "description": "AI-assisted reconstruction of fragmented oral histories and automatic adaptation of traditional folklore into modern children's content — bridging generations through technology.",
+          "stat": "500+",
+          "statLabel": "Cultural creators at launch"
+        },
+        "tools": {
+          "tag": "Empowerment",
+          "title": "Creator AI Tools",
+          "description": "A full suite of tools empowering elders, artists, and storytellers to publish, monetize, and preserve their heritage digitally — no technical knowledge required. The platform does the heavy lifting.",
+          "stat": "10-20%",
+          "statLabel": "Revenue share for creators"
+        }
+      }
+    },
+    "pillars": {
+      "sectionTitle": "Our AI Principles",
+      "items": {
+        "ethical": {
+          "label": "Ethical AI",
+          "desc": "Community-first development"
+        },
+        "panAfrican": {
+          "label": "Pan-African",
+          "desc": "All 54 nations in scope"
+        },
+        "sovereignty": {
+          "label": "Data Sovereignty",
+          "desc": "Communities own their data"
+        },
+        "scalable": {
+          "label": "Scalable",
+          "desc": "Built for 10M+ users"
+        }
+      }
+    },
+    "howItWorks": {
+      "sectionTitle": "How It Works",
+      "steps": {
+        "capture": {
+          "step": "01",
+          "title": "Capture",
+          "desc": "Elders, artists and storytellers record oral content through the Magical Africa Creator Platform — audio, video, and text."
+        },
+        "transcribe": {
+          "step": "02",
+          "title": "Transcribe",
+          "desc": "Our Speech Recognition AI converts spoken African languages into text, handling tonal variations and dialects with precision."
+        },
+        "index": {
+          "step": "03",
+          "title": "Index",
+          "desc": "Cultural Indexing AI categorizes and tags the content by language, region, tribe, and topic — making it fully searchable."
+        },
+        "deliver": {
+          "step": "04",
+          "title": "Deliver",
+          "desc": "Smart Recommendation AI serves the right content to the right learner — in their language, at their pace, on any device."
+        }
+      }
+    },
+    "cta": {
+      "sectionTitle": "Join the Movement",
+      "description": "Help us build the largest digital repository of African linguistic and cultural knowledge. Whether you are a creator, learner, or investor — there is a place for you at Magical Africa.",
+      "exploreBtn": "Explore the Academy",
+      "startBtn": "Get Started Free"
+    }
+  },
+
+  
+  "accordionPrinciples": {
+    "items": [
+      {
+        "subtitle": "Pan-African by Design",
+        "title": "Built for all 54 nations and the global diaspora",
+        "detail": "Everything we build serves the full breadth of the African continent — no single culture, language, or region takes priority over another. From East to West, North to South, and across diaspora communities in Europe, the Americas, and beyond, Magical Africa is designed to represent and celebrate every corner of African heritage. Our content strategy, language support, and community features are all built with this pan-African lens at their core."
+      },
+      {
+        "subtitle": "Community Ownership",
+        "title": "Creators and communities own their heritage",
+        "detail": "The communities whose languages and stories we preserve retain full ownership and sovereignty over their content. We are custodians, not owners. Every elder, artist, and storyteller who contributes to the platform earns directly from their work through transparent revenue sharing models. We will never sell community data, license cultural knowledge without consent, or extract value from heritage without giving back to the people it belongs to."
+      },
+      {
+        "subtitle": "Ethical AI Stewardship",
+        "title": "AI that serves culture, not the other way around",
+        "detail": "Our AI models are built with community consent, cultural sensitivity, and continuous bias auditing at every stage. We reject the extractive model of data collection that has historically harmed marginalized communities. Every dataset we use is sourced ethically and with explicit permission. Communities are partners in training the models that represent their languages — and they benefit directly from the AI products built on their knowledge."
+      },
+      {
+        "subtitle": "Sustainable Long-Term Impact",
+        "title": "Building for generations, not quarters",
+        "detail": "We measure success not in monthly active users or quarterly revenue, but in languages preserved, elders recorded, and children who grow up knowing their heritage. Every product decision, partnership, and business model is evaluated through the lens of long-term cultural impact. We are playing a 50-year game — ensuring that the wisdom held by today's elders is accessible to the grandchildren of tomorrow."
+      },
+      {
+        "subtitle": "Digital Preservation",
+        "title": "Saving languages before they disappear forever",
+        "detail": "Over 600 African languages are currently classified as endangered. Without urgent digital intervention, they will vanish within a generation. Magical Africa works directly with linguistic experts, community elders, and local schools to record, transcribe, and teach these languages at scale — creating permanent digital archives that ensure no African language is lost to time, urbanization, or neglect."
+      },
+      {
+        "subtitle": "Radical Accessibility",
+        "title": "Heritage should never be locked behind a paywall",
+        "detail": "We believe every African — regardless of income, location, or technical literacy — deserves access to their own cultural heritage. That is why our core learning content is free, our platform works on low-bandwidth connections, and our mobile experience is optimized for the devices most commonly used across the continent. Premium features exist to fund the free tier, not to restrict it."
+      }
+    ]
   }
 }
+
+
+
+
 
 
 

@@ -1314,8 +1314,150 @@
         "success": "🎉 Siyabonga ngokubhalisa!"
       }
     }
+  },
+
+
+  
+  "technology": {
+    "helmet": {
+      "title": "Ubuchwepheshe | Magical Africa",
+      "description": "Thola ukuthi Magical Africa isebenzisa kanjani i-AI yayo ukugcina izilimi ezingaphezu kuka-2,000 zase-Afrika, ukudijithayiza ilifa lomlomo, nokunikeza ukufunda kwamasiko.",
+      "keywords": "ubuchwepheshe Magical Africa, i-AI yase-Afrika, i-AI yezilimi zase-Afrika, ukugcinwa kwezilimi zase-Afrika",
+      "ogTitle": "Magical Africa — Ubuchwepheshe be-AI Belifa lase-Afrika",
+      "ogDescription": "Amamodeli e-AI akhiwa ngokukhethekile ngebunjalo bezilimi zase-Afrika nokujula kwamasiko."
+    },
+    "hero": {
+      "eyebrow": "Ubuchwepheshe be-AI",
+      "title1": "Yakhiwe nge-Afrika,",
+      "title2": "Iqhutshelwa yi-AI",
+      "subtitle": "Amamodeli akhethekile akhiwe ngokukhethekile ngebunjalo bezilimi zase-Afrika, ukujula kwamasiko, nokugcinwa kwezilimi ezingaphezu kuka-2,000 — ezadingelwanga yi-AI evamile isikhathi eside.",
+      "stat1Value": "2,000+",
+      "stat1Label": "Izilimi zase-Afrika",
+      "stat2Value": "<1%",
+      "stat2Label": "Ukumelwa Kwedijithali",
+      "stat3Value": "140M+",
+      "stat3Label": "Abasebenzisi be-Diaspora"
+    },
+    "intro": {
+      "title": "Inkinga Esiyixazululayo",
+      "description": "Izilimi zase-Afrika zimelela ngaphansi kuka-1% yawo wonke umqukathi wedijithali. Njengoba amadlozi edlula, ikhulu leminyaka lwobulumko luyanyamalala nazo. Magical Africa isebenzisa i-AI ukuguqula lokhu.",
+      "quote": "Ukugcina ubulumko babadala ngenxa yabantwana basekhomkhulu."
+    },
+    "features": {
+      "sectionTitle": "Amakhono Ethu e-AI",
+      "sectionSubtitle": "Izinhlelo eziyisithupha ze-AI ezisebenza ndawonye ukugcina nokuFundisa ilifa lase-Afrika.",
+      "items": {
+        "speech": {
+          "tag": "Ukuhlonza",
+          "title": "Ukuhlonza Inkulumo",
+          "description": "Amamodeli e-AI aqeqeshwe ezilimini ezineithoni zase-Afrika namazwe — izilimi ezivame ukwadingelwa yizinkundla ezivamile. Amamodeli ethu ayaqonda izithinta ezehlukene ezenza ulimi ngalunye lube lwekhethekile.",
+          "stat": "2,000+",
+          "statLabel": "Izilimi zase-Afrika ezikhungelwe"
+        },
+        "transcription": {
+          "tag": "Ukudijithayiza",
+          "title": "Ukubhala Izikhulumi",
+          "description": "Ukudijithayiza ngokuzenzakalelayo kwezinganekwane zezikhulumi — ukuguqula ilifa elikhulunywayo elivela kubadala lube umbhalo ongasetshenziswa, ugcinwe, noshiyelanwayo.",
+          "stat": "100%",
+          "statLabel": "Umgwamanda wokuzenzakalelayo"
+        },
+        "indexing": {
+          "tag": "Ukuhlela",
+          "title": "Ukuhlelwa Kwamasiko",
+          "description": "I-AI ye-semantic ehlanganisa izaga, izindaba zomlando, nolwazi lwamasiko ngemiphakathi, isifunda, nenkhathi — ukwenza ilifa lase-Afrika litholakale ngendlela engakaze ibonwe.",
+          "stat": "54",
+          "statLabel": "Amazwe ase-Afrika ashwelezwa"
+        },
+        "recommendations": {
+          "tag": "Ukwenza Kube Kwakho",
+          "title": "Izincomo Ezihlakaniphile",
+          "description": "Izindlela zokufunda ezikhuthazwa yi-AI ezihlangabeza wonke umsebenzisi nezindaba zamasiko ezihambelana kakhulu, izifundo zolimi, nabakhulumi bezilimi zomdabu.",
+          "stat": "10M+",
+          "statLabel": "Abasebenzisi abakhungelwe nguNyaka 3"
+        },
+        "regeneration": {
+          "tag": "Ukudala",
+          "title": "Ukudalwa Kabusha Komqukathi",
+          "description": "Ukwakhiwa kabusha komlando wezikhulumi ogcwele izinzwa nge-AI nokujugunyulwa kwendaba zakudala zibe ngumqukathi wesimanje wabantwana.",
+          "stat": "500+",
+          "statLabel": "Abaklami bamasiko ngesikhathi sokwethulwa"
+        },
+        "tools": {
+          "tag": "Ukuqinisa Amandla",
+          "title": "Amathuluzi e-AI Yabaklami",
+          "description": "Iseti ephelele yamathuluzi enika amandla abadala, izingcweti, nabaxoxi ukushicilela, ukuthola inzuzo, nokugcina ilifa labo ngedijithali — ngaphandle kolwazi lwezobuchwepheshe.",
+          "stat": "10-20%",
+          "statLabel": "Ukwabiwa kwenzuzo kubaklami"
+        }
+      }
+    },
+    "pillars": {
+      "sectionTitle": "Imigomo Yethu ye-AI",
+      "items": {
+        "ethical": { "label": "I-AI Yezenhlalo", "desc": "Ukuthuthukiswa okulendlela yomphakathi kuqala" },
+        "panAfrican": { "label": "I-Pan-Africa", "desc": "Wonke amazwe ayi-54 akhungelwe" },
+        "sovereignty": { "label": "Ukuzimela Kwedatha", "desc": "Imiphakathi inikela idatha yayo" },
+        "scalable": { "label": "Ingakhula", "desc": "Yakhiwe nge-10M+ yabasebenzisi" }
+      }
+    },
+    "howItWorks": {
+      "sectionTitle": "Isebenza Kanjani",
+      "steps": {
+        "capture": { "step": "01", "title": "Ukuthatha", "desc": "Abadala, izingcweti nabalandisi babhalisa umqukathi wezikhulumi nge-Magical Africa Creator Platform." },
+        "transcribe": { "step": "02", "title": "Ukubhala", "desc": "I-AI yethu Yokuhlonza Inkulumo iguqula izilimi zase-Afrika ezikhulunywayo zibe umbhalo, ibhekana nezinguquko zeithoni namazwe ngokuneliwe." },
+        "index": { "step": "03", "title": "Ukuhlelwa", "desc": "I-AI Yokuhlelwa Kwamasiko ihlanganisa futhi inamathelise umqukathi ngolimi, isifunda, isizwe, nesihloko." },
+        "deliver": { "step": "04", "title": "Ukuhlinzekwa", "desc": "I-AI Yezincomo Ezihlakaniphile inikeza umqukathi ofanele kumfundi ofanele — ngolimi lwabo, ngesivinini sabo, kudivayisi nayiphi." }
+      }
+    },
+    "cta": {
+      "sectionTitle": "Joyina Uhlelo",
+      "description": "Sisizele ukwakha ingundikhishi enkulu kakhulu yedijithali yolwazi lolimi namasiko ase-Afrika. Noma ungumklami, umfundi, noma umtshalimali — kunendawo yakho e-Magical Africa.",
+      "exploreBtn": "Hlola i-Academy",
+      "startBtn": "Qala Simahla"
+    }
+  },
+
+
+  
+  "accordionPrinciples": {
+    "items": [
+      {
+        "subtitle": "I-Pan-Afrika nge-Dizayini",
+        "title": "Yakhiwe ngazo zonke izizwe ezingama-54 kanye ne-diaspora yomhlaba",
+        "detail": "Konke esikwakhayo kukhonza ububanzi bonke beqhwele lase-Afrika — awukho amasiko, ulimi, noma isifunda esithatha phambili kulezinye. Kusuka eMpumalanga kuya eNtshonalanga, eNyakatho kuya eNingizimu, nasemiphakathini ye-diaspora eYurophu, eAmericans, nangaphesheya, i-Magical Africa ikhiwe ukumela nokubungaza yonke ingxenye yefa lase-Afrika."
+      },
+      {
+        "subtitle": "Ukuphathwa Umphakathi",
+        "title": "Abaklami nemiphakathi banelifa labo",
+        "detail": "Imiphakathi enazo izilimi nezindaba esizigcinayo ihlala nomnikazi ogcwele nenkululeko phezu kokuqukethwe kwayo. Thina singabalindi, hhayi abanikazi. Wonke umuntu omdala, umculi, nomxoxi onikela enkundleni ukhokhelwa ngqo ngomsebenzi wakhe ngamodeli yokwabelana ngemali echaphazelekayo."
+      },
+      {
+        "subtitle": "Ukubhekelelwa kwe-AI Ngokwezenhlalo",
+        "title": "I-AI esebenzela amasiko, hhayi ngendlela ephambene",
+        "detail": "Amamodeli ethu e-AI akhiwe ngokugunyazwa umphakathi, ukuzwela kwamasiko, nokuhlolwa ngokuqhubekayo kwamandla amabi kuzo zonke izigaba. Siyenqaba imodeli yokukhokhela idatha ethathayo eyakulimaza imiphakathi eyashiywa eceleni ngemlando. Yonke idatha esiyisebenzisayo isuselwa ngendlela emsulwa nangokugunyazwa ngokucacile."
+      },
+      {
+        "subtitle": "Umthelela Oqhubekayo Wesikhathi Eside",
+        "title": "Ukwakha ngenxa yezizukulwane, hhayi izizini",
+        "detail": "Silinganisa impumelelo hhayi ngabasebenzisi benyanga noma imali yesizini, kodwa ngezilimi ezigcinwayo, amadlozi arekodiwe, nabantwana abakhulela bewazi ifa labo. Yonke isinqumo semikhiqizo, ukubambisana, namodeliyo yebhizinisi ihlolwa ngomqondo womthelela wezamasiko wesikhathi eside."
+      },
+      {
+        "subtitle": "Ukugcinwa Kwedijithali",
+        "title": "Ukusindisa izilimi zingakulahleka kuze kube phakade",
+        "detail": "Izilimi ezingaphezu kwama-600 zase-Afrika manje zihlonzwa njengezisengozini. Ngaphandle kokuhlanganyela kwedijithali ngokusheshayo, zizonyamalala ngegciwane. I-Magical Africa isebenza ngqo nezingcweti zolimi, amadlozi omphakathi, nezikole zasekhaya ukurekhoda, ukubhala, nokuFundisa lezi zilimi ngasikhathi sinye."
+      },
+      {
+        "subtitle": "Ukufinyelela Okwenqabela",
+        "title": "Ifa akumelwe livinjelwe ngemuva kohange lwemali",
+        "detail": "Siyakholelwa ukuthi wonke umuntu wase-Afrika — ngaphandle kwemali yengeniso, indawo, noma ulwazi lwezobuchwepheshe — ufanelwe ukufinyelela efa lakhe lamasiko. Yingakho okuqukethwe kwethu okuyisisekelo sokufunda kumahhala, inkundla yethu isebenza ezixhumanisini eziphansi, futhi ulwazi lwethu lweselula luhlelwe kahle kwizidingo ezisetshenziswa kakhulu kulo lonke elase-Afrika."
+      }
+    ]
   }
 }
+
+
+
+
 
 
 

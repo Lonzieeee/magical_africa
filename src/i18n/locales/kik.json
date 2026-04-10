@@ -1234,8 +1234,148 @@
         "success": "🎉 Twĩ na ũshukrani kwa kũĩandĩkĩria!"
       }
     }
+  },
+
+  
+  "technology": {
+    "helmet": {
+      "title": "Teknolojia | Magical Africa",
+      "description": "Ona ũrĩa Magical Africa ĩkumageria AI ya mwene gũhĩtia ndũmi igana na mĩrongo ĩĩrĩ ya Afrika, gũhĩtia ũhoro wa kale, na gũcooka maarifa ya mĩtũũrĩre.",
+      "keywords": "teknolojia Magical Africa, AI Afrika, gũhĩtia ndũmi Afrika",
+      "ogTitle": "Magical Africa — Teknolojia ya AI kwa Ũhoro wa Afrika",
+      "ogDescription": "Mifano ya AI ĩyumĩtwo mahususi kwa ũrĩa ndũmi cia Afrika ĩrĩ na ũhoro mũingĩ."
+    },
+    "hero": {
+      "eyebrow": "Teknolojia ya AI",
+      "title1": "Yatũmwo kwa Afrika,",
+      "title2": "Ĩkĩtumia AI",
+      "subtitle": "Mifano ya mwene ĩyumĩtwo mahususi kwa ũrĩa ndũmi cia Afrika ĩrĩ na ũhoro mũingĩ, na gũhĩtia ndũmi igana na mĩrongo ĩĩrĩ — icio ciarĩ ciagatĩrĩrĩa na AI ya kawaida.",
+      "stat1Value": "2,000+",
+      "stat1Label": "Ndũmi cia Afrika",
+      "stat2Value": "<1%",
+      "stat2Label": "Ũwakilishi wa Kidijitali",
+      "stat3Value": "140M+",
+      "stat3Label": "Atumia a Diaspora"
+    },
+    "intro": {
+      "title": "Kĩaro Gĩtũgĩthagĩria",
+      "description": "Ndũmi cia Afrika ĩwakilishia gĩkĩ gĩtonya 1% ya ũhoro woothe wa kidijitali. Akũrũ nao oheaga, wĩĩru wa mĩaka mĩingĩ ũheyaga nao. Magical Africa ĩkumageria AI gũhindũra ũguo.",
+      "quote": "Gũhĩtia wĩĩru wa akũrũ kwa ciana cia rũciũ."
+    },
+    "features": {
+      "sectionTitle": "Ũwezo Witũ wa AI",
+      "sectionSubtitle": "Mifumo itandatũ ya msingi ya AI ĩkĩthiĩ pamoja kũhĩtia na kũrutia ũhoro wa Afrika.",
+      "items": {
+        "speech": {
+          "tag": "Ũtambuzi",
+          "title": "Ũtambuzi wa Gũcookia",
+          "description": "Mifano ya AI ĩyumĩtwo kwa ndũmi cia toni cia Afrika na lahaja — ndũmi cia kawaida ciagatĩrĩrĩtwo. Mifano yitũ ĩũĩ toni cia kĩĩyo kwa ndũmi ĩmwe na ĩmwe.",
+          "stat": "2,000+",
+          "statLabel": "Ndũmi cia Afrika cilenganĩtwo"
+        },
+        "transcription": {
+          "tag": "Ũdijitali",
+          "title": "Ũandĩko wa Ũhoro wa Kĩrũa",
+          "description": "Ũdijitali wa kiotomatiki wa ngano cia kĩrũa — gũhindũra ũhoro ũrĩa akũrũ makuaga kuĩ andĩko ĩgũĩka kwĩtagĩrĩa na kugayanĩa.",
+          "stat": "100%",
+          "statLabel": "Mchakato wa kiotomatiki"
+        },
+        "indexing": {
+          "tag": "Ũrũgĩro",
+          "title": "Orodha ya Mĩtũũrĩre",
+          "description": "AI ya kisemantiki ĩrũgĩaga ũhoro wa mĩtũũrĩre, ngano cia mbere, na maarifa ya mĩtũũrĩre na jamii, mũhĩrĩga, na zama.",
+          "stat": "54",
+          "statLabel": "Nchi cia Afrika ciathĩnjĩtwo"
+        },
+        "recommendations": {
+          "tag": "Ũbinafsishaji",
+          "title": "Mawatho ya Akĩli",
+          "description": "Njĩra cia kũrutia cia AI cianaganĩo na atumia woothe na ngano cia mĩtũũrĩre, masomo ya ndũmi na asemaji a mwanzo.",
+          "stat": "10M+",
+          "statLabel": "Atumia alengwa ifikapo Mwaka 3"
+        },
+        "regeneration": {
+          "tag": "Ũumba",
+          "title": "Ũumba Upya wa Ũhoro",
+          "description": "Ũjenzi upya wa ngano cia kĩrũa ciavunjĩtho na msaada wa AI na ũhindũro wa ngano cia kale kuĩ ũhoro wa kisasa kwa ciana.",
+          "stat": "500+",
+          "statLabel": "Aũmba a mĩtũũrĩre wakati wa ũzinduzi"
+        },
+        "tools": {
+          "tag": "Ũwezeshaji",
+          "title": "Zana cia AI kwa Aũmba",
+          "description": "Seti yothe ya zana iwezesha akũrũ, asanii na asimulizi kũcapĩsha, gũhĩtia na gũhĩtia ũhoro wao kidijitali — atĩ ũĩ na ũĩ wĩngĩ wa kĩteknolojia.",
+          "stat": "10-20%",
+          "statLabel": "Mgawanyo wa mapato kwa aũmba"
+        }
+      }
+    },
+    "pillars": {
+      "sectionTitle": "Mĩtũũrĩre Yitũ ya AI",
+      "items": {
+        "ethical": { "label": "AI ya Maadili", "desc": "Maendeleo yanayoweka jamii kwanza" },
+        "panAfrican": { "label": "Pan-Afrika", "desc": "Nchi ciothe 54 cĩlengwa" },
+        "sovereignty": { "label": "Ũhuru wa Data", "desc": "Jamii ndĩo iciĩkĩtia data ciao" },
+        "scalable": { "label": "Ĩgũĩka Gũkũa", "desc": "Ĩyumĩtwo kwa atumia igana na mĩrongo na ngiri nyingĩ" }
+      }
+    },
+    "howItWorks": {
+      "sectionTitle": "Ũrĩa Ĩthiĩ",
+      "steps": {
+        "capture": { "step": "01", "title": "Gũkamata", "desc": "Akũrũ, asanii na asimulizi marekodia ũhoro wa kĩrũa kupitia Jukwaa la Aũmba la Magical Africa." },
+        "transcribe": { "step": "02", "title": "Ũandĩko", "desc": "AI yitũ ya Ũtambuzi wa Gũcookia ĩhindũra ndũmi cia Afrika ciakuagĩtwo kuĩ andĩko, ĩkĩthiĩ na tofauti cia toni na lahaja na usahihi." },
+        "index": { "step": "03", "title": "Ũrũgĩro", "desc": "AI ya Orodha ya Mĩtũũrĩre ĩingĩa na ĩwĩke alama ũhoro na ndũmi, mũhĩrĩga, kĩama na mada." },
+        "deliver": { "step": "04", "title": "Ũtũmĩro", "desc": "AI ya Mawatho ya Akĩli ĩtũmia ũhoro ũrĩa wĩ na ũhoro kwa mwanafunzi ũrĩa wĩ na ũhoro — na ndũmi yao, na ũndũũrĩri wao, kwa kĩrĩa kĩrĩa." }
+      }
+    },
+    "cta": {
+      "sectionTitle": "Injĩra Ũndũ Ũyu",
+      "description": "Tũsaidĩe gũjenga hifadhi nene ya kidijitali ya maarifa ya ndũmi na mĩtũũrĩre ya Afrika. Ũkĩĩ nĩwe mũmba, mwanafunzi, kana mwekezaji — kũna nafasi yako Magical Africa.",
+      "exploreBtn": "Chunguza Chuo",
+      "startBtn": "Anza Bure"
+    }
+  },
+
+
+  
+  "accordionPrinciples": {
+    "items": [
+      {
+        "subtitle": "Pan-Afrika na Ũrĩa Ĩyumĩtwo",
+        "title": "Ĩyumĩtwo kwa nchi ciothe 54 na diaspora ya ũthĩ woothe",
+        "detail": "Kila kĩtu tũkĩjenga gĩkĩhũhũria upana woothe wa bara la Afrika — gũtĩrĩ mĩtũũrĩre, ndũmi, kana mũhĩrĩga ũmwe ũrĩa ũpewa njĩra mbere kurĩkia ũngĩ. Kuuma Ithokoro hĩndĩ na Ithokoro, Ugoro na Ithiru, na mũgĩrĩra wa diaspora Ulaya, Amerika, na ũngĩ, Magical Africa ĩyumĩtwe gũwakilisha na gũsherehekea kila pembe ya ũhoro wa Afrika."
+      },
+      {
+        "subtitle": "Ũmiliki wa Jamii",
+        "title": "Aũmba na jamii nĩo ĩĩkĩtia ũhoro wao",
+        "detail": "Jamii icio ndũmi na ngano iao tũkĩhĩtia ibaki na ũmiliki na ũhuru woothe juu ya maudhui ao. Itũ nĩ alinzi, hatũrĩ ĩmiliki. Mũkũrũ woothe, mũsanii, na mũsimulizi ũrĩa akĩchangia kwa jukwaa akũhĩa moja kwa moja kuuma kwa ũndũ wao kupitia mifano ya kugawana mapato inayoeleweka."
+      },
+      {
+        "subtitle": "Ũangalizi wa Kimaadili wa AI",
+        "title": "AI ĩkĩhũhũria mĩtũũrĩre, hatĩrĩ kinyume chake",
+        "detail": "Mifano yitũ ya AI ĩyumĩtwe na idhini ya jamii, unyeti wa mĩtũũrĩre, na ukaguzi wa upendeleo unaoendelea kila hatua. Tũkakata mfano wa ukusanyaji data unaochomoa ũrĩa kihistoria ũmedhuru jamii zilizotengwa. Kila seti ya data tũkĩtumia inatoka kwa njia ya kimaadili na kwa ruhusa wazi."
+      },
+      {
+        "subtitle": "Athari Endelevu ya Muda Mwene",
+        "title": "Kũjenga kwa vizazi, hatĩrĩ robo za mwaka",
+        "detail": "Tũkĩpima mafanikio hatĩrĩ na atũmia a kila mwezi kana mapato ya robo, no kwa ndũmi icio tĩhĩtĩtwo, akũrũ acio marekodiwa, na ciana icio ikũa iciĩ ũhoro wao. Kila ũamuzi wa bidhaa, ushirikiano, na mfano wa biashara ũkĩtathminiwa kupitia lenzi ya athari ya mĩtũũrĩre ya muda mwene."
+      },
+      {
+        "subtitle": "Ũhĩtia wa Kidijitali",
+        "title": "Kũhũhũria ndũmi mbere ciaatĩkũra milele",
+        "detail": "Ndũmi igana na mĩrongo itandatũ ya Afrika ĩrĩa ĩno ĩiainishwa nĩ cia hatari. Atĩ gũtĩkũre kuingilia kati kwa kidijitali haraka, cia kuanguka ndani ya kizazi kimoja. Magical Africa ĩkĩthiĩ moja kwa moja na wataalam wa ndũmi, akũrũ a jamii, na shule za ndani kũrekodi, kuandika, na kufundisha ndũmi icio kwa kiwango kikubwa."
+      },
+      {
+        "subtitle": "Ũpatikanaji wa Hali ya Juu",
+        "title": "Ũhoro ũtĩgũgũrũkio na ukuta wa malipo",
+        "detail": "Tũkĩamini Mũafrica woothe — atĩ mapato, mahali, kana ũĩ wĩngĩ wa kiufundi — astahili kupata ũhoro wake wa mĩtũũrĩre. Nĩ ũndũ ũcio maudhui yaitũ ya msingi ya kujifunza nĩ ya bure, jukwaa laitũ lĩkĩthiĩ kwa miunganiko ya kipimo cha chini, na uzoefu wacitũ wa simu ũboreshĩtwe kwa vifaa vinavyotumiwa zaidi barani."
+      }
+    ]
   }
 }
+
+
+
 
 
 

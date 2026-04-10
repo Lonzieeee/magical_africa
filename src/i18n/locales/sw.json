@@ -1308,8 +1308,150 @@
         "success": "🎉 Asante kwa kujiandikisha!"
       }
     }
+  },
+
+
+
+  
+  "technology": {
+    "helmet": {
+      "title": "Teknolojia | Magical Africa",
+      "description": "Gundua jinsi Magical Africa inavyotumia AI ya kipekee kuhifadhi lugha zaidi ya 2,000 za Afrika, kudijitali urithi wa mdomo, na kutoa mafunzo ya kitamaduni.",
+      "keywords": "teknolojia Magical Africa, AI ya Afrika, AI lugha za Afrika, uhifadhi lugha Afrika",
+      "ogTitle": "Magical Africa — Teknolojia ya AI kwa Urithi wa Afrika",
+      "ogDescription": "Mifano ya AI iliyoundwa mahususi kwa utata wa lugha za Afrika na kina cha kitamaduni."
+    },
+    "hero": {
+      "eyebrow": "Teknolojia ya AI",
+      "title1": "Imejengwa kwa Afrika,",
+      "title2": "Inayotumia AI",
+      "subtitle": "Mifano ya kipekee iliyoundwa mahususi kwa utata wa lugha za Afrika, kina cha kitamaduni, na uhifadhi wa lugha zaidi ya 2,000 — zilizopuuzwa na AI ya kawaida kwa muda mrefu.",
+      "stat1Value": "2,000+",
+      "stat1Label": "Lugha za Afrika",
+      "stat2Value": "<1%",
+      "stat2Label": "Uwakilishi wa Kidijitali",
+      "stat3Value": "140M+",
+      "stat3Label": "Watumiaji wa Diaspora"
+    },
+    "intro": {
+      "title": "Tatizo Tunaloshughulikia",
+      "description": "Lugha za Afrika zinawakilisha chini ya 1% ya maudhui yote ya kidijitali. Wakubwa wanapotoweka, hekima ya karne nyingi inapotoweka nao. Magical Africa inatumia AI kubadilisha hili.",
+      "quote": "Kuhifadhi hekima ya wazee kwa watoto wa kesho."
+    },
+    "features": {
+      "sectionTitle": "Uwezo Wetu wa AI",
+      "sectionSubtitle": "Mifumo sita ya msingi ya AI inayofanya kazi pamoja kuhifadhi na kufundisha urithi wa Afrika.",
+      "items": {
+        "speech": {
+          "tag": "Utambuzi",
+          "title": "Utambuzi wa Hotuba",
+          "description": "Mifano ya AI iliyoundwa kwa lugha za toni za Afrika na lahaja — lugha mara nyingi zinazopuuzwa na majukwaa ya kawaida. Mifano yetu inaelewea toni za kipekee za kila lugha.",
+          "stat": "2,000+",
+          "statLabel": "Lugha za Afrika zinazolengwa"
+        },
+        "transcription": {
+          "tag": "Udijitali",
+          "title": "Uandishi wa Mdomo",
+          "description": "Udijitali wa kiotomatiki wa hadithi za mdomo — kubadilisha urithi uliosemwa na wazee kuwa maandishi yanayoweza kutafutwa na kushirikiwa.",
+          "stat": "100%",
+          "statLabel": "Mchakato wa kiotomatiki"
+        },
+        "indexing": {
+          "tag": "Mpangilio",
+          "title": "Orodha ya Kitamaduni",
+          "description": "AI ya kisemantiki inayopanga methali, hadithi za kihistoria, na maarifa ya kitamaduni kwa jamii, mkoa, na zama.",
+          "stat": "54",
+          "statLabel": "Nchi za Afrika zilizoshughulikiwa"
+        },
+        "recommendations": {
+          "tag": "Ubinafsishaji",
+          "title": "Mapendekezo ya Akili",
+          "description": "Njia za kujifunza zinazoendeshwa na AI zinazofanana na mtumiaji kila mmoja na hadithi za kitamaduni, masomo ya lugha na wasemaji wa asili.",
+          "stat": "10M+",
+          "statLabel": "Watumiaji wanaolengwa ifikapo Mwaka 3"
+        },
+        "regeneration": {
+          "tag": "Uundaji",
+          "title": "Uundaji Upya wa Maudhui",
+          "description": "Ujenzi upya wa historia za mdomo zilizovunjika kwa msaada wa AI na ubadilishaji wa hadithi za kimapokeo kuwa maudhui ya kisasa ya watoto.",
+          "stat": "500+",
+          "statLabel": "Waundaji wa kitamaduni wakati wa uzinduzi"
+        },
+        "tools": {
+          "tag": "Uwezeshaji",
+          "title": "Zana za AI za Waundaji",
+          "description": "Seti kamili ya zana zinazowezesha wazee, wasanii na wasimulizi kuchapisha, kupata mapato na kuhifadhi urithi wao kidijitali — bila ujuzi wa kiufundi.",
+          "stat": "10-20%",
+          "statLabel": "Mgawanyo wa mapato kwa waundaji"
+        }
+      }
+    },
+    "pillars": {
+      "sectionTitle": "Kanuni Zetu za AI",
+      "items": {
+        "ethical": { "label": "AI ya Maadili", "desc": "Maendeleo yanayoweka jamii kwanza" },
+        "panAfrican": { "label": "Pan-Afrika", "desc": "Mataifa yote 54 yanayolengwa" },
+        "sovereignty": { "label": "Uhuru wa Data", "desc": "Jamii zinamiliki data zao" },
+        "scalable": { "label": "Inayoweza Kupanuka", "desc": "Imejengwa kwa watumiaji zaidi ya 10M" }
+      }
+    },
+    "howItWorks": {
+      "sectionTitle": "Jinsi Inavyofanya Kazi",
+      "steps": {
+        "capture": { "step": "01", "title": "Kukamata", "desc": "Wazee, wasanii na wasimulizi wanarekodia maudhui ya mdomo kupitia Jukwaa la Waundaji la Magical Africa." },
+        "transcribe": { "step": "02", "title": "Kuandika", "desc": "AI yetu ya Utambuzi wa Hotuba inabadilisha lugha za Afrika zilizosemwa kuwa maandishi, ikishughulikia tofauti za toni na lahaja kwa usahihi." },
+        "index": { "step": "03", "title": "Kupanga", "desc": "AI ya Orodha ya Kitamaduni inaingia na kuweka alama maudhui kwa lugha, mkoa, kabila na mada — kuifanya itafutike kikamilifu." },
+        "deliver": { "step": "04", "title": "Kutoa", "desc": "AI ya Mapendekezo ya Akili inatoa maudhui sahihi kwa mwanafunzi sahihi — kwa lugha yao, kwa kasi yao, kwenye kifaa chochote." }
+      }
+    },
+    "cta": {
+      "sectionTitle": "Jiunge na Harakati",
+      "description": "Tusaidie kujenga hifadhi kubwa zaidi ya kidijitali ya maarifa ya lugha na kitamaduni ya Afrika. Iwe wewe ni muundaji, mwanafunzi, au mwekezaji — kuna nafasi yako katika Magical Africa.",
+      "exploreBtn": "Chunguza Chuo",
+      "startBtn": "Anza Bure"
+    }
+  },
+
+
+  
+  "accordionPrinciples": {
+    "items": [
+      {
+        "subtitle": "Pan-Afrika kwa Muundo",
+        "title": "Imejengwa kwa mataifa yote 54 na diaspora ya kimataifa",
+        "detail": "Kila kitu tunachokijenga kinahudumia upana wote wa bara la Afrika — hakuna utamaduni, lugha, au mkoa mmoja unaopewa kipaumbele kuliko mwingine. Kutoka Mashariki hadi Magharibi, Kaskazini hadi Kusini, na katika jamii za diaspora Ulaya, Amerika, na zaidi, Magical Africa imeundwa kuwakilisha na kusherehekea kila pembe ya urithi wa Afrika."
+      },
+      {
+        "subtitle": "Umiliki wa Jamii",
+        "title": "Waundaji na jamii wanamiliki urithi wao",
+        "detail": "Jamii ambazo lugha na hadithi zao tunazihifadhi zinabaki na umiliki kamili na uhuru juu ya maudhui yao. Sisi ni walezi, si wamiliki. Kila mzee, msanii, na msimulizi anayechangia kwenye jukwaa anapata moja kwa moja kutoka kwa kazi yao kupitia mifano ya kugawana mapato inayoeleweka. Hatutauza data ya jamii, tutahitaji kibali kwa maarifa ya kitamaduni, au tutachukua thamani kutoka kwa urithi bila kurudisha kwa watu wanaomiliki."
+      },
+      {
+        "subtitle": "Uangalizi wa Kimaadili wa AI",
+        "title": "AI inayohudumia utamaduni, si kinyume chake",
+        "detail": "Mifano yetu ya AI imejengwa kwa idhini ya jamii, unyeti wa kitamaduni, na ukaguzi wa upendeleo unaoendelea katika kila hatua. Tunakataa mfano wa ukusanyaji data unaochomoa ambao kihistoria umedhuru jamii zilizotengwa. Kila seti ya data tunayotumia inatoka kwa njia ya kimaadili na kwa ruhusa wazi."
+      },
+      {
+        "subtitle": "Athari Endelevu ya Muda Mrefu",
+        "title": "Kujenga kwa vizazi, si robo za mwaka",
+        "detail": "Tunapima mafanikio si kwa watumiaji wa kila mwezi au mapato ya robo, bali kwa lugha zilizohifadhiwa, wazee waliorekodiwa, na watoto wanaokua wakijua urithi wao. Kila uamuzi wa bidhaa, ushirikiano, na mfano wa biashara unatathminiwa kupitia lenzi ya athari ya kitamaduni ya muda mrefu."
+      },
+      {
+        "subtitle": "Uhifadhi wa Kidijitali",
+        "title": "Kuokoa lugha kabla hazijapotea milele",
+        "detail": "Zaidi ya lugha 600 za Afrika kwa sasa zimeainishwa kama ziko hatarini. Bila kuingilia kati kwa kidijitali haraka, zitaanguka ndani ya kizazi kimoja. Magical Africa inafanya kazi moja kwa moja na wataalam wa lugha, wazee wa jamii, na shule za ndani kurekodi, kuandika, na kufundisha lugha hizi kwa kiwango kikubwa."
+      },
+      {
+        "subtitle": "Upatikanaji wa Hali ya Juu",
+        "title": "Urithi hauwezi kufungwa nyuma ya ukuta wa malipo",
+        "detail": "Tunaamini kila Mwafrika — bila kujali mapato, mahali, au ujuzi wa kiufundi — anastahili kupata urithi wake wa kitamaduni. Ndiyo maana maudhui yetu ya msingi ya kujifunza ni ya bure, jukwaa letu linafanya kazi kwenye miunganiko ya kipimo cha chini, na uzoefu wetu wa simu umeboreshwa kwa vifaa vinavyotumiwa zaidi barani."
+      }
+    ]
   }
 }
+
+
+
 
 
 

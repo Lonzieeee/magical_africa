@@ -1319,8 +1319,150 @@
         "success": "🎉 Daalụ maka ịdebanye aha!"
       }
     }
+  },
+
+  
+  "technology": {
+    "helmet": {
+      "title": "Teknọlọjị | Magical Africa",
+      "description": "Chọpụta otu Magical Africa si eji AI ya nke ya chekwaa asụsụ ihe karịrị 2,000 nke Afịrịka, digitalize ihe nketa ọnụ, na-enye mmụta omenala.",
+      "keywords": "teknọlọjị Magical Africa, AI Afịrịka, AI asụsụ Afịrịka, ichekwa asụsụ Afịrịka",
+      "ogTitle": "Magical Africa — AI Teknọlọjị maka Ihe Nketa Afịrịka",
+      "ogDescription": "Ọmụmaatụ AI ewumewu kwa ọnọdụ asụsụ Afịrịka na omimi omenala."
+    },
+    "hero": {
+      "eyebrow": "AI Teknọlọjị",
+      "title1": "Arụrụ maka Afịrịka,",
+      "title2": "Nke AI na-anya",
+      "subtitle": "Ọmụmaatụ nke pụtara arụrụ kwa ọnọdụ asụsụ Afịrịka, omimi omenala, na ichekwa asụsụ ihe karịrị 2,000 — ndị AI a na-ahụta achọghị.",
+      "stat1Value": "2,000+",
+      "stat1Label": "Asụsụ Afịrịka",
+      "stat2Value": "<1%",
+      "stat2Label": "Nnọchiteanya Dijital",
+      "stat3Value": "140M+",
+      "stat3Label": "Ndị ọrụ Diaspora"
+    },
+    "intro": {
+      "title": "Nsogbu Anyị na-edozi",
+      "description": "Asụsụ Afịrịka na-anọchite anya ihe na-erughị 1% nke ihe niile dijital. Ka ndị okenye na-anwụọ, ihe ọghọm nke narị afọ na-apụnarị ha. Magical Africa na-eji AI tụgharịa nke a.",
+      "quote": "Ichekwa ihe ọghọm nke ndị okenye maka ụmụ nke echi."
+    },
+    "features": {
+      "sectionTitle": "Ikike Anyị nke AI",
+      "sectionSubtitle": "Sistemụ isii nke AI na-arụ ọrụ ọnụ iji chekwaa ma kụzịa ihe nketa Afịrịka.",
+      "items": {
+        "speech": {
+          "tag": "Nchọpụta",
+          "title": "Nchọpụta Okwu",
+          "description": "Ọmụmaatụ AI zụọrọ asụsụ tọn Afịrịka na asụsụ obodo — asụsụ ndị a na-ahụta achọghị nkịtị. Ọmụmaatụ anyị na-aghọta ọnọdụ tọn nke mere asụsụ ọ bụla pụtara iche.",
+          "stat": "2,000+",
+          "statLabel": "Asụsụ Afịrịka ndị e jidere n'anya"
+        },
+        "transcription": {
+          "tag": "Dijitalaizeshọn",
+          "title": "Ide Okwu",
+          "description": "Dijitalaizeshọn akpaaka nke akụkọ ifo ọnụ — tụgharịa ihe nketa ndị okenye kwuru ka ọ bụrụ ederede enwere ike ịchọta, echekwa, na kesaa.",
+          "stat": "100%",
+          "statLabel": "Usoro akpaaka"
+        },
+        "indexing": {
+          "tag": "Nhazi",
+          "title": "Ntinye Ụzọ Omenala",
+          "description": "AI semantic na-ahazi ihe ilu, akụkọ ihe mere eme, na ihe ọmụma omenala site na obodo, mpaghara, na oge — na-eme ka ihe nketa Afịrịka nwee ike ịchọtakwa.",
+          "stat": "54",
+          "statLabel": "Mba Afịrịka ndị e kpuchiri"
+        },
+        "recommendations": {
+          "tag": "Ịhazi onwe",
+          "title": "Ndụmọdụ Nke Uche",
+          "description": "Ụzọ mmụta ndị AI na-akwado na-ejikọ onye ọrụ ọ bụla na akụkọ omenala kacha kwesịrị ekwesị, ihe mmụta asụsụ, na ndị ọkà mmụta asụsụ ọbị.",
+          "stat": "10M+",
+          "statLabel": "Ndị ọrụ e jidere n'anya na Afọ 3"
+        },
+        "regeneration": {
+          "tag": "Ịmepụta",
+          "title": "Ịmepụta Ọhụrụ Ihe",
+          "description": "Ọmụmaatụ nke AI na-enyere aka ịgbazite akụkọ ifo ọnụ ndị merụọrụ ma tụgharịa akụkọ ifo ọdịnala ka ọ bụrụ ihe ọhụrụ maka ụmụaka.",
+          "stat": "500+",
+          "statLabel": "Ndị okike omenala n'oge ntọhapụ"
+        },
+        "tools": {
+          "tag": "Ike",
+          "title": "Ngwa AI nke Ndị Okike",
+          "description": "Ngwa zuru oke na-enye ndị okenye, ndị nka, na ndị na-akọ akụkọ ike ikepụta, nweta ego, na chekwaa ihe nketa ha dijital — n'enweghị ihe ọmụma teknọlọjị.",
+          "stat": "10-20%",
+          "statLabel": "Nkewa ego maka ndị okike"
+        }
+      }
+    },
+    "pillars": {
+      "sectionTitle": "Ụkpụrụ Anyị nke AI",
+      "items": {
+        "ethical": { "label": "AI nke Omume Ọma", "desc": "Mmepe na-etinye obodo n'ụzọ mbụ" },
+        "panAfrican": { "label": "Pan-Afrika", "desc": "Mba niile 54 e jidere n'anya" },
+        "sovereignty": { "label": "Ọchịchị Onwe Data", "desc": "Obodo nwe data ha" },
+        "scalable": { "label": "Nwere Ike Ịba Ụba", "desc": "Arụrụ maka ndị ọrụ 10M+" }
+      }
+    },
+    "howItWorks": {
+      "sectionTitle": "Otu O Si Arụ Ọrụ",
+      "steps": {
+        "capture": { "step": "01", "title": "Ịnakọta", "desc": "Ndị okenye, ndị nka na ndị na-akọ akụkọ na-edebanye ihe ọnụ site na Magical Africa Creator Platform." },
+        "transcribe": { "step": "02", "title": "Ide", "desc": "AI anyị nke Nchọpụta Okwu na-atụgharị asụsụ Afịrịka a kwụrụ ka ọ bụrụ ederede, na-elekọta ọdịiche tọn na asụsụ obodo nke ọma." },
+        "index": { "step": "03", "title": "Ntinye Ụzọ", "desc": "AI Ntinye Ụzọ Omenala na-ahazi ma tinye akara ihe site na asụsụ, mpaghara, ebo, na isiokwu." },
+        "deliver": { "step": "04", "title": "Inyefe", "desc": "AI Ndụmọdụ Nke Uche na-ebu ihe kwesịrị kwesịrị nye onye mmụta kwesịrị — n'asụsụ ha, n'ọsọ ha, n'ngwaọrụ ọ bụla." }
+      }
+    },
+    "cta": {
+      "sectionTitle": "Sonyere Ọgba Aghara",
+      "description": "Nyere anyị aka wuo ọba nchekwa dijital kachasị ukwuu nke ihe ọmụma asụsụ na omenala Afịrịka. Ma ọ bụ onye okike, onye mmụta, ma ọ bụ onye ntinye ego — enwere ọhere gị na Magical Africa.",
+      "exploreBtn": "Chọpụta Academy",
+      "startBtn": "Malite n'Efu"
+    }
+  },
+
+
+
+  
+  "accordionPrinciples": {
+    "items": [
+      {
+        "subtitle": "I-Pan-Afrika site na Nhazi",
+        "title": "Arụrụ maka mba niile 54 na diaspora nke ụwa",
+        "detail": "Ihe niile anyị na-ewu na-eme na-eje n'oge oge nke ogo ogo nke kọntinent Afrika — ọ dịghị omenala, asụsụ, maọbụ mpaghara ọ bụla na-ewe mbụ karịa ndị ọzọ. Site n'Ọwụwa Anyanwụ ruo Ọdịda Anyanwụ, n'Ugwu ruo n'Ndịda, na n'ime obodo ndị diaspora n'Europe, Americas, na n'ofe, Magical Africa achọpụtara imele na ikelebị ihe nketa nke Africa."
+      },
+      {
+        "subtitle": "Ịnwe Obodo",
+        "title": "Ndị okike na obodo nwe ihe nketa ha",
+        "detail": "Obodo ndị asụsụ ha na akụkọ ha anyị na-echekwa na-echekwa iniwe na ọchịchị onwe puku n'ihe ọ bụla ha nwere. Anyị bụ ndị nlekọta, ọ bụghị ndị nwe. Onye okenye ọ bụla, onye nka, na onye na-akọ akụkọ na-enye n'ọrụ ahụ na-enweta n'ịdịmma site n'ọrụ ha site n'ụdị nkewa ego doro anya."
+      },
+      {
+        "subtitle": "Nlekọta AI Nke Omume Ọma",
+        "title": "AI na-eje n'ihi omenala, ọ bụghị n'ụzọ ọzọ",
+        "detail": "Amamụta anyị nke AI arụrụ na ikike obodo, nzacha omenala, na nlele ihe ọjọọ na-aga n'ihu n'oge nile n'ọkwa ọ bụla. Anyị na-akwụsị ụdị nkwakọba dị iche na-ekpochapụ nke e ji ihe nketa maka obodo ndị e wepụrụ na mbụ. Nke ọ bụla ndekọ data anyị na-eji sitere na ụzọ dị mma ma na-enye ikike ngwa ngwa."
+      },
+      {
+        "subtitle": "Mmetụta Ogologo Oge Na-adị Mụna",
+        "title": "Ịwu maka ọtụtụ ọgbọ, ọ bụghị nkeji",
+        "detail": "Anyị na-atụ ihe ize ndụ ọ bụghị na ndị ọrụ nke ọ bụla ọnwa ma ọ bụ ego nkeji, kama n'asụsụ echekwara, ndị okenye rekodiara, na ụmụaka ndị na-eto eto n'ịmara ihe nketa ha. Mkpebi ngwaahịa ọ bụla, mmekọrịta, na ụdị azụmahịa a na-atụle site n'anya nke mmetụta omenala nke ogologo oge."
+      },
+      {
+        "subtitle": "Ichekwa Dijital",
+        "title": "Ịzọpụta asụsụ tupu ha apụrụ ruo mgbe ebighị ebi",
+        "detail": "Ihe karịa asụsụ 600 nke Afịrịka ugbu a na-ekewapụ dị ka asụsụ ndị dị n'ụzọ iyi ize ndụ. N'enweghị ntụpụ dijital ngwa ngwa, ha ga-apụ n'oge ọgbọ. Magical Africa na-arụ ọrụ ozugbo na ndị ọkà mmụta asụsụ, amadị obodo, na ụlọ akwụkwọ ndị mpaghara iji dee, dee akwụkwọ, ma kụzịa asụsụ ndị a n'ọnụ ahịa."
+      },
+      {
+        "subtitle": "Nkwado Dị Ukwuu",
+        "title": "Ihe nketa ekwesịghị ikpọpụ n'azụ mgbidi ọnụ ego",
+        "detail": "Anyị kwere na onye Afịrịka ọ bụla — n'ọ bụ n'ihe gbasara ego, ọnọdụ, ma ọ bụ ihe ọmụma nke teknọlọjị — kwesịrị inweta ihe nketa ya nke omenala. Nke ahụ bụ ihe mere okuqukethwe anyị nke msingi nke mmụta bụ efu, ikpe anyị na-arụ ọrụ na njikọ mgbata ala dị ala, na ahụmịhe simu anyị emebere maka ngwaọrụ a na-ejikarị eme ihe n'kọntinent."
+      }
+    ]
   }
 }
+
+
+
+
 
 
 

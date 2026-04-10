@@ -1247,8 +1247,150 @@
         "success": "🎉 Ashe nabo kwa eandikish!"
       }
     }
+  },
+
+
+  
+  "technology": {
+    "helmet": {
+      "title": "Teknoloji | Magical Africa",
+      "description": "Iyiok enkiama Magical Africa eyiamu AI enkitegenya ilchamus tobono le 2,000 Afrika, enkisidai olkiama le entim, enkiyiamu mparnat enkiama.",
+      "keywords": "teknoloji Magical Africa, AI Afrika, AI ilchamus Afrika",
+      "ogTitle": "Magical Africa — AI Teknoloji lenkiama Afrika",
+      "ogDescription": "Imodeli ye AI eyiamu entim yilchamus Afrika enkiama."
+    },
+    "hero": {
+      "eyebrow": "AI Teknoloji",
+      "title1": "Eyiyiamu Afrika,",
+      "title2": "Enkiamu AI",
+      "subtitle": "Imodeli enkitegenya eyiamu entim yilchamus Afrika enkiama, enkisidai ilchamus tobono le 2,000 — ilchamus eyisidaiwa na AI nalanaa.",
+      "stat1Value": "2,000+",
+      "stat1Label": "Ilchamus Afrika",
+      "stat2Value": "<1%",
+      "stat2Label": "Enkiama Kidijitali",
+      "stat3Value": "140M+",
+      "stat3Label": "Ilkiama Diaspora"
+    },
+    "intro": {
+      "title": "Enkiama Eyitimu",
+      "description": "Ilchamus Afrika eyiamu nabo 1% ye enkiama yoote kidijitali. Ilpayiani nabo itiamu, olkiama le miaka mingi itiamu nalanaa. Magical Africa eyiamu AI enkisidai enkiama ino.",
+      "quote": "Enkisidai olkiama leilpayiani lenyena leitino."
+    },
+    "features": {
+      "sectionTitle": "Enkiama Yaitore ye AI",
+      "sectionSubtitle": "Imifumo isitaa ye AI eyiamu pamoja enkisidai enkiama Afrika.",
+      "items": {
+        "speech": {
+          "tag": "Enkiama",
+          "title": "Enkiama ye Pee",
+          "description": "Imodeli ye AI eyiamu ilchamus toni Afrika — ilchamus eyisidaiwa na iplatfom nalanaa. Imodeli yaitore eyiamu toni enkitegenya ye chamus yoote.",
+          "stat": "2,000+",
+          "statLabel": "Ilchamus Afrika eyilengatai"
+        },
+        "transcription": {
+          "tag": "Kidijitali",
+          "title": "Enkiandiki ye Pee",
+          "description": "Kidijitali kiotomatiki ye inkiama ye pee — enkisidai olkiama ilpayiani eyipee kuwa iandiki eyitagea.",
+          "stat": "100%",
+          "statLabel": "Enkiama kiotomatiki"
+        },
+        "indexing": {
+          "tag": "Enkiama",
+          "title": "Enkiama ye Ilkiama",
+          "description": "AI enkiama imodeli, inkiama za mbere, na olkiama leilkiama na inkiama, olotoi, na zama.",
+          "stat": "54",
+          "statLabel": "Inchi Afrika eyitimu"
+        },
+        "recommendations": {
+          "tag": "Enkiama",
+          "title": "Imawatho ye Akili",
+          "description": "Injia ze kujifunza ze AI ezifanana na ilkiama yoote na inkiama ze ilkiama, masomo ye ilchamus na ilkiama le mwanzo.",
+          "stat": "10M+",
+          "statLabel": "Ilkiama eilengatai Mwaka 3"
+        },
+        "regeneration": {
+          "tag": "Enkiama",
+          "title": "Enkiama Upya ye Olkiama",
+          "description": "Enkiama upya ye inkiama ze pee eyivunjika na msaada ye AI na enkisidai inkiama za kale kuwa olkiama osimani wa eitino.",
+          "stat": "500+",
+          "statLabel": "Ilkiama le ilkiama wakati ye enkiama"
+        },
+        "tools": {
+          "tag": "Enkiama",
+          "title": "Izana ze AI ze Ilkiama",
+          "description": "Iseti yoote ye izana ewezesha ilpayiani, isanaa na isimulizi enkichapa, enkisidai na enkihitia olkiama wao kidijitali.",
+          "stat": "10-20%",
+          "statLabel": "Enkiama ye mapato leilkiama"
+        }
+      }
+    },
+    "pillars": {
+      "sectionTitle": "Imigomo Yaitore ye AI",
+      "items": {
+        "ethical": { "label": "AI ye Enkiama", "desc": "Enkiama enkiamu inkiama kwanza" },
+        "panAfrican": { "label": "Pan-Afrika", "desc": "Inchi yoote 54 eyilengatai" },
+        "sovereignty": { "label": "Enkiama ye Data", "desc": "Inkiama eyiamu data yao" },
+        "scalable": { "label": "Enkiama Enkikua", "desc": "Eyiamu leilkiama tobono le 10M+" }
+      }
+    },
+    "howItWorks": {
+      "sectionTitle": "Enkiama Yaitore",
+      "steps": {
+        "capture": { "step": "01", "title": "Enkiama", "desc": "Ilpayiani, isanaa na isimulizi eirekodi olkiama le pee kupitia Jukwaa le Magical Africa." },
+        "transcribe": { "step": "02", "title": "Enkiandiki", "desc": "AI yaitore ye Enkiama ye Pee eguqula ilchamus Afrika eyipewa kuwa iandiki." },
+        "index": { "step": "03", "title": "Enkiama", "desc": "AI ye Enkiama ye Ilkiama eingia na eiweke alama olkiama na ilchamus, olotoi, enkiama na mada." },
+        "deliver": { "step": "04", "title": "Enkiama", "desc": "AI ye Imawatho ye Akili etuma olkiama oreto leilkiama oreto — na ilchamus yao, na enkiama yao, kwa kifaa chochote." }
+      }
+    },
+    "cta": {
+      "sectionTitle": "Injia Enkiama Ino",
+      "description": "Tusaidie enkiama hifadhi nene ye kidijitali ye olkiama ye ilchamus na ilkiama Afrika. Eitai wewe ni ilkiama, mwanafunzi, kana mwekezaji — kuna nafasi yako Magical Africa.",
+      "exploreBtn": "Chunguza Chuo",
+      "startBtn": "Anza Bure"
+    }
+  },
+
+
+  
+  "accordionPrinciples": {
+    "items": [
+      {
+        "subtitle": "Pan-Afrika Enkiama",
+        "title": "Eyiyiamu nchi yoote 54 na diaspora ye ũthĩ woothe",
+        "detail": "Enkiama yoote eyiyiamu ekiamu upana woothe ye bara ye Afrika — ilkiama imwe, ilchamus, kana olotoi imwe eisidaiwa njia mbele kurĩkia ingine. Kuuma ithokoro na ithiru, ugoro na ithiru, na inkiama ye diaspora Ulaya, Amerika, na ingine, Magical Africa eyiyiamu enkiama na enkisherehekea kila pembe ye olkiama Afrika."
+      },
+      {
+        "subtitle": "Enkiama ye Jamii",
+        "title": "Ilkiama na inkiama nĩo eiĩkĩtia olkiama wao",
+        "detail": "Inkiama icio ilchamus na inkiama iao eitihĩtia eibaki na ũmiliki na ũhuru woothe juu ye enkiama yao. Itore nĩ alinzi, hatĩrĩ ĩmiliki. Ilpayiani yoote, isanaa, na isimulizi eirĩa ekichangia kwa enkiama akũhĩa moja kwa moja kuuma kwa enkiama yao kupitia enkiama ye kugawana mapato inayoeleweka."
+      },
+      {
+        "subtitle": "Enkiama ye AI Kimaadili",
+        "title": "AI eyikiamu ilkiama, hatĩrĩ kinyume",
+        "detail": "Imodeli yaitore ye AI eyiyiamu na idhini ye inkiama, unyeti ye ilkiama, na ukaguzi we upendeleo unaoendelea kila hatua. Eitumo enkiama ye ukusanyaji data unaochomoa ũrĩa kihistoria ũmedhuru inkiama zilizotengwa. Kila seti ye data eitumia inatoka kwa njia ye kimaadili na kwa ruhusa wazi."
+      },
+      {
+        "subtitle": "Enkiama Endelevu ye Muda Mwene",
+        "title": "Enkijenga kwa ilkiama, hatĩrĩ robo ye mwaka",
+        "detail": "Eitipima enkiama hatĩrĩ na ilkiama ye kila mwezi kana mapato ye robo, ilo kwa ilchamus izio eihĩtĩtwo, ilpayiani iao eirekodiwa, na eitino iao eikũa eiciĩ olkiama wao. Kila ũamuzi ye enkiama, ushirikiano, na enkiama ye biashara eititathminiwa kupitia lenzi ye enkiama ye ilkiama ye muda mwene."
+      },
+      {
+        "subtitle": "Enkihĩtia ye Kidijitali",
+        "title": "Enkihũhũria ilchamus mbere ciaatĩkũra milele",
+        "detail": "Ilchamus igana na mĩrongo itandatũ ye Afrika ĩrĩa ĩno eiainishwa nĩ cia hatari. Atĩ gũtĩkũre kuingilia kati ye kidijitali haraka, cia kuanguka ndani ye kizazi kimoja. Magical Africa eikiamu moja kwa moja na wataalam ye ilchamus, ilpayiani ya inkiama, na shule ze ndani enkiurekodi, kuandika, na kufundisha ilchamus icio kwa kiwango kikubwa."
+      },
+      {
+        "subtitle": "Enkipatikana ye Hali ye Juu",
+        "title": "Olkiama eitĩgũgũrũkio na enkiama ye malipo",
+        "detail": "Eitĩamini Mũafrica woothe — atĩ mapato, mahali, kana ũĩ wĩngĩ ye kiufundi — astahili enkipatikana olkiama wake ye ilkiama. Nĩ ũndũ ũcio enkiama yaitore ye msingi ye kujifunza nĩ ya bure, enkiama laitore lĩkĩthiĩ kwa miunganiko ye kipimo cha chini, na uzoefu wacitore ye simu ũboreshĩtwe kwa vifaa vinavyotumiwa zaidi barani."
+      }
+    ]
   }
 }
+
+
+
+
 
 
 
