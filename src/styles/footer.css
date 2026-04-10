@@ -28,6 +28,9 @@
   gap: 10px;
   width: 100%;
 }
+.footer-link:hover{
+  color: #D27B35;
+}
 
 .link1 a{
   font-size: 1rem;

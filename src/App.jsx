@@ -40,7 +40,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/tribes" element={<Tribes />} />
           <Route path="/maasai" element={<Maasai />} />
+          {/* 
           <Route path="/academy" element={<Academy />} />
+          */}
           <Route path="/register" element={<Language2 />} />animation onan
           <Route path="/welcome" element={<Language3 />} />
           <Route path="/welcome-learningReason" element={<Language4 />} />
@@ -52,7 +54,7 @@ function App() {
           <Route path="/academy-signUp" element={<Academy2 />} />
           <Route path="/academy-signIn" element={<AcademyLogin />} />
           <Route path="/music" element={<Music />} />
-        <Route path="/academy-page"element={<AcademyPage />}
+        <Route path="/academy"element={<AcademyPage />}
          />
          <Route path="/blogs" element={<Blogs />}
         

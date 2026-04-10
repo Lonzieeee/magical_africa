@@ -3,6 +3,8 @@ import React from 'react'
 import '../styles/academy-dropdown.css'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
+import useAcademyNavigation from "../hooks/useAcademyNavigation";
+
 
 const academyData = [
   {
@@ -99,6 +101,7 @@ const DropdownPanel = ({ header, columns, footerLink, footerTag, onFooterClick }
 const AcademyDropdown = () => {
   const navigate = useNavigate()
    const { t } = useTranslation();
+     const goToAcademy  = useAcademyNavigation();
 
   return (
     <div className='md-wrapper'>
@@ -106,7 +109,7 @@ const AcademyDropdown = () => {
       {/* Academy only */}
       <div className='md-trigger'>
          <NavLink
-    to='/academy-page'
+    to='/academy'
     className={({ isActive }) => `md-nav-label ${isActive ? 'active-link' : ''}`}
   >
    {t('sideMenu.academy')}
@@ -116,7 +119,7 @@ const AcademyDropdown = () => {
           columns={academyData}
           footerLink='Browse all courses'
           footerTag='New courses weekly'
-          onFooterClick={() => navigate('/academy-page')}
+          onFooterClick={goToAcademy}
         />
       </div>
 

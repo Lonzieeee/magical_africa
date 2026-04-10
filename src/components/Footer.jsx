@@ -66,7 +66,7 @@ const Footer = () => {
             <Link to="" onClick={goToAcademy}>{t('footer.links.academy')}</Link>
             */}
 
-            <span className="footer-link" onClick={goToAcademy}>
+            <span className="footer-link" onClick={()=> handleNavigation('/academy')}>
   {t('footer.links.academy')}
 </span>
             <Link to="/events">{t('footer.links.events')}</Link>
