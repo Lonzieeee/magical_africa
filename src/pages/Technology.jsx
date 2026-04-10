@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { Helmet } from 'react-helmet-async';
 import useAcademyNavigation from "../hooks/useAcademyNavigation";
 import '../styles/technology.css'
 

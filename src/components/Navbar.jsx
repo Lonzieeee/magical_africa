@@ -220,7 +220,7 @@ const Navbar = ({ solid }) => {
           </NavLink>
 
          <NavLink to="/technology" className={({ isActive }) => isActive ? 'active-link' : ''}>
-            Technology
+           {t('nav.technology')}
           </NavLink>
 
 
