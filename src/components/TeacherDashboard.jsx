@@ -126,7 +126,9 @@ const TeacherDashboard = () => {
   useEffect(() => {
     const desiredPath = buildTeacherDashboardPath(activeSection)
     const currentSection = normalizeTeacherSection(routeSection || 'courses')
+    const routeStateSynced = currentSection === activeSection
     const isCanonicalTeacherPath = location.pathname === desiredPath && currentSection === activeSection
+    if (!routeStateSynced) return
     if (isCanonicalTeacherPath) return
     navigate(desiredPath, { replace: true })
   }, [activeSection, routeSection, location.pathname, navigate])
@@ -626,6 +628,14 @@ const TeacherDashboard = () => {
       const teacherName = userData
         ? `${userData.firstName || ''} ${userData.secondName || userData.lastName || ''}`.trim()
         : auth.currentUser.displayName || 'Tutor'
+      const cloudSafePhoto = String(profileDraft.photoURL || '').startsWith('data:')
+        ? ''
+        : (profileDraft.photoURL || '')
+      const teacherProfileSnapshot = buildTutorProfileSnapshot({
+        firstName: profileDraft.firstName || userData?.firstName || '',
+        lastName: profileDraft.lastName || userData?.lastName || userData?.secondName || '',
+        photoUrl: cloudSafePhoto || userData?.photoURL || auth.currentUser.photoURL || ''
+      })
 
       const payload = {
         title: title.trim(),
@@ -647,6 +657,7 @@ const TeacherDashboard = () => {
         certificateFileName: certificateFileName.trim(),
         teacherName,
         teacherId: auth.currentUser.uid,
+        teacherProfileSnapshot,
         updatedAt: new Date().toISOString()
       }
 
@@ -1109,6 +1120,20 @@ const TeacherDashboard = () => {
     setSidebarOpen(false)
   }
 
+  const buildTutorProfileSnapshot = ({ firstName, lastName, photoUrl }) => ({
+    displayName: `${firstName || ''} ${lastName || ''}`.trim() || 'Tutor',
+    headline: tutorProfileDraft.headline.trim(),
+    bio: tutorProfileDraft.bio.trim(),
+    teachingStyle: tutorProfileDraft.teachingStyle.trim(),
+    languages: tutorProfileDraft.languages.split(',').map((item) => item.trim()).filter(Boolean),
+    expertiseTags: tutorProfileDraft.expertiseTags.split(',').map((item) => item.trim()).filter(Boolean),
+    timezone: tutorProfileDraft.timezone.trim() || 'Africa/Nairobi',
+    availabilityText: tutorProfileDraft.availabilityText.trim(),
+    responseTimeLabel: tutorProfileDraft.responseTimeLabel.trim(),
+    photoUrl: photoUrl || '',
+    updatedAt: new Date().toISOString()
+  })
+
   const toggleThemeMode = () => {
     const nextMode = themeMode === 'dark' ? 'light' : 'dark'
     setThemeMode(nextMode)
@@ -1187,25 +1212,29 @@ const TeacherDashboard = () => {
       setProfileSaving(true)
       const isLocalPhoto = String(profileDraft.photoURL || '').startsWith('data:')
       const cloudSafePhoto = isLocalPhoto ? '' : (profileDraft.photoURL || '')
+      const publicTutorProfile = buildTutorProfileSnapshot({
+        firstName,
+        lastName,
+        photoUrl: cloudSafePhoto
+      })
 
       await setDoc(doc(db, 'users', uid), {
         firstName, lastName, secondName: lastName,
         photoURL: cloudSafePhoto,
-        tutorProfile: {
-          displayName: publicDisplayName,
-          headline: tutorProfileDraft.headline.trim(),
-          bio: tutorProfileDraft.bio.trim(),
-          teachingStyle: tutorProfileDraft.teachingStyle.trim(),
-          languages,
-          expertiseTags,
-          timezone: tutorProfileDraft.timezone.trim() || 'Africa/Nairobi',
-          availabilityText: tutorProfileDraft.availabilityText.trim(),
-          responseTimeLabel: tutorProfileDraft.responseTimeLabel.trim(),
-          photoUrl: cloudSafePhoto,
-          updatedAt: new Date().toISOString()
-        },
+        tutorProfile: publicTutorProfile,
         updatedAt: new Date().toISOString()
       }, { merge: true })
+
+      const teacherCoursesSnapshot = await getDocs(
+        query(collection(db, 'courses'), where('teacherId', '==', uid))
+      )
+      await Promise.all(
+        teacherCoursesSnapshot.docs.map((courseDoc) => updateDoc(doc(db, 'courses', courseDoc.id), {
+          teacherName: publicDisplayName,
+          teacherProfileSnapshot: publicTutorProfile,
+          updatedAt: new Date().toISOString()
+        }))
+      )
 
       const displayName = `${firstName} ${lastName}`.trim()
       await updateProfile(auth.currentUser, { displayName, photoURL: cloudSafePhoto })

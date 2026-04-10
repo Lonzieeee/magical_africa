@@ -452,12 +452,14 @@ const Learner = () => {
     const currentSection = normalizeLearnerSection(routeSection || fallbackSection || 'store')
     const currentView = normalizeLearnerView(currentSection, routeView || fallbackView)
     const expectedView = activeSection === 'courses' ? courseView : activeSection === 'store' ? storeView : ''
+    const routeStateSynced = currentSection === activeSection && currentView === expectedView
     const isCanonicalLearnerPath =
       location.pathname === desiredPath &&
       !location.search &&
       currentSection === activeSection &&
       currentView === expectedView
 
+    if (!routeStateSynced) return
     if (isCanonicalLearnerPath) return
     navigate(desiredPath, { replace: true })
   }, [activeSection, courseView, storeView, routeSection, routeView, location.pathname, location.search, navigate])
