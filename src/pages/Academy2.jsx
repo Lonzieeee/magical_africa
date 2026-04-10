@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import Navbar from '../components/Navbar'
 import '../styles/academy-signIn.css'
 import { useNavigate } from 'react-router-dom'
@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet-async'
 import { auth, db } from '../context/AuthContext'
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
-import SmallFooter from '../components/SmallFooter'
+import Footer from '../components/Footer'
 
 const Academy2 = () => {
   const [role, setRole] = useState('learner')
@@ -20,6 +20,13 @@ const Academy2 = () => {
   const [dob, setDob] = useState('')
   const [success, setSuccess] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
+  const dateRef = useRef(null)
+
+  const openDatePicker = () => {
+  if (dateRef.current) {
+    dateRef.current.showPicker()
+  }
+}
 
   const navigate = useNavigate()
 
@@ -167,19 +174,21 @@ const Academy2 = () => {
 
           <div className='academy-info1'>
             <div className='academy-info1-a'>
-              <label>FirstName</label>
+              <label>First name</label>
               <input
                 type="text"
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
+                placeholder='John'
               />
             </div>
             <div className='academy-info1-b'>
-              <label>SecondName</label>
+              <label>Last name</label>
               <input
                 type="text"
                 value={secondName}
                 onChange={(e) => setSecondName(e.target.value)}
+                placeholder='Doe'
               />
             </div>
           </div>
@@ -190,6 +199,7 @@ const Academy2 = () => {
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder='johndoe@gmail.com'
             />
           </div>
 
@@ -206,7 +216,6 @@ const Academy2 = () => {
   />
 </div>
 
-*/}
 
      <div className='academy-info2'>
    <label>Date of Birth</label>
@@ -215,7 +224,31 @@ const Academy2 = () => {
     value={dob}
     onChange={(e) => setDob(e.target.value)}
     max={new Date().toISOString().split('T')[0]}
+   
   />
+</div>
+
+*/}
+
+
+
+<div className='academy-info2 date-wrapper'>
+  <label>Date of Birth</label>
+
+  <div className="date-input-container" onClick={openDatePicker}>
+    <input
+      ref={dateRef}
+      type="date"
+      value={dob}
+      onChange={(e) => setDob(e.target.value)}
+      max={new Date().toISOString().split('T')[0]}
+    />
+
+    <i 
+      className="fa-regular fa-calendar calendar-icon"
+      onClick={openDatePicker}
+    />
+  </div>
 </div>
 
        
@@ -226,6 +259,7 @@ const Academy2 = () => {
     type={showPassword ? 'text' : 'password'}
     value={password}
     onChange={(e) => setPassword(e.target.value)}
+    placeholder='Enter your password'
   />
   <i
     className={`fa-regular ${showPassword ? 'fa-eye' : 'fa-eye-slash'}`}
@@ -258,8 +292,8 @@ const Academy2 = () => {
               {loading
                 ? 'Creating Account...'
                 : role === 'learner'
-                  ? 'Create Learner Account'
-                  : 'Create Teacher Account'
+                  ? 'Create new account'
+                  : 'Create new account'
               }
             </button>
 
@@ -276,7 +310,7 @@ const Academy2 = () => {
         </div>
       </div>
 
-      <SmallFooter />
+      <Footer />
     </>
   )
 }

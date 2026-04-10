@@ -7,6 +7,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
 import SmallFooter from './SmallFooter'
 import { buildLearnerDashboardPath, buildTeacherDashboardPath } from '../utils/dashboardRoute'
+import Footer from './Footer'
 
 const AcademyLogin = () => {
   const [email, setEmail] = useState('')
@@ -149,7 +150,7 @@ const AcademyLogin = () => {
               <label>Email Address</label>
               <input
                 type="email"
-                placeholder="you@example.com"
+                placeholder="johndoe@gmail.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -221,7 +222,7 @@ const AcademyLogin = () => {
       </div>
 
 
-      <SmallFooter />
+      <Footer />
     </>
   )
 }
