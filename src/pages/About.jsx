@@ -193,13 +193,15 @@ useEffect(() => {
       image: '/images/lorna.jpeg',
       bio: t('about.team.members.lorna.bio'),
     },
+
+    /*
     { 
       name: t('about.team.members.steve.name'), 
       role: t('about.team.members.steve.role'), 
       image: '/images/Steve.jpeg',
       bio: t('about.team.members.steve.bio'),
     },
-   
+   */
     { 
       name: t('about.team.members.joel.name'), 
       role: t('about.team.members.joel.role'), 
