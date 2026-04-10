@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+Disallow: /learner
+Disallow: /learner/
+Disallow: /teacher
+Disallow: /teacher-dashboard
+Disallow: /teacher-dashboard/
+Disallow: /dashboard
+Disallow: /tutor-dashboard
+Disallow: /curriculum
+Disallow: /lesson
+Disallow: /course-content
+Disallow: /tutor-preview/
+Disallow: /academy-signIn
+Disallow: /academy-signUp
+
+Sitemap: https://magical.africa/sitemap.xml

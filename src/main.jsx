@@ -5,8 +5,18 @@ import './i18n'
 import './styles/shared-loading.css'
 import { HelmetProvider } from 'react-helmet-async'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
+root.render(
   <HelmetProvider>
     <App />
   </HelmetProvider>,
 )
+
+if (typeof document !== 'undefined') {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.dispatchEvent(new Event('app-rendered'))
+    })
+  })
+}
