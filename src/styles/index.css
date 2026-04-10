@@ -1,6 +1,31 @@
 /* Global Styles */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
+/* Import all component styles */
+@import './navbar.css';
+@import './hero-stuff.css';
+@import './services.css';
+@import './language.css';
+@import './about.css';
+@import './marketplace.css';
+@import './contact.css';
+@import './footer.css';
+@import './sign-up.css';
+@import './sign-up2.css';
+@import './about-page.css';
+@import './impact.css';
+@import './team.css';
+@import './tribes2.css';
+@import './contribute.css';
+@import './community-description.css';
+@import './language-content.css';
+@import './culture.css';
+@import './leaders.css';
+@import './tribes.css';
+@import './social-impact.css';
+@import './partners.css';
+@import './faq.css';
+
 * {
   margin: 0;
   padding: 0;
@@ -26,28 +51,3 @@ button {
 ul {
   list-style: none;
 }
-
-/* Import all component styles */
-@import './navbar.css';
-@import './hero-stuff.css';
-@import './services.css';
-@import './language.css';
-@import './about.css';
-@import './marketplace.css';
-@import './contact.css';
-@import './footer.css';
-@import './sign-up.css';
-@import './sign-up2.css';
-@import './about-page.css';
-@import './impact.css';
-@import './team.css';
-@import './tribes2.css';
-@import './contribute.css';
-@import './community-description.css';
-@import './language-content.css';
-@import './culture.css';
-@import './leaders.css';
-@import './tribes.css';
-@import './social-impact.css';
-@import './partners.css';
-@import './faq.css';

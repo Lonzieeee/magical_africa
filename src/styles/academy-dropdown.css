@@ -91,6 +91,13 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.md-status {
+  grid-column: 1 / -1;
+  padding: 20px;
+  font-size: 12px;
+  color: #666;
+}
+
 .md-col {
   padding: 16px 20px 20px;
   border-right: 0.5px solid #f0ede8;
@@ -177,7 +184,10 @@
   padding: 3px 8px;
   border-radius: 20px;
   font-weight: 500;
+  cursor: pointer;
 }
+
+.md-footer-tag:hover { text-decoration: underline; }
 
 /* Hide on mobile/tablet where item2 is already hidden */
 @media screen and (max-width: 1024px) {

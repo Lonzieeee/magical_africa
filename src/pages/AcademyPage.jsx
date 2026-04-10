@@ -1,18 +1,15 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { useTranslation } from 'react-i18next';
 import useAcademyNavigation from "../hooks/useAcademyNavigation";
+import { useAuth } from '../context/AuthContext';
+import { buildCoursePath } from '../utils/courseRoute';
+import { getPublishedCourses } from '../utils/publishedCourses';
 import '../styles/academy-page.css';
 import PageSeo from '../components/PageSeo'
 import { SEO_CONTENT } from '../utils/seoContent'
-
-const courses = [
-  { key: 'swahili', image: '/images/learn-language-kids.jpg', tag: 'Language', badge: 'Habari!' },
-  { key: 'drumming', image: '/images/drums2-latest.jpg',      tag: 'Music' },
-  { key: 'beadwork', image: '/images/kitenge-latest.jpg',     tag: 'Crafts' },
-  { key: 'cooking',  image: '/images/Oromo2.jpg',             tag: 'Culture' },
-];
 
 const languages = ['Swahili', 'Yoruba', 'Zulu', 'Hausa', 'Amharic'];
 
@@ -31,16 +28,71 @@ const communityIcons = {
   mentorship:  'fa-handshake',
 };
 
+const truncateWords = (text = '', maxWords = 14) => {
+  const normalizedText = String(text || '').trim();
+  if (!normalizedText) return '';
+
+  const words = normalizedText.split(/\s+/);
+  if (words.length <= maxWords) return normalizedText;
+
+  return `${words.slice(0, maxWords).join(' ')}...`;
+};
+
+const preloadCourseImages = async (courses = []) => {
+  const imageUrls = courses
+    .map((course) => String(course?.featuredImage || '').trim())
+    .filter(Boolean);
+
+  await Promise.allSettled(
+    imageUrls.map((imageUrl) => new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+      img.src = imageUrl;
+    }))
+  );
+};
+
 const AcademyPage = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const { user, userData } = useAuth();
   const [activeLanguage, setActiveLanguage] = useState('Swahili');
   const [searchQuery, setSearchQuery] = useState('');
+  const [featuredCourses, setFeaturedCourses] = useState([]);
+  const [coursesLoading, setCoursesLoading] = useState(true);
 
   const featuresRef  = useRef(null);
   const coursesRef   = useRef(null);
   const langRef      = useRef(null);
   const communityRef = useRef(null);
   const goToAcademy  = useAcademyNavigation();
+
+  const normalizeRole = (role) => {
+    const value = String(role || '').trim().toLowerCase();
+    if (!value) return '';
+    if (value.includes('teacher') || value.includes('tutor') || value.includes('educator')) return 'teacher';
+    if (value.includes('learner') || value.includes('student')) return 'learner';
+    return '';
+  };
+
+  useEffect(() => {
+    const fetchFeaturedCourses = async () => {
+      setCoursesLoading(true);
+      try {
+        const liveCourses = await getPublishedCourses(4);
+        await preloadCourseImages(liveCourses);
+        setFeaturedCourses(liveCourses);
+      } catch (error) {
+        console.log('Failed to load featured courses:', error);
+        setFeaturedCourses([]);
+      } finally {
+        setCoursesLoading(false);
+      }
+    };
+
+    fetchFeaturedCourses();
+  }, []);
 
   const useReveal = (ref, childSelector, baseClass, visibleClass, delay = 150) => {
     useEffect(() => {
@@ -71,6 +123,33 @@ const AcademyPage = () => {
 
   const scrollToCourses = () => {
     coursesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
+  const handleCourseShortcut = (course) => {
+    if (!course?.id) {
+      goToAcademy();
+      return;
+    }
+
+    if (!user) {
+      navigate('/academy-signIn');
+      return;
+    }
+
+    const resolvedRole = normalizeRole(userData?.role);
+    if (resolvedRole === 'teacher' || String(userData?.subject || '').trim()) {
+      goToAcademy();
+      return;
+    }
+
+    navigate(buildCoursePath(course.id, course.title, { preview: true }));
+  };
+
+  const handleCourseShortcutKeyDown = (event, course) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleCourseShortcut(course);
+    }
   };
 
   const handleSearch = (e) => {
@@ -164,20 +243,32 @@ const AcademyPage = () => {
         </div>
 
         <div className="courses-grid" ref={coursesRef}>
-          {courses.map((course) => (
-            <div className="course-card" key={course.key}>
+          {coursesLoading && (
+            <p className="academy-empty-state">Loading featured courses...</p>
+          )}
+
+          {!coursesLoading && featuredCourses.length === 0 && (
+            <p className="academy-empty-state">No featured courses yet.</p>
+          )}
+
+          {!coursesLoading && featuredCourses.map((course) => (
+            <div
+              className="course-card"
+              key={course.id}
+              onClick={() => handleCourseShortcut(course)}
+              onKeyDown={(event) => handleCourseShortcutKeyDown(event, course)}
+              role="button"
+              tabIndex={0}
+            >
               <div
                 className="course-img"
-                style={{ backgroundImage: `url('${course.image}')` }}
+                style={{ backgroundImage: `url('${course.featuredImage || '/images/learn-language-kids.jpg'}')` }}
               >
-                {course.badge && (
-                  <div className="course-badge">{course.badge}</div>
-                )}
-                <div className="course-tag">{course.tag}</div>
+                <div className="course-tag">{course.courseType || 'Course'}</div>
               </div>
               <div className="course-info">
-                <h3>{t(`academy.courses.items.${course.key}.title`)}</h3>
-                <p>{t(`academy.courses.items.${course.key}.subtitle`)}</p>
+                <h3>{course.title || 'Untitled Course'}</h3>
+                <p>{truncateWords(course.description || 'Explore this course in the academy.', 14)}</p>
               </div>
             </div>
           ))}
