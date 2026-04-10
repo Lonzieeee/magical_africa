@@ -271,6 +271,62 @@ background-color: transparent;
   text-decoration: underline;
 }
 
+.date-input-container{
+  position: relative;
+  width: 100%;
+}
+
+.date-input-container input{
+  width: 100%;
+  padding-right: 40px; /* space for icon */
+}
+
+/* Custom calendar icon */
+.calendar-icon{
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  color: rgb(181, 161, 145);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Hide the default browser calendar icon completely */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+}
+
+/* Also remove extra spacing reserved for the icon */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Firefox fix */
+input[type="date"] {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+
+/* Hide the default browser calendar icon completely */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+}
+
+/* Also remove extra spacing reserved for the icon */
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+/* Firefox fix */
+input[type="date"] {
+  appearance: none;
+  -moz-appearance: textfield;
+}
 
 @media screen and (max-width:480px) {
   .academy-form{
