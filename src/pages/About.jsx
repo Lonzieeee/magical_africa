@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { FaPlay, FaPause } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Helmet } from 'react-helmet-async';
+import PageSeo from '../components/PageSeo'
+import { SEO_CONTENT } from '../utils/seoContent'
 import '../styles/about-page.css';
 import '../styles/impact.css';
 import '../styles/team.css';
@@ -260,16 +261,7 @@ const toggleHeroVideo = () => {
     <>
 
 
-<Helmet>
-  <title>About | Magical Africa</title>
-  <meta name="description" content="Learn about Magical Africa — a pan-African platform dedicated to preserving and celebrating African languages, culture, knowledge and heritage." />
-  <meta name="keywords" content="About Magical Africa, African platform, African heritage, pan-African, African culture preservation" />
-  <meta property="og:title" content="About Magical Africa — Our Story & Mission" />
-  <meta property="og:description" content="A pan-African platform dedicated to preserving and celebrating African languages, culture and heritage." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://magical.africa/about" />
-   <meta property="og:image" content="https://magical.africa/images/about-video.mp4" />
-</Helmet>
+      <PageSeo {...SEO_CONTENT.about} />
 
 
 

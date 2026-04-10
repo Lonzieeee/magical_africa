@@ -3,7 +3,7 @@
 
 import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/Navbar';
-import { Helmet } from 'react-helmet-async';
+import PageSeo from '../components/PageSeo'
 import { useTranslation } from 'react-i18next';
 import { collection, onSnapshot } from 'firebase/firestore'
 import { db } from '../context/AuthContext'
@@ -16,6 +16,7 @@ import Pottery from '../components/Pottery';
 import Footer from '../components/Footer';
 import '../styles/artisans.css'
 import '../styles/best-sellers.css'
+import { SEO_CONTENT } from '../utils/seoContent'
 
 
 const Market = () => {
@@ -148,16 +149,7 @@ useEffect(() => {
 
   return (
     <>
-      <Helmet>
-        <title>Marketplace | Magical Africa</title>
-        <meta name="description" content="Shop authentic African products from artisans and creators across the continent. Discover handcrafted goods, traditional crafts, clothing, jewelry and more." />
-        <meta name="keywords" content="African marketplace, buy African products, authentic African crafts, African artisans, handmade African goods, African jewelry, African clothing" />
-        <meta property="og:title" content="African Marketplace — Buy Authentic African Products" />
-        <meta property="og:description" content="Shop authentic handcrafted African products from artisans and creators across the continent." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://magical.africa/market" />
-         <meta property="og:image" content="https://magical.africa/images/side-view-people-garage-sale2.jpg" />
-      </Helmet>
+      <PageSeo {...SEO_CONTENT.market} />
 
       <div className='market-hero' style={{ backgroundImage: `url(${marketHeroImages[currentSlide]})` }}>
         <Navbar />

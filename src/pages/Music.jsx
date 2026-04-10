@@ -6,6 +6,8 @@ import '../styles/music.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useTranslation } from 'react-i18next'
+import PageSeo from '../components/PageSeo'
+import { SEO_CONTENT } from '../utils/seoContent'
 
 const Music = () => {
   const { t } = useTranslation();
@@ -13,16 +15,7 @@ const Music = () => {
   return (
     <>
 
-    <Helmet>
-  <title>African Music | Magical Africa</title>
-  <meta name="description" content="Explore the rich world of African music — from Afrobeats and Highlife to traditional instruments like the Djembe, Kora and Mbira. Discover iconic African artists and their global influence." />
-  <meta name="keywords" content="African music, Afrobeats, African instruments, Djembe, Kora, Mbira, African artists, Fela Kuti, Burna Boy, African culture music" />
-  <meta property="og:title" content="African Music — Explore Genres, Instruments & Artists" />
-  <meta property="og:description" content="Explore the rich world of African music — from Afrobeats and Highlife to traditional instruments like the Djembe, Kora and Mbira." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://magical.africa/music" />
-  <meta property="og:image" content="https://magical.africa/images/drums2-latest.jpg" />
-</Helmet>
+      <PageSeo {...SEO_CONTENT.music} />
 
       <div className="music-hero">
         <Navbar />

@@ -4,7 +4,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { Helmet } from 'react-helmet-async';
+import PageSeo from '../components/PageSeo'
+import { SEO_CONTENT } from '../utils/seoContent'
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import SearchSection from '../components/SearchSection';
@@ -60,16 +61,7 @@ const Tribes = () => {
     <>
 
 
-    <Helmet>
-  <title>Tribes — Magical Africa</title>
-  <meta name="description" content="Explore the rich diversity of African tribes and communities. Learn about their traditions, cultures, customs and way of life." />
-  <meta name="keywords" content="African tribes, African communities, African culture, African traditions, Maasai, Zulu, Yoruba, Ashanti" />
-  <meta property="og:title" content="African Tribes & Communities — Magical Africa" />
-  <meta property="og:description" content="Explore the rich diversity of African tribes and communities. Learn about their traditions, cultures and way of life." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://magical.africa/tribes" />
-   <meta property="og:image" content="https://magical.africa/images/maasai-women2.jpg" />
-</Helmet>
+      <PageSeo {...SEO_CONTENT.tribes} />
 
 
 

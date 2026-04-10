@@ -9,6 +9,8 @@ import '../styles/culture.css';
 import '../styles/leaders.css';
 import '../styles/nature.css';
 import '../styles/antiques.css';
+import PageSeo from '../components/PageSeo'
+import { SEO_CONTENT } from '../utils/seoContent'
 
 const Maasai = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -97,12 +99,9 @@ const Maasai = () => {
     }));
   };
 
-
-    useEffect(() => {
-    document.title = 'Maasai Tribe - Maasai History, Culture, Traditions';
-  }, []);
   return (
     <>
+      <PageSeo {...SEO_CONTENT.maasai} />
       {/* Hero Section */}
       <div className="heroSection">
         <Navbar />

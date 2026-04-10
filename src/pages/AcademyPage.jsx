@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import useAcademyNavigation from "../hooks/useAcademyNavigation";
 import '../styles/academy-page.css';
+import PageSeo from '../components/PageSeo'
+import { SEO_CONTENT } from '../utils/seoContent'
 
 const courses = [
   { key: 'swahili', image: '/images/learn-language-kids.jpg', tag: 'Language', badge: 'Habari!' },
@@ -81,16 +82,7 @@ const AcademyPage = () => {
 
   return (
     <>
-      <Helmet>
-  <title>Academy | Magical Africa</title>
-  <meta name="description" content="Learn African languages, cultural arts, and creative skills through Magical Africa Academy — your gateway to pan-African knowledge." />
-  <meta name="keywords" content="Magical Africa Academy, African courses, learn African languages, African arts, African culture courses" />
-  <meta property="og:title" content="Magical Africa Academy" />
-  <meta property="og:description" content="Learn African languages, cultural arts, and creative skills through Magical Africa Academy — your gateway to pan-African knowledge." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://magical.africa/academy" />
-  <meta property="og:image" content="https://magical.africa/images/photorealistic-portrait-african-woman.jpg" />
-</Helmet>
+      <PageSeo {...SEO_CONTENT.academy} />
 
 
       {/* ── HERO ── */}
