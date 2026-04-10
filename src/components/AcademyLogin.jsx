@@ -5,9 +5,9 @@ import { useNavigate } from 'react-router-dom'
 import { auth, db } from '../context/AuthContext'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { doc, getDoc, setDoc } from 'firebase/firestore'
-import SmallFooter from './SmallFooter'
 import { buildLearnerDashboardPath, buildTeacherDashboardPath } from '../utils/dashboardRoute'
-import Footer from './Footer'
+import PageSeo from './PageSeo'
+import { SEO_CONTENT } from '../utils/seoContent'
 
 const AcademyLogin = () => {
   const [email, setEmail] = useState('')
@@ -98,6 +98,7 @@ const AcademyLogin = () => {
 
   return (
     <>
+      <PageSeo {...SEO_CONTENT.academyLogin} />
       <Navbar solid />
 
       <div className="signIn-page">
@@ -220,9 +221,6 @@ const AcademyLogin = () => {
 
         </div>
       </div>
-
-
-      <Footer />
     </>
   )
 }

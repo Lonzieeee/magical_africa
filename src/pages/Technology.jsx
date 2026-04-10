@@ -6,9 +6,10 @@ import { Navigate, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { Helmet } from 'react-helmet-async'
 import useAcademyNavigation from '../hooks/useAcademyNavigation'
 import '../styles/technology.css'
+import PageSeo from '../components/PageSeo'
+import { SEO_CONTENT } from '../utils/seoContent'
 
 
 const aiFeatureIds = ['speech', 'transcription', 'indexing', 'recommendations', 'regeneration', 'tools']
@@ -84,16 +85,7 @@ const Technology = () => {
 
   return (
     <>
-      <Helmet>
-        <title>{t('technology.helmet.title')}</title>
-        <meta name='description' content={t('technology.helmet.description')} />
-        <meta name='keywords' content={t('technology.helmet.keywords')} />
-        <meta property='og:title' content={t('technology.helmet.ogTitle')} />
-        <meta property='og:description' content={t('technology.helmet.ogDescription')} />
-        <meta property='og:type' content='website' />
-        <meta property='og:url' content='https://magical.africa/technology' />
-        <meta property='og:image' content='https://magical.africa/images/AI-woman.png' />
-      </Helmet>
+      <PageSeo {...SEO_CONTENT.technology} />
 
       <Navbar />
 

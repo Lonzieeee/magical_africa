@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import '../styles/blogs.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { Helmet } from 'react-helmet-async'
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import PageSeo from '../components/PageSeo'
+import { SEO_CONTENT } from '../utils/seoContent'
 
 const featuredPost = {
   image: '/images/African-storytelling2.jpg',
@@ -46,16 +47,7 @@ const Blogs = () => {
 
   return (
     <>
-      <Helmet>
-  <title>Blog | Magical Africa</title>
-  <meta name="description" content="Read blogs about African languages, cultural traditions, history, travel destinations, art, and digital skills from Magical Africa Academy." />
-  <meta name="keywords" content="Magical Africa blog, African culture blog, African languages, African history, African travel, African art" />
-  <meta property="og:title" content="Magical Africa Blog" />
-  <meta property="og:description" content="Read blogs about African languages, cultural traditions, history, travel destinations, art, and digital skills from Magical Africa." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://magical.africa/blogs" />
-  <meta property="og:image" content="https://magical.africa/images/african-basketry.jpg" />
-</Helmet>
+      <PageSeo {...SEO_CONTENT.blogs} />
       <div className="blogs-page">
 
         <Navbar />

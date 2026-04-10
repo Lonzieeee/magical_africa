@@ -4,7 +4,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import '../styles/events.css'
 import MusicDance from '../components/MusicDance';
@@ -12,6 +11,8 @@ import Ceremonies from '../components/Ceremonies';
 import Foods from '../components/Foods';
 import Footer from '../components/Footer'
 import '../styles/month.css'
+import PageSeo from '../components/PageSeo'
+import { SEO_CONTENT } from '../utils/seoContent'
 
 const Events = () => {
   const { t } = useTranslation();
@@ -29,16 +30,7 @@ const Events = () => {
 
   return (
     <>
-      <Helmet>
-  <title>Events | Magical Africa</title>
-  <meta name="description" content="Discover and attend authentic African cultural events happening across the continent and around the world. Celebrate African music, art, food, dance and traditions." />
-  <meta name="keywords" content="African events, African cultural events, African festivals, African music events, African art events, African dance, celebrate Africa" />
-  <meta property="og:title" content="African Cultural Events — Discover & Celebrate Africa" />
-  <meta property="og:description" content="Discover authentic African cultural events happening across the continent and around the world." />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://magical.africa/events" />
-  <meta property="og:image" content="https://magical.africa/images/drums2-latest.jpg" />
-</Helmet>
+      <PageSeo {...SEO_CONTENT.events} />
 
       {/* Hero */}
       <div className='events-hero'>
