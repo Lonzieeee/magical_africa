@@ -82,6 +82,13 @@ const SideMenu = ({ isOpen, onClose }) => {
           <i className="fa-solid fa-chevron-right"></i>
 
           </li>
+ 
+         <li onClick={()=> handleNavigation('/technology')}>
+          {t('nav.technology')}
+          <i className="fa-solid fa-chevron-right"></i>
+
+         </li>
+
 
           <li onClick={() => handleNavigation('/events')}>
             {t('sideMenu.events')} <i className="fa-solid fa-chevron-right"></i>

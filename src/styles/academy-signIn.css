@@ -333,4 +333,8 @@ input[type="date"] {
     border: none;
     
   }
+.academy-signIn{
+  min-height: fit-content;
+  padding-bottom: 1rem;
+}
 }

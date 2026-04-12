@@ -886,7 +886,12 @@
   "weaving": "Izifundo zokuphothula",
   "cooking": "Izifundo zokupheka",
   "woodCarving": "Izifundo zokusika umuthi",
-  "viewMore": "Vakashela I-Akademi"
+  "viewMore": "Vakashela I-Akademi",
+  "potteryDesc": "Funda ubuciko bendabuko bokwenza izitsha ngezandla nangegalavasi. Yenza izindishi, amavazi, nezitsha zemvelo zase-Afrika ezidluliselwe ezizukulwaneni.",
+    "instrumentMakingDesc": "Yenza izinsimbi zomculo zase-Afrika — kusuka esigubhwini se-djembe kuya e-kora. Qonda ukwakhiwa kwamawindi, izinto ezisetshenziswa, nokubaluleka kwamasiko kwazo.",
+    "weavingDesc": "Thola ubuciko bokwenza izintendane zase-Afrika nezindwangu. Funda imifanekiso yendabuko, izibopho zemvelo, nezindaba ezinunwayo.",
+    "cookingDesc": "Hlola izinambitheko ezehlukene zokudla kwase-Afrika. Funda ukupheka izidlo zendabuko — kusuka ku-pilau yaseKenya kuya ku-jollof yase-Afrika Ntshonalanga.",
+    "woodCarvingDesc": "Thola ubuciko bokugawula izinto ngemithi yase-Afrika — kusuka kumikhonto nezithombe kuya ezintweni zasekhaya. Funda ukufunda umqamelo, amacebo ezinhlang, nencazelo yomoya."
 },
 
 

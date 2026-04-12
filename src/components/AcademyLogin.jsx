@@ -8,7 +8,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore'
 import { buildLearnerDashboardPath, buildTeacherDashboardPath } from '../utils/dashboardRoute'
 import PageSeo from './PageSeo'
 import { SEO_CONTENT } from '../utils/seoContent'
-import Footer from './Footer'
+import Footer from '../components/Footer';
 
 const AcademyLogin = () => {
   const [email, setEmail] = useState('')

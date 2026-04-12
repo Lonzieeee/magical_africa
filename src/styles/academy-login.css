@@ -166,4 +166,9 @@
   }
 
 
+  .signIn-page{
+    min-height: fit-content;
+    padding-bottom: 1rem;
+  }
+
 }

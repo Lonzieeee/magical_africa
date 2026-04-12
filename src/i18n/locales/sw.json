@@ -880,7 +880,12 @@
   "weaving": "Kozi za uusukaji",
   "cooking": "Kozi za kupikia",
   "woodCarving": "Kozi za uchongaji wa mbao",
-  "viewMore": "Tembelea Akademi"
+  "viewMore": "Tembelea Akademi",
+   "potteryDesc": "Jifunze sanaa ya kale ya kuumba vyungu kwa mikono na gurudumu. Unda bakuli, vasi, na vyombo vya jadi vya Afrika kwa kutumia mbinu za asili zilizopitishwa kwa vizazi.",
+    "instrumentMakingDesc": "Tengeneza vyombo vya muziki vya jadi vya Afrika kutoka mwanzo — kutoka ngoma ya djembe hadi kora. Elewa ujenzi wa toni, vifaa, na umuhimu wa kitamaduni wa kila chombo.",
+    "weavingDesc": "Bwana sanaa ya kuunganisha vikapu vya Afrika na utengenezaji wa nguo. Jifunze mifumo ya jadi, rangi asili, na hadithi zilizofumwa katika kila kipande.",
+    "cookingDesc": "Chunguza ladha tofauti za vyakula vya Afrika. Jifunze kupika sahani za asili kutoka bara zima — kutoka pilau ya Kenya hadi jollof ya Afrika Magharibi na tagine za Afrika Kaskazini.",
+    "woodCarvingDesc": "Gundua ufundi wa uchongaji wa mbao wa Afrika — kutoka masks na sanamu hadi vitu vya nyumbani. Jifunza kusoma nafaka ya mbao, mbinu za zana, na maana ya kiroho nyuma ya kila umbo."
 },
 
 

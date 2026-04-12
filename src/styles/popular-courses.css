@@ -13,7 +13,6 @@
   height: fit-content;
   padding-top: 3rem;
   padding-bottom: 3rem;
-
 }
 
 .popular-course-div h1{
@@ -26,177 +25,171 @@
   text-align: center;
   padding-top: 2rem;
   font-size: 0.875rem;
- 
 }
+
 .pop{
- text-align: start;
+  text-align: start;
   margin-top: 2rem;
   color: rgb(210, 123, 53);
   font-size: 0.875rem;
   padding-bottom: 0.5rem;
   font-weight: 600;
-  
 }
 
 .pop-div{
   width: 820px;
   align-self: center;
-
 }
 
 .pop-bottom{
-
-color: #1f6f43; 
-padding-top: 0.5rem;
-font-weight: 600;
-display: flex;
-flex-direction: row;
-gap: 10px;
-align-items: center;
-font-size: 0.875rem;
-cursor: pointer;
+  color: #1f6f43; 
+  padding-top: 0.5rem;
+  font-weight: 600;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.875rem;
+  cursor: pointer;
 }
 
 .pop-bottom-div{
   width: 820px;
   align-self: center;
- 
- justify-content: flex-end;
+  justify-content: flex-end;
   display: flex;
   flex-direction: row;
 }
-
 
 .popular-div{
   display: flex;
   flex-direction: row;
- 
   align-items: center;
   justify-content: center;
   gap: 20px;
 }
+
 .popular1{
   width: 400px;
   height: 500px;
- position: relative;
+  position: relative;
   background-image: url(/images/african-pottery2.jpg);
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
 .popular1::before{
-    content: '';
+  content: '';
   position: absolute;
- 
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4); 
   z-index: 1;
 }
+
 .popular2{
- width: 400px;
- height:500px;
-
- display: flex;
- flex-direction: column;
-gap: 20px;
-
+  width: 400px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .popular2-a{
-
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: row;
-gap: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .popular2-b{
-
-width: 100%;
-height: 100%;
-display: flex;
-flex-direction: row;
-gap: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 .popular2-a1{
-background-color: aquamarine;
-width: 100%;
-height: 100%;
-position: relative;
-background-image: url(/images/african-instrument.avif);
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
+  background-color: aquamarine;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-image: url(/images/african-instrument.avif);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
 .popular2-a1::before{
-    content: '';
+  content: '';
   position: absolute;
- 
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4); 
   z-index: 1;
 }
+
 .popular2-a2{
-background-color: aquamarine;
-width: 100%;
-height: 100%;
-background-image: url(/images/african-basketry.jpg);
-position: relative;
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
+  background-color: aquamarine;
+  width: 100%;
+  height: 100%;
+  background-image: url(/images/african-basketry.jpg);
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
 .popular2-a2::before{
-    content: '';
+  content: '';
   position: absolute;
- 
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4); 
   z-index: 1;
 }
+
 .popular2-b1{
-background-color: aquamarine;
-width: 100%;
-height: 100%;
-position: relative;
-background-image: url(/images/African-cooking.avif);
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
+  background-color: aquamarine;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-image: url(/images/African-cooking.avif);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
+
 .popular2-b1::before{
-    content: '';
+  content: '';
   position: absolute;
- 
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4); 
   z-index: 1;
 }
+
 .popular2-b2{
-background-color: aquamarine;
-width: 100%;
-height: 100%;
-position: relative;
-background-image: url(/images/wood_carving.webp);
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
+  background-color: aquamarine;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-image: url(/images/wood_carving.webp);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .popular2-b2::before{
-    content: '';
+  content: '';
   position: absolute;
- 
   left: 0;
   width: 100%;
   height: 100%;
@@ -205,17 +198,67 @@ background-repeat: no-repeat;
 }
 
 .popular-div-content{
-position: absolute;
-z-index: 2;
-color: white;
-font-size: 0.675rem;
-padding-top: 1rem;
-padding-left: 0.5rem;
+  position: absolute;
+  z-index: 2;
+  color: white;
+  font-size: 0.675rem;
+  padding-top: 1rem;
+  padding-left: 0.5rem;
+  transition: opacity 0.25s ease;
 }
 
+/* ── OVERLAY ── */
+.pc-card {
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.pc-card:hover .popular-div-content {
+  opacity: 0;
+}
+
+.pc-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.25rem;
+  gap: 0.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(18, 74, 42, 0.97) 0%,
+    rgba(31, 111, 67, 0.75) 60%,
+    transparent 100%
+  );
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.pc-card:hover .pc-overlay {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pc-overlay h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+}
+
+.pc-overlay p {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── RESPONSIVE ── */
 @media screen and (min-width:1440px) {
   .popular1{
-  
     width: 500px;
     height: 600px;
   }
@@ -223,7 +266,6 @@ padding-left: 0.5rem;
     width: 500px;
     height: 600px;
   }
-
   .pop-div{
     width: 1020px;
   }
@@ -246,7 +288,7 @@ padding-left: 0.5rem;
 }
 
 @media screen and (max-width:480px) {
-    .popular-course-div{
+  .popular-course-div{
     padding-left: 1rem;
     padding-right: 1rem;
   }
@@ -256,11 +298,8 @@ padding-left: 0.5rem;
 }
 
 @media screen and (max-width:390px) {
-
-
-.popular-course-div{
-  width: 100%;
- overflow: hidden;
-}
-
+  .popular-course-div{
+    width: 100%;
+    overflow: hidden;
+  }
 }

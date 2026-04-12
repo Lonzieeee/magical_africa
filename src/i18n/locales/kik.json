@@ -817,7 +817,12 @@
   "weaving": "Masomo ma gũsuka",
   "cooking": "Masomo ma gũtũhia",
   "woodCarving": "Masomo ma gũkora mĩtĩ",
-  "viewMore": "Temberera Akademi"
+  "viewMore": "Temberera Akademi",
+   "potteryDesc": "Ũrutwo wa ũũmba wa njohi na gurudumu. Ũmba bakuli, vasi, na vyombo vya jadi vya Afrika na mbinu za mwanzo ĩyo ĩhĩtĩtwo kuuma kizazi na kizazi.",
+    "instrumentMakingDesc": "Ũmba vyombo vya muziki vya jadi vya Afrika kuuma mwanzo — kuuma ngoma ya djembe hadi kora. Ũĩ ujenzi wa toni, vifaa, na ũhoro wa kĩĩyo wa kila chombo.",
+    "weavingDesc": "Bwana ũũmba wa vikapu vya Afrika na nguo. Ũrutwo wa mifumo ya jadi, rangi asili, na ngano ĩyo ĩfumĩtwo kila kipande.",
+    "cookingDesc": "Chunguza ladha tofauti za vyakula vya Afrika. Ũrutwo wa kupika sahani za asili — kuuma pilau ya Kenya hadi jollof na tagine za Afrika Kaskazini.",
+    "woodCarvingDesc": "Gũndũra ũũmba wa ũchongaji wa mbao wa Afrika — kuuma masks na sanamu hadi vitu vya nyumbani. Ũrutwo wa kusoma nafaka ya mbao na ũhoro wa kiroho."
 },
 
 

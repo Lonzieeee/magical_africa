@@ -816,7 +816,12 @@
   "weaving": "Enkiama ye nkejek",
   "cooking": "Enkiama ye nkima",
   "woodCarving": "Enkiama ye olbul",
-  "viewMore": "Tadamu Akademi"
+  "viewMore": "Tadamu Akademi",
+  "potteryDesc": "Enkiamu enkiama ye njohi na gurudumu. Enkiuma bakuli, vasi, na vyombo vya jadi vya Afrika na enkiama ye mwanzo iliyopitishwa kwa vizazi vingi.",
+    "instrumentMakingDesc": "Enkiuma vyombo vya enkiama vya jadi vya Afrika — kuuma ngoma ya djembe hadi kora. Enkiamu ujenzi wa toni, vifaa, na enkiama ya kila chombo.",
+    "weavingDesc": "Enkibwana enkiama ye vikapu vya Afrika na nguo. Enkiamu mifumo ya jadi, rangi asili, na enkiama iliyofumwa katika kila kipande.",
+    "cookingDesc": "Enkichunguza ladha tofauti ze vyakula vya Afrika. Enkiamu kupika sahani za asili — kuuma pilau ya Kenya hadi jollof na tagine za Afrika Kaskazini.",
+    "woodCarvingDesc": "Enkigundura enkiama ye uchongaji wa mbao wa Afrika — kuuma masks na sanamu hadi vitu vya nyumbani. Enkiamu kusoma nafaka ya mbao na enkiama ye kiroho."
 },
 
 

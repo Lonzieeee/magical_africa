@@ -89,7 +89,8 @@ const ContactWidget = () => {
       >
         {isOpen
           ? <i className='fa-solid fa-xmark'></i>
-          : <span className='cw-trigger-symbol'>✦</span>
+          : <i className='fa-regular fa-comments'></i>
+
         }
       </button>
     </>

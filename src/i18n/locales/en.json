@@ -879,7 +879,12 @@
   "weaving": "Weaving courses",
   "cooking": "Cooking courses",
   "woodCarving": "Wood-carving courses",
-  "viewMore": "Visit Academy"
+  "viewMore": "Visit Academy",
+   "potteryDesc": "Learn the ancient art of hand-building and wheel-throwing pottery. Create bowls, vases, and traditional African vessels using authentic techniques passed down through generations.",
+    "instrumentMakingDesc": "Craft traditional African instruments from scratch — from the djembe drum to the kora. Understand tonal construction, materials, and the cultural significance of each instrument.",
+    "weavingDesc": "Master the art of African basket weaving and textile creation. Learn traditional patterns, natural dyes, and the storytelling woven into every piece.",
+    "cookingDesc": "Explore the diverse flavours of African cuisine. Learn to cook authentic dishes from across the continent — from Kenyan pilau to West African jollof and North African tagines.",
+    "woodCarvingDesc": "Discover the craft of African wood carving — from masks and figurines to functional household items. Learn grain reading, tool techniques, and the spiritual meaning behind each form."
 },
 
 

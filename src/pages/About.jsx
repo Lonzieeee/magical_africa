@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { FaPlay, FaPause } from 'react-icons/fa';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import PageSeo from '../components/PageSeo'
@@ -185,8 +184,15 @@ useEffect(() => {
      { 
       name: t('about.team.members.gloria.name'), 
       role: t('about.team.members.gloria.role'), 
-      image: '/images/nyatichi2.jpeg',
+      image: '/images/nyatichi3.jpeg',
       bio: t('about.team.members.gloria.bio'),
+    },
+
+          { 
+      name: t('about.team.members.ian.name'), 
+      role: t('about.team.members.ian.role'), 
+      image: '/images/cheru.jpeg',
+      bio: t('about.team.members.ian.bio'),
     },
        { 
       name: t('about.team.members.lorna.name'), 
@@ -209,24 +215,21 @@ useEffect(() => {
       image: '/images/Joel-Makori.jpeg',
       bio: t('about.team.members.joel.bio'),
     },
+
+ 
     { 
       name: t('about.team.members.Edewait.name'), 
       role: t('about.team.members.Edewait.role'), 
       image: '/images/kikiPhoto.jpg',
       bio: t('about.team.members.Edewait.bio'),
     },
-    { 
-      name: t('about.team.members.ian.name'), 
-      role: t('about.team.members.ian.role'), 
-      image: '/images/cheru.jpeg',
-      bio: t('about.team.members.ian.bio'),
-    },
+ 
  
 
     { 
       name: t('about.team.members.collins.name'), 
       role: t('about.team.members.collins.role'), 
-      image: '/images/Joel-Makori.jpeg',
+      image: '/images/collins.jpg',
       bio: t('about.team.members.collins.bio'),
     },
 
@@ -244,6 +247,8 @@ useEffect(() => {
   };
 
 
+  {/* 
+
 const heroVideoRef = useRef(null);
 const [isHeroPlaying, setIsHeroPlaying] = useState(true);
 
@@ -258,6 +263,18 @@ const toggleHeroVideo = () => {
     setIsHeroPlaying(false);
   }
 };
+
+*/}
+const heroVideoRef = useRef(null);
+const [isMuted, setIsMuted] = useState(true);
+
+const toggleMute = () => {
+  const video = heroVideoRef.current;
+  if (!video) return;
+  video.muted = !video.muted;
+  setIsMuted(video.muted);
+};
+
 
   return (
     <>
@@ -289,9 +306,9 @@ const toggleHeroVideo = () => {
   <video
     ref={heroVideoRef}
     className="hero-video"
-    src="/images/about-video.mp4"   // 👈 replace with your actual video path
+    src="/images/about-video.mp4"  
     autoPlay
-   
+    muted
     loop
     playsInline
   />
@@ -299,7 +316,7 @@ const toggleHeroVideo = () => {
   {/* Dark overlay */}
   <div className="hero-overlay" />
 
-  {/* Play/Pause Button */}
+  {/* Play/Pause Button 
   <button
     className="hero-play-btn"
     onClick={toggleHeroVideo}
@@ -307,6 +324,18 @@ const toggleHeroVideo = () => {
   >
     {isHeroPlaying ? <FaPause /> : <FaPlay />}
   </button>
+  */}
+
+  <button
+  className="hero-play-btn"
+  onClick={toggleMute}
+  aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+>
+  {isMuted
+    ? <i className='fa-solid fa-volume-xmark'></i>
+    : <i className='fa-solid fa-volume-high'></i>
+  }
+</button>
 
   <div className="mission-vision">
     <h1>{t('about.hero.title')}</h1>
