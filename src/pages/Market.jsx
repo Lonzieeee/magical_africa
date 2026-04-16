@@ -253,7 +253,9 @@ const [fashionCategory, setFashionCategory] = useState("Clothing");
 
         {/* Image area */}
         <div className='best-seller-image-area'>
+          {/* 
           <span className='best-seller-badge'>Handcrafted</span>
+          */}
           <button className='best-seller-wishlist' aria-label="Add to wishlist">
            
             <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
