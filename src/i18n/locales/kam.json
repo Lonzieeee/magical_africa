@@ -884,8 +884,8 @@
     "title": "Gũra Vĩndũ",
     "subtitle": "Vĩndũ vya kĩgongona vya andu a ũhiano wa ndĩ kote Afrika",
     "categories": {
-      "jewellery": "Itura", "carvings": "Ũkorwo wa Mĩtĩ", "pottery": "Ũhiano wa Vĩndũ",
-      "textiles": "Nguo", "baskets": "Vikapu", "spices": "Viungo na Irio"
+      "jewellery": "Itura", "carvings": "Ũkorwo wa Mĩtĩ", "pottery": "Ũhiano wa Vĩndũ", "artefacts":"Syindu sya kala",
+      "textiles": "Nguo", "fashion":"Mĩtindo ya nguwo", "baskets": "Vikapu", "spices": "Viungo na Irio"
     }
   },
   "auctions": {

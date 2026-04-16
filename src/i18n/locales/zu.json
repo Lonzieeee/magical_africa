@@ -951,8 +951,8 @@
     "title": "Thenga Uqoqo",
     "subtitle": "Imikhiqizo yeqiniso eyenziwe izindlunkulu zendawo kulo lonke izwekazi",
     "categories": {
-      "jewellery": "Amashokobezi", "carvings": "Ukuqopha", "pottery": "Ukwenza Izitsha",
-      "textiles": "Izindwangu", "baskets": "Izingobozi", "spices": "Izilimo Nokudla"
+      "jewellery": "Amashokobezi", "carvings": "Ukuqopha", "pottery": "Ukwenza Izitsha", "artefacts":"Izinto zakudala",
+      "textiles": "Izindwangu", "fashion":"Imfashini", "baskets": "Izingobozi", "spices": "Izilimo Nokudla"
     }
   },
   "auctions": {

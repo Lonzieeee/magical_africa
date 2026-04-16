@@ -16,6 +16,13 @@ import Pottery from '../components/Pottery';
 import Footer from '../components/Footer';
 import '../styles/artisans.css'
 import '../styles/best-sellers.css'
+import JewelleryDropdown from '../components/JewelleryDropdown';
+import SculptureDropdown from '../components/SculptureDropdown';
+import ArtefactsDropdown from '../components/ArtefactsDropdown';
+import FashionDropdown from '../components/FashionDropdown';
+import FurnitureDropdown from '../components/FurnitureDropdown';
+import Artefacts from '../components/Artefacts';
+import Fashion from '../components/Fashion';
 import { SEO_CONTENT } from '../utils/seoContent'
 
 
@@ -87,25 +94,29 @@ useEffect(() => {
       id: 'default-1',
       imageUrl: '/images/pottery2-image2.png',
       name: t('market.bestSellers.item1.name'),
-      price: 45
+      price: 45,
+      tribe: 'Maasai',
     },
     {
       id: 'default-2',
       imageUrl: '/images/pottery3-image3.png',
       name: t('market.bestSellers.item2.name'),
-      price: 76
+      price: 76,
+      tribe: 'Kikuyu'
     },
     {
       id: 'default-3',
       imageUrl: '/images/pottery4-image5.png',
       name: t('market.bestSellers.item3.name'),
-      price: 25
+      price: 25,
+      tribe: 'kamba'
     },
     {
       id: 'default-4',
       imageUrl: '/images/pottery5-image6.png',
       name: t('market.bestSellers.item4.name'),
-      price: 30
+      price: 30,
+      tribe: 'Igbo'
     }
   ]
 
@@ -147,6 +158,24 @@ useEffect(() => {
     return () => observer.disconnect();
   }, []);
 
+  const [showJewelleryDropdown, setShowJewelleryDropdown] = useState(false);
+
+  const [showSculptureDropdown, setShowSculptureDropdown] = useState(false);
+
+  const [showArtefactsDropdown, setShowArtefactsDropdown] = useState(false);
+
+  const [showFashionDropdown, setShowFashionDropdown] = useState(false);
+
+  const [showFurnitureDropdown, setShowFurnitureDropdown] = useState(false);
+
+  const [jewellerySubCategory, setJewellerySubCategory] = useState('Beadwork Jewellery');
+
+  const [sculptureSubCategory, setSculptureSubCategory] = useState('Wood Sculpture');
+
+const [artefactSubCategory, setArtefactSubCategory] = useState('Oil Paintings');
+
+const [fashionCategory, setFashionCategory] = useState("Clothing");
+
   return (
     <>
       <PageSeo {...SEO_CONTENT.market} />
@@ -185,7 +214,7 @@ useEffect(() => {
       </div>
 
 
-      {/* Best Sellers */}
+      {/* Best Sellers
       <div className='best-sellers-div'>
         <h1>{t('market.bestSellers.title')}</h1>
         <p>{t('market.bestSellers.subtitle')}</p>
@@ -196,6 +225,9 @@ useEffect(() => {
               <img src={item.imageUrl || '/images/pottery2-image2.png'} alt={item.name || 'Marketplace product'} />
               <div className='best-seller1-content'>
                 <p>{item.name || 'Untitled Product'}</p>
+                 <span className="tribe-text">
+    Tribe: {item.tribe || 'Unknown'}
+  </span>
                 <button>{t('market.bestSellers.addToCart')}</button>
               </div>
               <div className='seller-price'>
@@ -207,6 +239,76 @@ useEffect(() => {
         </div>
       </div>
 
+       */}
+
+
+       {/* Best Sellers */}
+<div className='best-sellers-div'>
+  <h1>{t('market.bestSellers.title')}</h1>
+  <p>{t('market.bestSellers.subtitle')}</p>
+
+  <div className='best-seller-wrapper'>
+    {bestSellerItems.map((item, index) => (
+      <div key={item.id || index} className={`best-seller1 sel${(index % 4) + 1}`}>
+
+        {/* Image area */}
+        <div className='best-seller-image-area'>
+          <span className='best-seller-badge'>Handcrafted</span>
+          <button className='best-seller-wishlist' aria-label="Add to wishlist">
+           
+            <svg width="16" height="16" viewBox="0 0 14 14" fill="none">
+              <path d="M7 12S1.5 8 1.5 4.5a2.8 2.8 0 015.5-.7 2.8 2.8 0 015.5.7C12.5 8 7 12 7 12z"
+                stroke="#888" strokeWidth="1.2" fill="none"/>
+            </svg>
+          </button>
+          <img src={item.imageUrl || '/images/pottery2-image2.png'} alt={item.name || 'Marketplace product'} />
+        </div>
+
+        {/* Content area */}
+        <div className='best-seller1-content'>
+
+          {/* Tribe pill + stars */}
+          <div className='best-seller-meta'>
+            <span className='tribe-pill'>{item.tribe || 'Unknown'}</span>
+          {/* 
+            <div className='best-seller-stars'>
+              {[1,2,3,4].map(i => (
+                
+                <svg key={i} width="11" height="11" viewBox="0 0 10 10">
+                  <path d="M5 1l1.1 2.2L9 3.6 7 5.5l.5 2.7L5 6.9 2.5 8.2 3 5.5 1 3.6l2.9-.4z" fill="#EF9F27"/>
+                </svg>
+              ))}
+              <svg width="11" height="11" viewBox="0 0 10 10">
+                <path d="M5 1l1.1 2.2L9 3.6 7 5.5l.5 2.7L5 6.9 2.5 8.2 3 5.5 1 3.6l2.9-.4z" fill="#ccc"/>
+              </svg>
+            </div>
+          */}
+          </div>
+
+          {/* Name */}
+          <p className='best-seller-name'>{item.name || 'Untitled Product'}</p>
+
+          {/* Short description */}
+          <p className='best-seller-desc'>Hand-crafted by skilled artisans using traditional techniques passed down through generations.</p>
+
+          {/* Divider */}
+          <div className='best-seller-divider'></div>
+
+          {/* Price + Add to Cart */}
+          <div className='best-seller-footer'>
+            <div className='best-seller-price-block'>
+              <span className='best-seller-price-label'>{t('market.bestSellers.price')}</span>
+              <span className='best-seller-price-value'>{formatMarketPrice(item.price)}</span>
+            </div>
+            <button className='best-seller-btn'>{t('market.bestSellers.addToCart')}</button>
+          </div>
+
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
 
       {/* Shop Collection */}
       <div className='Shop-div'>
@@ -214,30 +316,157 @@ useEffect(() => {
         <p className='collection-description'>{t('market.shop.subtitle')}</p>
 
         <div className='collection-div'>
+
+  {/* 
           <button
             className={activeCategory === 'jewellery' ? 'active' : ''}
             onClick={() => setActiveCategory('jewellery')}
           >{t('market.shop.categories.jewellery')}</button>
+  */}
 
+
+    <div
+  className="dropdown-wrapper"
+  onMouseEnter={() => setShowJewelleryDropdown(true)}
+  onMouseLeave={() => setShowJewelleryDropdown(false)}
+>
+  <button
+    className={activeCategory === 'jewellery' ? 'active' : ''}
+    onClick={() => setActiveCategory('jewellery')}
+  >
+    {t('market.shop.categories.jewellery')}
+  </button>
+
+  <JewelleryDropdown
+    visible={showJewelleryDropdown}
+    onSelect={(cat) => {
+      setJewellerySubCategory(cat);
+      setActiveCategory('jewellery');
+      setShowJewelleryDropdown(false);
+    }}
+  />
+</div>
+
+
+
+
+{/* 
           <button
             className={activeCategory === 'carvings' ? 'active' : ''}
             onClick={() => setActiveCategory('carvings')}
           >{t('market.shop.categories.carvings')}</button>
+*/}
 
+
+     <div
+  className="dropdown-wrapper"
+  onMouseEnter={() => setShowSculptureDropdown(true)}
+  onMouseLeave={() => setShowSculptureDropdown(false)}
+>
+  <button
+    className={activeCategory === 'carvings' ? 'active' : ''}
+    onClick={() => setActiveCategory('carvings')}
+  >
+   {t('market.shop.categories.carvings')}
+  </button>
+
+ <SculptureDropdown
+  visible={showSculptureDropdown}
+  onSelect={(cat) => {
+    setSculptureSubCategory(cat);
+    setActiveCategory('carvings');
+    setShowSculptureDropdown(false);
+  }}
+/>
+</div>     
+
+{/* 
           <button
             className={activeCategory === 'pottery' ? 'active' : ''}
             onClick={() => setActiveCategory('pottery')}
           >{t('market.shop.categories.pottery')}</button>
+         
 
           <button
-            className={activeCategory === 'textiles' ? 'active' : ''}
-            onClick={() => setActiveCategory('textiles')}
-          >{t('market.shop.categories.textiles')}</button>
+            className={activeCategory === 'artefacts' ? 'active' : ''}
+            onClick={() => setActiveCategory('artefacts')}
+          >{t('market.shop.categories.artefacts')}</button>
+ */}
 
-          <button
-            className={activeCategory === 'baskets' ? 'active' : ''}
-            onClick={() => setActiveCategory('baskets')}
-          >{t('market.shop.categories.baskets')}</button>
+
+ <div
+  className="dropdown-wrapper"
+  onMouseEnter={() => setShowArtefactsDropdown(true)}
+  onMouseLeave={() => setShowArtefactsDropdown(false)}
+>
+  <button
+    className={activeCategory === 'artefacts' ? 'active' : ''}
+    onClick={() => setActiveCategory('artefacts')}
+  >
+    {t('market.shop.categories.artefacts')}
+  </button>
+
+  <ArtefactsDropdown
+  visible={showArtefactsDropdown}
+ onSelect={(cat) => {
+  setArtefactSubCategory(cat);
+  setActiveCategory('artefacts');
+  setShowArtefactsDropdown(false);
+}}
+/>
+</div>
+
+{/* 
+  <button
+    className={activeCategory === 'fashion' ? 'active' : ''}
+    onClick={() => setActiveCategory('fashion')}
+    >{t('market.shop.categories.fashion')}</button>
+
+  */}
+
+  <div
+  className="dropdown-wrapper"
+  onMouseEnter={() => setShowFashionDropdown(true)}
+  onMouseLeave={() => setShowFashionDropdown(false)}
+>
+  <button
+    className={activeCategory === 'fashion' ? 'active' : ''}
+    onClick={() => setActiveCategory('fashion')}
+  >
+    {t('market.shop.categories.fashion')}
+  </button>
+
+ <FashionDropdown
+   visible={showFashionDropdown}
+   onSelect={(item) => {
+      setFashionCategory(item)
+      setShowFashionDropdown(false)
+   }}
+/>
+</div>  
+
+{/*
+    <button
+    className={activeCategory === 'baskets' ? 'active' : ''}
+      onClick={() => setActiveCategory('baskets')}
+    >{t('market.shop.categories.baskets')}</button>
+ */}
+
+
+    <div
+  className="dropdown-wrapper"
+  onMouseEnter={() => setShowFurnitureDropdown(true)}
+  onMouseLeave={() => setShowFurnitureDropdown(false)}
+>
+  <button
+    className={activeCategory === 'baskets' ? 'active' : ''}
+    onClick={() => setActiveCategory('baskets')}
+  >
+    {t('market.shop.categories.baskets')}
+  </button>
+
+  <FurnitureDropdown visible={showFurnitureDropdown} />
+</div>
 
           <button
             className={activeCategory === 'spices' ? 'active' : ''}
@@ -245,9 +474,11 @@ useEffect(() => {
           >{t('market.shop.categories.spices')}</button>
         </div>
 
-        {activeCategory === 'jewellery' && <Jewelery />}
-        {activeCategory === 'carvings' && <Carvings />}
+       {activeCategory === 'jewellery' && <Jewelery subCategory={jewellerySubCategory} />}
+       {activeCategory === 'carvings' && <Carvings subCategory={sculptureSubCategory} />}
         {activeCategory === 'pottery' && <Pottery />}
+       {activeCategory === 'artefacts' && <Artefacts subCategory={artefactSubCategory} />} 
+       {activeCategory === 'fashion' && <Fashion subCategory={fashionCategory} />}
       </div>
 
 

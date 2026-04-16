@@ -883,8 +883,8 @@
     "title": "Sorre Enkiama",
     "subtitle": "Inkishu ezigbo eziokwu nke ilkisonko ole nkiama kote e Afrika",
     "categories": {
-      "jewellery": "Ilkilorit", "carvings": "Olbul", "pottery": "Ilchamus ye Oldung'a",
-      "textiles": "Nkejek", "baskets": "Enkiama ye Olbul", "spices": "Ilchamus na Nkima"
+      "jewellery": "Ilkilorit", "carvings": "Olbul", "pottery": "Ilchamus ye Oldung'a", "artefacts": "Enkishui oo nkop pee",
+      "textiles": "Nkejek", "fashion":"enkishui sidai", "baskets": "Enkiama ye Olbul", "spices": "Ilchamus na Nkima"
     }
   },
   "auctions": {

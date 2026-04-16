@@ -9,89 +9,90 @@
 .Carvings-div{
   height: 130vh;
   width: 100%;
-  background-color: yellow;
+  
   margin-top: 6rem;
   display: grid;
-  
-  grid-template-columns: 1fr 1fr; /* 2 columns */
-  grid-template-rows: 1fr 1fr;    /* 2 rows */
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
 }
 
+/* CARD */
 .carving{
-  background-color: white;
   position: relative;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
 
+/* DARK OVERLAY */
 .carving::before{
-   content: '';
+  content: '';
   position: absolute;
- 
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background-color: rgba(0, 0, 0, 0.4); 
   z-index: 1;
 }
 
+/* ❌ REMOVE OLD STATIC BACKGROUNDS */
+/* .cav1 .cav2 .cav3 .cav4  ← delete these completely */
 
-.cav1{
-  background-image: url(/images/beaded-jewelery2.jpg);
-}
 
-.cav2{
-  background-image: url(/images/woman-mask2.png);
-}
-
-.cav3{
-  background-image: url(/images/maasai-bracelets2.jpg);
-}
-
-.cav4{
-  background-image: url(/images/nigeria-wear2.jpg);
-}
-
+/* TEXT AREA */
 .carving-description{
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  align-items: center;
-  justify-content: center;
+  gap: 10px;
   position: absolute;
   z-index: 2;
-  left: 40%;
-  bottom: 5%;
- 
+  left: 2rem;
+  bottom: 2rem;
+  right: 2rem;
 }
 
-.carving-description p{
-  font-size: 1rem;
+.carving-pill{
+  background: rgba(210, 123, 53, 0.85) ;
+  color: white ;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  width: fit-content;
+  letter-spacing: 0.04rem;
+  cursor: pointer;
+}
+
+.carving-pill:hover{
+   background: rgba(211, 106, 20, 0.85);
+}
+
+.carving-desc{
+  font-size: 0.9rem;
   color: white;
 }
-
 .carving-description h3{
-  font-size: 2rem;
+  font-size: 1.6rem;
   color: white;
 }
 
+/* BUTTON */
 .carving-description button{
-  padding: 0.2rem 1rem;
-  font-size: 0.875rem;
-  border: 2px solid rgb(210, 123, 53);
-  background-color: transparent;
-  color: rgb(210, 123, 53);
+  width: fit-content;
+  padding: 0.3rem 1rem;
+  font-size: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  cursor: pointer;
 }
 
 .carving-description button:hover{
-  background-color: rgb(210, 123, 53);
-  color: white;
+ background-color: rgb(210, 123, 53);
+  border-color: rgb(210, 123, 53);
 }
 
+/* PRICE */
 .seller-price3{
   position: absolute;
-  top: 1rem !important;
+  top: 1rem;
   right: 1rem;
   z-index: 2;
 }
@@ -99,21 +100,23 @@
 .seller-price3 p{
   color: white;
   font-size: 0.75rem;
+   background: rgba(0,0,0,0.4);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
 }
 
+/* TABLET */
 @media screen and (max-width:768px) {
-
-  .carving-description{
-    left: 25%;
+  .Carvings-div{
+    height: auto;
   }
-  
 }
 
+/* MOBILE */
 @media screen and (max-width:480px) {
-
-    .Carvings-div{
-    grid-template-columns: 1fr; /* one column */
-    grid-template-rows: auto;   /* rows adjust automatically */
+  .Carvings-div{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
   }
-  
 }

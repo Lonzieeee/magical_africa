@@ -880,8 +880,8 @@
     "title": "Gũra Nchịkọta",
     "subtitle": "Indo cia kĩgongona cia andũ a ũhiano a ndĩ kote Afrika",
     "categories": {
-      "jewellery": "Itura", "carvings": "Ũkorwo wa Mĩtĩ", "pottery": "Ũhiano wa Indo",
-      "textiles": "Nguo", "baskets": "Vikapu", "spices": "Viungo na Irio"
+      "jewellery": "Itura", "carvings": "Ũkorwo wa Mĩtĩ", "pottery": "Ũhiano wa Indo", "artefacts":"Indo cia tene",
+      "textiles": "Nguo", "fashion":"Mũtugo wa nguo", "baskets": "Vikapu", "spices": "Viungo na Irio"
     }
   },
   "auctions": {

@@ -946,7 +946,8 @@
     "subtitle": "Bidhaa halisi zilizoundwa na mafundi wa ndani kote barani",
     "categories": {
       "jewellery": "Vito", "carvings": "Uchongaji", "pottery": "Ufinyanzi",
-      "textiles": "Nguo", "baskets": "Vikapu", "spices": "Viungo na Chakula"
+      "artefacts":"Vitu vya kale",
+      "textiles": "Nguo", "fashion":"Mitindo ya mavazi", "baskets": "Vikapu", "spices": "Viungo na Chakula"
     }
   },
   "auctions": {

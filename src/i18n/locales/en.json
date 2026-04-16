@@ -36,6 +36,10 @@
     "streamFolklore": {
       "title": "Stream folklore, music, and storytelling",
       "description": "Uncover the roots of African identity and the timeless traditions passed through generations."
+    },
+    "exploreCourses":{
+      "title": "Explore Courses",
+      "description": "Learn practical, hands-on skills through guided courses designed to help you grow and build real projects."
     }
   },
 
@@ -945,8 +949,8 @@
     "title": "Shop The Collection",
     "subtitle": "Authentic goods made by local artisans across the continent",
     "categories": {
-      "jewellery": "Jewellery", "carvings": "Carvings", "pottery": "Pottery",
-      "textiles": "Textiles", "baskets": "Baskets", "spices": "Spice and Food"
+      "jewellery": "Jewellery", "carvings": "Sculpture", "pottery": "Pottery", "artefacts": "Artefacts",
+      "textiles": "Textiles", "fashion":"Fashion",  "baskets": "Furniture", "spices": "Spice and Food"
     }
   },
   "auctions": {

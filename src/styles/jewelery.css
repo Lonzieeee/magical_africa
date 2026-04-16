@@ -108,8 +108,90 @@ display: grid;
 .seller-price2 p{
   color: white;
   font-size: 0.75rem;
+   background: rgba(0,0,0,0.4);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
 }
 
+.jewelery-hero-label {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  z-index: 2;
+  color: white;
+}
+
+.jewelery-hero-label h2 {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.jewelery-hero-label p {
+  font-size: 0.8rem;
+  opacity: 0.8;
+  letter-spacing: 0.05rem;
+}
+
+/* Make left panel relative so the label positions correctly */
+.African-jewelery1 {
+  position: relative;
+}
+
+.African-jewelery1::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  z-index: 1;
+}
+
+.grid-tribe-pill {
+  background: rgba(210, 123, 53, 0.85);
+  color: white;
+  font-size: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  width: fit-content;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.04rem;
+  cursor: pointer;
+}
+
+.grid-tribe-pill:hover{
+
+ background: rgba(211, 106, 20, 0.85);
+}
+
+.grid-item-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 0.2rem;
+}
+
+.grid-item-desc {
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.4;
+  margin-bottom: 0.4rem;
+  max-width: 180px;
+}
+
+.grid-add-cart {
+  font-size: 0.75rem !important;
+  color: white !important;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.6);
+  padding: 0.3rem 0.7rem;
+  margin-top: 0.5rem;
+  width: fit-content;
+  transition: 0.2s;
+}
+
+.grid-add-cart:hover {
+  background: rgb(210, 123, 53);
+  border-color: rgb(210, 123, 53);
+}
 
 @media screen and (max-width:768px) {
   .African-jewelery{

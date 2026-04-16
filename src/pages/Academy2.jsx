@@ -20,6 +20,7 @@ const Academy2 = () => {
   const [error, setError] = useState('')
   const [dob, setDob] = useState('')
   const [success, setSuccess] = useState(false)
+  const [tribe, setTribe] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const dateRef = useRef(null)
 
@@ -64,6 +65,7 @@ const Academy2 = () => {
         firstName,
         secondName,
         email,
+        tribe: tribe || null,
         dob,
         role,
         subject: role === 'teacher' ? subject : null,
@@ -242,6 +244,18 @@ const Academy2 = () => {
       onClick={openDatePicker}
     />
   </div>
+</div>
+
+
+
+<div className='academy-info2'>
+  <label>Tribe / Ethnic Group</label>
+  <input
+    type="text"
+    value={tribe}
+    onChange={(e) => setTribe(e.target.value)}
+    placeholder='e.g. Kikuyu, Luo, Maasai, Zulu...'
+  />
 </div>
 
        

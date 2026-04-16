@@ -27,6 +27,13 @@ const Services = () => {
       title: t('services.streamFolklore.title'),
       description: t('services.streamFolklore.description'),
       image: "/images/African-storytelling2.jpg"
+    },
+    {
+
+      title: t('services.exploreCourses.title'),
+      description: t('services.exploreCourses.description'),
+      image: "/images/photorealistic-portrait-african-woman.jpg"
+      
     }
   ];
 
@@ -40,9 +47,9 @@ const Services = () => {
 
   const service = services[currentIndex];
 
-    const navigate = useNavigate(); // 👈 1. create navigate
+    const navigate = useNavigate(); 
   
-    // 👈 2. define the handler
+  
     const handleNavigation = (path) => {
       navigate(path);
     };

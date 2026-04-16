@@ -51,6 +51,11 @@ gap: 20px;
   color: white;
 }
 
+.dropdown-wrapper{
+  position: relative;
+  display: inline-block;
+}
+
 @media screen and (max-width:1280px) {
 
   .Shop-div{

@@ -1,0 +1,58 @@
+.sculpture-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(0px);
+  background: #fff;
+  border: 1px solid rgba(210, 123, 53, 0.2);
+  padding: 0.5rem 0;
+  min-width: 200px;
+  box-shadow: 0 10px 30px rgba(210, 123, 53, 0.12);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s ease;
+  z-index: 999;
+  margin-top: 6px;
+}
+
+.sculpture-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 0;
+  right: 0;
+  height: 8px;
+}
+
+.sculpture-dropdown::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+}
+
+.sculpture-dropdown.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sculpture-dropdown p {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: #3a2e2a;
+  letter-spacing: 0.03rem;
+  border-left: 3px solid transparent;
+  position: relative;
+}
+
+.sculpture-dropdown p:hover {
+  background: linear-gradient(to right, rgba(210, 123, 53, 0.08), rgba(31, 111, 67, 0.06));
+  border-left: 3px solid rgb(210, 123, 53);
+  color: #1f6f43;
+  padding-left: 1.5rem;
+  font-weight: 500;
+}

@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.025rem;
+}
+
+/* MAIN LAYOUT */
+.Artefacts-div {
+  display: flex;
+  flex-direction: row;
+  margin-top: 6rem;
+  width: 100%;
+  height: 92vh;
+}
+
+/* LEFT BIG IMAGE */
+.artefacts1 {
+  width: 100%;
+  height: 100%;
+  background-image: url(/images/pottery1-image1.jpg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+/* DARK OVERLAY LEFT SIDE (optional but balanced) */
+.artefacts1::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+}
+
+/* TITLE */
+.artefacts-title {
+  position: absolute;
+  bottom: 3rem;
+  left: 3rem;
+  z-index: 2;
+}
+
+.artefacts-title h1 {
+  color: white;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+/* RIGHT GRID */
+.artefacts2 {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+/* CARD */
+.artefacts-grid {
+  position: relative;
+  overflow: hidden;
+}
+
+/* IMAGE FULL COVER */
+.artefacts-grid img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.05);
+}
+
+/* DARK OVERLAY */
+.artefacts-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.15),
+    rgba(0,0,0,0.65)
+  );
+  z-index: 1;
+}
+
+/* CONTENT (FIXED VISIBILITY) */
+.artefacts-content {
+  position: absolute;
+  left: 1.5rem;
+  bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  z-index: 2;
+  color: white;
+}
+
+/* TRIBE BADGE (PILL STYLE) */
+.artefacts-content .tribe {
+  display: inline-block;
+  width: fit-content;
+  background: rgba(210, 123, 53, 0.9);
+  color: white;
+  font-size: 0.65rem;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.artefacts-content .tribe:hover{
+background: rgba(211, 106, 20, 0.85);
+}
+ 
+/* TITLE */
+.artefacts-content h3 {
+  font-size: 1rem;
+  color: #fff;
+}
+
+/* DESCRIPTION (FIXED VISIBILITY) */
+.artefacts-content .desc {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.85);
+  max-width: 200px;
+  line-height: 1.3;
+}
+
+/* BUTTON */
+.artefacts-content button {
+  margin-top: 0.3rem;
+  background-color: rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  width: fit-content;
+}
+
+.artefacts-content button:hover {
+  background-color: rgb(210, 123, 53);
+  border-color: rgb(210, 123, 53);
+}
+
+/* PRICE */
+.seller4-price {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2;
+}
+
+.seller4-price p {
+  color: white;
+  font-size: 0.75rem;
+  background: rgba(0,0,0,0.4);
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 768px) {
+  .Artefacts-div {
+    flex-direction: column;
+    height: auto;
+  }
+}
