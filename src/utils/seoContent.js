@@ -46,7 +46,7 @@ export const SEO_CONTENT = {
     image: '/images/drums2-latest.jpg'
   },
   market: {
-    title: 'African Marketplace | Magical Africa',
+    title: 'Marketplace - Original African Art For Sale',
     description: 'Shop African jewellery, carvings, pottery, textiles, spices, and other handcrafted products on Magical Africa.',
     keywords: 'African marketplace, buy African products, authentic African crafts, African artisans, African jewelry, African clothing',
     path: '/market',
