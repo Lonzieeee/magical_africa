@@ -108,7 +108,7 @@
 /* TABLET */
 @media screen and (max-width:768px) {
   .Carvings-div{
-    height: auto;
+   
   }
 }
 
@@ -117,6 +117,6 @@
   .Carvings-div{
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    height: auto;
+   
   }
 }

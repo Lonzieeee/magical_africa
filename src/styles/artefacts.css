@@ -167,6 +167,26 @@ background: rgba(211, 106, 20, 0.85);
 @media screen and (max-width: 768px) {
   .Artefacts-div {
     flex-direction: column;
-    height: auto;
+   
   }
+}
+
+
+@media screen and (max-width:480px) {
+  .artefacts2{
+   grid-template-columns: 1fr;   /* 1 column */
+    grid-template-rows: auto;     /* rows adjust automatically */
+  }
+
+  .artefacts1{
+    height: 400px;
+  }
+
+   .artefacts-grid{
+   height: 400px;
+  }
+  .Artefacts-div{
+    height: fit-content;
+  }
+
 }
