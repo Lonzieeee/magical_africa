@@ -39,13 +39,13 @@
     },
     "exploreCourses":{
       "title": "Explore Courses",
-      "description": "Learn practical, hands-on skills through guided courses designed to help you grow and build real projects."
+      "description": "Learn practical, hands-on skills through guided courses designed to help you grow and build cultural skills"
     }
   },
 
     "about2": {
   "title": "About Magical Africa",
-  "description": "Magical Africa celebrates the beauty, culture, and stories of Africa. We showcase the continent's rich traditions, diverse landscapes, and vibrant spirit, sharing what makes Africa truly magical.",
+  "description": "Magical Africa is a Pan-African platform where people can learn, build, preserve, and market cultural skills.",
   "learnMore": "Learn More"
 },
 
@@ -131,62 +131,46 @@
   "title": "Get to Learn Some of Our Languages",
   "description": "Africa is home to thousands of languages, each carrying history, identity, and culture. Explore common greetings and words from different African communities and connect with the continent through language.",
   "items": {
-    "swahili": {
-      "name": "Swahili",
-      "tooltip": "A common greeting is 'Habari?', meaning 'How are you?'"
-    },
-    "zulu": {
-      "name": "Zulu",
-      "tooltip": "A common greeting is 'Sawubona', meaning 'I see you.'"
-    },
-    "yoruba": {
-      "name": "Yoruba",
-      "tooltip": "'Báwo ni?' is a common Yoruba greeting meaning 'How are you?'"
-    },
-    "kikuyu": {
-      "name": "Kikuyu",
-      "tooltip": "A common greeting is 'Jambo', meaning 'Hello'"
-    },
-    "hausa": {
-      "name": "Hausa",
-      "tooltip": "'Akkam?' means 'How are you?' in Hausa."
-    },
-    "shona": {
-      "name": "Shona",
-      "tooltip": "'Mhoro' is a common Shona greeting meaning 'Hello.'"
-    },
-    "sukuma": {
-      "name": "Sukuma",
-      "tooltip": "A common greeting is 'Moro', meaning 'Hello'"
-    },
-    "xhosa": {
-      "name": "Xhosa",
-      "tooltip": "'Molo' is a common Xhosa greeting meaning 'Hello.'"
-    },
-    "maasai": {
-      "name": "Maasai",
-      "tooltip": "A common greeting is 'Sanu', meaning 'Hello'"
-    },
-    "igbo": {
-      "name": "Igbo",
-      "tooltip": "A common greeting is 'Kedu?', meaning 'How are you?'"
-    },
-    "lingala": {
-      "name": "Lingala",
-      "tooltip": "A common greeting is 'Mbote', meaning 'Hello'"
-    },
-    "tsonga": {
-      "name": "Tsonga",
-      "tooltip": "A common greeting is 'Avuxeni', meaning 'Good morning'"
-    },
-    "setswana": {
-      "name": "Setswana",
-      "tooltip": "A common greeting is 'Dumela', meaning 'Hello'"
-    },
-    "chichewa": {
-      "name": "Chichewa",
-      "tooltip": "A common greeting is 'Moni', meaning 'Hello'"
-    }
+"swahili": {
+  "name": "Swahili",
+  "tooltip": "A common greeting is 'Habari?', meaning 'How are you?'"
+},
+"kikuyu": {
+  "name": "Kikuyu",
+  "tooltip": "A common greeting is 'Wî mwega?', meaning 'How are you?'"
+},
+"luo": {
+  "name": "Luo",
+  "tooltip": "A common greeting is 'Nadi?', meaning 'How are you?'"
+},
+"kalenjin": {
+  "name": "Kalenjin",
+  "tooltip": "A common greeting is 'Chamgei?', meaning 'How are you?'"
+},
+"luhya": {
+  "name": "Luhya",
+  "tooltip": "A common greeting is 'Mulembe', meaning 'Hello/Peace.'"
+},
+"kamba": {
+  "name": "Kamba",
+  "tooltip": "A common greeting is 'Uvoo?', meaning 'How are you?'"
+},
+"maasai": {
+  "name": "Maasai",
+  "tooltip": "A common greeting is 'Supa', meaning 'Hello.'"
+},
+"meru": {
+  "name": "Meru",
+  "tooltip": "A common greeting is 'Mura?', meaning 'Hello.'"
+},
+"somali": {
+  "name": "Somali",
+  "tooltip": "A common greeting is 'Iska warran?', meaning 'How are you?'"
+},
+"turkana": {
+  "name": "Turkana",
+  "tooltip": "A common greeting is 'Ejoka?', meaning 'How are you/Hello.'"
+}
   }
 },
 

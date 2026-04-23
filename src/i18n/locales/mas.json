@@ -40,7 +40,7 @@
 
   "about2": {
   "title": "Tenebo Magical Africa",
-  "description": "Magical Africa eidimie enaishorua, enkítùàátà, ó inkonyek e Afrika. Kéítoòdòl inkítùàátìn naapukunot e enkóp, inkóp naápuò, ó oltau enídò, kéídim ake engídongoí e Afrika.",
+  "description": "Magical Africa naa enkiguena e Pan-Africa nemeishori iltung’ana ilarin, ilaka, ilaretu pee ilanyit ilashei le nkishon.",
   "learnMore": "Ayau Kumok"
 },
 
@@ -128,61 +128,45 @@
   "description": "Afrika eitii inkutuk kutukui, naápuò enkíshón, enaitoi, ó enkítùàátà. Eidim inkitáábùàin ó inkutuk naápuò kulie iloshon e Afrika amu eitodolu enkóp tené enkutuk.",
   "items": {
     "swahili": {
-      "name": "Enkutuk e Swahili",
-      "tooltip": "Enkitáábùà naatii 'Habari?', nápúò 'Kéídim?'"
-    },
-    "zulu": {
-      "name": "Enkutuk e Zulu",
-      "tooltip": "Enkitáábùà naatii 'Sawubona', nápúò 'Káítoóók.'"
-    },
-    "yoruba": {
-      "name": "Enkutuk e Yoruba",
-      "tooltip": "'Báwo ni?' enkitáábùà e Yoruba nápúò 'Kéídim?'"
-    },
-    "kikuyu": {
-      "name": "Enkutuk e Kikuyu",
-      "tooltip": "Enkitáábùà naatii 'Jambo', nápúò 'Supá'"
-    },
-    "hausa": {
-      "name": "Enkutuk e Hausa",
-      "tooltip": "'Akkam?' nápúò 'Kéídim?' tené Hausa."
-    },
-    "shona": {
-      "name": "Enkutuk e Shona",
-      "tooltip": "'Mhoro' enkitáábùà e Shona nápúò 'Supá.'"
-    },
-    "sukuma": {
-      "name": "Enkutuk e Sukuma",
-      "tooltip": "Enkitáábùà naatii 'Moro', nápúò 'Supá'"
-    },
-    "xhosa": {
-      "name": "Enkutuk e Xhosa",
-      "tooltip": "'Molo' enkitáábùà e Xhosa nápúò 'Supá.'"
-    },
-    "maasai": {
-      "name": "Enkutuk e Maasai",
-      "tooltip": "Enkitáábùà naatii 'Sanu', nápúò 'Supá'"
-    },
-    "igbo": {
-      "name": "Enkutuk e Igbo",
-      "tooltip": "Enkitáábùà naatii 'Kedu?', nápúò 'Kéídim?'"
-    },
-    "lingala": {
-      "name": "Enkutuk e Lingala",
-      "tooltip": "Enkitáábùà naatii 'Mbote', nápúò 'Supá'"
-    },
-    "tsonga": {
-      "name": "Enkutuk e Tsonga",
-      "tooltip": "Enkitáábùà naatii 'Avuxeni', nápúò 'Supá enkolóng'"
-    },
-    "setswana": {
-      "name": "Enkutuk e Setswana",
-      "tooltip": "Enkitáábùà naatii 'Dumela', nápúò 'Supá'"
-    },
-    "chichewa": {
-      "name": "Enkutuk e Chichewa",
-      "tooltip": "Enkitáábùà naatii 'Moni', nápúò 'Supá'"
-    }
+    "name": "Swahili",
+    "tooltip": "Enkai sidai oleng: 'Habari?' ninye 'Are you well?'"
+  },
+  "kikuyu": {
+    "name": "Kikuyu",
+    "tooltip": "Enkai sidai oleng: 'Wî mwega?' ninye 'Are you well?'"
+  },
+  "luo": {
+    "name": "Luo",
+    "tooltip": "Enkai sidai oleng: 'Nadi?' ninye 'Are you well?'"
+  },
+  "kalenjin": {
+    "name": "Kalenjin",
+    "tooltip": "Enkai sidai oleng: 'Chamgei?' ninye 'Are you well?'"
+  },
+  "luhya": {
+    "name": "Luhya",
+    "tooltip": "Enkai sidai oleng: 'Mulembe' ninye 'Hello/Peace.'"
+  },
+  "kamba": {
+    "name": "Kamba",
+    "tooltip": "Enkai sidai oleng: 'Uvoo?' ninye 'Are you well?'"
+  },
+  "maasai": {
+    "name": "Maa",
+    "tooltip": "Enkai sidai oleng: 'Supa' ninye 'Hello.'"
+  },
+  "meru": {
+    "name": "Meru",
+    "tooltip": "Enkai sidai oleng: 'Mura?' ninye 'Hello.'"
+  },
+  "somali": {
+    "name": "Somali",
+    "tooltip": "Enkai sidai oleng: 'Iska warran?' ninye 'Are you well?'"
+  },
+  "turkana": {
+    "name": "Turkana",
+    "tooltip": "Enkai sidai oleng: 'Ejoka?' ninye 'Hello.'"
+  }
   }
 },
 

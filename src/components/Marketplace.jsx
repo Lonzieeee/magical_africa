@@ -61,6 +61,7 @@ const Marketplace = () => {
     <section className="marketplace">
       <h1>{t('marketplace.title')}</h1>
 
+{/*
       <ul id="categoryList">
         {marketplaceData.map((category, index) => (
           <li 
@@ -72,6 +73,21 @@ const Marketplace = () => {
           </li>
         ))}
       </ul>
+
+       */}
+
+
+       <div id="categoryList">
+  {marketplaceData.map((category, index) => (
+    <button
+      key={index}
+      className={activeCategory === index ? 'active' : ''}
+      onClick={() => setActiveCategory(index)}
+    >
+      {category.name}
+    </button>
+  ))}
+</div>
 
       <div className="market-section">
         {currentData.sections.map((item, index) => (

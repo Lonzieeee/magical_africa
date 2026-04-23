@@ -40,7 +40,7 @@
 
   "about2": {
   "title": "Mayelana ne-Magical Africa",
-  "description": "I-Magical Africa igubha ubuhle, isiko, nezindaba ze-Afrika. Sibonisa amasiko acebi ezwekazi, izindawo ezihlukahlukene, nomoya ophilayo, sabelana ngokwenza i-Afrika ibe yimlingo ngempela.",
+  "description": "IMagical Africa iyinkundla yePan-Africa lapho abantu bengafunda, bakhe, bagcine futhi bathengise amakhono amasiko.",
   "learnMore": "Funda Kabanzi"
 },
 
@@ -129,61 +129,45 @@
   "description": "I-Afrika ikhaya lezinkulungwane zezilimi, ngayinye iphethe umlando, ubunikazi, nesiko. Hlola ukubingelela namagama avamile avela emiphakathini ehlukahlukene yase-Afrika uxhumane nezwekazi ngolimi.",
   "items": {
     "swahili": {
-      "name": "IsiSwahili",
-      "tooltip": "Ukubingelela okuvamile 'Habari?', okusho 'Unjani?'"
-    },
-    "zulu": {
-      "name": "IsiZulu",
-      "tooltip": "Ukubingelela okuvamile 'Sawubona', okusho 'Ngiyakubona.'"
-    },
-    "yoruba": {
-      "name": "IsiYoruba",
-      "tooltip": "'Báwo ni?' ukubingelela kwesiYoruba okusho 'Unjani?'"
-    },
-    "kikuyu": {
-      "name": "IsiKikuyu",
-      "tooltip": "Ukubingelela okuvamile 'Jambo', okusho 'Sawubona'"
-    },
-    "hausa": {
-      "name": "IsiHausa",
-      "tooltip": "'Akkam?' kusho 'Unjani?' ngesiHausa."
-    },
-    "shona": {
-      "name": "IsiShona",
-      "tooltip": "'Mhoro' ukubingelela kwesiShona okusho 'Sawubona.'"
-    },
-    "sukuma": {
-      "name": "IsiSukuma",
-      "tooltip": "Ukubingelela okuvamile 'Moro', okusho 'Sawubona'"
-    },
-    "xhosa": {
-      "name": "IsiXhosa",
-      "tooltip": "'Molo' ukubingelela kwesiXhosa okusho 'Sawubona.'"
-    },
-    "maasai": {
-      "name": "IsiMaasai",
-      "tooltip": "Ukubingelela okuvamile 'Sanu', okusho 'Sawubona'"
-    },
-    "igbo": {
-      "name": "Isi-Igbo",
-      "tooltip": "Ukubingelela okuvamile 'Kedu?', okusho 'Unjani?'"
-    },
-    "lingala": {
-      "name": "IsiLingala",
-      "tooltip": "Ukubingelela okuvamile 'Mbote', okusho 'Sawubona'"
-    },
-    "tsonga": {
-      "name": "IsiTsonga",
-      "tooltip": "Ukubingelela okuvamile 'Avuxeni', okusho 'Kusile'"
-    },
-    "setswana": {
-      "name": "IsiSetswana",
-      "tooltip": "Ukubingelela okuvamile 'Dumela', okusho 'Sawubona'"
-    },
-    "chichewa": {
-      "name": "IsiChichewa",
-      "tooltip": "Ukubingelela okuvamile 'Moni', okusho 'Sawubona'"
-    }
+    "name": "IsiSwahili",
+    "tooltip": "Ukubingelela okuvamile uthi 'Habari?' okusho 'Unjani?'"
+  },
+  "kikuyu": {
+    "name": "IsiKikuyu",
+    "tooltip": "Ukubingelela okuvamile uthi 'Wî mwega?' okusho 'Unjani?'"
+  },
+  "luo": {
+    "name": "IsiLuo",
+    "tooltip": "Ukubingelela okuvamile uthi 'Nadi?' okusho 'Unjani?'"
+  },
+  "kalenjin": {
+    "name": "IsiKalenjin",
+    "tooltip": "Ukubingelela okuvamile uthi 'Chamgei?' okusho 'Unjani?'"
+  },
+  "luhya": {
+    "name": "IsiLuhya",
+    "tooltip": "Ukubingelela okuvamile uthi 'Mulembe' okusho 'Sawubona/Ukuthula.'"
+  },
+  "kamba": {
+    "name": "IsiKamba",
+    "tooltip": "Ukubingelela okuvamile uthi 'Uvoo?' okusho 'Unjani?'"
+  },
+  "maasai": {
+    "name": "IsiMaasai",
+    "tooltip": "Ukubingelela okuvamile uthi 'Supa' okusho 'Sawubona.'"
+  },
+  "meru": {
+    "name": "IsiMeru",
+    "tooltip": "Ukubingelela okuvamile uthi 'Mura?' okusho 'Sawubona.'"
+  },
+  "somali": {
+    "name": "IsiSomali",
+    "tooltip": "Ukubingelela okuvamile uthi 'Iska warran?' okusho 'Unjani?'"
+  },
+  "turkana": {
+    "name": "IsiTurkana",
+    "tooltip": "Ukubingelela okuvamile uthi 'Ejoka?' okusho 'Sawubona.'"
+  }
   }
 },
 

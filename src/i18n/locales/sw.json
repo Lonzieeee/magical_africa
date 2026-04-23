@@ -39,7 +39,7 @@
   },
   "about2": {
   "title": "Kuhusu Magical Africa",
-  "description": "Magical Africa inasherehekea uzuri, utamaduni, na hadithi za Afrika. Tunaonyesha mila tajiri za bara, mandhari mbalimbali, na roho hai, tukishiriki kinachofanya Afrika kuwa ya kichawi kweli.",
+  "description": "Magical Africa ni jukwaa la Kiafrika linalowawezesha watu kujifunza, kujenga, kuhifadhi na kuuza ujuzi wa kitamaduni.",
   "learnMore": "Jifunze Zaidi"
 },
 
@@ -127,61 +127,45 @@
   "description": "Afrika ni nyumbani kwa maelfu ya lugha, kila moja ikibeba historia, utambulisho, na utamaduni. Chunguza salamu na maneno ya kawaida kutoka jamii mbalimbali za Kiafrika na uunganishe na bara kupitia lugha.",
   "items": {
     "swahili": {
-      "name": "Kiswahili",
-      "tooltip": "Salamu ya kawaida ni 'Habari?', ikimaanisha 'Hali yako?'"
-    },
-    "zulu": {
-      "name": "Kizulu",
-      "tooltip": "Salamu ya kawaida ni 'Sawubona', ikimaanisha 'Ninakuona.'"
-    },
-    "yoruba": {
-      "name": "Kiyoruba",
-      "tooltip": "'Báwo ni?' ni salamu ya Kiyoruba ikimaanisha 'Habari yako?'"
-    },
-    "kikuyu": {
-      "name": "Kikuyu",
-      "tooltip": "Salamu ya kawaida ni 'Jambo', ikimaanisha 'Hujambo'"
-    },
-    "hausa": {
-      "name": "Kihausa",
-      "tooltip": "'Akkam?' inamaanisha 'Habari yako?' kwa Kihausa."
-    },
-    "shona": {
-      "name": "Kishona",
-      "tooltip": "'Mhoro' ni salamu ya Kishona ikimaanisha 'Hujambo.'"
-    },
-    "sukuma": {
-      "name": "Kisukuma",
-      "tooltip": "Salamu ya kawaida ni 'Moro', ikimaanisha 'Hujambo'"
-    },
-    "xhosa": {
-      "name": "Kixhosa",
-      "tooltip": "'Molo' ni salamu ya Kixhosa ikimaanisha 'Hujambo.'"
-    },
-    "maasai": {
-      "name": "Kimaasai",
-      "tooltip": "Salamu ya kawaida ni 'Sanu', ikimaanisha 'Hujambo'"
-    },
-    "igbo": {
-      "name": "Kiigbo",
-      "tooltip": "Salamu ya kawaida ni 'Kedu?', ikimaanisha 'Habari yako?'"
-    },
-    "lingala": {
-      "name": "Kilingala",
-      "tooltip": "Salamu ya kawaida ni 'Mbote', ikimaanisha 'Hujambo'"
-    },
-    "tsonga": {
-      "name": "Kitsonga",
-      "tooltip": "Salamu ya kawaida ni 'Avuxeni', ikimaanisha 'Habari ya asubuhi'"
-    },
-    "setswana": {
-      "name": "Kisetswana",
-      "tooltip": "Salamu ya kawaida ni 'Dumela', ikimaanisha 'Hujambo'"
-    },
-    "chichewa": {
-      "name": "Kichichewa",
-      "tooltip": "Salamu ya kawaida ni 'Moni', ikimaanisha 'Hujambo'"
-    }
+    "name": "Kiswahili",
+    "tooltip": "Salamu ya kawaida ni 'Habari?', ikimaanisha 'Unaendeleaje?'"
+  },
+  "kikuyu": {
+    "name": "Kikuyu",
+    "tooltip": "Salamu ya kawaida ni 'Wî mwega?', ikimaanisha 'Unaendeleaje?'"
+  },
+  "luo": {
+    "name": "Kijaluo",
+    "tooltip": "Salamu ya kawaida ni 'Nadi?', ikimaanisha 'Unaendeleaje?'"
+  },
+  "kalenjin": {
+    "name": "Kalenjin",
+    "tooltip": "Salamu ya kawaida ni 'Chamgei?', ikimaanisha 'Unaendeleaje?'"
+  },
+  "luhya": {
+    "name": "Kiluhya",
+    "tooltip": "Salamu ya kawaida ni 'Mulembe', ikimaanisha 'Hujambo/Amani.'"
+  },
+  "kamba": {
+    "name": "Kikamba",
+    "tooltip": "Salamu ya kawaida ni 'Uvoo?', ikimaanisha 'Unaendeleaje?'"
+  },
+  "maasai": {
+    "name": "Kimaasai",
+    "tooltip": "Salamu ya kawaida ni 'Supa', ikimaanisha 'Hujambo.'"
+  },
+  "meru": {
+    "name": "Kimeru",
+    "tooltip": "Salamu ya kawaida ni 'Mura?', ikimaanisha 'Hujambo.'"
+  },
+  "somali": {
+    "name": "Kisomali",
+    "tooltip": "Salamu ya kawaida ni 'Iska warran?', ikimaanisha 'Unaendeleaje?'"
+  },
+  "turkana": {
+    "name": "Kiturkana",
+    "tooltip": "Salamu ya kawaida ni 'Ejoka?', ikimaanisha 'Hujambo/Unaendeleaje.'"
+  }
   }
 },
 

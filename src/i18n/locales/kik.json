@@ -40,7 +40,7 @@
 
   "about2": {
   "title": "Ũhoro wa Magical Africa",
-  "description": "Magical Africa nĩyonanĩria ũthaka, mĩtũũrĩre, na ngano cia Abirika. Tũkonanĩria mĩtũũrĩre ya kontinent ĩno, matũũra ma kũhũũrana, na ngwatanĩro ya muoyo, tũkĩana kĩrĩa gĩtũmaga Abirika ĩkorwo na ũrogi wa ma.",
+  "description": "Magical Africa nĩ gĩthomo gĩa Pan-Africa kĩrĩa andũ mangĩhota kũruta, kũaka, kũgitĩra na kũgũra wĩra wa mĩtugo.",
   "learnMore": "Menya Gũkĩra"
 },
 
@@ -129,61 +129,45 @@
   "description": "Abirika nĩ mũciĩ wa rũthiomi ngiri nyingĩ, ĩrĩa yothe yĩkũũa ũhoro wa tene, ũmenyekani, na mĩtũũrĩre. Menya mahoya na maũndũ ma kawaĩda kuuma mĩhĩrĩga ya Gĩabirika na ũkoranĩrie na kontinent kũhuthĩra rũthiomi.",
   "items": {
     "swahili": {
-      "name": "Gĩswahili",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Habari?', yĩtiĩtwo 'Wĩ mwega?'"
-    },
-    "zulu": {
-      "name": "Gĩzulu",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Sawubona', yĩtiĩtwo 'Ngũkuona.'"
-    },
-    "yoruba": {
-      "name": "Gĩyoruba",
-      "tooltip": "'Báwo ni?' nĩ mahoya ma Gĩyoruba yĩtiĩtwo 'Wĩ mwega?'"
-    },
-    "kikuyu": {
-      "name": "Gĩkũyũ",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Jambo', yĩtiĩtwo 'Nĩ wega'"
-    },
-    "hausa": {
-      "name": "Gĩhausa",
-      "tooltip": "'Akkam?' yĩtiĩtwo 'Wĩ mwega?' na Gĩhausa."
-    },
-    "shona": {
-      "name": "Gĩshona",
-      "tooltip": "'Mhoro' nĩ mahoya ma Gĩshona yĩtiĩtwo 'Nĩ wega.'"
-    },
-    "sukuma": {
-      "name": "Gĩsukuma",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Moro', yĩtiĩtwo 'Nĩ wega'"
-    },
-    "xhosa": {
-      "name": "Gĩxhosa",
-      "tooltip": "'Molo' nĩ mahoya ma Gĩxhosa yĩtiĩtwo 'Nĩ wega.'"
-    },
-    "maasai": {
-      "name": "Gĩmaasai",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Sanu', yĩtiĩtwo 'Nĩ wega'"
-    },
-    "igbo": {
-      "name": "Gĩigbo",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Kedu?', yĩtiĩtwo 'Wĩ mwega?'"
-    },
-    "lingala": {
-      "name": "Gĩlingala",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Mbote', yĩtiĩtwo 'Nĩ wega'"
-    },
-    "tsonga": {
-      "name": "Gĩtsonga",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Avuxeni', yĩtiĩtwo 'Rũcinĩ rwega'"
-    },
-    "setswana": {
-      "name": "Gĩsetswana",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Dumela', yĩtiĩtwo 'Nĩ wega'"
-    },
-    "chichewa": {
-      "name": "Gĩchichewa",
-      "tooltip": "Mahoya ma kawaĩda nĩ 'Moni', yĩtiĩtwo 'Nĩ wega'"
-    }
+    "name": "Gĩswahili",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Habari?' ũrĩa wĩ 'Ũrĩ mwega?'"
+  },
+  "kikuyu": {
+    "name": "Gĩkũyũ",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Wî mwega?'"
+  },
+  "luo": {
+    "name": "Luo",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Nadi?' ũrĩa wĩ 'Ũrĩ mwega?'"
+  },
+  "kalenjin": {
+    "name": "Kalenjin",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Chamgei?' ũrĩa wĩ 'Ũrĩ mwega?'"
+  },
+  "luhya": {
+    "name": "Luhya",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Mulembe' ũrĩa wĩ 'Amani.'"
+  },
+  "kamba": {
+    "name": "Kamba",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Uvoo?' ũrĩa wĩ 'Ũrĩ mwega?'"
+  },
+  "maasai": {
+    "name": "Maasai",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Supa' ũrĩa wĩ 'Ũhoro.'"
+  },
+  "meru": {
+    "name": "Meru",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Mura?'"
+  },
+  "somali": {
+    "name": "Somali",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Iska warran?' ũrĩa wĩ 'Ũrĩ mwega?'"
+  },
+  "turkana": {
+    "name": "Turkana",
+    "tooltip": "Mũhoro wa kawaida nĩ 'Ejoka?'"
+  }
   }
 },
 

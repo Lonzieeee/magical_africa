@@ -42,7 +42,7 @@
 
   "about2": {
   "title": "Maka Magical Africa",
-  "description": "Magical Africa na-eme emume ịma mma, omenala, na akụkọ nke Afrika. Anyị na-egosi omenala bara ụba nke kọntinent ahụ, ala dị iche iche, na mmụọ dị ndụ, na-ekekọrịta ihe na-eme Afrika bụrụ nke anwansi n'ezie.",
+  "description": "Magical Africa bụ ikpo okwu Pan-Afrịka ebe ndị mmadụ nwere ike ịmụ, wuo, chekwaa ma ree nka na omenala.",
   "learnMore": "Mụtakwuo"
 },
 
@@ -129,62 +129,46 @@
   "title": "Mụta Asụsụ Anyị Ụfọdụ",
   "description": "Afrika bụ ụlọ ọtụtụ puku asụsụ, nke ọ bụla na-eburu akụkọ ihe mere eme, njirimara, na omenala. Nyochaa ekele na okwu ndị a na-ahụkarị site na obodo Afrika dị iche iche ma jikọọ na kọntinent ahụ site na asụsụ.",
   "items": {
-    "swahili": {
-      "name": "Swahili",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Habari?', pụtara 'Kedu ka ị mere?'"
-    },
-    "zulu": {
-      "name": "Zulu",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Sawubona', pụtara 'Ahụrụ m gị.'"
-    },
-    "yoruba": {
-      "name": "Yoruba",
-      "tooltip": "'Báwo ni?' bụ ekele Yoruba pụtara 'Kedu ka ị mere?'"
-    },
-    "kikuyu": {
-      "name": "Kikuyu",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Jambo', pụtara 'Nnọọ'"
-    },
-    "hausa": {
-      "name": "Hausa",
-      "tooltip": "'Akkam?' pụtara 'Kedu ka ị mere?' na Hausa."
-    },
-    "shona": {
-      "name": "Shona",
-      "tooltip": "'Mhoro' bụ ekele Shona pụtara 'Nnọọ.'"
-    },
-    "sukuma": {
-      "name": "Sukuma",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Moro', pụtara 'Nnọọ'"
-    },
-    "xhosa": {
-      "name": "Xhosa",
-      "tooltip": "'Molo' bụ ekele Xhosa pụtara 'Nnọọ.'"
-    },
-    "maasai": {
-      "name": "Maasai",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Sanu', pụtara 'Nnọọ'"
-    },
-    "igbo": {
-      "name": "Igbo",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Kedu?', pụtara 'Kedu ka ị mere?'"
-    },
-    "lingala": {
-      "name": "Lingala",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Mbote', pụtara 'Nnọọ'"
-    },
-    "tsonga": {
-      "name": "Tsonga",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Avuxeni', pụtara 'Ụtụtụ ọma'"
-    },
-    "setswana": {
-      "name": "Setswana",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Dumela', pụtara 'Nnọọ'"
-    },
-    "chichewa": {
-      "name": "Chichewa",
-      "tooltip": "Ekele a na-ahụkarị bụ 'Moni', pụtara 'Nnọọ'"
-    }
+     "swahili": {
+    "name": "Swahili",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Habari?' nke pụtara 'Kedu ka ị mere?'"
+  },
+  "kikuyu": {
+    "name": "Kikuyu",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Wî mwega?' nke pụtara 'Kedu ka ị mere?'"
+  },
+  "luo": {
+    "name": "Luo",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Nadi?' nke pụtara 'Kedu ka ị mere?'"
+  },
+  "kalenjin": {
+    "name": "Kalenjin",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Chamgei?' nke pụtara 'Kedu ka ị mere?'"
+  },
+  "luhya": {
+    "name": "Luhya",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Mulembe' nke pụtara 'Ndewo/Udo.'"
+  },
+  "kamba": {
+    "name": "Kamba",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Uvoo?' nke pụtara 'Kedu ka ị mere?'"
+  },
+  "maasai": {
+    "name": "Maasai",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Supa' nke pụtara 'Ndewo.'"
+  },
+  "meru": {
+    "name": "Meru",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Mura?' nke pụtara 'Ndewo.'"
+  },
+  "somali": {
+    "name": "Somali",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Iska warran?' nke pụtara 'Kedu ka ị mere?'"
+  },
+  "turkana": {
+    "name": "Turkana",
+    "tooltip": "Ekele a na-ahụkarị bụ 'Ejoka?' nke pụtara 'Ndewo/Kedu ka ị mere.'"
+  }
   }
 },
 
