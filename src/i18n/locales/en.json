@@ -180,18 +180,18 @@
   "title": "Explore Our Tribes",
   "subtitle": "Journey through Africa's diverse tribes and timeless traditions",
   "viewAll": "View Communities",
-  "oromo": {
-    "name": "Oromo",
-    "description": "Rooted in Ethiopia, the Oromo people carry a proud legacy of tradition, unity, and cultural identity. They are the country's largest ethnic group, making up about one-third of the population with around 40 million people."
-  },
-  "zulu": {
-    "name": "Zulu",
-    "description": "From South Africa, the Zulu people carry a powerful legacy of tradition, resilience, and identity, representing over 11 million people."
-  },
-  "igbo": {
-    "name": "Igbo",
-    "description": "Rooted in Nigeria, the Igbo people are one of the country's largest ethnic groups, numbering over 30 million, known for their rich traditions, entrepreneurship, and strong communal values."
-  }
+  "kikuyu": {
+  "name": "Kikuyu",
+  "description": "Rooted in Kenya, the Kikuyu people are the country’s largest ethnic group, known for their strong agricultural heritage, entrepreneurship, and deep cultural traditions."
+},
+"luo": {
+  "name": "Luo",
+  "description": "From western Kenya, the Luo people are known for their rich storytelling, music, fishing traditions, and strong sense of community and leadership."
+},
+"maasai": {
+  "name": "Maasai",
+  "description": "Living across Kenya and Tanzania, the Maasai people are famous for their vibrant dress, warrior traditions, and deep connection to land and livestock."
+}
 },
 
 

@@ -175,18 +175,18 @@
   "title": "Manya Mĩsyĩ Yĩtũ",
   "subtitle": "Thĩĩna kũtĩĩa mĩsyĩ ya Afilika ĩla ĩkũvathũkana na mĩtũũo ya tene",
   "viewAll": "Tala Jamii",
-  "oromo": {
-    "name": "Oromo",
-    "description": "Andũ a Oromo kuuma Ethiopia, makũvata ũtaũo wa kũĩyumĩa wa mĩtũũo, ũmwe, na ũmanyĩkĩlĩlyo wa mĩtũũo. Nĩmo mũsyĩ mũnene mũno ũsũ, makũũmba thĩka ĩmwe kũmĩĩna ĩtatũ ya andũ na andũ milioni 40."
-  },
-  "zulu": {
-    "name": "Zulu",
-    "description": "Kuuma South Africa, andũ a Zulu makũvata ũtaũo wa ngũvũ wa mĩtũũo, kũũmĩĩĩlĩla, na ũmanyĩkĩlĩlyo, makũĩmĩĩa andũ milioni 11."
-  },
-  "igbo": {
-    "name": "Igbo",
-    "description": "Andũ a Igbo kuuma Nigeria, nĩmo ĩmwe ya mĩsyĩ mĩnene mũno ũsũ, makwata andũ milioni 30, mamanyĩkĩĩte nĩ mĩtũũo yoo mĩnene, ũcũũĩanĩĩo, na maũndũ ma kĩũngano."
-  }
+  "kikuyu": {
+  "name": "Kikuyu",
+  "description": "Andu a Kikuyu ni aingi muno Kenya, maendete kusyiwa nesa kwa wĩa wa kĩvũthĩ, biashara na mĩtugo yao."
+},
+"luo": {
+  "name": "Luo",
+  "description": "Ava kuma west Kenya, andu a Luo maendete kusyiwa kwa ndeto, nyimbo, uvuvi na kwĩkala hamwe."
+},
+"maasai": {
+  "name": "Maasai",
+  "description": "Andu a Maasai maikala Kenya na Tanzania, maendete kusyiwa kwa nguo sya rangi, utamaduni wa mashujaa na ng’ombe."
+}
 },
 
 

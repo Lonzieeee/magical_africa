@@ -178,18 +178,18 @@
   "title": "Nyochaa Ebo Anyị",
   "subtitle": "Njem site na ebo dị iche iche nke Afrika na omenala ebighị ebi",
   "viewAll": "Lelee Obodo",
-  "oromo": {
-    "name": "Oromo",
-    "description": "Ndị Oromo si Ethiopia, na-eburu ihe nketa mpako nke omenala, ịdị n'otu, na njirimara omenala. Ha bụ otu ndị kachasị ukwuu n'obodo ahụ, na-eme ihe dị ka otu ụzọ n'ụzọ atọ nke ndị mmadụ nwere ihe dị ka nde mmadụ 40."
-  },
-  "zulu": {
-    "name": "Zulu",
-    "description": "Site na South Africa, ndị Zulu na-eburu ihe nketa dị ike nke omenala, nguzosi ike n'oge, na njirimara, na-anọchite anya karịa nde mmadụ 11."
-  },
-  "igbo": {
-    "name": "Igbo",
-    "description": "Ndị Igbo si Nigeria, bụ otu n'ime ebo kachasị ukwuu n'obodo ahụ, nwere karịa nde 30, a ma ama maka omenala bara ụba, ịzụ ahịa, na ụkpụrụ obodo siri ike."
-  }
+ "kikuyu": {
+  "name": "Kikuyu",
+  "description": "N’ime Kenya ka ndị Kikuyu sitere; ha bụ nnukwu agbụrụ kachasị na mba ahụ, a ma ama n’ọrụ ugbo, azụmahịa na omenala siri ike."
+},
+"luo": {
+  "name": "Luo",
+  "description": "Site n’ụsọ ọdịda anyanwụ Kenya, ndị Luo a ma ama n’akụkọ ifo, egwu, ịkụ azụ na ịdị n’otu."
+},
+"maasai": {
+  "name": "Maasai",
+  "description": "Ndị Maasai bi na Kenya na Tanzania, a ma ama ha n’uwe ha mara mma, omenala ndị dike na ịhụ ala na anụ ụlọ n’anya."
+}
 },
 
 

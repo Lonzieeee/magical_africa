@@ -48,18 +48,18 @@ const TribesSection = () => {
 
       <div className="tribes-section" ref={tribesRef}>
         <div className="tribe1">
-          <h1>{t('tribes.oromo.name')}</h1>
-          <p>{t('tribes.oromo.description')}</p>
+          <h1>{t('tribes.kikuyu.name')}</h1>
+          <p>{t('tribes.kikuyu.description')}</p>
         </div>
 
         <div className="tribe2">
-          <h1>{t('tribes.zulu.name')}</h1>
-          <p>{t('tribes.zulu.description')}</p>
+          <h1>{t('tribes.luo.name')}</h1>
+          <p>{t('tribes.luo.description')}</p>
         </div>
 
         <div className="tribe3">
-          <h1>{t('tribes.igbo.name')}</h1>
-          <p>{t('tribes.igbo.description')}</p>
+          <h1>{t('tribes.maasai.name')}</h1>
+          <p>{t('tribes.maasai.description')}</p>
         </div>
       </div>
 

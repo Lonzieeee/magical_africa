@@ -174,18 +174,18 @@
   "title": "Chunguza Makabila Yetu",
   "subtitle": "Safari kupitia makabila mbalimbali ya Afrika na mila za milele",
   "viewAll": "Tazama Jamii",
-  "oromo": {
-    "name": "Oromo",
-    "description": "Wenye asili ya Ethiopia, watu wa Oromo wanabeba urithi wa kiburi wa mila, umoja, na utambulisho wa kitamaduni. Wao ni kabila kubwa zaidi nchini, wakiunda takriban theluthi moja ya idadi ya watu wenye watu milioni 40."
-  },
-  "zulu": {
-    "name": "Zulu",
-    "description": "Kutoka Afrika Kusini, watu wa Zulu wanabeba urithi wenye nguvu wa mila, ustahimilivu, na utambulisho, wakiwakilisha zaidi ya watu milioni 11."
-  },
-  "igbo": {
-    "name": "Igbo",
-    "description": "Wenye asili ya Nigeria, watu wa Igbo ni moja ya makabila makubwa nchini, wakiwa na zaidi ya milioni 30, wanaojulikana kwa mila tajiri, ujasiriamali, na maadili imara ya kijamii."
-  }
+ "kikuyu": {
+  "name": "Wakikuyu",
+  "description": "Wakikuyu ni jamii kubwa zaidi nchini Kenya, wakijulikana kwa urithi wao wa kilimo, ujasiriamali na mila zao tajiri."
+},
+"luo": {
+  "name": "Wajaluo",
+  "description": "Wakitoka magharibi mwa Kenya, Wajaluo wanajulikana kwa hadithi, muziki, uvuvi na mshikamano wa jamii."
+},
+"maasai": {
+  "name": "Wamaasai",
+  "description": "Wanaoishi Kenya na Tanzania, Wamaasai wanajulikana kwa mavazi yao ya rangi, utamaduni wa mashujaa na uhusiano wao na ardhi na mifugo."
+}
 },
 
 

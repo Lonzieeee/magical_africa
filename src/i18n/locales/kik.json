@@ -176,18 +176,18 @@
   "title": "Menya Mĩhĩrĩga Yĩtũ",
   "subtitle": "Rũgendo rũthiĩre mĩhĩrĩga ya Abirika ĩrĩa ĩhũũranĩte na mĩtũũrĩre ya tene",
   "viewAll": "Tara Jamii",
-  "oromo": {
-    "name": "Oromo",
-    "description": "Andũ a Oromo kuuma Ethiopia, makũũa ũtaũo wa kũĩgĩria wa mĩtũũrĩre, ũmwe, na ũmenyekani wa mĩtũũrĩre. Nĩo mũhĩrĩga mũnene mũno, makĩũmba thĩka ĩmwe kũmĩĩna ĩtatũ ya andũ na andũ milioni 40."
-  },
-  "zulu": {
-    "name": "Zulu",
-    "description": "Kuuma South Africa, andũ a Zulu makũũa ũtaũo wa hinya wa mĩtũũrĩre, kũũmĩrĩra, na ũmenyekani, makĩĩmĩĩra andũ milioni 11."
-  },
-  "igbo": {
-    "name": "Igbo",
-    "description": "Andũ a Igbo kuuma Nigeria, nĩo ũmwe wa mĩhĩrĩga mĩnene mũno, makĩrĩ andũ milioni 30, mamenyekete nĩ mĩtũũrĩre yao mĩnene, ũcũũranĩri, na maũndũ ma kĩũnganĩro."
-  }
+ "kikuyu": {
+  "name": "Agĩkũyũ",
+  "description": "Agĩkũyũ nĩ andũ aingĩ mũno Kenya, marĩ na mĩtugo ya mĩera, biashara na mĩtugo yao mĩrĩu."
+},
+"luo": {
+  "name": "Ajalũo",
+  "description": "Ajalũo auma kũraya kwa Kenya, marĩ na mĩtugo ya nyũmbo, kũoya thĩna na wendo wa andũ hamwe."
+},
+"maasai": {
+  "name": "Abaasai",
+  "description": "Abaasai matũũra Kenya na Tanzania, marĩ na mĩtugo ya nguo cia rangi na wendo wa indo cia mũgunda."
+}
 },
 
 

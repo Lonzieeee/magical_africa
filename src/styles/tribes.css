@@ -105,27 +105,27 @@
 }
 
 .tribe1 {
-  background-image: url(/images/Oromo2.jpg);
+  background-image: url(/images/kikuyu-community.jpg);
 }
 
 .tribe1::before {
-  background-image: url(/images/Oromo2.jpg);
+  background-image: url(/images/kikuyu-community.jpg);
 }
 
 .tribe2 {
-  background-image: url(/images/Zulu3.jpg);
+  background-image: url(/images/luo-kenya.png);
 }
 
 .tribe2::before {
-  background-image: url(/images/Zulu3.jpg);
+  background-image: url(/images/luo-kenya.png);
 }
 
 .tribe3 {
-  background-image: url(/images/Igbo2.jpg);
+  background-image: url(/images/maasai-kenya.jpg);
 }
 
 .tribe3::before {
-  background-image: url(/images/Igbo2.jpg);
+  background-image: url(/images/maasai-kenya.jpg);
 }
 
 .tribe1:hover, .tribe2:hover, .tribe3:hover {

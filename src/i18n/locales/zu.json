@@ -176,18 +176,18 @@
   "title": "Hlola Izizwe Zethu",
   "subtitle": "Uhambo olungezizwe ezahlukahlukene ze-Afrika namasiko angunaphakade",
   "viewAll": "Buka Imiphakathi",
-  "oromo": {
-    "name": "Oromo",
-    "description": "Abakhe e-Ethiopia, abantu base-Oromo baphethe ifa lokuziqhenya lesiko, ubunye, nobunikazi besiko. Bayisizwe esikhulu kunazo zonke ezweni, benza cishe ingxenye yesithathu yabantu abangu-40 million."
-  },
-  "zulu": {
-    "name": "Zulu",
-    "description": "Abavela eNingizimu Afrika, abantu bamaZulu baphethe ifa elinamandla lesiko, ukubekezela, nobunikazi, bemele abantu abangaphezu kuka-11 million."
-  },
-  "igbo": {
-    "name": "Igbo",
-    "description": "Abakhe eNigeria, abantu bama-Igbo bangesinye sezizwe ezinkulu ezweni, bebala ngaphezu kuka-30 million, baziwa ngamasiko abo acebi, ubusomabhizinisi, nezimilo zomphakathi eziqinile."
-  }
+ "kikuyu": {
+  "name": "AmaKikuyu",
+  "description": "AmaKikuyu ayisizwe esikhulu eKenya, aziwa ngokulima, amabhizinisi namasiko aqinile."
+},
+"luo": {
+  "name": "AmaLuo",
+  "description": "AmaLuo avela entshonalanga yeKenya, aziwa ngomculo, izinganekwane nokudoba."
+},
+"maasai": {
+  "name": "AmaMaasai",
+  "description": "AmaMaasai ahlala eKenya naseTanzania, aziwa ngezingubo ezinemibala namasiko amaqhawe."
+}
 },
 
 

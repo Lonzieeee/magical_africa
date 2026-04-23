@@ -175,18 +175,18 @@
   "title": "Eidim Iloshon Enatií",
   "subtitle": "Injore tené iloshon naápukunot e Afrika ó inkítùàátìn naápuò",
   "viewAll": "Tadamu Jamii",
-  "oromo": {
-    "name": "Oromo",
-    "description": "Iltunganak le Oromo kulie Ethiopia, naákúàk enkíshón naatódòl e enkítùàátà, enkíyámà, ó enaitoi. Kéré ilosho apa kumok tené enkóp, naátúrù apa enkitálá e sídáì e iltunganak naátíí milioni 40."
-  },
-  "zulu": {
-    "name": "Zulu",
-    "description": "Kulie South Africa, iltunganak le Zulu naákúàk enkíshón naatódòl e enkítùàátà, enkitóbòní, ó enaitoi, naátíí iltunganak milioni 11."
-  },
-  "igbo": {
-    "name": "Igbo",
-    "description": "Iltunganak le Igbo kulie Nigeria, kéré ilosho apa kumok tené enkóp, naátíí iltunganak milioni 30, naáyíéú enkítùàátà naápukunot, enkíshómárè, ó inkítùàátìn naásídáì."
-  }
+  "kikuyu": {
+  "name": "Kikuyu",
+  "description": "Ilkikuyu le Kenya iltung’ana oo nemeeta oltau lenyena sidai, oltau le nkishu na enkishon."
+},
+"luo": {
+  "name": "Luo",
+  "description": "IlLuo le Kenya apa aji pee ilarin enkatini, enkaina, entoki na oltau lenye sidai."
+},
+"maasai": {
+  "name": "Maasai",
+  "description": "IlMaasai apa Kenya na Tanzania, aji pee ilarin enkarewa, oltau loo nkera na nkishu."
+}
 },
 
 
